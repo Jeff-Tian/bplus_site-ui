@@ -1,0 +1,14 @@
+{
+  "name": "bplus_site-ui",
+  "description": "Bridge+ Site UI",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "resolutions": {
+  }
+}

@@ -1,0 +1,14 @@
+logs/*
+!.gitkeep
+
+assets/
+node_modules/
+bower_components/
+bin/
+obj/
+temp/
+dist/
+
+tmp
+.DS_Store
+.idea
