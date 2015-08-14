@@ -9,6 +9,7 @@ bin/
 obj/
 temp/
 dist/
+bower/
 
 # Root folders
 /semantic/

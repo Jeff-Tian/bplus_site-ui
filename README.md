@@ -8,6 +8,7 @@ Install dependencies and run your app locally.
 
 ```
 npm install
+bower install
 ```
 
 ### Run project

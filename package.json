@@ -52,7 +52,6 @@
     "matchdep": "~0.3.0",
     "protractor": "^2.1.0",
     "require-dot-file": "^0.4.0",
-    "semantic-ui": "^2.0.8",
     "shelljs": "^0.2.6",
     "yamljs": "^0.2.3"
   },
