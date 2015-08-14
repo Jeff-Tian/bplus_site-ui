@@ -1,6 +1,10 @@
 logs/*
 !.gitkeep
 
+tmp
+.DS_Store
+.idea
+
 # Folders
 assets/
 node_modules/
@@ -10,10 +14,3 @@ obj/
 temp/
 dist/
 bower/
-
-# Root folders
-/semantic/
-
-tmp
-.DS_Store
-.idea

@@ -16,3 +16,5 @@ bower install
 ```
 npm start
 ```
+
+Now browse to the website at `http://localhost:8000`
