@@ -5,10 +5,8 @@
   "homepage": "",
   "license": "",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-  },
-  "resolutions": {
+    "less": "~2.5.1"
   }
 }

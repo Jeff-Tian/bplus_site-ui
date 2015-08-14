@@ -1,6 +1,7 @@
 logs/*
 !.gitkeep
 
+# Folders
 assets/
 node_modules/
 bower_components/
@@ -8,6 +9,9 @@ bin/
 obj/
 temp/
 dist/
+
+# Root folders
+/semantic/
 
 tmp
 .DS_Store
