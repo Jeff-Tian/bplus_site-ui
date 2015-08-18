@@ -1,4 +1,4 @@
-// TODO: initial scripts, to be removed
+// TODO: initial scripts, to be integrated into JS framework
 $(document)
     .ready(function() {
 
@@ -19,3 +19,7 @@ $(document)
             .sidebar('attach events', '.toc.item');
 
     });
+// TODO: initial tabs, to be integrated into JS framework
+$('.menu .item')
+  .tab()
+;
