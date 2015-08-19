@@ -94,10 +94,53 @@
     }
 }
 
-// Bridge+ homepage
-.ui.vertical.segment.b_client {
-	background-color: #333;
+/*
+* - @Bridge+ Homepage/Salespage
+*/
+
+// Basic
+@import "../basic/variable";
+@import "../basic/mixin";
+
+// Module
+
+
+// Theme
+@import "../theme/variable";
+@import "../theme/semantic-ui-override";
+@import "../theme/zh-cn";
+@import "../theme/layout";
+@import "../theme/header";
+@import "../theme/footer";
+
+// Slider/Banner
+.b_slider {
+	background-color: #eabbbf;
 }
-.ui.items > .item {
-    width: auto;
+
+// Client
+.b_client {
+	background-color: #2d363d;
+
+	h2 {
+		color: @color-white;
+	}
+}
+
+// Advantage
+.b_advantage {
+	background-color: #f0f0f0;
+
+	h3 {
+		color: #707070;
+	}
+}
+
+// Theory
+.b_theory {
+	background-color: #2e363d;
+
+	h3 {
+		color: @color-white;
+	}
 }
