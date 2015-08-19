@@ -1,6 +1,5 @@
 // TODO: initial scripts, to be integrated into JS framework
 define([], function() {
-console.log("aaaa");
   return {
     start: function() {
           //$(document)
