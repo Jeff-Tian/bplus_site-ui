@@ -9,12 +9,29 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--ICON-->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="manifest" href="/icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="bower/semantic-ui/dist/semantic.css">
     <!--LESS-->
     <link rel="stylesheet/less" type="text/css" href="css/page/salespage.less">
     <script src="bower/less/dist/less.js" type="text/javascript"></script>
-    
     <script src="bower/requirejs/require.js" type="text/javascript" charset="utf-8" data-main="index.js"></script>
 </head>
 
@@ -49,19 +66,28 @@
     </div>
     <!-- Page Contents -->
     <div class="pusher">
-        <div class="ui inverted vertical masthead center aligned b_slider">
-            <div class="ui">
-                <div class="ui large secondary inverted pointing menu">
+        <div class="ui b-header">
+            <div class="ui secondary inverted pointing menu">
+                <div class="ui container">
                     <a class="toc item">
                         <i class="sidebar icon"></i>
                     </a>
                     <div class="right item">
-                        <a class="ui inverted button">登录</a>
-                        <a class="ui inverted button">注册</a>
-                        <a class="ui inverted button">English</a>
+                        <a class="ui button">登录</a>
+                        <a class="ui button">注册</a>
+                        <a class="ui button">English</a>
                     </div>
                 </div>
             </div>
+            <div class="b-header-bar">
+                <div class="ui container">
+                    <a href="">
+                        <img src="img/logo.png" height="60">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="ui vertical stripe masthead b-slider">
             <div class="ui text container">
                 <h1 class="ui inverted header">
                     现在就和好朋友一起开公司！
@@ -71,7 +97,7 @@
                     让你在无风险的环境下享受创业激情！
                 </h2>
             </div>
-            <div style="width: 400px;">
+            <div class="b-signin">
                 <div class="ui top attached tabular menu">
                     <a class="item active" data-tab="first">登录</a>
                     <a class="item" data-tab="second">注册</a>
@@ -121,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui vertical b_client">
+        <div class="ui vertical stripe b-client">
             <div class="ui container">
                 <h2>商战游戏部分服务对象</h2>
                 <div class="ui tiny images">
@@ -134,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui vertical stripe b_advantage">
+        <div class="ui vertical stripe b-advantage">
             <div class="ui container">
                 <h3 class="ui header">全球领先的商战模拟游戏</h3>
                 <div class="ui items">
@@ -193,7 +219,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui vertical stripe quote b_theory">
+        <div class="ui vertical stripe quote b-theory">
             <div class="ui container equal width stackable internally celled grid">
                 <div class="center aligned row">
                     <div class="column">
@@ -214,7 +240,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui vertical stripe b_jobs">
+        <div class="ui vertical stripe b-jobs">
             <div class="ui container">
                 <h3 class="ui header">用游戏积分申请真实岗位</h3>
                 <div class="ui grid">
@@ -333,7 +359,7 @@
                 <a class="ui large button">查看更多职位</a>
             </div>
         </div>
-        <div class="ui vertical stripe b_feedback">
+        <div class="ui vertical stripe b-feedback">
             <div class="ui container">
                 <h3 class="ui header">学员们的积极反馈</h3>
                 <div class="ui grid items">
@@ -370,7 +396,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui vertical stripe b_trial">
+        <div class="ui vertical stripe b-trial">
             <div class="ui middle aligned center aligned grid">
                 <div class="column">
                     <a class="ui red large button">立即体验</a>
