@@ -19,6 +19,7 @@ require.config({
       "json": "requirejs-plugins/src/json",
       "propertyParser": "requirejs-plugins/src/propertyParser",
       "angular": "angularjs/angular.min",
+      'domReady': 'requirejs-domready/domReady',
       "semantic": "semantic-ui/dist/semantic"
   },
   "shim": {
@@ -29,8 +30,8 @@ require.config({
         deps: ["jquery"]
       }
   },
-  "deps": ["require", "less", "angular", "semantic"],
-  "callback": function(require, less, angular) {
+  "deps": ["require", "less","semantic"],
+  "callback": function(require, less) {
     require(["bplus-ui/app"], function(app) {
       app.start();
     })
