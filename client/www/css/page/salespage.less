@@ -3,10 +3,6 @@
 */
 
 // TODO: Initial styles, to be removed
-.hidden.menu {
-    display: none;
-}
-
 .masthead.segment {
     min-height: 700px;
     padding: 1em 0em;
@@ -108,6 +104,7 @@
 
 // Module
 @import "../module/signin.less";
+@import "../module/home-slider.less";
 
 // Theme
 @import "../theme/variable";
@@ -125,10 +122,25 @@
 // Client
 .b-client {
 	background-color: #2d363d;
+    padding: 3em 0;
 
 	h2 {
 		color: @color-white;
+        font-weight: lighter;
 	}
+    .ui.horizontal.list {
+        margin-top: 2em;
+        width: 100%;
+
+        .item {
+            margin-left: 0;
+            width: 16.667%;
+
+            .ui.image {
+                height: 40px;
+            }
+        }
+    }
 }
 
 // Advantage
