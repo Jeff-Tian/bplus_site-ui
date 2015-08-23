@@ -5,14 +5,14 @@ define([], function() {
       //$(document)
       //  .ready(function() {
       // fix header when passed
-      $('.masthead')
+      $('.b-masthead')
         .visibility({
           once: false,
           onBottomPassed: function() {
-            $('.fixed.b-header').transition('fade in');
+            $('[data-action=fixedHeader]').transition('fade in');
           },
           onBottomPassedReverse: function() {
-            $('.fixed.b-header').transition('fade out');
+            $('[data-action=fixedHeader]').transition('fade out');
           }
         });
 

@@ -30,7 +30,7 @@
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="bower/semantic-ui/dist/semantic.css">
     <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="css/page/salespage.less">
+    <link rel="stylesheet/less" type="text/css" href="css/page/salespage/main.less">
     <script src="bower/less/dist/less.js" type="text/javascript"></script>
     <script src="bower/requirejs/require.js" type="text/javascript" charset="utf-8" data-main="index.js"></script>
 </head>
@@ -40,8 +40,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Following Menu -->
-    <div class="ui top fixed hidden b-header">
-        <div class="ui secondary pointing menu b-header-account">
+    <div class="ui top fixed hidden b-header" data-action="fixedHeader">
+        <div class="ui menu b-header-account">
             <div class="ui container">
                 <a class="toc item">
                     <i class="sidebar icon"></i>
@@ -77,7 +77,7 @@
     <!-- Page Contents -->
     <div class="pusher">
         <div class="ui b-header">
-            <div class="ui secondary pointing menu b-header-account">
+            <div class="ui menu b-header-account">
                 <div class="ui container">
                     <a class="toc item">
                         <i class="sidebar icon"></i>
@@ -103,15 +103,17 @@
                 </div>
             </div>
         </div>
-        <div class="ui b-slider">
+        <div class="ui b-masthead">
             <div class="ui container">
-                <h1 class="ui header">
-                    现在就和好朋友一起开公司！
-                </h1>
-                <h2>
-                    全球顶尖团队开发的商战模拟游戏，<br>
-                    让你在无风险的环境下享受创业激情！
-                </h2>
+                <div class="b-slider">
+                    <h1 class="ui header">
+                        现在就和好朋友一起开公司！
+                    </h1>
+                    <h2>
+                        全球顶尖团队开发的商战模拟游戏，<br>
+                        让你在无风险的环境下享受创业激情！
+                    </h2>
+                </div>
             </div>
             <div class="b-signin">
                 <div class="ui top attached tabular menu">
@@ -191,16 +193,13 @@
         <div class="ui b-advantage">
             <div class="ui container">
                 <h3 class="ui header">全球领先的商战模拟游戏</h3>
-                <div class="ui items">
-                    <div class="item">
+                <div class="ui three column grid">
+                    <div class="column b-advantage-item">
                         <div class="image">
-                            <img src="img/image.png">
+                            <img src="img/image.png" height="160">
                         </div>
                         <div class="content">
-                            <a class="header">在线模拟运营企业</a>
-                            <div class="meta">
-                                <span></span>
-                            </div>
+                            <p class="header">在线模拟运营企业</p>
                             <div class="description">
                                 <p>
                                     游戏者通过模拟运营企业
@@ -210,15 +209,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
+                    <div class="column b-advantage-item">
                         <div class="image">
-                            <img src="img/image.png">
+                            <img src="img/image.png" height="160">
                         </div>
                         <div class="content">
-                            <a class="header">全球顶尖团队开发</a>
-                            <div class="meta">
-                                <span></span>
-                            </div>
+                            <p class="header">全球顶尖团队开发</p>
                             <div class="description">
                                 <p>
                                     游戏由中欧商学院的创始人之一
@@ -227,15 +223,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
+                    <div class="column b-advantage-item">
                         <div class="image">
-                            <img src="img/image.png">
+                            <img src="img/image.png" height="160">
                         </div>
                         <div class="content">
-                            <a class="header">真实提高能力水平</a>
-                            <div class="meta">
-                                <span></span>
-                            </div>
+                            <p class="header">真实提高能力水平</p>
                             <div class="description">
                                 <p>
                                     锻炼游戏者在压力情境下的数据分析、
@@ -247,10 +240,10 @@
                 </div>
             </div>
         </div>
-        <div class="ui quote b-theory">
-            <div class="ui container equal width stackable internally celled grid">
-                <div class="center aligned row">
-                    <div class="column">
+        <div class="ui b-theory">
+            <div class="ui container equal width grid">
+                <div class="row">
+                    <div class="column b-theory-header">
                         <h3>权威的学习理论</h3>
                         <div>
                             <p>
@@ -259,7 +252,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="column">
+                    <div class="column b-theory-content">
                         <h3>学习方法论</h3>
                         <p>
                             体验式学习，结合“做中学learning by doing”、“经验学习圈experiential learning cycle”、“认知发展论theory of cognitive development”等学习理论，为达到某些预期结果而特别为学员设计。根据美国缅因州国家训练实验室提出的学习金字塔理论，通过实践学习的效率可以达到75%，远远高于传统“说教式”的被动学习方式。
@@ -270,7 +263,7 @@
         </div>
         <div class="ui b-jobs">
             <div class="ui container">
-                <h3 class="ui header">用游戏积分申请真实岗位</h3>
+                <h3>用游戏积分申请真实岗位</h3>
                 <div class="ui grid">
                     <div class="eight wide column">
                         <div class="ui items">
