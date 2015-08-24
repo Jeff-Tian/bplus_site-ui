@@ -1,0 +1,54 @@
+/*
+* - @Bridge+
+*/
+
+.b-theory {
+	background-color: #2e363d;
+	background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
+	background-repeat: no-repeat, no-repeat;  
+	background-position: right bottom, left bottom;  
+	background-size: auto 100%, auto 100%;
+
+	.ui.container {
+		min-height: 40rem;
+
+		h3 {
+			color: @color-white;
+			font-size: @fontsize-5xl;
+		}
+		.b-theory-header {
+			position: relative;
+
+			> h3 {
+				margin-top: 2rem;
+			}
+
+			> div {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				color: @color-white;
+				text-align: right;
+				line-height: 1.6em;
+				font-size: @fontsize-s;
+				margin: 1.4rem 0;
+				margin-right: 19.6rem;
+			}
+		}
+		.b-theory-content {
+			> h3 {
+				margin-left: -4rem;
+				font-weight: lighter;
+				margin-top: 15rem;
+				margin-bottom: 1.6rem;
+			}
+			> p {
+				margin-left: -4rem;
+				width: 84%;
+				color: @color-white;
+				font-size: @fontsize-s;
+				line-height: 2.4em;
+			}
+		}
+	}
+}
