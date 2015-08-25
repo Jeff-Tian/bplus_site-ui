@@ -1,0 +1,45 @@
+/*
+* - @Bridge+
+*/
+
+.b-feedback {
+	// TODO: instead of background image
+	background-color: @color-grey-lighter;
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+
+	> .ui.container {
+	}
+
+	h3 {
+        &.ui.header {
+			color: #8c8c8c;
+			margin-bottom: 3rem;
+		}
+	}
+	.ui.items {
+		> .item {
+			> .content {
+				> .header {
+					margin-top: 1rem;
+					font-size: @fontsize-xl;
+				}
+				.meta {
+					font-size: @fontsize-s;
+				    display: inline-block;
+				    margin-left: 1rem;
+				}
+				.ui.divider {
+				    border-top-color: @color-brand;
+			        margin: .3rem 0 .6rem;
+				}
+				.description {
+					> p {
+						line-height: 1.6em;
+						font-size: @fontsize-s;
+					}
+				}
+			}
+		}
+	}
+}

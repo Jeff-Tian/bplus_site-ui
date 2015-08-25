@@ -1,0 +1,138 @@
+/*
+* - @Bridge+
+*/
+
+.b-jobs {
+	background-color: @color-white;
+	background-image: url("/img/salespage/jobs_bg.png"),;
+	background-repeat: no-repeat;  
+	background-position: left bottom;  
+	background-size: auto 100%;
+
+	> .ui.container {
+		min-height: 50.8rem;
+		padding-top: 5rem;
+	}
+
+	h3 {
+        &.ui.header {
+			color: @color-white;
+			margin-bottom: 3rem;
+		}
+	}
+	
+	.b-jobs-pokesperson {
+		.ui.items {
+			> .item {
+				> .ui.small.image {
+					width: 130px;
+				}
+				> .content {
+					position: relative;
+
+					.b-jobs-pokesperson-sink {
+						position: absolute;
+						bottom: 1rem;
+					}
+					.header {
+						color: @color-white;
+						font-size: @fontsize-xl;
+					}
+					.meta {
+						color: @color-white;
+						font-size: @fontsize-s;
+					}
+					.ui.divider {
+					    border-top-color: @color-white;
+				        margin: .3rem 0 .6rem;
+					}
+					.description {
+						> p {
+							line-height: 1.6em;
+							font-size: @fontsize-s;
+							color: @color-grey-lighter;
+						}
+					}
+				}
+			}
+		}
+	}
+	.b-jobs-statistics {
+		position: relative;
+
+		.b-jobs-statistics-sink {
+			position: absolute;
+			bottom: .7rem;
+			left: 3.5rem;
+		}
+		.ui.header {
+			&.sub {
+				color: @color-white;
+				font-weight: normal;
+				font-size: @fontsize-xl;
+			}
+		}
+		.ui.statistics {
+			-webkit-flex-direction: row;
+			-ms-flex-direction: row;
+			flex-direction: row;
+
+			> .statistic {
+				display: inline-block;
+
+				> .value {
+					color: @color-brand;
+					font-size: @fontsize-22xl;
+					vertical-align: super;
+				}
+				> .label {
+					color: @color-brand;
+					font-size: @fontsize-xl;
+					font-weight: normal;
+					vertical-align: super;
+				}
+
+				&:first-child {
+					> .value {
+						color: @color-white;
+					}
+				}
+			}
+		}
+	}
+
+	.ui.grid {
+		+ .grid {
+			margin-top: 0;
+
+			> .column:not(.row) {
+				padding-top: 0;
+			}
+		}
+	}
+	.b-jobs-list {
+		background-color: #f0f0f0;
+		padding: 2rem 3.5rem;
+
+		.ui.header {
+			margin-bottom: 2rem;
+			margin-left: -0.5rem;
+
+			i.icon {
+				&.red {
+					color: @color-brand!important;
+				}
+			}
+			.content {
+				font-weight: normal;
+			}
+		}
+
+		.ui.table {
+			font-size: @fontsize-s;
+		}
+	}
+	.b-jobs-action {
+		margin-top: 2rem;
+	}
+}
