@@ -12,10 +12,10 @@ define([
       status: this.ENUM_STATUS.STATUS_READONLY
     };
     this.saveEdit = function() {
-      this.property.status = this.ENUM_STATUS.STATUS_EDIT;
+      //TODO
     };
     this.cancelEdit = function() {
-      
+      //TODO
     };
   };
   ListWidgetBase.prototype = Object.create(Object.prototype);

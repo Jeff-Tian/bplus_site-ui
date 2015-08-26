@@ -27,7 +27,6 @@ define([
      $scope.cancel = function() {
        //TODO
        //cancel function
-       me.saveEdit();
      };
     }).directive("bplusskills", function(){
       return {
