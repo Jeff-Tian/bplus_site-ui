@@ -1,50 +1,95 @@
 <%- include('view-partial/header.html') -%>
 <div class="ui">
-    <div class="b-signin-wide">
-        <div class="ui top attached pointing secondary menu">
-            <a class="item active" data-tab="login">登录</a>
-            <a class="item" data-tab="register">注册</a>
-        </div>
-        <div class="ui bottom attached tab segment active" data-tab="login">
-            <form class="ui large form">
-                <div class="ui stacked segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" name="mobile" placeholder="手机号">
+    <div class="ui column b-signin-container">
+        <div class="b-signin-wide">
+            <div class="ui fluid two item top pointing secondary menu">
+                <a class="item active" data-tab="login">登录</a>
+                <a class="item" data-tab="register">注册</a>
+            </div>
+            <div class="ui bottom attached tab active" data-tab="login">
+                <form class="ui large fulid form">
+                    <div class="ui">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="phone icon"></i>
+                                <input type="text" name="mobile" placeholder="手机号">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="Password">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="请输入密码">
+                            </div>
                         </div>
+                        <div class="fields">
+                            <div class="ten wide field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" tab-index="0" class="hidden">
+                                    <label>下次自动登录</label>
+                                </div>
+                            </div>
+                            <div class="six wide field ui right aligned container">
+                                <a href="">忘记密码</a>
+                            </div>
+                        </div>
+                        <div class="ui fluid huge red submit button">登录</div>
                     </div>
-                    <div class="ui fluid large red submit button">登录</div>
+                    <div class="ui error message"></div>
+                </form>
+                <div class="ui right aligned container">
+                    没有账号？ <a href="#">马上注册</a>
                 </div>
-                <div class="ui error message"></div>
-            </form>
-            <div class="ui message">没有账号？ <a href="#">马上注册</a></div>
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="register">
-            <form class="ui large form">
-                <div class="ui stacked segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" name="mobile" placeholder="手机号">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="ui fluid large red submit button">注册</div>
+                <div class="ui divider"></div>
+                <div class="ui">
+                    其他方式登录:
+                    <i class="big wechat icon"></i>
                 </div>
-                <div class="ui error message"></div>
-            </form>
+            </div>
+            <div class="ui bottom attached tab" data-tab="register">
+                <form class="ui large form">
+                    <div class="ui">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="phone icon"></i>
+                                <input type="text" name="mobile" placeholder="请输入手机号码">
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="ten wide field">
+                                <div class="ui left icon input">
+                                    <i class="write icon"></i>
+                                    <input type="text" name="captcha" placeholder="请输入图形验证码">
+                                </div>
+                            </div>
+                            <div class="six wide field">
+                                <img src="icon/android-icon-36x36.png">
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="ten wide field"></div>
+                            <div class="six wide field ui center aligned container">
+                                <a href="javascript: void(0);">换一张</a>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui fluid huge red button">获取手机验证码</div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="请设置登录密码">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui fluid huge red submit button">完成</div>
+                        </div>
+                        <div class="field ui right aligned container">
+                            已有账号或微信账号？<a href="login">马上登录</a>
+                        </div>
+                    </div>
+                    <div class="ui error message"></div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
