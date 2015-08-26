@@ -14,7 +14,7 @@ bower install
 ### Run project
 
 ```
-npm start
+node server.js
 ```
 
-Now browse to the website at `http://localhost:8000`
+Now browse to the website at `http://localhost:8000/index`
