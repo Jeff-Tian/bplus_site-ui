@@ -1,13 +1,14 @@
 <div ng-controller="skillscontroller">
   <!--EDIT MODE-->
-  <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
+  <!--FOR TESTING, THE STATUS BELOW SHOULD BE property.status===ENUM_STATUS.STATUS_EDI-->
+  <div ng-show="property.status!==ENUM_STATUS.STATUS_EDIT">
     <form name="skills" novalidate>
       <div>
         <div class="invalidtext" ng-show="clicked && skills.$error.required">红框处必填字段未完成，请全部填写完成后按下保存</div>
         <div>技能名称</div>
-        <input type="text" name="skillname" ng-model="skill.name" required/>
+        <input type="text" name="skillname" ng-model="skill.name" required placeholder="javascript编程"/>
         <div>技能描述</div>
-        <bplustag></bplustag>
+        <bplustag title="hello"/>
         <div>
          <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
          <button type="button" ng-click="cancel()">取消</button>
@@ -17,11 +18,12 @@
   </div>
   <!--DISPLAY MODE-->
   <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY">
+    <h2 ng-bind="skill.name"></h2>
+    <div ng-bind="skill.description"></div>
     <div>
-      <h2 ng-bind="skill.name"></h2>
-    </div>
-    <div>
-      <div ng-bind="skill.tag"></div>
+      <i class="tags icon"></i>
+      <span>标签:</span>
+      <span ng-repeat="tag in skill.tags track by $index">{{$index === 0 ? "" : ", "}}{{tag}}</span>
     </div>
   </div>
 </div>
