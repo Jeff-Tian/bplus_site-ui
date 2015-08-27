@@ -14,12 +14,12 @@ server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
 
 // Page route define
-server.get('/index', function(req, res) {
+server.get('/index', function (req, res) {
     res.render('index');
 });
 
-server.get('/register', function (req, res) {
-    res.render('register');
+server.get('/signin', function (req, res) {
+    res.render('sign-in');
 });
 
 // Host & Port

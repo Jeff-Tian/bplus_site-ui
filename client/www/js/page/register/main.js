@@ -20,11 +20,13 @@ angular.module('register', [
     // TODO: initial tabs, to be integrated into JS framework
     $('.menu .item')
         .tab({
-            //context: '.b-signin-wide .menu .item',
-            //history: true
+            context: '.b-signin-wide',
+            history: true
         });
 
-    $('.ui.form')
+    var $form = $('.ui.form');
+
+    $form
         .form({
             fields: {
                 mobile: {
@@ -70,7 +72,9 @@ angular.module('register', [
             }
         });
 
-    $('.ui.form').on('click', '.remove.circle.icon', function () {
-        $(this).parent().remove();
+    $form.on('click', '.remove.circle.icon', function () {
+        $form.removeClass('error');
     });
+
+    $('.checkbox').checkbox();
 })();
