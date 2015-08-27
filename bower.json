@@ -12,7 +12,9 @@
     "tests"
   ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "jquery-address": "https://github.com/asual/jquery-address.git"
+  },
   "devDependencies": {
     "less": "~2.5.1",
     "semantic-ui": "~2.0.8",

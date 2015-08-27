@@ -1,12 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bridge+</title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+
+    <!--LESS-->
+    <link rel="stylesheet/less" type="text/css" href="css/page/register/main.less">
+    <script src="bower/less/dist/less.js"></script>
+</head>
+<body>
+
 <%- include('view-partial/header.html') -%>
 <div class="ui">
     <div class="ui column b-signin-container">
         <div class="b-signin-wide">
-            <div class="ui fluid two item top pointing secondary menu">
-                <a class="item active" data-tab="login">登录</a>
-                <a class="item" data-tab="register">注册</a>
+            <div class="ui fluid two item top pointing secondary menu brand">
+                <a class="item" data-tab="login">登录</a>
+                <a class="item active" data-tab="register">注册</a>
             </div>
-            <div class="ui bottom attached tab active" data-tab="login">
+            <div class="ui bottom attached tab" data-tab="login">
                 <form class="ui large fulid form">
                     <div class="ui">
                         <div class="field">
@@ -42,10 +58,10 @@
                 <div class="ui divider"></div>
                 <div class="ui">
                     其他方式登录:
-                    <i class="big wechat icon"></i>
+                    <i class="grey big wechat icon"></i>
                 </div>
             </div>
-            <div class="ui bottom attached tab" data-tab="register">
+            <div class="ui bottom attached tab active" data-tab="register">
                 <form class="ui large form">
                     <div class="ui">
                         <div class="field">
@@ -94,3 +110,20 @@
     </div>
 </div>
 <%- include('view-partial/footer.html') -%>
+
+<!--JS-->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<!--Angular JS-->
+<script src="bower/angular/angular.min.js"></script>
+<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Page JS-->
+<script src="js/page/register/main.js"></script>
+
+<!--Utils JS-->
+<script src="js/utils/utils.js"></script>
+<script src="js/utils/msgbus.js"></script>
+<script src="js/utils/underscore.js"></script>
+</body>
