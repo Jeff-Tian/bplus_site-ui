@@ -14,9 +14,6 @@ server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
 
 // Page route define
-server.get('/', function(req, res) {
-    res.location('/index');
-});
 server.get('/index', function(req, res) {
     res.render('index');
 });
