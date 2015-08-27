@@ -18,19 +18,25 @@ require.config({
       "image": "requirejs-plugins/src/image",
       "json": "requirejs-plugins/src/json",
       "propertyParser": "requirejs-plugins/src/propertyParser",
-      "angular": "angularjs/angular.min",
+      "angular": "angularjs/angular",
+      "angular-route": "angular-route/angular-route",
+      'domReady': 'requirejs-domready/domReady',
       "semantic": "semantic-ui/dist/semantic"
   },
   "shim": {
       'angular': {
           exports: 'angular'
       },
+      "angular-route":{
+        deps: ["angular"],
+        exports:"angular-route"
+      },
       'semantic': {
         deps: ["jquery"]
       }
   },
-  "deps": ["require", "less", "angular", "semantic"],
-  "callback": function(require, less, angular) {
+  "deps": ["require", "less","semantic", "angular-route"],
+  "callback": function(require, less) {
     require(["bplus-ui/app"], function(app) {
       app.start();
     })
