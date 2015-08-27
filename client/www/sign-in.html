@@ -12,7 +12,7 @@
     <script src="bower/less/dist/less.js"></script>
 </head>
 
-<body>
+<body ng-app="signIn">
 <%- include('view-partial/header.html') -%>
 <div class="ui">
     <div class="ui column b-signin-container">
@@ -63,20 +63,20 @@
                     </a>
                 </div>
             </div>
-            <div class="ui bottom attached tab" data-tab="register">
-                <form class="ui large form">
+            <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
+                <form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp()">
                     <div class="ui error message brand"></div>
                     <div class="ui">
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="phone icon"></i>
-                                <input type="text" name="mobile" placeholder="请输入手机号码">
+                                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile">
                             </div>
                         </div>
                         <div class="fields">
-                            <div class="ui left icon input">
+                            <div class="ui left icon input field">
                                 <i class="write icon"></i>
-                                <input type="text" name="captcha" placeholder="请输入图形验证码">
+                                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
                             </div>
                             <img src="icon/android-icon-36x36.png" width="100">
                         </div>
@@ -87,16 +87,29 @@
                             </div>
                         </div>
                         <div class="field">
-                            <div class="ui fluid huge red button">获取手机验证码</div>
+                            <button type="button" class="ui fluid huge red button" ng-click="getVerificationCode()"
+                                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                                {{verificationCodeButtonText}}
+                            </button>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input field">
+                                <i class="icon"></i>
+                                <input type="text" name="verificationCode" placeholder="请输入手机验证码"
+                                       ng-model="signUpData.verificationCode">
+                            </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="请设置登录密码">
+                                <input type="password" name="password" placeholder="请设置登录密码"
+                                       ng-model="signUpData.password">
                             </div>
                         </div>
                         <div class="field">
-                            <div class="ui fluid huge red submit button">完成</div>
+                            <button type="submit" class="ui fluid huge red submit button"
+                                    ng-disabled="!isSignUpFormFullyValid()">完成
+                            </button>
                         </div>
                         <div class="field ui right aligned container">
                             已有账号或微信账号？<a href="#/login">马上登录</a>
