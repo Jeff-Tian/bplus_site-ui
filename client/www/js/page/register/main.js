@@ -21,7 +21,7 @@ angular.module('register', [
     $('.menu .item')
         .tab({
             //context: '.b-signin-wide .menu .item',
-            //history: true
+            history: true
         });
 
     $('.ui.form')

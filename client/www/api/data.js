@@ -1,5 +1,5 @@
 module.exports = {
     getData: function(req, res) {
-        res.send({'result':'send you new file nononononononono'});
+        res.send({'result':'send you new file'});
     }
 };

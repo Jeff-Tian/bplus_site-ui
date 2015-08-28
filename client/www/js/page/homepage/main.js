@@ -38,14 +38,6 @@ angular.module('mates', [
   $('.menu .item')
     .tab();
 
-  $('#getdata').click(function(data){
-    $.get('/data').success(function(data){
-      window.alert('su:'+data.result);
-    }).fail(function(data){
-      window.alert('fail:'+data.result);
-    });
-  });
-    
 
   // TODO: initial carousel, to be integrated into JS framework
   $("[data-action=carousel]").owlCarousel({
