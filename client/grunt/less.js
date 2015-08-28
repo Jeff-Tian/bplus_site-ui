@@ -1,18 +1,18 @@
 module.exports = function() {
     return {
         development: {
-            options: {
-                paths: []
-            },
             files: {
+                "client/www/css/main.css": "client/www/css/page/main.less" // destination file and source file
             }
         },
         production: {
             options: {
-                paths: [],
-                compress: true
+                compress: true,
+                yuicompress: true,
+                optimization: 2
             },
             files: {
+                "client/www/css/main.css": "client/www/css/page/main.less" // destination file and source file
             }
         }
     };

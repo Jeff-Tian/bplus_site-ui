@@ -1,0 +1,579 @@
+/*
+* - @Bridge+
+*/
+/*
+* - @Bridge+
+*/
+/*
+* - @Bridge+
+*/
+/*
+* - @Bridge+
+*/
+.ui.button.b-sp {
+  font-weight: normal;
+  font-size: 1.4em;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.ui.button.red {
+  background-color: #ff3c42;
+}
+.ui.button.red:hover {
+  background-color: #d7343a;
+}
+/*
+* - @Bridge+
+*/
+.ui.header.b-sp {
+  font-size: 1.4em;
+  font-weight: normal;
+}
+/*
+* - @Bridge+
+*/
+/*
+* - @Bridge+
+*/
+.b-signin {
+  width: 20em;
+  position: absolute;
+  right: 5em;
+  top: 8em;
+}
+.b-signin-container {
+  width: 600px;
+  padding: 1px 50px 40px 50px;
+  margin: 8em auto 2em auto;
+  background-color: #e5e5e5;
+}
+.b-signin-wide {
+  width: 300px;
+  margin: 2em auto 2em auto;
+}
+.b-signin-wide form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/*
+* - @Bridge+
+*/
+/*
+* - @Bridge+
+*/
+html,
+body {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+}
+.ui.button {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+}
+.header {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+}
+.header.ui {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+}
+.ui.statistics .statistic > .label,
+.ui.statistic > .label {
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+}
+/*
+* - @Bridge+
+*/
+a,
+a:link,
+a:visited {
+  color: #ff3c42;
+}
+a:hover,
+a:active {
+  color: #ff3c42;
+  text-decoration: underline;
+}
+/*
+* - @Bridge+
+*/
+.b-header {
+  position: relative;
+  z-index: 4;
+}
+.b-header.hidden {
+  display: none;
+}
+.b-header.fixed {
+  width: 100%;
+}
+.b-header.fixed .menu.b-header-nav {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.b-header .menu {
+  box-shadow: none;
+  border-radius: 0;
+  border-width: 0;
+  background-color: #ff3c42;
+  min-height: initial;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.b-header .menu .item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.b-header .menu .item:before {
+  display: none;
+}
+.b-header .menu .item .ui.button {
+  color: #ffffff;
+  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+}
+.b-header .menu.b-header-account {
+  background-color: #ff3c42;
+}
+.b-header .menu.b-header-account .item.toc {
+  display: none;
+  padding-top: .4em;
+  padding-bottom: .4em;
+}
+.b-header .menu.b-header-account .item .ui.button {
+  font-size: 0.9em;
+  font-weight: normal;
+  padding-top: .6em;
+  padding-bottom: .6em;
+}
+.b-header .menu.b-header-nav {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+}
+.b-header .menu.b-header-nav .b-header-logo {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+.b-header .menu.b-header-nav .item .ui.button {
+  font-size: 0.95em;
+}
+@media only screen and (max-width: 700px) {
+  .b-header.fixed {
+    display: none!important;
+  }
+  .b-header .menu.b-header-account .item,
+  .b-header .menu.b-header-account .menu {
+    display: none;
+  }
+  .b-header .menu.b-header-account .item.toc {
+    display: block;
+  }
+  .b-header .menu.b-header-nav .item.right {
+    display: none!important;
+  }
+}
+/*
+* - @Bridge+
+*/
+.footer {
+  background-color: #2e363d;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.footer h4.ui.header {
+  font-weight: normal;
+}
+.footer .list > .item {
+  font-size: 0.9em;
+  line-height: 1.6em;
+}
+.footer .b-copyright {
+  color: rgba(255, 255, 255, 0.498039);
+  font-size: 0.9em;
+  line-height: 1.6em;
+  margin-top: 3rem;
+}
+/*
+* - @Bridge+ Homepage/Salespage
+*/
+/*
+* - @Bridge+
+*/
+.b-masthead .owl-theme .owl-controls {
+  margin-top: -22px;
+}
+.b-masthead .owl-theme .owl-controls .owl-page {
+  position: relative;
+  top: -1rem;
+}
+.b-masthead .owl-theme .owl-controls .owl-page.active span {
+  background-color: #ffffff;
+}
+.b-masthead .owl-theme .owl-controls .owl-page span {
+  width: 8px;
+  height: 8px;
+  margin: 5px 3px;
+  background-color: #7d7d7d;
+}
+.b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
+  position: absolute;
+  top: 24rem;
+  left: 5rem;
+}
+.b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
+  position: absolute;
+  top: 24rem;
+  right: 5rem;
+}
+.b-masthead .b-slider {
+  overflow: hidden;
+}
+.b-masthead .b-slider .b-slider-item {
+  width: 100%;
+  min-height: 50rem;
+  overflow: hidden;
+}
+.b-masthead .b-slider h1.ui.header {
+  color: #ffffff;
+  font-size: 2.4em;
+  margin-top: 8em;
+}
+.b-masthead .b-slider h2 {
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: normal;
+  line-height: 1.6em;
+}
+/*
+* - @Bridge+
+*/
+.b-client {
+  background-color: #2d363d;
+  padding: 3em 0;
+}
+.b-client h3.ui.header {
+  color: #ffffff;
+  margin-bottom: 1.6rem;
+}
+.b-client .ui.list.horizontal {
+  width: 100%;
+}
+.b-client .ui.list.horizontal > .item {
+  margin-left: 0;
+  width: 16.667%;
+}
+.b-client .ui.list.horizontal > .item .ui.image {
+  height: 40px;
+}
+/*
+* - @Bridge+
+*/
+.b-advantage {
+  background-color: #f0f0f0;
+  padding: 6rem 0 7rem;
+}
+.b-advantage h3.ui.header {
+  color: #8c8c8c;
+  margin-bottom: 4rem;
+}
+.b-advantage .b-advantage-item {
+  text-align: center;
+}
+.b-advantage .b-advantage-item .image {
+  margin-bottom: 1.2rem;
+}
+.b-advantage .b-advantage-item .content .header {
+  font-size: 1.4em;
+  color: #ff3c42;
+  margin-bottom: .8rem;
+}
+.b-advantage .b-advantage-item .content .description p {
+  font-size: 0.95em;
+  line-height: 1.6em;
+}
+/*
+* - @Bridge+
+*/
+.b-theory {
+  background-color: #2e363d;
+  background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, left bottom;
+  background-size: auto 100%, auto 100%;
+}
+.b-theory > .ui.container {
+  min-height: 40rem;
+  padding-top: 3rem;
+}
+.b-theory h3.ui.header {
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-theory .b-theory-header {
+  position: relative;
+}
+.b-theory .b-theory-header > div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #ffffff;
+  text-align: right;
+  line-height: 1.6em;
+  font-size: 0.9em;
+  margin: 1.4rem 0;
+  margin-right: 19.5rem;
+}
+.b-theory .b-theory-content > h3 {
+  color: #ffffff;
+  font-size: 1.5em;
+  margin-left: -4rem;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 1.6rem;
+}
+.b-theory .b-theory-content > p {
+  margin-left: -4rem;
+  width: 84%;
+  color: #ffffff;
+  font-size: 0.9em;
+  line-height: 2.4em;
+}
+/*
+* - @Bridge+
+*/
+.b-jobs {
+  background-color: #ffffff;
+  background-image: url("/img/salespage/jobs_bg.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: auto 100%;
+}
+.b-jobs > .ui.container {
+  min-height: 50.8rem;
+  padding-top: 5rem;
+}
+.b-jobs h3.ui.header {
+  color: #ffffff;
+  margin-bottom: 3rem;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .ui.small.image {
+  width: 130px;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content {
+  position: relative;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content .b-jobs-pokesperson-sink {
+  position: absolute;
+  bottom: 1rem;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content .header {
+  color: #ffffff;
+  font-size: 1.13em;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content .meta {
+  color: #ffffff;
+  font-size: 0.9em;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content .ui.divider {
+  border-top-color: #ffffff;
+  margin: .3rem 0 .6rem;
+}
+.b-jobs .b-jobs-pokesperson .ui.items > .item > .content .description > p {
+  line-height: 1.6em;
+  font-size: 0.9em;
+  color: #e5e5e5;
+}
+.b-jobs .b-jobs-statistics {
+  position: relative;
+}
+.b-jobs .b-jobs-statistics .b-jobs-statistics-sink {
+  position: absolute;
+  bottom: .7rem;
+  left: 3.5rem;
+}
+.b-jobs .b-jobs-statistics .ui.header.sub {
+  color: #ffffff;
+  font-weight: normal;
+  font-size: 1.13em;
+}
+.b-jobs .b-jobs-statistics .ui.statistics {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.b-jobs .b-jobs-statistics .ui.statistics > .statistic {
+  display: inline-block;
+}
+.b-jobs .b-jobs-statistics .ui.statistics > .statistic > .value {
+  color: #ff3c42;
+  font-size: 5em;
+  vertical-align: super;
+}
+.b-jobs .b-jobs-statistics .ui.statistics > .statistic > .label {
+  color: #ff3c42;
+  font-size: 1.13em;
+  font-weight: normal;
+  vertical-align: super;
+}
+.b-jobs .b-jobs-statistics .ui.statistics > .statistic:first-child > .value {
+  color: #ffffff;
+}
+.b-jobs .ui.grid + .grid {
+  margin-top: 0;
+}
+.b-jobs .ui.grid + .grid > .column:not(.row) {
+  padding-top: 0;
+}
+.b-jobs .b-jobs-list {
+  background-color: #f0f0f0;
+  padding: 2rem 3.5rem;
+}
+.b-jobs .b-jobs-list .ui.header {
+  margin-bottom: 2rem;
+  margin-left: -0.5rem;
+}
+.b-jobs .b-jobs-list .ui.header i.icon.red {
+  color: #ff3c42 !important;
+}
+.b-jobs .b-jobs-list .ui.header .content {
+  font-weight: normal;
+}
+.b-jobs .b-jobs-list .ui.table {
+  font-size: 0.9em;
+}
+.b-jobs .b-jobs-action {
+  margin-top: 2rem;
+}
+/*
+* - @Bridge+
+*/
+.b-feedback {
+  background-color: #e5e5e5;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.b-feedback h3.ui.header {
+  color: #8c8c8c;
+  margin-bottom: 3rem;
+}
+.b-feedback .ui.items > .item > .content > .header {
+  margin-top: 1rem;
+  font-size: 1.13em;
+}
+.b-feedback .ui.items > .item > .content .meta {
+  font-size: 0.9em;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.b-feedback .ui.items > .item > .content .ui.divider {
+  border-top-color: #ff3c42;
+  margin: .3rem 0 .6rem;
+}
+.b-feedback .ui.items > .item > .content .description > p {
+  line-height: 1.6em;
+  font-size: 0.9em;
+}
+/*
+* - @Bridge+
+*/
+.b-trial {
+  margin: 3rem 0;
+}
+/*
+* - @Bridge+
+*/
+.wechat.link,
+.wechat.link:link {
+  color: black;
+}
+.wechat.link .icon,
+.wechat.link:link .icon {
+  color: #999999;
+}
+.wechat.link:hover,
+.wechat.link:active {
+  text-decoration: none;
+}
+.wechat.link:hover .icon,
+.wechat.link:active .icon {
+  color: limegreen;
+}
+.ui.secondary.pointing.menu.brand {
+  border-color: #ffabb1;
+}
+.ui.secondary.pointing.menu.brand .active.item {
+  border-color: #ff3c42;
+  border-width: 4px;
+  color: #ff3c42;
+}
+.ui.secondary.pointing.menu.brand .item:hover {
+  color: #ff3c42;
+}
+.ui.brand.error.message {
+  background-color: #900000;
+  color: white;
+  padding: 5px 10px;
+  font-size: smaller;
+  position: relative;
+}
+.ui.brand.error.message .list {
+  list-style-type: none;
+}
+.ui.brand.error.message .list li {
+  margin: 0;
+}
+.ui.brand.error.message .list li::before {
+  content: '';
+}
+.ui.brand.error.message .list li:nth-child(n+3) {
+  display: none;
+}
+.ui.brand.error.message .remove.circle.icon {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: block;
+  margin: auto 0 auto auto;
+  cursor: pointer;
+}
+.ui.form .fields.error .field textarea,
+.ui.form .fields.error .field select,
+.ui.form .fields.error .field input:not([type]),
+.ui.form .fields.error .field input[type="date"],
+.ui.form .fields.error .field input[type="datetime-local"],
+.ui.form .fields.error .field input[type="email"],
+.ui.form .fields.error .field input[type="number"],
+.ui.form .fields.error .field input[type="password"],
+.ui.form .fields.error .field input[type="search"],
+.ui.form .fields.error .field input[type="tel"],
+.ui.form .fields.error .field input[type="time"],
+.ui.form .fields.error .field input[type="text"],
+.ui.form .fields.error .field input[type="url"],
+.ui.form .field.error textarea,
+.ui.form .field.error select,
+.ui.form .field.error input:not([type]),
+.ui.form .field.error input[type="date"],
+.ui.form .field.error input[type="datetime-local"],
+.ui.form .field.error input[type="email"],
+.ui.form .field.error input[type="number"],
+.ui.form .field.error input[type="password"],
+.ui.form .field.error input[type="search"],
+.ui.form .field.error input[type="tel"],
+.ui.form .field.error input[type="time"],
+.ui.form .field.error input[type="text"],
+.ui.form .field.error input[type="url"] {
+  border-color: #ff3c42;
+}
