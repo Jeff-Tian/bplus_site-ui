@@ -17,6 +17,9 @@ server.use(express.static(__dirname + '/client/www'));
 server.get('/index', function(req, res) {
     res.render('index');
 });
+server.get('/game', function(req, res) {
+    res.render('game');
+});
 
 // Host & Port
 server.listen(8000);
