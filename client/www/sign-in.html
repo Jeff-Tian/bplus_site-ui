@@ -12,7 +12,7 @@
     <script src="bower/less/dist/less.js"></script>
 </head>
 
-<body ng-app="signIn">
+<body ng-app="signIn" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
 <div class="ui">
     <div class="ui column b-signin-container">
@@ -22,7 +22,7 @@
                 <a class="item" data-tab="register">注册</a>
             </div>
             <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
-                <form class="ui large fluid form" ng-submit="tryLogin()">
+                <form class="ui large fluid form login" ng-submit="tryLogin()" name="loginForm">
                     <div class="ui error message brand"></div>
                     <div class="ui">
                         <div class="field">
@@ -50,7 +50,8 @@
                             </div>
                         </div>
                         <div class="ui divider horizontal"></div>
-                        <button type="submit" class="ui fluid huge red submit button" ng-disabled="!isFormValid()">登录
+                        <button type="submit" class="ui fluid huge red submit button"
+                                ng-disabled="!isLoginFormValid()">登录
                         </button>
                     </div>
                 </form>
@@ -67,6 +68,10 @@
             </div>
             <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
                 <register-form action="signUp"></register-form>
+
+                <div class="field ui right aligned container">
+                    已有账号或微信账号？<a href="signin#/login">马上登录</a>
+                </div>
             </div>
         </div>
     </div>

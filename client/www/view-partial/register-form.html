@@ -7,7 +7,7 @@
                 <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile">
             </div>
         </div>
-        <div class="field">
+        <div class="field absolute-prompt">
             <div class="ui left icon input">
                 <i class="write icon"></i>
                 <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
@@ -44,9 +44,6 @@
             <button type="submit" class="ui fluid huge red submit button"
                     ng-disabled="!isSignUpFormFullyValid()">完成
             </button>
-        </div>
-        <div class="field ui right aligned container">
-            已有账号或微信账号？<a href="signin#/login">马上登录</a>
         </div>
     </div>
 </form>

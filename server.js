@@ -30,6 +30,14 @@ server.get('/reset-password', function (req, res) {
     res.render('reset-password');
 });
 
+server.get('/reset-password-by-email', function (req, res) {
+    res.render('reset-password-by-email');
+});
+
+server.get('/set-password', function (req, res) {
+    res.render('set-password');
+});
+
 // Host & Port
 server.listen(8000);
 console.log('8000 is for Bridge+');

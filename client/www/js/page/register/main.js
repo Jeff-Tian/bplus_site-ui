@@ -14,10 +14,73 @@ angular.module('signIn', [
 
     })
     .factory('FormValidation', function () {
-        return {
+        var res = {
             validChineseMobileNumberPattern: '^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$'
         };
+
+        res.defaultSetting = {
+            on: 'blur',
+            inline: true,
+            fields: {
+                mobile: {
+                    identifier: 'mobile',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入手机号码'
+                    }, {
+                        type: 'regExp[' + res.validChineseMobileNumberPattern + ']',
+                        prompt: '请输入有效的手机号码'
+                    }]
+                },
+
+                password: {
+                    identifier: 'password',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入密码'
+                    }]
+                },
+
+                email: {
+                    identifier: 'email',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入邮箱地址'
+                    }, {
+                        type: 'email',
+                        prompt: '请输入有效的邮箱地址'
+                    }]
+                },
+
+                captcha: {
+                    identifier: 'captcha',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入验证码'
+                    }]
+                }
+            },
+
+            templates: {
+                error: function (errors) {
+                    var html = '<ul class="list">';
+                    $.each(errors, function (index, value) {
+                        html += '<li>' + value + '</li>';
+                    });
+                    html += '</ul><i class="large remove circle icon"></i>';
+
+                    return $(html);
+                }
+            }
+        };
+
+        return res;
     })
+    .controller('AppCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
+        var $form = $('.ui.form');
+
+        $form.form(FormValidation.defaultSetting);
+    }])
     .controller('SignUpCtrl', ['$scope', function ($scope) {
         $scope.signUp = function () {
             alert('submitted');
@@ -30,21 +93,96 @@ angular.module('signIn', [
             rememberMe: false
         };
 
-        $scope.isFormValid = function () {
-            return $scope.loginData.mobile && $scope.loginData.password;
+        var $loginForm = $('.ui.form.login');
+
+        $scope.isLoginFormValid = function () {
+            if ($scope.loginForm.$pristine) {
+                return false;
+            }
+
+            return $loginForm.form('is valid');
         };
 
         $scope.tryLogin = function () {
-            if (!$scope.isFormValid()) {
+            if (!$scope.isLoginFormValid()) {
                 return;
             }
 
             alert('submitted');
         };
     }])
-    .controller('ResetPasswordCtrl', ['$scope', function ($scope) {
+    .controller('ResetPasswordCtrl', ['$scope', '$element', function ($scope, $element) {
         $scope.resetPassword = function () {
-            alert('reset password');
+            $('.reset.shape').shape('flip over');
+        };
+
+        $('.reset.shape').shape();
+        var $form = $($element);
+        $form.form({
+            on: 'blur',
+            inline: true,
+            fields: {
+                email: {
+                    identifier: 'email',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请填写邮箱地址'
+                    }, {
+                        type: 'email',
+                        prompt: '请填写有效的邮箱地址'
+                    }]
+                },
+                captcha: {
+                    identifier: 'captcha',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请填写验证码'
+                    }]
+                }
+            }
+        });
+    }])
+    .controller('ResetPasswordByEmailCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
+        var $shape = $('.shape.reset-by-email');
+        $shape.shape();
+
+        var $form = $('.ui.form.reset-by-email');
+        $scope.isResetPasswordFormValid = function () {
+            if ($scope.resetPasswordForm.$pristine) {
+                return false;
+            }
+
+            return $form.form('is valid');
+        };
+
+        $scope.tryResetPassword = function () {
+            if (!$scope.isResetPasswordFormValid()) {
+                return;
+            }
+
+            $shape.shape('flip over');
+        };
+    }])
+    .controller('SetPasswordCtrl', ['$scope', function ($scope) {
+        var $form = $('.ui.form.set-password');
+        $scope.isSetPasswordFormValid = function () {
+            if ($scope.setPasswordForm.$pristine) {
+                return false;
+            }
+
+            return $form.form('is valid');
+        };
+
+        $scope.setData = {
+            password: ''
+        };
+
+        $scope.trySetPassword = function () {
+            if (!$scope.isSetPasswordFormValid()) {
+                return;
+            }
+
+            alert('set');
         };
     }])
     .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {
@@ -213,64 +351,6 @@ angular.module('signIn', [
         });
 
     var $form = $('.ui.form');
-
-    $form
-        .form({
-            fields: {
-                mobile: {
-                    identifier: 'mobile',
-                    rules: [
-                        {
-                            type: 'regExp[/^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$/]',
-                            prompt: '请输入有效的手机号码'
-                        }
-                    ]
-                },
-
-                password: {
-                    identifier: 'password',
-                    rules: [
-                        {
-                            type: 'empty',
-                            prompt: '密码不能为空'
-                        }
-                    ]
-                },
-
-                captcha: {
-                    identifier: 'captcha',
-                    rules: [
-                        {
-                            type: 'empty',
-                            prompt: '请输入验证码'
-                        }
-                    ]
-                },
-
-                verificationCode: {
-                    identifier: 'verificationCode',
-                    rules: [
-                        {
-                            type: 'empty',
-                            prompt: '请输入手机验证码'
-                        }
-                    ]
-                }
-            },
-            templates: {
-                error: function (errors) {
-                    var html = '<ul class="list">';
-                    $.each(errors, function (index, value) {
-                        html += '<li>' + value + '</li>';
-                    });
-                    html += '</ul><i class="large remove circle icon"></i>';
-
-                    return $(html);
-                }
-            },
-            on: 'blur',
-            inline: true
-        });
 
     $form.on('click', '.remove.circle.icon', function () {
         $form.removeClass('error');
