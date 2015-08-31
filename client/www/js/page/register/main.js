@@ -18,121 +18,8 @@ angular.module('signIn', [
             validChineseMobileNumberPattern: '^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$'
         };
     })
-    .controller('SignUpCtrl', ['$scope', '$timeout', 'FormValidation', function ($scope, $timeout, FormValidation) {
-        $scope.signUpData = {
-            mobile: '',
-            captcha: '',
-            verificationCode: '',
-            password: ''
-        };
-
-        var validChineseMobileNumberPattern = FormValidation.validChineseMobileNumberPattern;
-
-        var countDownInterval = 60;
-        var countDown = countDownInterval;
-
-        function updateButtonText(text) {
-            $scope.verificationCodeButtonText = text;
-        }
-
-        function initButtonText() {
-            updateButtonText('获取手机验证码');
-            $scope.allowGetCode = true;
-        }
-
-        function refreshButtonText() {
-            updateButtonText(countDown + ' 秒后重新获取...');
-            $scope.allowGetCode = false;
-        }
-
-        function pollUpdateButtonText() {
-            refreshButtonText();
-
-            if (countDown > 0) {
-                $timeout(function () {
-                    countDown--;
-                    pollUpdateButtonText();
-                }, 1000);
-            } else {
-                countDown = countDownInterval;
-                initButtonText();
-            }
-        }
-
-        initButtonText();
-
-        var fields = {
-            mobile: {
-                identifier: 'mobile',
-                rules: [
-                    {
-                        type: 'regExp[' + validChineseMobileNumberPattern + ']',
-                        prompt: '请输入有效的手机号码'
-                    }
-                ]
-            },
-
-            captcha: {
-                identifier: 'captcha',
-                rules: [
-                    {
-                        type: 'empty',
-                        prompt: '请输入验证码'
-                    }
-                ]
-            }
-        };
-
-        var templates = {
-            error: function (errors) {
-                var html = '<ul class="list">';
-                $.each(errors, function (index, value) {
-                    html += '<li>' + value + '</li>';
-                });
-                html += '</ul><i class="large remove circle icon"></i>';
-
-                return $(html);
-            }
-        };
-
-        function getSignUpForm() {
-            return $('form.b-sign-up');
-        }
-
-        function partiallyValidateSignUpForm() {
-            var $form = getSignUpForm();
-
-            $form.form({
-                fields: fields,
-                templates: templates
-            });
-
-            $form.form('validate form');
-
-            return $form;
-        }
-
-        $scope.isSignUpFormPartiallyValid = function () {
-            return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha;
-        };
-
-        $scope.isSignUpFormFullyValid = function () {
-            return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
-        };
-
-        $scope.getVerificationCode = function () {
-            partiallyValidateSignUpForm();
-
-            if ($scope.isSignUpFormPartiallyValid()) {
-                pollUpdateButtonText();
-            }
-        };
-
-        $scope.trySignUp = function () {
-            if (!$scope.isSignUpFormFullyValid()) {
-                return;
-            }
-
+    .controller('SignUpCtrl', ['$scope', function ($scope) {
+        $scope.signUp = function () {
             alert('submitted');
         };
     }])
@@ -153,6 +40,164 @@ angular.module('signIn', [
             }
 
             alert('submitted');
+        };
+    }])
+    .controller('ResetPasswordCtrl', ['$scope', function ($scope) {
+        $scope.resetPassword = function () {
+            alert('reset password');
+        };
+    }])
+    .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {
+        return {
+            templateUrl: '../../../view-partial/register-form.html',
+            scope: {
+                action: '='
+            },
+            link: function ($scope, element) {
+                $scope.signUpData = {
+                    mobile: '',
+                    captcha: '',
+                    verificationCode: '',
+                    password: ''
+                };
+
+                var validChineseMobileNumberPattern = FormValidation.validChineseMobileNumberPattern;
+
+                var countDownInterval = 60;
+                var countDown = countDownInterval;
+
+                function updateButtonText(text) {
+                    $scope.verificationCodeButtonText = text;
+                }
+
+                function initButtonText() {
+                    updateButtonText('获取手机验证码');
+                    $scope.allowGetCode = true;
+                }
+
+                function refreshButtonText() {
+                    updateButtonText(countDown + ' 秒后重新获取...');
+                    $scope.allowGetCode = false;
+                }
+
+                function pollUpdateButtonText() {
+                    refreshButtonText();
+
+                    if (countDown > 0) {
+                        $timeout(function () {
+                            countDown--;
+                            pollUpdateButtonText();
+                        }, 1000);
+                    } else {
+                        countDown = countDownInterval;
+                        initButtonText();
+                    }
+                }
+
+                initButtonText();
+
+                var fields = {
+                    mobile: {
+                        identifier: 'mobile',
+                        rules: [
+                            {
+                                type: 'regExp[' + validChineseMobileNumberPattern + ']',
+                                prompt: '请输入有效的手机号码'
+                            }
+                        ]
+                    },
+
+                    captcha: {
+                        identifier: 'captcha',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: '请输入验证码'
+                            }
+                        ]
+                    }
+                };
+
+                var templates = {
+                    error: function (errors) {
+                        var html = '<ul class="list">';
+                        $.each(errors, function (index, value) {
+                            html += '<li>' + value + '</li>';
+                        });
+                        html += '</ul><i class="large remove circle icon"></i>';
+
+                        return $(html);
+                    }
+                };
+
+                function getSignUpForm() {
+                    return $('form.b-sign-up');
+                }
+
+                function partiallyValidateSignUpForm() {
+                    var $form = getSignUpForm();
+
+                    $form.form({
+                        fields: fields,
+                        templates: templates,
+                        on: 'blur',
+                        inline: true
+                    });
+
+                    $form.form('validate form');
+
+                    return $form;
+                }
+
+                $scope.isSignUpFormPartiallyValid = function () {
+                    return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha;
+                };
+
+                $scope.isSignUpFormFullyValid = function () {
+                    return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
+                };
+
+                $scope.getVerificationCode = function () {
+                    partiallyValidateSignUpForm();
+
+                    if ($scope.isSignUpFormPartiallyValid()) {
+                        pollUpdateButtonText();
+                    }
+                };
+
+                $scope.trySignUp = function () {
+                    if (!$scope.isSignUpFormFullyValid()) {
+                        return;
+                    }
+
+                    $scope.action();
+                };
+
+                getSignUpForm().form({
+                    fields: angular.extend({}, fields, {
+                        verificationCode: {
+                            identifier: 'verificationCode',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: '请输入手机验证码'
+                                }
+                            ]
+                        },
+
+                        password: {
+                            identifier: 'password',
+                            rules: [{
+                                type: 'empty',
+                                prompt: '请设置密码'
+                            }]
+                        }
+                    }),
+                    templates: templates,
+                    on: 'blur',
+                    inline: true
+                });
+            }
         };
     }])
 ;
@@ -222,7 +267,9 @@ angular.module('signIn', [
 
                     return $(html);
                 }
-            }
+            },
+            on: 'blur',
+            inline: true
         });
 
     $form.on('click', '.remove.circle.icon', function () {
