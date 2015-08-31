@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <textarea name="description"></textarea>
+  </div>
+  <div>
+    <i class="tags icon"></i>
+    <span>标签</span>
+    <span>
+      <input name="taginput" type="text" placeholder="添加标签"/>
+      <div>
+        <ul>
+         <li ng-repeat="candidate in taginput.candidates track by $index" ng-bind="candidate"></li>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>

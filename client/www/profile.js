@@ -6,6 +6,10 @@ require.config({
     "location": "jquery/dist",
     "main": "jquery"
   }, {
+    "name": "when",
+    "location": "when",
+    "main": "when"
+  }, {
     "name": "less",
     "location": "less/dist",
     "main": "less"
@@ -37,7 +41,7 @@ require.config({
   },
   "deps": ["require", "less","semantic", "angular-route"],
   "callback": function(require, less) {
-    require(["bplus-ui/app"], function(app) {
+    require(["bplus-ui/app_test"], function(app) {
       app.start();
     })
   }
