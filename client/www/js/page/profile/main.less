@@ -95,17 +95,17 @@ body.pushable > .pusher {
     position: relative;
     margin-bottom: 1em;
     border-bottom: solid 2px #BEBEBE;
-    padding: 1em;
+    padding: 2em 1em;
     background-color: #fff;
 }
 .b-profile-face {
     position: absolute;
-    top: -68px;
+    top: -72px;
     left: 0;
-    width: 135px;
+    width: 143px;
 }
 .b-profile-preview {
-    padding-top: 34px;
+    padding-top: 24px;
     text-align: right;
 }
 @media only screen and (max-width: 991px) {
@@ -113,8 +113,9 @@ body.pushable > .pusher {
         position: static;
         top: auto;
         left: auto;
-        margin-top: -60%;
-        width: 100%;
+        margin-top: -50%;
+        margin-left: 11%;
+        width: 78%;
     }
     .b-profile-preview {
         margin-top: 1em;
@@ -122,19 +123,53 @@ body.pushable > .pusher {
         text-align: center;
     }
 }
-.b-profile-preview a,
-.b-profile-preview a:hover,
-.b-profile-preview a:visited {
-    ;
+.b-profile-preview i {
+    background: url(/img/profile/icon_profile_preview.png) no-repeat center center;
+    background-size: cover;
 }
-.b-profile-area {
-    margin-top: 1em;
+
+.b-profile-achievement {
+    margin-left: 4.25em;
+    margin-right: 1em;
+}
+.b-profile-achievement .ui.grid > .column {
+    padding: 0.5rem !important;
+}
+.b-profile-achievement .column img {
+    width: 100%;
+}
+.b-profile-achievement-imgs {
+    margin-top: 1rem !important;
+}
+.b-profile-achievement-imgs i {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.b-profile-achievement-imgs-fraction i {
+    background-image: url(/img/profile/icon_profile_fraction.png);
+}
+.b-profile-achievement-imgs-level i {
+    background-image: url(/img/profile/icon_profile_level.png);
+}
+
+.b-profile-growing {
+    margin-left: 4.25em;
+    margin-right: 2em;
+}
+.b-profile-growing .content {
+    line-height: 1.5rem !important;
+}
+.b-profile-growing-buttons {
+    margin: 1rem 2rem 0 2em;
+}
+.b-profile-growing-buttons button {
+    margin-top: 1rem !important;
 }
 
 .b-profile-right-tip {
     position: absolute;
-    top: -1.5em;
-    color: #b92c1e;
+    top: -1.4em;
 }
 .b-profile-right-section {
     position: relative;
