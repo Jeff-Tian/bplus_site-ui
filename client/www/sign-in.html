@@ -21,26 +21,27 @@
                 <a class="item" data-tab="login">登录</a>
                 <a class="item" data-tab="register">注册</a>
             </div>
-            <div class="ui bottom attached tab" data-tab="login">
-                <form class="ui large fluid form">
+            <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
+                <form class="ui large fluid form" ng-submit="tryLogin()">
                     <div class="ui error message brand"></div>
                     <div class="ui">
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="phone icon"></i>
-                                <input type="text" name="mobile" placeholder="手机号">
+                                <input type="text" name="mobile" placeholder="手机号" ng-model="loginData.mobile">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="请输入密码">
+                                <input type="password" name="password" placeholder="请输入密码"
+                                       ng-model="loginData.password">
                             </div>
                         </div>
                         <div class="fields">
                             <div class="ten wide field">
                                 <div class="ui checkbox">
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="loginData.rememberMe">
                                     <label>下次自动登录</label>
                                 </div>
                             </div>
@@ -49,7 +50,8 @@
                             </div>
                         </div>
                         <div class="ui divider horizontal"></div>
-                        <div class="ui fluid huge red submit button">登录</div>
+                        <button type="submit" class="ui fluid huge red submit button" ng-disabled="!isFormValid()">登录
+                        </button>
                     </div>
                 </form>
                 <div class="ui right aligned container">

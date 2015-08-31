@@ -13,7 +13,12 @@ angular.module('signIn', [
     .run(function () {
 
     })
-    .controller('SignUpCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+    .factory('FormValidation', function () {
+        return {
+            validChineseMobileNumberPattern: '^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$'
+        };
+    })
+    .controller('SignUpCtrl', ['$scope', '$timeout', 'FormValidation', function ($scope, $timeout, FormValidation) {
         $scope.signUpData = {
             mobile: '',
             captcha: '',
@@ -21,7 +26,7 @@ angular.module('signIn', [
             password: ''
         };
 
-        var validChineseMobileNumberPattern = '^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$';
+        var validChineseMobileNumberPattern = FormValidation.validChineseMobileNumberPattern;
 
         var countDownInterval = 60;
         var countDown = countDownInterval;
@@ -108,7 +113,6 @@ angular.module('signIn', [
         }
 
         $scope.isSignUpFormPartiallyValid = function () {
-            //return partiallyValidateSignUpForm().form('is valid');
             return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha;
         };
 
@@ -125,6 +129,29 @@ angular.module('signIn', [
         };
 
         $scope.trySignUp = function () {
+            if (!$scope.isSignUpFormFullyValid()) {
+                return;
+            }
+
+            alert('submitted');
+        };
+    }])
+    .controller('LoginCtrl', ['$scope', function ($scope) {
+        $scope.loginData = {
+            mobile: '',
+            password: '',
+            rememberMe: false
+        };
+
+        $scope.isFormValid = function () {
+            return $scope.loginData.mobile && $scope.loginData.password;
+        };
+
+        $scope.tryLogin = function () {
+            if (!$scope.isFormValid()) {
+                return;
+            }
+
             alert('submitted');
         };
     }])
