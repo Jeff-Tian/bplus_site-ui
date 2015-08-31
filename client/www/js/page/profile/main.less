@@ -1,0 +1,145 @@
+/*
+* - @Bridge+ Profile
+*/
+
+// Page
+@import "../../../css/page/main.less";
+
+// Profile
+body.pushable > .pusher {
+    background-color: #efefef;
+}
+
+.b-profile-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.b-profile-banner .img {
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    padding: 0;
+    width: 1600px;
+    height: 235px;
+    background-color: #e5e5e5;
+}
+.b-profile-banner a,
+.b-profile-banner a:hover,
+.b-profile-banner a:visited,
+.b-profile-banner a.hover,
+.b-profile-banner a.hover:hover,
+.b-profile-banner a.hover:visited {
+    position: absolute;
+    left: 50%;
+    bottom: 1em;
+    width: 54px;
+    height: 54px;
+    text-decoration: none;
+    background: url(/img/profile/btn_profile_addphoto_n.png) no-repeat center center;
+}
+.b-profile-banner a:hover,
+.b-profile-banner a.hover,
+.b-profile-banner a.hover:hover,
+.b-profile-banner a.hover:visited {
+    background-image: url(/img/profile/btn_profile_addphoto_p.png)
+}
+@media only screen and (max-width: 767px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        left: auto;
+        right: 2em;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 362px - 54px );
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 467px - 54px );
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 564px - 54px );
+    }
+}
+
+.b-profile-main {
+    margin-top: 3em !important;
+    margin-bottom: 2em !important;
+}
+
+.b-profile-left-section {
+    position: relative;
+    margin-bottom: 1em;
+    border-bottom: solid 2px #BEBEBE;
+    padding: 1em;
+    background-color: #fff;
+}
+.b-profile-face {
+    position: absolute;
+    top: -68px;
+    left: 0;
+    width: 135px;
+}
+.b-profile-preview {
+    padding-top: 34px;
+    text-align: right;
+}
+@media only screen and (max-width: 991px) {
+    .b-profile-face {
+        position: static;
+        top: auto;
+        left: auto;
+        margin-top: -60%;
+        width: 100%;
+    }
+    .b-profile-preview {
+        margin-top: 1em;
+        padding-top: 0;
+        text-align: center;
+    }
+}
+.b-profile-preview a,
+.b-profile-preview a:hover,
+.b-profile-preview a:visited {
+    ;
+}
+.b-profile-area {
+    margin-top: 1em;
+}
+
+.b-profile-right-tip {
+    position: absolute;
+    top: -1.5em;
+    color: #b92c1e;
+}
+.b-profile-right-section {
+    position: relative;
+    margin-bottom: 1em;
+    border-bottom: solid 2px #BEBEBE;
+    padding: 1em;
+    background-color: #fff;
+}
