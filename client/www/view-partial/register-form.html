@@ -20,18 +20,16 @@
                 <a href="javascript: void(0);">换一张</a>
             </div>
         </div>
-        <div class="field">
-            <button type="button" class="ui fluid huge red button" ng-click="getVerificationCode()"
-                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                {{verificationCodeButtonText}}
-            </button>
-        </div>
-        <div class="field">
-            <div class="ui left icon input">
-                <i class="icon"></i>
+        <div class="fields">
+            <div class="ui left icon input field" ng-show="sendCodeButtonClicked">
+                <i class="write icon"></i>
                 <input type="text" name="verificationCode" placeholder="请输入手机验证码"
                        ng-model="signUpData.verificationCode">
             </div>
+            <button type="button" class="ui fluid huge red button field" ng-click="getVerificationCode()"
+                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                {{verificationCodeButtonText}}
+            </button>
         </div>
         <div class="field">
             <div class="ui left icon input">

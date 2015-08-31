@@ -38,6 +38,10 @@ server.get('/set-password', function (req, res) {
     res.render('set-password');
 });
 
+server.get('/sign-up-from', function (req, res) {
+    res.render('sign-up-from');
+});
+
 // Host & Port
 server.listen(8000);
 console.log('8000 is for Bridge+');

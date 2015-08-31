@@ -86,6 +86,11 @@ angular.module('signIn', [
             alert('submitted');
         };
     }])
+    .controller('BindMobileCtrl', ['$scope', function ($scope) {
+        $scope.bindMobile = function () {
+
+        };
+    }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.loginData = {
             mobile: '',
@@ -142,7 +147,7 @@ angular.module('signIn', [
             }
         });
     }])
-    .controller('ResetPasswordByEmailCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
+    .controller('ResetPasswordByEmailCtrl', ['$scope', function ($scope) {
         var $shape = $('.shape.reset-by-email');
         $shape.shape();
 
@@ -203,18 +208,20 @@ angular.module('signIn', [
 
                 var countDownInterval = 60;
                 var countDown = countDownInterval;
+                $scope.sendCodeButtonClicked = false;
 
                 function updateButtonText(text) {
                     $scope.verificationCodeButtonText = text;
                 }
 
                 function initButtonText() {
-                    updateButtonText('获取手机验证码');
+                    var message = $scope.sendCodeButtonClicked ? '再次发送' : '获取手机验证码';
+                    updateButtonText(message);
                     $scope.allowGetCode = true;
                 }
 
                 function refreshButtonText() {
-                    updateButtonText(countDown + ' 秒后重新获取...');
+                    updateButtonText(countDown);
                     $scope.allowGetCode = false;
                 }
 
@@ -301,6 +308,8 @@ angular.module('signIn', [
                     if ($scope.isSignUpFormPartiallyValid()) {
                         pollUpdateButtonText();
                     }
+
+                    $scope.sendCodeButtonClicked = true;
                 };
 
                 $scope.trySignUp = function () {
