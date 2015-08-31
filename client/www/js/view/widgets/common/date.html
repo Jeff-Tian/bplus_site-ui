@@ -1,0 +1,16 @@
+<div>
+  <span>
+    <select name="year" ng-change="selectYear()" ng-show="dateSelect.config.showYear" ng-model="dateSelect.value.year" ng-options="year.value for year in dateSelect.displaydata.years">
+      <option value="">选择。。</option>
+    </select>
+    年
+    <select name="month" ng-change="selectMonth()" ng-show="dateSelect.config.showMonth" ng-model="dateSelect.value.month" ng-options="month.value for month in dateSelect.displaydata.months">
+      <option value="">选择。。</option>
+    </select>
+    月
+    <select name="day" ng-show="dateSelect.config.showDay" ng-model="dateSelect.value.day" ng-options="day.value for day in dateSelect.displaydata.days">
+      <option value="">选择。。</option>
+    </select>
+    日
+  </span>
+</div>
