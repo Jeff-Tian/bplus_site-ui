@@ -3012,6 +3012,22 @@ a:active {
   color: #ff3c42;
   text-decoration: underline;
 }
+@media only screen and (max-width: 1399px) and (min-width: 992px) {
+  .ui.container {
+    width: 933px;
+  }
+  .ui.container.grid {
+    width: calc(935px) !important;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .ui.container {
+    width: 1127px;
+  }
+  .ui.container.grid {
+    width: calc(1129px) !important;
+  }
+}
 /*
 * - @Bridge+
 */
@@ -3408,7 +3424,7 @@ a:active {
 * - @Bridge+
 */
 .b-trial {
-  margin: 3rem 0;
+  padding: 3rem 0;
 }
 /*
 * - @Bridge+
@@ -3684,86 +3700,118 @@ a:active {
 /*
 * - @Bridge+ Homepage/Salespage
 */
-.game-banner {
+/*
+* - @Bridge+
+*/
+.b-masthead {
+  min-height: 36rem;
+  position: relative;
   background: url('/img/salespage/opportunity-banner.jpg');
-  min-height: 40rem;
-  color: #ffffff;
 }
-.game-banner .header {
-  color: #ffffff;
-}
-.game-banner-content {
+.b-masthead > .b-masthead-stripe {
   background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+}
+.b-masthead > .b-masthead-stripe h2.ui.header {
   color: #ffffff;
-  margin-top: -200px;
-  padding: 1.5rem 0;
+  font-size: 1.9em;
+  margin-top: 1.1rem;
 }
-.game-banner-content .item .content div {
-  color: #ffffff !important;
+.b-masthead > .b-masthead-stripe h3 {
+  color: #ffffff;
+  font-weight: normal;
 }
-.game-banner-content .game-item {
-  padding: 2rem 0 !important;
+.b-masthead > .b-masthead-stripe p {
+  color: #ffffff;
+  font-size: 0.9em;
+  line-height: 1.8em;
 }
-.game-banner-content .game-item h2 {
-  font-size: 2.3em;
+.b-masthead > .b-masthead-stripe p:first-child {
+  width: 88%;
 }
-.game-banner-content .game-item p {
-  line-height: 0.5rem;
-}
-.game-banner-content .teacher-header {
-  font-size: 1.5em !important;
+.b-masthead > .b-masthead-stripe .ui.image.floated {
+  margin-bottom: 0;
 }
 /*
 * - @Bridge+
 */
-.b-game-step {
+.b-process {
   background-color: #f0f0f0;
-  padding: 4rem 0;
+  padding-top: 5rem;
+  padding-bottom: 4.5rem;
 }
-.b-game-step h3.ui.header {
+.b-process h3.ui.header {
   color: #8c8c8c;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
-.b-game-step .content-item {
-  background-color: #ff3c42 !important;
-  margin: 0 !important;
+.b-process .ui.grid .column.b-process-item > .content {
+  background-color: #ff3c42;
+  padding: 1.6rem 1.3rem;
+  position: relative;
+}
+.b-process .ui.grid .column.b-process-item > .content > .b-process-item-next {
+  position: absolute;
+  left: -2.1rem;
+  top: 44%;
+}
+.b-process .ui.grid .column.b-process-item > .content > .b-process-item-next i.icon {
+  color: #ff3c42;
+  font-size: 2em;
+}
+.b-process .ui.grid .column.b-process-item > .content h4.ui.header {
   color: #ffffff;
-  padding: 0 1rem 1rem;
+  font-weight: normal;
+  font-size: 1.21em;
 }
-.b-game-step .content-item .item-content p {
-  line-height: 35px;
-  font-size: 1.3em;
-  margin: 0 !important;
+.b-process .ui.grid .column.b-process-item > .content h4.ui.header i.icon {
+  font-size: 1.7em;
 }
-.b-game-step .content-item:first-child {
-  padding: 1rem;
+.b-process .ui.grid .column.b-process-item > .content p {
+  color: #ffffff;
+  font-size: 0.9em;
 }
-.b-game-step .animation-row {
-  background-color: #999999;
+.b-process .ui.grid .column.b-process-item > .image {
+  background-color: #d2d2d2;
 }
-.b-game-step .arrow-column {
-  line-height: 92px;
+/*
+* - @Bridge+
+*/
+.b-skill {
+  background-color: #2e363d;
+  padding: 3rem 0;
 }
-.three-one-column {
-  width: 31.3% !important;
+.b-skill .b-skill-topic {
+  color: #ffffff;
 }
-.three-column {
-  width: 3% !important;
+.b-skill .b-skill-topic h3.ui.header {
+  color: #ffffff;
 }
-.b-game-topics {
-  background-color: #2d363d;
-  padding: 3em 0;
+.b-skill .b-skill-skill {
+  color: #ffffff;
 }
-.b-game-topics .b-game-list {
-  font-size: 2.2em;
-  color: #ffffff !important;
+.b-skill .b-skill-skill h3.ui.header {
+  color: #ffffff;
 }
-.b-game-topics .b-game-list .header {
-  color: #ffffff !important;
+.b-skill .b-skill-skill .ui.list .list > .item .header {
+  color: #ffffff;
 }
-.b-game-topics .b-game-list .content {
-  padding: 0 !important;
+.b-skill .b-game-list {
+  font-size: 2em;
 }
-.b-game-topics .b-game-list .item {
-  padding: 0.6rem 0 !important;
+/*
+* - @Bridge+
+*/
+.b-events {
+  background-color: #d2d2d2;
+}
+/*
+* - @Bridge+
+*/
+.b-trial {
+  padding: 3rem 0;
+  background-color: #f0f0f0;
 }
