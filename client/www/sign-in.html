@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录 Bridge+</title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+    <!--LESS-->
+    <link rel="stylesheet/less" type="text/css" href="css/page/register/main.less">
+    <script src="bower/less/dist/less.js"></script>
+</head>
+
+<body ng-app="signIn" ng-controller="AppCtrl">
+<%- include('view-partial/header.html') -%>
+<div class="ui b-signin-wrapper">
+    <div class="ui column b-signin-container">
+        <div class="b-signin-wide">
+            <div class="ui fluid two item top pointing secondary menu brand">
+                <a class="item" data-tab="login">登录</a>
+                <a class="item" data-tab="register">注册</a>
+            </div>
+            <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
+                <form class="ui large fluid form login" ng-submit="tryLogin()" name="loginForm">
+                    <div class="ui error message brand"></div>
+                    <div class="ui">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="phone icon"></i>
+                                <input type="text" name="mobile" placeholder="手机号" ng-model="loginData.mobile">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="请输入密码"
+                                       ng-model="loginData.password">
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="ten wide field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" ng-model="loginData.rememberMe">
+                                    <label>下次自动登录</label>
+                                </div>
+                            </div>
+                            <div class="six wide field ui right aligned container">
+                                <a href="/reset-password">忘记密码</a>
+                            </div>
+                        </div>
+                        <div class="ui divider horizontal"></div>
+                        <button type="submit" class="ui fluid huge red submit button"
+                                ng-disabled="!isLoginFormValid()">登录
+                        </button>
+                    </div>
+                </form>
+                <div class="ui right aligned container">
+                    没有账号？ <a href="#register">马上注册</a>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui">
+                    <a class="wechat link">
+                        其他方式登录:
+                        <i class="big wechat icon"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
+                <register-form action="signUp"></register-form>
+
+                <div class="field ui right aligned container">
+                    已有账号或微信账号？<a href="signin#/login">马上登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--JS-->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<!--Angular JS-->
+<script src="bower/angular/angular.min.js"></script>
+<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Page JS-->
+<script src="js/page/register/main.js"></script>
+<!--Utils JS-->
+<script src="js/utils/utils.js"></script>
+<script src="js/utils/msgbus.js"></script>
+<script src="js/utils/underscore.js"></script>
+</body>
+
+</html>
