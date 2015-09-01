@@ -192,7 +192,7 @@ angular.module('signIn', [
             alert('set');
         };
     }])
-    .controller('PersonalHistoryCtrl', ['$scope', function ($scope) {
+    .controller('PersonalHistoryCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
         $('.ui.dropdown')
             .dropdown({})
         ;
@@ -204,12 +204,159 @@ angular.module('signIn', [
         var $shape = $('.ui.shape.personal-history');
         $shape.shape();
         $scope.tryNextStep = function () {
+            if (!$form1.form('is valid')) {
+                return;
+            }
+
+            $shape.shape('flip over');
+        };
+
+        $scope.gotoNextStep = function () {
+            $form1.form('clear');
             $shape.shape('flip over');
         };
 
         $scope.prevStep = function () {
             $shape.shape('flip back');
         };
+
+        $scope.trySubmit = function () {
+            if (!$form2.form('is valid')) {
+                return;
+            }
+
+            alert('submitted');
+        };
+
+        var $form1 = $('.ui.form.personal-history.step-1');
+        var $form2 = $('.ui.form.personal-history.step-2');
+
+        $form1.form(angular.extend({}, FormValidation.defaultSetting, {
+            fields: {
+                realName: {
+                    identifier: 'realName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入真实姓名'
+                    }]
+                },
+                gender: {
+                    identifier: 'gender',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择性别'
+                    }]
+                },
+                yearOfBirth: {
+                    identifier: 'yearOfBirth',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择出生年份'
+                    }]
+                },
+                monthOfBirth: {
+                    identifier: 'monthOfBirth',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择出生月份'
+                    }]
+                },
+                dayOfBirth: {
+                    identifier: 'dayOfBirth',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择出生日期'
+                    }]
+                },
+                currentLocation: {
+                    identifier: 'currentLocation',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入当前所在地'
+                    }]
+                }
+            }
+        }));
+
+        $form2.form(angular.extend({}, FormValidation.defaultSetting, {
+            fields: {
+                schoolName: {
+                    identifier: 'schoolName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入学校名称'
+                    }]
+                },
+
+                schoolMajor: {
+                    identifier: 'schoolMajor',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请输入所学专业'
+                    }]
+                },
+
+                schoolEducationBackground: {
+                    identifier: 'schoolEducationBackground',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择学历'
+                    }]
+                },
+
+                schoolStartYear: {
+                    identifier: 'schoolStartYear',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择求学开始年份'
+                    }]
+                },
+
+                schoolStartMonth: {
+                    identifier: 'schoolStartMonth',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择求学开始月份'
+                    }]
+                },
+
+                schoolEndYear: {
+                    identifier: 'schoolEndYear',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择毕业年份'
+                    }]
+                },
+
+                schoolEndMonth: {
+                    identifier: 'schoolEndMonth',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择毕业月份'
+                    }]
+                }
+            }
+        }));
+
+        $scope.schoolInfo = {
+            name: '',
+            major: '',
+            educationBackground: '',
+            startYear: '',
+            startMonth: '',
+            endYear: '',
+            endMonth: ''
+        };
+
+        $scope.personalInfo = {
+            realName: '',
+            gender: '',
+            yearOfBirth: '',
+            monthOfBirth: '',
+            dayOfBirth: '',
+            setPrivacy: true,
+            currentLocation: ''
+        }
     }])
     .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {
         return {
