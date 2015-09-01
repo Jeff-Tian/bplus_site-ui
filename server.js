@@ -19,15 +19,12 @@ server.get('/index', function(req, res) {
 server.get('/game', function(req, res) {
     res.render('game');
 });
-
 server.get('/opportunity', function(req, res) {
     res.render('opportunity');
 });
-
 server.get('/register', function (req, res) {
     res.render('register');
 });
-
 server.get('/data', require('./client/www/api/data.js').getData);
 
 // Host & Port
