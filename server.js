@@ -42,6 +42,10 @@ server.get('/sign-up-from', function (req, res) {
     res.render('sign-up-from');
 });
 
+server.get('/personal-history', function (req, res) {
+    res.render('personal-history');
+});
+
 // Host & Port
 server.listen(8000);
 console.log('8000 is for Bridge+');

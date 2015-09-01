@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人信息 - Bridge+</title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+    <!--LESS-->
+    <link rel="stylesheet/less" type="text/css" href="css/page/register/main.less">
+    <script src="bower/less/dist/less.js"></script>
+</head>
+
+<body ng-app="signIn">
+<%- include('view-partial/header.html') -%>
+<div class="ui b-signin-wrapper">
+    <div class="ui success message brand">
+        <i class="large close icon"></i>
+
+        <div class="header">
+            恭喜您完成注册! 填写下方基本资料即可开始游戏!
+        </div>
+    </div>
+    <div class="ui column b-step-container b-separator">
+        <div class="ui center aligned container">
+            <h2 class="grey color">个人信息</h2>
+        </div>
+    </div>
+    <div class="ui column">
+        <div class="ui text shape personal-history" ng-controller="PersonalHistoryCtrl">
+            <div class="sides">
+                <div class="active side">
+                    <form name="personalInfoForm" class="ui form" ng-submit="tryNextStep()">
+                        <div class="b-step-container">
+                            <div class="field">
+                                <label><i class="ui large red icon">*</i>真实姓名</label>
+                                <input type="text" name="personalInfo.realName" placeholder="陈大华">
+                            </div>
+                            <div class="field">
+                                <label><i class="ui large red icon">*</i>性别</label>
+                                <select class="ui dropdown">
+                                    <option value="">选择...</option>
+                                    <option value="1">男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </div>
+                            <div class="fields">
+                                <div class="four wide field">
+                                    <label><i class="ui large red icon">*</i>生日</label>
+
+                                    <div class="fields">
+                                        <div class="field">
+                                            <select class="ui fluid search dropdown">
+                                                <option value="">选择...</option>
+                                                <option value="1985">1985 年</option>
+                                                <option value="1986">1986 年</option>
+                                                <option value="1987">1987 年</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            年
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field">
+                                    <label>&nbsp;</label>
+
+                                    <div class="fields">
+                                        <div class="field">
+                                            <select class="ui fluid search dropdown">
+                                                <option value="">选择...</option>
+                                                <option value="1">1月</option>
+                                                <option value="2">2月</option>
+                                                <option value="3">3月</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            月
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field">
+                                    <label>&nbsp;</label>
+
+                                    <div class="fields">
+                                        <div class="field">
+                                            <select class="ui fluid search dropdown">
+                                                <option value="">选择...</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field">
+                                    <label>&nbsp;</label>
+
+                                    <div class="ui right aligned container">
+                                        <div class="ui checkbox">
+                                            <input type="checkbox" checked>
+                                            <label>设置为隐私</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label><i class="ui large red icon">*</i>目前所在地</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="ui horizontal divider"></div>
+                        <div class="ui right aligned container">
+                            <button type="reset" class="ui large button">跳过</button>
+                            <button type="submit" class="ui large red button">下一步: 完善教育背景</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="side">
+                    <form name="personalInfoForm2" class="ui form b-step-container">
+                        <div class="field">
+                            <label><i class="ui large red icon">*</i>学校名称</label>
+                            <input type="text" name="schoolInfo.schoolName" placeholder="上海交通大学">
+                        </div>
+                        <div class="field">
+                            <label><i class="ui large red icon">*</i>所学专业</label>
+                            <input type="text" name="schoolInfo.major" placeholder="计算机工程">
+                        </div>
+                        <div class="field">
+                            <label><i class="ui large red icon">*</i>学历</label>
+                            <select class="ui fluid search dropdown">
+                                <option value="">选择...</option>
+                                <option value="本科">本科</option>
+                                <option value="硕士">硕士</option>
+                            </select>
+                        </div>
+                        <div class="two fields">
+                            <div class="nine wide field">
+                                <label><i class="ui large red icon">*</i>求学时间</label>
+
+                                <div class="fields">
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown">
+                                            <option value="">选择...</option>
+                                            <option value="1985">1985 年</option>
+                                            <option value="1986">1986 年</option>
+                                            <option value="1987">1987 年</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        年
+                                    </div>
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown">
+                                            <option value="">选择...</option>
+                                            <option value="1">1月</option>
+                                            <option value="2">2月</option>
+                                            <option value="3">3月</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        月
+                                    </div>
+                                    <div class="field">
+                                        —
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eight wide field">
+                                <label><i class="ui large red icon">*</i>毕业时间</label>
+
+                                <div class="fields">
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown">
+                                            <option value="">选择...</option>
+                                            <option value="1985">1985 年</option>
+                                            <option value="1986">1986 年</option>
+                                            <option value="1987">1987 年</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        年
+                                    </div>
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown">
+                                            <option value="">选择...</option>
+                                            <option value="1">1月</option>
+                                            <option value="2">2月</option>
+                                            <option value="3">3月</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        月
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="ui horizontal divider"></div>
+                    <div class="ui right aligned container">
+                        <button type="button" class="ui large button left floated" ng-click="prevStep()">上一步</button>
+                        <button type="reset" class="ui large button">跳过</button>
+                        <button type="submit" class="ui large red button">完成</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--JS-->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<!--Angular JS-->
+<script src="bower/angular/angular.min.js"></script>
+<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Page JS-->
+<script src="js/page/register/main.js"></script>
+<!--Utils JS-->
+<script src="js/utils/utils.js"></script>
+<script src="js/utils/msgbus.js"></script>
+<script src="js/utils/underscore.js"></script>
+</body>
+
+</html>

@@ -4,15 +4,28 @@
 // Page
 @import "../main.less";
 
+.b-signin-wrapper {
+    width: 600px;
+    margin: 6em auto 2em auto;
+}
+
 .b-signin-container {
     width: 600px;
     padding: 1px 50px 40px 50px;
-    margin: 8em auto 2em auto;
     background-color: @color-grey-lighter;
 }
 
+.b-step-container {
+    background-color: @color-grey-lighter;
+    padding: 1.5em 3em;
+}
+
+.b-separator {
+    border-bottom: solid 1px @color-grey;
+}
+
 .b-signin-wide {
-    width: 300px;
+    width: 280px;
     margin: 2em auto 2em auto;
 
     form {
@@ -48,6 +61,19 @@
 
     .item:hover {
         color: @color-brand;
+    }
+}
+
+.ui.brand.message {
+    background-color: @color-grey-dark;
+    border-color: @color-grey-dark;
+    box-shadow: 0 0 0 1px @color-grey-dark inset, 0 0 0 0 transparent;
+    color: white;
+    padding: 1.5em 3em;
+
+    .header {
+        color: @color-grey-lighter;
+        font-weight: normal;
     }
 }
 
@@ -94,7 +120,8 @@
     position: absolute;
 }
 
-.shape.reset, .shape.reset-by-email {
+.shape.reset, .shape.reset-by-email, .shape.personal-history {
     width: 100%;
+    max-width: 100%;
     min-height: 300px;
 }

@@ -19,8 +19,6 @@ angular.module('signIn', [
         };
 
         res.defaultSetting = {
-            on: 'blur',
-            inline: true,
             fields: {
                 mobile: {
                     identifier: 'mobile',
@@ -83,7 +81,7 @@ angular.module('signIn', [
     }])
     .controller('SignUpCtrl', ['$scope', function ($scope) {
         $scope.signUp = function () {
-            alert('submitted');
+            window.location.href = 'personal-history';
         };
     }])
     .controller('BindMobileCtrl', ['$scope', function ($scope) {
@@ -149,8 +147,9 @@ angular.module('signIn', [
     }])
     .controller('ResetPasswordByEmailCtrl', ['$scope', function ($scope) {
         var $shape = $('.shape.reset-by-email');
-        $shape.shape();
+        //$shape.shape();
 
+        $scope.emailSent = false;
         var $form = $('.ui.form.reset-by-email');
         $scope.isResetPasswordFormValid = function () {
             if ($scope.resetPasswordForm.$pristine) {
@@ -160,12 +159,15 @@ angular.module('signIn', [
             return $form.form('is valid');
         };
 
-        $scope.tryResetPassword = function () {
+        $scope.tryResetPassword = function ($event) {
             if (!$scope.isResetPasswordFormValid()) {
                 return;
             }
 
-            $shape.shape('flip over');
+            //$shape.shape('flip right');
+            $scope.emailSent = true;
+
+            $event.preventDefault();
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {
@@ -188,6 +190,25 @@ angular.module('signIn', [
             }
 
             alert('set');
+        };
+    }])
+    .controller('PersonalHistoryCtrl', ['$scope', function ($scope) {
+        $('.ui.dropdown')
+            .dropdown({})
+        ;
+
+        $('.ui.checkbox')
+            .checkbox()
+        ;
+
+        var $shape = $('.ui.shape.personal-history');
+        $shape.shape();
+        $scope.tryNextStep = function () {
+            $shape.shape('flip over');
+        };
+
+        $scope.prevStep = function () {
+            $shape.shape('flip back');
         };
     }])
     .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {

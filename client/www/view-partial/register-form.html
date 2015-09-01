@@ -21,12 +21,13 @@
             </div>
         </div>
         <div class="fields">
-            <div class="ui left icon input field" ng-show="sendCodeButtonClicked">
+            <div class="ui left icon input eleven wide field" ng-show="sendCodeButtonClicked">
                 <i class="write icon"></i>
                 <input type="text" name="verificationCode" placeholder="请输入手机验证码"
                        ng-model="signUpData.verificationCode">
             </div>
-            <button type="button" class="ui fluid huge red button field" ng-click="getVerificationCode()"
+            <button type="button" class="ui fluid huge red button wide field" ng-click="getVerificationCode()"
+                    ng-class="{'five': sendCodeButtonClicked, 'sixteen': !sendCodeButtonClicked}"
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
                 {{verificationCodeButtonText}}
             </button>
