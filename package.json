@@ -26,6 +26,8 @@
     "grunt-contrib-less": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-concurrent": "^2.0.3",
+    "grunt-nodemon": "^0.4.0",
     "grunt-html2js": "^0.3.3",
     "grunt-string-replace": "*",
     "http-server": "^0.6.1",

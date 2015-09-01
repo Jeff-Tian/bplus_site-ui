@@ -8,39 +8,75 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="bower/owlcarousel/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="bower/owlcarousel/owl-carousel/owl.theme.css">
-    <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="css/page/homepage/main.less">
-    <script src="bower/less/dist/less.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
     <%- include('view-partial/header.html') -%>
     <!-- Page Contents -->
     <div class="pusher">
-        <div class="ui b-masthead">
-            <div class="owl-carousel b-slider" data-action="carousel">
-                <div class="b-slider-item" style="background-color: #E4A6A6;">
-                    <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+        <div class="ui b-game-masthead">
+            <div class="ui game-banner">
+            </div>
+            <div class="ui game-banner-content animated fadeInUp">
+                <div class="ui container equal width grid">
+
+                    <div class="row">
+
+                        <div class="column game-item">
+                            <h2>商战模拟游戏MarkSimos</h2>
+                            <p>游戏者在逼真、无风险的虚拟环境下运营一家公司。</p>
+                            <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向。</p>
+                            <p>游戏者在逼真、无风险的虚拟环境下运营一家公司。</p>
+                        </div>
+                        <div class="column ui items">
+                            <div class="item">
+                                <div class="ui circular small image">
+                                    <img src="img/pic_wilfried_2.png">
+                                </div>
+                                <div class="middle aligned content">
+                                    <div class="header teacher-header">游戏开发者</div>
+                                    <div class="description">
+                                        <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
                 </div>
-                <div class="b-slider-item" style="background-color: #91D2A1;">
-                    <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+
+                
+
+
+<!--                 <div class="ui container two column grid">
+                    <div class="column game-info">
+                        <h2>商战模拟游戏MarkSimos</h2>
+                        <p>游戏者在逼真、无风险的虚拟环境下运营一家公司。</p>
+                        <p>游戏者在逼真、无风险的虚拟环境下运营一家公司。</p>
+                        <p>游戏者在逼真、无风险的虚拟环境下运营一家公司。</p>
                     </div>
-                </div>
-                <div class="b-slider-item" style="background-color: #EFD283;">
-                    <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+                    <div class="column ui items teacher-avatar">
+                        <div class="item">
+                            <div class="ui circular small image b-sp">
+                                <img src="img/tom.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">何平</div>
+                                <div class="meta">东北大学 / 机械工程</div>
+                                <div class="ui divider"></div>
+                                <div class="description">
+                                    <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
+
         <div class="ui b-advantage">
             <div class="ui container">
                 <h3 class="ui header b-sp">全球领先的商战模拟游戏</h3>
@@ -145,7 +181,7 @@
     <script src="bower/angular/angular.min.js"></script>
     <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!--Page JS-->
-    <script src="js/page/homepage/main.js"></script>
+    <script src="js/page/game/main.js"></script>
     <!--Utils JS-->
     <script src="js/utils/utils.js"></script>
     <script src="js/utils/msgbus.js"></script>

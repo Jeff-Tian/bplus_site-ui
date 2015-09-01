@@ -16,7 +16,7 @@ bower install
 ### Run project
 
 ```
-npm start
+grunt
 ```
 
 Now browse to the website at `http://localhost:8000/index`

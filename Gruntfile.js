@@ -9,7 +9,7 @@ var configJshint = require(path + 'grunt/jshint.js');
 var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
-
+var configStart = require(path + 'grunt/start.js');
 // Create grunt module
 module.exports = function(grunt) {
   'use strict';
@@ -43,7 +43,19 @@ module.exports = function(grunt) {
     "jshint": configJshint(),
     "html2js": configHtml2js(),
     "string-replace": configStringreplace(),
-    "watch": configWatch()
+    "watch": configWatch(),
+    "nodemon": configStart(),
+    'concurrent': {
+      dev: [
+        'less:development',
+        'watch',
+        'nodemon',
+        'jshint',
+      ],
+      options: {
+        logConcurrentOutput: true
+      }
+    },
   });
 
   // Load all grunt tasks
@@ -60,13 +72,21 @@ module.exports = function(grunt) {
     }
   });
 
+
+
+
+
   // Default task.
   grunt.registerTask('develop', [
+    'nodemon'
   ]);
 
   // Default task.
+
   grunt.registerTask('default', [
+    'concurrent'
   ]);
+
 
   // Copy to WEB
   grunt.registerTask('release', [

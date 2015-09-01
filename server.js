@@ -1,7 +1,6 @@
 // Use Expressjs as Node.js web framework
 var express = require('express');
 var server = express();
-
 // Node.js template engine
 var ejs = require('ejs');
 
@@ -21,6 +20,17 @@ server.get('/game', function(req, res) {
     res.render('game');
 });
 
+server.get('/opportunity', function(req, res) {
+    res.render('opportunity');
+});
+
+server.get('/register', function (req, res) {
+    res.render('register');
+});
+
+server.get('/data', require('./client/www/api/data.js').getData);
+
 // Host & Port
-server.listen(8000);
-console.log('8000 is for Bridge+');
+server.listen(8000, function() {
+    console.log('8000 is for Bridge+ ' );
+});
