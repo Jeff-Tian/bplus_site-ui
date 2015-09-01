@@ -52,12 +52,11 @@
 
                                     <div class="fields">
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="yearOfBirth"
+                                            <select class="ui fluid search dropdown defer" name="yearOfBirth"
                                                     ng-model="personalInfo.yearOfBirth">
-                                                <option value="">选择...</option>
-                                                <option value="1985">1985</option>
-                                                <option value="1986">1986</option>
-                                                <option value="1987">1987</option>
+                                                <option value="">请选择...</option>
+                                                <option value="{{y}}" ng-repeat="y in birthYearList" dropdown>{{y}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -70,12 +69,11 @@
 
                                     <div class="fields">
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="monthOfBirth"
+                                            <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
                                                 <option value="">选择...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown="">{{m}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -88,12 +86,12 @@
 
                                     <div class="fields">
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="dayOfBirth"
+                                            <select class="ui fluid search dropdown defer" name="dayOfBirth"
                                                     ng-model="personalInfo.dayOfBirth">
                                                 <option value="">选择...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="{{d}}" ng-repeat="d in getBirthDayList()" dropdown>
+                                                    {{d}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -121,7 +119,7 @@
                         </div>
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container">
-                            <button type="reset" class="ui large button" ng-click="gotoNextStep()">跳过</button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()">跳过</button>
                             <button type="submit" class="ui large red button">下一步: 完善教育背景</button>
                         </div>
 
@@ -155,24 +153,21 @@
 
                                     <div class="fields">
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="schoolStartYear"
+                                            <select class="ui fluid search dropdown defer" name="schoolStartYear"
                                                     ng-model="schoolInfo.startYear">
                                                 <option value="">请选择...</option>
-                                                <option value="1985">1985</option>
-                                                <option value="1986">1986</option>
-                                                <option value="1987">1987</option>
+                                                <option value="{{y}}" ng-repeat="y in startYearList" dropdown>{{y}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="field">
                                             年
                                         </div>
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="schoolStartMonth"
+                                            <select class="ui fluid search dropdown defer" name="schoolStartMonth"
                                                     ng-model="schoolInfo.startMonth">
                                                 <option value="">请选择...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -188,24 +183,21 @@
 
                                     <div class="fields">
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="schoolEndYear"
+                                            <select class="ui fluid search dropdown defer" name="schoolEndYear"
                                                     ng-model="schoolInfo.endYear">
                                                 <option value="">请选择...</option>
-                                                <option value="1985">1985</option>
-                                                <option value="1986">1986</option>
-                                                <option value="1987">1987</option>
+                                                <option value="{{y}}" ng-repeat="y in endYearList" dropdown>{{y}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="field">
                                             年
                                         </div>
                                         <div class="field">
-                                            <select class="ui fluid search dropdown" name="schoolEndMonth"
+                                            <select class="ui fluid search dropdown defer" name="schoolEndMonth"
                                                     ng-model="schoolInfo.endMonth">
                                                 <option value="">请选择...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -218,9 +210,10 @@
 
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container">
-                            <button type="button" class="ui large button left floated" ng-click="prevStep()">上一步
+                            <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
+                                上一步
                             </button>
-                            <button type="reset" class="ui large button">跳过</button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()">跳过</button>
                             <button type="submit" class="ui large red button">完成</button>
                         </div>
                     </form>

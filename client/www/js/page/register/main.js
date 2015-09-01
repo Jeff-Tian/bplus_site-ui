@@ -193,7 +193,7 @@ angular.module('signIn', [
         };
     }])
     .controller('PersonalHistoryCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
-        $('.ui.dropdown')
+        $('.ui.dropdown').not('.defer')
             .dropdown({})
         ;
 
@@ -220,6 +220,10 @@ angular.module('signIn', [
             $shape.shape('flip back');
         };
 
+        $scope.gotoComplete = function () {
+            alert('submitted');
+        };
+
         $scope.trySubmit = function () {
             if (!$form2.form('is valid')) {
                 return;
@@ -227,6 +231,56 @@ angular.module('signIn', [
 
             alert('submitted');
         };
+
+        $scope.birthYearList = (function () {
+            var res = [];
+            var thisYear = new Date().getFullYear();
+            for (var i = 1980; i < thisYear - 15; i++) {
+                res.push(i);
+            }
+
+            return res;
+        })();
+
+        $scope.getBirthDayList = function () {
+            var year = $scope.personalInfo.yearOfBirth;
+            var month = $scope.personalInfo.monthOfBirth;
+
+            if (!year || !month) {
+                return [];
+            }
+
+            var date = new Date(year, month - 1, 1);
+            var days = [];
+
+            while (date.getMonth() == month - 1) {
+                days.push(date.getDate());
+                date.setDate(date.getDate() + 1);
+            }
+
+            return days;
+        };
+
+        $scope.startYearList = (function () {
+            var res = [];
+            var thisYear = new Date().getFullYear();
+            for (var i = thisYear - 10; i <= thisYear; i++) {
+                res.push(i);
+            }
+
+            return res;
+        })();
+        $scope.endYearList = (function () {
+            var y = $scope.startYearList[$scope.startYearList.length - 1];
+            var res = [].concat($scope.startYearList);
+
+            for (var i = 0; i < 8; i++) {
+                res.push(y + i + 1);
+            }
+
+            return res;
+        })();
+        $scope.monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         var $form1 = $('.ui.form.personal-history.step-1');
         var $form2 = $('.ui.form.personal-history.step-2');
@@ -357,6 +411,15 @@ angular.module('signIn', [
             setPrivacy: true,
             currentLocation: ''
         }
+    }])
+    .directive('dropdown', ['$timeout', function ($timeout) {
+        return function (scope, element, attrs) {
+            if (scope.$last) {
+                $timeout(function () {
+                    $(element).parent().dropdown();
+                });
+            }
+        };
     }])
     .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {
         return {
