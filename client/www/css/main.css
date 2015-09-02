@@ -3012,6 +3012,15 @@ a:active {
   color: #ff3c42;
   text-decoration: underline;
 }
+.text-left {
+  text-align: left !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
   .ui.container {
     width: 933px;
@@ -3805,8 +3814,64 @@ a:active {
 /*
 * - @Bridge+
 */
+.b-popularity {
+  background-color: #2e363d;
+  background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_students.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, left bottom;
+  background-size: 74% auto, 52% auto;
+}
+.b-popularity > .ui.container {
+  min-height: 40rem;
+  padding-top: 3rem;
+}
+.b-popularity h3.ui.header {
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-popularity .b-theory-header > div {
+  color: #ffffff;
+  line-height: 1.6em;
+  font-size: 0.9em;
+}
+.b-popularity .b-theory-content {
+  padding: 7rem 0;
+}
+.b-popularity .b-theory-content > h3 {
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+.b-popularity .b-theory-content > p {
+  color: #ffffff;
+  font-size: 0.9em;
+  line-height: 2.4em;
+}
+/*
+* - @Bridge+
+*/
 .b-events {
+  background-image: url("/img/salespage/jobs_bg.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: auto 100%;
   background-color: #d2d2d2;
+}
+.b-events > .ui.container {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+.b-events h3.ui.header {
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+.b-events .events-table {
+  background-color: #ffffff !important;
+  padding: 1rem 2rem;
+}
+.b-events .events-table .icon {
+  color: #ff3c42;
+  font-size: 1.6em;
 }
 /*
 * - @Bridge+
