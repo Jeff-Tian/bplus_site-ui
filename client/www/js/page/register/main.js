@@ -420,7 +420,7 @@ angular.module('signIn', [
             }
         };
     }])
-    .directive('registerForm', ['FormValidation', '$timeout', function (FormValidation, $timeout) {
+    .directive('registerForm', ['FormValidation', '$timeout', '$http', function (FormValidation, $timeout, $http) {
         return {
             templateUrl: '../../../view-partial/register-form.html',
             scope: {
@@ -471,40 +471,6 @@ angular.module('signIn', [
 
                 initButtonText();
 
-                var fields = {
-                    mobile: {
-                        identifier: 'mobile',
-                        rules: [
-                            {
-                                type: 'regExp[' + validChineseMobileNumberPattern + ']',
-                                prompt: '请输入有效的手机号码'
-                            }
-                        ]
-                    },
-
-                    captcha: {
-                        identifier: 'captcha',
-                        rules: [
-                            {
-                                type: 'empty',
-                                prompt: '请输入验证码'
-                            }
-                        ]
-                    }
-                };
-
-                var templates = {
-                    error: function (errors) {
-                        var html = '<ul class="list">';
-                        $.each(errors, function (index, value) {
-                            html += '<li>' + value + '</li>';
-                        });
-                        html += '</ul><i class="large remove circle icon"></i>';
-
-                        return $(html);
-                    }
-                };
-
                 function getSignUpForm() {
                     return $('form.b-sign-up');
                 }
@@ -512,12 +478,10 @@ angular.module('signIn', [
                 function partiallyValidateSignUpForm() {
                     var $form = getSignUpForm();
 
-                    $form.form({
-                        fields: fields,
-                        templates: templates,
+                    $form.form(angular.extend({}, FormValidation.defaultSetting, {
                         on: 'blur',
                         inline: true
-                    });
+                    }));
 
                     $form.form('validate form');
 
@@ -550,30 +514,31 @@ angular.module('signIn', [
                     $scope.action();
                 };
 
-                getSignUpForm().form({
-                    fields: angular.extend({}, fields, {
-                        verificationCode: {
-                            identifier: 'verificationCode',
-                            rules: [
-                                {
-                                    type: 'empty',
-                                    prompt: '请输入手机验证码'
-                                }
-                            ]
-                        },
-
-                        password: {
-                            identifier: 'password',
-                            rules: [{
-                                type: 'empty',
-                                prompt: '请设置密码'
-                            }]
-                        }
-                    }),
-                    templates: templates,
+                getSignUpForm().form(angular.extend({}, FormValidation.defaultSetting, {
                     on: 'blur',
                     inline: true
-                });
+                }));
+
+                $scope.captchaImageUrl = '';
+
+                function errorHandler(res) {
+                    console.error(res);
+                }
+
+                $scope.refreshCaptcha = function () {
+                    $http({
+                        method: 'JSONP',
+                        url: 'http://10.20.32.51:10001/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus'
+                    }).success(function (response) {
+                        if (response.isSuccess !== false) {
+                            $scope.captchaImageUrl = 'http://10.20.32.51:10001' + response.result.url;
+                        } else {
+                            errorHandler();
+                        }
+                    }).error(errorHandler);
+                };
+
+                $scope.refreshCaptcha();
             }
         };
     }])

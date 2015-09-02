@@ -11,13 +11,8 @@
             <div class="ui left icon input">
                 <i class="write icon"></i>
                 <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
-                <img src="icon/android-icon-36x36.png" width="100">
-            </div>
-        </div>
-        <div class="fields">
-            <div class="eleven wide field"></div>
-            <div class="five wide field ui center aligned container">
-                <a href="javascript: void(0);">换一张</a>
+                &nbsp;
+                <img ng-src="{{captchaImageUrl}}" class="ui fluid b-captcha" ng-click="refreshCaptcha()">
             </div>
         </div>
         <div class="fields">
