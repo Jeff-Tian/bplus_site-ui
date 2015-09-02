@@ -10,6 +10,7 @@ var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
 var configStart = require(path + 'grunt/start.js');
+
 // Create grunt module
 module.exports = function(grunt) {
   'use strict';
@@ -72,24 +73,17 @@ module.exports = function(grunt) {
     }
   });
 
-
-
-
-
   // Default task.
   grunt.registerTask('develop', [
     'nodemon'
   ]);
 
   // Default task.
-
   grunt.registerTask('default', [
     'concurrent'
   ]);
 
-
   // Copy to WEB
   grunt.registerTask('release', [
   ]);
-
 };
