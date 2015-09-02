@@ -110,7 +110,7 @@ angular.module('signIn', [
                 return;
             }
 
-            alert('submitted');
+            //alert('submitted');
         };
     }])
     .controller('ResetPasswordCtrl', ['$scope', '$element', function ($scope, $element) {
@@ -188,7 +188,7 @@ angular.module('signIn', [
                 return;
             }
 
-            alert('set');
+            //alert('set');
         };
     }])
     .controller('PersonalHistoryCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
@@ -220,7 +220,7 @@ angular.module('signIn', [
         };
 
         $scope.gotoComplete = function () {
-            alert('submitted');
+            //alert('submitted');
         };
 
         $scope.trySubmit = function () {
@@ -228,7 +228,7 @@ angular.module('signIn', [
                 return;
             }
 
-            alert('submitted');
+            //alert('submitted');
         };
 
         $scope.birthYearList = (function () {
@@ -252,7 +252,7 @@ angular.module('signIn', [
             var date = new Date(year, month - 1, 1);
             var days = [];
 
-            while (date.getMonth() == month - 1) {
+            while (date.getMonth() === month - 1) {
                 days.push(date.getDate());
                 date.setDate(date.getDate() + 1);
             }
@@ -409,7 +409,7 @@ angular.module('signIn', [
             dayOfBirth: '',
             setPrivacy: true,
             currentLocation: ''
-        }
+        };
     }])
     .directive('dropdown', ['$timeout', function ($timeout) {
         return function (scope, element, attrs) {
