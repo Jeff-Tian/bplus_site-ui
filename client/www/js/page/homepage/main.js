@@ -43,15 +43,26 @@ angular.module('mates', [
     singleItem: true,
     lazyLoad: true,
     loop: true,
-    autoPlay: true,
-    autoplayTimeout: 10000,
+    autoPlay: false,
+    // autoplayTimeout: 10000,
+    // stopOnHover: true,
     navigation: true,
+    stopOnHover: true,
+    rewindSpeed: 100,
+    addClassActive: true,
     navigationText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
-    afterInit: function() {
-      console.log("carousel init");
+    beforeMove: function() {
+      $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
+      $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
     },
     afterMove: function() {
-      console.log("carousel move");
+      $('.active').find('h1').addClass('animated fadeInLeft');
+      $('.active').find('h2').addClass('animated fadeInRight');
+      setTimeout(function(){
+        $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
+        $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
+      },600);
+
     }
   });
 })();
