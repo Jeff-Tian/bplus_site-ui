@@ -9,12 +9,16 @@ var ejs = require('ejs');
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'html');
 
+server.get('/', function (req, res) {
+    res.render('index');
+});
+
 // Customize client file path
 server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
 
 // Page route define
-server.get('/index', function(req, res) {
+server.get('/index', function (req, res) {
     res.render('index');
 });
 
