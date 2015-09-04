@@ -3,30 +3,31 @@ define([
   "text!./date.html"
 ], function(angular, template) {
   var CURRENT_DATE = new Date()
+  var CURRENT_YEAR = CURRENT_DATE.getFullYear();
+  var CURRENT_MONTH = CURRENT_DATE.getMonth();
+  var CURRENT_DAY = CURRENT_DATE.getDate();
   var YEAR_RANGE = 150;
+  // Month begins from 0
+  var MAX_MONTH = 11;
+  var MAX_DAY = 31;
   
-  var createYears = function() {
+  var createYears = function(begin, end) {
     var year = [];
-    for (var i = YEAR_RANGE; i > 0; i--) {
-      year.push({value: CURRENT_DATE.getFullYear() - YEAR_RANGE + i});
+    for (var i = end.year; i >= begin.year; i--) {
+      year.push({value: i});
     }
     return year;
   }
   
-  var createMonths = function(year) {
+  var createMonths = function(year, begin, end) {
     if (!year) {
       return;
     }
-    var selectedYear = year;
-    var targetDate = new Date(selectedYear.value + "/01/01");
-    var maxMonth = 12;
+    var selectedYear = year.value;
+    var monthBegin = selectedYear === begin.year ? begin.month : 0;
+    var monthEnd = selectedYear === end.year ? end.month : MAX_MONTH;
     var targetMonths = [];
-    if (selectedYear && selectedYear.value) {
-      if (CURRENT_DATE.getFullYear() === targetDate.getFullYear()) {
-        maxMonth = CURRENT_DATE.getMonth() + 1;
-      }
-    }
-    for (var i = 0; i < maxMonth; i++) {
+    for (var i = monthBegin; i <= monthEnd; i++) {
       targetMonths.push({
         value: i + 1
       })
@@ -34,24 +35,18 @@ define([
     return targetMonths;
   }
   
-  var createDays = function(year, month) {
+  var createDays = function(year, month, begin, end) {
     if (!year || !month) {
       return ;
     }
-    var selectedYear = year;
-    var selectedMonth = month;
-    var targetDate = new Date(selectedYear.value + "/" + selectedMonth.value + "/01");
-    var targetYear = targetDate.getFullYear();
+    var selectedYear = year.value;
+    var selectedMonth = month.value - 1;
+    var targetDate = new Date(selectedYear + "/" + (selectedMonth + 1) + "/01");
     var targetMonth = targetDate.getMonth();
-    var maxDay = 31;
+    var dayBegin = (selectedYear === begin.year && selectedMonth === begin.month) ? begin.day : 1;
+    var dayEnd = (selectedYear === end.year && selectedMonth === end.month) ? end.day : MAX_DAY;
     var targetDays = [];
-    if (selectedMonth && selectedMonth.value) {
-      if (CURRENT_DATE.getFullYear() === targetYear
-      && CURRENT_DATE.getMonth() === targetMonth) {
-        maxDay = CURRENT_DATE.getDate();
-      }
-    }
-    for (var i = 1; i <= maxDay; i++) {
+    for (var i = dayBegin; i <= dayEnd; i++) {
       targetDate.setDate(i);
       if (targetDate.getMonth() === targetMonth) {
         targetDays.push({
@@ -73,24 +68,57 @@ define([
       return {
         restrict: 'E',
         template: template,
+        scope: {
+//        config: {
+//          showYear,
+//          showMonth,
+//          showDay,
+//          begin: {
+//            year,
+//            month,
+//            day
+//          },
+//          end: {
+//            year,
+//            month,
+//            day
+//          }
+//        }
+          config: "=",
+          value: "=",
+          fullfilled: "="
+        },
         controller: function($scope) {
-          $scope.dateSelect.displaydata = {
-            years: createYears(),
+          if (!$scope.config.begin) {
+            $scope.config.begin = {
+              year: CURRENT_YEAR - YEAR_RANGE,
+              month: 0,
+              day: 1
+            }
+          }
+          if (!$scope.config.end) {
+            $scope.config.end = {
+              year: CURRENT_YEAR,
+              month: CURRENT_MONTH,
+              day: CURRENT_DAY
+            }
+          }
+          $scope.displayData = {
+            years: createYears($scope.config.begin, $scope.config.end),
             months: [],
             days: []
           };
           $scope.selectYear = function() {
-            $scope.dateSelect.value.month = "";
-            $scope.dateSelect.value.day = "";
-            $scope.dateSelect.displaydata.months = createMonths($scope.dateSelect.value.year);
+            $scope.value.month = "";
+            $scope.value.day = "";
+            $scope.displaydata.months = createMonths($scope.value.year, $scope.config.begin, $scope.config.end);
           };
           $scope.selectMonth = function() {
-            $scope.dateSelect.value.day = "";
-            $scope.dateSelect.displaydata.days = createDays($scope.dateSelect.value.year, $scope.dateSelect.value.month);
+            $scope.value.day = "";
+            $scope.displaydata.days = createDays($scope.value.year, $scope.value.month, $scope.config.begin, $scope.config.end);
           };
-          $scope.dateSelect.required = false;
-          $scope.$watch("dateSelect.value", function(newValue){
-            $scope.dateSelect.required = !!(newValue.day &&  newValue.month && newValue.year); 
+          $scope.$watch("value", function(newValue){
+            $scope.fullfilled = !!(newValue.day &&  newValue.month && newValue.year); 
           }, true)
         }
       }

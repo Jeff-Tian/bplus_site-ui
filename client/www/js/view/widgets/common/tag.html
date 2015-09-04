@@ -6,10 +6,10 @@
     <i class="tags icon"></i>
     <span>标签</span>
     <span>
-      <input name="taginput" type="text" placeholder="添加标签"/>
+      <input name="taginput" type="text" placeholder="添加标签" ng-model="displayData.tags" ng-change="inputChange()"/>
       <div>
         <ul>
-         <li ng-repeat="candidate in taginput.candidates track by $index" ng-bind="candidate"></li>
+         <li ng-repeat="candidate in displayData.candidates track by $index" ng-bind="candidate" ng-click="candidateClick(candidate)"></li>
         </ul>
       </div>
     </span>
