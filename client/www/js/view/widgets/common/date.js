@@ -111,11 +111,11 @@ define([
           $scope.selectYear = function() {
             $scope.value.month = "";
             $scope.value.day = "";
-            $scope.displaydata.months = createMonths($scope.value.year, $scope.config.begin, $scope.config.end);
+            $scope.displayData.months = createMonths($scope.value.year, $scope.config.begin, $scope.config.end);
           };
           $scope.selectMonth = function() {
             $scope.value.day = "";
-            $scope.displaydata.days = createDays($scope.value.year, $scope.value.month, $scope.config.begin, $scope.config.end);
+            $scope.displayData.days = createDays($scope.value.year, $scope.value.month, $scope.config.begin, $scope.config.end);
           };
           $scope.$watch("value", function(newValue){
             $scope.fullfilled = !!(newValue.day &&  newValue.month && newValue.year); 

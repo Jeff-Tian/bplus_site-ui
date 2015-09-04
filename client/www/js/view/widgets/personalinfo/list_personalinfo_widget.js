@@ -6,7 +6,7 @@ define([
   "bplus-ui/view/widgets/common/date",
   "text!./list_personalinfo_widget.html"
 ], function(when, $, angular, BaseClass, DateSelect, template) {
-
+  
   var ListPersonalInfo = function() {
     BaseClass.call(this);
   }
@@ -15,7 +15,7 @@ define([
   
   ListPersonalInfo.prototype.start = function(agModel) {
     var me = this;
-    agModel.controller("personalinfocontroller", function($scope){
+    var bModel = agModel.controller("personalinfocontroller", function($scope){
      $scope.ENUM_STATUS = me.ENUM_STATUS;
      $scope.property = me.property;
      var tags = [];
@@ -29,9 +29,10 @@ define([
          year: "",
          month: "",
          day: ""
-       }
+       },
+       fullfilled: false
      };
-     $scope.info = me.data = {
+     $scope.data = me.data = {
        name: "",
        gender: "",
        dateOfBirth: {
@@ -48,18 +49,17 @@ define([
        $scope.clicked = true;
        //TODO
        //submit function
-       debugger;
      };
      $scope.cancel = function() {
-       debugger;
        //TODO
        //cancel function
+       //origin data
      };
     })
     .directive("bpluspersonalinfo", function(){
       return {
         restrict: 'E',
-        template: template,
+        template: template
       };
     })
     new DateSelect().start(agModel);

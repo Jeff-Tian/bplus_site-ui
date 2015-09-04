@@ -31,26 +31,30 @@ define([
         },
         controller: function($scope) {
           var tmpDataArray = [];
+          var latestInput = "";
           $scope.displayData = {
-            candidates: ["1", "2"],
+            candidates: [],
             tags: ""
           };
           $scope.inputChange = function() {
             tmpDataArray = $scope.displayData.tags.split(" ");
-            $scope.value = filterTags(tmpDataArray);
+            var lastValue = tmpDataArray[tmpDataArray.length - 1];
+            if (lastValue !== latestInput) {
+              latestInput = lastValue;
+              //TODO
+              //Search something
+            }
+            $scope.value.tags = filterTags(tmpDataArray);
           };
           $scope.candidateClick = function(value) {
             if (tmpDataArray.indexOf(value) === -1) {
               tmpDataArray.push(value);
               $scope.displayData.tags = tmpDataArray.join(" ");
-              $scope.value = filterTags(tmpDataArray);
+              $scope.value.tags = filterTags(tmpDataArray);
             }
           };
-          $scope.displayData.tags = $scope.value;
+          $scope.displayData.tags = $scope.value.tags;
           tmpDataArray = $scope.displayData.tags.split(" ");
-          //TODO
-          //Save tag
-          //filter user's input and delete duplicated element
         }
       }
     })

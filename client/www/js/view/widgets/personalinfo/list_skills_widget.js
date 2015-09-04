@@ -18,23 +18,23 @@ define([
     agModel.controller("skillscontroller", function($scope){
      $scope.ENUM_STATUS = me.ENUM_STATUS;
      $scope.property = me.property;
-     var tags = [];
-     $scope.skill = me.data = {
+     $scope.data = me.data = {
        name: "",
        description: "",
-       tags: tags
-     };
-     $scope.taginput = {
-         candidates: [],
-         data: tags
+       tags: {
+         tags: ""
        }
+     };
+     $scope.tag = {
+       config: {},
+       value: $scope.data.tags
+     };
      $scope.submit = function() {
        $scope.clicked = true;
        //TODO
        //submit function
      };
      $scope.cancel = function() {
-       debugger;
        //TODO
        //cancel function
      };
