@@ -1,0 +1,51 @@
+/*
+* - @Bridge+
+*/
+
+.b-masthead {
+    min-height: 50rem;
+
+    .owl-theme {
+        .owl-controls {
+            margin-top: -22px;
+            .owl-page {
+                position: relative;
+                top: -1rem;
+            }
+            .owl-buttons {
+                .owl-prev,
+                .owl-next {
+                    top: 42%; // calc(50% - 3rem);
+                }
+                .owl-prev {
+                    left: 3rem;
+                }
+                .owl-next {
+                    right: 3rem;
+                }
+            }
+        }
+    }
+
+    .b-slider {
+        overflow: hidden;
+
+        .b-slider-item {
+            width: 100%;
+            min-height: 50rem;
+            overflow: hidden;
+        }
+
+        h1.ui.header {
+            color: @color-white;
+            font-size: @fontsize-14xl;
+            margin-top: 8em;
+        }
+        h2 {
+            color: @color-white;
+            font-size: @fontsize-3xl;
+            font-weight: normal;
+            line-height: 1.6em;
+        }
+    }
+}

@@ -1,0 +1,189 @@
+/*
+* - @Bridge+ Profile
+*/
+
+// Page
+@import "../../../css/page/main.less";
+
+// Profile
+body.pushable > .pusher {
+    background-color: #efefef;
+}
+
+.b-profile-li > .item > .icon {
+    background: url(/img/profile/icon_profile_li.png) no-repeat center top;
+}
+
+.b-profile-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.b-profile-banner .img {
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    padding: 0;
+    width: 1600px;
+    height: 235px;
+    background-color: #e5e5e5;
+}
+.b-profile-banner a,
+.b-profile-banner a:hover,
+.b-profile-banner a:visited,
+.b-profile-banner a.hover,
+.b-profile-banner a.hover:hover,
+.b-profile-banner a.hover:visited {
+    position: absolute;
+    left: 50%;
+    bottom: 1em;
+    width: 54px;
+    height: 54px;
+    text-decoration: none;
+    background: url(/img/profile/btn_profile_addphoto_n.png) no-repeat center center;
+}
+.b-profile-banner a:hover,
+.b-profile-banner a.hover,
+.b-profile-banner a.hover:hover,
+.b-profile-banner a.hover:visited {
+    background-image: url(/img/profile/btn_profile_addphoto_p.png)
+}
+@media only screen and (max-width: 767px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        left: auto;
+        right: 2em;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 362px - 54px );
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 467px - 54px );
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .b-profile-banner a,
+    .b-profile-banner a:hover,
+    .b-profile-banner a:visited,
+    .b-profile-banner a.hover,
+    .b-profile-banner a.hover:hover,
+    .b-profile-banner a.hover:visited {
+        margin-left: calc( 564px - 54px );
+    }
+}
+
+.b-profile-main {
+    margin-top: 3em !important;
+    margin-bottom: 2em !important;
+}
+
+.b-profile-left-section {
+    position: relative;
+    margin-bottom: 1em;
+    border-bottom: solid 2px #BEBEBE;
+    padding: 2em 1em;
+    background-color: #fff;
+}
+.b-profile-face {
+    position: absolute;
+    top: -72px;
+    left: 0;
+    width: 143px;
+}
+.b-profile-preview {
+    padding-top: 24px;
+    text-align: right;
+}
+@media only screen and (max-width: 991px) {
+    .b-profile-face {
+        position: static;
+        top: auto;
+        left: auto;
+        margin-top: -50%;
+        margin-left: 11%;
+        width: 78%;
+    }
+    .b-profile-preview {
+        margin-top: 1em;
+        padding-top: 0;
+        text-align: center;
+    }
+}
+.b-profile-preview i {
+    background: url(/img/profile/icon_profile_preview.png) no-repeat center center;
+    background-size: cover;
+}
+
+.b-profile-achievement {
+    margin-left: 4.25em;
+    margin-right: 1em;
+}
+.b-profile-achievement .ui.grid {
+    margin-left: -0.1rem;
+}
+.b-profile-achievement .ui.grid > .column {
+    padding: 0.1rem !important;
+}
+.b-profile-achievement .column img {
+    width: 100%;
+}
+.b-profile-achievement-imgs {
+    margin-top: 1.5rem !important;
+}
+.b-profile-achievement-imgs i {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.b-profile-achievement-imgs-fraction i {
+    background-image: url(/img/profile/icon_profile_fraction.png);
+}
+.b-profile-achievement-imgs-level i {
+    background-image: url(/img/profile/icon_profile_level.png);
+}
+
+.b-profile-growing {
+    margin-left: 4.25em;
+}
+.b-profile-growing .b-profile-li > .item > .icon {
+    background-position: center 4px;
+}
+.b-profile-growing .content {
+    line-height: 1.5rem !important;
+}
+.b-profile-growing-buttons {
+    margin: 1rem 2rem 0 2em;
+}
+.b-profile-growing-buttons button {
+    margin-top: 1rem !important;
+}
+
+.b-profile-right-tip {
+    position: absolute;
+    top: -1.4em;
+}
+.b-profile-right-section {
+    position: relative;
+    margin-bottom: 1em;
+    border-bottom: solid 2px #BEBEBE;
+    padding: 1em;
+    background-color: #fff;
+}

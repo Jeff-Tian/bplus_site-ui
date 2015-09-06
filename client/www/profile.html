@@ -1,26 +1,234 @@
-<!DOCTYPE html>
-<html>
-
+﻿<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Bridge+</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+
+    <!--ICON-->
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="bower/semantic-ui/dist/semantic.css">
+    <link href="bower/semantic-ui/dist/semantic.css" rel="stylesheet" type="text/css" />
+
+    <!-- Stylesheet -->
+    <link href="bower/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="bower/owlcarousel/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css" />
     <!--LESS-->
-    <!--<link rel="stylesheet/less" type="text/css" href="css/main.less">-->
-    <!--<script src="bower/less/dist/less.js" type="text/javascript"></script>-->
-    <script src="bower/requirejs/require.js" type="text/javascript" charset="utf-8" data-main="profile.js"></script>
+    <link href="js/page/profile/main.less" rel="stylesheet/less" type="text/css" />
+    <script src="bower/less/dist/less.js" type="text/javascript"></script>
+    <script type="text/javascript">document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1' + 'js' + '$2');</script>
 </head>
-  <body>
-    <!--TEST CODE BEGIN-->
-    <div id="listskills">
-      <bplusskills/>
+<body>
+    <!-- Header Begin -->
+    <!--[if lt IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Following(fixed) Menu -->
+    <div class="ui top fixed hidden b-header" data-action="fixedHeader">
+        <div class="ui menu b-header-account">
+            <div class="ui container">
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <div class="right item">
+                    <a href="#登录" class="ui button">登录</a>
+                    <a href="#注册" class="ui button">注册</a>
+                    <a href="#English" class="ui button">English</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui menu b-header-nav">
+            <div class="ui container">
+                <a href="#" class="b-header-logo">
+                    <img src="img/logo.png" height="60">
+                </a>
+                <div class="right item">
+                    <a href="/index" class="ui button">首页</a>
+                    <a href="/study" class="ui button">学习</a>
+                    <a href="/game" class="ui button">游戏</a>
+                    <a href="/opportunity" class="ui button">机会</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--TEST CODE END-->
-  </body>
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+        <a href="/index" class="item active">首页</a>
+        <a href="/study" class="item">学习</a>
+        <a href="/game" class="item">游戏</a>
+        <a href="/opportunity" class="item">机会</a>
+    </div>
+    <!-- Initial Menu -->
+    <div class="ui b-header">
+        <div class="ui menu b-header-account">
+            <div class="ui container">
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <div class="right item">
+                    <a href="#登录" class="ui button">登录</a>
+                    <a href="#注册" class="ui button">注册</a>
+                    <a href="#English" class="ui button">English</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui menu b-header-nav">
+            <div class="ui container">
+                <a href="#" class="b-header-logo">
+                    <img src="img/logo.png" height="60">
+                </a>
+                <div class="right item">
+                    <a href="/index" class="ui button">首页</a>
+                    <a href="/study" class="ui button">学习</a>
+                    <a href="/game" class="ui button">游戏</a>
+                    <a href="/opportunity" class="ui button">机会</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Page Contents -->
+    <div class="pusher">
+        <div class="b-profile-banner">
+            <div class="img"></div>
+            <a href="javascript:void(0);">&nbsp;</a>
+        </div>
+        <div class="ui grid container b-profile-main">
+            <div class="five wide column">
+                <div class="b-profile-left-section">
+                    <img src="/img/profile/icon_profile_picture_male_big.png" class="b-profile-face" />
+                    <div class="b-profile-preview">
+                        <button class="ui basic button"><i class="icon"></i>预览简历</button>
+                    </div>
+                    <div class="b-profile-area">
+                        <div class="ui medium header">
+                            <img class="ui image" src="/img/profile/icon_profile_achievement.png">
+                            <div class="content">成就</div>
+                        </div>
+                        <div class="b-profile-achievement">
+                            <div class="ui five column grid">
+                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                            </div>
+                            <div class="ui horizontal list b-profile-achievement-imgs">
+                                <div class="item b-profile-achievement-imgs-level">
+                                    <i class="icon"></i>
+                                    <div class="content">等级</div>
+                                </div>
+                                <div class="item b-profile-achievement-imgs-fraction">
+                                    <i class="icon"></i>
+                                    <div class="content">积分</div>
+                                </div>
+                            </div>
+                            <div class="ui list b-profile-li">
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">分享信息到朋友圈+3</div>
+                                </div>
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">邀请朋友加入+5</div>
+                                </div>
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">注册成功+5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-profile-left-section">
+                    <div class="b-profile-area">
+                        <div class="ui medium header">
+                            <img class="ui image" src="/img/profile/icon_profile_growing.png">
+                            <div class="content">成长足迹</div>
+                        </div>
+                        <div class="b-profile-growing">
+                            <div class="ui list b-profile-li">
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">第一届Bridge+全国商业实战大赛 华东赛区 特等奖</div>
+                                </div>
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">第二届Bridge+全国商业实战大赛 复赛 优胜奖</div>
+                                </div>
+                                <div class="item">
+                                    <i class="icon"></i>
+                                    <div class="content">第二届Bridge+全国商业实战大赛 决赛 第一名</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b-profile-growing-buttons">
+                            <button class="fluid ui basic button">查看历次比赛成绩</button>
+                            <button class="fluid ui basic button">下载比赛结果报告</button>
+                            <button class="fluid ui basic button">下载比赛获奖证书</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eleven wide column">
+                <div class="ui medium red header b-profile-right-tip">完成[个人信息]、[教育背景]，才能配队友，以进行团战！</div>
+                <div class="b-profile-right-section">
+                    个人信息
+                </div>
+                <div class="b-profile-right-section">
+                    教育背景
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Begin -->
+    <div class="ui inverted vertical footer">
+        <div class="ui container">
+            <div class="ui inverted divided grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">关于我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">关于Bridge+</a>
+                        <a href="#" class="item">联系我们</a>
+                        <a href="#" class="item">加入我们</a>
+                        <a href="#" class="item">企业合作</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">产品与服务</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">商战模拟游戏</a>
+                        <a href="#" class="item">求职招聘</a>
+                        <a href="#" class="item">服务声明</a>
+                        <a href="#" class="item">反馈建议</a>
+                    </div>
+                </div>
+            </div>
+            <p class="b-copyright">&copy; 2015 Bridge+ 版权所有 | 增值电信业务经营许可证：沪ICP备12049999号</p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!--JS-->
+    <script src="bower/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
+    <script src="bower/underscore/underscore.js" type="text/javascript"></script>
+    <script src="bower/owlcarousel/owl-carousel/owl.carousel.js" type="text/javascript"></script>
+    <!--Angular JS-->
+    <script src="bower/angular/angular.min.js" type="text/javascript"></script>
+    <script src="bower/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+    <!--Page JS-->
+    <script src="js/page/profile/main.js" type="text/javascript"></script>
+    <!--Utils JS-->
+    <script src="js/utils/utils.js" type="text/javascript"></script>
+    <script src="js/utils/msgbus.js" type="text/javascript"></script>
+    <script src="js/utils/underscore.js" type="text/javascript"></script>
+</body>
 </html>

@@ -1,0 +1,63 @@
+/*
+* - @Bridge+
+*/
+
+.b-feedback {
+	// TODO: instead of background image
+	background-color: @color-grey-lighter;
+	padding-top: 5rem;
+	padding-bottom: 2rem;
+
+    .owl-theme {
+        .owl-controls {
+        	margin-top: 5rem;
+            .owl-buttons {
+                .owl-prev,
+                .owl-next {
+                    top: 15%; // calc(50% - 3rem);
+                }
+                .owl-prev {
+                    left: -6rem;
+                }
+                .owl-next {
+                    right: -6rem;
+                }
+            }
+        }
+    }
+
+	> .ui.container {
+	}
+
+	h3 {
+        &.ui.header {
+			color: #8c8c8c;
+			margin-bottom: 3rem;
+		}
+	}
+	.ui.items {
+		> .item {
+			> .content {
+				> .header {
+					margin-top: 1rem;
+					font-size: @fontsize-xl;
+				}
+				.meta {
+					font-size: @fontsize-s;
+				    display: inline-block;
+				    margin: 0 0 0 .8rem;
+				}
+				.ui.divider {
+				    border-top-color: @color-brand;
+			        margin: .4rem 0 .6rem;
+				}
+				.description {
+					> p {
+						line-height: 1.6em;
+						font-size: @fontsize-s;
+					}
+				}
+			}
+		}
+	}
+}
