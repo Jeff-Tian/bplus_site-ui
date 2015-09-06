@@ -51,7 +51,7 @@
                     $.each(errors, function (index, value) {
                         html += '<li>' + value + '</li>';
                     });
-                    html += '</ul><i class="large remove circle icon"></i>';
+                    html += '</ul><i class="large remove circle icon" onclick="$(this).closest(\'form\').removeClass(\'error\');"></i>';
 
                     return $(html);
                 }

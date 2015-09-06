@@ -15,9 +15,17 @@ angular.module('signIn', [
     .factory('FormValidation', angular.bplus.FormValidation)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
-    .controller('SignUpCtrl', ['$scope', function ($scope) {
+    .controller('SignUpCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.signUp = function () {
-            window.location.href = 'personal-history';
+
+            $http.post('http://10.20.32.61:10086/member/register', {})
+                .success(function (res) {
+                    if (res.isSuccess) {
+                        window.location.href = 'personal-history';
+                    } else {
+
+                    }
+                });
         };
     }])
     .controller('BindMobileCtrl', ['$scope', function ($scope) {
@@ -48,62 +56,6 @@ angular.module('signIn', [
             }
 
             //alert('submitted');
-        };
-    }])
-    .controller('ResetPasswordCtrl', ['$scope', '$element', function ($scope, $element) {
-        $scope.resetPassword = function () {
-            $('.reset.shape').shape('flip over');
-        };
-
-        $('.reset.shape').shape();
-        var $form = $($element);
-        $form.form({
-            on: 'blur',
-            inline: true,
-            fields: {
-                email: {
-                    identifier: 'email',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请填写邮箱地址'
-                    }, {
-                        type: 'email',
-                        prompt: '请填写有效的邮箱地址'
-                    }]
-                },
-                captcha: {
-                    identifier: 'captcha',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请填写验证码'
-                    }]
-                }
-            }
-        });
-    }])
-    .controller('ResetPasswordByEmailCtrl', ['$scope', function ($scope) {
-        var $shape = $('.shape.reset-by-email');
-        //$shape.shape();
-
-        $scope.emailSent = false;
-        var $form = $('.ui.form.reset-by-email');
-        $scope.isResetPasswordFormValid = function () {
-            if ($scope.resetPasswordForm.$pristine) {
-                return false;
-            }
-
-            return $form.form('is valid');
-        };
-
-        $scope.tryResetPassword = function ($event) {
-            if (!$scope.isResetPasswordFormValid()) {
-                return;
-            }
-
-            //$shape.shape('flip right');
-            $scope.emailSent = true;
-
-            $event.preventDefault();
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {
@@ -357,107 +309,7 @@ angular.module('signIn', [
             }
         };
     }])
-    .directive('registerForm', ['FormValidation', '$timeout', '$http', function (FormValidation, $timeout, $http) {
-        return {
-            templateUrl: '../../../view-partial/register-form.html',
-            scope: {
-                action: '='
-            },
-            link: function ($scope, element) {
-                $scope.signUpData = {
-                    mobile: '',
-                    captcha: '',
-                    verificationCode: '',
-                    password: ''
-                };
-
-                var validChineseMobileNumberPattern = FormValidation.validChineseMobileNumberPattern;
-
-                var countDownInterval = 60;
-                var countDown = countDownInterval;
-                $scope.sendCodeButtonClicked = false;
-
-                function updateButtonText(text) {
-                    $scope.verificationCodeButtonText = text;
-                }
-
-                function initButtonText() {
-                    var message = $scope.sendCodeButtonClicked ? '再次发送' : '获取手机验证码';
-                    updateButtonText(message);
-                    $scope.allowGetCode = true;
-                }
-
-                function refreshButtonText() {
-                    updateButtonText(countDown);
-                    $scope.allowGetCode = false;
-                }
-
-                function pollUpdateButtonText() {
-                    refreshButtonText();
-
-                    if (countDown > 0) {
-                        $timeout(function () {
-                            countDown--;
-                            pollUpdateButtonText();
-                        }, 1000);
-                    } else {
-                        countDown = countDownInterval;
-                        initButtonText();
-                    }
-                }
-
-                initButtonText();
-
-                function getSignUpForm() {
-                    return $('form.b-sign-up');
-                }
-
-                function partiallyValidateSignUpForm() {
-                    var $form = getSignUpForm();
-
-                    $form.form(angular.extend({}, FormValidation.defaultSetting, {
-                        on: 'blur',
-                        inline: true
-                    }));
-
-                    $form.form('validate form');
-
-                    return $form;
-                }
-
-                $scope.isSignUpFormPartiallyValid = function () {
-                    return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha;
-                };
-
-                $scope.isSignUpFormFullyValid = function () {
-                    return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
-                };
-
-                $scope.getVerificationCode = function () {
-                    partiallyValidateSignUpForm();
-
-                    if ($scope.isSignUpFormPartiallyValid()) {
-                        pollUpdateButtonText();
-                    }
-
-                    $scope.sendCodeButtonClicked = true;
-                };
-
-                $scope.trySignUp = function () {
-                    if (!$scope.isSignUpFormFullyValid()) {
-                        return;
-                    }
-
-                    $scope.action();
-                };
-
-                getSignUpForm().form(angular.extend({}, FormValidation.defaultSetting, {
-                    on: 'blur',
-                    inline: true
-                }));
-            }
-        };
-    }])
+    .directive('registerForm', angular.bplus.registerForm)
 ;
 
 // TODO: integrated into JS framework

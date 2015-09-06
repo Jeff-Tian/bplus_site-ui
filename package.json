@@ -8,6 +8,7 @@
   "homepage": "",
   "author": {},
   "dependencies": {
+    "body-parser": "^1.13.3",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "extend": "^3.0.0"

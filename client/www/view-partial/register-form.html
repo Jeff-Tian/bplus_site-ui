@@ -18,17 +18,17 @@
                 <a href="javascript: void(0);" ng-click="refreshCaptcha()">换一张</a>
             </div>
         </div>
-        <div class="fields">
-            <div class="ui left icon input eleven wide field" ng-show="sendCodeButtonClicked">
-                <i class="write icon"></i>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="write icon" ng-show="sendCodeButtonClicked"></i>
                 <input type="text" name="verificationCode" placeholder="请输入手机验证码"
-                       ng-model="signUpData.verificationCode">
+                       ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
+                &nbsp;
+                <button type="button" class="ui huge red button" ng-click="getVerificationCode()"
+                        ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                    {{verificationCodeButtonText}}
+                </button>
             </div>
-            <button type="button" class="ui fluid huge red button wide field" ng-click="getVerificationCode()"
-                    ng-class="{'five': sendCodeButtonClicked, 'sixteen': !sendCodeButtonClicked}"
-                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                {{verificationCodeButtonText}}
-            </button>
         </div>
         <div class="field">
             <div class="ui left icon input">
