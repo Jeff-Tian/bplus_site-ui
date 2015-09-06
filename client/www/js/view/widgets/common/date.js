@@ -23,7 +23,7 @@ define([
     if (!year) {
       return;
     }
-    var selectedYear = year.value;
+    var selectedYear = year;
     var monthBegin = selectedYear === begin.year ? begin.month : 0;
     var monthEnd = selectedYear === end.year ? end.month : MAX_MONTH;
     var targetMonths = [];
@@ -39,8 +39,8 @@ define([
     if (!year || !month) {
       return ;
     }
-    var selectedYear = year.value;
-    var selectedMonth = month.value - 1;
+    var selectedYear = year;
+    var selectedMonth = month - 1;
     var targetDate = new Date(selectedYear + "/" + (selectedMonth + 1) + "/01");
     var targetMonth = targetDate.getMonth();
     var dayBegin = (selectedYear === begin.year && selectedMonth === begin.month) ? begin.day : 1;
@@ -58,11 +58,15 @@ define([
     }
     return targetDays;
   }
-
+  var hasStarted = false;
   var BplusDate = function() {
   };
   BplusDate.prototype.constructor = BplusDate;
   BplusDate.prototype.start = function(agModel) {
+    if (hasStarted) {
+      return;
+    }
+    hasStarted = true;
     agModel.
     directive("bplusdate", function() {
       return {
@@ -104,25 +108,92 @@ define([
             }
           }
           scope.displayData = {
-            years: createYears(scope.config.begin, scope.config.end),
+            years: [],
             months: [],
-            days: []
+            days: [],
+            value: {
+              year: scope.value.year,
+              month: scope.value.month,
+              day: scope.value.day
+            }
           };
-          scope.selectYear = function() {
+          scope.$watch("config.display", function(newVal, oldVal) {
+            scope.displayData.years = newVal ? createYears(scope.config.begin, scope.config.end) : [];
+            scope.displayData.value.year = scope.value.year;
+            scope.displayData.value.month = scope.value.month;
+            scope.displayData.value.day = scope.value.day;
+            scope.selectYear(true);
+          });
+          
+          scope.selectYear = function(fillData) {
+            var chosenYear = "";
+            if (scope.displayData.value.year) {
+              chosenYear = scope.displayData.value.year.value ? scope.displayData.value.year.value : scope.displayData.value.year;
+            }
             if (scope.config.showMonth) {
-              scope.value.day = {};
-              scope.value.month = {};
-              scope.displayData.months = createMonths(scope.value.year, scope.config.begin, scope.config.end);
+              if (!fillData) {
+                scope.displayData.value.day = {};
+                scope.displayData.value.month = {};
+              }
+              scope.displayData.months = createMonths(chosenYear, scope.config.begin, scope.config.end);
+              if (scope.value.month) {
+                scope.selectMonth(true);
+              }
             }
           };
-          scope.selectMonth = function() {
+          scope.selectMonth = function(fillData) {
+            var chosenYear = "";
+            if (scope.displayData.value.year) {
+              chosenYear = scope.displayData.value.year.value ? scope.displayData.value.year.value : scope.displayData.value.year;
+            }
+            var chosenMonth = "";
+            if (scope.displayData.value.month) {
+              chosenMonth = scope.displayData.value.month.value ? scope.displayData.value.month.value : scope.displayData.value.month;
+            }
             if (scope.config.showDay) {
-              scope.value.day = {};
-              scope.displayData.days = createDays(scope.value.year, scope.value.month, scope.config.begin, scope.config.end);
+              if (!fillData) {
+                scope.displayData.value.day = {};
+              }
+              scope.displayData.days = createDays(chosenYear, chosenMonth, scope.config.begin, scope.config.end);
             }
           };
-          scope.$watch("value", function(newValue){
-            scope.fullfilled = !!(newValue.day.value &&  newValue.month.value && newValue.year.value); 
+          scope.$watch("displayData.value", function(newValue){
+            if (!newValue) {
+              scope.fullfilled = false;
+              return;
+            }
+            if (scope.value.year !== newValue.year) {
+              if (newValue.year && newValue.year.value) {
+                scope.value.year = newValue.year.value;
+              } else {
+                scope.value.year = "";
+              }
+            }
+            if (scope.value.month !== newValue.month) {
+              if (newValue.month && newValue.month.value) {
+                scope.value.month = newValue.month.value;
+              } else {
+                scope.value.month = "";
+              }
+            }
+            if (scope.value.day !== newValue.day) {
+              if (newValue.day && newValue.day.value) {
+                scope.value.day = newValue.day.value;
+              } else {
+                scope.value.day = "";
+              }
+            }
+            var fullfilled = true;
+            if (scope.config.showYear && scope.value.year === "") {
+              fullfilled = false;
+            }
+            if (scope.config.showMonth && scope.value.month === "") {
+              fullfilled = false;
+            }
+            if (scope.config.showDay && scope.value.day === "") {
+              fullfilled = false;
+            }
+            scope.fullfilled = fullfilled;
           }, true)
         }
       }

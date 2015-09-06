@@ -25,11 +25,28 @@ define([
     "bplusskillsoverall": {
        name: "",
        description: "",
-       tags: []
+       tags: ""
     },
+    "bpluseducationbackgroundall": {
+      name: "",
+      major: "",
+      background: "",
+      dateFrom: {
+        year: "",
+        month: "",
+        day: ""
+      },
+      dateTo: {
+        year: "",
+        month: "",
+        day: ""
+      },
+      specialDescription: "",
+      specialTags: ""
+    }
   };
 
-  var hasInitialized;
+  var _modelInstance;
   
   var ListWidgetContainer = function() {
     Object.call(this);
@@ -38,16 +55,17 @@ define([
   ListWidgetContainer.prototype.constructor = ListWidgetContainer;
   
   ListWidgetContainer.prototype.start = function(agModel, directiveName, template) {
-    if (!hasInitialized) {
-      new personalinfoData().start(agModel);
-      hasInitialized = true;
+    if (!_modelInstance) {
+      _modelInstance = new personalinfoData();
+      _modelInstance.start(agModel);
     }
     agModel
     .directive(directiveName, ["personalinfoService", function(model){
       return {
         restrict: 'E',
         template: template,
-        scope: {},
+        scope: {
+        },
         link: function(scope, element) {
           var service = model.SERVICES[directiveName];
           var updateData = function(isLatestData) {
@@ -64,21 +82,27 @@ define([
             });
           }
           updateData();
+          scope.showAddButton = true;
           scope.add = function() {
             scope.dataCollection.push($.extend(true, {}, DATA_PATTERN[directiveName]));
+            scope.showAddButton = false;
           };
           scope.submit = function() {
+            scope.showAddButton = true;
             //TODO
             //Get data and save them
             return when();
 //          return model.saveData();
           };
           scope.cancel = function() {
+            debugger;
+            scope.showAddButton = true;
             //TODO
             //Known issue, will refresh all the status.
             updateData();
           };
           scope.edit = function() {
+            scope.showAddButton = false;
             // Don't need to do anything on this action
           };
         }

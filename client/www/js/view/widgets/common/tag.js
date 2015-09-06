@@ -16,17 +16,22 @@ define([
     return targetValue;
   }
   
+  var hasStarted = false;
   var BplusTag = function() {
   };
   BplusTag.prototype.constructor = BplusTag;
   BplusTag.prototype.start = function(agModel) {
+    if (hasStarted) {
+      return;
+    }
+    hasStarted = true;
     agModel.
     directive("bplustag", function() {
       return {
         restrict: 'E',
         template: template,
         scope: {
-          config: "=",
+//        config: "=",
           value: "=",
           description: "="
         },
@@ -54,7 +59,6 @@ define([
               scope.value = filterTags(tmpDataArray);
             }
           };
-          debugger;
           scope.displayData.tags = scope.value;
           tmpDataArray = scope.displayData.tags.split(" ");
         }

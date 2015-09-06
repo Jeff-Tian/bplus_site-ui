@@ -1,16 +1,16 @@
 <div>
   <span>
-    <select name="year" ng-change="selectYear()" ng-show="config.showYear" ng-model="value.year" ng-options="year.value for year in displayData.years">
+    <select name="year" ng-change="selectYear()" ng-show="config.showYear" ng-model="displayData.value.year" ng-options="year.value for year in displayData.years track by year.value">
       <option value="">选择。。</option>
     </select>
-    年
-    <select name="month" ng-change="selectMonth()" ng-show="config.showMonth" ng-model="value.month" ng-options="month.value for month in displayData.months">
+    <span ng-show="config.showYear">年</span>
+    <select name="month" ng-change="selectMonth()" ng-show="config.showMonth" ng-model="displayData.value.month" ng-options="month.value for month in displayData.months track by month.value">
       <option value="">选择。。</option>
     </select>
-    月
-    <select name="day" ng-show="config.showDay" ng-model="value.day" ng-options="day.value for day in displayData.days">
+    <span ng-show="config.showMonth">月</span>
+    <select name="day" ng-show="config.showDay" ng-model="displayData.value.day" ng-options="day.value for day in displayData.days track by day.value">
       <option value="">选择。。</option>
     </select>
-    日
+    <span ng-show="config.showDay">日</span>
   </span>
 </div>

@@ -6,64 +6,88 @@ define([
   "bplus-ui/view/widgets/common/date",
   "text!./list_educationbackground_widget.html"
 ], function(when, $, angular, BaseClass, DateSelect, template) {
-
   var ListEducationBackground = function() {
     BaseClass.call(this);
   }
-  ListEducationBackground.prototype = Object.create(BaseClass);
+  ListEducationBackground.prototype = Object.create(BaseClass.prototype);
   ListEducationBackground.prototype.constructor = ListEducationBackground;
   
   ListEducationBackground.prototype.start = function(agModel) {
     var me = this;
-    agModel.controller("educationbackgroundcontroller", function($scope){
-     $scope.ENUM_STATUS = me.ENUM_STATUS;
-     $scope.property = me.property;
-     var tags = [];
-     $scope.dateSelect = {
-       config: {
-         showYear: true,
-         showMonth: true,
-         showDay: true
-       },
-       value: {
-         year: "",
-         month: "",
-         day: ""
-       }
-     };
-     $scope.info = me.data = {
-       name: "",
-       gender: "",
-       dateOfBirth: {
-         value: $scope.dateSelect.value,
-         isPrivate: false
-       },
-       location: "",
-       contractInfo: {
-         value: "",
-         isPrivate: false
-       }
-     };
-     $scope.submit = function() {
-       $scope.clicked = true;
-       //TODO
-       //submit function
-       debugger;
-     };
-     $scope.cancel = function() {
-       debugger;
-       //TODO
-       //cancel function
-     };
-    })
-    .directive("bpluseducationbackground", function(){
+    agModel
+    .directive("bpluseducationalbackground", function(){
       return {
         restrict: 'E',
         template: template,
+        scope: {
+          data: "=",
+        },
+        compile: function() {
+          return {
+            pre: function($scope) {
+              $scope.ENUM_STATUS = me.ENUM_STATUS;
+              $scope.property = {
+                status: ($scope.data.name === "") 
+                ? me.ENUM_STATUS.STATUS_EDIT
+                : me.ENUM_STATUS.STATUS_READONLY
+              };
+               $scope.dateFrom = {
+                 config: {
+                   showYear: true,
+                   showMonth: true,
+                   showDay: false,
+                   display: true
+                 },
+                 value: $scope.data.dateFrom.value,
+                 fullfilled: false
+               };
+               $scope.dateTo = {
+                 config: {
+                   showYear: true,
+                   showMonth: true,
+                   showDay: false,
+                   display: false
+                 },
+                 value: $scope.data.dateTo.value,
+                 fullfilled: false
+               };
+               $scope.$watch("dateFrom.value", function(newValue, oldValue) {
+                 if (newValue !== oldValue) {
+                   $scope.dateTo.value.year = "";
+                   $scope.dateTo.value.month = "";
+                   $scope.dateTo.value.day = "";
+                 }
+                 if (newValue && newValue.year && newValue.month) {
+                   $scope.dateTo.config.begin = {
+                     year: $scope.dateFrom.value.year,
+                     month: $scope.dateFrom.value.month - 1
+                   }
+                   $scope.dateTo.config.display = $scope.dateTo.config.display === "true1" ? true : "true1";
+                 } else {
+                   $scope.dateTo.config.display = false;
+                 }
+               }, true)
+               me.createActions($scope, false, true, true);
+               $scope.submit = function() {
+                 $scope.clicked = true;
+                 if ($scope.clicked && (!$scope.dateTo.fullfilled || !$scope.dateTo.fullfilled || $scope.data.background ==='' || $scope.educationbackgroundinfo.$error.required)) {
+                   return;
+                 }
+                 if (me.submit) {
+                   me.submit();
+                 }
+               };
+            }
+          }
+        }
       };
-    })
+    });
     new DateSelect().start(agModel);
   }
+  //TODO
+  //Known bug, the date value can't be shown on select widget
+  //Known bug, change the month from dataFrom won't refresh dataTo
+  //Watch can know the value change, can be fixed.
   
   return ListEducationBackground;
 });

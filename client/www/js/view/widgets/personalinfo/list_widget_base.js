@@ -45,6 +45,9 @@ define([
       if (editAction) {
         $scope.edit = function() {
           $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
+          if ($scope && $scope.$parent) {
+            $scope.$parent.edit();
+          }
         }
       }
     }

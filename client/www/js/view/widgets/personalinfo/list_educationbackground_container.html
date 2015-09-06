@@ -1,0 +1,12 @@
+<div>
+  <div>
+    <span>教育背景</span>
+    <span ng-hide="hasData">完成才可以参加团战</span>
+  </div>
+  <div ng-repeat="data in dataCollection">
+    <bpluseducationalbackground data="data"/>
+  </div>
+  <div ng-show="showAddButton">
+    <button type="button" ng-click="add()">添加教育背景</button>
+  </div>
+</div>

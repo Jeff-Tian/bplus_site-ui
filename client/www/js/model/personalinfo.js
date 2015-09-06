@@ -2,88 +2,28 @@ define([
   "when",
   "jquery",
   "angular",
-  "bplus-ui/model/modelbase"
-], function(when, $, angular, BaseClass) {
+  "bplus-ui/model/modelbase",
+  "json!bplus-mock/getEdu.json",
+  "json!bplus-mock/getSkills.json",
+  "json!bplus-mock/getPersonalInfo.json"
+], function(when, $, angular, BaseClass, getEduMock, getSkillsMock, getPsersonalInfoMock) {
   
   var PersonalInfo = function() {
     var me = this;
     BaseClass.call(me);
-    me.CONFIG = {
-     "getPersonalInfo": {
-        "url": "",
-        "method": ""
-      },
-     "getSkills": {
-        "url": "",
-        "method": ""
-      },
-    };
     me.SERVICES = {
       "bpluspersonalinfooverall": "getPersonalInfo",
       "bplusskillsoverall": "getSkills",
+      "bpluseducationbackgroundall": "getEdu",
     };
     me.rawdata = {};
     /////////////
     //TEST BEGIN
     me.rawdata = {
-      "getSkills": {
-        "0": [
-          {
-            name: "Cook",
-            description: "I love eating",
-            tags: "eat food"
-          },
-          {
-            name: "Music",
-            description: "I love music",
-            tags: "classic newAge"
-          }
-        ]
-      },
-      "getPersonalInfo": {
-        "0": [
-          {
-            name: "Hello, world",
-            gender: "男",
-            dateOfBirth: {
-              value: {
-                year: {value: "1949"},
-                month: {value: "10"},
-                day: {value: "1"}
-              },
-              isPrivate: false
-            },
-            location: "Shanghai",
-            contractInfo: {
-              value: "Huangpu",
-              isPrivate: false
-            }
-          },
-          {
-            name: "Hello, world 2",
-            gender: "女",
-            dateOfBirth: {
-              value: {
-                year: {value: "2015"},
-                month: {value: "9"},
-                day: {value: "1"}
-              },
-              isPrivate: false
-            },
-            location: "Beijing",
-            contractInfo: {
-              value: "Sihuan",
-              isPrivate: false
-            }
-          }
-        ]
-      }
+      "getEdu" : getEduMock,
+      "getSkills": getSkillsMock,
+      "getPersonalInfo": getPsersonalInfoMock 
     };
-//  me.rawdata = {
-//    "getPersonalInfo": {
-//      "0": []
-//    }
-//  };
     //TEST END
     ///////
     me.SERVICENAME = "personalinfoService";

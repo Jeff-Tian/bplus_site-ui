@@ -6,7 +6,7 @@
   <div ng-repeat="data in dataCollection">
     <bplusskills data="data"/>
   </div>
-  <div ng-hide="hasData">
+  <div ng-show="showAddButton">
     <button type="button" ng-click="add()">添加技能</button>
   </div>
 </div>

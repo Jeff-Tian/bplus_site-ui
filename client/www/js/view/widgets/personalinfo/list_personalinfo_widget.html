@@ -1,6 +1,5 @@
 <div>
   <!--EDIT MODE-->
-  <!--FOR TESTING, THE STATUS BELOW SHOULD BE property.status===ENUM_STATUS.STATUS_EDI-->
   <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
     <form name="personalinfo" novalidate>
       <div>
@@ -33,10 +32,10 @@
     </form>
   </div>
   <!--DISPLAY MODE-->
-  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" ng-click="edit()">
-    <h2 ng-bind="data.name"></h2>
+  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY">
+    <h2 ng-bind="data.name" ng-click="edit()"></h2>
     <div ng-bind="data.gender"></div>
-    <div ng-bind-template="{{data.dateOfBirth.value.year.value}}年{{data.dateOfBirth.value.month.value}}月{{data.dateOfBirth.value.day.value}}日出生"></div>
+    <div ng-bind-template="{{data.dateOfBirth.value.year}}年{{data.dateOfBirth.value.month}}月{{data.dateOfBirth.value.day}}日出生"></div>
     <div ng-bind-template="目前人在{{data.location}}"></div>
   </div>
 </div>

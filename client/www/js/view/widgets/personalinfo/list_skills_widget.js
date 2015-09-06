@@ -32,11 +32,9 @@ define([
                 ? me.ENUM_STATUS.STATUS_EDIT
                 : me.ENUM_STATUS.STATUS_READONLY
               };
-              $scope.tag = {
-                config: {},
-                value: $scope.data.tags,
-                description:$scope.data.description
-              };
+//            $scope.tag = {
+//              config: {},
+//            };
               me.createActions($scope, true, true, true);
             }
           }

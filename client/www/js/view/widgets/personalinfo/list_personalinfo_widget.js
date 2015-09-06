@@ -32,28 +32,12 @@ define([
                 ? me.ENUM_STATUS.STATUS_EDIT
                 : me.ENUM_STATUS.STATUS_READONLY
               };
-//            $scope.data = {
-//              name: "",
-//              gender: "",
-//              dateOfBirth: {
-//                value: {
-//                  year: "",
-//                  month: "",
-//                  day: ""
-//                },
-//                isPrivate: false
-//              },
-//              location: "",
-//              contractInfo: {
-//                value: "",
-//                isPrivate: false
-//              }
-//            };
                $scope.dateSelect = {
                  config: {
                    showYear: true,
                    showMonth: true,
-                   showDay: true
+                   showDay: true,
+                   display: true
                  },
                  value: $scope.data.dateOfBirth.value,
                  fullfilled: false
