@@ -19,6 +19,8 @@ server.get('/', function (req, res) {
     res.render('index');
 });
 
+server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
+
 // Customize client file path
 server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));

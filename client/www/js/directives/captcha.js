@@ -1,6 +1,6 @@
 (function (exports) {
     exports.captcha = function ($http) {
-        var captchaServiceDomain = 'http://10.20.32.51:10001';
+        var captchaServiceDomain = 'http://' + angular.bplus.config.captcha.host + ':' + angular.bplus.config.captcha.port;
 
         return {
             restrict: 'A',
@@ -20,7 +20,7 @@
                             $scope.captchaImageUrl = captchaServiceDomain + response.result.url;
                             ngModel.$setViewValue(response.result.id);
                         } else {
-                            errorHandler();
+                            errorHandler(response);
                         }
                     }).error(errorHandler);
                 }

@@ -24,7 +24,8 @@
                 <input type="text" name="verificationCode" placeholder="请输入手机验证码"
                        ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
                 &nbsp;
-                <button type="button" class="ui huge red button" ng-click="getVerificationCode()"
+                <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
+                        ng-click="getVerificationCode()"
                         ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
                     {{verificationCodeButtonText}}
                 </button>
