@@ -1,10 +1,10 @@
-<div ng-controller="personalinfocontroller">
+<div>
   <!--EDIT MODE-->
   <!--FOR TESTING, THE STATUS BELOW SHOULD BE property.status===ENUM_STATUS.STATUS_EDI-->
-  <div ng-show="property.status!==ENUM_STATUS.STATUS_EDIT">
+  <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
     <form name="personalinfo" novalidate>
       <div>
-        <div class="invalidtext" ng-show="clicked && (!dateSelect.fullfilled || data.gender ==='' || personaldata.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
+        <div class="invalidtext" ng-show="clicked && (!dateSelect.fullfilled || data.gender ==='' || personalinfo.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
         <div>真实姓名</div>
         <input type="text" name="personalname" ng-model="data.name" required placeholder="陈大华"/>
         <div>性别</div>
@@ -24,7 +24,7 @@
           <input type="checkbox" ng-model="data.contractdata.isPrivate">设置为隐私
         </span>
         <div>联系地址</div>
-        <input type="text" name="personalcontractInfo" ng-model="data.contractdata.value" placeholder="上海市人民路885号"/>
+        <input type="text" name="personalcontractInfo" ng-model="data.contractInfo.value" placeholder="上海市人民路885号"/>
         <div>
          <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
          <button type="button" ng-click="cancel()">取消</button>
@@ -33,7 +33,7 @@
     </form>
   </div>
   <!--DISPLAY MODE-->
-  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY">
+  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" ng-click="edit()">
     <h2 ng-bind="data.name"></h2>
     <div ng-bind="data.gender"></div>
     <div ng-bind-template="{{data.dateOfBirth.value.year.value}}年{{data.dateOfBirth.value.month.value}}月{{data.dateOfBirth.value.day.value}}日出生"></div>

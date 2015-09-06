@@ -88,37 +88,41 @@ define([
           value: "=",
           fullfilled: "="
         },
-        controller: function($scope) {
-          if (!$scope.config.begin) {
-            $scope.config.begin = {
+        link: function(scope, element) {
+          if (!scope.config.begin) {
+            scope.config.begin = {
               year: CURRENT_YEAR - YEAR_RANGE,
               month: 0,
               day: 1
             }
           }
-          if (!$scope.config.end) {
-            $scope.config.end = {
+          if (!scope.config.end) {
+            scope.config.end = {
               year: CURRENT_YEAR,
               month: CURRENT_MONTH,
               day: CURRENT_DAY
             }
           }
-          $scope.displayData = {
-            years: createYears($scope.config.begin, $scope.config.end),
+          scope.displayData = {
+            years: createYears(scope.config.begin, scope.config.end),
             months: [],
             days: []
           };
-          $scope.selectYear = function() {
-            $scope.value.month = "";
-            $scope.value.day = "";
-            $scope.displayData.months = createMonths($scope.value.year, $scope.config.begin, $scope.config.end);
+          scope.selectYear = function() {
+            if (scope.config.showMonth) {
+              scope.value.day = {};
+              scope.value.month = {};
+              scope.displayData.months = createMonths(scope.value.year, scope.config.begin, scope.config.end);
+            }
           };
-          $scope.selectMonth = function() {
-            $scope.value.day = "";
-            $scope.displayData.days = createDays($scope.value.year, $scope.value.month, $scope.config.begin, $scope.config.end);
+          scope.selectMonth = function() {
+            if (scope.config.showDay) {
+              scope.value.day = {};
+              scope.displayData.days = createDays(scope.value.year, scope.value.month, scope.config.begin, scope.config.end);
+            }
           };
-          $scope.$watch("value", function(newValue){
-            $scope.fullfilled = !!(newValue.day &&  newValue.month && newValue.year); 
+          scope.$watch("value", function(newValue){
+            scope.fullfilled = !!(newValue.day.value &&  newValue.month.value && newValue.year.value); 
           }, true)
         }
       }

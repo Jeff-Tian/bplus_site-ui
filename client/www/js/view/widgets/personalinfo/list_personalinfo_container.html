@@ -1,17 +1,12 @@
 <div>
-  <div ng-init="status.expend = false" ng-click="status.expend = !status.expend">
+  <div>
     <span>个人信息</span>
-    <span ng-show="!status.hasData">完成才可以参加团战</span>
+    <span ng-hide="hasData">完成才可以参加团战</span>
   </div>
-  <div ng-show="status.expend">
-    <div ng-show="status.hasData">
-      <bpluspersonalinfo/>
-    </div>
-    <div>
-      <button type="button" ng-click="add()">添加个人信息</button>
-    </div>
+  <div ng-repeat="data in dataCollection">
+    <bpluspersonalinfo data="data"/>
   </div>
-  <div ng-show="!status.expend">
-    
+  <div>
+    <button type="button" ng-click="add()">添加个人信息</button>
   </div>
 </div>

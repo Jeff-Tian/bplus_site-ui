@@ -29,32 +29,32 @@ define([
           config: "=",
           value: "="
         },
-        controller: function($scope) {
+        link: function(scope, element) {
           var tmpDataArray = [];
           var latestInput = "";
-          $scope.displayData = {
+          scope.displayData = {
             candidates: [],
             tags: ""
           };
-          $scope.inputChange = function() {
-            tmpDataArray = $scope.displayData.tags.split(" ");
+          scope.inputChange = function() {
+            tmpDataArray = scope.displayData.tags.split(" ");
             var lastValue = tmpDataArray[tmpDataArray.length - 1];
             if (lastValue !== latestInput) {
               latestInput = lastValue;
               //TODO
               //Search something
             }
-            $scope.value.tags = filterTags(tmpDataArray);
+            scope.value.tags = filterTags(tmpDataArray);
           };
-          $scope.candidateClick = function(value) {
+          scope.candidateClick = function(value) {
             if (tmpDataArray.indexOf(value) === -1) {
               tmpDataArray.push(value);
-              $scope.displayData.tags = tmpDataArray.join(" ");
-              $scope.value.tags = filterTags(tmpDataArray);
+              scope.displayData.tags = tmpDataArray.join(" ");
+              scope.value.tags = filterTags(tmpDataArray);
             }
           };
-          $scope.displayData.tags = $scope.value.tags;
-          tmpDataArray = $scope.displayData.tags.split(" ");
+          scope.displayData.tags = scope.value.tags;
+          tmpDataArray = scope.displayData.tags.split(" ");
         }
       }
     })

@@ -10,7 +10,7 @@ define([
   var ListSkill = function() {
     BaseClass.call(this);
   }
-  ListSkill.prototype = Object.create(BaseClass);
+  ListSkill.prototype = Object.create(BaseClass.prototype);
   ListSkill.prototype.constructor = ListSkill;
   
   ListSkill.prototype.start = function(agModel) {
@@ -18,7 +18,7 @@ define([
     agModel.controller("skillscontroller", function($scope){
      $scope.ENUM_STATUS = me.ENUM_STATUS;
      $scope.property = me.property;
-     $scope.data = me.data = {
+     $scope.data =  {
        name: "",
        description: "",
        tags: {
