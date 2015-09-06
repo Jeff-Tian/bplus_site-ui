@@ -12,7 +12,10 @@
                 <i class="write icon"></i>
                 <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
                 &nbsp;
-                <img ng-src="{{captchaImageUrl}}" class="ui fluid b-captcha" ng-click="refreshCaptcha()">
+                <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
+            </div>
+            <div class="ui right aligned container">
+                <a href="javascript: void(0);" ng-click="refreshCaptcha()">换一张</a>
             </div>
         </div>
         <div class="fields">

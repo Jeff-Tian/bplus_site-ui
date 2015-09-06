@@ -12,72 +12,9 @@ angular.module('signIn', [
     ])
     .run(function () {
     })
-    .factory('FormValidation', function () {
-        var res = {
-            validChineseMobileNumberPattern: '^(?:(0?86)|[\\(（](0?86)[\\)）])?-?(13\\d|15\\d|14[57]|17\\d|18\\d)(\\d{8})$'
-        };
-
-        res.defaultSetting = {
-            fields: {
-                mobile: {
-                    identifier: 'mobile',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请输入手机号码'
-                    }, {
-                        type: 'regExp[' + res.validChineseMobileNumberPattern + ']',
-                        prompt: '请输入有效的手机号码'
-                    }]
-                },
-
-                password: {
-                    identifier: 'password',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请输入密码'
-                    }]
-                },
-
-                email: {
-                    identifier: 'email',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请输入邮箱地址'
-                    }, {
-                        type: 'email',
-                        prompt: '请输入有效的邮箱地址'
-                    }]
-                },
-
-                captcha: {
-                    identifier: 'captcha',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请输入验证码'
-                    }]
-                }
-            },
-
-            templates: {
-                error: function (errors) {
-                    var html = '<ul class="list">';
-                    $.each(errors, function (index, value) {
-                        html += '<li>' + value + '</li>';
-                    });
-                    html += '</ul><i class="large remove circle icon"></i>';
-
-                    return $(html);
-                }
-            }
-        };
-
-        return res;
-    })
-    .controller('AppCtrl', ['$scope', 'FormValidation', function ($scope, FormValidation) {
-        var $form = $('.ui.form');
-
-        $form.form(FormValidation.defaultSetting);
-    }])
+    .factory('FormValidation', angular.bplus.FormValidation)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .directive('captcha', angular.bplus.captcha)
     .controller('SignUpCtrl', ['$scope', function ($scope) {
         $scope.signUp = function () {
             window.location.href = 'personal-history';
@@ -518,27 +455,6 @@ angular.module('signIn', [
                     on: 'blur',
                     inline: true
                 }));
-
-                $scope.captchaImageUrl = '';
-
-                function errorHandler(res) {
-                    console.error(res);
-                }
-
-                $scope.refreshCaptcha = function () {
-                    $http({
-                        method: 'JSONP',
-                        url: 'http://10.20.32.51:10001/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus'
-                    }).success(function (response) {
-                        if (response.isSuccess !== false) {
-                            $scope.captchaImageUrl = 'http://10.20.32.51:10001' + response.result.url;
-                        } else {
-                            errorHandler();
-                        }
-                    }).error(errorHandler);
-                };
-
-                $scope.refreshCaptcha();
             }
         };
     }])
