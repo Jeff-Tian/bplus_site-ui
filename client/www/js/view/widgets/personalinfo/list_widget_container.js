@@ -95,7 +95,6 @@ define([
 //          return model.saveData();
           };
           scope.cancel = function() {
-            debugger;
             scope.showAddButton = true;
             //TODO
             //Known issue, will refresh all the status.
