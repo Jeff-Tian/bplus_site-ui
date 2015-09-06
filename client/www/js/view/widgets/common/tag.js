@@ -27,7 +27,8 @@ define([
         template: template,
         scope: {
           config: "=",
-          value: "="
+          value: "=",
+          description: "="
         },
         link: function(scope, element) {
           var tmpDataArray = [];
@@ -44,16 +45,17 @@ define([
               //TODO
               //Search something
             }
-            scope.value.tags = filterTags(tmpDataArray);
+            scope.value = filterTags(tmpDataArray);
           };
           scope.candidateClick = function(value) {
             if (tmpDataArray.indexOf(value) === -1) {
               tmpDataArray.push(value);
               scope.displayData.tags = tmpDataArray.join(" ");
-              scope.value.tags = filterTags(tmpDataArray);
+              scope.value = filterTags(tmpDataArray);
             }
           };
-          scope.displayData.tags = scope.value.tags;
+          debugger;
+          scope.displayData.tags = scope.value;
           tmpDataArray = scope.displayData.tags.split(" ");
         }
       }

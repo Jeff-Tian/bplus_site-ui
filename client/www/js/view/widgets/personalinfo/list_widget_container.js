@@ -22,7 +22,14 @@ define([
         isPrivate: false
       }
     },
+    "bplusskillsoverall": {
+       name: "",
+       description: "",
+       tags: []
+    },
   };
+
+  var hasInitialized;
   
   var ListWidgetContainer = function() {
     Object.call(this);
@@ -31,14 +38,18 @@ define([
   ListWidgetContainer.prototype.constructor = ListWidgetContainer;
   
   ListWidgetContainer.prototype.start = function(agModel, directiveName, template) {
-    new personalinfoData().start(agModel);
+    if (!hasInitialized) {
+      new personalinfoData().start(agModel);
+      hasInitialized = true;
+    }
     agModel
     .directive(directiveName, ["personalinfoService", function(model){
       return {
         restrict: 'E',
         template: template,
+        scope: {},
         link: function(scope, element) {
-          var service = model.SERVICES.PERSONAL_INFO;
+          var service = model.SERVICES[directiveName];
           var updateData = function(isLatestData) {
             var returnPromise;
             if (isLatestData) {
@@ -59,6 +70,7 @@ define([
           scope.submit = function() {
             //TODO
             //Get data and save them
+            return when();
 //          return model.saveData();
           };
           scope.cancel = function() {

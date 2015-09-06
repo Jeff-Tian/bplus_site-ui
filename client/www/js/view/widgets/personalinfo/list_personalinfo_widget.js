@@ -58,31 +58,16 @@ define([
                  value: $scope.data.dateOfBirth.value,
                  fullfilled: false
                };
+               me.createActions($scope, false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
-                 debugger;
-                 //TODO
-                 //submit function
                  if ($scope.clicked && (!$scope.dateSelect.fullfilled || $scope.data.gender ==='' || $scope.personalinfo.$error.required)) {
                    return;
                  }
-                 var promise;
-                 if ($scope && $scope.$parent) {
-                   promise = $scope.$parent.submit();
-                 }
-                 promise.then(function() {
-                   $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
-                 })
-               };
-               $scope.cancel = function() {
-                 $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
-                 if ($scope && $scope.$parent) {
-                   $scope.$parent.cancel();
+                 if (me.submit) {
+                   me.submit();
                  }
                };
-               $scope.edit = function() {
-                 $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
-               }
             }
           }
         }

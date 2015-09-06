@@ -13,14 +13,33 @@ define([
         "url": "",
         "method": ""
       },
+     "getSkills": {
+        "url": "",
+        "method": ""
+      },
     };
     me.SERVICES = {
-      "PERSONAL_INFO": "getPersonalInfo",
+      "bpluspersonalinfooverall": "getPersonalInfo",
+      "bplusskillsoverall": "getSkills",
     };
     me.rawdata = {};
     /////////////
     //TEST BEGIN
     me.rawdata = {
+      "getSkills": {
+        "0": [
+          {
+            name: "Cook",
+            description: "I love eating",
+            tags: "eat food"
+          },
+          {
+            name: "Music",
+            description: "I love music",
+            tags: "classic newAge"
+          }
+        ]
+      },
       "getPersonalInfo": {
         "0": [
           {

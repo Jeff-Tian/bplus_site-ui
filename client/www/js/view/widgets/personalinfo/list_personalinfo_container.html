@@ -6,7 +6,7 @@
   <div ng-repeat="data in dataCollection">
     <bpluspersonalinfo data="data"/>
   </div>
-  <div>
+  <div ng-hide="hasData">
     <button type="button" ng-click="add()">添加个人信息</button>
   </div>
 </div>
