@@ -16,7 +16,7 @@
 @color-grey-lighter: #e5e5e5;
 @color-grey-light: #ccc;
 @color-grey: #999;
-@color-grey-dark: #666;
+@color-grey-dark: #7d7d7d;
 @color-grey-darker: #333;
 @color-black: #000;
 
@@ -72,5 +72,27 @@
 @fontfamily-numeral: arial, Tahoma, sans-serif;
 
 @border-radius: 5px;
-@border-radius-small: 3px;
+@border-radius-small: 2px;
 @border-radius-large: 8px;
+@border-radius-max: 50rem;
+
+.perspective (@value) {
+    -webkit-perspective: @value;  // Safari 4+, Chrome 12+
+    -moz-perspective: @value;  // Firefox 10+
+    -ms-perspective: @value;  // IE10+
+    perspective: @value;
+}
+
+.rotateX (@deg) {
+    -webkit-transform:   rotateX(@deg);
+    -moz-transform:      rotateX(@deg);
+    -ms-transform:       rotateX(@deg);
+    -o-transform:        rotateX(@deg);
+    transform:           rotateX(@deg);
+}
+
+.opacity (@opacity) {
+    opacity: @opacity;
+    -ms-filter: ~`"progid:DXImageTransform.Microsoft.Alpha(opacity=(" + "@{opacity}" * 100 + "))"`; 
+    filter: ~`"alpha(opacity = (" + "@{opacity}" * 100 + "))"`;
+}

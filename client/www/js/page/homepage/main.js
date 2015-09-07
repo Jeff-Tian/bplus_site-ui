@@ -39,12 +39,19 @@ angular.module('mates', [
     .tab();
 
   // TODO: initial carousel, to be integrated into JS framework
-  $("[data-action=carousel]").owlCarousel({
-    singleItem:true,
+  $('[data-action=carousel]').owlCarousel({
+    singleItem: true,
     lazyLoad: true,
     loop: true,
     autoPlay: true,
     autoplayTimeout: 10000,
-    navigation : true
+    navigation: true,
+    navigationText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
+    afterInit: function() {
+      console.log("carousel init");
+    },
+    afterMove: function() {
+      console.log("carousel move");
+    }
   });
 })();

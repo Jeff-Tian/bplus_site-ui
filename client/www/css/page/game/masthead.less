@@ -1,0 +1,44 @@
+/*
+* - @Bridge+
+*/
+
+.b-masthead {
+    min-height: 36rem;
+    position: relative;
+    background: url('/img/salespage/opportunity-banner.jpg');
+
+    > .b-masthead-stripe {
+    	background-color: rgba(0, 0, 0, .2);
+    	position: absolute;
+    	bottom: 0;
+    	left: 0;
+    	width: 100%;
+        padding: 1rem 0;
+
+        h2 {
+            &.ui.header {
+                color: @color-white;
+                font-size: @fontsize-9xl;
+                margin-top: 1.1rem;
+            }
+        }
+        h3 {
+            color: @color-white;
+            font-weight: normal;
+        }
+        p {
+            color: @color-white;
+            font-size: @fontsize-s;
+            line-height: 1.8em;
+
+            &:first-child {
+                width: 88%;
+            }
+        }
+        .ui.image {
+            &.floated {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

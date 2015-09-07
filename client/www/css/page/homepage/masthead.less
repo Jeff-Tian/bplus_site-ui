@@ -3,38 +3,26 @@
 */
 
 .b-masthead {
+    min-height: 50rem;
 
     .owl-theme {
         .owl-controls {
-            margin-top: -22px;
-
+            margin-top: -23px;
             .owl-page {
-            	position: relative;
-            	top: -1rem;
-            	&.active {
-            		span {
-            			background-color: @color-white;
-            		}
-            	}
-            	span {
-					width: 8px;
-					height: 8px;
-					margin: 5px 3px;
-            		background-color: #7d7d7d;
-            	}
+                position: relative;
+                top: -1rem;
             }
-
             .owl-buttons {
-            	.owl-prev {
-		            position: absolute;
-		            top: 24rem;
-		            left: 5rem;
-            	}
-            	.owl-next {
-		            position: absolute;
-		            top: 24rem;
-		            right: 5rem;
-            	}
+                .owl-prev,
+                .owl-next {
+                    top: 42%; // calc(50% - 3rem);
+                }
+                .owl-prev {
+                    left: 3rem;
+                }
+                .owl-next {
+                    right: 3rem;
+                }
             }
         }
     }
