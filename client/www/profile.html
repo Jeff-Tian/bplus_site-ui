@@ -101,8 +101,8 @@
         </div>
         <div class="ui grid container b-profile-main">
             <div class="five wide column">
-                <div class="b-profile-left-section">
-                    <img src="/img/profile/icon_profile_picture_male_big.png" class="b-profile-face" />
+                <div class="b-profile-left-section" ng-controller="achievement">
+                    <img ng-src="{{face}}" class="b-profile-face" />
                     <div class="b-profile-preview">
                         <button class="ui basic button"><i class="icon"></i>预览简历</button>
                     </div>
@@ -113,40 +113,28 @@
                         </div>
                         <div class="b-profile-achievement">
                             <div class="ui five column grid">
-                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
-                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
-                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
-                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
-                                <div class="column"><img src="/img/profile/achievement-img.jpg" /></div>
+                                <div class="column" ng-repeat="i in pics"><img ng-src="{{i.image}}" /></div>
                             </div>
                             <div class="ui horizontal list b-profile-achievement-imgs">
                                 <div class="item b-profile-achievement-imgs-level">
                                     <i class="icon"></i>
-                                    <div class="content">等级</div>
+                                    <div class="content">等级{{level}}</div>
                                 </div>
                                 <div class="item b-profile-achievement-imgs-fraction">
                                     <i class="icon"></i>
-                                    <div class="content">积分</div>
+                                    <div class="content">积分{{scroe}}</div>
                                 </div>
                             </div>
                             <div class="ui list b-profile-li">
-                                <div class="item">
+                                <div class="item" ng-repeat="i in list">
                                     <i class="icon"></i>
-                                    <div class="content">分享信息到朋友圈+3</div>
-                                </div>
-                                <div class="item">
-                                    <i class="icon"></i>
-                                    <div class="content">邀请朋友加入+5</div>
-                                </div>
-                                <div class="item">
-                                    <i class="icon"></i>
-                                    <div class="content">注册成功+5</div>
+                                    <div class="content">{{i.title}}{{i.scroe}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="b-profile-left-section">
+                <div class="b-profile-left-section" ng-controller="growing">
                     <div class="b-profile-area">
                         <div class="ui medium header">
                             <img class="ui image" src="/img/profile/icon_profile_growing.png">
@@ -154,24 +142,14 @@
                         </div>
                         <div class="b-profile-growing">
                             <div class="ui list b-profile-li">
-                                <div class="item">
+                                <div class="item" ng-repeat="i in list">
                                     <i class="icon"></i>
-                                    <div class="content">第一届Bridge+全国商业实战大赛 华东赛区 特等奖</div>
-                                </div>
-                                <div class="item">
-                                    <i class="icon"></i>
-                                    <div class="content">第二届Bridge+全国商业实战大赛 复赛 优胜奖</div>
-                                </div>
-                                <div class="item">
-                                    <i class="icon"></i>
-                                    <div class="content">第二届Bridge+全国商业实战大赛 决赛 第一名</div>
+                                    <div class="content">{{i.title}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="b-profile-growing-buttons">
-                            <button class="fluid ui basic button">查看历次比赛成绩</button>
-                            <button class="fluid ui basic button">下载比赛结果报告</button>
-                            <button class="fluid ui basic button">下载比赛获奖证书</button>
+                            <button class="fluid ui basic button" ng-repeat="i in buttons">{{i.title}}</button>
                         </div>
                     </div>
                 </div>

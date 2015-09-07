@@ -89,15 +89,21 @@ var require = {
     "callback": function(require, less) {
         require([
             "angular",
-            "bplus-ui/page/profile/widget/banner/main"
+            "bplus-ui/page/profile/widget/banner/main",
+            "bplus-ui/page/profile/widget/achievement/main",
+            "bplus-ui/page/profile/widget/growing/main"
         ], function(
             angular,
-            banner
+            banner,
+            achievement,
+            growing
         ) {
             var documentMudule = angular.module('docModule', []);
-
-            banner(documentMudule);
-
+            (function (agModule) {
+                banner(agModule);
+                achievement(agModule);
+                growing(agModule);
+            })(documentMudule);
             angular.element(window.document).ready(function() {
                 angular.bootstrap(window.document, ['docModule']);
             });
