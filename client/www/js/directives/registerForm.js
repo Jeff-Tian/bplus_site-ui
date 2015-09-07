@@ -120,7 +120,7 @@
 
                 $scope.internalCtrl = $scope.control || {};
                 $scope.internalCtrl.handleFormError = function (reason) {
-                    if (reason === null) {
+                    if (reason === null || typeof reason === 'undefined') {
                         getSignUpForm().addClass('error').form('add errors', ['未得到服务器响应']);
                     } else {
                         getSignUpForm().addClass('error').form('add errors', [reason]);

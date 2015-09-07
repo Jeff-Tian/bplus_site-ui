@@ -19,14 +19,26 @@ angular.module('signIn', [
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
-            $http.post('/service-proxy/member/register', $scope.registerFormCtrl.getFormData())
+            var signUpData = $scope.registerFormCtrl.getFormData();
+
+            $http.post('/service-proxy/member/register', signUpData)
                 .success(function (res) {
                     if (res.isSuccess) {
-                        window.location.href = 'personal-history';
+                        $http.post('/logon/authentication', {
+                            value: signUpData.mobile,
+                            password: signUpData.password
+                        })
+                            .success(function (json) {
+                                if (json.isSuccess) {
+                                    window.location.href = 'personal-history';
+                                } else {
+                                    $scope.registerFormCtrl.handleFormError(json.message);
+                                }
+                            }).error($scope.registerFormCtrl.handleFormError);
                     } else {
                         $scope.registerFormCtrl.handleFormError(res.message);
                     }
-                });
+                }).error($scope.registerFormCtrl.handleFormError);
         };
     }])
     .controller('BindMobileCtrl', ['$scope', function ($scope) {

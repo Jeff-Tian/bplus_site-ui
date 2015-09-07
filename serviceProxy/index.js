@@ -9,4 +9,5 @@ module.exports = require('express').Router()
     })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
     .post('/member/register', /*sms.validate,*/ sso.signUp)
+    .post('/logon/authentication', sso.authenticate)
 ;
