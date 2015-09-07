@@ -199,5 +199,7 @@ define([
       }
     })
   }
+  //TODO:
+  //Become an instance
   return BplusDate;
 });

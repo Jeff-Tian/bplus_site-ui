@@ -5,6 +5,27 @@ define([
   "bplus-ui/model/personalinfo",
 ], function(when, $, angular, personalinfoData) {
   var DATA_PATTERN = {
+    "bplusclubexperienceall": {
+      "name": "",
+      "position": "",
+      "dateFrom": {
+        "value": {
+          "year": "",
+          "month": "",
+          "day": "" 
+        }
+      },
+      "dateTo": {
+        "value": {
+          "year": "",
+          "month": "",
+          "day": ""
+        },
+        "tillNow": false
+      },
+      "description": "",
+      "tags": ""
+    },
     "bpluspersonalinfooverall": {
       name: "",
       gender: "",
@@ -41,8 +62,8 @@ define([
         month: "",
         day: ""
       },
-      specialDescription: "",
-      specialTags: ""
+      description: "",
+      tags: ""
     }
   };
 

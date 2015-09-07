@@ -65,5 +65,7 @@ define([
       }
     })
   }
+  //TODO:
+  //Become an instance
   return BplusTag;
 });
