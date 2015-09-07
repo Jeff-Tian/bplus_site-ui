@@ -1,36 +1,36 @@
-<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp()">
+<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp($event)">
     <div class="ui error message brand"></div>
     <div class="ui">
         <div class="field">
             <div class="ui left icon input">
                 <i class="phone icon"></i>
-                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile">
+                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile"
+                       ng-enter>
             </div>
         </div>
         <div class="field absolute-prompt">
             <div class="ui left icon input">
                 <i class="write icon"></i>
-                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
-                <img src="icon/android-icon-36x36.png" width="100">
+                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha" ng-enter>
+                &nbsp;
+                <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
+            </div>
+            <div class="ui right aligned container">
+                <a href="javascript: void(0);" ng-click="refreshCaptcha()">换一张</a>
             </div>
         </div>
-        <div class="fields">
-            <div class="eleven wide field"></div>
-            <div class="five wide field ui center aligned container">
-                <a href="javascript: void(0);">换一张</a>
-            </div>
-        </div>
-        <div class="fields">
-            <div class="ui left icon input eleven wide field" ng-show="sendCodeButtonClicked">
-                <i class="write icon"></i>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="write icon" ng-show="sendCodeButtonClicked"></i>
                 <input type="text" name="verificationCode" placeholder="请输入手机验证码"
-                       ng-model="signUpData.verificationCode">
+                       ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
+                &nbsp;
+                <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
+                        ng-click="getVerificationCode()"
+                        ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                    {{verificationCodeButtonText}}
+                </button>
             </div>
-            <button type="button" class="ui fluid huge red button wide field" ng-click="getVerificationCode()"
-                    ng-class="{'five': sendCodeButtonClicked, 'sixteen': !sendCodeButtonClicked}"
-                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                {{verificationCodeButtonText}}
-            </button>
         </div>
         <div class="field">
             <div class="ui left icon input">

@@ -22,7 +22,7 @@
                 <a class="item" data-tab="register">注册</a>
             </div>
             <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
-                <form class="ui large fluid form login" ng-submit="tryLogin()" name="loginForm">
+                <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">
                     <div class="ui error message brand"></div>
                     <div class="ui">
                         <div class="field">
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
-                <register-form action="signUp"></register-form>
+                <register-form action="signUp" control="registerFormCtrl"></register-form>
 
                 <div class="field ui right aligned container">
                     已有账号或微信账号？<a href="signin#/login">马上登录</a>
@@ -86,6 +86,12 @@
 <script src="bower/angular/angular.min.js"></script>
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <!--Page JS-->
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/FormValidation.js"></script>
+<script src="/config.js"></script>
+<script src="js/directives/captcha.js"></script>
+<script src="js/directives/ngEnter.js"></script>
+<script src="js/directives/registerForm.js"></script>
 <script src="js/page/register/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>

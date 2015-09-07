@@ -79,6 +79,8 @@
 
 .ui.brand.error.message {
     background-color: @color-brand-darker;
+    border-color: @color-brand-darker;
+    box-shadow: 0 0 0 1px @color-brand-darker inset, 0 0 0 0 transparent;
     color: white;
     padding: 5px 10px;
     font-size: smaller;
@@ -124,4 +126,13 @@
     width: 100%;
     max-width: 100%;
     min-height: 300px;
+}
+
+.b-captcha {
+    cursor: pointer;
+    max-height: 40px;
+
+    img {
+        max-height: 40px;
+    }
 }

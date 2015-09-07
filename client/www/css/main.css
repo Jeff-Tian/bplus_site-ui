@@ -2954,20 +2954,6 @@ h3.ui.header.b-sp {
   right: 5em;
   top: 8em;
 }
-.b-signin-container {
-  width: 600px;
-  padding: 1px 50px 40px 50px;
-  margin: 8em auto 2em auto;
-  background-color: #e5e5e5;
-}
-.b-signin-wide {
-  width: 300px;
-  margin: 2em auto 2em auto;
-}
-.b-signin-wide form {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 /*
 * - @Bridge+
 */
@@ -3027,6 +3013,9 @@ a:active {
   .ui.container.grid {
     width: calc(1129px) !important;
   }
+}
+.grey.color {
+  color: #7d7d7d;
 }
 /*
 * - @Bridge+
@@ -3429,6 +3418,30 @@ a:active {
 /*
 * - @Bridge+
 */
+.b-signin-wrapper {
+  width: 600px;
+  margin: 6em auto 2em auto;
+}
+.b-signin-container {
+  width: 600px;
+  padding: 1px 50px 40px 50px;
+  background-color: #e5e5e5;
+}
+.b-step-container {
+  background-color: #e5e5e5;
+  padding: 1.5em 3em;
+}
+.b-separator {
+  border-bottom: solid 1px #999999;
+}
+.b-signin-wide {
+  width: 280px;
+  margin: 2em auto 2em auto;
+}
+.b-signin-wide form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 .wechat.link,
 .wechat.link:link {
   color: black;
@@ -3456,8 +3469,21 @@ a:active {
 .ui.secondary.pointing.menu.brand .item:hover {
   color: #ff3c42;
 }
+.ui.brand.message {
+  background-color: #7d7d7d;
+  border-color: #7d7d7d;
+  box-shadow: 0 0 0 1px #7d7d7d inset, 0 0 0 0 transparent;
+  color: white;
+  padding: 1.5em 3em;
+}
+.ui.brand.message .header {
+  color: #e5e5e5;
+  font-weight: normal;
+}
 .ui.brand.error.message {
   background-color: #900000;
+  border-color: #900000;
+  box-shadow: 0 0 0 1px #900000 inset, 0 0 0 0 transparent;
   color: white;
   padding: 5px 10px;
   font-size: smaller;
@@ -3512,6 +3538,23 @@ a:active {
 .ui.form .field.error input[type="text"],
 .ui.form .field.error input[type="url"] {
   border-color: #ff3c42;
+}
+.field.error.absolute-prompt .ui.red.pointing.prompt {
+  position: absolute;
+}
+.shape.reset,
+.shape.reset-by-email,
+.shape.personal-history {
+  width: 100%;
+  max-width: 100%;
+  min-height: 300px;
+}
+.b-captcha {
+  cursor: pointer;
+  max-height: 40px;
+}
+.b-captcha img {
+  max-height: 40px;
 }
 /*
 * - @Bridge+ opportunity

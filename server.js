@@ -1,8 +1,15 @@
 // Use Expressjs as Node.js web framework
 var express = require('express');
 var server = express();
+var bodyParser = require('body-parser');
+
 // Node.js template engine
 var ejs = require('ejs');
+
+server.use(bodyParser.json())
+    .use(bodyParser.urlencoded({
+        extended: true
+    }));
 
 // Set the view engine to ejs, but specify file type with ".html"
 server.engine('html', ejs.renderFile);
@@ -12,19 +19,22 @@ server.get('/', function (req, res) {
     res.render('index');
 });
 
+server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
+
 // Customize client file path
 server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
+server.use('/service-proxy', require('./serviceProxy'));
 
 // Page route define
 server.get('/index', function (req, res) {
     res.render('index');
 });
-server.get('/game', function(req, res) {
+server.get('/game', function (req, res) {
     res.render('game');
 });
 
-server.get('/opportunity', function(req, res) {
+server.get('/opportunity', function (req, res) {
     res.render('opportunity');
 });
 
@@ -59,6 +69,6 @@ server.get('/personal-history', function (req, res) {
 });
 
 // Host & Port
-server.listen(8000, function() {
-    console.log('8000 is for Bridge+ ' );
+server.listen(8000, function () {
+    console.log('8000 is for Bridge+ ');
 });
