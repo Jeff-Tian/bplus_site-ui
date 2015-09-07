@@ -8,8 +8,7 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="css/page/register/main.less">
-    <script src="bower/less/dist/less.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body ng-app="signIn">
@@ -23,7 +22,7 @@
         </div>
     </div>
     <div class="ui column b-step-container b-separator">
-        <div class="ui center aligned container">
+        <div class="ui center aligned container subcontainer">
             <h2 class="grey color">个人信息</h2>
         </div>
     </div>
@@ -102,7 +101,7 @@
                                 <div class="four wide field">
                                     <label>&nbsp;</label>
 
-                                    <div class="ui right aligned container">
+                                    <div class="ui right aligned container subcontainer">
                                         <div class="ui checkbox">
                                             <input type="checkbox" checked name="setPrivacy"
                                                    ng-model="personalInfo.setPrivacy">
@@ -118,7 +117,7 @@
                             </div>
                         </div>
                         <div class="ui horizontal divider"></div>
-                        <div class="ui right aligned container">
+                        <div class="ui right aligned container subcontainer">
                             <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()">跳过</button>
                             <button type="submit" class="ui large red button">下一步: 完善教育背景</button>
                         </div>
@@ -209,7 +208,7 @@
                         </div>
 
                         <div class="ui horizontal divider"></div>
-                        <div class="ui right aligned container">
+                        <div class="ui right aligned container subcontainer">
                             <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
                                 上一步
                             </button>

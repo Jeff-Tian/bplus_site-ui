@@ -8,8 +8,7 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="css/page/register/main.less">
-    <script src="bower/less/dist/less.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body ng-app="signIn">
@@ -17,7 +16,7 @@
 <div class="ui b-signin-wrapper">
     <div class="ui column b-signin-container">
         <div class="b-signin-wide">
-            <div class="ui center aligned container">
+            <div class="ui center aligned container subcontainer">
                 <h2 class="grey color">手机绑定</h2>
             </div>
 
@@ -37,6 +36,12 @@
 <script src="bower/angular/angular.min.js"></script>
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <!--Page JS-->
+<script src="/config.js"></script>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/FormValidation.js"></script>
+<script src="js/directives/captcha.js"></script>
+<script src="js/directives/ngEnter.js"></script>
+<script src="js/directives/registerForm.js"></script>
 <script src="js/page/register/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>
