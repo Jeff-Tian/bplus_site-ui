@@ -11,7 +11,7 @@
                     console.error(res);
                 }
 
-                function refreshCaptcha() {
+                function refreshCaptcha(successCallback) {
                     $http({
                         method: 'JSONP',
                         url: captchaServiceDomain + '/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus'
@@ -19,6 +19,10 @@
                         if (response.isSuccess !== false) {
                             $scope.captchaImageUrl = captchaServiceDomain + response.result.url;
                             ngModel.$setViewValue(response.result.id);
+
+                            if (typeof successCallback === 'function') {
+                                successCallback();
+                            }
                         } else {
                             errorHandler(response);
                         }

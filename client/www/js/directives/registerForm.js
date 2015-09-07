@@ -3,7 +3,8 @@
         return {
             templateUrl: '../../view-partial/register-form.html',
             scope: {
-                action: '='
+                action: '=',
+                control: '='
             },
             link: function ($scope, element) {
                 $scope.signUpData = {
@@ -34,17 +35,21 @@
                     $scope.allowGetCode = false;
                 }
 
-                function pollUpdateButtonText() {
+                function pollUpdateButtonText(roundEndCallback) {
                     refreshButtonText();
 
                     if (countDown > 0) {
                         $timeout(function () {
                             countDown--;
-                            pollUpdateButtonText();
+                            pollUpdateButtonText(roundEndCallback);
                         }, 1000);
                     } else {
                         countDown = countDownInterval;
                         initButtonText();
+
+                        if (typeof roundEndCallback === 'function') {
+                            roundEndCallback();
+                        }
                     }
                 }
 
@@ -81,26 +86,22 @@
                 };
 
                 $scope.getVerificationCode = function () {
-                    function handleError(reason) {
-                        if (reason === null) {
-                            getSignUpForm().addClass('error').form('add errors', ['未得到服务器响应']);
-                        } else {
-                            getSignUpForm().addClass('error').form('add errors', [reason]);
-                        }
-                    }
-
                     partiallyValidateSignUpForm();
 
                     if ($scope.isSignUpFormPartiallyValid()) {
                         $http.post('/service-proxy/sms/send', $scope.signUpData)
                             .success(function (res) {
                                 if (res.isSuccess) {
-                                    pollUpdateButtonText();
+                                    pollUpdateButtonText(function () {
+                                        $scope.refreshCaptcha(function () {
+                                            $scope.signUpData.captcha = '';
+                                        });
+                                    });
                                     $scope.sendCodeButtonClicked = true;
                                 } else {
-                                    handleError(res.message);
+                                    $scope.internalCtrl.handleFormError(res.message);
                                 }
-                            }).error(handleError);
+                            }).error($scope.internalCtrl.handleFormError);
                     }
                 };
 
@@ -116,6 +117,18 @@
                     on: 'blur',
                     inline: true
                 }));
+
+                $scope.internalCtrl = $scope.control || {};
+                $scope.internalCtrl.handleFormError = function (reason) {
+                    if (reason === null) {
+                        getSignUpForm().addClass('error').form('add errors', ['未得到服务器响应']);
+                    } else {
+                        getSignUpForm().addClass('error').form('add errors', [reason]);
+                    }
+                };
+                $scope.internalCtrl.getFormData = function () {
+                    return $scope.signUpData;
+                };
             }
         };
     };

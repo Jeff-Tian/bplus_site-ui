@@ -1,28 +1,12 @@
 var http = require('http');
 var captcha = require('../config').captcha;
+var proxy = require('./proxy');
 
 module.exports = {
-    validate: function (req, res, next) {
-        var options = {
-            host: captcha.host,
-            port: captcha.port,
-            path: '/captcha/validate',
-            method: req.method,
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            }
+    validate: proxy(captcha.host, captcha.port, '/captcha/validate', function (d) {
+        return {
+            id: d.captchaId,
+            value: d.captcha
         };
-
-        var request = http.request(options, function (r) {
-            r.pipe(res);
-        });
-
-        request.on('error', next);
-        request.write(JSON.stringify({
-            id: req.body.captchaId,
-            value: req.body.captcha
-        }));
-
-        request.end();
-    }
+    })
 };

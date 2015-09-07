@@ -2,28 +2,20 @@
 
 var http = require('http');
 var sms = require('../config').sms;
+var proxy = require('./proxy');
 
 module.exports = {
-    getVerificationCode: function (req, res, next) {
-        var options = {
-            host: sms.host,
-            port: sms.port,
-            path: '/service' + req.path,
-            method: req.method,
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            }
+    getVerificationCode: proxy(sms.host, sms.port, '/service/sms/send', function (d) {
+        return {
+            phone: d.mobile,
+            code: d.code
         };
+    }),
 
-        var request = http.request(options, function (r) {
-            r.pipe(res);
-        });
-
-        request.on('error', next);
-        request.write(JSON.stringify({
-            phone: req.body.mobile,
-            code: sms.code
-        }));
-        request.end();
-    }
+    validate: proxy(sms.host, sms.port, '/service/sms/validate', function (d) {
+        return {
+            phone: d.mobile,
+            value: d.verificationCode
+        };
+    })
 };

@@ -16,14 +16,15 @@ angular.module('signIn', [
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .controller('SignUpCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.signUp = function () {
+        $scope.registerFormCtrl = {};
 
-            $http.post('http://10.20.32.61:10086/member/register', {})
+        $scope.signUp = function () {
+            $http.post('/service-proxy/member/register', $scope.registerFormCtrl.getFormData())
                 .success(function (res) {
                     if (res.isSuccess) {
                         window.location.href = 'personal-history';
                     } else {
-
+                        $scope.registerFormCtrl.handleFormError(res.message);
                     }
                 });
         };
