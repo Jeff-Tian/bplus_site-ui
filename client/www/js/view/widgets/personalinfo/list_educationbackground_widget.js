@@ -84,10 +84,6 @@ define([
     });
     new DateSelect().start(agModel);
   }
-  //TODO
-  //Known bug, the date value can't be shown on select widget
-  //Known bug, change the month from dataFrom won't refresh dataTo
-  //Watch can know the value change, can be fixed.
   
   return ListEducationBackground;
 });

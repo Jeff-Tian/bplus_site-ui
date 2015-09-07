@@ -59,8 +59,6 @@ define([
     });
     new DateSelect().start(agModel);
   }
-  //TODO
-  //Known bug, the date value can't be shown on select widget
   
   return ListPersonalInfo;
 });
