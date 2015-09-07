@@ -68,7 +68,7 @@
 		}
 		.ui.header {
 			&.sub {
-				color: @color-white;
+				color: @color-brand;
 				font-weight: normal;
 				font-size: @fontsize-xl;
 			}
@@ -93,11 +93,6 @@
 					vertical-align: super;
 				}
 
-				&:first-child {
-					> .value {
-						color: @color-white;
-					}
-				}
 			}
 		}
 	}
@@ -113,6 +108,7 @@
 	}
 	.b-jobs-list {
 		background-color: #f0f0f0;
+		box-shadow: 0 2px 0 #bebebe;
 		padding: 2rem 4rem;
 
 		.ui.header {
@@ -121,16 +117,19 @@
 
 			i.icon {
 				&.red {
+					padding-top: 0;
 					color: @color-brand!important;
 				}
 			}
 			.content {
 				font-weight: normal;
+				line-height: 2.25rem;
 			}
 		}
 
 		.ui.table {
 			font-size: @fontsize-s;
+
 		}
 	}
 	.b-jobs-action {

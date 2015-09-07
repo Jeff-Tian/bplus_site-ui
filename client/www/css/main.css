@@ -3159,10 +3159,10 @@ a:active {
   top: 42%;
 }
 .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
-  left: 3rem;
+  left: 2.5rem;
 }
 .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
-  right: 3rem;
+  right: 2.5rem;
 }
 .b-masthead .b-slider {
   overflow: hidden;
@@ -3354,7 +3354,7 @@ a:active {
   left: 3.5rem;
 }
 .b-jobs .b-jobs-statistics .ui.header.sub {
-  color: #ffffff;
+  color: #ff3c42;
   font-weight: normal;
   font-size: 1.13em;
 }
@@ -3377,9 +3377,6 @@ a:active {
   font-weight: normal;
   vertical-align: super;
 }
-.b-jobs .b-jobs-statistics .ui.statistics > .statistic:first-child > .value {
-  color: #ffffff;
-}
 .b-jobs .ui.grid + .grid {
   margin-top: 0;
 }
@@ -3388,6 +3385,7 @@ a:active {
 }
 .b-jobs .b-jobs-list {
   background-color: #f0f0f0;
+  box-shadow: 0 2px 0 #bebebe;
   padding: 2rem 4rem;
 }
 .b-jobs .b-jobs-list .ui.header {
@@ -3395,10 +3393,12 @@ a:active {
   margin-left: -0.5rem;
 }
 .b-jobs .b-jobs-list .ui.header i.icon.red {
+  padding-top: 0;
   color: #ff3c42 !important;
 }
 .b-jobs .b-jobs-list .ui.header .content {
   font-weight: normal;
+  line-height: 2.25rem;
 }
 .b-jobs .b-jobs-list .ui.table {
   font-size: 0.9em;
@@ -3422,10 +3422,10 @@ a:active {
   top: 15%;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
-  left: 3rem;
+  left: 2.5rem;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
-  right: 3rem;
+  right: 2.5rem;
 }
 .b-feedback h3.ui.header {
   color: #8c8c8c;
@@ -3448,12 +3448,28 @@ a:active {
   line-height: 1.6em;
   font-size: 0.9em;
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 900px), only screen and (min-width: 992px) and (max-width: 1099px) {
   .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
     left: 0;
   }
   .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
     right: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 830px) {
+  .ui.grid.container.control-container {
+    min-width: calc(683px) !important;
+    width: calc(683px) !important;
+  }
+  .b-feedback .ui.small.image {
+    width: 120px;
+    height: 120px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1050px) {
+  .ui.grid.container.control-container {
+    min-width: calc(893px) !important;
+    width: calc(893px) !important;
   }
 }
 /*
