@@ -66,6 +66,7 @@ server.get('/personal-history', function (req, res) {
 });
 
 // Host & Port
-server.listen(8000, function () {
-    console.log('8000 is for Bridge+ ');
+var port = process.env.PORT || 8000;
+server.listen(port, function () {
+    console.log(port + ' is for Bridge+ ');
 });
