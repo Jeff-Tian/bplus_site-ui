@@ -3,5 +3,33 @@
 */
 
 .b-events {
+    background-image: url("/img/salespage/events_bg.png"),;
+    background-repeat: no-repeat;  
+    background-position: left top;  
+    background-size: 100% 100%;
     background-color: #d2d2d2;
+
+    > .ui.container {
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+    }
+
+    h3 {
+        &.ui.header {
+            color: @color-white;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .events-table{
+        background-color: @color-white !important;
+        padding: 1rem 2rem;
+        .icon{
+            color: @color-brand;
+            font-size: @fontsize-6xl;
+        }
+    }
+
+
+
 }

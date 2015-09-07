@@ -1,0 +1,56 @@
+/*
+* - @Bridge+
+*/
+
+.b-popularity {
+    background-color: #2e363d;
+    background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_students.png");
+    background-repeat: no-repeat, no-repeat;  
+    background-position: right bottom, left bottom;  
+    background-size:100% 100%, auto 100%;
+    height:520px;
+
+    > .ui.container {
+        padding-top: 1.5rem;
+    }
+
+    h3 {
+        &.ui.header {
+            color: @color-white;
+            font-size: @fontsize-5xl;
+        }
+    }
+
+    .b-theory-header {
+        .content{
+            > div {
+                color: @color-white;
+                line-height: 1.6em;
+                font-size: @fontsize-s;
+            }
+        }
+    }
+    .b-theory-content {
+        padding-top: 5rem;
+        padding-left: 5rem !important;
+        padding-bottom: 5rem;
+        > h3 {
+            color: @color-white;
+            font-size: @fontsize-5xl;
+            font-weight: normal;
+        }
+        > p {
+            color: @color-white;
+            font-size: @fontsize-s;
+            line-height: 2em;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .b-popularity {
+        .b-theory-content {
+            padding-left: 3rem !important;
+        }
+    }
+}

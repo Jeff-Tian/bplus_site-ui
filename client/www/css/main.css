@@ -2998,6 +2998,18 @@ a:active {
   color: #ff3c42;
   text-decoration: underline;
 }
+.text-left {
+  text-align: left !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.ui.container {
+  min-width: 723px;
+}
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
   .ui.container {
     width: 933px;
@@ -3167,6 +3179,14 @@ a:active {
   font-weight: normal;
   line-height: 1.6em;
 }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+  }
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+  }
+}
 /*
 * - @Bridge+
 */
@@ -3221,8 +3241,9 @@ a:active {
   background-color: #2e363d;
   background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
   background-repeat: no-repeat, no-repeat;
-  background-position: right bottom, left bottom;
-  background-size: 72.3% auto, 40% auto;
+  background-position: left bottom, left bottom;
+  background-size: 100% 100%, 40% auto;
+  max-height: 520px;
 }
 .b-theory > .ui.container {
   min-height: 40rem;
@@ -3243,23 +3264,36 @@ a:active {
   text-align: right;
   line-height: 1.6em;
   font-size: 0.9em;
-  margin: 1.4rem 0;
+  margin-bottom: 1rem;
   margin-right: 19.5rem;
 }
 .b-theory .b-theory-content > h3 {
   color: #ffffff;
   font-size: 1.5em;
-  margin-left: -4rem;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 1.6rem;
 }
 .b-theory .b-theory-content > p {
-  margin-left: -4rem;
-  width: 33rem;
   color: #ffffff;
   font-size: 0.9em;
   line-height: 2.4em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-theory {
+    background-size: 100% 100%, 400px;
+  }
+  .b-theory .b-theory-header > div {
+    margin-bottom: 0.4rem;
+    margin-right: 45%;
+  }
+  .b-theory .b-theory-content > h3 {
+    margin-left: 0;
+  }
+  .b-theory .b-theory-content > p {
+    margin-left: 0;
+    width: auto;
+  }
 }
 /*
 * - @Bridge+
@@ -3268,8 +3302,9 @@ a:active {
   background-color: #ffffff;
   background-image: url("/img/salespage/jobs_bg.png");
   background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 76.2% auto;
+  background-position: left top;
+  background-size: 99% 100%;
+  max-height: 650px;
 }
 .b-jobs > .ui.container {
   padding-top: 5rem;
@@ -3383,10 +3418,10 @@ a:active {
   top: 15%;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
-  left: -6rem;
+  left: 3rem;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
-  right: -6rem;
+  right: 3rem;
 }
 .b-feedback h3.ui.header {
   color: #8c8c8c;
@@ -3408,6 +3443,14 @@ a:active {
 .b-feedback .ui.items > .item > .content .description > p {
   line-height: 1.6em;
   font-size: 0.9em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+  }
+  .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+  }
 }
 /*
 * - @Bridge+
@@ -3569,7 +3612,7 @@ a:active {
   font-size: 2em;
 }
 .opportunity-banner {
-  background: url('/img/salespage/opportunity-banner.jpg');
+  background: url('/img/salespage/banner.png');
   padding: 10em 0;
   color: #ffffff;
 }
@@ -3749,7 +3792,7 @@ a:active {
 .b-masthead {
   min-height: 36rem;
   position: relative;
-  background: url('/img/salespage/opportunity-banner.jpg');
+  background: url('/img/salespage/banner.png');
 }
 .b-masthead > .b-masthead-stripe {
   background-color: rgba(0, 0, 0, 0.2);
@@ -3827,6 +3870,9 @@ a:active {
   background-color: #2e363d;
   padding: 3rem 0;
 }
+.b-skill > .ui.container .test-button {
+  margin-bottom: 1rem;
+}
 .b-skill .b-skill-topic {
   color: #ffffff;
 }
@@ -3835,21 +3881,90 @@ a:active {
 }
 .b-skill .b-skill-skill {
   color: #ffffff;
+  margin: 3rem 0;
 }
 .b-skill .b-skill-skill h3.ui.header {
   color: #ffffff;
+  font-size: 1em;
+}
+.b-skill .b-skill-skill .ui.list .list {
+  margin-left: 0;
+  padding-top: 0.5rem;
 }
 .b-skill .b-skill-skill .ui.list .list > .item .header {
   color: #ffffff;
 }
 .b-skill .b-game-list {
-  font-size: 2em;
+  font-size: 1.8em;
+}
+/*
+* - @Bridge+
+*/
+.b-popularity {
+  background-color: #2e363d;
+  background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_students.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, left bottom;
+  background-size: 100% 100%, auto 100%;
+  height: 520px;
+}
+.b-popularity > .ui.container {
+  padding-top: 1.5rem;
+}
+.b-popularity h3.ui.header {
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-popularity .b-theory-header .content > div {
+  color: #ffffff;
+  line-height: 1.6em;
+  font-size: 0.9em;
+}
+.b-popularity .b-theory-content {
+  padding-top: 5rem;
+  padding-left: 5rem !important;
+  padding-bottom: 5rem;
+}
+.b-popularity .b-theory-content > h3 {
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+.b-popularity .b-theory-content > p {
+  color: #ffffff;
+  font-size: 0.9em;
+  line-height: 2em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-popularity .b-theory-content {
+    padding-left: 3rem !important;
+  }
 }
 /*
 * - @Bridge+
 */
 .b-events {
+  background-image: url("/img/salespage/events_bg.png");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 100% 100%;
   background-color: #d2d2d2;
+}
+.b-events > .ui.container {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+.b-events h3.ui.header {
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+.b-events .events-table {
+  background-color: #ffffff !important;
+  padding: 1rem 2rem;
+}
+.b-events .events-table .icon {
+  color: #ff3c42;
+  font-size: 1.6em;
 }
 /*
 * - @Bridge+

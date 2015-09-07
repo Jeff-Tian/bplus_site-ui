@@ -6,8 +6,9 @@
 	background-color: #2e363d;
 	background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
 	background-repeat: no-repeat, no-repeat;  
-	background-position: right bottom, left bottom;  
-	background-size: 72.3% auto, 40% auto;
+	background-position: left bottom, left bottom;  
+	background-size:100% 100%, 40% auto;
+	max-height:520px;
 
 	> .ui.container {
 		min-height: 40rem;
@@ -32,7 +33,7 @@
 			text-align: right;
 			line-height: 1.6em;
 			font-size: @fontsize-s;
-			margin: 1.4rem 0;
+			margin-bottom: 1rem;
 			margin-right: 19.5rem;
 		}
 	}
@@ -40,17 +41,36 @@
 		> h3 {
 			color: @color-white;
 			font-size: @fontsize-5xl;
-			margin-left: -4rem;
 			font-weight: normal;
 			margin-top: 0;
 			margin-bottom: 1.6rem;
 		}
 		> p {
-			margin-left: -4rem;
-			width: 33rem;
 			color: @color-white;
 			font-size: @fontsize-s;
 			line-height: 2.4em;
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.b-theory{
+		background-size:100% 100%, 400px;
+		.b-theory-header {
+			> div {
+				margin-bottom: 0.4rem;
+				margin-right: 45%;
+			}
+		}
+
+		.b-theory-content{
+			> h3{
+				margin-left: 0;
+			}
+			> p {
+				margin-left: 0;
+				width: auto;
+			}
 		}
 	}
 }
