@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>手机绑定 - Bridge+</title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+    <!--LESS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body ng-app="signIn">
+<%- include('view-partial/header.html') -%>
+<div class="ui b-signin-wrapper">
+    <div class="ui column b-signin-container">
+        <div class="b-signin-wide">
+            <div class="ui center aligned container subcontainer">
+                <h2 class="grey color">手机绑定</h2>
+            </div>
+
+            <div class="ui bind-mobile" ng-controller="BindMobileCtrl">
+                <register-form action="bindMobile"></register-form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--JS-->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<!--Angular JS-->
+<script src="bower/angular/angular.min.js"></script>
+<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Page JS-->
+<script src="/config.js"></script>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/FormValidation.js"></script>
+<script src="js/directives/captcha.js"></script>
+<script src="js/directives/ngEnter.js"></script>
+<script src="js/directives/registerForm.js"></script>
+<script src="js/page/register/main.js"></script>
+<!--Utils JS-->
+<script src="js/utils/utils.js"></script>
+<script src="js/utils/msgbus.js"></script>
+<script src="js/utils/underscore.js"></script>
+</body>
+
+</html>

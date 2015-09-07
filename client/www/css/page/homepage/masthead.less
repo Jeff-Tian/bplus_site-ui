@@ -18,10 +18,10 @@
                     top: 42%; // calc(50% - 3rem);
                 }
                 .owl-prev {
-                    left: 3rem;
+                    left: 2.5rem;
                 }
                 .owl-next {
-                    right: 3rem;
+                    right: 2.5rem;
                 }
             }
         }
@@ -46,6 +46,23 @@
             font-size: @fontsize-3xl;
             font-weight: normal;
             line-height: 1.6em;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .b-masthead {
+        .owl-theme {
+            .owl-controls {
+                .owl-buttons {
+                    .owl-prev {
+                        left: 0;
+                    }
+                    .owl-next {
+                        right: 0;
+                    }
+                }
+            }
         }
     }
 }

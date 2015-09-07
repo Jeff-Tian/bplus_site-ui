@@ -2954,20 +2954,6 @@ h3.ui.header.b-sp {
   right: 5em;
   top: 8em;
 }
-.b-signin-container {
-  width: 600px;
-  padding: 1px 50px 40px 50px;
-  margin: 8em auto 2em auto;
-  background-color: #e5e5e5;
-}
-.b-signin-wide {
-  width: 300px;
-  margin: 2em auto 2em auto;
-}
-.b-signin-wide form {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 /*
 * - @Bridge+
 */
@@ -3021,6 +3007,13 @@ a:active {
 .text-right {
   text-align: right !important;
 }
+.ui.container {
+  min-width: 723px;
+}
+.ui.container.subcontainer,
+.subcontainer .ui.container {
+  min-width: 0 !important;
+}
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
   .ui.container {
     width: 933px;
@@ -3036,6 +3029,9 @@ a:active {
   .ui.container.grid {
     width: calc(1129px) !important;
   }
+}
+.grey.color {
+  color: #7d7d7d;
 }
 /*
 * - @Bridge+
@@ -3163,10 +3159,10 @@ a:active {
   top: 42%;
 }
 .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
-  left: 3rem;
+  left: 2.5rem;
 }
 .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
-  right: 3rem;
+  right: 2.5rem;
 }
 .b-masthead .b-slider {
   overflow: hidden;
@@ -3186,6 +3182,14 @@ a:active {
   font-size: 1.3em;
   font-weight: normal;
   line-height: 1.6em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+  }
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+  }
 }
 /*
 * - @Bridge+
@@ -3241,8 +3245,9 @@ a:active {
   background-color: #2e363d;
   background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
   background-repeat: no-repeat, no-repeat;
-  background-position: right bottom, left bottom;
-  background-size: 72.3% auto, 40% auto;
+  background-position: left bottom, left bottom;
+  background-size: 100% 100%, 40% auto;
+  max-height: 520px;
 }
 .b-theory > .ui.container {
   min-height: 40rem;
@@ -3263,23 +3268,36 @@ a:active {
   text-align: right;
   line-height: 1.6em;
   font-size: 0.9em;
-  margin: 1.4rem 0;
+  margin-bottom: 1rem;
   margin-right: 19.5rem;
 }
 .b-theory .b-theory-content > h3 {
   color: #ffffff;
   font-size: 1.5em;
-  margin-left: -4rem;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 1.6rem;
 }
 .b-theory .b-theory-content > p {
-  margin-left: -4rem;
-  width: 33rem;
   color: #ffffff;
   font-size: 0.9em;
   line-height: 2.4em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-theory {
+    background-size: 100% 100%, 400px;
+  }
+  .b-theory .b-theory-header > div {
+    margin-bottom: 0.4rem;
+    margin-right: 45%;
+  }
+  .b-theory .b-theory-content > h3 {
+    margin-left: 0;
+  }
+  .b-theory .b-theory-content > p {
+    margin-left: 0;
+    width: auto;
+  }
 }
 /*
 * - @Bridge+
@@ -3288,8 +3306,9 @@ a:active {
   background-color: #ffffff;
   background-image: url("/img/salespage/jobs_bg.png");
   background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 76.2% auto;
+  background-position: left top;
+  background-size: 99% 100%;
+  max-height: 650px;
 }
 .b-jobs > .ui.container {
   padding-top: 5rem;
@@ -3335,7 +3354,7 @@ a:active {
   left: 3.5rem;
 }
 .b-jobs .b-jobs-statistics .ui.header.sub {
-  color: #ffffff;
+  color: #ff3c42;
   font-weight: normal;
   font-size: 1.13em;
 }
@@ -3358,9 +3377,6 @@ a:active {
   font-weight: normal;
   vertical-align: super;
 }
-.b-jobs .b-jobs-statistics .ui.statistics > .statistic:first-child > .value {
-  color: #ffffff;
-}
 .b-jobs .ui.grid + .grid {
   margin-top: 0;
 }
@@ -3369,6 +3385,7 @@ a:active {
 }
 .b-jobs .b-jobs-list {
   background-color: #f0f0f0;
+  box-shadow: 0 2px 0 #bebebe;
   padding: 2rem 4rem;
 }
 .b-jobs .b-jobs-list .ui.header {
@@ -3376,10 +3393,12 @@ a:active {
   margin-left: -0.5rem;
 }
 .b-jobs .b-jobs-list .ui.header i.icon.red {
+  padding-top: 0;
   color: #ff3c42 !important;
 }
 .b-jobs .b-jobs-list .ui.header .content {
   font-weight: normal;
+  line-height: 2.25rem;
 }
 .b-jobs .b-jobs-list .ui.table {
   font-size: 0.9em;
@@ -3403,10 +3422,10 @@ a:active {
   top: 15%;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
-  left: -6rem;
+  left: 2.5rem;
 }
 .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
-  right: -6rem;
+  right: 2.5rem;
 }
 .b-feedback h3.ui.header {
   color: #8c8c8c;
@@ -3429,6 +3448,30 @@ a:active {
   line-height: 1.6em;
   font-size: 0.9em;
 }
+@media only screen and (min-width: 768px) and (max-width: 900px), only screen and (min-width: 992px) and (max-width: 1099px) {
+  .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+  }
+  .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 830px) {
+  .ui.grid.container.control-container {
+    min-width: calc(683px) !important;
+    width: calc(683px) !important;
+  }
+  .b-feedback .ui.small.image {
+    width: 120px;
+    height: 120px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1050px) {
+  .ui.grid.container.control-container {
+    min-width: calc(893px) !important;
+    width: calc(893px) !important;
+  }
+}
 /*
 * - @Bridge+
 */
@@ -3438,6 +3481,30 @@ a:active {
 /*
 * - @Bridge+
 */
+.b-signin-wrapper {
+  width: 600px;
+  margin: 6em auto 2em auto;
+}
+.b-signin-container {
+  width: 600px;
+  padding: 1px 50px 40px 50px;
+  background-color: #e5e5e5;
+}
+.b-step-container {
+  background-color: #e5e5e5;
+  padding: 1.5em 3em;
+}
+.b-separator {
+  border-bottom: solid 1px #999999;
+}
+.b-signin-wide {
+  width: 280px;
+  margin: 2em auto 2em auto;
+}
+.b-signin-wide form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 .wechat.link,
 .wechat.link:link {
   color: black;
@@ -3465,8 +3532,21 @@ a:active {
 .ui.secondary.pointing.menu.brand .item:hover {
   color: #ff3c42;
 }
+.ui.brand.message {
+  background-color: #7d7d7d;
+  border-color: #7d7d7d;
+  box-shadow: 0 0 0 1px #7d7d7d inset, 0 0 0 0 transparent;
+  color: white;
+  padding: 1.5em 3em;
+}
+.ui.brand.message .header {
+  color: #e5e5e5;
+  font-weight: normal;
+}
 .ui.brand.error.message {
   background-color: #900000;
+  border-color: #900000;
+  box-shadow: 0 0 0 1px #900000 inset, 0 0 0 0 transparent;
   color: white;
   padding: 5px 10px;
   font-size: smaller;
@@ -3522,6 +3602,23 @@ a:active {
 .ui.form .field.error input[type="url"] {
   border-color: #ff3c42;
 }
+.field.error.absolute-prompt .ui.red.pointing.prompt {
+  position: absolute;
+}
+.shape.reset,
+.shape.reset-by-email,
+.shape.personal-history {
+  width: 100%;
+  max-width: 100%;
+  min-height: 300px;
+}
+.b-captcha {
+  cursor: pointer;
+  max-height: 40px;
+}
+.b-captcha img {
+  max-height: 40px;
+}
 /*
 * - @Bridge+ opportunity
 */
@@ -3535,7 +3632,7 @@ a:active {
   font-size: 2em;
 }
 .opportunity-banner {
-  background: url('/img/salespage/opportunity-banner.jpg');
+  background: url('/img/salespage/banner.png');
   padding: 10em 0;
   color: #ffffff;
 }
@@ -3715,7 +3812,7 @@ a:active {
 .b-masthead {
   min-height: 36rem;
   position: relative;
-  background: url('/img/salespage/opportunity-banner.jpg');
+  background: url('/img/salespage/banner.png');
 }
 .b-masthead > .b-masthead-stripe {
   background-color: rgba(0, 0, 0, 0.2);
@@ -3793,6 +3890,9 @@ a:active {
   background-color: #2e363d;
   padding: 3rem 0;
 }
+.b-skill > .ui.container .test-button {
+  margin-bottom: 1rem;
+}
 .b-skill .b-skill-topic {
   color: #ffffff;
 }
@@ -3801,15 +3901,21 @@ a:active {
 }
 .b-skill .b-skill-skill {
   color: #ffffff;
+  margin: 3rem 0;
 }
 .b-skill .b-skill-skill h3.ui.header {
   color: #ffffff;
+  font-size: 1em;
+}
+.b-skill .b-skill-skill .ui.list .list {
+  margin-left: 0;
+  padding-top: 0.5rem;
 }
 .b-skill .b-skill-skill .ui.list .list > .item .header {
   color: #ffffff;
 }
 .b-skill .b-game-list {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 /*
 * - @Bridge+
@@ -3819,23 +3925,25 @@ a:active {
   background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_students.png");
   background-repeat: no-repeat, no-repeat;
   background-position: right bottom, left bottom;
-  background-size: 74% auto, 52% auto;
+  background-size: 100% 100%, auto 100%;
+  height: 520px;
 }
 .b-popularity > .ui.container {
-  min-height: 40rem;
-  padding-top: 3rem;
+  padding-top: 1.5rem;
 }
 .b-popularity h3.ui.header {
   color: #ffffff;
   font-size: 1.5em;
 }
-.b-popularity .b-theory-header > div {
+.b-popularity .b-theory-header .content > div {
   color: #ffffff;
   line-height: 1.6em;
   font-size: 0.9em;
 }
 .b-popularity .b-theory-content {
-  padding: 7rem 0;
+  padding-top: 5rem;
+  padding-left: 5rem !important;
+  padding-bottom: 5rem;
 }
 .b-popularity .b-theory-content > h3 {
   color: #ffffff;
@@ -3845,16 +3953,21 @@ a:active {
 .b-popularity .b-theory-content > p {
   color: #ffffff;
   font-size: 0.9em;
-  line-height: 2.4em;
+  line-height: 2em;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-popularity .b-theory-content {
+    padding-left: 3rem !important;
+  }
 }
 /*
 * - @Bridge+
 */
 .b-events {
-  background-image: url("/img/salespage/jobs_bg.png");
+  background-image: url("/img/salespage/events_bg.png");
   background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: auto 100%;
+  background-position: left top;
+  background-size: 100% 100%;
   background-color: #d2d2d2;
 }
 .b-events > .ui.container {

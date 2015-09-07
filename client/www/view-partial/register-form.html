@@ -1,0 +1,48 @@
+<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp($event)">
+    <div class="ui error message brand"></div>
+    <div class="ui">
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="phone icon"></i>
+                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile"
+                       ng-enter>
+            </div>
+        </div>
+        <div class="field absolute-prompt">
+            <div class="ui left icon input">
+                <i class="write icon"></i>
+                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha" ng-enter>
+                &nbsp;
+                <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
+            </div>
+            <div class="ui right aligned container subcontainer">
+                <a href="javascript: void(0);" ng-click="refreshCaptcha()">换一张</a>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="write icon" ng-show="sendCodeButtonClicked"></i>
+                <input type="text" name="verificationCode" placeholder="请输入手机验证码"
+                       ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
+                &nbsp;
+                <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
+                        ng-click="getVerificationCode()"
+                        ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                    {{verificationCodeButtonText}}
+                </button>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="请设置登录密码"
+                       ng-model="signUpData.password">
+            </div>
+        </div>
+        <div class="field">
+            <button type="submit" class="ui fluid huge red submit button"
+                    ng-disabled="!isSignUpFormFullyValid()">完成
+            </button>
+        </div>
+    </div>
+</form>

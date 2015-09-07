@@ -73,7 +73,7 @@ angular.module('mates', [
                 $('.enhance-gif').html("<img src='img/salespage/gif/enhance.png' width='100%'>");
             }, 500);
         }
-    }
+    };
 
     $('.index-gif').visibility({
         once: false,
