@@ -8,7 +8,19 @@ function appendApplicationId(d) {
     return d;
 }
 
-module.exports = {
-    signUp: proxy(sso.host, sso.port, '/member/register', appendApplicationId),
-    authenticate: proxy(sso.host, sso.port, '/logon/authentication', appendApplicationId)
+function proxySSO(path) {
+    return proxy(sso.host, sso.port, path, appendApplicationId);
+}
+
+var pathMapping = {
+    signUp: '/member/register',
+    authenticate: '/logon/authentication',
+    resetPassword: '/member/resetPassword'
 };
+
+var res = {};
+for (var key in pathMapping) {
+    res[key] = proxySSO(pathMapping[key]);
+}
+
+module.exports = res;

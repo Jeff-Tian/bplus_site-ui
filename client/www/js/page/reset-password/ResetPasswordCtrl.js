@@ -1,11 +1,21 @@
 (function (exports) {
-    exports.ResetPasswordCtrl = function ($scope, $element) {
+    exports.ResetPasswordCtrl = function ($scope, $element, $http, FormValidation) {
+        $scope.formCtrl = {};
+
         $scope.resetPassword = function () {
-            $('.reset.shape').shape('flip over');
+            $http.post('/service-proxy/member/resetPassword', {})
+                .success(function (res) {
+                    if (res.isSuccess) {
+                        $('.reset.shape').shape('flip over');
+                    } else {
+                        FormValidation.handleFormError($form, res.message);
+                    }
+                }).error(FormValidation.delegateHandleFormError($form));
         };
 
         $('.reset.shape').shape();
-        var $form = $($element).find('form');
+        var $form = $('.reset-password-side').find('form');
+        
         $form.form({
             on: 'blur',
             inline: true,
@@ -31,5 +41,5 @@
         });
     };
 
-    exports.ResetPasswordCtrl.$inject = ['$scope'];
+    exports.ResetPasswordCtrl.$inject = ['$scope', '$element', '$http', 'FormValidation'];
 })(angular.bplus = angular.bplus || {});
