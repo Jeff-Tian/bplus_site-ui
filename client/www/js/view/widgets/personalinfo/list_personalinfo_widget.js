@@ -28,7 +28,7 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "" && $scope.data.gender === "")
+                status: ($scope.data.name === "")
                 ? me.ENUM_STATUS.STATUS_EDIT
                 : me.ENUM_STATUS.STATUS_READONLY
               };
@@ -40,16 +40,16 @@ define([
                    display: true
                  },
                  value: $scope.data.dateOfBirth.value,
-                 fullfilled: false
+                 fulfilled: false
                };
-               me.createActions($scope, false, true, true);
+               me.createActions($scope, "personalinfo", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
-                 if ($scope.clicked && (!$scope.dateSelect.fullfilled || $scope.data.gender ==='' || $scope.personalinfo.$error.required)) {
+                 if (!!(!$scope.dateSelect.fulfilled  || $scope.personalinfo.$error.required)) {
                    return;
                  }
                  if (me.submit) {
-                   me.submit();
+                   me.submit($scope);
                  }
                };
             }

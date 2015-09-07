@@ -9,10 +9,23 @@ define([
       STATUS_EDIT: "status.edit",
       STATUS_READONLY: "status.readonly"
     };
-    this.createActions = function($scope, submitAction, cancelAction, editAction) {
+    this.submit = function($scope) {
+      var promise = when();
+      if ($scope && $scope.$parent) {
+        promise = $scope.$parent.submit();
+      }
+      promise.then(function() {
+        $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
+        $scope.$apply();
+      })
+    };
+    this.createActions = function($scope, formname, submitAction, cancelAction, editAction) {
       if (submitAction) {
         $scope.submit = function() {
           $scope.clicked = true;
+          if (!!$scope[formname].$error.required) {
+            return;
+          }
           var promise;
           if ($scope && $scope.$parent) {
             promise = $scope.$parent.submit();
@@ -22,17 +35,6 @@ define([
             $scope.$apply();
           })
         };
-      } else {
-        me.submit = function() {
-          var promise = when();
-          if ($scope && $scope.$parent) {
-            promise = $scope.$parent.submit();
-          }
-          promise.then(function() {
-            $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
-            $scope.$apply();
-          })
-        }
       }
       if (cancelAction) {
         $scope.cancel = function() {
