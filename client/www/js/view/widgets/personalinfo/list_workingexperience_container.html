@@ -1,0 +1,12 @@
+<div>
+  <div>
+    <span>工作经历</span>
+    <span ng-hide="hasData">你还没填写</span>
+  </div>
+  <div ng-repeat="data in dataCollection">
+    <bplusworkexperience data="data"/>
+  </div>
+  <div ng-show="showAddButton">
+    <button type="button" ng-click="add()">添加工作经历</button>
+  </div>
+</div>

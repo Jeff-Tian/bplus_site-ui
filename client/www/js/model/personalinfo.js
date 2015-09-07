@@ -6,8 +6,9 @@ define([
   "json!bplus-mock/getEdu.json",
   "json!bplus-mock/getSkills.json",
   "json!bplus-mock/getPersonalInfo.json",
-  "json!bplus-mock/getClub.json"
-], function(when, $, angular, BaseClass, getEduMock, getSkillsMock, getPsersonalInfoMock, getClubMock) {
+  "json!bplus-mock/getClub.json",
+  "json!bplus-mock/getWork.json"
+], function(when, $, angular, BaseClass, getEduMock, getSkillsMock, getPsersonalInfoMock, getClubMock, getWork) {
   
   var PersonalInfo = function() {
     var me = this;
@@ -17,6 +18,7 @@ define([
       "bplusskillsoverall": "getSkills",
       "bpluseducationbackgroundall": "getEdu",
       "bplusclubexperienceall": "getClub",
+      "bplusworkexperienceall": "getWork",
     };
     me.rawdata = {};
     /////////////
@@ -25,7 +27,8 @@ define([
       "getEdu" : getEduMock,
       "getSkills": getSkillsMock,
       "getPersonalInfo": getPsersonalInfoMock,
-      "getClub": getClubMock
+      "getClub": getClubMock,
+      "getWork": getWork
     };
     //TEST END
     ///////

@@ -5,7 +5,7 @@
       <div>
         <div class="invalidtext" ng-show="clicked && (!dateSelect.required || info.gender ==='' || educationbackgroundinfo.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
         <div>社团名称</div>
-        <input type="text" name="schoolname" ng-model="data.name" required placeholder="上海交通大学"/>
+        <input type="text" name="clubname" ng-model="data.name" required/>
         <div>职位</div>
         <select name="background" ng-model="data.position" required>
           <option value="">请选择。。</option>
@@ -51,3 +51,7 @@
     <div ng-bind="data.tags"></div>
   </div>
 </div>
+<!--<div>
+  TODO
+  ng-show
+</div>-->
