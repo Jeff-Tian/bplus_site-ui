@@ -105,10 +105,12 @@
                     }
                 };
 
-                $scope.trySignUp = function () {
+                $scope.trySignUp = function ($event) {
                     if (!$scope.isSignUpFormFullyValid()) {
                         return;
                     }
+
+                    $event.preventDefault();
 
                     $scope.action();
                 };
@@ -119,13 +121,11 @@
                 }));
 
                 $scope.internalCtrl = $scope.control || {};
+
                 $scope.internalCtrl.handleFormError = function (reason) {
-                    if (reason === null || typeof reason === 'undefined') {
-                        getSignUpForm().addClass('error').form('add errors', ['未得到服务器响应']);
-                    } else {
-                        getSignUpForm().addClass('error').form('add errors', [reason]);
-                    }
+                    FormValidation.handleFormError(getSignUpForm(), reason);
                 };
+
                 $scope.internalCtrl.getFormData = function () {
                     return $scope.signUpData;
                 };

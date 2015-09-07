@@ -58,6 +58,20 @@
             }
         };
 
+        res.handleFormError = function ($form, reason) {
+            if (reason === null || typeof reason === 'undefined') {
+                $form.addClass('error').form('add errors', ['未得到服务器响应']);
+            } else {
+                $form.addClass('error').form('add errors', [reason]);
+            }
+        };
+
+        res.delegateHandleFormError = function ($form) {
+            return function (reason) {
+                res.handleFormError($form, reason);
+            };
+        };
+
         return res;
     };
 

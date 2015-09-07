@@ -1,16 +1,17 @@
-<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp()">
+<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp($event)">
     <div class="ui error message brand"></div>
     <div class="ui">
         <div class="field">
             <div class="ui left icon input">
                 <i class="phone icon"></i>
-                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile">
+                <input type="text" name="mobile" placeholder="请输入手机号码" ng-model="signUpData.mobile"
+                       ng-enter>
             </div>
         </div>
         <div class="field absolute-prompt">
             <div class="ui left icon input">
                 <i class="write icon"></i>
-                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha">
+                <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="signUpData.captcha" ng-enter>
                 &nbsp;
                 <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
             </div>

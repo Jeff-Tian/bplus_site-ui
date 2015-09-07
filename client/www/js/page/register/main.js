@@ -14,7 +14,7 @@ angular.module('signIn', [
     })
     .factory('FormValidation', angular.bplus.FormValidation)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    .directive('captcha', angular.bplus.captcha)
+    .directive('captcha', angular.bplus.captcha || {})
     .controller('SignUpCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.registerFormCtrl = {};
 
@@ -24,7 +24,7 @@ angular.module('signIn', [
             $http.post('/service-proxy/member/register', signUpData)
                 .success(function (res) {
                     if (res.isSuccess) {
-                        $http.post('/logon/authentication', {
+                        $http.post('/service-proxy/logon/authentication', {
                             value: signUpData.mobile,
                             password: signUpData.password
                         })
@@ -46,7 +46,8 @@ angular.module('signIn', [
 
         };
     }])
-    .controller('LoginCtrl', ['$scope', function ($scope) {
+    .directive('ngEnter', angular.bplus.ngEnter || {})
+    .controller('LoginCtrl', ['$scope', 'FormValidation', '$http', function ($scope, FormValidation, $http) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -63,12 +64,24 @@ angular.module('signIn', [
             return $loginForm.form('is valid');
         };
 
-        $scope.tryLogin = function () {
+        $scope.tryLogin = function ($event) {
+            $event.preventDefault();
+
             if (!$scope.isLoginFormValid()) {
                 return;
             }
 
-            //alert('submitted');
+            $http.post('/service-proxy/logon/authentication', {
+                value: $scope.loginData.mobile,
+                password: $scope.loginData.password,
+                remember: $scope.loginData.rememberMe
+            }).success(function (res) {
+                if (res.isSuccess) {
+                    window.location.href = '/';
+                } else {
+                    FormValidation.handleFormError($loginForm, res.message);
+                }
+            }).error(FormValidation.delegateHandleFormError($loginForm));
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {
@@ -322,7 +335,7 @@ angular.module('signIn', [
             }
         };
     }])
-    .directive('registerForm', angular.bplus.registerForm)
+    .directive('registerForm', angular.bplus.registerForm || {})
 ;
 
 // TODO: integrated into JS framework
