@@ -18,9 +18,25 @@ var pathMapping = {
     resetPassword: '/member/resetPassword'
 };
 
-var res = {};
+var result = {};
 for (var key in pathMapping) {
-    res[key] = proxySSO(pathMapping[key]);
+    result[key] = proxySSO(pathMapping[key]);
 }
 
-module.exports = res;
+result.authenticate = proxy({
+    host: sso.host,
+    port: sso.port,
+    path: pathMapping.authenticate,
+    dataMapper: appendApplicationId,
+    responseInterceptor: function (responseStream, responseJson) {
+        if (responseJson.isSuccess) {
+            responseStream.cookie('token', responseJson.result.token, {
+                expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+                path: '/',
+                httpOnly: true
+            });
+        }
+    }
+});
+
+module.exports = result;

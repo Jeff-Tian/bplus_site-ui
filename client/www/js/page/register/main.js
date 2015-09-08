@@ -77,7 +77,7 @@ angular.module('signIn', [
                 remember: $scope.loginData.rememberMe
             }).success(function (res) {
                 if (res.isSuccess) {
-                    window.location.href = '/';
+                    //window.location.href = '/';
                 } else {
                     FormValidation.handleFormError($loginForm, res.message);
                 }
