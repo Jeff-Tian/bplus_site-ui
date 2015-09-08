@@ -3,7 +3,12 @@
         sms: {
             host: '10.20.32.61', //'uat.service.hcdlearning.com',
             port: '10002',
-            code: "HCD_S1"
+            code: "BP_S1"
+        },
+        mail: {
+            host: '10.20.32.61',
+            port: '10002',
+            code: 'BP_M1'
         },
         captcha: {
             host: '10.20.32.51', // 'uat.captcha.service.hcdlearning.com'
