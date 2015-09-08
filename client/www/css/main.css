@@ -2886,8 +2886,8 @@ Copyright (c) 2015 Daniel Eden
 * - @Bridge+
 */
 h3.ui.header.b-sp {
-  font-size: 1.5em;
-  font-weight: normal;
+  font-size: 2em;
+  font-weight: bold;
 }
 /*
 * - @Bridge+
@@ -3024,6 +3024,13 @@ a:active {
 .ui.container {
   min-width: 723px;
 }
+body.pushable .pusher {
+  background-color: #DCDCDC;
+}
+.page-content {
+  max-width: 1600px;
+  margin: 0 auto;
+}
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
   .ui.container {
     width: 933px;
@@ -3107,7 +3114,8 @@ a:active {
   vertical-align: middle;
 }
 .b-header .menu.b-header-nav .item .ui.button {
-  font-size: 0.95em;
+  font-size: 1.05em;
+  font-weight: bold;
 }
 @media only screen and (max-width: 700px) {
   .b-header.fixed {
@@ -3190,14 +3198,6 @@ a:active {
   font-weight: normal;
   line-height: 1.6em;
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev {
-    left: 0;
-  }
-  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next {
-    right: 0;
-  }
-}
 /*
 * - @Bridge+
 */
@@ -3250,33 +3250,30 @@ a:active {
 */
 .b-theory {
   background-color: #2e363d;
-  background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
-  background-repeat: no-repeat, no-repeat;
-  background-position: left bottom, left bottom;
-  background-size: 100% 100%, 40% auto;
-  max-height: 520px;
+  background-image: url("/img/salespage/thearys_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto auto;
+  height: 700px;
 }
 .b-theory > .ui.container {
-  min-height: 40rem;
-  padding-top: 3rem;
+  height: 700px;
+  padding-top: 5rem;
 }
 .b-theory h3.ui.header {
   color: #ffffff;
-  font-size: 1.5em;
 }
 .b-theory .b-theory-header {
   position: relative;
 }
 .b-theory .b-theory-header > div {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 1.5rem;
+  left: 0;
   color: #ffffff;
   text-align: right;
   line-height: 1.6em;
   font-size: 0.9em;
-  margin-bottom: 1rem;
-  margin-right: 19.5rem;
 }
 .b-theory .b-theory-content > h3 {
   color: #ffffff;
@@ -3290,22 +3287,6 @@ a:active {
   font-size: 0.9em;
   line-height: 2.4em;
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .b-theory {
-    background-size: 100% 100%, 400px;
-  }
-  .b-theory .b-theory-header > div {
-    margin-bottom: 0.4rem;
-    margin-right: 45%;
-  }
-  .b-theory .b-theory-content > h3 {
-    margin-left: 0;
-  }
-  .b-theory .b-theory-content > p {
-    margin-left: 0;
-    width: auto;
-  }
-}
 /*
 * - @Bridge+
 */
@@ -3313,13 +3294,12 @@ a:active {
   background-color: #ffffff;
   background-image: url("/img/salespage/jobs_bg.png");
   background-repeat: no-repeat;
-  background-position: left top;
-  background-size: 99% 100%;
-  max-height: 650px;
+  background-position: center;
+  background-size: auto auto;
+  height: 900px;
 }
 .b-jobs > .ui.container {
-  padding-top: 5rem;
-  padding-bottom: 3rem;
+  padding: 13rem 0;
 }
 .b-jobs h3.ui.header {
   color: #ffffff;
@@ -3358,10 +3338,9 @@ a:active {
 .b-jobs .b-jobs-statistics .b-jobs-statistics-sink {
   position: absolute;
   bottom: .7rem;
-  left: 3.5rem;
 }
 .b-jobs .b-jobs-statistics .ui.header.sub {
-  color: #ff3c42;
+  color: #ffffff;
   font-weight: normal;
   font-size: 1.13em;
 }
@@ -3383,6 +3362,9 @@ a:active {
   font-size: 1.13em;
   font-weight: normal;
   vertical-align: super;
+}
+.b-jobs .b-jobs-statistics .ui.statistics > .statistic:first-child > .value {
+  color: #ffffff;
 }
 .b-jobs .ui.grid + .grid {
   margin-top: 0;
@@ -3456,17 +3438,19 @@ a:active {
   font-size: 0.9em;
 }
 @media only screen and (min-width: 768px) and (max-width: 900px), only screen and (min-width: 992px) and (max-width: 1099px) {
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev,
   .b-feedback .owl-theme .owl-controls .owl-buttons .owl-prev {
     left: 0;
   }
+  .b-masthead .owl-theme .owl-controls .owl-buttons .owl-next,
   .b-feedback .owl-theme .owl-controls .owl-buttons .owl-next {
     right: 0;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 830px) {
-  .ui.grid.container.control-container {
-    min-width: calc(683px) !important;
-    width: calc(683px) !important;
+  .ui.container.control-container {
+    min-width: 683px !important;
+    width: 683px !important;
   }
   .b-feedback .ui.small.image {
     width: 120px;
@@ -3474,9 +3458,9 @@ a:active {
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1050px) {
-  .ui.grid.container.control-container {
-    min-width: calc(893px) !important;
-    width: calc(893px) !important;
+  .ui.container.control-container {
+    min-width: 893px !important;
+    width: 893px !important;
   }
 }
 /*

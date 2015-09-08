@@ -4,21 +4,21 @@
 
 .b-theory {
 	background-color: #2e363d;
-	background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_wilfried.png");
-	background-repeat: no-repeat, no-repeat;  
-	background-position: left bottom, left bottom;  
-	background-size:100% 100%, 40% auto;
-	max-height:520px;
+	background-image: url("/img/salespage/thearys_bg.png");
+	background-repeat: no-repeat;  
+	background-position: center;  
+	background-size:auto auto;
+	height:700px;
+
 
 	> .ui.container {
-		min-height: 40rem;
-		padding-top: 3rem;
+		height:700px;
+		padding-top: 5rem;
 	}
 
 	h3 {
         &.ui.header {
 			color: @color-white;
-			font-size: @fontsize-5xl;
 		}
 	}
 
@@ -27,14 +27,12 @@
 
 		> div {
 			position: absolute;
-			bottom: 0;
-			right: 0;
+			bottom: 1.5rem;
+			left: 0;
 			color: @color-white;
 			text-align: right;
 			line-height: 1.6em;
 			font-size: @fontsize-s;
-			margin-bottom: 1rem;
-			margin-right: 19.5rem;
 		}
 	}
 	.b-theory-content {
@@ -49,28 +47,6 @@
 			color: @color-white;
 			font-size: @fontsize-s;
 			line-height: 2.4em;
-		}
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.b-theory{
-		background-size:100% 100%, 400px;
-		.b-theory-header {
-			> div {
-				margin-bottom: 0.4rem;
-				margin-right: 45%;
-			}
-		}
-
-		.b-theory-content{
-			> h3{
-				margin-left: 0;
-			}
-			> p {
-				margin-left: 0;
-				width: auto;
-			}
 		}
 	}
 }

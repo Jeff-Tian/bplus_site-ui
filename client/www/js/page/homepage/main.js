@@ -64,13 +64,13 @@ angular.module('mates', [
     var animateGif = function() {
 
         if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-            $('.online-gif').html("<img src='img/salespage/gif/online-animate.gif' width='100%'>");
-            $('.top-gif').html("<img src='img/salespage/gif/top-animate.gif' width='100%'>");
-            $('.enhance-gif').html("<img src='img/salespage/gif/enhance-animate.gif' width='100%'>");
+            $('.online-gif').html("<img src='img/salespage/gif/online-animate.gif' width='160px'>");
+            $('.top-gif').html("<img src='img/salespage/gif/top-animate.gif' width='160px'>");
+            $('.enhance-gif').html("<img src='img/salespage/gif/enhance-animate.gif' width='160px'>");
             setTimeout(function() {
-                $('.online-gif').html("<img src='img/salespage/gif/online.png' width='100%'>");
-                $('.top-gif').html("<img src='img/salespage/gif/top.png' width='100%'>");
-                $('.enhance-gif').html("<img src='img/salespage/gif/enhance.png' width='100%'>");
+                $('.online-gif').html("<img src='img/salespage/gif/online.png' width='160px'>");
+                $('.top-gif').html("<img src='img/salespage/gif/top.png' width='160px'>");
+                $('.enhance-gif').html("<img src='img/salespage/gif/enhance.png' width='160px'>");
             }, 500);
         }
     };
