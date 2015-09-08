@@ -11,18 +11,25 @@ a:hover, a:active {
     text-decoration: underline;
 }
 
-.text-left{
-	text-align: left !important;
+.text-left {
+    text-align: left !important;
 }
-.text-center{
-	text-align: center !important;
+
+.text-center {
+    text-align: center !important;
 }
-.text-right{
-	text-align: right !important;
+
+.text-right {
+    text-align: right !important;
 }
 
 .ui.container {
-	min-width: 723px;
+    min-width: 723px;
+}
+
+.ui.container.subcontainer,
+.subcontainer .ui.container {
+    min-width: 0 !important;
 }
 body.pushable{
 	.pusher {
@@ -36,21 +43,25 @@ body.pushable{
 }
 
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
-	.ui.container {
-	    width: 933px;
+    .ui.container {
+        width: 933px;
 
-	    &.grid {
-		    width: calc( 933px + 2em ) !important;
-	    }
-	}
+        &.grid {
+            width: calc(933px + 2em) !important;
+        }
+    }
 }
 
 @media only screen and (min-width: 1400px) {
-	.ui.container {
-	    width: 1127px;
+    .ui.container {
+        width: 1127px;
 
-	    &.grid {
-		    width: calc( 1127px + 2em ) !important;
-	    }
-	}
+        &.grid {
+            width: calc(1127px + 2em) !important;
+        }
+    }
+}
+
+.grey.color {
+    color: @color-grey-dark;
 }
