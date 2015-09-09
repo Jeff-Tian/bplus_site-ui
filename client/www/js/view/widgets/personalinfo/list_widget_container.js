@@ -5,6 +5,19 @@ define([
   "bplus-ui/model/personalinfo",
 ], function(when, $, angular, personalinfoData) {
   var DATA_PATTERN = {
+    "bplusawardall": {
+      "name": "",
+      "organization": "",
+      "prizeDate": {
+        "value": {
+          "year": "",
+          "month": "",
+          "day": ""
+        }
+      },
+      "description": "",
+      "tags": ""
+    },
     "bplusworkexperienceall": {
       "name": "",
       "position": "",

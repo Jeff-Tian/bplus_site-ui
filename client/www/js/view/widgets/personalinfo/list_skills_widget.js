@@ -32,10 +32,7 @@ define([
                 ? me.ENUM_STATUS.STATUS_EDIT
                 : me.ENUM_STATUS.STATUS_READONLY
               };
-//            $scope.tag = {
-//              config: {},
-//            };
-              me.createActions($scope, true, true, true);
+              me.createActions($scope, "skills", true, true, true);
             }
           }
         }

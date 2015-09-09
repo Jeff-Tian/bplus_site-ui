@@ -39,7 +39,7 @@ define([
                    display: true
                  },
                  value: $scope.data.dateFrom.value,
-                 fullfilled: false
+                 fulfilled: false
                };
                $scope.dateTo = {
                  config: {
@@ -49,7 +49,7 @@ define([
                    display: false
                  },
                  value: $scope.data.dateTo.value,
-                 fullfilled: false
+                 fulfilled: false
                };
                $scope.$watch("dateFrom.value", function(newValue, oldValue) {
                  if (newValue !== oldValue) {
@@ -67,14 +67,14 @@ define([
                    $scope.dateTo.config.display = false;
                  }
                }, true)
-               me.createActions($scope, false, true, true);
+               me.createActions($scope, "educationbackground", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
-                 if ($scope.clicked && (!$scope.dateTo.fullfilled || !$scope.dateTo.fullfilled || $scope.data.background ==='' || $scope.educationbackgroundinfo.$error.required)) {
+                 if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled ||  $scope.educationbackground.$error.required)) {
                    return;
                  }
                  if (me.submit) {
-                   me.submit();
+                   me.submit($scope);
                  }
                };
             }

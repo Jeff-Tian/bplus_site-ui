@@ -1,9 +1,9 @@
 <div>
   <!--EDIT MODE-->
   <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
-    <form name="educationbackgroundinfo" novalidate>
+    <form name="educationbackground" novalidate>
       <div>
-        <div class="invalidtext" ng-show="clicked && (!dateSelect.required || info.gender ==='' || educationbackgroundinfo.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
+        <div class="invalidtext" ng-show="clicked && (!dateTo.fulfilled || !dateFrom.fulfilled || educationbackground.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
         <div>学校名称</div>
         <input type="text" name="schoolname" ng-model="data.name" required placeholder="上海交通大学"/>
         <div>所学专业</div>
@@ -20,14 +20,14 @@
           <span>
             <div>求学时间</div>
             <div>
-              <bplusdate value="dateFrom.value" config="dateFrom.config" fullfilled="dateFrom.fullfilled"/>
+              <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled"/>
             </div>
           </span>
           <span>----</span>
           <span>
             <div>毕业时间</div>
             <div>
-              <bplusdate value="dateTo.value" config="dateTo.config" fullfilled="dateTo.fullfilled"/>
+              <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled"/>
             </div>
           </span>
         </div>

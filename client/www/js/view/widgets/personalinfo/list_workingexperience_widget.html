@@ -1,9 +1,9 @@
 <div>
   <!--EDIT MODE-->
   <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
-    <form name="workbackground" novalidate>
+    <form name="workexperience" novalidate>
       <div>
-        <div class="invalidtext" ng-show="clicked && (!dateSelect.required || info.gender ==='' || educationbackgroundinfo.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
+        <div class="invalidtext" ng-show="clicked && (!dateFrom.fulfilled || !dateTo.fulfilled || workexperience.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
         <div>公司名称</div>
         <input type="text" name="companyname" ng-model="data.name" required/>
         <div>工作类型</div>
@@ -19,11 +19,11 @@
         <div>工作时间</div>
         <div>
           <span>
-            <bplusdate value="dateFrom.value" config="dateFrom.config" fullfilled="dateFrom.fullfilled"/>
+            <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled"/>
           </span>
           <span>----</span>
           <span>
-            <bplusdate value="dateTo.value" config="dateTo.config" fullfilled="dateTo.fullfilled"/>
+            <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled"/>
           </span>
         </div>
         <div>

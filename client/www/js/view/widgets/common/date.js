@@ -90,7 +90,7 @@ define([
 //        }
           config: "=",
           value: "=",
-          fullfilled: "="
+          fulfilled: "="
         },
         link: function(scope, element) {
           if (!scope.config.begin) {
@@ -159,7 +159,7 @@ define([
           };
           scope.$watch("displayData.value", function(newValue){
             if (!newValue) {
-              scope.fullfilled = false;
+              scope.fulfilled = false;
               return;
             }
             if (scope.value.year !== newValue.year) {
@@ -183,17 +183,17 @@ define([
                 scope.value.day = "";
               }
             }
-            var fullfilled = true;
+            var fulfilled = true;
             if (scope.config.showYear && scope.value.year === "") {
-              fullfilled = false;
+              fulfilled = false;
             }
             if (scope.config.showMonth && scope.value.month === "") {
-              fullfilled = false;
+              fulfilled = false;
             }
             if (scope.config.showDay && scope.value.day === "") {
-              fullfilled = false;
+              fulfilled = false;
             }
-            scope.fullfilled = fullfilled;
+            scope.fulfilled = fulfilled;
           }, true)
         }
       }

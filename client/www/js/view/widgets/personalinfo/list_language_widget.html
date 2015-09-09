@@ -1,0 +1,51 @@
+<div>
+  <!--EDIT MODE-->
+  <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
+    <form name="language" novalidate>
+      <div>
+        <div class="invalidtext" ng-show="clicked && language.$error.required">红框处必填字段未完成，请全部填写完成后按下保存</div>
+        <div>
+          <span>
+            <div>使用语言</div>
+            <select name="languagename" ng-model="data.name" required>
+              <option value="">选择。。</option>
+              <option value="英语">英语</option>
+              <option value="俄语">俄语</option>
+            </select>
+          </span>
+          <span>
+            <div>熟练程度</div>
+            <select name="proficiency" ng-model="data.proficiency" required>
+              <option value="">选择。。</option>
+              <option value="初级（入门）">初级（入门）</option>
+              <option value="中级（运用）">中级（运用）</option>
+              <option value="高级（熟练）">高级（熟练）</option>
+            </select>
+          </span>
+        </div>
+        <div>
+          <span>
+            <div>证书</div>
+            <select name="certification" ng-model="data.certification" required>
+              <option value="">选择。。</option>
+              <option value="四级">四级</option>
+              <option value="六级">六级</option>
+            </select>
+          </span>
+          <span>
+            <div>分数</div>
+            <input type="text" name="score" ng-model="data.score"/>
+          </span>
+         </div>
+         <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
+         <button type="button" ng-click="cancel()">取消</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--DISPLAY MODE-->
+  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY">
+    <h2 ng-bind-template="{{data.name}}{{data.proficiency}}"  ng-click="edit()"></h2>
+    <div ng-bind-template="{{data.certification}}  {{data.score}}"></div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+  <div>
+    <span>语言能力</span>
+    <span ng-hide="hasData">你还没填写</span>
+  </div>
+  <div ng-repeat="data in dataCollection">
+    <bpluslanguage data="data"/>
+  </div>
+  <div ng-show="showAddButton">
+    <button type="button" ng-click="add()">添加语言能力</button>
+  </div>
+</div>
