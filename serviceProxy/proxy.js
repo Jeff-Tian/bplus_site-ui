@@ -20,43 +20,49 @@ function advancedProxy(req, res, next, settings) {
             }
         },
 
-        chunks = [],
+        chunks = []
+        ;
 
-        request = http.request(options, function (response) {
-            if (typeof settings.responseInterceptor === 'function') {
-                response.on('data', function (c) {
-                    chunks.push(c);
-                });
+    console.log('before proxy to ' + options.path + ' with method ' + options.method + '...');
+    var request = http.request(options, function (response) {
+        console.log('proxy result:');
+        if (typeof settings.responseInterceptor === 'function') {
+            response.on('data', function (c) {
+                chunks.push(c);
+            });
 
-                response.on('end', function () {
-                    chunks = Buffer.concat(chunks);
+            response.on('end', function () {
+                chunks = Buffer.concat(chunks);
 
-                    try {
-                        chunks = JSON.parse(chunks.toString());
-                    } catch (e) {
-                        return next(e);
-                    }
+                try {
+                    chunks = JSON.parse(chunks.toString());
+                } catch (e) {
+                    return next(e);
+                }
 
-                    settings.responseInterceptor(res, chunks);
+                settings.responseInterceptor(res, chunks);
 
-                    return res.send(chunks);
-                });
+                return res.send(chunks);
+            });
 
-                response.on('error', next);
-            } else {
-                response.pipe(res);
-            }
-        });
+            response.on('error', next);
+        } else {
+            response.pipe(res);
+        }
+    });
 
     request.on('error', next);
 
-    var data = req.body;
+    if (options.method !== 'GET') {
+        var data = req.body;
 
-    if (typeof settings.dataMapper === 'function') {
-        data = settings.dataMapper(data);
+        if (typeof settings.dataMapper === 'function') {
+            data = settings.dataMapper(data);
+        }
+
+        request.write(JSON.stringify(data));
     }
 
-    request.write(JSON.stringify(data));
     request.end();
 }
 

@@ -9,7 +9,10 @@ angular.module('bplus', [
     function($urlRouterProvider) {}
 ]).run(function() {
 
-}).controller('AppCtrl', angular.bplus.AppCtrl);
+}).factory('service', angular.bplus.service)
+    .factory('FormValidation', angular.bplus.FormValidation)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    ;
 
 // TODO: integrated into JS framework
 (function() {

@@ -1,7 +1,8 @@
 var sms = require('./sms'),
     captcha = require('./captcha'),
     sso = require('./sso'),
-    mail = require('./mail')
+    mail = require('./mail'),
+    membership = require('./membership')
     ;
 
 module.exports = require('express').Router()
@@ -13,4 +14,5 @@ module.exports = require('express').Router()
     .post('/logon/authentication', sso.authenticate)
     .post('/member/resetPassword', /*sms.validate, */ sso.resetPassword)
     .post('/mail/send', captcha.validate, mail.send)
+    .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
 ;

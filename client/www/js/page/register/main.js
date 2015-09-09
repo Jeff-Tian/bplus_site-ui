@@ -13,32 +13,27 @@ angular.module('signIn', [
     .run(function () {
     })
     .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('service', angular.bplus.service)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
-    .controller('SignUpCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('SignUpCtrl', ['$scope', 'service', function ($scope, service) {
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
+            function autoSignIn() {
+                service.post('/service-proxy/logon/authentication', {
+                    value: signUpData.mobile,
+                    password: signUpData.password
+                })
+                    .then(function (json) {
+                        window.location.href = 'personal-history';
+                    }, $scope.registerFormCtrl.handleFormError);
+            }
+
             var signUpData = $scope.registerFormCtrl.getFormData();
 
-            $http.post('/service-proxy/member/register', signUpData)
-                .success(function (res) {
-                    if (res.isSuccess) {
-                        $http.post('/service-proxy/logon/authentication', {
-                            value: signUpData.mobile,
-                            password: signUpData.password
-                        })
-                            .success(function (json) {
-                                if (json.isSuccess) {
-                                    window.location.href = 'personal-history';
-                                } else {
-                                    $scope.registerFormCtrl.handleFormError(json.message);
-                                }
-                            }).error($scope.registerFormCtrl.handleFormError);
-                    } else {
-                        $scope.registerFormCtrl.handleFormError(res.message);
-                    }
-                }).error($scope.registerFormCtrl.handleFormError);
+            service.post('/service-proxy/member/register', signUpData)
+                .then(autoSignIn, $scope.registerFormCtrl.handleFormError);
         };
     }])
     .controller('BindMobileCtrl', ['$scope', function ($scope) {

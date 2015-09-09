@@ -1,11 +1,9 @@
 (function (exports) {
     exports.service = function ($http, $q) {
-        var s = {};
-
-        s.post = function (url, data) {
+        function handleHttpPromise(httpPromise) {
             var dfd = $q.defer();
 
-            $http.post(url, data)
+            httpPromise
                 .success(function (res) {
                     if (res.isSuccess) {
                         dfd.resolve(res);
@@ -17,7 +15,19 @@
                 });
 
             return dfd.promise;
-        };
+        }
+
+        var s = {};
+
+        for (var method in $http) {
+            if (typeof $http[method] === 'function') {
+                s[method] = (function (m) {
+                    return function () {
+                        return handleHttpPromise($http[m].apply(this, Array.prototype.slice.call(arguments)));
+                    };
+                })(method);   // jshint ignore:line
+            }
+        }
 
         return s;
     };
