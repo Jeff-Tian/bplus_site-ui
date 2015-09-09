@@ -38,7 +38,11 @@
         <div class="ui grid container b-profile-main">
             <div class="five wide column">
                 <div class="b-profile-left-section" ng-controller="achievement">
-                    <img ng-src="{{face}}" class="b-profile-face" />
+                    <div class="b-profile-face">
+                        <progress id="b-profile-face-progress2" class="progress2" value="50"></progress>
+                        <progress id="b-profile-face-progress" class="progress" value="0"></progress>
+                        <img ng-src="{{data.face}}" />
+                    </div>
                     <div class="b-profile-preview">
                         <button class="ui basic button"><i class="icon"></i>预览简历</button>
                     </div>
@@ -49,22 +53,22 @@
                         </div>
                         <div class="b-profile-achievement">
                             <div class="ui five column grid">
-                                <div class="column" ng-repeat="i in pics"><img ng-src="{{i.image}}" /></div>
+                                <div class="column" ng-repeat="i in data.pics"><img ng-src="{{i.img}}" /></div>
                             </div>
                             <div class="ui horizontal list b-profile-achievement-imgs">
                                 <div class="item b-profile-achievement-imgs-level">
                                     <i class="icon"></i>
-                                    <div class="content">等级{{level}}</div>
+                                    <div class="content">等级{{data.level}}</div>
                                 </div>
                                 <div class="item b-profile-achievement-imgs-fraction">
                                     <i class="icon"></i>
-                                    <div class="content">积分{{scroe}}</div>
+                                    <div class="content">积分{{data.score}}</div>
                                 </div>
                             </div>
                             <div class="ui list b-profile-li">
-                                <div class="item" ng-repeat="i in list">
+                                <div class="item" ng-repeat="i in data.list">
                                     <i class="icon"></i>
-                                    <div class="content">{{i.title}}{{i.scroe}}</div>
+                                    <div class="content">{{i.title}}{{i.score}}</div>
                                 </div>
                             </div>
                         </div>
@@ -78,14 +82,14 @@
                         </div>
                         <div class="b-profile-growing">
                             <div class="ui list b-profile-li">
-                                <div class="item" ng-repeat="i in list">
+                                <div class="item" ng-repeat="i in data.list">
                                     <i class="icon"></i>
                                     <div class="content">{{i.title}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="b-profile-growing-buttons">
-                            <button class="fluid ui basic button" ng-repeat="i in buttons">{{i.title}}</button>
+                            <button class="fluid ui basic button" ng-repeat="i in data.buttons">{{i.title}}</button>
                         </div>
                     </div>
                 </div>
@@ -115,8 +119,8 @@
     <!--JS-->
     <script src="bower/jquery/dist/jquery.js" type="text/javascript"></script>
     <script src="bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
-    <!-- <script src="bower/underscore/underscore.js" type="text/javascript"></script> -->
-    <!-- <script src="bower/owlcarousel/owl-carousel/owl.carousel.js" type="text/javascript"></script> -->
+    <script src="bower/underscore/underscore.js" type="text/javascript"></script>
+    <script src="bower/owlcarousel/owl-carousel/owl.carousel.js" type="text/javascript"></script>
     <!--Angular JS-->
     <script src="bower/angular/angular.min.js" type="text/javascript"></script>
     <script src="bower/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>

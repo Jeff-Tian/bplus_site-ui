@@ -4,8 +4,15 @@
 
 // Page
 @import "../../../css/page/main.less";
+@import "./widget/achievement/face.less";
 
 // Profile
+@media only screen and (max-width: 767px) {
+    .ui.grid.container {
+        width: calc( 723px + 26px ) !important;
+    }
+}
+
 body.pushable > .pusher {
     background-color: #efefef;
 }
@@ -104,10 +111,52 @@ body.pushable > .pusher {
 }
 .b-profile-face {
     position: absolute;
-    top: -72px;
+    z-index: 1;
+    top: -71px;
     left: 0;
-    width: 143px;
 }
+.b-profile-face img {
+    margin: 5%;
+    width: 90%;
+}
+
+.b-profile-face {
+    width: 142px;
+}
+.b-profile-face progress.progress,
+.b-profile-face progress.progress2,
+.b-profile-face progress.progress::-webkit-progress-value:before,
+.b-profile-face progress.progress2::-webkit-progress-value:before {
+  width: 71px;
+}
+.b-profile-face,
+.b-profile-face progress.progress,
+.b-profile-face progress.progress2,
+.b-profile-face progress.progress::-webkit-progress-value:before,
+.b-profile-face progress.progress2::-webkit-progress-value:before {
+  height: 142px;
+}
+.b-profile-face {
+  border-radius: 142px;
+}
+.b-profile-face progress.progress::-webkit-progress-value:before {
+  border-radius: 142px 0 0 142px;
+}
+.b-profile-face progress.progress2::-webkit-progress-value:before {
+  border-radius: 0 200px 142px 0;
+}
+progress.progress,
+progress.progress2 {
+    z-index: -1;
+}
+.b-profile-face {
+  background-color: black;
+}
+progress.progress::-webkit-progress-value:before,
+progress.progress2::-webkit-progress-value:before {
+  background-color: gray;
+}
+
 .b-profile-preview {
     padding-top: 24px;
     text-align: right;
@@ -119,7 +168,6 @@ body.pushable > .pusher {
         left: auto;
         margin-top: -50%;
         margin-left: 11%;
-        width: 78%;
     }
     .b-profile-preview {
         margin-top: 1em;
