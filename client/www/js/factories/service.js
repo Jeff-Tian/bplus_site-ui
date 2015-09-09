@@ -8,7 +8,7 @@
                     if (res.isSuccess) {
                         dfd.resolve(res.result);
                     } else {
-                        dfd.reject(res.message);
+                        dfd.reject(res.message || '服务器返回错误的数据');
                     }
                 }).error(function (reason) {
                     dfd.reject(reason);

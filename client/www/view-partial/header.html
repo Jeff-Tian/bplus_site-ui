@@ -59,7 +59,9 @@
                 <a href="signin#/login" class="ui button">
                     <img ng-src="{{memberInfo.avatar}}">
                     <span>{{memberInfo.displayName}}</span>
-                    <i class="icon angle down"></i></a>
+                    <i class="icon angle down"></i>
+                </a>
+                (<span ng-click="signOut()">退出登录</span>)
                 <% } else { %>
                 <a href="signin#/login" class="ui button">登录</a>
                 <a href="signin#/register" class="ui button">注册</a>

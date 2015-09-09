@@ -15,4 +15,5 @@ module.exports = require('express').Router()
     .post('/member/resetPassword', /*sms.validate, */ sso.resetPassword)
     .post('/mail/send', captcha.validate, mail.send)
     .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
+    .post('/logon/logout', sso.logout)
 ;

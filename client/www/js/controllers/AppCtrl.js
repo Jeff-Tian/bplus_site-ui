@@ -11,10 +11,19 @@
 
                 $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile;
 
-                $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
+                if ($scope.message) {
+                    $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
+                }
             });
 
         $scope.message = MessageStore.flash();
+
+        $scope.signOut = function () {
+            service.post('/service-proxy/logon/logout')
+                .finally(function (res) {
+                    window.location.href = '/';
+                });
+        };
     };
 
     exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore'];

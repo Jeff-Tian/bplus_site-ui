@@ -23,9 +23,7 @@ function advancedProxy(req, res, next, settings) {
         chunks = []
         ;
 
-    console.log('before proxy to ' + options.path + ' with method ' + options.method + '...');
     var request = http.request(options, function (response) {
-        console.log('proxy result:');
         if (typeof settings.responseInterceptor === 'function') {
             response.on('data', function (c) {
                 chunks.push(c);
@@ -53,14 +51,18 @@ function advancedProxy(req, res, next, settings) {
 
     request.on('error', next);
 
-    if (options.method !== 'GET') {
-        var data = req.body;
+    if (typeof settings.requestInterceptor === 'function') {
+        settings.requestInterceptor(req, request);
+    } else {
+        if (options.method !== 'GET') {
+            var data = req.body;
 
-        if (typeof settings.dataMapper === 'function') {
-            data = settings.dataMapper(data);
+            if (typeof settings.dataMapper === 'function') {
+                data = settings.dataMapper(data);
+            }
+
+            request.write(JSON.stringify(data));
         }
-
-        request.write(JSON.stringify(data));
     }
 
     request.end();

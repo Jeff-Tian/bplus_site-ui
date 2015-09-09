@@ -9,16 +9,12 @@ module.exports = {
         res.locals.applicationId = sso.applicationId;
 
         if (req.headers.hcd_user) {
-            console.log('got hcd_user: ' + req.headers.hcd_user);
-
             try {
                 res.locals.hcd_user = JSON.parse(req.headers.hcd_user);
                 req.body.member_id = res.locals.hcd_user.member_id;
             } catch (e) {
                 next(e);
             }
-        } else {
-            console.log('hcd_user not found');
         }
 
         next();
