@@ -48,8 +48,12 @@
             </a>
 
             <div class="right item">
+                <% if (hcd_user && hcd_user.member_id) { %>
+                <span>已登录</span>
+                <% } else { %>
                 <a href="signin#/login" class="ui button">登录</a>
                 <a href="signin#/register" class="ui button">注册</a>
+                <% } %>
                 <a href="#English" class="ui button">English</a>
             </div>
         </div>

@@ -60,7 +60,7 @@ function advancedProxy(req, res, next, settings) {
     request.end();
 }
 
-module.exports = function (options) {
+function proxy(options) {
     var args = arguments;
 
     return function (req, res, next) {
@@ -70,5 +70,11 @@ module.exports = function (options) {
             basicProxy.apply(this, [req, res, next, args[0], args[1], args[2], args[3]]);
         }
     };
+}
+
+proxy.execute = function (req, res, next, options) {
+    advancedProxy(req, res, next, options);
 };
+
+module.exports = proxy;
 

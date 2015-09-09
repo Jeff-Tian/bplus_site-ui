@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('mates', [
+angular.module('bplus', [
     'ui.router',
     'ng.utils'
 ]).config([
@@ -9,7 +9,7 @@ angular.module('mates', [
     function($urlRouterProvider) {}
 ]).run(function() {
 
-});
+}).controller('AppCtrl', angular.bplus.AppCtrl);
 
 // TODO: integrated into JS framework
 (function() {
