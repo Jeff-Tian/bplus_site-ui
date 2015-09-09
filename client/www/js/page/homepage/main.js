@@ -11,6 +11,7 @@ angular.module('bplus', [
 
 }).factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     ;
 

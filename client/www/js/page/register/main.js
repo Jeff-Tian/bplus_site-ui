@@ -14,6 +14,7 @@ angular.module('signIn', [
     })
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
+    .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
     .controller('SignUpCtrl', ['$scope', 'service', function ($scope, service) {
@@ -42,7 +43,7 @@ angular.module('signIn', [
         };
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
-    .controller('LoginCtrl', ['$scope', 'FormValidation', '$http', function ($scope, FormValidation, $http) {
+    .controller('LoginCtrl', ['$scope', 'FormValidation', 'service', 'MessageStore', function ($scope, FormValidation, service, MessageStore) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -66,17 +67,15 @@ angular.module('signIn', [
                 return;
             }
 
-            $http.post('/service-proxy/logon/authentication', {
+            service.post('/service-proxy/logon/authentication', {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe
-            }).success(function (res) {
-                if (res.isSuccess) {
-                    window.location.href = '/';
-                } else {
-                    FormValidation.handleFormError($loginForm, res.message);
-                }
-            }).error(FormValidation.delegateHandleFormError($loginForm));
+            }).then(function (res) {
+                MessageStore.set('{user.name}已成功登录,欢迎你回来!');
+
+                window.location.href = '/';
+            }).catch(FormValidation.delegateHandleFormError($loginForm));
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {

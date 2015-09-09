@@ -6,7 +6,7 @@
             httpPromise
                 .success(function (res) {
                     if (res.isSuccess) {
-                        dfd.resolve(res);
+                        dfd.resolve(res.result);
                     } else {
                         dfd.reject(res.message);
                     }

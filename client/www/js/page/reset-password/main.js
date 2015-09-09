@@ -5,6 +5,7 @@
 angular.module('resetPassword', [])
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
+    .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('ResetPasswordCtrl', angular.bplus.ResetPasswordCtrl)
     .directive('registerForm', angular.bplus.registerForm || {})

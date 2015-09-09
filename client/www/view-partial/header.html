@@ -3,6 +3,13 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Following(fixed) Menu -->
+<div class="ui center aligned container brand message-wrapper" ng-show="message && !hideMessage">
+    <div class="ui black brand message">
+        {{message}}
+        <i class="large remove circle icon" ng-click="hideMessage = true"></i>
+    </div>
+</div>
+
 <div class="ui top fixed hidden b-header" data-action="fixedHeader">
     <div class="ui menu b-header-account">
         <div class="ui container">
