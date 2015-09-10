@@ -3077,6 +3077,9 @@ a:active {
 .ng-cloak {
   display: none !important;
 }
+.no-padded.field {
+  padding: 0 !important;
+}
 /*
 * - @Bridge+
 */
