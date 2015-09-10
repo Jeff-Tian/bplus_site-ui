@@ -3150,6 +3150,7 @@ body.pushable .pusher {
   font-weight: normal;
   border-left: 1px solid #7F7F7f;
   padding-left: 0.25em;
+  font-size: 1.05em;
 }
 .footer a:hover.ui.header,
 .footer a:active.ui.header {
