@@ -15,10 +15,6 @@
     <%- include('view-partial/head.html') -%>
 
     <!-- <link href="bower/semantic-ui/dist/semantic.css" rel="stylesheet" type="text/css" /> -->
-    <!-- Stylesheet -->
-    <link href="bower/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
-    <link href="bower/owlcarousel/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css" />
-    <!--LESS-->
     <link href="js/page/profile/main.less" rel="stylesheet/less" type="text/css" />
     <script src="bower/less/dist/less.js" type="text/javascript"></script>
 
@@ -30,7 +26,7 @@
     <!-- Header End -->
 
     <!-- Page Contents -->
-    <div class="pusher">
+    <div class="b-profile-body">
         <div class="b-profile-banner" ng-controller="banner">
             <div class="img" style="background-image:url({{imageBanner}});" ng-mouseover="hoverBtn='hover'" ng-mouseleave="hoverBtn=''"></div>
             <a href="javascript:void(0);" class="{{hoverBtn}}">&nbsp;</a>
@@ -42,11 +38,13 @@
                         <div class="b-profile-face-line"></div>
                         <div class="b-profile-face-percentage">{{data.progress}}%</div>
                         <div class="b-profile-face-txt">简历完成度{{data.progress}}%，{{data.tip}}</div>
-                        <progress id="b-profile-face-progress2" class="progress2" value="50"></progress>
-                        <progress id="b-profile-face-progress" class="progress" value="0"></progress>
-                        <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit='edit'">
+                        <div class="progress-circle">
+                            <div class="progress-pie-left"><div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div></div>
+                            <div class="progress-pie-right"><div id="progressRight" class="progress-right" style="transform:rotate(0deg);"></div></div>
+                        </div>
+                        <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit=''">
                             <img ng-src="{{data.face}}" />
-                            <img src="/img/profile/icon_profile_picture_edit.png" class="{{classNameFaceEdit}}" />
+                            <img src="/img/profile/icon_profile_picture_edit.png" class="edit {{classNameFaceEdit}}" />
                         </div>
                     </div>
                     <div class="b-profile-preview">
@@ -123,19 +121,13 @@
     <!-- Footer End -->
 
     <!--JS-->
+    <script src="bower/requirejs/require.js" type="text/javascript"></script>
     <script src="bower/jquery/dist/jquery.js" type="text/javascript"></script>
     <script src="bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
-    <script src="bower/underscore/underscore.js" type="text/javascript"></script>
-    <script src="bower/owlcarousel/owl-carousel/owl.carousel.js" type="text/javascript"></script>
     <!--Angular JS-->
     <script src="bower/angular/angular.min.js" type="text/javascript"></script>
     <script src="bower/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
     <!--Page JS-->
     <script src="js/page/profile/main.js" type="text/javascript"></script>
-    <script src="bower/requirejs/require.js" type="text/javascript"></script>
-    <!--Utils JS-->
-    <script src="js/utils/utils.js" type="text/javascript"></script>
-    <script src="js/utils/msgbus.js" type="text/javascript"></script>
-    <script src="js/utils/underscore.js" type="text/javascript"></script>
 </body>
 </html>

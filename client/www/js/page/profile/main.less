@@ -4,7 +4,7 @@
 
 // Page
 @import "../../../css/page/main.less";
-@import "./widget/achievement/face.less";
+@import "./widget/achievement/circle.less";
 
 // Profile
 @media only screen and (max-width: 767px) {
@@ -13,7 +13,9 @@
     }
 }
 
-body.pushable > .pusher {
+body.pushable > .pusher,
+.pusher,
+.b-profile-body {
     background-color: #efefef;
 }
 
@@ -78,8 +80,8 @@ body.pushable > .pusher {
 }
 
 .b-profile-main {
-    margin-top: 3em !important;
-    margin-bottom: 2em !important;
+    padding-top: 3em !important;
+    padding-bottom: 2em !important;
 }
 
 .b-profile-left-section {
@@ -97,7 +99,7 @@ body.pushable > .pusher {
 }
 .b-profile-face-line {
     position: absolute;
-    top: -20px;
+    top: -18px;
     left: 50%;
     width: 2px;
     height: 20px;
@@ -106,7 +108,7 @@ body.pushable > .pusher {
 .b-profile-face-percentage,
 .b-profile-face-txt {
     position: absolute;
-    top: -52px;
+    top: -50px;
     left: 50%;
     color: #fff;
     line-height: 26px;
@@ -125,54 +127,52 @@ body.pushable > .pusher {
     cursor: pointer;
 }
 .b-profile-face img {
-    margin: 5%;
-    width: 90%;
+    margin: 6%;
+    width: 88%;
 }
-.b-profile-face img.edit,
-.b-profile-face img.editHover {
+.b-profile-face img.edit {
+    display: none;
     position: absolute;
     left: 0;
     top: 0;
 }
-.b-profile-face img.edit {
-    display: none;
+.b-profile-face img.editHover {
+    display: block;
 }
 
 .b-profile-face {
     width: 142px;
+    height: 142px;
+    background-color: #2E363C;
+    border-radius: 50%;
 }
-.b-profile-face progress.progress,
-.b-profile-face progress.progress2,
-.b-profile-face progress.progress::-webkit-progress-value:before,
-.b-profile-face progress.progress2::-webkit-progress-value:before {
-  width: 71px;
-}
-.b-profile-face,
-.b-profile-face progress.progress,
-.b-profile-face progress.progress2,
-.b-profile-face progress.progress::-webkit-progress-value:before,
-.b-profile-face progress.progress2::-webkit-progress-value:before {
-  height: 142px;
-}
-.b-profile-face {
-  border-radius: 142px;
-}
-.b-profile-face progress.progress::-webkit-progress-value:before {
-  border-radius: 142px 0 0 142px;
-}
-.b-profile-face progress.progress2::-webkit-progress-value:before {
-  border-radius: 0 200px 142px 0;
-}
-progress.progress,
-progress.progress2 {
+.b-profile-face .progress-circle {
+    position: absolute;
     z-index: -1;
+    margin: 2px;
 }
-.b-profile-face {
-  background-color: #2E363C;
+.b-profile-face .progress-circle,
+.b-profile-face .progress-left,
+.b-profile-face .progress-right,
+.b-profile-face .progress-pie-left,
+.b-profile-face .progress-pie-right {
+    width: 138px;
+    height: 138px;
 }
-progress.progress::-webkit-progress-value:before,
-progress.progress2::-webkit-progress-value:before {
-  background-color: #fff;
+.b-profile-face .progress-pie-left,
+.b-profile-face .progress-left {
+    clip: rect(0, 69px, auto, 0);
+}
+.b-profile-face .progress-pie-right,
+.b-profile-face .progress-right {
+    clip: rect(0, auto, auto, 69px);
+}
+.b-profile-face .progress-circle {
+    background: #fff;
+}
+.b-profile-face .progress-left,
+.b-profile-face .progress-right {
+    background: #2E363C;
 }
 
 .b-profile-preview {
