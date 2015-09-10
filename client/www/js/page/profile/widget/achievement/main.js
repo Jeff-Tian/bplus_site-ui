@@ -12,7 +12,7 @@ define([
             maxRight = val >= 50 ? 180 : (val <= 0 ? 0 : val * 3.6),
             maxLeft = (val > 50 && val < 100) ? (val - 50) * 3.6 : 180;
         function circleRight() {
-            var deg = parseInt(progressRight.style.transform.toString().match(/rotate\((\d+)deg\)/im)[1]);
+            var deg = Math.round(progressRight.style.transform.toString().match(/rotate\(([\d\.]+)deg\)/im)[1]);
             if (deg < maxRight) {
                 progressRight.style.transform = 'rotate(' + (deg + 1) + 'deg)';
                 setTimeout(circleRight, space);
@@ -21,7 +21,7 @@ define([
             }
         }
         function circleLeft() {
-            var deg = parseInt(progressLeft.style.transform.toString().match(/rotate\((\d+)deg\)/im)[1]);
+            var deg = Math.round(progressLeft.style.transform.toString().match(/rotate\(([\d\.]+)deg\)/im)[1]);
             if (deg < maxLeft) {
                 progressLeft.style.transform = 'rotate(' + (deg + 1) + 'deg)';
                 setTimeout(circleLeft, space);
