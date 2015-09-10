@@ -13,32 +13,28 @@ angular.module('signIn', [
     .run(function () {
     })
     .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('service', angular.bplus.service)
+    .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
-    .controller('SignUpCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('SignUpCtrl', ['$scope', 'service', function ($scope, service) {
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
+            function autoSignIn() {
+                service.post('/service-proxy/logon/authentication', {
+                    value: signUpData.mobile,
+                    password: signUpData.password
+                })
+                    .then(function (json) {
+                        window.location.href = 'personal-history';
+                    }, $scope.registerFormCtrl.handleFormError);
+            }
+
             var signUpData = $scope.registerFormCtrl.getFormData();
 
-            $http.post('/service-proxy/member/register', signUpData)
-                .success(function (res) {
-                    if (res.isSuccess) {
-                        $http.post('/service-proxy/logon/authentication', {
-                            value: signUpData.mobile,
-                            password: signUpData.password
-                        })
-                            .success(function (json) {
-                                if (json.isSuccess) {
-                                    window.location.href = 'personal-history';
-                                } else {
-                                    $scope.registerFormCtrl.handleFormError(json.message);
-                                }
-                            }).error($scope.registerFormCtrl.handleFormError);
-                    } else {
-                        $scope.registerFormCtrl.handleFormError(res.message);
-                    }
-                }).error($scope.registerFormCtrl.handleFormError);
+            service.post('/service-proxy/member/register', signUpData)
+                .then(autoSignIn, $scope.registerFormCtrl.handleFormError);
         };
     }])
     .controller('BindMobileCtrl', ['$scope', function ($scope) {
@@ -47,7 +43,7 @@ angular.module('signIn', [
         };
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
-    .controller('LoginCtrl', ['$scope', 'FormValidation', '$http', function ($scope, FormValidation, $http) {
+    .controller('LoginCtrl', ['$scope', 'FormValidation', 'service', 'MessageStore', function ($scope, FormValidation, service, MessageStore) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -71,17 +67,15 @@ angular.module('signIn', [
                 return;
             }
 
-            $http.post('/service-proxy/logon/authentication', {
+            service.post('/service-proxy/logon/authentication', {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe
-            }).success(function (res) {
-                if (res.isSuccess) {
-                    window.location.href = '/';
-                } else {
-                    FormValidation.handleFormError($loginForm, res.message);
-                }
-            }).error(FormValidation.delegateHandleFormError($loginForm));
+            }).then(function (res) {
+                MessageStore.set('{user.name}已成功登录,欢迎你回来!');
+
+                window.location.href = '/';
+            }).catch(FormValidation.delegateHandleFormError($loginForm));
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {

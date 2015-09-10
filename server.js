@@ -15,6 +15,8 @@ server.use(bodyParser.json())
 server.engine('html', ejs.renderFile);
 server.set('view engine', 'html');
 
+server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
+
 server.get('/', function (req, res) {
     res.render('index');
 });
@@ -42,6 +44,7 @@ server.get('/register', function (req, res) {
 server.get('/data', require('./client/www/api/data.js').getData);
 
 server.get('/signin', function (req, res) {
+    console.log(req.headers);
     res.render('sign-in');
 });
 

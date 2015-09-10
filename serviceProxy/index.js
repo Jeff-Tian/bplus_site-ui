@@ -1,6 +1,8 @@
 var sms = require('./sms'),
     captcha = require('./captcha'),
-    sso = require('./sso')
+    sso = require('./sso'),
+    mail = require('./mail'),
+    membership = require('./membership')
     ;
 
 module.exports = require('express').Router()
@@ -11,4 +13,7 @@ module.exports = require('express').Router()
     .post('/member/register', /*sms.validate,*/ sso.signUp)
     .post('/logon/authentication', sso.authenticate)
     .post('/member/resetPassword', /*sms.validate, */ sso.resetPassword)
+    .post('/mail/send', captcha.validate, mail.send)
+    .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
+    .post('/logon/logout', sso.logout)
 ;

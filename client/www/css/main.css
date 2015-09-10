@@ -3049,6 +3049,28 @@ body.pushable .pusher {
 .grey.color {
   color: #7d7d7d;
 }
+.ui.brand.message-wrapper.container {
+  z-index: 999999;
+  position: fixed;
+  top: 20%;
+  width: 100%;
+}
+.ui.brand.message-wrapper.container .ui.brand.message {
+  position: relative;
+  margin: 0 auto;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: larger;
+  padding: 10px 50px 10px 20px;
+  box-shadow: 0 0 0 0;
+  border: none;
+}
+.ui.brand.message-wrapper.container .ui.brand.message .remove.circle.icon {
+  cursor: pointer;
+  margin-right: -40px;
+  margin-left: 10em;
+  letter-spacing: 2em;
+}
 /*
 * - @Bridge+
 */
@@ -3624,6 +3646,7 @@ body.pushable .pusher {
 }
 .field.error.absolute-prompt .ui.red.pointing.prompt {
   position: absolute;
+  z-index: 999;
 }
 .shape.reset,
 .shape.reset-by-email,
