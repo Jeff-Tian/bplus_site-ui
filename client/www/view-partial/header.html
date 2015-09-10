@@ -3,7 +3,7 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Following(fixed) Menu -->
-<div class="ui center aligned container brand message-wrapper" ng-show="message && !hideMessage">
+<div class="ui center aligned container brand message-wrapper" ng-show="message && !hideMessage" ng-cloak>
     <div class="ui black brand message">
         {{message}}
         <i class="large remove circle icon" ng-click="hideMessage = true"></i>
@@ -56,12 +56,20 @@
 
             <div class="right item">
                 <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
-                <a href="signin#/login" class="ui button">
-                    <img ng-src="{{memberInfo.avatar}}">
-                    <span>{{memberInfo.displayName}}</span>
-                    <i class="icon angle down"></i>
-                </a>
-                (<span ng-click="signOut()">退出登录</span>)
+                <img ng-src="{{memberInfo.avatar}}" ng-show="memberInfo.avatar" ng-cloak>
+
+                <div class="avatar-minor" ng-cloak>
+                    <i class="large user icon avatar" ng-hide="memberInfo.avatar"></i>
+                </div>
+
+                <div class="ui right dropdown item" ng-cloak>
+                    <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
+
+                    <div class="menu">
+                        <a class="item">个人资料</a>
+                        <a class="item" ng-click="signOut()">退出</a>
+                    </div>
+                </div>
                 <% } else { %>
                 <a href="signin#/login" class="ui button">登录</a>
                 <a href="signin#/register" class="ui button">注册</a>

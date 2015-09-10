@@ -1,17 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('signIn', [
-    'ui.router',
-    'ng.utils'
-])
-    .config([
-        '$urlRouterProvider',
-        function ($urlRouterProvider) {
-        }
-    ])
-    .run(function () {
-    })
+angular.module('signIn', [])
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)

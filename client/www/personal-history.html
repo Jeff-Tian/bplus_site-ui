@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
-<body ng-app="signIn">
+<body ng-app="signIn" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
     <div class="ui success message brand" ng-hide="userHide === true">
@@ -233,6 +233,9 @@
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <!--Page JS-->
 <script src="js/factories/FormValidation.js"></script>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/service.js"></script>
+<script src="js/factories/MessageStore.js"></script>
 <script src="js/page/register/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>

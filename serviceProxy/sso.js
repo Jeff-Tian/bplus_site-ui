@@ -32,15 +32,11 @@ module.exports = {
             if (requestFrom.headers.cookie) {
                 var token = requestFrom.headers.cookie.match(/(?:^|;) *token=([^;]*)/)[1];
 
-                console.log('logout for "' + token + '"');
-
                 requestTo.write(JSON.stringify({token: token}));
             }
         },
         responseInterceptor: function (responseStream, responseJson) {
-            //responseStream.writeHead(301, {
-            //    'Location': '/'
-            //});
+            responseStream.location('/');
         }
     })
 };

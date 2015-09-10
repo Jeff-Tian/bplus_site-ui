@@ -80,3 +80,26 @@ a:hover, a:active {
         }
     }
 }
+
+.avatar-minor {
+    background-color: @color-grey-light;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+
+    .avatar {
+        color: @color-grey-darker;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important
+}
