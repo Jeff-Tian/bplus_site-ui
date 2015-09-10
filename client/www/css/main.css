@@ -2963,6 +2963,9 @@ h3.ui.header.b-sp {
 /*
 * - @Bridge+
 */
+.b-content {
+  fontsize: 1.05em;
+}
 /*
 * - @Bridge+
 */
@@ -3085,6 +3088,10 @@ body.pushable .pusher {
   background: none;
   border-radius: 0;
 }
+.b-header .menu .item .nav-button:hover,
+.b-header .menu .item .nav-button:active {
+  color: #FF3C42;
+}
 .b-header .menu.b-header-account {
   background-color: #ff3c42;
 }
@@ -3143,6 +3150,11 @@ body.pushable .pusher {
   font-weight: normal;
   border-left: 1px solid #7F7F7f;
   padding-left: 0.25em;
+}
+.footer a:hover.ui.header,
+.footer a:active.ui.header {
+  color: #FF3C42;
+  text-decoration: none;
 }
 .footer .list > .item {
   font-size: 0.9em;
@@ -3236,12 +3248,12 @@ body.pushable .pusher {
   margin-bottom: 1.2rem;
 }
 .b-advantage .b-advantage-item .content .header {
-  font-size: 1.4em;
+  font-size: 1.6em;
   color: #ff3c42;
   margin-bottom: .8rem;
 }
 .b-advantage .b-advantage-item .content .description p {
-  font-size: 0.95em;
+  font-size: 1.05em;
   line-height: 1.6em;
 }
 /*
@@ -3262,6 +3274,9 @@ body.pushable .pusher {
 .b-theory h3.ui.header {
   color: #ffffff;
 }
+.b-theory .row {
+  margin-top: -5em;
+}
 .b-theory .b-theory-header {
   position: relative;
 }
@@ -3272,18 +3287,18 @@ body.pushable .pusher {
   color: #ffffff;
   text-align: right;
   line-height: 1.6em;
-  font-size: 0.9em;
+  font-size: 1em;
 }
 .b-theory .b-theory-content > h3 {
   color: #ffffff;
-  font-size: 1.5em;
+  font-size: 2.25em;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 1.6rem;
 }
 .b-theory .b-theory-content > p {
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 1.05em;
   line-height: 2.4em;
 }
 /*
@@ -3316,11 +3331,11 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .header {
   color: #ffffff;
-  font-size: 1.13em;
+  font-size: 1.5em;
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .meta {
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 1.05em;
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .ui.divider {
   border-top-color: #ffffff;
@@ -3328,7 +3343,7 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .description > p {
   line-height: 1.6em;
-  font-size: 0.9em;
+  font-size: 1.05em;
   color: #e5e5e5;
 }
 .b-jobs .b-jobs-statistics {
@@ -3341,7 +3356,7 @@ body.pushable .pusher {
 .b-jobs .b-jobs-statistics .ui.header.sub {
   color: #ffffff;
   font-weight: normal;
-  font-size: 1.13em;
+  font-size: 1.5em;
 }
 .b-jobs .b-jobs-statistics .ui.statistics {
   -webkit-flex-direction: row;
@@ -3350,6 +3365,7 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-statistics .ui.statistics > .statistic {
   display: inline-block;
+  margin-top: 0.5em;
 }
 .b-jobs .b-jobs-statistics .ui.statistics > .statistic > .value {
   color: #ff3c42;
@@ -3388,8 +3404,12 @@ body.pushable .pusher {
   font-weight: normal;
   line-height: 2.25rem;
 }
-.b-jobs .b-jobs-list .ui.table {
-  font-size: 0.9em;
+.b-jobs .b-jobs-list .ui.table th {
+  font-size: 1.4em;
+}
+.b-jobs .b-jobs-list .ui.table td {
+  font-size: 1.25em;
+  color: #787878;
 }
 .b-jobs .b-jobs-action {
   margin-top: 2rem;
@@ -3419,12 +3439,15 @@ body.pushable .pusher {
   color: #8c8c8c;
   margin-bottom: 3rem;
 }
+.b-feedback .ui.items > .item > .image img {
+  border-radius: 500rem;
+}
 .b-feedback .ui.items > .item > .content > .header {
   margin-top: 1rem;
-  font-size: 1.13em;
+  font-size: 1.5em;
 }
 .b-feedback .ui.items > .item > .content .meta {
-  font-size: 0.9em;
+  font-size: 1.05em;
   display: inline-block;
   margin: 0 0 0 .8rem;
 }
@@ -3434,7 +3457,7 @@ body.pushable .pusher {
 }
 .b-feedback .ui.items > .item > .content .description > p {
   line-height: 1.6em;
-  font-size: 0.9em;
+  font-size: 1.05em;
 }
 @media only screen and (min-width: 768px) and (max-width: 900px), only screen and (min-width: 992px) and (max-width: 1099px) {
   .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev,
@@ -3739,7 +3762,12 @@ body.pushable .pusher {
   -o-transform: rotateX(360deg);
   transform: rotateX(360deg);
 }
+.opportunity-box .back {
+  background-color: #ffffff;
+}
 .opportunity-box .back table {
+  padding: 1em 1em 0 1em;
+  height: 100%;
   box-shadow: 0 2px 0 #bebebe !important;
   border-radius: 0;
 }
@@ -3828,16 +3856,17 @@ body.pushable .pusher {
 }
 .b-masthead > .b-masthead-stripe h2.ui.header {
   color: #ffffff;
-  font-size: 1.9em;
+  font-size: 2.4em;
   margin-top: 1.1rem;
 }
 .b-masthead > .b-masthead-stripe h3 {
   color: #ffffff;
   font-weight: normal;
+  font-size: 1.5em;
 }
 .b-masthead > .b-masthead-stripe p {
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 1.05em;
   line-height: 1.8em;
 }
 .b-masthead > .b-masthead-stripe p:first-child {
@@ -3917,27 +3946,42 @@ body.pushable .pusher {
 .b-skill .b-skill-skill {
   color: #ffffff;
   padding-top: 1.5em;
+  float: right;
 }
 .b-skill .b-skill-skill h3.ui.header {
   color: #ffffff;
-  font-size: 1.6em;
+  font-size: 1.25em;
   font-weight: bold;
-  margin-top: -0.15em;
 }
 .b-skill .b-skill-skill .ui.list .list {
   margin-left: 0;
   padding-top: 0.5rem;
-  font-size: 1.2em;
+  font-size: 1.125em;
 }
 .b-skill .b-skill-skill .ui.list .list > .item .header {
   color: #ffffff;
   margin-top: -0.05em;
+  font-weight: normal;
 }
 .b-skill .b-skill-skill .ui.list .list > .item {
   padding-top: 1em;
 }
-.b-skill .b-game-list {
-  font-size: 1.8em;
+.b-skill .b-game-list .item .content {
+  padding-left: 0.2em !important;
+}
+.b-skill .seventy {
+  width: 70% !important;
+}
+.b-skill .thirty {
+  width: 30% !important;
+}
+@media only screen and (min-width: 992px) {
+  .b-skill .b-skill-skill {
+    margin-right: 2em;
+  }
+  .b-skill .b-skill-skill .ui.list .list > .item {
+    padding-top: 1.5em;
+  }
 }
 /*
 * - @Bridge+
@@ -3955,12 +3999,12 @@ body.pushable .pusher {
 }
 .b-popularity h3.ui.header {
   color: #ffffff;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 .b-popularity .b-theory-header .content > div {
   color: #ffffff;
   line-height: 1.6em;
-  font-size: 0.9em;
+  font-size: 1.05em;
 }
 .b-popularity .b-theory-content {
   padding-top: 5rem;
@@ -3974,7 +4018,7 @@ body.pushable .pusher {
 }
 .b-popularity .b-theory-content > p {
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 1.05em;
   line-height: 2em;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3994,8 +4038,8 @@ body.pushable .pusher {
   height: 584px;
 }
 .b-events > .ui.container {
-  padding-top: 5rem;
-  padding-bottom: 4rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }
 .b-events h3.ui.header {
   color: #ffffff;
@@ -4005,12 +4049,13 @@ body.pushable .pusher {
   background-color: #ffffff !important;
   padding: 1rem 2rem;
   box-shadow: 0 2px 0 #bebebe !important;
+  border-radius: 0;
 }
 .b-events .events-table .icon {
   color: #ff3c42;
 }
 .b-events .events-table td:not(.text-right) {
-  font-size: 1.2em;
+  font-size: 1.05em;
 }
 /*
 * - @Bridge+

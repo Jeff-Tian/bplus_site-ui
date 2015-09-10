@@ -36,11 +36,11 @@
 					}
 					.header {
 						color: @color-white;
-						font-size: @fontsize-xl;
+						font-size: @fontsize-5xl;
 					}
 					.meta {
 						color: @color-white;
-						font-size: @fontsize-s;
+						font-size: 1.05em;
 					}
 					.ui.divider {
 					    border-top-color: @color-white;
@@ -49,7 +49,7 @@
 					.description {
 						> p {
 							line-height: 1.6em;
-							font-size: @fontsize-s;
+							font-size: 1.05em;
 							color: @color-grey-lighter;
 						}
 					}
@@ -68,7 +68,7 @@
 			&.sub {
 				color: @color-white;
 				font-weight: normal;
-				font-size: @fontsize-xl;
+				font-size: @fontsize-5xl;
 			}
 		}
 		.ui.statistics {
@@ -78,6 +78,7 @@
 
 			> .statistic {
 				display: inline-block;
+				margin-top: 0.5em;
 
 				> .value {
 					color: @color-brand;
@@ -131,8 +132,13 @@
 		}
 
 		.ui.table {
-			font-size: @fontsize-s;
-
+		    th{
+                font-size:1.4em;
+            }
+            td{
+                font-size:1.25em;
+                color: #787878;
+            }
 		}
 	}
 	.b-jobs-action {
