@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>登录 Bridge+</title>
-    <meta name="description" content="Bridge+">
+    <title><%= __('SEOTitle_SignIn') %></title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
     <%- include('view-partial/head.html') -%>
     <!--LESS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -17,7 +17,7 @@
     <div class="ui column b-signin-container">
         <div class="b-signin-wide">
             <div class="ui fluid two item top pointing secondary menu brand">
-                <a class="item" data-tab="login">登录</a>
+                <a class="item" data-tab="login"><%= __('SignIn') %></a>
                 <a class="item" data-tab="register">注册</a>
             </div>
             <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">

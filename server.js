@@ -2,6 +2,16 @@
 var express = require('express');
 var server = express();
 var bodyParser = require('body-parser');
+var i18n = require('i18n');
+
+i18n.configure({
+    locales: ['en', 'zh'],
+    directory: __dirname + '/locales'
+});
+
+function regexPath(p) {
+    return new RegExp('(?:/(en|zh))?' + p, 'i');
+}
 
 // Node.js template engine
 var ejs = require('ejs');
@@ -26,6 +36,30 @@ server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
 // Customize client file path
 server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
+server.use('/en', express.static(__dirname + '/client/www'));
+server.use('/zh', express.static(__dirname + '/client/www'));
+
+server.use(i18n.init);
+
+server.all('*', function (req, res, next) {
+    var l = /^\/(en|zh)/i;
+    if (l.test(req.url)) {
+        var a = l.exec(req.url);
+        var local = a[1];
+        i18n.setLocale(local);
+        res.setLocale(local);
+    } else {
+        i18n.setLocale('zh');
+        res.setLocale('zh');
+    }
+
+    next();
+});
+
+server.get(/(?:\/(en|zh))?\/test/i, function (req, res) {
+    res.send(i18n.__('Hello'));
+});
+
 server.use('/service-proxy', require('./serviceProxy'));
 
 // Page route define
@@ -43,8 +77,7 @@ server.get('/register', function (req, res) {
 });
 server.get('/data', require('./client/www/api/data.js').getData);
 
-server.get('/signin', function (req, res) {
-    console.log(req.headers);
+server.get(regexPath('/signin'), function (req, res) {
     res.render('sign-in');
 });
 
