@@ -3653,6 +3653,7 @@ body.pushable .pusher {
 }
 .opportunity-banner {
   background: url('/img/salespage/banner.png');
+  min-height: 36rem;
   padding: 10em 0;
   color: #ffffff;
 }
@@ -3669,14 +3670,12 @@ body.pushable .pusher {
 }
 .opportunity-list-red .content h3 {
   font-size: 2em;
-  font-weight: bold;
   color: #ffffff;
   text-align: center;
   padding-top: 125px;
 }
 .opportunity-list-white .content h3 {
   font-size: 2em;
-  font-weight: bold;
   color: #ff3c42;
   text-align: center;
   padding-top: 125px;
@@ -3834,8 +3833,8 @@ body.pushable .pusher {
   margin-bottom: 1.5rem;
 }
 .b-opportunity-jobs .b-opportunity-pokesperson .description > p {
-  line-height: 1em;
-  font-size: 0.9em;
+  line-height: 2.4em;
+  font-size: 1.05em;
   color: #000000;
 }
 .b-opportunity-trial {
@@ -3917,6 +3916,9 @@ body.pushable .pusher {
 }
 .b-process .ui.grid .column.b-process-item > .content h4.ui.header i.icon {
   font-size: 1.3em;
+}
+.b-process .ui.grid .column.b-process-item > .content h4.ui.header .content {
+  padding-top: 0.2em;
 }
 .b-process .ui.grid .column.b-process-item > .content p {
   color: #ffffff;
@@ -4002,7 +4004,7 @@ body.pushable .pusher {
   height: 700px;
 }
 .b-popularity > .ui.container {
-  padding-top: 6rem;
+  padding-top: 5rem;
 }
 .b-popularity h3.ui.header {
   color: #ffffff;
@@ -4010,13 +4012,14 @@ body.pushable .pusher {
 }
 .b-popularity .b-theory-header .content > div {
   color: #ffffff;
-  line-height: 1.6em;
   font-size: 1.05em;
 }
+.b-popularity .b-theory-header .content > div p {
+  line-height: 2.4em;
+}
 .b-popularity .b-theory-content {
-  padding-top: 5rem;
-  padding-left: 5rem !important;
-  padding-bottom: 5rem;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 .b-popularity .b-theory-content > h3 {
   color: #ffffff;
@@ -4026,7 +4029,7 @@ body.pushable .pusher {
 .b-popularity .b-theory-content > p {
   color: #ffffff;
   font-size: 1.05em;
-  line-height: 2em;
+  line-height: 2.4em;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .b-popularity .b-theory-content {
