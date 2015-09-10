@@ -13,6 +13,7 @@
   ],
   "private": true,
   "dependencies": {
+    "angular-semantic-ui": "~0.0.3",
     "jquery-address": "https://github.com/asual/jquery-address.git"
   },
   "devDependencies": {

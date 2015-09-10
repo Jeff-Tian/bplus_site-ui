@@ -3,6 +3,8 @@
         var $form = $('.ui.form');
         $form.form(FormValidation.defaultSetting);
 
+        $('.ui.menu.b-header-account .ui.dropdown').dropdown();
+
         $scope.memberInfo = {};
 
         service.get('/service-proxy/member/profile/')

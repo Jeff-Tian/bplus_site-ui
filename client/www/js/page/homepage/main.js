@@ -6,26 +6,29 @@ angular.module('bplus', [
     'ng.utils'
 ]).config([
     '$urlRouterProvider',
-    function($urlRouterProvider) {}
-]).run(function() {
+    function ($urlRouterProvider) {
+    }
+]).run(function () {
 
 }).factory('service', angular.bplus.service)
-    .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('FormValidation', angular.bplus.FormValidation || function () {
+        return {};
+    })
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    ;
+;
 
 // TODO: integrated into JS framework
-(function() {
+(function () {
     //$(document)
     //  .ready(function() {
     // fix header when passed
     $('.b-masthead').visibility({
         once: false,
-        onBottomPassed: function() {
+        onBottomPassed: function () {
             $('[data-action=fixedHeader]').transition('fade in');
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
@@ -50,14 +53,14 @@ angular.module('bplus', [
         rewindSpeed: 100,
         addClassActive: true,
         navigationText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
-        beforeMove: function() {
+        beforeMove: function () {
             $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
             $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
         },
-        afterMove: function() {
+        afterMove: function () {
             $('.active').find('h1').addClass('animated fadeInLeft');
             $('.active').find('h2').addClass('animated fadeInRight');
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
                 $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
             }, 600);
@@ -100,13 +103,11 @@ angular.module('bplus', [
 
     $('.index-gif').visibility({
         once: false,
-        onTopVisible: function() {
+        onTopVisible: function () {
             animateGif();
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             animateGif();
         }
     });
-
-
 })();

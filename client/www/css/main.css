@@ -3071,6 +3071,31 @@ body.pushable .pusher {
   margin-left: 10em;
   letter-spacing: 2em;
 }
+.avatar-minor {
+  background-color: #cccccc;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.avatar-minor .avatar {
+  color: #333333;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+.no-padded.field {
+  padding: 0 !important;
+}
 /*
 * - @Bridge+
 */
@@ -3147,7 +3172,7 @@ body.pushable .pusher {
 }
 @media only screen and (max-width: 700px) {
   .b-header.fixed {
-    display: none!important;
+    display: none !important;
   }
   .b-header .menu.b-header-account .item,
   .b-header .menu.b-header-account .menu {
@@ -3157,7 +3182,7 @@ body.pushable .pusher {
     display: block;
   }
   .b-header .menu.b-header-nav .item.right {
-    display: none!important;
+    display: none !important;
   }
 }
 /*

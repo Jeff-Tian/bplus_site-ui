@@ -40,7 +40,8 @@ function advancedProxy(req, res, next, settings) {
 
                 settings.responseInterceptor(res, chunks);
 
-                return res.send(chunks);
+                res.send(chunks);
+                next();
             });
 
             response.on('error', next);
