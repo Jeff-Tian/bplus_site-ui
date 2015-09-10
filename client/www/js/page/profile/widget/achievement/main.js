@@ -27,15 +27,34 @@ define([
                 setTimeout(fnProgress2, space);
             }
         }
+        progress.setAttribute('value', 0);
+        progress2.setAttribute('value', 50);
         fnProgress();
     }
 
     return function (agModule) {
         agModule.controller('achievement', ['$scope', '$http', function ($scope, $http) {
+            $scope.classNameFaceEdit = 'edit';
             $http.get('/mock/profile-achievement.json').success( function (data) {
+                if (!data) { return; }
+
                 var isProgress = false;
+
                 (function () {
-                    var list = (data && (data.list instanceof Array)) ? data.list : [];
+                    if (!data.gender || (data.gender.toString().toLowerCase() != 'male' && data.gender.toString().toLowerCase() != 'female')) {
+                        data.gender = 'male';
+                    }
+                    if (!data.face) {
+                        if (data.gender.toString().toLowerCase() == 'male') {
+                            data.face = '/img/profile/icon_profile_picture_male_big.png';
+                        } else {
+                            data.face = '/img/profile/icon_profile_picture_female_big.png';
+                        }
+                    }
+                })();
+
+                (function () {
+                    var list = (data.list instanceof Array) ? data.list : [];
                     for (var i = 0, len = list.length; i < len; i++) {
                         var item = list[i];
                         if (('score' in item) && !/^[\+\-]/gim.test(item.score.toString())) {
@@ -43,13 +62,18 @@ define([
                         }
                     }
                 })();
-                if (data && ('score' in data)) {
+
+                if ('score' in data) {
                     data.score = '+' + data.score;
                 }
+
                 if (typeof(data.progress) == 'number' && (!$scope.data || ($scope.data.progress != data.progress))) {
                     isProgress = true;
+                    data.tip = '差强人意，多说点';
                 }
+
                 $scope.data = data;
+
                 if (isProgress) {
                     progressFace($scope.data.progress);
                 }

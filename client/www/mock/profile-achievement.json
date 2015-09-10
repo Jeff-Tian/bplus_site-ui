@@ -1,5 +1,5 @@
 ﻿{
-    "face": "/img/profile/icon_profile_picture_male_big.png",
+    "gender": "female",
     "progress": 15,
     "pics": [{
         "img": "/img/profile/achievement-img.jpg"

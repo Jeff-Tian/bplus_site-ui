@@ -44,6 +44,7 @@ body.pushable > .pusher {
     position: absolute;
     left: 50%;
     bottom: 1em;
+    margin-left: calc( 400.5px );
     width: 54px;
     height: 54px;
     text-decoration: none;
@@ -55,45 +56,24 @@ body.pushable > .pusher {
 .b-profile-banner a.hover:visited {
     background-image: url(/img/profile/btn_profile_addphoto_p.png)
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
     .b-profile-banner a,
     .b-profile-banner a:hover,
     .b-profile-banner a:visited,
     .b-profile-banner a.hover,
     .b-profile-banner a.hover:hover,
     .b-profile-banner a.hover:visited {
-        left: auto;
-        right: 2em;
+        margin-left: calc( 307.5px );
     }
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 1400px) {
     .b-profile-banner a,
     .b-profile-banner a:hover,
     .b-profile-banner a:visited,
     .b-profile-banner a.hover,
     .b-profile-banner a.hover:hover,
     .b-profile-banner a.hover:visited {
-        margin-left: calc( 362px - 54px );
-    }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .b-profile-banner a,
-    .b-profile-banner a:hover,
-    .b-profile-banner a:visited,
-    .b-profile-banner a.hover,
-    .b-profile-banner a.hover:hover,
-    .b-profile-banner a.hover:visited {
-        margin-left: calc( 467px - 54px );
-    }
-}
-@media only screen and (min-width: 1200px) {
-    .b-profile-banner a,
-    .b-profile-banner a:hover,
-    .b-profile-banner a:visited,
-    .b-profile-banner a.hover,
-    .b-profile-banner a.hover:hover,
-    .b-profile-banner a.hover:visited {
-        margin-left: calc( 564px - 54px );
+        margin-left: calc( 497.5px );
     }
 }
 
@@ -115,9 +95,47 @@ body.pushable > .pusher {
     top: -71px;
     left: 0;
 }
+.b-profile-face-line {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background-color: #fff;
+}
+.b-profile-face-percentage,
+.b-profile-face-txt {
+    position: absolute;
+    top: -52px;
+    left: 50%;
+    color: #fff;
+    line-height: 26px;
+    white-space: nowrap;
+}
+.b-profile-face-percentage {
+    width: 70px;
+    font-size: 26px;
+    margin-left: -25px;
+    text-align: center;
+}
+.b-profile-face-txt {
+    margin-left: 52px;
+}
+.b-profile-face-img {
+    cursor: pointer;
+}
 .b-profile-face img {
     margin: 5%;
     width: 90%;
+}
+.b-profile-face img.edit,
+.b-profile-face img.editHover {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.b-profile-face img.edit {
+    display: none;
 }
 
 .b-profile-face {
@@ -150,11 +168,11 @@ progress.progress2 {
     z-index: -1;
 }
 .b-profile-face {
-  background-color: black;
+  background-color: #2E363C;
 }
 progress.progress::-webkit-progress-value:before,
 progress.progress2::-webkit-progress-value:before {
-  background-color: gray;
+  background-color: #fff;
 }
 
 .b-profile-preview {
@@ -163,7 +181,7 @@ progress.progress2::-webkit-progress-value:before {
 }
 @media only screen and (max-width: 991px) {
     .b-profile-face {
-        position: static;
+        position: relative;
         top: auto;
         left: auto;
         margin-top: -50%;

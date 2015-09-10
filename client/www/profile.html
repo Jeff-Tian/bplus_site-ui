@@ -39,9 +39,15 @@
             <div class="five wide column">
                 <div class="b-profile-left-section" ng-controller="achievement">
                     <div class="b-profile-face">
+                        <div class="b-profile-face-line"></div>
+                        <div class="b-profile-face-percentage">{{data.progress}}%</div>
+                        <div class="b-profile-face-txt">简历完成度{{data.progress}}%，{{data.tip}}</div>
                         <progress id="b-profile-face-progress2" class="progress2" value="50"></progress>
                         <progress id="b-profile-face-progress" class="progress" value="0"></progress>
-                        <img ng-src="{{data.face}}" />
+                        <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit='edit'">
+                            <img ng-src="{{data.face}}" />
+                            <img src="/img/profile/icon_profile_picture_edit.png" class="{{classNameFaceEdit}}" />
+                        </div>
                     </div>
                     <div class="b-profile-preview">
                         <button class="ui basic button"><i class="icon"></i>预览简历</button>
