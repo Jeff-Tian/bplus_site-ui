@@ -82,13 +82,14 @@ angular.module('mates', [
     var animateGif = function() {
 
         if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-            $('.online-gif').html("<img src='img/salespage/gif/online-animate.gif' width='160px'>");
-            $('.top-gif').html("<img src='img/salespage/gif/top-animate.gif' width='160px'>");
-            $('.enhance-gif').html("<img src='img/salespage/gif/enhance-animate.gif' width='160px'>");
+            $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
+            $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
+            $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
+
             setTimeout(function() {
-                $('.online-gif').html("<img src='img/salespage/gif/online.png' width='160px'>");
-                $('.top-gif').html("<img src='img/salespage/gif/top.png' width='160px'>");
-                $('.enhance-gif').html("<img src='img/salespage/gif/enhance.png' width='160px'>");
+                $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
+                $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
+                $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
             }, 500);
         }
     };

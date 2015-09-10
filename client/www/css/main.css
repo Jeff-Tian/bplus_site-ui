@@ -3247,6 +3247,7 @@ body.pushable .pusher {
 }
 .b-advantage .b-advantage-item .image {
   margin-bottom: 1.2rem;
+  min-height: 165px;
 }
 .b-advantage .b-advantage-item .content .header {
   font-size: 1.6em;
@@ -3414,6 +3415,11 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-action {
   margin-top: 2rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .b-jobs .b-jobs-list {
+    padding: 1.5rem 2rem;
+  }
 }
 /*
 * - @Bridge+
