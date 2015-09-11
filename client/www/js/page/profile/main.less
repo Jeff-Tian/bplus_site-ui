@@ -124,11 +124,13 @@ body.pushable > .pusher,
     margin-left: 52px;
 }
 .b-profile-face-img {
+    border-radius: 50%;
     cursor: pointer;
 }
 .b-profile-face img {
     margin: 6%;
     width: 88%;
+    border-radius: 50%;
 }
 .b-profile-face img.edit {
     display: none;
@@ -252,9 +254,25 @@ body.pushable > .pusher,
     color: #787878;
 }
 .b-profile-right-section-header {
-    border-bottom: solid 2px #BEBEBE;
-    padding: 1rem 2rem;
+    margin: 0 !important;
+    border: 0  !important;
+    border-bottom: solid 2px #BEBEBE !important;
+    padding: 1rem 2rem !important;
     background-color: #fff;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+}
+.b-profile-right-section-header:hover {
+    background-color: #e6e6e6;
+    box-shadow: 0px 0px 0px 1px transparent inset, 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+}
+.b-profile-right-section-header-hover {
+    cursor: default !important;
+}
+.b-profile-right-section-header-hover:hover {
+    background-color: #fff;
+    box-shadow: none;
 }
 .b-profile-right-section-header > .ui.header {
     margin-bottom: 0;
@@ -268,12 +286,14 @@ body.pushable > .pusher,
     background-position: center center;
     background-size: cover;
 }
-.b-profile-right-section-form {
-    ;
+.b-profile-right-section-tip-fill img {
+    width: 1.8em !important;
 }
-.b-profile-right-section-btn-append button {
-    color: #fff !important;
-    border-radius: 0 !important;
+.b-profile-right-section-header > .ui.header.b-profile-right-section-tip-fill > .content {
+    color: #deddde;
+}
+.b-profile-right-section-header > .ui.header.red > .content {
+    color: #db2828 !important;
 }
 .b-profile-right-section-personalinfo .b-profile-right-section-header > .ui.header > .icon {
     background-image: url(/img/profile/icon_profile_personal.png);
@@ -286,4 +306,38 @@ body.pushable > .pusher,
 }
 .b-profile-right-section-clubexperience .b-profile-right-section-header > .ui.header > .icon {
     background-image: url(/img/profile/icon_profile_league.png);
+}
+.b-profile-right-section-workingexperience .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_experience.png);
+}
+.b-profile-right-section-language .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_language.png);
+}
+.b-profile-right-section-award .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_award.png);
+}
+.b-profile-right-section-section {
+    margin-bottom: 1px;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+}
+.b-profile-right-section-section:last-child {
+    margin-bottom: 0;
+}
+.b-profile-right-section-form {
+    ;
+}
+.b-profile-right-section-displaymode {
+    color: #323232;
+}
+.b-profile-right-section-txt {
+    margin-bottom: 1rem;
+    color: #787878;
+}
+.b-profile-right-section-txt:last-child {
+    margin-bottom: 0;
+}
+.b-profile-right-section-btn-append button {
+    color: #fff !important;
+    border-radius: 0 !important;
 }

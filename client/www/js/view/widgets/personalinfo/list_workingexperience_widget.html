@@ -1,58 +1,58 @@
 <div>
-  <!--EDIT MODE-->
-  <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT">
-    <form name="workexperience" novalidate>
-      <div>
-        <div class="invalidtext" ng-show="clicked && (!dateFrom.fulfilled || !dateTo.fulfilled || workexperience.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
-        <div>公司名称</div>
-        <input type="text" name="companyname" ng-model="data.name" required/>
-        <div>工作类型</div>
-        <select name="background" ng-model="data.type" required>
-          <option value="">请选择。。</option>
-          <option value="全职">全职</option>
-          <option value="兼职">兼职</option>
-        </select>
-        <div>行业</div>
-        <input type="text" name="industry" ng-model="data.industry" required/>
-        <div>职位</div>
-        <input type="text" name="position" ng-model="data.position" required/>
-        <div>工作时间</div>
-        <div>
-          <span>
-            <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled"/>
-          </span>
-          <span>----</span>
-          <span>
-            <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled"/>
-          </span>
-        </div>
-        <div>
-          <input type="checkbox" ng-model="data.dateTo.tillNow">目前工作中
-        </div>
-        <div>经历描述</div>
-          <bplustag value="data.tags" description="data.description"/>
-        <div>
-         <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
-         <button type="button" ng-click="cancel()">取消</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!--DISPLAY MODE-->
-  <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY">
-    <h2 ng-bind="data.name" ng-click="edit()"></h2>
-    <div ng-bind="data.type"></div>
-    <div ng-bind="data.industry"></div>
-    <div ng-bind="data.position"></div>
-    <div>
-      <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
-      <span>----</span>
-      <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
-      <!--<div>
-        TODO, till now
-      </div>-->
+    <!--EDIT MODE-->
+    <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
+        <form name="workexperience" novalidate>
+            <div>
+                <div class="invalidtext" ng-show="clicked && (!dateFrom.fulfilled || !dateTo.fulfilled || workexperience.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div>公司名称</div>
+                <input type="text" name="companyname" ng-model="data.name" required/>
+                <div>工作类型</div>
+                <select name="background" ng-model="data.type" required>
+                    <option value="">请选择。。</option>
+                    <option value="全职">全职</option>
+                    <option value="兼职">兼职</option>
+                </select>
+                <div>行业</div>
+                <input type="text" name="industry" ng-model="data.industry" required/>
+                <div>职位</div>
+                <input type="text" name="position" ng-model="data.position" required/>
+                <div>工作时间</div>
+                    <div>
+                        <span>
+                        <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled"/>
+                    </span>
+                    <span>----</span>
+                    <span>
+                        <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled"/>
+                    </span>
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="data.dateTo.tillNow">目前工作中
+                </div>
+                <div>经历描述</div>
+                <bplustag value="data.tags" description="data.description"/>
+                <div>
+                    <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
+                    <button type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div ng-bind="data.description"></div>
-    <div ng-bind="data.tags"></div>
-  </div>
+    <!--DISPLAY MODE-->
+    <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
+        <h2 ng-bind="data.name" ng-click="edit()"></h2>
+        <div ng-bind="data.type" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.industry" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.position" class="b-profile-right-section-txt"></div>
+        <div class="b-profile-right-section-txt">
+            <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
+            <span>----</span>
+            <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
+            <!--<div>
+              TODO, till now
+            </div>-->
+        </div>
+        <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>
+    </div>
 </div>

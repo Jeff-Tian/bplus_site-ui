@@ -1,9 +1,15 @@
 <div class="b-profile-right-section-clubexperience">
-    <div class="b-profile-right-section-header">
-        <div class="ui medium header"><i class="icon"></i><div class="content">社团经验</div></div>
-        <span ng-hide="hasData">你还没填写</span>
+    <div class="ui clearing segment b-profile-right-section-header">
+        <div class="ui medium left floated header">
+            <i class="icon"></i>
+            <div class="content">社团经验</div>
+        </div>
+        <div ng-hide="hasData" class="ui small right floated header b-profile-right-section-tip-fill">
+            <img class="ui image" src="/img/profile/icon_remind_g.png" />
+            <div class="content">你还没填写</div>
+        </div>
     </div>
-    <div ng-repeat="data in dataCollection" class="b-profile-right-section-form">
+    <div ng-repeat="data in dataCollection" class="b-profile-right-section-section">
         <bplusclubexperience data="data"/>
     </div>
     <div ng-show="showAddButton" class="b-profile-right-section-btn-append">

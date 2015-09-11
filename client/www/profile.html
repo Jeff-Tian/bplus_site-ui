@@ -36,8 +36,8 @@
                 <div class="b-profile-left-section" ng-controller="achievement">
                     <div class="b-profile-face">
                         <div class="b-profile-face-line"></div>
-                        <div class="b-profile-face-percentage">{{data.progress}}%</div>
-                        <div class="b-profile-face-txt">简历完成度{{data.progress}}%，{{data.tip}}</div>
+                        <div class="b-profile-face-percentage" ng-bind="data.progress + '%'"></div>
+                        <div class="b-profile-face-txt" ng-bind="'简历完成度' + data.progress + '%，' + data.tip"></div>
                         <div class="progress-circle">
                             <div class="progress-pie-left"><div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div></div>
                             <div class="progress-pie-right"><div id="progressRight" class="progress-right" style="transform:rotate(0deg);"></div></div>
@@ -62,17 +62,17 @@
                             <div class="ui horizontal list b-profile-achievement-imgs">
                                 <div class="item b-profile-achievement-imgs-level">
                                     <i class="icon"></i>
-                                    <div class="content">等级{{data.level}}</div>
+                                    <div class="content" ng-bind="'等级' + data.level"></div>
                                 </div>
                                 <div class="item b-profile-achievement-imgs-fraction">
                                     <i class="icon"></i>
-                                    <div class="content">积分{{data.score}}</div>
+                                    <div class="content" ng-bind="'积分' + data.score"></div>
                                 </div>
                             </div>
                             <div class="ui list b-profile-li">
                                 <div class="item" ng-repeat="i in data.list">
                                     <i class="icon"></i>
-                                    <div class="content">{{i.title}}{{i.score}}</div>
+                                    <div class="content" ng-bind="i.title + i.score"></div>
                                 </div>
                             </div>
                         </div>
@@ -88,12 +88,12 @@
                             <div class="ui list b-profile-li">
                                 <div class="item" ng-repeat="i in data.list">
                                     <i class="icon"></i>
-                                    <div class="content">{{i.title}}</div>
+                                    <div class="content" ng-bind="i.title"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="b-profile-growing-buttons">
-                            <button class="fluid ui basic button" ng-repeat="i in data.buttons">{{i.title}}</button>
+                            <button class="fluid ui basic button" ng-repeat="i in data.buttons" ng-bind="i.title"></button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +111,15 @@
                 </div>
                 <div class="b-profile-right-section">
                     <bplusclubexperienceall />
+                </div>
+                <div class="b-profile-right-section">
+                    <bplusworkexperienceall />
+                </div>
+                <div class="b-profile-right-section">
+                    <bplusawardall />
+                </div>
+                <div class="b-profile-right-section">
+                    <bpluslanguageall />
                 </div>
             </div>
         </div>
