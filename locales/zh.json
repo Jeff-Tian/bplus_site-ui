@@ -40,5 +40,10 @@
   "PleaseInputMobileVerificationCode": "请输入手机验证码",
   "PleaseSetSignInPassword": "请设置登录密码",
   "Done": "完成",
-  "en": "English"
+  "en": "English",
+  "70006": "手机号与密码不匹配",
+  "70009": "手机号码已被注册",
+  "100": "验证码不正确",
+  "NoResponseFromServer": "未得到服务器响应",
+  "SignedInWelcomeMessage": "{user.name}已成功登录,欢迎你回来!"
 }

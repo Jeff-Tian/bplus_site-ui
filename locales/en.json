@@ -39,5 +39,10 @@
   "PleaseInputMobileVerificationCode": "Please input mobile verification code",
   "PleaseSetSignInPassword": "Please set sign in password",
   "Done": "Done",
-  "zh": "中文"
+  "zh": "中文",
+  "70006": "Invalid identity or password",
+  "70009": "Identity already existed",
+  "100": "validate not pass",
+  "NoResponseFromServer": "No response from server",
+  "SignedInWelcomeMessage": "Welcome back, {user.name}!"
 }

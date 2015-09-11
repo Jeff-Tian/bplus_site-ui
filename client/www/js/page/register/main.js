@@ -35,7 +35,7 @@ angular.module('signIn', ['pascalprecht.translate'])
         };
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
-    .controller('LoginCtrl', ['$scope', 'FormValidation', 'service', 'MessageStore', function ($scope, FormValidation, service, MessageStore) {
+    .controller('LoginCtrl', ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', function ($scope, FormValidation, service, MessageStore, $filter) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -52,22 +52,30 @@ angular.module('signIn', ['pascalprecht.translate'])
             return $loginForm.form('is valid');
         };
 
+        var submitting = false;
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
+
+            if (submitting) {
+                return;
+            }
 
             if (!$scope.isLoginFormValid()) {
                 return;
             }
 
+            submitting = true;
             service.post('/service-proxy/logon/authentication', {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe
             }).then(function (res) {
-                MessageStore.set('{user.name}已成功登录,欢迎你回来!');
+                MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
-                window.location.href = '/';
-            }).catch(FormValidation.delegateHandleFormError($loginForm));
+                window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
+            }).catch(FormValidation.delegateHandleFormError($loginForm)).finally(function () {
+                submitting = false;
+            });
         };
     }])
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {

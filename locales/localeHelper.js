@@ -46,6 +46,13 @@
         setLocalVars: function (req, res, next) {
             res.locals.otherLocale = i18n.getLocale(req) === 'zh' ? 'en' : 'zh';
             res.locals.otherLocaleLink = helper.generateLocaleLink(req.url, res.locals.otherLocale);
+            res.locals.localeLink = function (path) {
+                if (path[0] !== '/') {
+                    path = '/' + path;
+                }
+
+                return '/' + i18n.getLocale(req) + path;
+            };
 
             next();
         },

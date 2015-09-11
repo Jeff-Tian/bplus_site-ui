@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.captcha = function ($http) {
+    exports.captcha = function (service) {
         var captchaServiceDomain = 'http://' + angular.bplus.config.captcha.host + ':' + angular.bplus.config.captcha.port;
 
         return {
@@ -12,21 +12,14 @@
                 }
 
                 function refreshCaptcha(successCallback) {
-                    $http({
-                        method: 'JSONP',
-                        url: captchaServiceDomain + '/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus'
-                    }).success(function (response) {
-                        if (response.isSuccess !== false) {
-                            $scope.captchaImageUrl = captchaServiceDomain + response.result.url;
-                            ngModel.$setViewValue(response.result.id);
+                    service.jsonp(captchaServiceDomain + '/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus').then(function (result) {
+                        $scope.captchaImageUrl = captchaServiceDomain + result.url;
+                        ngModel.$setViewValue(result.id);
 
-                            if (typeof successCallback === 'function') {
-                                successCallback();
-                            }
-                        } else {
-                            errorHandler(response);
+                        if (typeof successCallback === 'function') {
+                            successCallback();
                         }
-                    }).error(errorHandler);
+                    }).catch(errorHandler);
                 }
 
                 $scope.refreshCaptcha = refreshCaptcha;
@@ -36,5 +29,5 @@
         };
     };
 
-    exports.captcha.$inject = ['$http'];
+    exports.captcha.$inject = ['service'];
 })(angular.bplus = angular.bplus || {});

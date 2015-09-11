@@ -18,8 +18,8 @@
             </a>
 
             <div class="right item">
-                <a href="signin#/login" class="ui button"><%= __('SignIn') %></a>
-                <a href="signin#register" class="ui button">注册</a>
+                <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
+                <a href="<%= localeLink('signin#register') %>" class="ui button">注册</a>
                 <a href="<%= otherLocaleLink %>" class="ui button"><%= __('otherLocale') %></a>
             </div>
         </div>
@@ -31,20 +31,20 @@
             </a>
 
             <div class="right item">
-                <a href="/index" class="ui button"><%= __('Home') %></a>
-                <a href="/study" class="ui button"><%= __('Learn') %></a>
-                <a href="/game" class="ui button"><%= __('Play') %></a>
-                <a href="/opportunity" class="ui button"><%= __('Opportunity') %></a>
+                <a href="<%= localeLink('/index') %>" class="ui button"><%= __('Home') %></a>
+                <a href="<%= localeLink('/study') %>" class="ui button"><%= __('Learn') %></a>
+                <a href="<%= localeLink('/game') %>" class="ui button"><%= __('Play') %></a>
+                <a href="<%= localeLink('/opportunity') %>" class="ui button"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>
 </div>
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
-    <a href="/index" class="item active"><%= __('Home') %></a>
-    <a href="/study" class="item"><%= __('Learn') %></a>
-    <a href="/game" class="item"><%= __('Play') %></a>
-    <a href="/opportunity" class="item"><%= __('Opportunity') %></a>
+    <a href="<%= localeLink('/index') %>" class="item active"><%= __('Home') %></a>
+    <a href="<%= localeLink('/study') %>" class="item"><%= __('Learn') %></a>
+    <a href="<%= localeLink('/game') %>" class="item"><%= __('Play') %></a>
+    <a href="<%= localeLink('/opportunity') %>" class="item"><%= __('Opportunity') %></a>
 </div>
 <!-- Initial Menu -->
 <div class="ui b-header">
@@ -71,8 +71,8 @@
                     </div>
                 </div>
                 <% } else { %>
-                <a href="signin#/login" class="ui button"><%= __('SignIn') %></a>
-                <a href="signin#/register" class="ui button"><%= __('SignUp') %></a>
+                <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
+                <a href="<%= localeLink('signin#/register') %>" class="ui button"><%= __('SignUp') %></a>
                 <% } %>
                 <a href="<%= otherLocaleLink %>" class="ui button"><%= __(otherLocale) %></a>
             </div>
@@ -85,10 +85,10 @@
             </a>
 
             <div class="right item">
-                <a href="/index" class="ui button"><%= __('Home') %></a>
-                <a href="/study" class="ui button"><%= __('Learn') %></a>
-                <a href="/game" class="ui button"><%= __('Play') %></a>
-                <a href="/opportunity" class="ui button"><%= __('Opportunity') %></a>
+                <a href="<%= localeLink('/index') %>" class="ui button"><%= __('Home') %></a>
+                <a href="<%= localeLink('/study') %>" class="ui button"><%= __('Learn') %></a>
+                <a href="<%= localeLink('/game') %>" class="ui button"><%= __('Play') %></a>
+                <a href="<%= localeLink('/opportunity') %>" class="ui button"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>

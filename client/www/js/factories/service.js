@@ -41,7 +41,13 @@
                     if (res.isSuccess) {
                         dfd.resolve(res.result);
                     } else {
-                        dfd.reject(res.message || '服务器返回错误的数据');
+                        console.error(res);
+
+                        if (typeof res.code !== 'undefined') {
+                            dfd.reject(res);
+                        } else {
+                            dfd.reject(res.message || '服务器返回错误的数据');
+                        }
                     }
                 }).error(function (reason) {
                     dfd.reject(reason);
