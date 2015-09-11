@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>手机绑定 - Bridge+</title>
-    <meta name="description" content="Bridge+">
+    <title><%= __('SEOTitle_MobileBinding') %></title>
+    <meta name="description" content="<%= __('SEODesc_MobileBinding')">
     <%- include('view-partial/head.html') -%>
     <!--LESS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -17,7 +17,7 @@
     <div class="ui column b-signin-container">
         <div class="b-signin-wide">
             <div class="ui center aligned container subcontainer">
-                <h2 class="grey color">手机绑定</h2>
+                <h2 class="grey color"><%= __('BindMobile') %></h2>
             </div>
 
             <div class="ui bind-mobile" ng-controller="BindMobileCtrl">
