@@ -1,12 +1,12 @@
-<div>
-  <div>
-    <span>个人信息</span>
-    <span ng-hide="hasData">完成才可以参加团战</span>
-  </div>
-  <div ng-repeat="data in dataCollection">
-    <bpluspersonalinfo data="data"/>
-  </div>
-  <div ng-hide="hasData">
-    <button type="button" ng-click="add()">添加个人信息</button>
-  </div>
+<div class="b-profile-right-section-personalinfo">
+    <div class="b-profile-right-section-header">
+        <div class="ui medium header"><i class="icon"></i><div class="content">个人信息</div></div>
+        <span ng-hide="hasData">完成才可以参加团战</span>
+    </div>
+    <div ng-repeat="data in dataCollection" class="b-profile-right-section-form">
+        <bpluspersonalinfo data="data"/>
+    </div>
+    <div ng-hide="hasData" class="b-profile-right-section-btn-append">
+        <button class="fluid ui button" type="button" ng-click="add()">添加个人信息</button>
+    </div>
 </div>

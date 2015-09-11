@@ -143,29 +143,29 @@ body.pushable > .pusher,
 .b-profile-face {
     width: 142px;
     height: 142px;
-    background-color: #2E363C;
+    /* background-color: #2E363C; */
     border-radius: 50%;
 }
 .b-profile-face .progress-circle {
     position: absolute;
     z-index: -1;
-    margin: 2px;
+    /* margin: 2px; */
 }
 .b-profile-face .progress-circle,
 .b-profile-face .progress-left,
 .b-profile-face .progress-right,
 .b-profile-face .progress-pie-left,
 .b-profile-face .progress-pie-right {
-    width: 138px;
-    height: 138px;
+    width: 142px;
+    height: 142px;
 }
 .b-profile-face .progress-pie-left,
 .b-profile-face .progress-left {
-    clip: rect(0, 69px, auto, 0);
+    clip: rect(0, 71px, auto, 0);
 }
 .b-profile-face .progress-pie-right,
 .b-profile-face .progress-right {
-    clip: rect(0, auto, auto, 69px);
+    clip: rect(0, auto, auto, 71px);
 }
 .b-profile-face .progress-circle {
     background: #fff;
@@ -249,7 +249,41 @@ body.pushable > .pusher,
 .b-profile-right-section {
     position: relative;
     margin-bottom: 1em;
+    color: #787878;
+}
+.b-profile-right-section-header {
     border-bottom: solid 2px #BEBEBE;
-    padding: 1em;
+    padding: 1rem 2rem;
     background-color: #fff;
+}
+.b-profile-right-section-header > .ui.header {
+    margin-bottom: 0;
+}
+.b-profile-right-section-header > .ui.header > .content {
+    font-weight: normal;
+    color: #787878;
+}
+.b-profile-right-section-header > .ui.header > .icon {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.b-profile-right-section-form {
+    ;
+}
+.b-profile-right-section-btn-append button {
+    color: #fff !important;
+    border-radius: 0 !important;
+}
+.b-profile-right-section-personalinfo .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_personal.png);
+}
+.b-profile-right-section-skills .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_skill.png);
+}
+.b-profile-right-section-educationbackground .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_education.png);
+}
+.b-profile-right-section-clubexperience .b-profile-right-section-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_league.png);
 }
