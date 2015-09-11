@@ -1,4 +1,37 @@
 (function (exports) {
+    /**
+     * A $http wrapper that dedicate to pre handle the return data by service api. For example, check the
+     * isSuccess and invoke the successCallback and errorCallback accordingly.
+     *
+     * Without it, you have to write code like this:
+     *      $http.get(url)
+     *          .success(function(res){
+     *              if(res.isSuccess) {
+     *                  successCallback(res.result);
+     *              } else {
+     *                  errorCallback(res.message);
+     *              }
+     *          }).error(function(res){
+     *              errorCallback(res.message);
+     *          })
+     *      ;
+     *
+     * With service, you can simplify the above code to:
+     *      $service.get(url)
+     *          .then(successCallback)
+     *          .catch(errorCallback)
+     *      ;
+     *
+     * For each method provided by $http, service has one with the same name:
+     *      $http.get       --> service.get
+     *      $http.post      --> service.post
+     *      $http.delete    --> service.delete
+     *      ...
+     *
+     * @param $http
+     * @param $q
+     * @returns {{}}
+     */
     exports.service = function ($http, $q) {
         function handleHttpPromise(httpPromise) {
             var dfd = $q.defer();
@@ -20,7 +53,7 @@
         var s = {};
 
         for (var method in $http) {
-            if (typeof $http[method] === 'function') {
+            if ($http.hasOwnProperty(method) && typeof $http[method] === 'function') {
                 s[method] = (function (m) {
                     return function () {
                         return handleHttpPromise($http[m].apply(this, Array.prototype.slice.call(arguments)));
