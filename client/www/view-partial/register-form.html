@@ -4,25 +4,28 @@
         <div class="field">
             <div class="ui left icon input">
                 <i class="phone icon"></i>
-                <input type="text" name="mobile" placeholder="<%= __('PleaseInputMobileNumber') %>" ng-model="signUpData.mobile"
+                <input type="text" name="mobile" placeholder="{{'PleaseInputMobileNumber'| translate}}"
+                       ng-model="signUpData.mobile"
                        ng-enter>
             </div>
         </div>
         <div class="field absolute-prompt">
             <div class="ui left icon input">
                 <i class="write icon"></i>
-                <input type="text" name="captcha" placeholder="<%= __('PleaseInputCaptcha') %>" ng-model="signUpData.captcha" ng-enter>
+                <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
+                       ng-model="signUpData.captcha" ng-enter>
                 &nbsp;
                 <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
             </div>
             <div class="ui right aligned container subcontainer">
-                <a href="javascript: void(0);" ng-click="refreshCaptcha()"><%= __('RefreshCaptcha') %></a>
+                <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
             </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
                 <i class="write icon" ng-show="sendCodeButtonClicked"></i>
-                <input type="text" name="verificationCode" placeholder="<%= __('PleaseInputMobileVerificationCode') %>"
+                <input type="text" name="verificationCode"
+                       placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
                        ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
                 &nbsp;
                 <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
@@ -35,13 +38,13 @@
         <div class="field">
             <div class="ui left icon input">
                 <i class="lock icon"></i>
-                <input type="password" name="password" placeholder="<%= __('PleaseSetSignInPassword') %>"
+                <input type="password" name="password" placeholder="{{'PleaseSetSignInPassword' | translate}}"
                        ng-model="signUpData.password">
             </div>
         </div>
         <div class="field">
             <button type="submit" class="ui fluid huge red submit button"
-                    ng-disabled="!isSignUpFormFullyValid()"><%= __('Done') %>
+                    ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
             </button>
         </div>
     </div>

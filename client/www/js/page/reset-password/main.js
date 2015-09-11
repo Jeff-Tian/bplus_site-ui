@@ -2,7 +2,9 @@
 
 
 // Declare app level module which depends on views, and components
-angular.module('resetPassword', [])
+angular.module('resetPassword', ['pascalprecht.translate'])
+    .config(angular.bplus.translate)
+    .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)

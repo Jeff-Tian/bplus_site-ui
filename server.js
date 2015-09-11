@@ -40,6 +40,8 @@ supportedLocales.map(function (l) {
 });
 
 server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
+server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
+server.use('/translation', localeHelper.serveTranslations);
 
 // Customize client file path
 server.set('views', __dirname + '/client/www');
