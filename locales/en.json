@@ -3,5 +3,21 @@
   "SEOTitle_SignIn": "Log On to Bridge+",
   "SEODesc_SignIn": "Bridge+",
   "SignIn": "Sign In",
-  "zh": "中文"
+  "zh": "中文",
+  "Home": "Home",
+  "Learn": "Learn",
+  "Opportunity": "Opportunity",
+  "Play": "Play",
+  "Profile": "Profile",
+  "SignOut": "Sign Out",
+  "NoAccount": "No account? ",
+  "SignUpNow": "Sign up now",
+  "Mobile": "Mobile Number",
+  "Password": "Password",
+  "PleaseInputPassword": "Please input password",
+  "RememberMe": "Remember me",
+  "ForgotPassword": "Forgot password",
+  "SignInWithOtherWays": "Sign in with other ways:",
+  "HasAccount": "Has account or wechat? ",
+  "SignInNow": "Sign me in"
 }

@@ -18,9 +18,9 @@
             </a>
 
             <div class="right item">
-                <a href="signin#/login" class="ui button">登录</a>
+                <a href="signin#/login" class="ui button"><%= __('SignIn') %></a>
                 <a href="signin#register" class="ui button">注册</a>
-                <a href="#English" class="ui button">English</a>
+                <a href="<%= otherLocaleLink %>" class="ui button"><%= __('otherLocale') %></a>
             </div>
         </div>
     </div>
@@ -31,20 +31,20 @@
             </a>
 
             <div class="right item">
-                <a href="/index" class="ui button">首页</a>
-                <a href="/study" class="ui button">学习</a>
-                <a href="/game" class="ui button">游戏</a>
-                <a href="/opportunity" class="ui button">机会</a>
+                <a href="/index" class="ui button"><%= __('Home') %></a>
+                <a href="/study" class="ui button"><%= __('Learn') %></a>
+                <a href="/game" class="ui button"><%= __('Play') %></a>
+                <a href="/opportunity" class="ui button"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>
 </div>
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
-    <a href="/index" class="item active">首页</a>
-    <a href="/study" class="item">学习</a>
-    <a href="/game" class="item">游戏</a>
-    <a href="/opportunity" class="item">机会</a>
+    <a href="/index" class="item active"><%= __('Home') %></a>
+    <a href="/study" class="item"><%= __('Learn') %></a>
+    <a href="/game" class="item"><%= __('Play') %></a>
+    <a href="/opportunity" class="item"><%= __('Opportunity') %></a>
 </div>
 <!-- Initial Menu -->
 <div class="ui b-header">
@@ -66,13 +66,13 @@
                     <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
 
                     <div class="menu">
-                        <a class="item">个人资料</a>
-                        <a class="item" ng-click="signOut()">退出</a>
+                        <a class="item"><%= __('Profile') %></a>
+                        <a class="item" ng-click="signOut()"><%= __('SignOut') %></a>
                     </div>
                 </div>
                 <% } else { %>
-                <a href="signin#/login" class="ui button">登录</a>
-                <a href="signin#/register" class="ui button">注册</a>
+                <a href="signin#/login" class="ui button"><%= __('SignIn') %></a>
+                <a href="signin#/register" class="ui button"><%= __('SignUp') %></a>
                 <% } %>
                 <a href="<%= otherLocaleLink %>" class="ui button"><%= __(otherLocale) %></a>
             </div>
@@ -85,10 +85,10 @@
             </a>
 
             <div class="right item">
-                <a href="/index" class="ui button">首页</a>
-                <a href="/study" class="ui button">学习</a>
-                <a href="/game" class="ui button">游戏</a>
-                <a href="/opportunity" class="ui button">机会</a>
+                <a href="/index" class="ui button"><%= __('Home') %></a>
+                <a href="/study" class="ui button"><%= __('Learn') %></a>
+                <a href="/game" class="ui button"><%= __('Play') %></a>
+                <a href="/opportunity" class="ui button"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>

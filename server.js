@@ -8,7 +8,8 @@ var localeHelper = require('./locales/localeHelper.js');
 var supportedLocales = localeHelper.supportedLocales;
 i18n.configure({
     locales: supportedLocales,
-    directory: __dirname + '/locales'
+    directory: __dirname + '/locales',
+    updateFiles: false
 });
 
 // Node.js template engine
@@ -50,13 +51,13 @@ supportedLocales.map(function (l) {
 server.use('/service-proxy', require('./serviceProxy'));
 
 // Page route define
-server.get('/index', function (req, res) {
+server.get(localeHelper.regexPath('/index'), function (req, res) {
     res.render('index');
 });
-server.get('/game', function (req, res) {
+server.get(localeHelper.regexPath('/game'), function (req, res) {
     res.render('game');
 });
-server.get('/opportunity', function (req, res) {
+server.get(localeHelper.regexPath('/opportunity'), function (req, res) {
     res.render('opportunity');
 });
 server.get('/data', require('./client/www/api/data.js').getData);
@@ -65,23 +66,23 @@ server.get(localeHelper.regexPath('/signin'), function (req, res) {
     res.render('sign-in');
 });
 
-server.get('/reset-password', function (req, res) {
+server.get(localeHelper.regexPath('/reset-password'), function (req, res) {
     res.render('reset-password');
 });
 
-server.get('/reset-password-by-email', function (req, res) {
+server.get(localeHelper.regexPath('/reset-password-by-email'), function (req, res) {
     res.render('reset-password-by-email');
 });
 
-server.get('/set-password', function (req, res) {
+server.get(localeHelper.regexPath('/set-password'), function (req, res) {
     res.render('set-password');
 });
 
-server.get('/sign-up-from', function (req, res) {
+server.get(localeHelper.regexPath('/sign-up-from'), function (req, res) {
     res.render('sign-up-from');
 });
 
-server.get('/personal-history', function (req, res) {
+server.get(localeHelper.regexPath('/personal-history'), function (req, res) {
     res.render('personal-history');
 });
 
