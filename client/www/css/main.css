@@ -2893,7 +2893,6 @@ Copyright (c) 2015 Daniel Eden
 */
 h3.ui.header.b-sp {
   font-size: 2em;
-  font-weight: bold;
 }
 /*
 * - @Bridge+
@@ -2963,9 +2962,6 @@ h3.ui.header.b-sp {
 /*
 * - @Bridge+
 */
-.b-content {
-  fontsize: 1.05em;
-}
 /*
 * - @Bridge+
 */
@@ -3120,12 +3116,12 @@ body.pushable .pusher {
   vertical-align: middle;
 }
 .b-header .menu.b-header-nav .item .ui.button {
-  font-size: 1.05em;
+  font-size: 1em;
   font-weight: bold;
 }
 @media only screen and (max-width: 700px) {
   .b-header.fixed {
-    display: none!important;
+    display: none !important;
   }
   .b-header .menu.b-header-account .item,
   .b-header .menu.b-header-account .menu {
@@ -3135,7 +3131,7 @@ body.pushable .pusher {
     display: block;
   }
   .b-header .menu.b-header-nav .item.right {
-    display: none!important;
+    display: none !important;
   }
 }
 /*
@@ -3150,7 +3146,7 @@ body.pushable .pusher {
   font-weight: normal;
   border-left: 1px solid #7F7F7f;
   padding-left: 0.25em;
-  font-size: 1.05em;
+  font-size: 1em;
 }
 .footer a:hover.ui.header,
 .footer a:active.ui.header {
@@ -3174,7 +3170,7 @@ body.pushable .pusher {
 * - @Bridge+
 */
 .b-masthead {
-  min-height: 50rem;
+  min-height: 40rem;
 }
 .b-masthead .owl-theme .owl-controls {
   margin-top: -23px;
@@ -3255,7 +3251,7 @@ body.pushable .pusher {
   margin-bottom: .8rem;
 }
 .b-advantage .b-advantage-item .content .description p {
-  font-size: 1.05em;
+  font-size: 1em;
   line-height: 1.6em;
 }
 /*
@@ -3300,7 +3296,7 @@ body.pushable .pusher {
 }
 .b-theory .b-theory-content > p {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
   line-height: 2.4em;
 }
 /*
@@ -3337,7 +3333,7 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .meta {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .ui.divider {
   border-top-color: #ffffff;
@@ -3345,7 +3341,7 @@ body.pushable .pusher {
 }
 .b-jobs .b-jobs-pokesperson .ui.items > .item > .content .description > p {
   line-height: 1.6em;
-  font-size: 1.05em;
+  font-size: 1em;
   color: #e5e5e5;
 }
 .b-jobs .b-jobs-statistics {
@@ -3410,7 +3406,7 @@ body.pushable .pusher {
   font-size: 1.4em;
 }
 .b-jobs .b-jobs-list .ui.table td {
-  font-size: 1.25em;
+  font-size: 1.21em;
   color: #787878;
 }
 .b-jobs .b-jobs-action {
@@ -3454,7 +3450,7 @@ body.pushable .pusher {
   font-size: 1.5em;
 }
 .b-feedback .ui.items > .item > .content .meta {
-  font-size: 1.05em;
+  font-size: 1em;
   display: inline-block;
   margin: 0 0 0 .8rem;
 }
@@ -3464,7 +3460,7 @@ body.pushable .pusher {
 }
 .b-feedback .ui.items > .item > .content .description > p {
   line-height: 1.6em;
-  font-size: 1.05em;
+  font-size: 1em;
 }
 @media only screen and (min-width: 768px) and (max-width: 900px), only screen and (min-width: 992px) and (max-width: 1099px) {
   .b-masthead .owl-theme .owl-controls .owl-buttons .owl-prev,
@@ -3652,13 +3648,23 @@ body.pushable .pusher {
   font-size: 2em;
 }
 .opportunity-banner {
-  background: url('/img/salespage/banner.png');
-  min-height: 36rem;
+  background: url('/img/salespage/opportunity_banner.png');
+  height: 540px;
   padding: 10em 0;
   color: #ffffff;
 }
 .opportunity-banner .header {
   color: #ffffff;
+}
+.opportunity-banner h1.ui.header {
+  color: #ffffff;
+  font-size: 2.4em;
+}
+.opportunity-banner h2 {
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: normal;
+  line-height: 1.6em;
 }
 .ui.button.opportunity-gray {
   background-color: transparent;
@@ -3668,13 +3674,13 @@ body.pushable .pusher {
 .ui.button.opportunity-gray:hover {
   background: rgba(0, 0, 0, 0.2);
 }
-.opportunity-list-red .content h3 {
+.opportunity-list-red .content p {
   font-size: 2em;
   color: #ffffff;
   text-align: center;
   padding-top: 125px;
 }
-.opportunity-list-white .content h3 {
+.opportunity-list-white .content p {
   font-size: 2em;
   color: #ff3c42;
   text-align: center;
@@ -3781,7 +3787,7 @@ body.pushable .pusher {
   font-size: 1.4em;
 }
 .opportunity-box .back table td {
-  font-size: 1.25em;
+  font-size: 1.21em;
   color: #787878;
 }
 .b-opportunity-client {
@@ -3834,7 +3840,7 @@ body.pushable .pusher {
 }
 .b-opportunity-jobs .b-opportunity-pokesperson .description > p {
   line-height: 2.4em;
-  font-size: 1.05em;
+  font-size: 1em;
   color: #000000;
 }
 .b-opportunity-trial {
@@ -3847,12 +3853,12 @@ body.pushable .pusher {
 /*
 * - @Bridge+
 */
-.b-masthead {
-  min-height: 36rem;
+.b-game {
+  height: 540px;
   position: relative;
-  background: url('/img/salespage/banner.png');
+  background: url('/img/salespage/game_banner.png');
 }
-.b-masthead > .b-masthead-stripe {
+.b-game > .b-game-stripe {
   background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   bottom: 0;
@@ -3860,25 +3866,25 @@ body.pushable .pusher {
   width: 100%;
   padding: 1rem 0;
 }
-.b-masthead > .b-masthead-stripe h2.ui.header {
+.b-game > .b-game-stripe h2.ui.header {
   color: #ffffff;
   font-size: 2.4em;
   margin-top: 1.1rem;
 }
-.b-masthead > .b-masthead-stripe h3 {
+.b-game > .b-game-stripe h3 {
   color: #ffffff;
   font-weight: normal;
   font-size: 1.5em;
 }
-.b-masthead > .b-masthead-stripe p {
+.b-game > .b-game-stripe p {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
   line-height: 1.8em;
 }
-.b-masthead > .b-masthead-stripe p:first-child {
+.b-game > .b-game-stripe p:first-child {
   width: 88%;
 }
-.b-masthead > .b-masthead-stripe .ui.image.floated {
+.b-game > .b-game-stripe .ui.image.floated {
   margin-bottom: 0;
 }
 /*
@@ -3897,7 +3903,6 @@ body.pushable .pusher {
   background-color: #ff3c42;
   padding: 1.6rem 1.3rem;
   position: relative;
-  font-size: 1.3em;
 }
 .b-process .ui.grid .column.b-process-item > .content > .b-process-item-next {
   position: absolute;
@@ -3922,7 +3927,7 @@ body.pushable .pusher {
 }
 .b-process .ui.grid .column.b-process-item > .content p {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
 }
 .b-process .ui.grid .column.b-process-item > .image {
   background-color: #d2d2d2;
@@ -3959,7 +3964,7 @@ body.pushable .pusher {
 }
 .b-skill .b-skill-skill h3.ui.header {
   color: #ffffff;
-  font-size: 1.25em;
+  font-size: 1.21em;
   font-weight: bold;
 }
 .b-skill .b-skill-skill .ui.list .list {
@@ -4012,7 +4017,7 @@ body.pushable .pusher {
 }
 .b-popularity .b-theory-header .content > div {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
 }
 .b-popularity .b-theory-header .content > div p {
   line-height: 2.4em;
@@ -4028,7 +4033,7 @@ body.pushable .pusher {
 }
 .b-popularity .b-theory-content > p {
   color: #ffffff;
-  font-size: 1.05em;
+  font-size: 1em;
   line-height: 2.4em;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -4065,7 +4070,7 @@ body.pushable .pusher {
   color: #ff3c42;
 }
 .b-events .events-table td:not(.text-right) {
-  font-size: 1.05em;
+  font-size: 1em;
 }
 /*
 * - @Bridge+

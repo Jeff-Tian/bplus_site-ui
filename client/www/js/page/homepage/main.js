@@ -90,7 +90,7 @@ angular.module('mates', [
                 $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
                 $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
                 $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
-            }, 500);
+            }, 950);
         }
     };
 
