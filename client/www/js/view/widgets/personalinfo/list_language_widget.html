@@ -1,45 +1,49 @@
 <div>
     <!--EDIT MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
-        <form name="language" novalidate>
+        <form name="language" novalidate class="ui form">
             <div>
                 <div class="invalidtext" ng-show="clicked && language.$error.required">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div>
-                    <span>
-                        <div>使用语言</div>
-                        <select name="languagename" ng-model="data.name" required>
+                <div class="two fields">
+                    <div class="field">
+                        <label>使用语言</label>
+                        <select name="languagename" ng-model="data.name" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
                             <option value="英语">英语</option>
                             <option value="俄语">俄语</option>
                         </select>
-                    </span>
-                    <span>
-                        <div>熟练程度</div>
-                        <select name="proficiency" ng-model="data.proficiency" required>
+                    </div>
+                    <div class="field">
+                        <label>熟练程度</label>
+                        <select name="proficiency" ng-model="data.proficiency" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
                             <option value="初级（入门）">初级（入门）</option>
                             <option value="中级（运用）">中级（运用）</option>
                             <option value="高级（熟练）">高级（熟练）</option>
                         </select>
-                    </span>
+                    </div>
                 </div>
-                <div>
-                    <span>
-                        <div>证书</div>
-                        <select name="certification" ng-model="data.certification" required>
+                <div class="two fields">
+                    <div class="field">
+                        <label>证书</label>
+                        <select name="certification" ng-model="data.certification" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
                             <option value="四级">四级</option>
                             <option value="六级">六级</option>
                         </select>
-                    </span>
-                    <span>
-                        <div>分数</div>
-                        <input type="text" name="score" ng-model="data.score"/>
-                    </span>
+                    </div>
+                    <div class="field">
+                        <label>分数</label>
+                        <input type="text" name="score" ng-model="data.score" />
+                    </div>
                 </div>
-                <div>
-                    <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
-                    <button type="button" ng-click="cancel()">取消</button>
+                <div class="ui three column grid">
+                    <div class="column">
+                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                    </div>
+                    <div class="column">
+                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                    </div>
                 </div>
             </div>
         </form>

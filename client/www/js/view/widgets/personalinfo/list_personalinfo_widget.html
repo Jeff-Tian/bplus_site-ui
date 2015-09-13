@@ -25,7 +25,7 @@
                         <div class="four wide field">
                             <div class="field">
                                 <div class="ui checkbox">
-                                    <input type="checkbox" ng-model="data.dateOfBirth.isPrivate">
+                                    <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
                                     <label>设置为隐私</label>
                                 </div>
                             </div>
@@ -34,13 +34,13 @@
                 </div>
                 <div class="field">
                     <label>目前所在地</label>
-                    <input type="text" name="personallocation" ng-model="data.location" required placeholder="上海"/>
+                    <input type="text" name="personallocation" ng-model="data.location" required placeholder="上海" />
                 </div>
                 <div class="field">
                     <label>联系地址</label>
                     <div class="inline fields">
                         <div class="twelve wide field">
-                            <input type="text" name="personalcontractInfo" ng-model="data.contractInfo.value" placeholder="上海市人民路885号"/>
+                            <input type="text" name="personalcontractInfo" ng-model="data.contractInfo.value" placeholder="上海市人民路885号" />
                         </div>
                         <div class="four wide field">
                             <div class="ui checkbox">
@@ -50,9 +50,13 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button type="button" ng-click="submit()" ng-init="clicked=false">保存</button>
-                    <button type="button" ng-click="cancel()">取消</button>
+                <div class="ui three column grid">
+                    <div class="column">
+                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                    </div>
+                    <div class="column">
+                        <button typeu="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                    </div>
                 </div>
             </div>
         </form>
