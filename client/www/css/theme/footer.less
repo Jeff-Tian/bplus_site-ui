@@ -7,11 +7,22 @@
 	padding-top: 3rem;
 	padding-bottom: 3rem;
 
-	h4 {
+
+	a {
 		&.ui.header {
 			font-weight: normal;
+			border-left: 1px solid #7F7F7f;
+			padding-left: 0.25em;
+			font-size: 1.05em;
 		}
 	}
+	a:hover,a:active{
+		&.ui.header {
+			color: #FF3C42;
+			text-decoration: none;
+		}
+	}
+
 	.list {
 		> .item {
 			font-size: @fontsize-s;

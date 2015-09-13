@@ -4,20 +4,20 @@
 
 .b-popularity {
     background-color: #2e363d;
-    background-image: url("/img/salespage/theary_bg.png"), url("/img/salespage/theary_students.png");
-    background-repeat: no-repeat, no-repeat;  
-    background-position: right bottom, left bottom;  
-    background-size:100% 100%, auto 100%;
-    height:520px;
+    background-image: url("/img/salespage/popularity_bg.png");
+    background-repeat: no-repeat;  
+    background-position: center;  
+    background-size:auto auto;
+    height:700px;
 
     > .ui.container {
-        padding-top: 1.5rem;
+        padding-top: 5rem;
     }
 
     h3 {
         &.ui.header {
             color: @color-white;
-            font-size: @fontsize-5xl;
+            font-size: @fontsize-10xl;
         }
     }
 
@@ -25,15 +25,16 @@
         .content{
             > div {
                 color: @color-white;
-                line-height: 1.6em;
-                font-size: @fontsize-s;
+                font-size: 1.05em;
+                p{
+                    line-height:2.4em;
+                }
             }
         }
     }
     .b-theory-content {
-        padding-top: 5rem;
-        padding-left: 5rem !important;
-        padding-bottom: 5rem;
+        padding-top: 8rem;
+        padding-bottom: 8rem;
         > h3 {
             color: @color-white;
             font-size: @fontsize-5xl;
@@ -41,8 +42,8 @@
         }
         > p {
             color: @color-white;
-            font-size: @fontsize-s;
-            line-height: 2em;
+            font-size: 1.05em;
+            line-height: 2.4em;
         }
     }
 }

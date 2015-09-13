@@ -5,13 +5,14 @@
 .b-events {
     background-image: url("/img/salespage/events_bg.png"),;
     background-repeat: no-repeat;  
-    background-position: left top;  
-    background-size: 100% 100%;
+    background-position: center;  
+    background-size: auto auto;
     background-color: #d2d2d2;
+    height: 584px;
 
     > .ui.container {
-        padding-top: 5rem;
-        padding-bottom: 4rem;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
     }
 
     h3 {
@@ -24,9 +25,13 @@
     .events-table{
         background-color: @color-white !important;
         padding: 1rem 2rem;
+        box-shadow: 0 2px 0 #bebebe !important;
+        border-radius:0;
         .icon{
             color: @color-brand;
-            font-size: @fontsize-6xl;
+        }
+        td:not(.text-right){
+            font-size: 1.05em;
         }
     }
 

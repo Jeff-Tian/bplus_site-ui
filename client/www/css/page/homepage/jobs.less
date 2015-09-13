@@ -6,13 +6,12 @@
 	background-color: @color-white;
 	background-image: url("/img/salespage/jobs_bg.png");
 	background-repeat: no-repeat;  
-	background-position: left top;  
-	background-size: 99% 100%;
-	max-height: 650px;
+	background-position: center;  
+	background-size: auto auto;
+	height: 900px;
 
 	> .ui.container {
-		padding-top: 5rem;
-		padding-bottom: 3rem;
+		padding: 13rem 0;
 	}
 
 	h3 {
@@ -37,11 +36,11 @@
 					}
 					.header {
 						color: @color-white;
-						font-size: @fontsize-xl;
+						font-size: @fontsize-5xl;
 					}
 					.meta {
 						color: @color-white;
-						font-size: @fontsize-s;
+						font-size: 1.05em;
 					}
 					.ui.divider {
 					    border-top-color: @color-white;
@@ -50,7 +49,7 @@
 					.description {
 						> p {
 							line-height: 1.6em;
-							font-size: @fontsize-s;
+							font-size: 1.05em;
 							color: @color-grey-lighter;
 						}
 					}
@@ -64,13 +63,12 @@
 		.b-jobs-statistics-sink {
 			position: absolute;
 			bottom: .7rem;
-			left: 3.5rem;
 		}
 		.ui.header {
 			&.sub {
-				color: @color-brand;
+				color: @color-white;
 				font-weight: normal;
-				font-size: @fontsize-xl;
+				font-size: @fontsize-5xl;
 			}
 		}
 		.ui.statistics {
@@ -80,6 +78,7 @@
 
 			> .statistic {
 				display: inline-block;
+				margin-top: 0.5em;
 
 				> .value {
 					color: @color-brand;
@@ -93,6 +92,11 @@
 					vertical-align: super;
 				}
 
+				&:first-child {
+					> .value {
+						color: @color-white;
+					}
+				}
 			}
 		}
 	}
@@ -128,11 +132,24 @@
 		}
 
 		.ui.table {
-			font-size: @fontsize-s;
-
+		    th{
+                font-size:1.4em;
+            }
+            td{
+                font-size:1.25em;
+                color: #787878;
+            }
 		}
 	}
 	.b-jobs-action {
 		margin-top: 2rem;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.b-jobs {
+		.b-jobs-list {
+			padding: 1.5rem 2rem;
+		}
 	}
 }
