@@ -10,6 +10,7 @@ define([
       STATUS_READONLY: "status.readonly"
     };
     this.submit = function($scope) {
+      $scope.isSubmitting = true;
       var promise = when();
       if ($scope && $scope.$parent) {
         promise = $scope.$parent.submit();
@@ -26,6 +27,7 @@ define([
           if (!!$scope[formname].$error.required) {
             return;
           }
+          $scope.isSubmitting = true;
           var promise;
           if ($scope && $scope.$parent) {
             promise = $scope.$parent.submit();
@@ -46,6 +48,7 @@ define([
       }
       if (editAction) {
         $scope.edit = function() {
+          delete $scope.isSubmitting;
           $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
           if ($scope && $scope.$parent) {
             $scope.$parent.edit();

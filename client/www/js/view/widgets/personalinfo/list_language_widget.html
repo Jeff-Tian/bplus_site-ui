@@ -1,9 +1,9 @@
 <div>
     <!--EDIT MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
-        <form name="language" novalidate class="ui form">
+        <form name="language" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && language.$error.required) ? 'error' : ''}}">
             <div>
-                <div class="invalidtext" ng-show="clicked && language.$error.required">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="two fields">
                     <div class="field">
                         <label>使用语言</label>

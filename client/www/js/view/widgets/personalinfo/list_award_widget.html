@@ -1,9 +1,9 @@
 <div>
     <!--EDIT MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
-        <form name="award" novalidate class="ui form">
+        <form name="award" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateSelect.fulfilled || award.$error.required)) ? 'error' : ''}}">
             <div>
-                <div class="invalidtext" ng-show="clicked && (!dateSelect.fulfilled || award.$error.required)">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="field">
                     <label>获奖名称</label>
                     <input type="text" name="prizename" ng-model="data.name" required placeholder="上海交通大学" />

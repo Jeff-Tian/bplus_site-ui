@@ -1,18 +1,16 @@
 <div>
     <!--EDIT MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
-        <form name="skills" novalidate class="ui form">
+        <form name="skills" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && skills.$error.required) ? 'error' : ''}}">
             <div>
-                <div class="invalidtext" ng-show="clicked && skills.$error.required">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="field">
                     <label>技能名称</label>
                     <input type="text" name="skillname" ng-model="data.name" required placeholder="javascript编程" />
                 </div>
                 <div class="field">
                     <label>技能描述</label>
-                    <div>
-                        <bplustag value="data.tags" description="data.description"/>
-                    </div>
+                    <bplustag value="data.tags" description="data.description"/>
                 </div>
                 <div class="ui three column grid">
                     <div class="column">
@@ -29,9 +27,9 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
         <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
-        <div>
+        <div class="b-profile-right-section-txt">
             <i class="tags icon"></i>
-            <span>标签:</span>
+            <span class="b-profile-right-section-txt-tags">标签:</span>
             <span ng-bind="data.tags"></span>
         </div>
     </div>
