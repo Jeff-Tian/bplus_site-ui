@@ -3170,10 +3170,10 @@ body.pushable .pusher {
 * - @Bridge+
 */
 .b-masthead {
-  min-height: 40rem;
+  height: 50rem;
 }
 .b-masthead .owl-theme .owl-controls {
-  margin-top: -23px;
+  margin-top: -22px;
 }
 .b-masthead .owl-theme .owl-controls .owl-page {
   position: relative;
