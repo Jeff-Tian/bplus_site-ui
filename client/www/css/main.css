@@ -3231,7 +3231,7 @@ body.pushable .pusher {
 * - @Bridge+
 */
 .b-advantage {
-  background-color: #f0f0f0;
+  background-color: #e8e8e8;
   padding: 6rem 0 7rem;
 }
 .b-advantage h3.ui.header {
@@ -3289,7 +3289,7 @@ body.pushable .pusher {
 }
 .b-theory .b-theory-content > h3 {
   color: #ffffff;
-  font-size: 2.25em;
+  font-size: 2.2em;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 1.6rem;
@@ -3970,7 +3970,7 @@ body.pushable .pusher {
 .b-skill .b-skill-skill .ui.list .list {
   margin-left: 0;
   padding-top: 0.5rem;
-  font-size: 1.125em;
+  font-size: 1.13em;
 }
 .b-skill .b-skill-skill .ui.list .list > .item .header {
   color: #ffffff;

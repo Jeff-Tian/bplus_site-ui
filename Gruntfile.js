@@ -50,7 +50,6 @@ module.exports = function(grunt) {
       dev: [
         'less:development',
         'watch',
-        'nodemon',
         'jshint',
       ],
       options: {

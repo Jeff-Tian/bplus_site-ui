@@ -2,13 +2,15 @@ module.exports = function() {
     return {
         scripts: ['<%= config.src %>/widgets/**/*.js'],
         options: {
-            "jquery": true,
+            jquery: true,
+            //分号的行尾
+            asi: true,
             //大括号包裹
             curly: true,
             //对于简单类型，使用===和!==，而不是==和!=
-            eqeqeq: true,
+            eqeqeq: false,
             //对于首字母大写的函数（声明的类），强制使用new
-            newcap: true,
+            newcap: false,
             //禁用arguments.caller和arguments.callee
             noarg: true,
             //对于属性使用aaa.bbb而不是aaa['bbb']
@@ -27,7 +29,9 @@ module.exports = function() {
                 "_": false,
                 "module": false,
                 "require": false,
-                "window": false
+                "window": false,
+                "define": false,
+                "document": false
             }
         },
         //具体任务配置
