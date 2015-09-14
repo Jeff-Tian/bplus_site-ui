@@ -13,7 +13,7 @@ define([
       $scope.isSubmitting = true;
       var promise = when();
       if ($scope && $scope.$parent) {
-        promise = $scope.$parent.submit();
+        promise = $scope.$parent.submit($scope.data);
       }
       promise.then(function() {
         $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
@@ -30,7 +30,7 @@ define([
           $scope.isSubmitting = true;
           var promise;
           if ($scope && $scope.$parent) {
-            promise = $scope.$parent.submit();
+            promise = $scope.$parent.submit($scope.data);
           }
           promise.then(function() {
             $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
@@ -42,7 +42,7 @@ define([
         $scope.cancel = function() {
           $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
           if ($scope && $scope.$parent) {
-            $scope.$parent.cancel();
+            $scope.$parent.cancel($scope.data);
           }
         };
       }
@@ -51,7 +51,7 @@ define([
           delete $scope.isSubmitting;
           $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
           if ($scope && $scope.$parent) {
-            $scope.$parent.edit();
+            $scope.$parent.edit($scope.data);
           }
         }
       }

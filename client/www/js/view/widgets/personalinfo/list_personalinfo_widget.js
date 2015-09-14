@@ -3,9 +3,8 @@ define([
   "jquery",
   "angular",
   "bplus-ui/view/widgets/personalinfo/list_widget_base",
-  "bplus-ui/view/widgets/common/date",
   "text!./list_personalinfo_widget.html"
-], function(when, $, angular, BaseClass, DateSelect, template) {
+], function(when, $, angular, BaseClass, template) {
   
   var ListPersonalInfo = function() {
     BaseClass.call(this);
@@ -57,7 +56,6 @@ define([
         }
       };
     });
-    new DateSelect().start(agModel);
   }
   
   return ListPersonalInfo;

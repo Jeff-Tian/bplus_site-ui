@@ -102,6 +102,7 @@ define([
   };
 
   var _modelInstance;
+  var _instance;
   
   var ListWidgetContainer = function() {
     Object.call(this);
@@ -141,28 +142,32 @@ define([
           scope.add = function() {
             scope.dataCollection.push($.extend(true, {}, DATA_PATTERN[directiveName]));
             scope.showAddButton = false;
+            //TODO 
+            //Call service
           };
-          scope.submit = function() {
+          scope.submit = function(data) {
             scope.showAddButton = true;
             //TODO
             //Get data and save them
             return when();
 //          return model.saveData();
           };
-          scope.cancel = function() {
+          scope.cancel = function(data) {
             scope.showAddButton = true;
             //TODO
             //Known issue, will refresh all the status.
             updateData();
           };
-          scope.edit = function() {
+          scope.edit = function(data) {
             scope.showAddButton = false;
             // Don't need to do anything on this action
           };
         }
       };
     }]);
+    return _instance;
   }
   
-  return ListWidgetContainer;
+  _instance = _instance ? _instance : new ListWidgetContainer();
+  return _instance;
 });
