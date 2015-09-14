@@ -5,7 +5,7 @@
 
             $http({
                 method: 'GET',
-                url: '/translation?lang=' + options.key
+                url: '/translation?lang=' + options.key + '&timestamp=' + new Date().getTime()
             })
                 .success(dfd.resolve)
                 .error(dfd.reject);

@@ -39,7 +39,7 @@ supportedLocales.map(function (l) {
     });
 });
 
-server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
+server.use('/config.js', express.static(__dirname + '/config/config_' + (process.env.NODE_ENV || 'dev') + '.js'));
 server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
 server.use('/translation', localeHelper.serveTranslations);
 
@@ -68,12 +68,12 @@ server.get(localeHelper.regexPath('/signin'), function (req, res) {
     res.render('sign-in');
 });
 
-server.get(localeHelper.regexPath('/reset-password'), function (req, res) {
-    res.render('reset-password');
-});
-
 server.get(localeHelper.regexPath('/reset-password-by-email'), function (req, res) {
     res.render('reset-password-by-email');
+});
+
+server.get(localeHelper.regexPath('/reset-password'), function (req, res) {
+    res.render('reset-password');
 });
 
 server.get(localeHelper.regexPath('/set-password'), function (req, res) {

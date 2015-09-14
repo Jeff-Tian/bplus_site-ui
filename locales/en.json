@@ -43,6 +43,7 @@
   "70006": "Invalid identity or password",
   "70009": "Identity already existed",
   "100": "validate not pass",
+  "50": "sms validate error",
   "NoResponseFromServer": "No response from server",
   "SignedInWelcomeMessage": "Welcome back, {user.name}!"
 }

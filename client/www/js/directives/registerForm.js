@@ -101,11 +101,12 @@
                 };
 
                 $scope.trySignUp = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+
                     if (!$scope.isSignUpFormFullyValid()) {
                         return;
                     }
-
-                    $event.preventDefault();
 
                     $scope.action();
                 };
