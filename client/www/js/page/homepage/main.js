@@ -11,12 +11,20 @@ angular.module('bplus', [
     }
 ]).run(function () {
 
-}).factory('service', angular.bplus.service)
+})
+    .config(angular.bplus.translate)
+    .factory('translationLoader', angular.bplus.translationLoader)
+    .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation || function () {
         return {};
     })
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
+    .directive('captcha', angular.bplus.captcha)
+    .directive('registerForm', angular.bplus.registerForm)
+    .directive('tab', angular.bplus.tab)
+    .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
 ;
 
 // TODO: integrated into JS framework

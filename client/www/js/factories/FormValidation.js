@@ -49,7 +49,7 @@
                 error: function (errors) {
                     var html = '<ul class="list">';
                     $.each(errors, function (index, value) {
-                        html += '<li>' + value + '</li>';
+                        html += '<li>' + translate(value) + '</li>';
                     });
                     html += '</ul><i class="large remove circle icon" onclick="$(this).closest(\'form\').removeClass(\'error\');"></i>';
 
@@ -60,7 +60,7 @@
 
         res.handleFormError = function ($form, reason) {
             if (reason === null || typeof reason === 'undefined') {
-                $form.addClass('error').form('add errors', [$filter('translate')('NoServerResponse') || '未得到服务器响应']);
+                $form.addClass('error').form('add errors', [translate('NoServerResponse') || '未得到服务器响应']);
             } else {
                 if (typeof reason === 'object' && typeof reason.code !== 'undefined') {
                     $form.addClass('error').form('add errors', [translate(reason.code)]);

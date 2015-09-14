@@ -15,64 +15,8 @@
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
     <div class="ui column b-signin-container">
-        <div class="b-signin-wide">
-            <div class="ui fluid two item top pointing secondary menu brand">
-                <a class="item" data-tab="login"><%= __('SignIn') %></a>
-                <a class="item" data-tab="register"><%= __('SignUp') %></a>
-            </div>
-            <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
-                <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">
-                    <div class="ui error message brand"></div>
-                    <div class="ui">
-                        <div class="field">
-                            <div class="ui left icon input">
-                                <i class="phone icon"></i>
-                                <input type="text" name="mobile" placeholder="<%= __('Mobile') %>"
-                                       ng-model="loginData.mobile">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="ui left icon input">
-                                <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="<%= __('PleaseInputPassword') %>"
-                                       ng-model="loginData.password">
-                            </div>
-                        </div>
-                        <div class="fields">
-                            <div class="eight wide field">
-                                <div class="ui checkbox">
-                                    <input type="checkbox" ng-model="loginData.rememberMe">
-                                    <label><%= __('RememberMe') %></label>
-                                </div>
-                            </div>
-                            <div class="eight wide field ui right aligned container subcontainer">
-                                <a href="/reset-password" class=""><%= __('ForgotPassword') %></a>
-                            </div>
-                        </div>
-                        <div class="ui divider horizontal"></div>
-                        <button type="submit" class="ui fluid huge red submit button"
-                                ng-disabled="!isLoginFormValid()"><%= __('SignIn') %>
-                        </button>
-                    </div>
-                </form>
-                <div class="ui right aligned container subcontainer">
-                    <%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a>
-                </div>
-                <div class="ui divider"></div>
-                <div class="ui">
-                    <a class="wechat link">
-                        <%= __('SignInWithOtherWays') %>
-                        <i class="big wechat icon"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
-                <register-form action="signUp" control="registerFormCtrl"></register-form>
-
-                <div class="field ui right aligned container subcontainer">
-                    <%= __('HasAccount') %> <a href="signin#/login"><%= __('SignInNow') %></a>
-                </div>
-            </div>
+        <div class="b-signin-wide" tab=".b-signin-wide">
+            <%- include('view-partial/sign-in.html') -%>
         </div>
     </div>
 </div>
@@ -97,6 +41,9 @@
 <script src="js/directives/captcha.js"></script>
 <script src="js/directives/ngEnter.js"></script>
 <script src="js/directives/registerForm.js"></script>
+<script src="js/directives/tab.js"></script>
+<script src="js/controllers/LoginCtrl.js"></script>
+<script src="js/controllers/SignUpCtrl.js"></script>
 <script src="js/page/register/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>

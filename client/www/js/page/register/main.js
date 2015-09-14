@@ -9,75 +9,14 @@ angular.module('signIn', ['pascalprecht.translate'])
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
-    .controller('SignUpCtrl', ['$scope', 'service', function ($scope, service) {
-        $scope.registerFormCtrl = {};
-
-        $scope.signUp = function () {
-            function autoSignIn() {
-                service.post('/service-proxy/logon/authentication', {
-                    value: signUpData.mobile,
-                    password: signUpData.password
-                })
-                    .then(function (json) {
-                        window.location.href = 'personal-history';
-                    }, $scope.registerFormCtrl.handleFormError);
-            }
-
-            var signUpData = $scope.registerFormCtrl.getFormData();
-
-            service.post('/service-proxy/member/register', signUpData)
-                .then(autoSignIn, $scope.registerFormCtrl.handleFormError);
-        };
-    }])
+    .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
     .controller('BindMobileCtrl', ['$scope', function ($scope) {
         $scope.bindMobile = function () {
 
         };
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
-    .controller('LoginCtrl', ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', function ($scope, FormValidation, service, MessageStore, $filter) {
-        $scope.loginData = {
-            mobile: '',
-            password: '',
-            rememberMe: false
-        };
-
-        var $loginForm = $('.ui.form.login');
-
-        $scope.isLoginFormValid = function () {
-            if ($scope.loginForm.$pristine) {
-                return false;
-            }
-
-            return $loginForm.form('is valid');
-        };
-
-        var submitting = false;
-        $scope.tryLogin = function ($event) {
-            $event.preventDefault();
-
-            if (submitting) {
-                return;
-            }
-
-            if (!$scope.isLoginFormValid()) {
-                return;
-            }
-
-            submitting = true;
-            service.post('/service-proxy/logon/authentication', {
-                value: $scope.loginData.mobile,
-                password: $scope.loginData.password,
-                remember: $scope.loginData.rememberMe
-            }).then(function (res) {
-                MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
-
-                window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
-            }).catch(FormValidation.delegateHandleFormError($loginForm)).finally(function () {
-                submitting = false;
-            });
-        };
-    }])
+    .controller('LoginCtrl', angular.bplus.LoginCtrl)
     .controller('SetPasswordCtrl', ['$scope', function ($scope) {
         var $form = $('.ui.form.set-password');
         $scope.isSetPasswordFormValid = function () {
@@ -112,18 +51,11 @@ angular.module('signIn', ['pascalprecht.translate'])
         };
     }])
     .directive('registerForm', angular.bplus.registerForm || {})
+    .directive('tab', angular.bplus.tab)
 ;
 
 // TODO: integrated into JS framework
 (function () {
-
-    // TODO: initial tabs, to be integrated into JS framework
-    $('.menu .item')
-        .tab({
-            context: '.b-signin-wide',
-            history: true
-        });
-
     var $form = $('.ui.form');
 
     $form.on('click', '.remove.circle.icon', function () {
