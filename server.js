@@ -88,6 +88,10 @@ server.get(localeHelper.regexPath('/personal-history'), function (req, res) {
     res.render('personal-history');
 });
 
+server.get('/profile', function (req, res) {
+    res.render('profile');
+});
+
 // Host & Port
 var port = process.env.PORT || 8000;
 server.listen(port, function () {

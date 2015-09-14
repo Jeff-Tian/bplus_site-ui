@@ -1,0 +1,18 @@
+<div class="b-profile-right-section-language">
+    <div class="ui clearing segment b-profile-right-section-header">
+        <div class="ui medium left floated header">
+            <i class="icon"></i>
+            <div class="content">语言能力</div>
+        </div>
+        <div ng-hide="hasData" class="ui small right floated header b-profile-right-section-tip-fill">
+            <img class="ui image" src="/img/profile/icon_remind_g.png" />
+            <div class="content">你还没填写</div>
+        </div>
+    </div>
+    <div ng-repeat="data in dataCollection" class="b-profile-right-section-section">
+        <bpluslanguage data="data"/>
+    </div>
+    <div ng-show="showAddButton" class="b-profile-right-section-btn-append">
+        <button class="fluid ui button" type="button" ng-click="add()">添加语言能力</button>
+    </div>
+</div>

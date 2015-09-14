@@ -1,0 +1,56 @@
+<div>
+    <!--EDIT MODE-->
+    <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
+        <form name="language" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && language.$error.required) ? 'error' : ''}}">
+            <div>
+                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>使用语言</label>
+                        <select name="languagename" ng-model="data.name" required class="ui fluid dropdown">
+                            <option value="">选择。。</option>
+                            <option value="英语">英语</option>
+                            <option value="俄语">俄语</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>熟练程度</label>
+                        <select name="proficiency" ng-model="data.proficiency" required class="ui fluid dropdown">
+                            <option value="">选择。。</option>
+                            <option value="初级（入门）">初级（入门）</option>
+                            <option value="中级（运用）">中级（运用）</option>
+                            <option value="高级（熟练）">高级（熟练）</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>证书</label>
+                        <select name="certification" ng-model="data.certification" required class="ui fluid dropdown">
+                            <option value="">选择。。</option>
+                            <option value="四级">四级</option>
+                            <option value="六级">六级</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>分数</label>
+                        <input type="text" name="score" ng-model="data.score" />
+                    </div>
+                </div>
+                <div class="ui three column grid">
+                    <div class="column">
+                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                    </div>
+                    <div class="column">
+                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--DISPLAY MODE-->
+    <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
+        <h2 ng-bind-template="{{data.name}}{{data.proficiency}}"  ng-click="edit()"></h2>
+        <div ng-bind-template="{{data.certification}}  {{data.score}}" class="b-profile-right-section-txt"></div>
+    </div>
+</div>

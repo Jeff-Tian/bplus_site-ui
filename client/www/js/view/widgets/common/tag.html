@@ -1,0 +1,16 @@
+<div class="b-profile-right-section-form-textarea-tags">
+    <textarea name="description" ng-model="description"></textarea>
+    <div class="b-profile-right-section-form-textarea-tags-tag-container">
+        <div class="inline fields">
+            <div class="field">
+                <label><i class="tags icon"></i><span>标签</span></label>
+                <input name="taginput" type="text" placeholder="添加标签" ng-model="displayData.tags" ng-change="inputChange()" />
+                <div ng-show="false">
+                    <ul>
+                        <li ng-repeat="candidate in displayData.candidates track by $index" ng-bind="candidate" ng-click="candidateClick(candidate)"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
