@@ -21,14 +21,13 @@
                 return;
             }
 
-            submitting = true;
-
             $form.form('validate form');
 
             if (!$scope.isResetPasswordFormValid()) {
                 return;
             }
 
+            submitting = true;
             service.post('/service-proxy/mail/send', {
                 to: $scope.resetData.email,
                 linkPasswordReset: window.location.origin + '/set-password',
@@ -40,7 +39,7 @@
                     $form.form('clear');
                     $shape.shape('flip over');
                 }, function (reason) {
-                    $form.addClass('error').form('add errors', [reason]);
+                    FormValidation.handleFormError($form, reason);
                 }).finally(function () {
                     submitting = false;
                 });

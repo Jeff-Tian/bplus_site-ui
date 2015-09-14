@@ -1,7 +1,7 @@
 <div class="b-signin">
     <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="first">登录</a>
-        <a class="item" data-tab="second">注册</a>
+        <a class="item active" data-tab="first"><%= __('SignIn') %></a>
+        <a class="item" data-tab="second"><%= __('SignUp') %></a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="first">
         <form class="ui large form">
@@ -9,20 +9,20 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="mobile" placeholder="手机号">
+                        <input type="text" name="mobile" placeholder="<%= __('Mobile') %>">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="<%= __('Password') %>">
                     </div>
                 </div>
-                <div class="ui fluid large red submit button">登录</div>
+                <div class="ui fluid large red submit button"><%= __('SignIn') %></div>
             </div>
             <div class="ui error message"></div>
         </form>
-        <div class="ui message">没有账号？ <a href="#">马上注册</a></div>
+        <div class="ui message"><%= __('NoAccount') %> <a href="#"><%= __('SignUpNow') %></a></div>
     </div>
     <div class="ui bottom attached tab segment" data-tab="second">
         <form class="ui large form">
@@ -30,16 +30,16 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="mobile" placeholder="手机号">
+                        <input type="text" name="mobile" placeholder="<%= __('Mobile') %>">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="<%= __('Password') %>">
                     </div>
                 </div>
-                <div class="ui fluid large red submit button">注册</div>
+                <div class="ui fluid large red submit button"><%= __('SignUp') %></div>
             </div>
             <div class="ui error message"></div>
         </form>

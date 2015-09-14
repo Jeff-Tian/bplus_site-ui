@@ -1,5 +1,16 @@
 var http = require('http');
 
+/**
+ * make a proxy delegate with less options
+ * @param req
+ * @param res
+ * @param next
+ * @param host
+ * @param port
+ * @param requestPath
+ * @param map: the mapper function to tweak the passing data
+ * @returns {Function|*}
+ */
 function basicProxy(req, res, next, host, port, requestPath, map) {
     return advancedProxy(req, res, next, {
         host: host,
@@ -9,6 +20,13 @@ function basicProxy(req, res, next, host, port, requestPath, map) {
     });
 }
 
+/**
+ * make a proxy delegate with more options
+ * @param req
+ * @param res
+ * @param next
+ * @param settings
+ */
 function advancedProxy(req, res, next, settings) {
     var options = {
             host: settings.host,
@@ -69,6 +87,11 @@ function advancedProxy(req, res, next, settings) {
     request.end();
 }
 
+/**
+ * make a proxy delegate
+ * @param options
+ * @returns {Function}
+ */
 function proxy(options) {
     var args = arguments;
 
@@ -81,6 +104,13 @@ function proxy(options) {
     };
 }
 
+/**
+ * execute a proxy request immediately
+ * @param req
+ * @param res
+ * @param next
+ * @param options
+ */
 proxy.execute = function (req, res, next, options) {
     advancedProxy(req, res, next, options);
 };

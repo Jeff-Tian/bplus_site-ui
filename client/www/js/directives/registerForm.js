@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.registerForm = function (FormValidation, $timeout, $http) {
+    exports.registerForm = function (FormValidation, $timeout, service) {
         return {
             templateUrl: '../../view-partial/register-form.html',
             scope: {
@@ -68,8 +68,7 @@
                             captcha: FormValidation.defaultSetting.captcha
                         },
                         templates: FormValidation.defaultSetting.templates,
-                        on: 'blur',
-                        inline: true
+                        on: 'blur'
                     }));
 
                     $form.form('validate form');
@@ -89,35 +88,31 @@
                     partiallyValidateSignUpForm();
 
                     if ($scope.isSignUpFormPartiallyValid()) {
-                        $http.post('/service-proxy/sms/send', $scope.signUpData)
-                            .success(function (res) {
-                                if (res.isSuccess) {
-                                    pollUpdateButtonText(function () {
-                                        $scope.refreshCaptcha(function () {
-                                            $scope.signUpData.captcha = '';
-                                        });
+                        service.post('/service-proxy/sms/send', $scope.signUpData)
+                            .then(function (res) {
+                                pollUpdateButtonText(function () {
+                                    $scope.refreshCaptcha(function () {
+                                        $scope.signUpData.captcha = '';
                                     });
-                                    $scope.sendCodeButtonClicked = true;
-                                } else {
-                                    $scope.internalCtrl.handleFormError(res.message);
-                                }
-                            }).error($scope.internalCtrl.handleFormError);
+                                });
+                                $scope.sendCodeButtonClicked = true;
+                            }).catch($scope.internalCtrl.handleFormError);
                     }
                 };
 
                 $scope.trySignUp = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+
                     if (!$scope.isSignUpFormFullyValid()) {
                         return;
                     }
-
-                    $event.preventDefault();
 
                     $scope.action();
                 };
 
                 getSignUpForm().form(angular.extend({}, FormValidation.defaultSetting, {
-                    on: 'blur',
-                    inline: true
+                    on: 'blur'
                 }));
 
                 $scope.internalCtrl = $scope.control || {};
@@ -133,5 +128,5 @@
         };
     };
 
-    exports.registerForm.$inject = ['FormValidation', '$timeout', '$http'];
+    exports.registerForm.$inject = ['FormValidation', '$timeout', 'service'];
 })(angular.bplus = angular.bplus || {});
