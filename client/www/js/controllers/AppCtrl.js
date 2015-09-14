@@ -26,6 +26,16 @@
                     window.location.href = '/';
                 });
         };
+
+        function locationHashChanged() {
+            $scope.$apply(function () {
+                $scope.hash = window.location.hash;
+            });
+        }
+
+        $scope.hash = window.location.hash;
+        window.addEventListener('load', locationHashChanged);
+        window.addEventListener('hashchange', locationHashChanged);
     };
 
     exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore'];

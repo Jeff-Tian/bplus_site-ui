@@ -20,7 +20,7 @@
             <div class="right item">
                 <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
                 <a href="<%= localeLink('signin#register') %>" class="ui button">注册</a>
-                <a href="<%= otherLocaleLink %>" class="ui button"><%= __('otherLocale') %></a>
+                <a ng-href="<%= otherLocaleLink %>{{hash}}" class="ui button"><%= __('otherLocale') %></a>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                 <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
                 <a href="<%= localeLink('signin#/register') %>" class="ui button"><%= __('SignUp') %></a>
                 <% } %>
-                <a href="<%= otherLocaleLink %>" class="ui button"><%= __(otherLocale) %></a>
+                <a ng-href="<%= otherLocaleLink %>{{hash}}" class="ui button"><%= __(otherLocale) %></a>
             </div>
         </div>
     </div>
