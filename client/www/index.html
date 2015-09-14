@@ -14,6 +14,7 @@
 
 <body ng-controller="AppCtrl" ng-app="bplus">
 <%- include('view-partial/header.html') -%>
+<% if (typeof hcd_user === 'undefined' || !hcd_user.member_id) { %>
 <div class="ui">
     <div class="ui container">
         <div class="b-sign-in-position-wrapper">
@@ -29,6 +30,7 @@
         </div>
     </div>
 </div>
+<% } %>
 <!-- Page Contents -->
 <div class="pusher">
     <div class="b-masthead">

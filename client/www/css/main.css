@@ -3045,7 +3045,7 @@ body.pushable .pusher {
 .ui.brand.message-wrapper.container {
   z-index: 999999;
   position: fixed;
-  top: 20%;
+  top: 100px;
   width: 100%;
 }
 .ui.brand.message-wrapper.container .ui.brand.message {
@@ -3552,7 +3552,7 @@ body.pushable .pusher {
   width: 300px;
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   color: #cccccc;
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container label,
@@ -3598,6 +3598,9 @@ body.pushable .pusher {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.divider {
+  border-top-color: #cccccc;
+}
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand {
   border-color: transparent;
   border-width: 0;
@@ -3607,7 +3610,7 @@ body.pushable .pusher {
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand .item {
   margin: 0;
   float: left;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand .active.item {
   border-color: transparent;
