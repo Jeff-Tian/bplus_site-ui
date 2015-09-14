@@ -9,7 +9,7 @@ define([
 
   var ListSkill = function() {
     BaseClass.call(this);
-  }
+  };
   ListSkill.prototype = Object.create(BaseClass.prototype);
   ListSkill.prototype.constructor = ListSkill;
   
@@ -32,12 +32,12 @@ define([
               };
               me.createActions($scope, "skills", true, true, true);
             }
-          }
+          };
         }
       };
-    })
+    });
     new Tag().start(agModel);
-  }
+  };
   
   return ListSkill;
 });

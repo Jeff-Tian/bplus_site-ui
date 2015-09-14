@@ -56,5 +56,5 @@ define(["domReady!",
 //  instance1.start(agModule);
     angular.bootstrap($("#listskills"), ['testmodule']);
     }
-  }
+  };
 });

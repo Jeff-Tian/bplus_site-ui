@@ -9,7 +9,7 @@ define([
     me.CONFIG = {};
     me.rawdata = {};
     me.SERVICENAME = "";
-  }
+  };
   ModelBase.prototype = Object.create(ModelBase);
   ModelBase.prototype.constructor = ModelBase;
   
@@ -50,8 +50,8 @@ define([
       };
       this.saveData = function(dataKey, dataParam) {
         //TODO
-      }
+      };
     });
-  }
+  };
   return ModelBase;
 });

@@ -9,7 +9,7 @@ define([
   
   var ListPersonalInfo = function() {
     BaseClass.call(this);
-  }
+  };
   ListPersonalInfo.prototype = Object.create(BaseClass.prototype);
   ListPersonalInfo.prototype.constructor = ListPersonalInfo;
   
@@ -51,12 +51,12 @@ define([
                  }
                };
             }
-          }
+          };
         }
       };
     });
     new DateSelect().start(agModel);
-  }
+  };
   
   return ListPersonalInfo;
 });

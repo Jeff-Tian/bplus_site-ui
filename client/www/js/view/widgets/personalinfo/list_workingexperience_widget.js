@@ -7,7 +7,7 @@ define([
 ], function(when, $, angular, BaseClass, template) {
   var ListWorkingBackground = function() {
     BaseClass.call(this);
-  }
+  };
   ListWorkingBackground.prototype = Object.create(BaseClass.prototype);
   ListWorkingBackground.prototype.constructor = ListWorkingBackground;
   
@@ -58,12 +58,12 @@ define([
                    $scope.dateTo.config.begin = {
                      year: $scope.dateFrom.value.year,
                      month: $scope.dateFrom.value.month - 1
-                   }
+                   };
                    $scope.dateTo.config.display = $scope.dateTo.config.display === "true1" ? true : "true1";
                  } else {
                    $scope.dateTo.config.display = false;
                  }
-               }, true)
+               }, true);
                me.createActions($scope, "workexperience", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
@@ -75,11 +75,11 @@ define([
                  }
                };
             }
-          }
+          };
         }
       };
     });
-  }
+  };
   
   return ListWorkingBackground;
 });

@@ -135,7 +135,7 @@ define([
               scope.hasData = scope.dataCollection && scope.dataCollection.length > 0;
               scope.$apply();
             });
-          }
+          };
           updateData();
           scope.showAddButton = true;
           scope.add = function() {
@@ -162,7 +162,7 @@ define([
         }
       };
     }]);
-  }
+  };
   
   return ListWidgetContainer;
 });

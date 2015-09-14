@@ -8,5 +8,5 @@ define([
             $scope.imageBanner = '/img/profile/XXX.jpg';
             $scope.hoverBtn = '';
         }]);
-    }
+    };
 });

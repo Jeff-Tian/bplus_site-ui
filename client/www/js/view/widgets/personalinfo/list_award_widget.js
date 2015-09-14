@@ -7,7 +7,7 @@ define([
 ], function(when, $, angular, BaseClass, template) {
   var ListAward = function() {
     BaseClass.call(this);
-  }
+  };
   ListAward.prototype = Object.create(BaseClass.prototype);
   ListAward.prototype.constructor = ListAward;
   
@@ -49,11 +49,11 @@ define([
                  }
                };
             }
-          }
+          };
         }
       };
     });
-  }
+  };
   
   return ListAward;
 });

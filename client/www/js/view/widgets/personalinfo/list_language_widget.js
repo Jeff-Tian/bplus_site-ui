@@ -8,7 +8,7 @@ define([
 
   var ListLanguage = function() {
     BaseClass.call(this);
-  }
+  };
   ListLanguage.prototype = Object.create(BaseClass.prototype);
   ListLanguage.prototype.constructor = ListLanguage;
   
@@ -31,11 +31,11 @@ define([
               };
               me.createActions($scope, "language", true, true, true);
             }
-          }
+          };
         }
       };
-    })
-  }
+    });
+  };
   
   return ListLanguage;
 });

@@ -2,7 +2,7 @@ define([
   "angular",
   "text!./date.html"
 ], function(angular, template) {
-  var CURRENT_DATE = new Date()
+  var CURRENT_DATE = new Date();
   var CURRENT_YEAR = CURRENT_DATE.getFullYear();
   var CURRENT_MONTH = CURRENT_DATE.getMonth();
   var CURRENT_DAY = CURRENT_DATE.getDate();
@@ -17,7 +17,7 @@ define([
       year.push({value: i});
     }
     return year;
-  }
+  };
   
   var createMonths = function(year, begin, end) {
     if (!year) {
@@ -30,10 +30,10 @@ define([
     for (var i = monthBegin; i <= monthEnd; i++) {
       targetMonths.push({
         value: i + 1
-      })
+      });
     }
     return targetMonths;
-  }
+  };
   
   var createDays = function(year, month, begin, end) {
     if (!year || !month) {
@@ -51,13 +51,13 @@ define([
       if (targetDate.getMonth() === targetMonth) {
         targetDays.push({
           value: i
-        })
+        });
       } else {
         break;
       }
     }
     return targetDays;
-  }
+  };
   var hasStarted = false;
   var BplusDate = function() {
   };
@@ -98,14 +98,14 @@ define([
               year: CURRENT_YEAR - YEAR_RANGE,
               month: 0,
               day: 1
-            }
+            };
           }
           if (!scope.config.end) {
             scope.config.end = {
               year: CURRENT_YEAR,
               month: CURRENT_MONTH,
               day: CURRENT_DAY
-            }
+            };
           }
           scope.displayData = {
             years: [],
@@ -194,11 +194,11 @@ define([
               fulfilled = false;
             }
             scope.fulfilled = fulfilled;
-          }, true)
+          }, true);
         }
-      }
-    })
-  }
+      };
+    });
+  };
   //TODO:
   //Become an instance
   return BplusDate;
