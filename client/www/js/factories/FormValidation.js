@@ -5,13 +5,15 @@
             validEmailRegex: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
         };
 
+        var translate = $filter('translate');
+
         res.defaultSetting = {
             fields: {
                 mobile: {
                     identifier: 'mobile',
                     rules: [{
                         type: 'regExp[' + res.validChineseMobileNumberPattern + ']',
-                        prompt: '请输入有效的手机号码'
+                        prompt: translate('PleaseInputValidMobileNumber')
                     }]
                 },
 
@@ -19,7 +21,7 @@
                     identifier: 'password',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入密码'
+                        prompt: translate('PleaseInputPassword')
                     }]
                 },
 
@@ -27,10 +29,10 @@
                     identifier: 'email',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入邮箱地址'
+                        prompt: translate('PleaseInputEmail')
                     }, {
                         type: 'email',
-                        prompt: '请输入有效的邮箱地址'
+                        prompt: translate('PleaseInputValidEmail')
                     }]
                 },
 
@@ -38,7 +40,7 @@
                     identifier: 'captcha',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入验证码'
+                        prompt: translate('PleaseInputCaptcha')
                     }]
                 }
             },
@@ -61,7 +63,7 @@
                 $form.addClass('error').form('add errors', [$filter('translate')('NoServerResponse') || '未得到服务器响应']);
             } else {
                 if (typeof reason === 'object' && typeof reason.code !== 'undefined') {
-                    $form.addClass('error').form('add errors', [$filter('translate')(reason.code)]);
+                    $form.addClass('error').form('add errors', [translate(reason.code)]);
                 } else {
                     $form.addClass('error').form('add errors', [reason]);
                 }

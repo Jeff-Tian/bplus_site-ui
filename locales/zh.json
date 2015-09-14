@@ -45,6 +45,9 @@
   "70009": "手机号码已被注册",
   "100": "验证码不正确",
   "50": "短信验证码不正确",
+  "PleaseInputValidMobileNumber": "请输入有效的手机号码",
+  "PleaseInputEmail": "请输入邮箱地址",
+  "PleaseInputValidEmail": "请输入有效的邮箱地址",
   "NoResponseFromServer": "未得到服务器响应",
   "SignedInWelcomeMessage": "{user.name}已成功登录,欢迎你回来!"
 }
