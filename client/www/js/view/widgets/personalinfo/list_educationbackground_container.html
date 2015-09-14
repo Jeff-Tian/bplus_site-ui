@@ -1,5 +1,5 @@
 <div class="b-profile-right-section-educationbackground">
-    <div class="ui clearing segment b-profile-right-section-header">
+    <div class="ui clearing segment b-profile-right-section-header"  ng-click="isExtend=!isExtend" ng-init="isExtend=false">
         <div class="ui medium left floated header">
             <i class="icon"></i>
             <div class="content">教育背景</div>
@@ -9,10 +9,12 @@
             <div class="content">完成才可以参加团战</div>
         </div>
     </div>
-    <div ng-repeat="data in dataCollection" class="b-profile-right-section-section">
-       <bpluseducationalbackground data="data"/>
-    </div>
-    <div ng-show="showAddButton" class="b-profile-right-section-btn-append">
-        <button class="fluid ui button" type="button" ng-click="add()">添加教育背景</button>
+    <div ng-show="isExtend">
+      <div ng-repeat="data in dataCollection" class="b-profile-right-section-section">
+         <bpluseducationalbackground data="data"/>
+      </div>
+      <div ng-show="showAddButton" class="b-profile-right-section-btn-append">
+          <button class="fluid ui button" type="button" ng-click="add()">添加教育背景</button>
+      </div>
     </div>
 </div>

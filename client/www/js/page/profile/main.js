@@ -60,7 +60,10 @@ require.config({"context": "bplus"})([
         "bplus-ui/page/profile/widget/banner/main",
         "bplus-ui/page/profile/widget/achievement/main",
         "bplus-ui/page/profile/widget/growing/main",
-
+        
+        "bplus-ui/view/widgets/common/date",
+        "bplus-ui/view/widgets/common/tag",
+        
         "bplus-ui/view/widgets/personalinfo/list_skills_widget",
         "bplus-ui/view/widgets/personalinfo/list_personalinfo_widget",
         "bplus-ui/view/widgets/personalinfo/list_educationbackground_widget",
@@ -82,15 +85,18 @@ require.config({"context": "bplus"})([
         banner,
         achievement,
         growing,
+        
+        Date,
+        Tag,
 
-        skills,
-        personalinfo,
-        educationbackground,
-        club,
-        work,
-        award,
-        language,
-        container,
+        Skills,
+        Personalinfo,
+        Educationbackground,
+        Club,
+        Work,
+        Award,
+        Language,
+        Container,
         personalinfoContainerTemplate,
         skillsContainerTemplate,
         eduContainerTemplate,
@@ -100,45 +106,36 @@ require.config({"context": "bplus"})([
         languageContainerTemplate
     ) {
         var documentMudule = angular.module('docModule', []);
-
         (function (agModule) {
             banner(agModule);
             achievement(agModule);
             growing(agModule);
-
-            //  var skillInstance = new skills();
-            //  skillInstance.start(agModule);
-            var instance = new container();
-            instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate);
-            var instance1 = new container();
-            instance1.start(agModule, "bplusskillsoverall", skillsContainerTemplate);
-            var instance2 = new container();
-            instance2.start(agModule, "bpluseducationbackgroundall", eduContainerTemplate);
-            var instance3 = new container();
-            instance3.start(agModule, "bplusclubexperienceall", clubContainerTemplate);
-            var instance4 = new container();
-            instance4.start(agModule, "bplusworkexperienceall", workContainerTemplate);
-            var instance5 = new container();
-            instance5.start(agModule, "bplusawardall", awardContainerTemplate);
-            var instance6 = new container();
-            instance6.start(agModule, "bpluslanguageall", languageContainerTemplate);
-
-            var instancePersonalInfo = new personalinfo();
-            instancePersonalInfo.start(agModule);
-            var instanceSkills = new skills();
-            instanceSkills.start(agModule);
-            var instanceEdu = new educationbackground();
-            instanceEdu.start(agModule);
-            var instanceClub = new club();
-            instanceClub.start(agModule);
-            var instanceWork = new work();
-            instanceWork.start(agModule);
-            var instanceAward = new award();
-            instanceAward.start(agModule);
-            var instanceLanguage = new language();
-            instanceLanguage.start(agModule);
-            //  var instance1 = new skills();
-            //  instance1.start(agModule);
+            
+            var instance = Container;
+            instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
+            .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
+            .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
+            .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
+            .start(agModule, "bplusworkexperienceall", workContainerTemplate)
+            .start(agModule, "bplusawardall", awardContainerTemplate)
+            .start(agModule, "bpluslanguageall", languageContainerTemplate)
+            
+            new Date().start(agModule);
+            new Tag().start(agModule);
+            
+            var listWidgets = [
+              new Personalinfo(),
+              new Skills(),
+              new Educationbackground(),
+              new Club(),
+              new Work(),
+              new Award(),
+              new Language()
+            ];
+            
+            listWidgets.forEach(function(value) {
+              value.start(agModule);
+            })
         })(documentMudule);
 
         angular.element(window.document).ready(function() {
