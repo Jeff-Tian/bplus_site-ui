@@ -3,9 +3,8 @@ define([
   "jquery",
   "angular",
   "bplus-ui/view/widgets/personalinfo/list_widget_base",
-  "bplus-ui/view/widgets/common/tag",
   "text!./list_skills_widget.html"
-], function(when, $, angular, BaseClass, Tag, template) {
+], function(when, $, angular, BaseClass, template) {
 
   var ListSkill = function() {
     BaseClass.call(this);
@@ -38,7 +37,6 @@ define([
         }
       };
     })
-    new Tag().start(agModel);
   }
   
   return ListSkill;
