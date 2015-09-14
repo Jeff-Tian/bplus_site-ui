@@ -4,11 +4,11 @@
         <form name="workexperience" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateFrom.fulfilled || !dateTo.fulfilled || workexperience.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div class="field">
+                <div class="required field {{data.name ? '' : 'error'}}">
                     <label>公司名称</label>
                     <input type="text" name="companyname" ng-model="data.name" required />
                 </div>
-                <div class="field">
+                <div class="required field {{data.type ? '' : 'error'}}">
                     <label>工作类型</label>
                     <select name="background" ng-model="data.type" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
@@ -16,17 +16,17 @@
                         <option value="兼职">兼职</option>
                     </select>
                 </div>
-                <div class="field">
+                <div class="required field {{data.industry ? '' : 'error'}}">
                     <label>行业</label>
                     <input type="text" name="industry" ng-model="data.industry" required />
                 </div>
-                <div class="field">
+                <div class="required field {{data.position ? '' : 'error'}}">
                     <label>职位</label>
                     <input type="text" name="position" ng-model="data.position" required />
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
-                        <div class="field">
+                        <div class="required field">
                             <label>工作时间</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields"/>
                         </div>

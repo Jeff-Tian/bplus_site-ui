@@ -4,11 +4,11 @@
         <form name="clubbackground" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateTo.fulfilled || !dateFrom.fulfilled || clubbackground.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div class="field">
+                <div class="required field {{data.name ? '' : 'error'}}">
                     <label>社团名称</label>
                     <input type="text" name="clubname" ng-model="data.name" required />
                 </div>
-                <div class="field">
+                <div class="required field {{data.position ? '' : 'error'}}">
                     <label>职位</label>
                     <select name="background" ng-model="data.position" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
-                        <div class="field">
+                        <div class="required field">
                             <label>参与时间</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
                         </div>

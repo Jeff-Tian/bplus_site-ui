@@ -1,16 +1,16 @@
-<div class="field">
+<div class="field {{config.showYear ? ((displayData.value && displayData.value.year) ? '' : 'error') : ''}}">
     <select name="year" ng-change="selectYear()" ng-show="config.showYear" ng-model="displayData.value.year" ng-options="year.value for year in displayData.years track by year.value" class="ui fluid dropdown">
         <option value="">选择。。</option>
     </select>
     <label ng-show="config.showYear">年</label>
 </div>
-<div class="field">
+<div class="field {{config.showMonth ? ((displayData.value && displayData.value.month) ? '' : 'error') : ''}}">
     <select name="month" ng-change="selectMonth()" ng-show="config.showMonth" ng-model="displayData.value.month" ng-options="month.value for month in displayData.months track by month.value" class="ui fluid dropdown">
         <option value="">选择。。</option>
     </select>
     <label ng-show="config.showMonth">月</label>
 </div>
-<div class="field">
+<div class="field {{config.showDay ? ((displayData.value && displayData.value.day) ? '' : 'error') : ''}}">
     <select name="day" ng-show="config.showDay" ng-model="displayData.value.day" ng-options="day.value for day in displayData.days track by day.value" class="ui fluid dropdown">
         <option value="">选择。。</option>
     </select>
