@@ -8,7 +8,7 @@ module.exports = {
     getVerificationCode: proxy(sms.host, sms.port, '/service/sms/send', function (d) {
         return {
             phone: d.mobile,
-            code: d.code
+            code: sms.code
         };
     }),
 

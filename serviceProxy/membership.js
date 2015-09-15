@@ -37,6 +37,6 @@ module.exports = {
             return next();
         }
 
-        res.status(503).send('You are not allowed to access this page.');
+        res.status(401).send('You are not allowed to access this page.');
     }
 };

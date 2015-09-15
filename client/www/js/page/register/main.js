@@ -48,6 +48,7 @@ angular.module('signIn', ['pascalprecht.translate'])
             mailToken = mailToken.replace(/^.+mailToken=([^&]+).*/i, '$1');
 
             submitting = true;
+            $scope.passwordReset = false;
             service
                 .post('/service-proxy/member/resetPasswordByEmail', {
                     token: mailToken,
@@ -55,6 +56,7 @@ angular.module('signIn', ['pascalprecht.translate'])
                 })
                 .then(function (json) {
                     console.log(json);
+                    $scope.passwordReset = true;
                 })
                 .catch(FormValidation.delegateHandleFormError($form))
                 .finally(function () {

@@ -59,16 +59,16 @@
         };
 
         res.handleFormError = function ($form, reason, args) {
-            function format(format, values) {
+            function format(f, values) {
                 if (arguments.length <= 1) {
-                    return format;
+                    return f;
                 } else {
                     var args = Array.prototype.slice.call(arguments, 1, arguments.length);
 
-                    var s = format.replace(/(?:[^{]|^|\b|)(?:{{)*(?:{(\d+)}){1}(?:}})*(?=[^}]|$|\b)/g, function (match, number) {
+                    var s = f.replace(/(?:[^{]|^|\b|)(?:{{)*(?:{(\d+)}){1}(?:}})*(?=[^}]|$|\b)/g, function (match, number) {
                         number = parseInt(number);
 
-                        return typeof args[number] != "undefined" ? match.replace(/{\d+}/g, args[number]) : match;
+                        return typeof args[number] !== "undefined" ? match.replace(/{\d+}/g, args[number]) : match;
                     });
 
                     return s.replace(/{{/g, "{").replace(/}}/g, "}");

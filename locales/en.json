@@ -51,6 +51,7 @@
   "70005": "Can't find member with mail {0}",
   "70013": "Token expired",
   "100": "validate not pass",
+  "20": "missing sms template code",
   "50": "sms validate error",
   "PleaseInputValidMobileNumber": "Please input a valid mobile phone number",
   "PleaseInputEmail": "Please input email address",
