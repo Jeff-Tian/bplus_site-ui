@@ -2859,6 +2859,11 @@ Copyright (c) 2015 Daniel Eden
 /*
 * - @Bridge+
 */
+@font-face {
+  font-family: "微软雅黑";
+  font-style: normal;
+  src: url('/css/fonts/msyh.ttf');
+}
 /*
 * - @Bridge+
 */
@@ -2967,7 +2972,7 @@ h3.ui.header.b-sp {
 */
 html,
 body {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
 h1,
@@ -2975,20 +2980,20 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
 .ui.button {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
 .header {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
 .header.ui {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
 .ui.statistics .statistic > .label,
 .ui.statistic > .label {
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
 /*
 * - @Bridge+
@@ -3079,7 +3084,7 @@ body.pushable .pusher {
 }
 .b-header .menu .item .ui.button {
   color: #ffffff;
-  font-family: "微软雅黑", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
   margin: 0;
   background: none;
   border-radius: 0;
@@ -3200,6 +3205,7 @@ body.pushable .pusher {
 .b-masthead .b-slider h1.ui.header {
   color: #ffffff;
   font-size: 2.4em;
+  font-weight: normal;
   margin-top: 8em;
 }
 .b-masthead .b-slider h2 {
@@ -3659,6 +3665,7 @@ body.pushable .pusher {
 .opportunity-banner h1.ui.header {
   color: #ffffff;
   font-size: 2.4em;
+  font-weight: normal;
 }
 .opportunity-banner h2 {
   color: #ffffff;
