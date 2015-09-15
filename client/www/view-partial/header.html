@@ -56,19 +56,17 @@
 
             <div class="right item">
                 <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
-                <img ng-src="{{memberInfo.avatar}}" ng-show="memberInfo.avatar" ng-cloak>
-
-                <div class="avatar-minor" ng-cloak>
-                    <i class="large user icon avatar" ng-hide="memberInfo.avatar"></i>
-                </div>
-
-                <div class="ui right dropdown item" ng-cloak>
+                <div class="ui right dropdown b-profile item" ng-cloak>
+                    <img ng-src="{{memberInfo.avatar || 'img/anonymous_default.png'}}" class="ui circular image avatar">
                     <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
 
-                    <div class="ui inverted vertical menu">
-                        <a class="item"><%= __('Profile') %></a>
-                        <a class="item"><%= __('AccountSetting') %></a>
-                        <a class="item" ng-click="signOut()"><%= __('SignOut') %></a>
+                    <div class="ui inverted vertical center aligned b-profile menu">
+                        <img
+                                ng-src="{{memberInfo.avatar || (memberInfo.gender ? 'img/male_default.png' : 'img/female_default.png')}}"
+                                class="ui circular image avatar">
+                        <a class="center aligned item"><%= __('Profile') %></a>
+                        <a class="center aligned item"><%= __('AccountSetting') %></a>
+                        <a class="center aligned item" ng-click="signOut()"><%= __('SignOut') %></a>
                     </div>
                 </div>
                 <% } else { %>

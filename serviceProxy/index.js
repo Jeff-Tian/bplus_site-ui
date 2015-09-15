@@ -10,10 +10,11 @@ module.exports = require('express').Router()
         res.send('Hello from service proxy');
     })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
-    .post('/member/register', /*sms.validate,*/ sso.signUp)
+    .post('/member/register', sms.validate, sso.signUp)
     .post('/logon/authentication', sso.authenticate)
     .post('/member/resetPassword', sms.validate, sso.resetPassword)
-    .post('/mail/send', captcha.validate, mail.send)
+    .post('/member/resetPasswordByEmail', sso.resetPasswordByEmail)
+    .post('/mail/send', captcha.validate, sso.getMailToken, mail.send)
     .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
     .post('/logon/logout', sso.logout)
 ;

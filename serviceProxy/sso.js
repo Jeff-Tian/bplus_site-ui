@@ -5,10 +5,12 @@ var proxy = require('./proxy');
 function proxySSO(options) {
     options.host = sso.host;
     options.port = sso.port;
-    options.dataMapper = function (d) {
-        d.application_id = sso.applicationId;
-        return d;
-    };
+    if (!options.dataMapper) {
+        options.dataMapper = function (d) {
+            d.application_id = sso.applicationId;
+            return d;
+        };
+    }
 
     return proxy(options);
 }
@@ -26,7 +28,10 @@ module.exports = {
             }
         }
     }),
-    resetPassword: proxySSO({path: '/member/resetPassword'}),
+    resetPassword: proxySSO({
+        path: '/member/resetPassword'
+    }),
+    resetPasswordByEmail: proxySSO({path: '/member/password/resetByMail'}),
     logout: proxySSO({
         path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
             if (requestFrom.headers.cookie) {
@@ -37,6 +42,22 @@ module.exports = {
         },
         responseInterceptor: function (responseStream, responseJson) {
             responseStream.location('/');
+        }
+    }),
+    getMailToken: proxySSO({
+        path: '/member/password/mailToken',
+        dataMapper: function (d) {
+            d.mail = d.to;
+            return d;
+        },
+        responseInterceptor: function (res, json) {
+            if (json.isSuccess && json.result) {
+                res.locals.mailToken = json.result;
+                return true;
+            } else {
+                res.status(503);
+                return false;
+            }
         }
     })
 };

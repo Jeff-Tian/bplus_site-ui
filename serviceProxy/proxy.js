@@ -53,13 +53,17 @@ function advancedProxy(req, res, next, settings) {
                 try {
                     chunks = JSON.parse(chunks.toString());
                 } catch (e) {
+                    req.dualLogError('Error while trying to parse JSON from: ');
+                    req.dualLogError(chunks.toString());
+                    req.dualLogError(e.stack);
                     return next(e);
                 }
 
-                settings.responseInterceptor(res, chunks);
-
-                res.send(chunks);
-                next();
+                if (settings.responseInterceptor(res, chunks)) {
+                    next();
+                } else {
+                    res.send(chunks);
+                }
             });
 
             response.on('error', next);
@@ -80,7 +84,9 @@ function advancedProxy(req, res, next, settings) {
                 data = settings.dataMapper(data);
             }
 
-            request.write(JSON.stringify(data));
+            if (data) {
+                request.write(JSON.stringify(data));
+            }
         }
     }
 

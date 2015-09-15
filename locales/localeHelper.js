@@ -37,6 +37,8 @@
         setLocale: function (req, res, next) {
             var locale = helper.getLocale(req.url);
 
+            console.log('current locale for "' + req.url + '" is ' + locale);
+
             i18n.setLocale(locale);
             res.setLocale(locale);
 
@@ -67,6 +69,7 @@
                 var lang = require('../locales/' + req.query.lang);
                 res.send(lang);
             } catch (err) {
+                req.dualLogError(err);
                 res.status(404).send();
             }
         }

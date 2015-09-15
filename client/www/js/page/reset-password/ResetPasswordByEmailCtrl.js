@@ -31,15 +31,16 @@
             service.post('/service-proxy/mail/send', {
                 to: $scope.resetData.email,
                 linkPasswordReset: window.location.origin + '/set-password',
-                displayName: $scope.resetData.email.substr(0, $scope.resetData.email.indexOf('@') + 1),
+                displayName: $scope.resetData.email.substr(0, $scope.resetData.email.indexOf('@')),
                 captcha: $scope.resetData.captcha,
                 captchaId: $scope.resetData.captchaId
             })
                 .then(function (res) {
                     $form.form('clear');
-                    $shape.shape('flip over');
+                    $shape.shape('flip over').find('.active.side').removeClass('hidden');
                 }, function (reason) {
-                    FormValidation.handleFormError($form, reason);
+                    FormValidation.handleFormError($form, reason, $scope.resetData.email);
+                    $scope.refreshCaptcha();
                 }).finally(function () {
                     submitting = false;
                 });
