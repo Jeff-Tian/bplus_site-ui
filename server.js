@@ -88,6 +88,29 @@ server.get(localeHelper.regexPath('/personal-history'), function (req, res) {
     res.render('personal-history');
 });
 
+function logErrors(err, req, res, next) {
+    console.error(err.stack);
+    next(err);
+}
+
+function clientErrorHandler(err, req, res, next) {
+    if (req.xhr) {
+        res.status(500).send({error: 'Something blew up!'});
+    } else {
+        next(err);
+    }
+}
+
+function errorHandler(err, req, res, next) {
+    res.status(500).send('Something borke!');
+    // TODO: prepare an error template
+    //res.render('error', {error: err});
+}
+
+server.use(logErrors);
+server.use(clientErrorHandler);
+server.use(errorHandler);
+
 // Host & Port
 var port = process.env.PORT || 8000;
 server.listen(port, function () {

@@ -1,6 +1,6 @@
 (function (exports) {
     exports.captcha = function (service) {
-        var captchaServiceDomain = 'http://' + angular.bplus.config.captcha.host + ':' + angular.bplus.config.captcha.port;
+        var captchaServiceDomain = '//' + angular.bplus.config.captcha.host + ':' + angular.bplus.config.captcha.port;
 
         return {
             restrict: 'A',

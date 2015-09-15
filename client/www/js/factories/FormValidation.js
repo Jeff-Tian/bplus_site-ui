@@ -60,7 +60,7 @@
 
         res.handleFormError = function ($form, reason) {
             if (reason === null || typeof reason === 'undefined') {
-                $form.addClass('error').form('add errors', [translate('NoServerResponse') || '未得到服务器响应']);
+                $form.addClass('error').form('add errors', [translate('NoResponseFromServer') || '未得到服务器响应']);
             } else {
                 if (typeof reason === 'object' && typeof reason.code !== 'undefined') {
                     $form.addClass('error').form('add errors', [translate(reason.code)]);

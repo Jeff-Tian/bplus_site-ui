@@ -56,10 +56,11 @@ function advancedProxy(req, res, next, settings) {
                     return next(e);
                 }
 
-                settings.responseInterceptor(res, chunks);
-
-                res.send(chunks);
-                next();
+                if (settings.responseInterceptor(res, chunks)) {
+                    next();
+                } else {
+                    res.send(chunks);
+                }
             });
 
             response.on('error', next);
