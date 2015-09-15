@@ -49,6 +49,7 @@
   "70009": "Identity already existed",
   "70003": "Mail can' be empty",
   "70005": "Can't find member with mail {0}",
+  "70013": "Token expired",
   "100": "validate not pass",
   "50": "sms validate error",
   "PleaseInputValidMobileNumber": "Please input a valid mobile phone number",

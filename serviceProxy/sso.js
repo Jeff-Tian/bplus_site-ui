@@ -29,6 +29,7 @@ module.exports = {
         }
     }),
     resetPassword: proxySSO({path: '/member/resetPassword'}),
+    resetPasswordByEmail: proxySSO({path: '/member/password/resetByMail'}),
     logout: proxySSO({
         path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
             if (requestFrom.headers.cookie) {
