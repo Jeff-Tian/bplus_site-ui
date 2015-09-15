@@ -3,94 +3,144 @@
 */
 
 .b-header {
-	position: relative;
-	z-index: 4;
-	
-	&.hidden {
-		display: none;
-	}
-	&.fixed {
-		width: 100%;
+    position: relative;
+    z-index: 4;
 
-		.menu {
-			&.b-header-nav {
-				background-color: rgba(0, 0, 0, .8);
-			}
-		}
-	}
+    &.hidden {
+        display: none;
+    }
+    &.fixed {
+        width: 100%;
 
-	.menu {
-		border-width: 0;
-		box-shadow: none;
-		border-radius: 0;
-		border-width: 0;
-		background-color: @color-brand;
-		min-height: initial;
-		margin-top: 0;
-		margin-bottom: 0;
+        .menu {
+            &.b-header-nav {
+                background-color: rgba(0, 0, 0, .8);
+            }
+        }
+    }
 
-		.item {
-			padding-top: 0;
-			padding-bottom: 0;
+    .menu {
+        border-width: 0;
+        box-shadow: none;
+        border-radius: 0;
+        border-width: 0;
+        background-color: @color-brand;
+        min-height: initial;
+        margin-top: 0;
+        margin-bottom: 0;
 
-			&:before {
-				display: none;
-			}
+        .item {
+            padding-top: 0;
+            padding-bottom: 0;
 
-			.ui.button {
-				color: @color-white;
-				font-family: @fontfamily-general;
+            &:before {
+                display: none;
+            }
 
-				margin: 0;
-				background: none;
-				border-radius: 0;
-			}
-			.nav-button:hover,.nav-button:active{
-				color: #FF3C42;
-			}
-		}
+            .ui.button {
+                color: @color-white;
+                font-family: @fontfamily-general;
 
-		&.b-header-account {
-			background-color: @color-brand;
+                margin: 0;
+                background: none;
+                border-radius: 0;
+            }
+            .nav-button:hover, .nav-button:active {
+                color: #FF3C42;
+            }
+        }
 
-			.item {
-				&.toc {
-				    display: none;
-					padding-top: .4em;
-					padding-bottom: .4em;
-				}
+        .center.aligned.item {
+            text-align: center;
+        }
 
-				.ui.button {
-					font-size: @fontsize-s;
-					font-weight: normal;
+        &.b-header-account {
+            background-color: @color-brand;
 
-					padding-top: .6em;
-					padding-bottom: .6em;
-				}
-			}
-		}
-		&.b-header-nav {
-			background-color: rgba(0, 0, 0, .2);
-			position: absolute;
-			top: 100%;
-			left: 0;
-			z-index: 2;
-			width: 100%;
+            .item {
+                &.toc {
+                    display: none;
+                    padding-top: .4em;
+                    padding-bottom: .4em;
+                }
 
-			.b-header-logo {
-				display: inline-block;
-				line-height: 0;
-				vertical-align: middle;
-			}
+                .ui.button {
+                    font-size: @fontsize-s;
+                    font-weight: normal;
 
-			.item {
-				.ui.button {
-					font-size: 1.05em;
-					font-weight: bold;
-				}
-			}
-		}
-	}
+                    padding-top: .6em;
+                    padding-bottom: .6em;
+                }
+            }
+        }
+        &.b-header-nav {
+            background-color: rgba(0, 0, 0, .2);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 2;
+            width: 100%;
+
+            .b-header-logo {
+                display: inline-block;
+                line-height: 0;
+                vertical-align: middle;
+            }
+
+            .item {
+                .ui.button {
+                    font-size: 1.05em;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .b-profile.item:hover, .b-profile.item.active {
+            background-color: @color-brand-darker !important;
+        }
+    }
+
+    .b-profile.item .avatar {
+        width: 25px !important;
+        height: 25px;
+    }
+
+    .b-profile.menu {
+        background-color: #1a1a1a !important;
+        padding: 5px 0;
+        border-radius: 6px !important;
+        width: auto !important;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 0;
+            margin-top: -10px;
+            margin-left: 50%;
+            left: -5px;
+            border: 5px solid transparent;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .avatar {
+            height: 80px;
+            width: 80px !important;
+            display: block;
+            margin: 10px auto;
+        }
+    }
+
+    .ui.menu .ui.dropdown .b-profile.menu > .item {
+        color: #DCDCDC !important;
+
+        &.active, &:hover {
+            background-color: #2D363D !important;
+            color: white !important;
+        }
+    }
 }
 
 @media only screen and (max-width: 700px) {
