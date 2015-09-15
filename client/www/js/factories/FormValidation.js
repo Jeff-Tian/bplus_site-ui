@@ -58,14 +58,40 @@
             }
         };
 
-        res.handleFormError = function ($form, reason) {
+        res.handleFormError = function ($form, reason, args) {
+            function format(format, values) {
+                if (arguments.length <= 1) {
+                    return format;
+                } else {
+                    var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+
+                    var s = format.replace(/(?:[^{]|^|\b|)(?:{{)*(?:{(\d+)}){1}(?:}})*(?=[^}]|$|\b)/g, function (match, number) {
+                        number = parseInt(number);
+
+                        return typeof args[number] != "undefined" ? match.replace(/{\d+}/g, args[number]) : match;
+                    });
+
+                    return s.replace(/{{/g, "{").replace(/}}/g, "}");
+                }
+            }
+
+            function message(m) {
+                if (a.length > 2) {
+                    return format.apply(this, [m].concat(Array.prototype.slice.call(a, 2, a.length)));
+                }
+
+                return m;
+            }
+
+            var a = arguments;
+
             if (reason === null || typeof reason === 'undefined') {
                 $form.addClass('error').form('add errors', [translate('NoResponseFromServer') || '未得到服务器响应']);
             } else {
                 if (typeof reason === 'object' && typeof reason.code !== 'undefined') {
-                    $form.addClass('error').form('add errors', [translate(reason.code)]);
+                    $form.addClass('error').form('add errors', [message(translate(reason.code))]);
                 } else {
-                    $form.addClass('error').form('add errors', [reason]);
+                    $form.addClass('error').form('add errors', [typeof reason === 'string' ? message(reason) : reason]);
                 }
             }
         };

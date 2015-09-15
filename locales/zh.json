@@ -48,11 +48,14 @@
   "en": "English",
   "70006": "手机号与密码不匹配",
   "70009": "手机号码已被注册",
+  "70003": "邮箱地址不能为空",
+  "70005": "没有找到与该邮箱地址({0})关联的用户 ",
   "100": "验证码不正确",
   "50": "短信验证码不正确",
   "PleaseInputValidMobileNumber": "请输入有效的手机号码",
   "PleaseInputEmail": "请输入邮箱地址",
   "PleaseInputValidEmail": "请输入有效的邮箱地址",
   "NoResponseFromServer": "未得到服务器响应",
-  "SignedInWelcomeMessage": "{user.name}已成功登录,欢迎你回来!"
+  "SignedInWelcomeMessage": "{user.name}已成功登录,欢迎你回来!",
+  "B+FailedToGetMailToken": "没有获取到邮箱令牌"
 }

@@ -39,7 +39,7 @@
                     $form.form('clear');
                     $shape.shape('flip over').find('.active.side').removeClass('hidden');
                 }, function (reason) {
-                    FormValidation.handleFormError($form, reason);
+                    FormValidation.handleFormError($form, reason, $scope.resetData.email);
                     $scope.refreshCaptcha();
                 }).finally(function () {
                     submitting = false;
