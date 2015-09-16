@@ -6,24 +6,17 @@
     height: 50rem;
 
     .owl-theme {
-        .owl-controls {
-            margin-top: -22px;
-            .owl-page {
-                position: relative;
-                top: -1rem;
+        .owl-stage-outer{
+            z-index: -1;
+        }
+        .owl-nav {
+            .owl-prev,
+            .owl-next {
+                top: 42%; // calc(50% - 3rem);
             }
-            .owl-buttons {
-                .owl-prev,
-                .owl-next {
-                    top: 42%; // calc(50% - 3rem);
-                }
-                .owl-prev {
-                    left: 2.5rem;
-                }
-                .owl-next {
-                    right: 2.5rem;
-                }
-            }
+        }
+        .owl-dots {
+            margin-top:-25px !important;
         }
     }
 
@@ -39,6 +32,7 @@
         h1.ui.header {
             color: @color-white;
             font-size: @fontsize-14xl;
+            font-weight: normal;
             margin-top: 8em;
         }
         h2 {
@@ -47,5 +41,21 @@
             font-weight: normal;
             line-height: 1.6em;
         }
+    }
+    .first-item,.second-item,.third-item{
+        background-repeat: no-repeat;  
+        background-position: center;  
+        background-size:auto 650px;
+        height:650px;
+        background-color: @color-grey;
+    }
+    .first-item{
+        background-image: url("/img/salespage/bg_1.png");
+    }
+    .second-item{
+        background-image: url("/img/salespage/bg_2.png");
+    }
+    .third-item{
+        background-image: url("/img/salespage/bg_3.png");
     }
 }

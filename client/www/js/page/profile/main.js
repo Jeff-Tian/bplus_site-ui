@@ -118,7 +118,7 @@ require.config({"context": "bplus"})([
             .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
             .start(agModule, "bplusworkexperienceall", workContainerTemplate)
             .start(agModule, "bplusawardall", awardContainerTemplate)
-            .start(agModule, "bpluslanguageall", languageContainerTemplate)
+            .start(agModule, "bpluslanguageall", languageContainerTemplate);
             
             new Date().start(agModule);
             new Tag().start(agModule);
@@ -135,7 +135,7 @@ require.config({"context": "bplus"})([
             
             listWidgets.forEach(function(value) {
               value.start(agModule);
-            })
+            });
         })(documentMudule);
 
         angular.element(window.document).ready(function() {

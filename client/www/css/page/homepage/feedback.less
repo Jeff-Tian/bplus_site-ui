@@ -4,24 +4,19 @@
 
 .b-feedback {
 	// TODO: instead of background image
-	background-color: @color-grey-lighter;
-	padding-top: 5rem;
-	padding-bottom: 2rem;
+    background-image: url("/img/salespage/feedback_bg.png");
+    background-repeat: no-repeat;  
+    background-position: center;  
+    background-size:auto auto;
+    height:540px;
+	padding-top: 12rem;
+	padding-bottom: 12rem;
 
     .owl-theme {
-        .owl-controls {
-        	margin-top: 5rem;
-            .owl-buttons {
-                .owl-prev,
-                .owl-next {
-                    top: 15%; // calc(50% - 3rem);
-                }
-                .owl-prev {
-                    left: 2.5rem;
-                }
-                .owl-next {
-                    right: 2.5rem;
-                }
+        .owl-nav {
+            .owl-prev,
+            .owl-next {
+                top: 15%; // calc(50% - 3rem);
             }
         }
     }
@@ -50,7 +45,7 @@
 				.meta {
 					font-size: @fontsize-o;
 				    display: inline-block;
-				    margin: 0 0 0 .8rem;
+				    margin: 0 0 0 .4rem;
 				}
 				.ui.divider {
 				    border-top-color: @color-brand;
@@ -67,22 +62,6 @@
 	}
 }
 
-@media only screen and (min-width: 768px) and (max-width: 900px),only screen and (min-width: 992px) and (max-width: 1099px) {
-    .b-masthead,.b-feedback {
-        .owl-theme {
-            .owl-controls {
-                .owl-buttons {
-                    .owl-prev {
-                        left: 0;
-                    }
-                    .owl-next {
-                        right: 0;
-                    }
-                }
-            }
-        }
-    }
-}
 @media only screen and (min-width: 768px) and (max-width: 830px) {
     .ui.container.control-container{
             min-width:683px !important;

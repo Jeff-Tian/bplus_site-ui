@@ -30,7 +30,7 @@ define(["domReady!",
                 .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
                 .start(agModule, "bplusworkexperienceall", workContainerTemplate)
                 .start(agModule, "bplusawardall", awardContainerTemplate)
-                .start(agModule, "bpluslanguageall", languageContainerTemplate)
+                .start(agModule, "bpluslanguageall", languageContainerTemplate);
 
             new Date().start(agModule);
             new Tag().start(agModule);
