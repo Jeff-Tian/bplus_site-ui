@@ -6,24 +6,24 @@
     height: 50rem;
 
     .owl-theme {
+        .owl-stage-outer{
+            z-index: -1;
+        }
         .owl-controls {
             margin-top: -22px;
             .owl-page {
                 position: relative;
                 top: -1rem;
             }
-            .owl-buttons {
-                .owl-prev,
-                .owl-next {
-                    top: 42%; // calc(50% - 3rem);
-                }
-                .owl-prev {
-                    left: 2.5rem;
-                }
-                .owl-next {
-                    right: 2.5rem;
-                }
+        }
+        .owl-nav {
+            .owl-prev,
+            .owl-next {
+                top: 42%; // calc(50% - 3rem);
             }
+        }
+        .owl-dots {
+            margin-top:-25px !important;
         }
     }
 

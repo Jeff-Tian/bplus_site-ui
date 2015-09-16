@@ -8,8 +8,8 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="bower/owlcarousel/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="bower/owlcarousel/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.theme.default.min.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <!-- Page Contents -->
     <div class="pusher">
         <div class="b-masthead">
-            <div class="owl-carousel b-slider" data-action="carousel">
+            <div class="owl-carousel owl-theme b-slider masthead-carousel" id="superpulse">
                 <div class="b-slider-item" style="background-color: #E4A6A6;">
                     <div class="ui container">
                         <h1 class="ui header">现在就和好朋友一起开公司！</h1>
@@ -42,7 +42,7 @@
             <div class="b-client">
                 <div class="ui container" id="b-client-content">
                     <h3 class="ui header b-sp animated" id="b-client-header">商战游戏部分服务对象</h3>
-                    <div class="ui horizontal list" id="b-client-list">
+                    <div class="ui horizontal list owl-carousel owl-theme" id="b-client-list">
                         <div class="item">
                             <img class="ui image" src="img/client/1x/tencent.png">
                         </div>
@@ -260,7 +260,7 @@
             </div>
             <div class="b-feedback">
                 <h3 class="ui header container b-sp">学员们的积极反馈</h3>
-                <div class="owl-carousel b-slider" data-action="carousel">
+                <div class="owl-carousel owl-theme b-slider feedback-carousel">
                     <div class="b-slider-item">
                         <div class="ui equal width grid ui control-container container">
                             <div class="row">
@@ -303,21 +303,6 @@
                                 <div class="column ui items">
                                     <div class="item">
                                         <div class="ui circular small image b-sp">
-                                            <img src="img/feedback_student_3.png">
-                                        </div>
-                                        <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
-                                            <div class="ui divider"></div>
-                                            <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column ui items">
-                                    <div class="item">
-                                        <div class="ui circular small image b-sp">
                                             <img src="img/feedback_student_4.png">
                                         </div>
                                         <div class="content">
@@ -326,6 +311,21 @@
                                             <div class="ui divider"></div>
                                             <div class="description">
                                                 <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column ui items">
+                                    <div class="item">
+                                        <div class="ui circular small image b-sp">
+                                            <img src="img/feedback_student_3.png">
+                                        </div>
+                                        <div class="content">
+                                            <div class="header">何平</div>
+                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="ui divider"></div>
+                                            <div class="description">
+                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
                                             </div>
                                         </div>
                                     </div>
@@ -375,21 +375,6 @@
                                 <div class="column ui items">
                                     <div class="item">
                                         <div class="ui circular small image b-sp">
-                                            <img src="img/feedback_student_2.png">
-                                        </div>
-                                        <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
-                                            <div class="ui divider"></div>
-                                            <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column ui items">
-                                    <div class="item">
-                                        <div class="ui circular small image b-sp">
                                             <img src="img/feedback_student_8.png">
                                         </div>
                                         <div class="content">
@@ -398,6 +383,21 @@
                                             <div class="ui divider"></div>
                                             <div class="description">
                                                 <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column ui items">
+                                    <div class="item">
+                                        <div class="ui circular small image b-sp">
+                                            <img src="img/feedback_student_2.png">
+                                        </div>
+                                        <div class="content">
+                                            <div class="header">何平</div>
+                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="ui divider"></div>
+                                            <div class="description">
+                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
                                             </div>
                                         </div>
                                     </div>
@@ -421,7 +421,9 @@
     <script src="bower/jquery/dist/jquery.js"></script>
     <script src="bower/semantic-ui/dist/semantic.js"></script>
     <script src="bower/underscore/underscore.js"></script>
-    <script src="bower/owlcarousel/owl-carousel/owl.carousel.js"></script>
+    <script src="bower/owl.carousel/dist/owl.carousel.js"></script>
+    
+
     <!--Angular JS-->
     <script src="bower/angular/angular.min.js"></script>
     <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
