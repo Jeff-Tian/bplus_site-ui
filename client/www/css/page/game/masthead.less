@@ -2,12 +2,16 @@
 * - @Bridge+
 */
 
-.b-masthead {
-    min-height: 36rem;
+.b-game {
+    height: 540px;
     position: relative;
-    background: url('/img/salespage/banner.png');
+    background: url('/img/salespage/game_banner.png');
+    background-repeat: no-repeat;  
+    background-position: center;  
+    background-size:auto auto;
+    background-color: @color-grey;
 
-    > .b-masthead-stripe {
+    > .b-game-stripe {
     	background-color: rgba(0, 0, 0, .2);
     	position: absolute;
     	bottom: 0;
@@ -29,7 +33,7 @@
         }
         p {
             color: @color-white;
-            font-size: 1.05em;
+            font-size: @fontsize-o;
             line-height: 1.8em;
 
             &:first-child {

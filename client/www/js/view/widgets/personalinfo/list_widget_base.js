@@ -18,7 +18,7 @@ define([
       promise.then(function() {
         $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
         $scope.$apply();
-      })
+      });
     };
     this.createActions = function($scope, formname, submitAction, cancelAction, editAction) {
       if (submitAction) {
@@ -35,7 +35,7 @@ define([
           promise.then(function() {
             $scope.property.status = $scope.ENUM_STATUS.STATUS_READONLY;
             $scope.$apply();
-          })
+          });
         };
       }
       if (cancelAction) {
@@ -53,9 +53,9 @@ define([
           if ($scope && $scope.$parent) {
             $scope.$parent.edit($scope.data);
           }
-        }
+        };
       }
-    }
+    };
   };
   ListWidgetBase.prototype = Object.create(Object.prototype);
   ListWidgetBase.prototype.constructor = ListWidgetBase;

@@ -13,12 +13,27 @@
 }
 
 .opportunity-banner {
-    background: url('/img/salespage/banner.png');
-    min-height: 36rem;
+    background: url('/img/salespage/opportunity_banner.png');
+    background-repeat: no-repeat;  
+    background-position: center;  
+    background-size:auto auto;
+    background-color: @color-grey;
+    height: 540px;
     padding: 10em 0;
     color: @color-white;
     .header{
         color: @color-white;
+    }
+    h1.ui.header {
+        color: @color-white;
+        font-size: @fontsize-14xl;
+        font-weight: normal;
+    }
+    h2 {
+        color: @color-white;
+        font-size: @fontsize-3xl;
+        font-weight: normal;
+        line-height: 1.6em;
     }
 }
 

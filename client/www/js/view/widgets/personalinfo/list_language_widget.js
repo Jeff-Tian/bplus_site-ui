@@ -8,7 +8,7 @@ define([
 
   var ListLanguage = function() {
     BaseClass.call(this);
-  }
+  };
   ListLanguage.prototype = Object.create(BaseClass.prototype);
   ListLanguage.prototype.constructor = ListLanguage;
   
@@ -27,17 +27,15 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "")
-                ? me.ENUM_STATUS.STATUS_EDIT
-                : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
               me.createActions($scope, "language", true, true, true);
             }
-          }
+          };
         }
       };
-    })
-  }
+    });
+  };
   
   return ListLanguage;
 });

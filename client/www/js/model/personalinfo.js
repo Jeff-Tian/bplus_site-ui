@@ -42,7 +42,7 @@ define([
       
     };
     me.SERVICENAME = "personalinfoService";
-  }
+  };
   PersonalInfo.prototype = Object.create(BaseClass.prototype);
   PersonalInfo.prototype.constructor = PersonalInfo;
 

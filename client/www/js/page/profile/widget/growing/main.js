@@ -9,5 +9,5 @@ define([
                 $scope.data = data;
             });
         }]);
-    }
+    };
 });

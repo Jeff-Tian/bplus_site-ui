@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('SEOTitle_AccountSetting') %></title>
+    <meta name="description" content="<%= __('SEODesc_AccountSetting') %>">
+    <%- include('view-partial/head.html') -%>
+</head>
+
+<body ng-app="accountSetting" ng-controller="AppCtrl" class="b-background">
+<%- include('view-partial/header.html') -%>
+<div class="ui b-signin-wrapper" style="width: 500px;">
+    <div class="ui column b-step-container b-separator">
+        <div class="ui center aligned container subcontainer">
+            <h2 class="grey color"><%= __('AccountSetting') %></h2>
+        </div>
+    </div>
+    <div class="ui column b-step-container">
+        <div class="ui grid">
+            <div class="row">
+                <div class="three wide column middle aligned">
+                    <%= __('MobilePhone') %>
+                </div>
+                <div class="ten wide column middle aligned left aligned"> {{memberInfo.mobile}}</div>
+                <div class="three wide column">
+                    <button class="ui large red right floated button no-wrap"
+                            onclick="$('.ui.modal.b-modify-mobile').modal('show');">
+                        <%= __('Modify') %>
+                    </button>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="row">
+                <div class="three wide column middle aligned"> <%= __('Wechat') %></div>
+                <div class="twelve wide column middle aligned left aligned"> {{memberInfo.wechat}}</div>
+                <div class="one wide column">
+                    <button class="ui large red right floated button no-wrap"
+                            onclick="$('.ui.modal.b-modify-wechat').modal('show');"><%= __('Modify') %>
+                    </button>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="row">
+                <div class="three wide middle aligned column"> <%= __('Email') %></div>
+                <div class="twelve wide middle aligned left aligned column"> {{memberInfo.email}}</div>
+                <div class="column">
+                    <button class="ui large red right floated button no-wrap"
+                            onclick="$('.ui.modal.b-modify-email').modal('show');"><%= __('Modify') %>
+                    </button>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="row">
+                <div class="three wide middle aligned column"> <%= __('Password') %></div>
+                <div class="twelve wide middle aligned left aligned column"> ******</div>
+                <div class="one wide column">
+                    <button class="ui large red right floated button no-wrap"
+                            onclick="$('.ui.modal.b-modify-password').modal('show');"><%= __('Modify') %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-mobile" ng-controller="changeMobileCtrl">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyMobile') %>
+        </div>
+        <div class="content">
+            <register-form action="changeMobile" control="changeMobileFormCtrl"></register-form>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-wechat">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyWechat') %>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-email">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyEmail') %>
+        </div>
+        <div class="content">
+            <form name="changeEmailForm" class="ui large form">
+                <%- include('view-partial/email-and-captcha.html') %>
+                <div class="row">&nbsp;</div>
+
+                <div class="field">
+                    <button type="submit" class="ui fluid large red submit button"
+                            ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-password">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyPassword') %>
+        </div>
+        <div class="content">
+            <form name="changePasswordForm" class="ui large form">
+                <div class="ui error message brand"></div>
+                <div class="ui">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="oldPassword"
+                                   placeholder="{{'PleaseInputOldPassword' | translate}}"
+                                    >
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="{{'PleaseSetNewPassword' | translate}}">
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+
+                    <div class="field">
+                        <button type="submit" class="ui fluid large red submit button"
+                                ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--JS-->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<!--Angular JS-->
+<script src="bower/angular/angular.min.js"></script>
+<script src="bower/angular-translate/angular-translate.min.js"></script>
+<!--Page JS-->
+<script src="js/factories/service.js"></script>
+<script src="js/factories/MessageStore.js"></script>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/FormValidation.js"></script>
+<script src="js/config/translate.js"></script>
+<script src="js/factories/translationLoader.js"></script>
+<script src="/translation/localeHelper.js"></script>
+<script src="/config.js"></script>
+<script src="js/directives/captcha.js"></script>
+<script src="js/directives/ngEnter.js"></script>
+<script src="js/directives/registerForm.js"></script>
+<script src="js/directives/tab.js"></script>
+<script src="js/controllers/LoginCtrl.js"></script>
+<script src="js/controllers/SignUpCtrl.js"></script>
+<script src="js/page/account-setting/main.js"></script>
+<!--Utils JS-->
+<script src="js/utils/utils.js"></script>
+<script src="js/utils/msgbus.js"></script>
+<script src="js/utils/underscore.js"></script>
+</body>
+
+</html>

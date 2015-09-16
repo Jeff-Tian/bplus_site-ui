@@ -14,7 +14,7 @@ define([
     });
     targetValue = targetArrary.join(" ");
     return targetValue;
-  }
+  };
   
   var hasStarted = false;
   var BplusTag = function() {
@@ -62,9 +62,9 @@ define([
           scope.displayData.tags = scope.value;
           tmpDataArray = scope.displayData.tags.split(" ");
         }
-      }
-    })
-  }
+      };
+    });
+  };
   //TODO:
   //Become an instance
   return BplusTag;

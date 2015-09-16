@@ -8,4 +8,11 @@
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
+
+        // create sidebar and attach to menu open
+    $('.ui.sidebar').sidebar('attach events', '.toc.item');
+    //  });
+
+    // TODO: initial tabs, to be integrated into JS framework
+    $('.menu .item').tab();
 })();

@@ -2,11 +2,43 @@
 var express = require('express');
 var server = express();
 var bodyParser = require('body-parser');
+var i18n = require('i18n');
+var localeHelper = require('./locales/localeHelper.js');
+var Logger = require('logger');
+var pack = require('./package.json');
+var config = require('./config');
+var membership = require('./serviceProxy/membership.js');
+var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+
+var supportedLocales = localeHelper.supportedLocales;
+i18n.configure({
+    locales: supportedLocales,
+    directory: __dirname + '/locales',
+    updateFiles: false
+});
 
 // Node.js template engine
 var ejs = require('ejs');
 
-server.use(bodyParser.json())
+server
+    .use(Logger.express("auto"))
+    .use(function (req, res, next) {
+        function dualLogError(o) {
+            req.logger.error(o);
+            console.error(o);
+        }
+
+        function dualLog(o) {
+            req.logger.log(o);
+            console.log(o);
+        }
+
+        req.logger = logger;
+        req.dualLogError = dualLogError;
+        req.dualLog = dualLog;
+        next();
+    })
+    .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
     }));
@@ -15,59 +47,99 @@ server.use(bodyParser.json())
 server.engine('html', ejs.renderFile);
 server.set('view engine', 'html');
 
+server.use(i18n.init);
+
+server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
+
+server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
+
 server.get('/', function (req, res) {
     res.render('index');
 });
+supportedLocales.map(function (l) {
+    server.get('/' + l, function (req, res) {
+        res.render('index');
+    });
+});
 
-server.use('/config.js', express.static(__dirname + '/config/config_dev.js'));
+server.use('/config.js', express.static(__dirname + '/config/config_' + (process.env.NODE_ENV || 'dev') + '.js'));
+server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
+server.use('/translation', localeHelper.serveTranslations);
 
 // Customize client file path
 server.set('views', __dirname + '/client/www');
 server.use(express.static(__dirname + '/client/www'));
+supportedLocales.map(function (l) {
+    server.use('/' + l, express.static(__dirname + '/client/www'));
+});
+
 server.use('/service-proxy', require('./serviceProxy'));
 
 // Page route define
-server.get('/index', function (req, res) {
-    res.render('index');
-});
-server.get('/game', function (req, res) {
-    res.render('game');
-});
-server.get('/opportunity', function (req, res) {
-    res.render('opportunity');
-});
-server.get('/register', function (req, res) {
-    res.render('register');
-});
+function renderTemplate(name) {
+    return function (req, res, next) {
+        res.render(name);
+    }
+}
+
+function mapRoute2Template(url, template) {
+    if (!template) {
+        template = url;
+
+        if (template[0] === '/') {
+            template = template.substr(1);
+        }
+    }
+
+    server.get(localeHelper.regexPath(url), renderTemplate(template));
+}
+
+mapRoute2Template('/index');
+mapRoute2Template('/game');
+mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
-
-server.get('/signin', function (req, res) {
-    res.render('sign-in');
+mapRoute2Template('/signin', 'sign-in');
+mapRoute2Template('/reset-password-by-email');
+mapRoute2Template('/reset-password');
+mapRoute2Template('/set-password');
+mapRoute2Template('/sign-up-from');
+mapRoute2Template('/personal-history');
+mapRoute2Template('/profile');
+//mapRoute2Template('/account-setting');
+server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, function (req, res, next) {
+    res.render('account-setting');
 });
 
-server.get('/reset-password', function (req, res) {
-    res.render('reset-password');
+server.use('/healthcheck', function (req, res, next) {
+    res.json({
+        everything: 'is ok',
+        time: new Date()
+    });
 });
 
-server.get('/reset-password-by-email', function (req, res) {
-    res.render('reset-password-by-email');
-});
+function logErrors(err, req, res, next) {
+    req.logger.error(err);
+    console.error(err.stack);
+    next(err);
+}
 
-server.get('/set-password', function (req, res) {
-    res.render('set-password');
-});
+function clientErrorHandler(err, req, res, next) {
+    if (req.xhr) {
+        res.status(500).send({error: 'Something blew up!'});
+    } else {
+        next(err);
+    }
+}
 
-server.get('/sign-up-from', function (req, res) {
-    res.render('sign-up-from');
-});
+function errorHandler(err, req, res, next) {
+    res.status(500).send('Something borke!');
+    // TODO: prepare an error template
+    //res.render('error', {error: err});
+}
 
-server.get('/personal-history', function (req, res) {
-    res.render('personal-history');
-});
-
-server.get('/profile', function (req, res) {
-    res.render('profile');
-});
+server.use(logErrors);
+server.use(clientErrorHandler);
+server.use(errorHandler);
 
 // Host & Port
 var port = process.env.PORT || 8000;

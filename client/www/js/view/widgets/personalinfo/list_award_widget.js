@@ -7,7 +7,7 @@ define([
 ], function(when, $, angular, BaseClass, template) {
   var ListAward = function() {
     BaseClass.call(this);
-  }
+  };
   ListAward.prototype = Object.create(BaseClass.prototype);
   ListAward.prototype.constructor = ListAward;
   
@@ -26,9 +26,7 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") 
-                ? me.ENUM_STATUS.STATUS_EDIT
-                : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
                $scope.dateSelect = {
                  config: {
@@ -51,11 +49,11 @@ define([
                  }
                };
             }
-          }
+          };
         }
       };
     });
-  }
+  };
   
   return ListAward;
 });

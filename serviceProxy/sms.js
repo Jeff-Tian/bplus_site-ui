@@ -8,14 +8,22 @@ module.exports = {
     getVerificationCode: proxy(sms.host, sms.port, '/service/sms/send', function (d) {
         return {
             phone: d.mobile,
-            code: d.code
+            code: sms.code
         };
     }),
 
-    validate: proxy(sms.host, sms.port, '/service/sms/validate', function (d) {
-        return {
-            phone: d.mobile,
-            value: d.verificationCode
-        };
+    validate: proxy({
+        host: sms.host,
+        port: sms.port,
+        path: '/service/sms/validate',
+        dataMapper: function (d) {
+            return {
+                phone: d.mobile,
+                value: d.verificationCode
+            };
+        },
+        responseInterceptor: function (resStream, json) {
+            return json.isSuccess && json.result;
+        }
     })
 };

@@ -7,11 +7,9 @@
     <title>个人信息 - Bridge+</title>
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
-    <!--LESS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
-<body ng-app="signIn">
+<body ng-app="signIn" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
     <div class="ui success message brand" ng-hide="userHide === true">
@@ -44,30 +42,31 @@
                                     <option value="1">男</option>
                                     <option value="0">女</option>
                                 </select>
+
                             </div>
                             <div class="fields">
                                 <div class="four wide field">
                                     <label><i class="ui large red icon">*</i>生日</label>
 
-                                    <div class="fields">
-                                        <div class="field">
+                                    <div class="inline fields">
+                                        <div class="no-padded field">
                                             <select class="ui fluid search dropdown defer" name="yearOfBirth"
                                                     ng-model="personalInfo.yearOfBirth">
-                                                <option value="">请选择...</option>
+                                                <option value="">选择...</option>
                                                 <option value="{{y}}" ng-repeat="y in birthYearList" dropdown>{{y}}
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="field">
-                                            年
+                                        <div class="no-padded field">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;年
                                         </div>
                                     </div>
                                 </div>
                                 <div class="four wide field">
                                     <label>&nbsp;</label>
 
-                                    <div class="fields">
-                                        <div class="field">
+                                    <div class="inline fields">
+                                        <div class="no-paddedfield">
                                             <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
                                                 <option value="">选择...</option>
@@ -75,17 +74,17 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="field">
-                                            月
+                                        <div class="no-padded field">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;月
                                         </div>
                                     </div>
                                 </div>
                                 <div class="four wide field">
                                     <label>&nbsp;</label>
 
-                                    <div class="fields">
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="dayOfBirth"
+                                    <div class="inline fields">
+                                        <div class="no-padded field">
+                                            <select class="ui fluid search dropdown defer dayOfBirth" name="dayOfBirth"
                                                     ng-model="personalInfo.dayOfBirth">
                                                 <option value="">选择...</option>
                                                 <option value="{{d}}" ng-repeat="d in getBirthDayList()" dropdown>
@@ -93,15 +92,16 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="field">
-                                            日
+                                        <div class="no-padded field">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;日
                                         </div>
                                     </div>
                                 </div>
                                 <div class="four wide field">
                                     <label>&nbsp;</label>
 
-                                    <div class="ui right aligned container subcontainer">
+                                    <div class="ui right aligned container subcontainer"
+                                         style="height: 35px; line-height: 35px;">
                                         <div class="ui checkbox">
                                             <input type="checkbox" checked name="setPrivacy"
                                                    ng-model="personalInfo.setPrivacy">
@@ -231,8 +231,13 @@
 <!--Angular JS-->
 <script src="bower/angular/angular.min.js"></script>
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower/angular-semantic-ui/dist/angular-semantic-ui.min.js"></script>
 <!--Page JS-->
 <script src="js/factories/FormValidation.js"></script>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/factories/service.js"></script>
+<script src="js/factories/MessageStore.js"></script>
+<script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
 <script src="js/page/register/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>

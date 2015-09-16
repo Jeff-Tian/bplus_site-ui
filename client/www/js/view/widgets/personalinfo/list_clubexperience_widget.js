@@ -7,7 +7,7 @@ define([
 ], function(when, $, angular, BaseClass, template) {
   var ListClubBackground = function() {
     BaseClass.call(this);
-  }
+  };
   ListClubBackground.prototype = Object.create(BaseClass.prototype);
   ListClubBackground.prototype.constructor = ListClubBackground;
   
@@ -26,9 +26,7 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") 
-                ? me.ENUM_STATUS.STATUS_EDIT
-                : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
                $scope.dateFrom = {
                  config: {
@@ -60,12 +58,12 @@ define([
                    $scope.dateTo.config.begin = {
                      year: $scope.dateFrom.value.year,
                      month: $scope.dateFrom.value.month - 1
-                   }
+                   };
                    $scope.dateTo.config.display = $scope.dateTo.config.display === "true1" ? true : "true1";
                  } else {
                    $scope.dateTo.config.display = false;
                  }
-               }, true)
+               }, true);
                me.createActions($scope, "clubbackground", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
@@ -77,11 +75,11 @@ define([
                  }
                };
             }
-          }
+          };
         }
       };
     });
-  }
+  };
   
   return ListClubBackground;
 });

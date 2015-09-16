@@ -1,27 +1,43 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('mates', [
+angular.module('bplus', [
     'ui.router',
-    'ng.utils'
+    'ng.utils',
+    'pascalprecht.translate'
 ]).config([
     '$urlRouterProvider',
-    function($urlRouterProvider) {}
-]).run(function() {
+    function ($urlRouterProvider) {
+    }
+]).run(function () {
 
-});
+})
+    .config(angular.bplus.translate)
+    .factory('translationLoader', angular.bplus.translationLoader)
+    .factory('service', angular.bplus.service)
+    .factory('FormValidation', angular.bplus.FormValidation || function () {
+        return {};
+    })
+    .factory('MessageStore', angular.bplus.MessageStore)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .directive('captcha', angular.bplus.captcha)
+    .directive('registerForm', angular.bplus.registerForm)
+    .directive('tab', angular.bplus.tab)
+    .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
+;
 
 // TODO: integrated into JS framework
-(function() {
+(function () {
     //$(document)
     //  .ready(function() {
     // fix header when passed
     $('.b-masthead').visibility({
         once: false,
-        onBottomPassed: function() {
+        onBottomPassed: function () {
             $('[data-action=fixedHeader]').transition('fade in');
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
@@ -34,75 +50,107 @@ angular.module('mates', [
     $('.menu .item').tab();
 
     // TODO: initial carousel, to be integrated into JS framework
-    $('[data-action=carousel]').owlCarousel({
-        singleItem: true,
-        lazyLoad: true,
+    $('.masthead-carousel').owlCarousel({
+        items: 1,
+        lazyLoad: false,
         loop: true,
-        autoPlay: false,
-        // autoplayTimeout: 10000,
-        // stopOnHover: true,
-        navigation: true,
-        stopOnHover: true,
-        rewindSpeed: 100,
-        addClassActive: true,
-        navigationText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
-        beforeMove: function() {
-            $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
-            $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
-        },
-        afterMove: function() {
-            $('.active').find('h1').addClass('animated fadeInLeft');
-            $('.active').find('h2').addClass('animated fadeInRight');
-            setTimeout(function() {
-                $('.owl-carousel').find('h1').removeClass('animated fadeInLeft');
-                $('.owl-carousel').find('h2').removeClass('animated fadeInRight');
-            }, 600);
+        autoplay: true,
+        autoplayHoverPause: true,
+        nav: true,
+        animateIn: 'b-pulse',
+        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
+        onTranslate: function() {
+            // $('.masthead-carousel').removeClass('animated pulse');
+            $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
+            $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
+            //$('.masthead-carousel').removeClass('animated b-pulse');
 
+            setTimeout(function() {
+                $('.active').find('h1').addClass('animated b-fadeInLeft');
+                $('.active').find('h2').addClass('animated b-fadeInRight');
+            }, 100);
+            setTimeout(function() {
+                $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
+                $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
+            }, 1200);
         }
     });
 
+    $('.feedback-carousel').owlCarousel({
+        items: 1,
+        lazyLoad:true,
+        loop:true,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        autoplayHoverPause: true,
+        nav: true,
+        navRewind: true,
+        animateIn: 'bounceInRight',
+        animateOut: 'bounceOutLeft',
+        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
+    });
+    
+
+    
+
     var client=$('#b-client-list');
     client.owlCarousel({
-        items : 6, 
-        itemsDesktop : [1199,5], 
-        itemsDesktopSmall : [991,4], 
-        itemsTablet: [767,3], 
-        itemsMobile : [600,1],
-        pagination: false,
-        autoPlay: 6000,
-        scrollPerPage: true
+        loop:true,
+        lazyLoad:true,
+        responsiveClass:true,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        navRewind: true,
+        autoplayTimeout: 6000,
+        slideBy: 'page',
+        responsive:{
+            0: {
+                items: 1,
+            },
+            600: {
+                items: 3,
+            },
+            767: {
+                items: 3,
+            },
+            991: {
+                items: 4,
+            },
+            1199: {
+                items: 5,
+            }
+        }
     });
 
-    $('.b-client').mouseover(function() {
-        $('#b-client-header').css('visibility','visible');
-    }).mouseout(function() {
-        $('#b-client-header').css('visibility','hidden');
+    $('.b-client').mouseover(function () {
+        $('#b-client-header').css('visibility', 'visible');
+    }).mouseout(function () {
+        $('#b-client-header').css('visibility', 'hidden');
     });
 
-    var animateGif = function() {
+    var animateGif = function () {
 
         if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-            $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
-            $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
-            $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
+            $('.online-gif').find('img').attr('src', 'img/salespage/gif/online-animate.gif');
+            $('.top-gif').find('img').attr('src', 'img/salespage/gif/top-animate.gif');
+            $('.enhance-gif').find('img').attr('src', 'img/salespage/gif/enhance-animate.gif');
 
-            setTimeout(function() {
-                $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
-                $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
-                $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
-            }, 500);
+            setTimeout(function () {
+                $('.online-gif').find('img').attr('src', 'img/salespage/gif/online.png');
+                $('.top-gif').find('img').attr('src', 'img/salespage/gif/top.png');
+                $('.enhance-gif').find('img').attr('src', 'img/salespage/gif/enhance.png');
+            }, 950);
         }
     };
 
     $('.index-gif').visibility({
         once: false,
-        onTopVisible: function() {
+        onTopVisible: function () {
             animateGif();
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             animateGif();
         }
     });
-
-
 })();

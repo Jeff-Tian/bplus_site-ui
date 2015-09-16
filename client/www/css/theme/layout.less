@@ -31,15 +31,16 @@ a:hover, a:active {
 .subcontainer .ui.container {
     min-width: 0 !important;
 }
-body.pushable{
-	.pusher {
-		background-color: #DCDCDC;
-	}
+
+body.pushable {
+    .pusher {
+        background-color: #DCDCDC;
+    }
 }
 
 .page-content {
-	max-width: 1600px;
-	margin: 0 auto;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 1399px) and (min-width: 992px) {
@@ -64,4 +65,64 @@ body.pushable{
 
 .grey.color {
     color: @color-grey-dark;
+}
+
+.ui.brand.message-wrapper.container {
+    z-index: 4;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+
+    .ui.brand.message {
+        position: relative;
+        margin: 0 auto;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: larger;
+        padding: 10px 50px 10px 20px;
+        box-shadow: 0 0 0 0;
+        border: none;
+
+        .remove.circle.icon {
+            cursor: pointer;
+            margin-right: -40px;
+            margin-left: 10em;
+            letter-spacing: 2em;
+        }
+    }
+}
+
+.avatar-minor {
+    background-color: @color-grey-light;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+
+    .avatar {
+        color: @color-grey-darker;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important
+}
+
+.no-padded.field {
+    padding: 0 !important;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.b-background {
+    background-color: @color-grey-lightest !important;
 }

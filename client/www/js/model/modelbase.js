@@ -10,7 +10,7 @@ define([
     me.rawdata = {};
     me.SERVICENAME = "";
     me.parseData = function() {};
-  }
+  };
   ModelBase.prototype = Object.create(ModelBase);
   ModelBase.prototype.constructor = ModelBase;
   
@@ -53,10 +53,9 @@ define([
       this.saveData = function(dataKey, dataParam) {
         //TODO
         //Update local storage
-        //
         return when();
-      }
+      };
     });
-  }
+  };
   return ModelBase;
 });
