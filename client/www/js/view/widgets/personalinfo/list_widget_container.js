@@ -98,6 +98,12 @@ define([
             },
             description: "",
             tags: ""
+        },
+        "bpluslanguageall": {
+          name: "",
+          proficiency: "",
+          certification: "",
+          score: ""
         }
     };
 
