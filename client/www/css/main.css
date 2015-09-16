@@ -3089,6 +3089,9 @@ body.pushable .pusher {
 .no-padded.field {
   padding: 0 !important;
 }
+.b-background {
+  background-color: #f0f0f0;
+}
 /*
 * - @Bridge+
 */

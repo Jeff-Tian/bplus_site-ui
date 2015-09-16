@@ -19,6 +19,7 @@
 @color-grey-dark: #7d7d7d;
 @color-grey-darker: #333;
 @color-black: #000;
+@color-grey-lightest: #F0F0F0;
 
 // Color by status
 // -------------------------
@@ -77,22 +78,22 @@
 @border-radius-max: 50rem;
 
 .perspective (@value) {
-    -webkit-perspective: @value;  // Safari 4+, Chrome 12+
-    -moz-perspective: @value;  // Firefox 10+
-    -ms-perspective: @value;  // IE10+
+    -webkit-perspective: @value; // Safari 4+, Chrome 12+
+    -moz-perspective: @value; // Firefox 10+
+    -ms-perspective: @value; // IE10+
     perspective: @value;
 }
 
 .rotateX (@deg) {
-    -webkit-transform:   rotateX(@deg);
-    -moz-transform:      rotateX(@deg);
-    -ms-transform:       rotateX(@deg);
-    -o-transform:        rotateX(@deg);
-    transform:           rotateX(@deg);
+    -webkit-transform: rotateX(@deg);
+    -moz-transform: rotateX(@deg);
+    -ms-transform: rotateX(@deg);
+    -o-transform: rotateX(@deg);
+    transform: rotateX(@deg);
 }
 
 .opacity (@opacity) {
     opacity: @opacity;
-    -ms-filter: ~`"progid:DXImageTransform.Microsoft.Alpha(opacity=(" + "@{opacity}" * 100 + "))"`; 
+    -ms-filter: ~`"progid:DXImageTransform.Microsoft.Alpha(opacity=(" + "@{opacity}" * 100 + "))"`;
     filter: ~`"alpha(opacity = (" + "@{opacity}" * 100 + "))"`;
 }
