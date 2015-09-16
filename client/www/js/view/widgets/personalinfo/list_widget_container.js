@@ -142,20 +142,20 @@ define([
           scope.add = function() {
             scope.dataCollection.push($.extend(true, {}, DATA_PATTERN[directiveName]));
             scope.showAddButton = false;
-            //TODO 
-            //Call service
           };
           scope.submit = function(data) {
-            scope.showAddButton = true;
-            //TODO
-            //Get data and save them
-            return when();
-//          return model.saveData();
+            return model.saveData(service, data).then(function() {
+              scope.showAddButton = true;
+              updateData();
+            }, function() {
+              scope.showAddButton = true;
+              //TODO
+              //ERROR HANDLING
+            });
           };
           scope.cancel = function(data) {
             scope.showAddButton = true;
-            //TODO
-            //Known issue, will refresh all the status.
+            //Known behavior, will refresh all the status.
             updateData();
           };
           scope.edit = function(data) {

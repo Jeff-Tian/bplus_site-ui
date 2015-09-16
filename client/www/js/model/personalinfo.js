@@ -38,6 +38,9 @@ define([
     };
     //TEST END
     ///////
+    me.parseData = function(data) {
+      
+    };
     me.SERVICENAME = "personalinfoService";
   }
   PersonalInfo.prototype = Object.create(BaseClass.prototype);

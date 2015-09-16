@@ -9,6 +9,7 @@ define([
     me.CONFIG = {};
     me.rawdata = {};
     me.SERVICENAME = "";
+    me.parseData = function() {};
   }
   ModelBase.prototype = Object.create(ModelBase);
   ModelBase.prototype.constructor = ModelBase;
@@ -31,11 +32,12 @@ define([
           paramKey = "0";
         }
         return $.ajax(ajaxParam).then(function(data) {
+          var parsedData = me.parseData(data);
           if (!self.rawdata[dataKey]) {
             self.rawdata[dataKey] = {};
           }
-          self.rawdata[dataKey][paramKey] = data;
-          return $.extend(true, [], data);
+          self.rawdata[dataKey][paramKey] = parsedData;
+          return $.extend(true, [], parsedData);
         });
       };
       this.getRawData = function(dataKey, dataParam) {
@@ -50,6 +52,9 @@ define([
       };
       this.saveData = function(dataKey, dataParam) {
         //TODO
+        //Update local storage
+        //
+        return when();
       }
     });
   }
