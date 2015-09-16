@@ -79,11 +79,15 @@ module.exports = {
                                 console.log(responseJson);
 
                                 if (responseJson.isSuccess) {
-                                    responseStream.cookie('token', responseJson.result.token, {
-                                        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
-                                        path: '/',
-                                        httpOnly: true
-                                    });
+                                    //responseStream.cookie('token', responseJson.result.token, {
+                                    //    expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+                                    //    path: '/',
+                                    //    httpOnly: true
+                                    //});
+
+                                    return true;
+                                } else {
+                                    return false;
                                 }
                             }
                         })(req, res, next);
@@ -142,7 +146,27 @@ module.exports = {
             }
         }
     }),
-    changeMobile: proxySSO({
-        path: '/profile/update'
-    })
+    changeMobile: function (req, res, next) {
+        console.log('changing...');
+
+        proxySSO({
+            path: '/profile/update',
+            dataMapper: function (d) {
+                console.log('change mobile');
+                console.log(d);
+
+                return d;
+            },
+            responseInterceptor: function (res, json) {
+                console.log('changed');
+                console.log(json);
+
+                if (json.isSuccess && json.result) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        })(req, res, next);
+    }
 };

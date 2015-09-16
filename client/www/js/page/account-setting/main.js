@@ -29,7 +29,7 @@ angular.module('accountSetting', ['pascalprecht.translate'])
 
                     $scope.fetchProfile();
 
-                    $scope.message = $filter('translate')('ChangeMobileSuccess');
+                    $scope.message = $filter('translate')('ChangeMobileSuccess') || '修改密码成功！';
                 })
                 .catch($scope.changeMobileFormCtrl.handleFormError)
                 .finally(function () {
