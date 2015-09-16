@@ -1,8 +1,12 @@
 (function (exports) {
     exports.AppCtrl = function (FormValidation, $scope, service, MessageStore) {
         var $form = $('.ui.form');
-        $form.form(FormValidation.defaultSetting);
 
+        $form.form(FormValidation.defaultSetting);
+        $form.on('click', '.remove.circle.icon', function () {
+            $form.removeClass('error');
+        });
+        $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
         $scope.memberInfo = {};

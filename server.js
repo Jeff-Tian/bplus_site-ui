@@ -75,44 +75,36 @@ supportedLocales.map(function (l) {
 server.use('/service-proxy', require('./serviceProxy'));
 
 // Page route define
-server.get(localeHelper.regexPath('/index'), function (req, res) {
-    res.render('index');
-});
-server.get(localeHelper.regexPath('/game'), function (req, res) {
-    res.render('game');
-});
-server.get(localeHelper.regexPath('/opportunity'), function (req, res) {
-    res.render('opportunity');
-});
+function renderTemplate(name) {
+    return function (req, res, next) {
+        res.render(name);
+    }
+}
+
+function mapRoute2Template(url, template) {
+    if (!template) {
+        template = url;
+
+        if (template[0] === '/') {
+            template = template.substr(1);
+        }
+    }
+
+    server.get(localeHelper.regexPath(url), renderTemplate(template));
+}
+
+mapRoute2Template('/index');
+mapRoute2Template('/game');
+mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
-
-server.get(localeHelper.regexPath('/signin'), function (req, res) {
-    res.render('sign-in');
-});
-
-server.get(localeHelper.regexPath('/reset-password-by-email'), function (req, res) {
-    res.render('reset-password-by-email');
-});
-
-server.get(localeHelper.regexPath('/reset-password'), function (req, res) {
-    res.render('reset-password');
-});
-
-server.get(localeHelper.regexPath('/set-password'), function (req, res) {
-    res.render('set-password');
-});
-
-server.get(localeHelper.regexPath('/sign-up-from'), function (req, res) {
-    res.render('sign-up-from');
-});
-
-server.get(localeHelper.regexPath('/personal-history'), function (req, res) {
-    res.render('personal-history');
-});
-
-server.get(localeHelper.regexPath('/profile'), function (req, res) {
-    res.render('profile');
-});
+mapRoute2Template('/signin', 'sign-in');
+mapRoute2Template('/reset-password-by-email');
+mapRoute2Template('/reset-password');
+mapRoute2Template('/set-password');
+mapRoute2Template('/sign-up-from');
+mapRoute2Template('/personal-history');
+mapRoute2Template('/profile');
+mapRoute2Template('/account-setting');
 
 function logErrors(err, req, res, next) {
     req.logger.error(err);

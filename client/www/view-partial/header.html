@@ -65,7 +65,8 @@
                                 ng-src="{{memberInfo.avatar || (memberInfo.gender ? 'img/male_default.png' : 'img/female_default.png')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
-                        <a class="center aligned item"><%= __('AccountSetting') %></a>
+                        <a class="center aligned item" href="<%= localeLink('account-setting') %>"><%=
+                            __('AccountSetting') %></a>
                         <a class="center aligned item" ng-click="signOut()"><%= __('SignOut') %></a>
                     </div>
                 </div>
