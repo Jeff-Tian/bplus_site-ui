@@ -34,7 +34,7 @@ define([
                         };
                     }
                 };
-            })
+            });
     };
 
     return ListSkill;

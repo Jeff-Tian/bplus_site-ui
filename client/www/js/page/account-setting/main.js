@@ -11,7 +11,7 @@ angular.module('accountSetting', ['pascalprecht.translate'])
     .directive('captcha', angular.bplus.captcha)
     .directive('ngEnter', angular.bplus.ngEnter)
     .directive('registerForm', angular.bplus.registerForm)
-    .controller('changeMobileCtrl', ['$scope', 'service', function ($scope, service) {
+    .controller('changeMobileCtrl', ['$scope', 'service', '$filter', function ($scope, service, $filter) {
         $scope.changeMobileFormCtrl = {};
 
         var submitting = false;
@@ -25,6 +25,11 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                 .post('/service-proxy/member/change-mobile', $scope.changeMobileFormCtrl.getFormData())
                 .then(function (res) {
                     console.log(res);
+                    $('.ui.modal.b-modify-mobile').modal('hide');
+
+                    $scope.fetchProfile();
+
+                    $scope.message = $filter('translate')('ChangeMobileSuccess');
                 })
                 .catch($scope.changeMobileFormCtrl.handleFormError)
                 .finally(function () {

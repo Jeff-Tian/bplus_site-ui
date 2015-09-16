@@ -53,6 +53,7 @@
   "ModifyWechat": "修改微信",
   "ModifyEmail": "修改邮箱",
   "ModifyPassword": "修改密码",
+  "ChangeMobileSuccess": "修改手机号码成功！",
   "PleaseInputOldPassword": "请输入原来密码",
   "PleaseSetNewPassword": "重新设置新密码",
   "ResetPasswordEmailSent": "密码重设邮件已经发往您所注册的邮箱地址",

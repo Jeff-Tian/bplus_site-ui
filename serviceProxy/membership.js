@@ -27,7 +27,7 @@ module.exports = {
             path: '/profile/load/' + res.locals.hcd_user.member_id,
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                'User-Agent': 'HCD Global Web'
+                'User-Agent': 'BridgePlus Web'
             }
         });
     },
