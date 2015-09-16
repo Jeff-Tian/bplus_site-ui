@@ -12,6 +12,13 @@
 <body ng-app="accountSetting" ng-controller="AppCtrl" class="b-background">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper" style="width: 500px;">
+    <div class="ui success message brand" ng-hide="!message || userHide === true">
+        <i class="large close icon" ng-click="userHide = true"></i>
+
+        <div class="header">
+            {{message}}
+        </div>
+    </div>
     <div class="ui column b-step-container b-separator">
         <div class="ui center aligned container subcontainer">
             <h2 class="grey color"><%= __('AccountSetting') %></h2>
@@ -44,7 +51,7 @@
             <div class="ui divider"></div>
             <div class="row">
                 <div class="three wide middle aligned column"> <%= __('Email') %></div>
-                <div class="twelve wide middle aligned left aligned column"> {{memberInfo.email}}</div>
+                <div class="twelve wide middle aligned left aligned column"> {{memberInfo.mail}}</div>
                 <div class="column">
                     <button class="ui large red right floated button no-wrap"
                             onclick="$('.ui.modal.b-modify-email').modal('show');"><%= __('Modify') %>
@@ -81,52 +88,75 @@
 
         </div>
     </div>
-    <div class="ui modal b-modify b-modify-email">
+    <div class="ui modal b-modify b-modify-email" ng-controller="changeEmailCtrl">
         <div class="header b-background">
             <i class="ui large remove circle close icon"></i>
             <%= __('ModifyEmail') %>
         </div>
         <div class="content">
-            <form name="changeEmailForm" class="ui large form">
-                <%- include('view-partial/email-and-captcha.html') %>
+            <form name="changeEmailForm" class="ui large form" ng-submit="changeEmail($event)">
+                <div class="ui error message brand"></div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="mail icon"></i>
+                        <input type="text" name="email"
+                               placeholder="<%= __('PleaseInputEmail') %>"
+                               ng-model="data.email">
+                    </div>
+                </div>
+                <div class="field absolute-prompt">
+                    <div class="ui left icon input">
+                        <i class="write icon"></i>
+                        <input type="text" name="captcha" placeholder="<%= __('PleaseInputCaptcha') %>"
+                               ng-model="data.captcha">
+                        &nbsp;
+                        <div captcha ng-model="data.captchaId" class="ui fluid b-captcha"></div>
+                    </div>
+                    <div class="ui right aligned container subcontainer">
+                        <a href="javascript: void(0);" ng-click="refreshCaptcha()"><%=
+                            __('RefreshCaptcha') %></a>
+                    </div>
+                </div>
                 <div class="row">&nbsp;</div>
 
                 <div class="field">
                     <button type="submit" class="ui fluid large red submit button"
-                            ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                            ng-disabled="!isChangeEmailFormValid()">{{'Done' | translate}}
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="ui modal b-modify b-modify-password">
+    <div class="ui modal b-modify b-modify-password" ng-controller="changePasswordCtrl">
         <div class="header b-background">
             <i class="ui large remove circle close icon"></i>
             <%= __('ModifyPassword') %>
         </div>
         <div class="content">
-            <form name="changePasswordForm" class="ui large form">
+            <form name="changePasswordForm" class="ui large form" ng-submit="changePassword($event)">
                 <div class="ui error message brand"></div>
                 <div class="ui">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="oldPassword"
+                            <input type="password" name="password"
                                    placeholder="{{'PleaseInputOldPassword' | translate}}"
-                                    >
+                                   ng-model="data.password">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="{{'PleaseSetNewPassword' | translate}}">
+                            <input type="password" name="newPassword"
+                                   placeholder="{{'PleaseSetNewPassword' | translate}}"
+                                   ng-model="data.newPassword">
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
 
                     <div class="field">
                         <button type="submit" class="ui fluid large red submit button"
-                                ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                                ng-disabled="!isChangePasswordFormValid()">{{'Done' | translate}}
                         </button>
                     </div>
                 </div>

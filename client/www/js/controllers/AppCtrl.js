@@ -11,16 +11,20 @@
 
         $scope.memberInfo = {};
 
-        service.get('/service-proxy/member/profile/')
-            .then(function (res) {
-                $scope.memberInfo = res;
+        $scope.fetchProfile = function () {
+            service.get('/service-proxy/member/profile/')
+                .then(function (res) {
+                    $scope.memberInfo = res;
 
-                $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile;
+                    $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile;
 
-                if ($scope.message) {
-                    $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
-                }
-            });
+                    if ($scope.message) {
+                        $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
+                    }
+                });
+        };
+
+        $scope.fetchProfile();
 
         $scope.message = MessageStore.flash();
 
