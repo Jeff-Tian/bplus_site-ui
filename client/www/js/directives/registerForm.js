@@ -20,6 +20,7 @@
                 var countDown = countDownInterval;
                 $scope.sendCodeButtonClicked = false;
 
+                $scope.verificationCodeButtonText = '';
                 function updateButtonText(text) {
                     $scope.verificationCodeButtonText = text;
                 }
