@@ -25,7 +25,10 @@
                 </div>
                 <div class="twelve wide column middle aligned left aligned"> {{memberInfo.mobile}}</div>
                 <div class="one wide column">
-                    <button class="ui large red right floated button"><%= __('Modify') %></button>
+                    <button class="ui large red right floated button"
+                            onclick="$('.ui.modal.b-modify-mobile').modal('show');">
+                        <%= __('Modify') %>
+                    </button>
                 </div>
             </div>
             <div class="ui divider"></div>
@@ -33,7 +36,9 @@
                 <div class="three wide column middle aligned"> <%= __('Wechat') %></div>
                 <div class="twelve wide column middle aligned left aligned"> {{memberInfo.wechat}}</div>
                 <div class="one wide column">
-                    <button class="ui large red right floated button"><%= __('Modify') %></button>
+                    <button class="ui large red right floated button"
+                            onclick="$('.ui.modal.b-modify-wechat').modal('show');"><%= __('Modify') %>
+                    </button>
                 </div>
             </div>
             <div class="ui divider"></div>
@@ -41,7 +46,9 @@
                 <div class="three wide middle aligned column"> <%= __('Email') %></div>
                 <div class="twelve wide middle aligned left aligned column"> {{memberInfo.email}}</div>
                 <div class="column">
-                    <button class="ui large red right floated button"><%= __('Modify') %></button>
+                    <button class="ui large red right floated button"
+                            onclick="$('.ui.modal.b-modify-email').modal('show');"><%= __('Modify') %>
+                    </button>
                 </div>
             </div>
             <div class="ui divider"></div>
@@ -49,9 +56,81 @@
                 <div class="three wide middle aligned column"> <%= __('Password') %></div>
                 <div class="twelve wide middle aligned left aligned column"> ******</div>
                 <div class="one wide column">
-                    <button class="ui large red right floated button"><%= __('Modify') %></button>
+                    <button class="ui large red right floated button"
+                            onclick="$('.ui.modal.b-modify-password').modal('show');"><%= __('Modify') %>
+                    </button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-mobile">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyMobile') %>
+        </div>
+        <div class="content">
+            <%- include('view-partial/register-form.html') -%>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-wechat">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyWechat') %>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-email">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyEmail') %>
+        </div>
+        <div class="content">
+            <form name="changeEmailForm" class="ui large form">
+                <%- include('view-partial/email-and-captcha.html') %>
+                <div class="row">&nbsp;</div>
+
+                <div class="field">
+                    <button type="submit" class="ui fluid large red submit button"
+                            ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ui modal b-modify b-modify-password">
+        <div class="header b-background">
+            <i class="ui large remove circle close icon"></i>
+            <%= __('ModifyPassword') %>
+        </div>
+        <div class="content">
+            <form name="changePasswordForm" class="ui large form">
+                <div class="ui error message brand"></div>
+                <div class="ui">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="oldPassword"
+                                   placeholder="{{'PleaseInputOldPassword' | translate}}"
+                                    >
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="{{'PleaseSetNewPassword' | translate}}">
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+
+                    <div class="field">
+                        <button type="submit" class="ui fluid large red submit button"
+                                ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

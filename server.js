@@ -106,6 +106,13 @@ mapRoute2Template('/personal-history');
 mapRoute2Template('/profile');
 mapRoute2Template('/account-setting');
 
+server.use('/healthcheck', function (req, res, next) {
+    res.json({
+        everything: 'is ok',
+        time: new Date()
+    });
+});
+
 function logErrors(err, req, res, next) {
     req.logger.error(err);
     console.error(err.stack);
