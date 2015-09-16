@@ -19,7 +19,7 @@
 
             <div class="right item">
                 <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
-                <a href="<%= localeLink('signin#register') %>" class="ui button">注册</a>
+                <a href="<%= localeLink('signin#register') %>" class="ui button"><%= __('SignUp') %></a>
                 <a ng-href="<%= otherLocaleLink %>{{hash}}" class="ui button"><%= __('otherLocale') %></a>
             </div>
         </div>
@@ -64,7 +64,7 @@
                         <img
                                 ng-src="{{memberInfo.avatar || (memberInfo.gender ? 'img/male_default.png' : 'img/female_default.png')}}"
                                 class="ui circular image avatar">
-                        <a class="center aligned item"><%= __('Profile') %></a>
+                        <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
                         <a class="center aligned item"><%= __('AccountSetting') %></a>
                         <a class="center aligned item" ng-click="signOut()"><%= __('SignOut') %></a>
                     </div>

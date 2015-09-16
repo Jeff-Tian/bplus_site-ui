@@ -110,7 +110,7 @@ server.get(localeHelper.regexPath('/personal-history'), function (req, res) {
     res.render('personal-history');
 });
 
-server.get('/profile', function (req, res) {
+server.get(localeHelper.regexPath('/profile'), function (req, res) {
     res.render('profile');
 });
 
