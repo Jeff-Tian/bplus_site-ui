@@ -3383,13 +3383,6 @@ body.pushable .pusher {
 .b-masthead .owl-theme .owl-stage-outer {
   z-index: -1;
 }
-.b-masthead .owl-theme .owl-controls {
-  margin-top: -22px;
-}
-.b-masthead .owl-theme .owl-controls .owl-page {
-  position: relative;
-  top: -1rem;
-}
 .b-masthead .owl-theme .owl-nav .owl-prev,
 .b-masthead .owl-theme .owl-nav .owl-next {
   top: 42%;
@@ -3416,6 +3409,24 @@ body.pushable .pusher {
   font-size: 1.3em;
   font-weight: normal;
   line-height: 1.6em;
+}
+.b-masthead .first-item,
+.b-masthead .second-item,
+.b-masthead .third-item {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 650px;
+  height: 650px;
+  background-color: #999999;
+}
+.b-masthead .first-item {
+  background-image: url("/img/salespage/bg_1.png");
+}
+.b-masthead .second-item {
+  background-image: url("/img/salespage/bg_2.png");
+}
+.b-masthead .third-item {
+  background-image: url("/img/salespage/bg_3.png");
 }
 /*
 * - @Bridge+
@@ -3630,12 +3641,13 @@ body.pushable .pusher {
 * - @Bridge+
 */
 .b-feedback {
-  background-color: #e5e5e5;
-  padding-top: 5rem;
-  padding-bottom: 2rem;
-}
-.b-feedback .owl-theme .owl-controls {
-  margin-top: 5rem;
+  background-image: url("/img/salespage/feedback_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto auto;
+  height: 540px;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
 }
 .b-feedback .owl-theme .owl-nav .owl-prev,
 .b-feedback .owl-theme .owl-nav .owl-next {
@@ -3691,7 +3703,7 @@ body.pushable .pusher {
 .b-feedback .owl-theme .owl-nav .owl-next {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.2);
-  opacity: 0.5;
+  opacity: 0.8;
   width: 3.6rem;
   height: 6rem;
   line-height: 5.5rem;
@@ -3894,6 +3906,10 @@ body.pushable .pusher {
 }
 .opportunity-banner {
   background: url('/img/salespage/opportunity_banner.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto auto;
+  background-color: #999999;
   height: 540px;
   padding: 10em 0;
   color: #ffffff;
@@ -4103,6 +4119,10 @@ body.pushable .pusher {
   height: 540px;
   position: relative;
   background: url('/img/salespage/game_banner.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto auto;
+  background-color: #999999;
 }
 .b-game > .b-game-stripe {
   background-color: rgba(0, 0, 0, 0.2);

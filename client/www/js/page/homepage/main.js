@@ -49,9 +49,6 @@ angular.module('mates', [
             $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
             //$('.masthead-carousel').removeClass('animated b-pulse');
 
-            setTimeout(function(){
-                $('.masthead-carousel').addClass('animated b-pulse');
-            },1);
             setTimeout(function() {
                 $('.active').find('h1').addClass('animated b-fadeInLeft');
                 $('.active').find('h2').addClass('animated b-fadeInRight');
@@ -59,10 +56,7 @@ angular.module('mates', [
             setTimeout(function() {
                 $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
                 $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
-            }, 1100);
-            setTimeout(function(){
-                $('.masthead-carousel').removeClass('animated b-pulse');
-            },3001);
+            }, 1200);
         }
     });
 
