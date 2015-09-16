@@ -37,4 +37,38 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                 });
         };
     }])
+    .controller('changeEmailCtrl', ['$scope', 'service', '$filter', 'FormValidation', function ($scope, service, $filter, FormValidation) {
+        $scope.data = {};
+
+        $scope.isChangeEmailFormValid = function () {
+            return $scope.data.email && $scope.data.captcha;
+        };
+
+        var submitting = false;
+        $scope.changeEmail = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            if (submitting) {
+                return;
+            }
+
+            var $form = $('.b-modify-email form');
+            submitting = true;
+            service
+                .post('/service-proxy/member/change-email', $scope.data)
+                .then(function (res) {
+                    console.log(res);
+                    $scope.fetchProfile();
+                    $form.form('clear');
+                    $('.ui.modal.b-modify-email').modal('hide');
+                    $scope.message = $filter('translate')('ChangeEmailSuccess') || '修改邮箱成功！';
+                })
+                .catch(FormValidation.delegateHandleFormError($form))
+                .finally(function () {
+                    submitting = false;
+                })
+            ;
+        }
+    }])
 ;

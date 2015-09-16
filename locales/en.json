@@ -53,6 +53,7 @@
   "ModifyEmail": "Modify Email",
   "ModifyPassword": "Modify Password",
   "ChangeMobileSuccess": "Change mobile phone number success!",
+  "ChangeEmailSuccess": "Change email success!",
   "PleaseInputOldPassword": "Please input current password",
   "PleaseSetNewPassword": "Set new password",
   "ResetPasswordEmailSent": "The reset password instructions has been sent to your registered email",

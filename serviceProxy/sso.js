@@ -168,5 +168,18 @@ module.exports = {
                 }
             }
         })(req, res, next);
-    }
+    },
+    changeEmail: proxySSO({
+        path: '/profile/update',
+        dataMapper: function (d) {
+            delete d.mobile;
+            d.application_id = sso.applicationId;
+            d.mail = d.email;
+
+            console.log('changing mobile:');
+            console.log(d);
+
+            return d;
+        }
+    })
 };
