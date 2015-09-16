@@ -181,5 +181,14 @@ module.exports = {
 
             return d;
         }
+    }),
+    changePassword: proxySSO({
+        path: '/profile/update',
+        dataMapper: function (d) {
+            delete d.password;
+            d.password = d.newPassword;
+
+            return d;
+        }
     })
 };

@@ -71,4 +71,38 @@ angular.module('accountSetting', ['pascalprecht.translate'])
             ;
         }
     }])
+    .controller('changePasswordCtrl', ['$scope', 'service', '$filter', 'FormValidation', function ($scope, service, $filter, FormValidation) {
+        $scope.data = {};
+
+        $scope.isChangePasswordFormValid = function () {
+            return $scope.data.password && $scope.data.newPassword;
+        };
+
+        var submitting = false;
+        $scope.changePassword = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            if (submitting) {
+                return;
+            }
+
+            var $form = $('.b-modify-password form');
+            submitting = true;
+
+            service
+                .post('/service-proxy/member/change-password', $scope.data)
+                .then(function (res) {
+                    console.log(res);
+
+                    $form.form('clear');
+                    $('.ui.modal.b-modify-password').modal('hide');
+                    $scope.message = $filter('translate')('ChangePasswordSuccess') || '修改密码成功！';
+                })
+                .catch(FormValidation.delegateHandleFormError($form))
+                .finally(function () {
+                    submitting = false;
+                });
+        }
+    }])
 ;

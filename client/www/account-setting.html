@@ -127,34 +127,35 @@
             </form>
         </div>
     </div>
-    <div class="ui modal b-modify b-modify-password">
+    <div class="ui modal b-modify b-modify-password" ng-controller="changePasswordCtrl">
         <div class="header b-background">
             <i class="ui large remove circle close icon"></i>
             <%= __('ModifyPassword') %>
         </div>
         <div class="content">
-            <form name="changePasswordForm" class="ui large form">
+            <form name="changePasswordForm" class="ui large form" ng-submit="changePassword($event)">
                 <div class="ui error message brand"></div>
                 <div class="ui">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="oldPassword"
+                            <input type="password" name="password"
                                    placeholder="{{'PleaseInputOldPassword' | translate}}"
-                                    >
+                                   ng-model="data.password">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="{{'PleaseSetNewPassword' | translate}}">
+                            <input type="password" name="newPassword" placeholder="{{'PleaseSetNewPassword' | translate}}"
+                                   ng-model="data.newPassword">
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
 
                     <div class="field">
                         <button type="submit" class="ui fluid large red submit button"
-                                ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
+                                ng-disabled="!isChangePasswordFormValid()">{{'Done' | translate}}
                         </button>
                     </div>
                 </div>
