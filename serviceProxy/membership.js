@@ -37,6 +37,14 @@ module.exports = {
             return next();
         }
 
-        res.status(401).send('You are not allowed to access this page.');
+        console.log('test');
+
+        if (req.xhr) {
+            res.status(401).send('You are not allowed to access this page.');
+        } else {
+            // TODO: check language
+            // TODO: append return url
+            res.redirect('/signin');
+        }
     }
 };

@@ -78,3 +78,14 @@ angular.module('signIn', ['pascalprecht.translate'])
     .directive('registerForm', angular.bplus.registerForm || {})
     .directive('tab', angular.bplus.tab || {})
 ;
+
+// TODO: integrated into JS framework
+(function () {
+    var $form = $('.ui.form');
+
+    $form.on('click', '.remove.circle.icon', function () {
+        $form.removeClass('error');
+    });
+
+    $('.checkbox').checkbox();
+})();

@@ -7,6 +7,7 @@ var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
 var pack = require('./package.json');
 var config = require('./config');
+var membership = require('./serviceProxy/membership.js');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 
 var supportedLocales = localeHelper.supportedLocales;
@@ -104,7 +105,10 @@ mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from');
 mapRoute2Template('/personal-history');
 mapRoute2Template('/profile');
-mapRoute2Template('/account-setting');
+//mapRoute2Template('/account-setting');
+server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, function (req, res, next) {
+    res.render('account-setting');
+});
 
 server.use('/healthcheck', function (req, res, next) {
     res.json({

@@ -59,5 +59,8 @@ module.exports = {
                 return false;
             }
         }
+    }),
+    changeMobile: proxySSO({
+        path: '/profile/update'
     })
 };
