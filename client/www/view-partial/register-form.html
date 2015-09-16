@@ -21,19 +21,20 @@
                 <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
             </div>
         </div>
-        <div class="field">
+        <div class="field" ng-show="sendCodeButtonClicked">
             <div class="ui left icon input">
-                <i class="write icon" ng-show="sendCodeButtonClicked"></i>
+                <i class="write icon"></i>
                 <input type="text" name="verificationCode"
                        placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
-                       ng-model="signUpData.verificationCode" ng-show="sendCodeButtonClicked">
-                &nbsp;
-                <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
-                        ng-click="getVerificationCode()"
-                        ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                    {{verificationCodeButtonText}}
-                </button>
+                       ng-model="signUpData.verificationCode">
             </div>
+        </div>
+        <div class="field">
+            <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
+                    ng-click="getVerificationCode()"
+                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                {{verificationCodeButtonText}}
+            </button>
         </div>
         <div class="field">
             <div class="ui left icon input">
