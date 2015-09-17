@@ -40,7 +40,7 @@ module.exports = {
         console.log('test');
 
         if (req.xhr) {
-            res.status(401).send('You are not allowed to access this page.');
+            res.status(401).send({code: '401', message: 'You are not allowed to access this page.'});
         } else {
             // TODO: check language
             // TODO: append return url

@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('accountSetting', ['pascalprecht.translate'])
     .config(angular.bplus.translate)
-    .config(['$httpProvider', function($httpProvider) {
+    .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
     }])
     .factory('translationLoader', angular.bplus.translationLoader)
@@ -31,8 +31,9 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                     $('.ui.modal.b-modify-mobile').modal('hide');
 
                     $scope.fetchProfile();
+                    $scope.changeMobileFormCtrl.getForm().form('clear');
 
-                    $scope.message = $filter('translate')('ChangeMobileSuccess') || '修改密码成功！';
+                    $scope.$parent.message = $filter('translate')('ChangeMobileSuccess');
                 })
                 .catch($scope.changeMobileFormCtrl.handleFormError)
                 .finally(function () {
@@ -65,16 +66,16 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                     $scope.fetchProfile();
                     $form.form('clear');
                     $('.ui.modal.b-modify-email').modal('hide');
-                    $scope.message = $filter('translate')('ChangeEmailSuccess') || '修改邮箱成功！';
+                    $scope.$parent.message = $filter('translate')('ChangeEmailSuccess');
                 })
                 .catch(FormValidation.delegateHandleFormError($form))
                 .finally(function () {
                     submitting = false;
                 })
             ;
-        }
+        };
     }])
-    .controller('changePasswordCtrl', ['$scope', 'service', '$filter', 'FormValidation', function ($scope, service, $filter, FormValidation) {
+    .controller('changePasswordCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$rootScope', function ($scope, service, $filter, FormValidation, $rootScope) {
         $scope.data = {};
 
         $scope.isChangePasswordFormValid = function () {
@@ -100,12 +101,12 @@ angular.module('accountSetting', ['pascalprecht.translate'])
 
                     $form.form('clear');
                     $('.ui.modal.b-modify-password').modal('hide');
-                    $scope.message = $filter('translate')('ChangePasswordSuccess') || '修改密码成功！';
+                    $scope.$parent.message = $filter('translate')('ChangePasswordSuccess');
                 })
                 .catch(FormValidation.delegateHandleFormError($form))
                 .finally(function () {
                     submitting = false;
                 });
-        }
+        };
     }])
 ;
