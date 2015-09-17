@@ -1,14 +1,14 @@
 (function () {
     var config = {
         sms: {
-            host: 'uat.service.hcdlearning.com',
+            host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
             port: '10002',
             code: "BP_S1",
-            enabled: true
+            enabled: false
         },
         mail: {
-            host: 'uat.service.hcdlearning.com',
+            host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
             port: '10002',
             code: 'BP_M1'
@@ -19,7 +19,7 @@
             port: '10001'
         },
         sso: {
-            host: 'uat.service.hcdlearning.com',
+            host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
             port: '10086',
             applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504'
