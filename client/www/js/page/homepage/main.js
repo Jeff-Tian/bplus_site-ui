@@ -1,27 +1,44 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('mates', [
+angular.module('bplus', [
     'ui.router',
-    'ng.utils'
+    'ng.utils',
+    'pascalprecht.translate'
 ]).config([
     '$urlRouterProvider',
-    function($urlRouterProvider) {}
-]).run(function() {
+    function ($urlRouterProvider) {
+    }
+]).run(function () {
 
-});
+})
+    .config(angular.bplus.translate)
+    .config(angular.bplus.xhr)
+    .factory('translationLoader', angular.bplus.translationLoader)
+    .factory('service', angular.bplus.service)
+    .factory('FormValidation', angular.bplus.FormValidation || function () {
+        return {};
+    })
+    .factory('MessageStore', angular.bplus.MessageStore)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .directive('captcha', angular.bplus.captcha)
+    .directive('registerForm', angular.bplus.registerForm)
+    .directive('tab', angular.bplus.tab)
+    .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
+;
 
 // TODO: integrated into JS framework
-(function() {
+(function () {
     //$(document)
     //  .ready(function() {
     // fix header when passed
     $('.b-masthead').visibility({
         once: false,
-        onBottomPassed: function() {
+        onBottomPassed: function () {
             $('[data-action=fixedHeader]').transition('fade in');
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
@@ -62,8 +79,8 @@ angular.module('mates', [
 
     $('.feedback-carousel').owlCarousel({
         items: 1,
-        lazyLoad:true,
-        loop:true,
+        lazyLoad: true,
+        loop: true,
         autoplay: true,
         autoplayTimeout: 8000,
         autoplayHoverPause: true,
@@ -77,18 +94,18 @@ angular.module('mates', [
 
     
 
-    var client=$('#b-client-list');
+    var client = $('#b-client-list');
     client.owlCarousel({
-        loop:true,
-        lazyLoad:true,
-        responsiveClass:true,
+        loop: true,
+        lazyLoad: true,
+        responsiveClass: true,
         nav: false,
         dots: false,
         autoplay: true,
         navRewind: true,
         autoplayTimeout: 6000,
         slideBy: 'page',
-        responsive:{
+        responsive: {
             0: {
                 items: 1,
             },
@@ -107,36 +124,35 @@ angular.module('mates', [
         }
     });
 
-    $('.b-client').mouseover(function() {
-        $('#b-client-header').css('visibility','visible');
-    }).mouseout(function() {
-        $('#b-client-header').css('visibility','hidden');
+    $('.b-client').mouseover(function () {
+        $('#b-client-header').css('visibility', 'visible');
+    }).mouseout(function () {
+        $('#b-client-header').css('visibility', 'hidden');
     });
 
-    var animateGif = function() {
+    // var animateGif = function() {
 
-        if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-            $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
-            $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
-            $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
+    //     if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
+    //         $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
+    //         $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
+    //         $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
 
-            setTimeout(function() {
-                $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
-                $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
-                $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
-            }, 950);
-        }
-    };
+    //         setTimeout(function() {
+    //             $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
+    //             $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
+    //             $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
+    //         }, 950);
+    //     }
+    // };
 
-    $('.index-gif').visibility({
-        once: false,
-        onTopVisible: function() {
-            animateGif();
-        },
-        onBottomPassedReverse: function() {
-            animateGif();
-        }
-    });
-
+    // $('.index-gif').visibility({
+    //     once: false,
+    //     onTopVisible: function() {
+    //         animateGif();
+    //     },
+    //     onBottomPassedReverse: function() {
+    //         animateGif();
+    //     }
+    // });
 
 })();

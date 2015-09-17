@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bridge+</title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+
+</head>
+
+<body ng-app="map">
+    <%- include('view-partial/header.html') -%>
+    <!-- Page Contents -->
+    <div class="pusher">
+        <div china-map ng-model='select'></div>
+        <input ng-model='select'></div>
+    </div>
+    <%- include('view-partial/footer.html') -%>
+    <!--JS-->
+    <script src="bower/jquery/dist/jquery.js"></script>
+    <script src="bower/semantic-ui/dist/semantic.js"></script>
+    <script src="bower/underscore/underscore.js"></script>
+    <!--Angular JS-->
+    <script src="bower/angular/angular.min.js"></script>
+    <script src="js/directives/map.js"></script>
+    <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!--Page JS-->
+    <script src="js/page/map/main.js"></script>
+    <script src="bower/echarts/build/dist/echarts.js"></script>
+    <script src="js/directives/map.js"></script>
+
+    <!--Utils JS-->
+    <script src="js/utils/utils.js"></script>
+    <script src="js/utils/msgbus.js"></script>
+    <script src="js/utils/underscore.js"></script>
+    
+
+    <!--<script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'bower/echarts/build/dist'
+            }
+        });
+        //使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/map' 
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                option = {
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: '{b}'
+                    },
+                    series : [
+                        {
+                            name: '中国',
+                            type: 'map',
+                            mapType: 'china',
+                            selectedMode : 'single',
+                            itemStyle:{
+                                normal:{label:{show:true}},
+                                emphasis:{label:{show:true}}
+                            },
+                            data:[]
+                        }
+                    ]
+                };
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+
+                var ecConfig = require('echarts/config');
+                myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {
+                    var selected = param.selected;
+                    var str = '当前选择： ';
+                    for (var p in selected) {
+                        if (selected[p]) {
+                            str += p + ' ';
+                        }
+                    }
+                    document.getElementById('wrong-message').innerHTML = str;
+                })
+            }
+        );
+    </script>-->
+</body>
+
+</html>

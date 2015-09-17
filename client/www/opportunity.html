@@ -9,7 +9,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body>
+<body ng-controller="AppCtrl" ng-app="bplus">
     <%- include('view-partial/header.html') -%>
     <!-- Page Contents -->
     <div class="pusher">
@@ -353,6 +353,9 @@
     <script src="bower/angular/angular.min.js"></script>
     <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!--Page JS-->
+    <script src="js/controllers/AppCtrl.js"></script>
+    <script src="js/factories/service.js"></script>
+    <script src="js/factories/MessageStore.js"></script>
     <script src="js/page/opportunity/main.js"></script>
     <!--Utils JS-->
     <script src="js/utils/utils.js"></script>

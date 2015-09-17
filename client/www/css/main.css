@@ -3163,9 +3163,6 @@ h3.ui.header.b-sp {
 */
 .b-signin {
   width: 20em;
-  position: absolute;
-  right: 5em;
-  top: 8em;
 }
 /*
 * - @Bridge+
@@ -3253,6 +3250,59 @@ body.pushable .pusher {
 .grey.color {
   color: #7d7d7d;
 }
+.ui.brand.message-wrapper.container {
+  z-index: 4;
+  position: fixed;
+  top: 100px;
+  width: 100%;
+}
+.ui.brand.message-wrapper.container .ui.brand.message {
+  position: relative;
+  margin: 0 auto;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: larger;
+  padding: 10px 50px 10px 20px;
+  box-shadow: 0 0 0 0;
+  border: none;
+}
+.ui.brand.message-wrapper.container .ui.brand.message .remove.circle.icon {
+  cursor: pointer;
+  margin-right: -40px;
+  margin-left: 10em;
+  letter-spacing: 2em;
+}
+.avatar-minor {
+  background-color: #cccccc;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.avatar-minor .avatar {
+  color: #333333;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+.no-padded.field {
+  padding: 0 !important;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.b-background {
+  background-color: #f0f0f0 !important;
+}
 /*
 * - @Bridge+
 */
@@ -3296,6 +3346,9 @@ body.pushable .pusher {
 .b-header .menu .item .nav-button:active {
   color: #FF3C42;
 }
+.b-header .menu .center.aligned.item {
+  text-align: center;
+}
 .b-header .menu.b-header-account {
   background-color: #ff3c42;
 }
@@ -3326,6 +3379,47 @@ body.pushable .pusher {
 .b-header .menu.b-header-nav .item .ui.button {
   font-size: 1em;
   font-weight: bold;
+}
+.b-header .menu .b-profile.item:hover,
+.b-header .menu .b-profile.item.active {
+  background-color: #900000 !important;
+}
+.b-header .b-profile.item .avatar {
+  width: 25px !important;
+  height: 25px;
+}
+.b-header .b-profile.menu {
+  background-color: #1a1a1a !important;
+  padding: 5px 0;
+  border-radius: 6px !important;
+  width: auto !important;
+}
+.b-header .b-profile.menu:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  margin-top: -10px;
+  margin-left: 50%;
+  left: -5px;
+  border: 5px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+.b-header .b-profile.menu .avatar {
+  height: 80px;
+  width: 80px !important;
+  display: block;
+  margin: 10px auto;
+}
+.b-header .ui.menu .ui.dropdown .b-profile.menu > .item {
+  color: #DCDCDC !important;
+}
+.b-header .ui.menu .ui.dropdown .b-profile.menu > .item.active,
+.b-header .ui.menu .ui.dropdown .b-profile.menu > .item:hover {
+  background-color: #2D363D !important;
+  color: white !important;
 }
 @media only screen and (max-width: 700px) {
   .b-header.fixed {
@@ -3751,6 +3845,97 @@ body.pushable .pusher {
 .b-trial {
   padding: 3rem 0;
 }
+.b-sign-in-position-wrapper {
+  position: relative;
+  margin-right: 33px;
+}
+.b-sign-in-position-wrapper .b-sign-in-position {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  z-index: 10000;
+}
+.b-signin-semi-transparent-wrapper {
+  width: 300px;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #cccccc;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container label,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container label:hover,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container label:active,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container label:focus,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .ui.checkbox input:focus ~ label,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .ui.checkbox label,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .ui.checkbox + label {
+  color: #cccccc;
+  cursor: pointer;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container a:link,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container a:visited,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container a:hover,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container a:active {
+  color: white !important;
+  cursor: pointer;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .wechat.link {
+  cursor: pointer;
+  color: #cccccc !important;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .wechat.icon {
+  color: white !important;
+  cursor: pointer;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .wechat.icon:hover,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .wechat.icon:active,
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .wechat.icon:focus {
+  color: limegreen !important;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .item {
+  color: white;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 2em;
+  padding-top: 0;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.divider {
+  border-top-color: #cccccc;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand {
+  border-color: transparent;
+  border-width: 0;
+  padding: 0;
+  display: inline-block;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand .item {
+  margin: 0;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand .active.item {
+  border-color: transparent;
+  border-width: 0;
+  color: white !important;
+  font-weight: normal !important;
+  background-color: transparent;
+  height: 100%;
+  margin: 0;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand .item:hover {
+  color: white;
+  font-weight: normal !important;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .tab {
+  width: 250px;
+  margin: 0 auto;
+}
 /*
 * - @Bridge+
 */
@@ -3877,6 +4062,7 @@ body.pushable .pusher {
 }
 .field.error.absolute-prompt .ui.red.pointing.prompt {
   position: absolute;
+  z-index: 999;
 }
 .shape.reset,
 .shape.reset-by-email,
@@ -4778,4 +4964,12 @@ body.pushable > .pusher,
 .b-profile-right-section-btn-append button {
   color: #fff !important;
   border-radius: 0 !important;
+}
+.b-modify {
+  width: 300px !important;
+}
+.ui.modal i.icon {
+  float: right;
+  cursor: pointer;
+  margin: -5px -10px 0 0;
 }

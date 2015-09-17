@@ -51,6 +51,7 @@ module.exports = function(grunt) {
         'less:development',
         'watch',
         'jshint',
+        'nodemon',
       ],
       options: {
         logConcurrentOutput: true

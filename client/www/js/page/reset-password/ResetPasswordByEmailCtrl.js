@@ -1,28 +1,73 @@
 (function (exports) {
-    exports.ResetPasswordByEmailCtrl = function ($scope) {
+    exports.ResetPasswordByEmailCtrl = function ($scope, FormValidation, service) {
+        $scope.resetData = {};
+
         var $shape = $('.shape.reset-by-email');
         $shape.shape();
 
         var $form = $('.ui.form.reset-by-email');
         $scope.isResetPasswordFormValid = function () {
-            if ($scope.resetPasswordForm.$pristine) {
-                return false;
-            }
+            var result = $scope.resetData.email && $scope.resetData.email.match(FormValidation.validEmailRegex) && $scope.resetData.captcha;
 
-            return $form.form('is valid');
+            return result;
         };
 
+        var submitting = false;
         $scope.tryResetPassword = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            if (submitting) {
+                return;
+            }
+
+            $form.form('validate form');
+
             if (!$scope.isResetPasswordFormValid()) {
                 return;
             }
 
-            $form.form('clear');
-            $shape.shape('flip over');
+            submitting = true;
+            service.post('/service-proxy/mail/send', {
+                to: $scope.resetData.email,
+                linkPasswordReset: window.location.origin + '/set-password',
+                displayName: $scope.resetData.email.substr(0, $scope.resetData.email.indexOf('@')),
+                captcha: $scope.resetData.captcha,
+                captchaId: $scope.resetData.captchaId
+            })
+                .then(function (res) {
+                    $form.form('clear');
+                    $shape.shape('flip over').find('.active.side').removeClass('hidden');
+                }, function (reason) {
+                    FormValidation.handleFormError($form, reason, $scope.resetData.email);
+                    $scope.refreshCaptcha();
+                }).finally(function () {
+                    submitting = false;
+                });
+        };
 
-            $event.preventDefault();
+        $scope.getEmailProviderLink = function () {
+            function endsWith(str, suffix) {
+                if (!str || !str.length) {
+                    return false;
+                }
+
+                return str.indexOf(suffix, str.length - suffix.length) >= 0;
+            }
+
+            var providers = {
+                'hotmail.com': 'https://outlook.com'
+            };
+
+            for (var p in providers) {
+                if (endsWith($scope.resetData.email, p)) {
+                    return providers[p];
+                }
+            }
+
+            return 'about:blank';
         };
     };
 
-    exports.ResetPasswordByEmailCtrl.$inject = ['$scope'];
+    exports.ResetPasswordByEmailCtrl.$inject = ['$scope', 'FormValidation', 'service'];
 })(angular.bplus = angular.bplus || {});
