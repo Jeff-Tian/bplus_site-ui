@@ -103,12 +103,10 @@ mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from');
-mapRoute2Template('/personal-history');
+server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
 mapRoute2Template('/profile');
 //mapRoute2Template('/account-setting');
-server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, function (req, res, next) {
-    res.render('account-setting');
-});
+server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 
 server.use('/healthcheck', function (req, res, next) {
     res.json({
@@ -125,7 +123,7 @@ function logErrors(err, req, res, next) {
 
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
-        res.status(500).send({error: 'Something blew up!'});
+        res.status(500).send({code: '', message: 'Something blew up!'});
     } else {
         next(err);
     }

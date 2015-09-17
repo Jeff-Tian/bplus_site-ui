@@ -9,7 +9,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-app="signIn" ng-controller="AppCtrl">
+<body ng-app="personalHistory" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
     <div class="ui success message brand" ng-hide="userHide === true">
@@ -28,21 +28,21 @@
         <div class="ui text shape personal-history" ng-controller="PersonalHistoryCtrl">
             <div class="sides">
                 <div class="active side">
-                    <form name="personalInfoForm" class="ui form personal-history step-1" ng-submit="tryNextStep()">
+                    <form name="personalInfoForm" class="ui form personal-history step-1"
+                          ng-submit="tryNextStep($event)">
                         <div class="b-step-container">
+                            <div class="ui error message brand"></div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i>真实姓名</label>
                                 <input type="text" name="realName" placeholder="请输入真实姓名"
-                                       ng-model="personalInfo.realName">
+                                       ng-model="memberInfo.real_name">
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i>性别</label>
-                                <select class="ui dropdown" name="gender" ng-model="personalInfo.gender">
-                                    <option value="">请选择...</option>
-                                    <option value="1">男</option>
-                                    <option value="0">女</option>
+                                <select class="ui dropdown defer" name="gender" ng-model="memberInfo.gender">
+                                    <option value=""><%= __('PleaseSelect') %></option>
+                                    <option value="{{g.value}}" ng-repeat="g in genderList" dropdown>{{g.text}}</option>
                                 </select>
-
                             </div>
                             <div class="fields">
                                 <div class="four wide field">
@@ -52,13 +52,13 @@
                                         <div class="no-padded field">
                                             <select class="ui fluid search dropdown defer" name="yearOfBirth"
                                                     ng-model="personalInfo.yearOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{y}}" ng-repeat="y in birthYearList" dropdown>{{y}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;年
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Year') %>
                                         </div>
                                     </div>
                                 </div>
@@ -69,13 +69,13 @@
                                         <div class="no-paddedfield">
                                             <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{m}}" ng-repeat="m in monthList" dropdown="">{{m}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;月
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Month') %>
                                         </div>
                                     </div>
                                 </div>
@@ -86,14 +86,14 @@
                                         <div class="no-padded field">
                                             <select class="ui fluid search dropdown defer dayOfBirth" name="dayOfBirth"
                                                     ng-model="personalInfo.dayOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{d}}" ng-repeat="d in getBirthDayList()" dropdown>
                                                     {{d}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;日
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Day') %>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="side">
                     <form name="personalInfoForm2" class="ui form personal-history step-2 brand"
-                          ng-submit="trySubmit()">
+                          ng-submit="trySubmit($event)">
                         <div class="b-step-container">
                             <div class="ui error message brand"></div>
                             <div class="field">
@@ -230,15 +230,20 @@
 <script src="bower/underscore/underscore.js"></script>
 <!--Angular JS-->
 <script src="bower/angular/angular.min.js"></script>
-<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower/angular-semantic-ui/dist/angular-semantic-ui.min.js"></script>
+<script src="bower/angular-translate/angular-translate.min.js"></script>
 <!--Page JS-->
+<script src="js/config/translate.js"></script>
+<script src="js/factories/translationLoader.js"></script>
+<script src="/translation/localeHelper.js"></script>
+<script src="js/config/xhr.js"></script>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
 <script src="js/factories/service.js"></script>
 <script src="js/factories/MessageStore.js"></script>
+<script src="js/directives/dropdown.js"></script>
 <script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
-<script src="js/page/register/main.js"></script>
+<script src="js/page/personal-histroy/main.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>
 <script src="js/utils/msgbus.js"></script>
