@@ -3,6 +3,9 @@
 // Declare app level module which depends on views, and components
 angular.module('accountSetting', ['pascalprecht.translate'])
     .config(angular.bplus.translate)
+    .config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    }])
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)

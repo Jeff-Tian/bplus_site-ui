@@ -13,6 +13,7 @@ angular.module('bplus', [
 
 })
     .config(angular.bplus.translate)
+    .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation || function () {
@@ -59,17 +60,17 @@ angular.module('bplus', [
         nav: true,
         animateIn: 'b-pulse',
         navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
-        onTranslate: function() {
+        onTranslate: function () {
             // $('.masthead-carousel').removeClass('animated pulse');
             $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
             $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
             //$('.masthead-carousel').removeClass('animated b-pulse');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.active').find('h1').addClass('animated b-fadeInLeft');
                 $('.active').find('h2').addClass('animated b-fadeInRight');
             }, 100);
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
                 $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
             }, 1200);
@@ -78,8 +79,8 @@ angular.module('bplus', [
 
     $('.feedback-carousel').owlCarousel({
         items: 1,
-        lazyLoad:true,
-        loop:true,
+        lazyLoad: true,
+        loop: true,
         autoplay: true,
         autoplayTimeout: 8000,
         autoplayHoverPause: true,
@@ -89,22 +90,20 @@ angular.module('bplus', [
         animateOut: 'bounceOutLeft',
         navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
     });
-    
 
-    
 
-    var client=$('#b-client-list');
+    var client = $('#b-client-list');
     client.owlCarousel({
-        loop:true,
-        lazyLoad:true,
-        responsiveClass:true,
+        loop: true,
+        lazyLoad: true,
+        responsiveClass: true,
         nav: false,
         dots: false,
         autoplay: true,
         navRewind: true,
         autoplayTimeout: 6000,
         slideBy: 'page',
-        responsive:{
+        responsive: {
             0: {
                 items: 1,
             },

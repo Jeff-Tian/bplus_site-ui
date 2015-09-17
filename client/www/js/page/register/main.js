@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('signIn', ['pascalprecht.translate'])
     .config(angular.bplus.translate)
+    .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
