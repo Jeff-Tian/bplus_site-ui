@@ -13,7 +13,6 @@
     "express": "^4.13.3",
     "extend": "^3.0.0",
     "i18n": "^0.5.0",
-    "log4js_cassandra": "git+ssh://git@bitbucket.org/hcdlearning/log4js-cassandra.git",
     "logger": "git://github.com/HCDLearning/logger.git#v1.0.0"
   },
   "devDependencies": {

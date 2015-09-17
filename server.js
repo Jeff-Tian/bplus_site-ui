@@ -105,6 +105,7 @@ mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from');
 mapRoute2Template('/personal-history');
 mapRoute2Template('/profile');
+mapRoute2Template('/map');
 //mapRoute2Template('/account-setting');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, function (req, res, next) {
     res.render('account-setting');

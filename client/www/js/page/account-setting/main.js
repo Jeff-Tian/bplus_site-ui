@@ -98,7 +98,7 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                 .post('/service-proxy/member/change-password', $scope.data)
                 .then(function (res) {
                     console.log(res);
-
+                    
                     $form.form('clear');
                     $('.ui.modal.b-modify-password').modal('hide');
                     $scope.$parent.message = $filter('translate')('ChangePasswordSuccess');
