@@ -153,15 +153,23 @@ module.exports = {
             path: '/profile/update',
             dataMapper: function (d) {
                 console.log('change mobile');
+                delete d.captcha;
+                delete d.verificationCode;
+                delete d.password;
+                delete d.captchaId;
+                delete d.value;
+
                 console.log(d);
 
                 return d;
             },
-            responseInterceptor: function (res, json) {
-                console.log('changed');
+            responseInterceptor: function (response, json) {
+                console.log('changed password');
                 console.log(json);
 
-                if (json.isSuccess && json.result) {
+                if (json.isSuccess) {
+                    response.send(json);
+
                     return true;
                 } else {
                     return false;
@@ -182,13 +190,23 @@ module.exports = {
             return d;
         }
     }),
-    changePassword: proxySSO({
-        path: '/profile/update',
-        dataMapper: function (d) {
-            delete d.password;
-            d.password = d.newPassword;
+    changePassword: function (req, res, next) {
+        proxySSO({
+            path: '/profile/changepassword',
+            dataMapper: function (d) {
+                return d;
+            },
+            responseInterceptor: function (response, json) {
+                console.log('changed password.');
+                console.log(json);
 
-            return d;
-        }
-    })
+                if (json.isSuccess) {
+                    response.send(json);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        })(req, res, next);
+    }
 };

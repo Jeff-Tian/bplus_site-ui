@@ -3,10 +3,10 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Following(fixed) Menu -->
-<div class="ui center aligned container brand message-wrapper" ng-show="message && !hideMessage" ng-cloak>
+<div class="ui center aligned container brand message-wrapper" ng-show="message" ng-cloak>
     <div class="ui black brand message">
         {{message}}
-        <i class="large remove circle icon" ng-click="hideMessage = true"></i>
+        <i class="large remove circle icon" ng-click="message = null"></i>
     </div>
 </div>
 

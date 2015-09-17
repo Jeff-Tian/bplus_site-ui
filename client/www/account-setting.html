@@ -12,13 +12,6 @@
 <body ng-app="accountSetting" ng-controller="AppCtrl" class="b-background">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper" style="width: 500px;">
-    <div class="ui success message brand" ng-hide="!message || userHide === true">
-        <i class="large close icon" ng-click="userHide = true"></i>
-
-        <div class="header">
-            {{message}}
-        </div>
-    </div>
     <div class="ui column b-step-container b-separator">
         <div class="ui center aligned container subcontainer">
             <h2 class="grey color"><%= __('AccountSetting') %></h2>

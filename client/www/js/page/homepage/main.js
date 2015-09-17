@@ -88,10 +88,8 @@ angular.module('bplus', [
         navRewind: true,
         animateIn: 'bounceInRight',
         animateOut: 'bounceOutLeft',
-        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
+        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>']
     });
-    
-
     
 
     var client = $('#b-client-list');
