@@ -21,7 +21,7 @@ define([
         "bplusworkexperienceall": {
             "name": "",
             "position": "",
-            "industry" "",
+            "industry": "",
             "dateFrom": {
                 "value": {
                     "year": "",

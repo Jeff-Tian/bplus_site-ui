@@ -29,5 +29,8 @@
     "angular": "~1.4.4",
     "angular-route": "~1.4.4",
     "when": "~3.7.3"
+  },
+  "resolutions": {
+    "angular": "~1.4.4"
   }
 }
