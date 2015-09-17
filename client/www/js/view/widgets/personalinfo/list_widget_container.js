@@ -21,6 +21,7 @@ define([
         "bplusworkexperienceall": {
             "name": "",
             "position": "",
+            "industry" "",
             "dateFrom": {
                 "value": {
                     "year": "",
@@ -61,49 +62,49 @@ define([
             "tags": ""
         },
         "bpluspersonalinfooverall": {
-            name: "",
-            gender: "",
-            dateOfBirth: {
-                value: {
-                    year: {value: ""},
-                    month: {value: ""},
-                    day: {value: ""}
+            "name": "",
+            "gender": "",
+            "dateOfBirth": {
+                "value": {
+                    "year": {value: ""},
+                    "month": {value: ""},
+                    "day": {value: ""}
                 },
-                isPrivate: false
+                "isPrivate": false
             },
-            location: "",
-            contractInfo: {
-                value: "",
-                isPrivate: false
+            "location": "",
+            "contractInfo": {
+                "value": "",
+                "isPrivate": false
             }
         },
         "bplusskillsoverall": {
-            name: "",
-            description: "",
-            tags: ""
+            "name": "",
+            "description": "",
+            "tags": ""
         },
         "bpluseducationbackgroundall": {
-            name: "",
-            major: "",
-            background: "",
-            dateFrom: {
-                year: "",
-                month: "",
-                day: ""
+            "name": "",
+            "major": "",
+            "background": "",
+            "dateFrom": {
+                "year": "",
+                "month": "",
+                "day": ""
             },
-            dateTo: {
-                year: "",
-                month: "",
-                day: ""
+            "dateTo": {
+                "year": "",
+                "month": "",
+                "day": ""
             },
-            description: "",
-            tags: ""
+            "description": "",
+            "tags": ""
         },
         "bpluslanguageall": {
-          name: "",
-          proficiency: "",
-          certification: "",
-          score: ""
+          "name": "",
+          "proficiency": "",
+          "certification": "",
+          "score": ""
         }
     };
 

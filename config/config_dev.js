@@ -23,6 +23,13 @@
             port: '10086',
             applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504'
         },
+        profile: {
+            //host: 'uat.service.hcd.com', //'10.20.32.61'
+            host: 'uat.service.hcd.com',
+            port: '12345',
+            //should get it from login infomation.
+            applicationId: 'ea9027f4-b448-4051-968c-648489a86d75'
+        },
         "logger": {
             "levels": {
                 "[all]": "DEBUG"
