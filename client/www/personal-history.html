@@ -118,7 +118,9 @@
                         </div>
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container subcontainer">
-                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()"><%= __('Skip') %></button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()"><%=
+                                __('Skip') %>
+                            </button>
                             <button type="submit" class="ui large red button"><%= __('NextStepEducation') %></button>
                         </div>
 
@@ -140,12 +142,13 @@
                                        ng-model="schoolInfo.major">
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i><%= __('Qualification') %></label>
-                                <select class="ui fluid search dropdown" ng-model="schoolInfo.educationBackground"
+                                <label><i class="ui large red icon">*</i><%= __('Qualification')
+                                    %></label>
+                                <select class="ui fluid search dropdown defer" ng-model="schoolInfo.educationBackground"
                                         name="schoolEducationBackground">
                                     <option value=""><%= __('PleaseSelect') %></option>
-                                    <option value="本科">本科</option>
-                                    <option value="硕士">硕士</option>
+                                    <option value="{{q.value}}" ng-repeat="q in qualifications" dropdown>{{q.text}}
+                                    </option>
                                 </select>
                             </div>
                             <div class="two fields">
@@ -214,7 +217,9 @@
                             <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
                                 <%= __('PreviousStep') %>
                             </button>
-                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()"><%= __('Skip') %></button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()"><%=
+                                __('Skip') %>
+                            </button>
                             <button type="submit" class="ui large red button"><%= __('Done') %></button>
                         </div>
                     </form>
