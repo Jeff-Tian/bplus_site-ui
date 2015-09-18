@@ -1,6 +1,5 @@
 (function(exports) {
-	exports.chinaMap = function($http) {
-
+	exports.chinaMap = function($http, $translate, $filter) {
 		return {
 			restrict: 'AE',
 			require: 'ngModel',
@@ -19,40 +18,64 @@
 					],
 					function(ec) {
 						//加载中国地图（分区域）           
+						var jsonPath = '/js/page/map/geoJson/area-' + $translate.preferredLanguage() + '.json';
 						require('echarts/util/mapData/params').params.area = {
 							getGeoJson: function(callback) {
-								$.getJSON('js/page/map/geoJson/area.geo.json', callback);
+								$.getJSON(jsonPath, callback);
 							}
 						};
 
 						// 基于准备好的dom，初始化echarts图表
 						var myChart = ec.init(document.getElementById('main'));
-						var mapType = ['area', '东北地区', '华北地区', '华东地区', '华南地区', '华中地区', '西南地区', '西北地区', '港澳台'];
+						var mapType = ['area', $filter('translate')('MapDongBei'), $filter('translate')('MapHuaBei'), $filter('translate')('MapHuaDong'), $filter('translate')('MapHuaNan'), $filter('translate')('MapHuaZhong'), $filter('translate')('MapXiNan'), $filter('translate')('MapXiBei'), $filter('translate')('MapGangAoTai')];
 						var result = '';
 						var option = {
 							tooltip: {
 								trigger: 'item',
-								formatter: function (params,ticket,callback) {
-									switch(params[1]){
+								formatter: function(params, ticket, callback) {
+									switch (params[1]) {
 										case '东北地区':
-											result = '辽宁、吉林、黑龙江'; break;
+										case 'DoneBei':
+											result = $filter('translate')('MapDongBeiList');
+											break;
 										case '华北地区':
-											result = '北京、天津、河北、山西、内蒙古'; break;
+										case 'HuaBei':
+											result = $filter('translate')('MapHuaBeiList');
+
+											break;
 										case '华东地区':
-											result = '山东、江苏、安徽、浙江、福建、上海'; break;
+										case 'HuaDong':
+											result = $filter('translate')('MapHuaDongList');
+
+											break;
 										case '华南地区':
-											result = '广东、广西、海南'; break;
-										case '华中地区' :
-											result = '湖北、湖南、河南、江西'; break;
-										case '西北地区':
-											result = '宁夏、新疆、青海、陕西、甘肃'; break;
+										case 'HuaNan':
+											result = $filter('translate')('MapHuaNanList');
+
+											break;
+										case '华中地区':
+										case 'HuaZhong':
+											result = $filter('translate')('MapHuaZhongList');
+
+											break;
 										case '西南地区':
-											result = '四川、云南、贵州、西藏、重庆'; break;
+										case 'XiNan':
+											result = $filter('translate')('MapXiNanList');
+
+											break;
+										case '西北地区':
+										case 'XiBei':
+											result = $filter('translate')('MapXiBeiList');
+
+											break;
 										case '港澳台':
-											result = '香港、澳门、台湾'; break;
-										}
+										case 'GangAoTai':
+											result = $filter('translate')('MapGangAoTaiList');
+
+											break;
+									}
 									return result;
-						        }
+								}
 							},
 							series: [{
 								name: '中国',
@@ -99,6 +122,6 @@
 		};
 	};
 
-	exports.chinaMap.$inject = ['$http'];
+	exports.chinaMap.$inject = ['$http', '$translate', '$filter'];
 
 })(angular.bplus = angular.bplus || {});

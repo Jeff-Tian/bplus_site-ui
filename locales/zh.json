@@ -75,5 +75,21 @@
   "PleaseInputValidEmail": "请输入有效的邮箱地址",
   "NoResponseFromServer": "未得到服务器响应",
   "SignedInWelcomeMessage": "{user.name}已成功登录,欢迎你回来!",
-  "B+FailedToGetMailToken": "没有获取到邮箱令牌"
+  "B+FailedToGetMailToken": "没有获取到邮箱令牌",
+  "MapDongBei":"东北地区",
+  "MapHuaBei":"华北地区",
+  "MapHuaDong":"华东地区",
+  "MapHuaNan":"华南地区",
+  "MapHuaZhong":"华中地区",
+  "MapXiNan":"西南地区",
+  "MapXiBei":"西北地区",
+  "MapGangAoTai":"港澳台",
+  "MapDongBeiList":"辽宁、吉林、黑龙江",
+  "MapHuaBeiList":"北京、天津、河北、山西、内蒙古",
+  "MapHuaDongList":"山东、江苏、安徽、浙江、福建、上海",
+  "MapHuaNanList":"广东、广西、海南",
+  "MapHuaZhongList":"湖北、湖南、河南、江西",
+  "MapXiNanList":"四川、云南、贵州、西藏、重庆",
+  "MapXiBeiList":"宁夏、新疆、青海、陕西、甘肃",
+  "MapGangAoTaiList":"香港、澳门、台湾"
 }
