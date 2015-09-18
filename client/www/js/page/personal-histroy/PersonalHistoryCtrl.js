@@ -1,9 +1,5 @@
 (function (exports) {
     exports.PersonalHistoryCtrl = function ($scope, FormValidation, $timeout, service, $filter, msgBus, $q) {
-        $('.ui.dropdown').not('.defer')
-            .dropdown({})
-        ;
-
         $('.ui.checkbox')
             .checkbox()
         ;
@@ -108,8 +104,7 @@
             service
                 .post(path, $scope.schoolInfo)
                 .then(function (res) {
-                    console.log(res);
-                    //$scope.gotoComplete();
+                    $scope.gotoComplete();
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {
@@ -117,6 +112,8 @@
                 })
             ;
         };
+
+        window.test = $scope;
 
         $scope.birthYearList = (function () {
             var res = [];
@@ -175,11 +172,39 @@
         })();
         $scope.monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-        $scope.genderList = [{
-            value: "M", text: $filter('translate')('Male')
-        }, {
-            value: "F", text: $filter('translate')('Female')
-        }];
+        msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
+            if ($scope.memberInfo.birthday) {
+                var d = new Date($scope.memberInfo.birthday);
+
+                $scope.personalInfo.yearOfBirth = d.getUTCFullYear().toString();
+                $scope.personalInfo.monthOfBirth = (d.getUTCMonth() + 1).toString();
+                $scope.personalInfo.dayOfBirth = d.getUTCDate().toString();
+
+                setSomeForm1Value();
+            }
+        });
+
+        $scope.qualifications = [];
+
+        service
+            .get('/service-proxy/bplus-resource/qualifications/' + angular.bplus.localeHelper.getLocale(window.location.pathname))
+            .then(function (res) {
+                $scope.qualifications = res.map(function (q) {
+                    return {
+                        value: q.id,
+                        text: q.text
+                    };
+                });
+            })
+            .finally(function () {
+                $scope.genderList = [{
+                    value: "M", text: $filter('translate')('Male')
+                }, {
+                    value: "F", text: $filter('translate')('Female')
+                }];
+
+                loadBPlusProfile();
+            });
 
         var $form1 = $('.ui.form.personal-history.step-1');
         var $form2 = $('.ui.form.personal-history.step-2');
@@ -295,7 +320,7 @@
             educationId: '',
             name: '',
             major: '',
-            educationBackground: '',
+            educationBackground: null,
             startYear: '',
             startMonth: '',
             endYear: '',
@@ -310,54 +335,56 @@
             currentLocation: ''
         };
 
-        service
-            .get('/service-proxy/member/bplus-profile')
-            .then(function (res) {
-                if (res.memberExt) {
-                    $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
-                    $scope.personalInfo.currentLocation = res.memberExt.current_location;
+        function findQualificationText(value) {
+            for (var i = 0; i < $scope.qualifications.length; i++) {
+                if ($scope.qualifications[i].value === value) {
+                    return $scope.qualifications[i].text;
                 }
-
-                if (res.education && res.education.length) {
-                    var first = res.education[0];
-
-                    $scope.schoolInfo.educationId = first.education_id;
-                    $scope.schoolInfo.name = first.university;
-                    $scope.schoolInfo.major = first.major;
-                    $scope.schoolInfo.educationBackground = first.qualification_id;
-
-                    var startDate = null;
-                    if (first.start_date) {
-                        startDate = new Date(first.start_date);
-                    }
-                    var endDate = null;
-                    if (first.end_date) {
-                        endDate = new Date(first.end_date);
-                    }
-
-                    $scope.schoolInfo.startYear = startDate ? startDate.getUTCFullYear() : null;
-                    $scope.schoolInfo.startMonth = startDate ? startDate.getUTCMonth() + 1 : null;
-                    $scope.schoolInfo.endYear = endDate ? endDate.getUTCFullYear() : null;
-                    $scope.schoolInfo.endMonth = endDate ? endDate.getUTCMonth() + 1 : null;
-
-                    $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
-                    $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
-                    $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
-                    $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
-                }
-            });
-
-        msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
-            if ($scope.memberInfo.birthday) {
-                var d = new Date($scope.memberInfo.birthday);
-
-                $scope.personalInfo.yearOfBirth = d.getUTCFullYear().toString();
-                $scope.personalInfo.monthOfBirth = (d.getUTCMonth() + 1).toString();
-                $scope.personalInfo.dayOfBirth = d.getUTCDate().toString();
-
-                setSomeForm1Value();
             }
-        });
+
+            return '';
+        }
+
+        function loadBPlusProfile() {
+            service
+                .get('/service-proxy/member/bplus-profile')
+                .then(function (res) {
+                    if (res.memberExt) {
+                        $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
+                        $scope.personalInfo.currentLocation = res.memberExt.current_location;
+                    }
+
+                    if (res.education && res.education.length) {
+                        var first = res.education[0];
+
+                        $scope.schoolInfo.educationId = first.education_id;
+                        $scope.schoolInfo.name = first.university;
+                        $scope.schoolInfo.major = first.major;
+                        $scope.schoolInfo.educationBackground = first.qualifications_id;
+
+                        $('select[name=schoolEducationBackground]').dropdown('set text', findQualificationText($scope.schoolInfo.educationBackground));
+
+                        var startDate = null;
+                        if (first.start_date) {
+                            startDate = new Date(first.start_date);
+                        }
+                        var endDate = null;
+                        if (first.end_date) {
+                            endDate = new Date(first.end_date);
+                        }
+
+                        $scope.schoolInfo.startYear = startDate ? startDate.getUTCFullYear() : null;
+                        $scope.schoolInfo.startMonth = startDate ? startDate.getUTCMonth() + 1 : null;
+                        $scope.schoolInfo.endYear = endDate ? endDate.getUTCFullYear() : null;
+                        $scope.schoolInfo.endMonth = endDate ? endDate.getUTCMonth() + 1 : null;
+
+                        $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
+                        $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
+                        $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
+                        $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
+                    }
+                });
+        }
 
         /**
          * Workaround for unknown angular and semantic issues
@@ -373,7 +400,16 @@
                 return '';
             }
 
-            $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
+            if ($scope.genderList && $scope.genderList.length) {
+                $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
+            } else {
+                $scope.$watch('genderList', function () {
+                    if ($scope.genderList && $scope.genderList.length) {
+                        $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
+                    }
+                });
+            }
+
             $('select[name=yearOfBirth]').dropdown('set text', $scope.personalInfo.yearOfBirth);
             $('select[name=monthOfBirth]').dropdown('set text', $scope.personalInfo.monthOfBirth);
             $('select[name=dayOfBirth]').dropdown('set text', $scope.personalInfo.dayOfBirth);
@@ -386,7 +422,7 @@
         function updateMemberInfoBirthday() {
             var year = Number($scope.personalInfo.yearOfBirth);
             var month = $scope.personalInfo.monthOfBirth ? Number($scope.personalInfo.monthOfBirth) - 1 : 1;
-            var day = $scope.personalInfo.dayOfBirth ? Number($scope.personalInfo.dayOfBirth) + 1 : 1;
+            var day = $scope.personalInfo.dayOfBirth ? Number($scope.personalInfo.dayOfBirth) : 1;
 
             $scope.memberInfo.birthday = new Date(Date.UTC(year, month, day));
         }
