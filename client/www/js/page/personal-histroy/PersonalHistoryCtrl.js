@@ -36,32 +36,50 @@
 
                         //$shape.shape('flip over').find('.active.side').removeClass('hidden');
                     })
-                    .catch(FormValidation.delegateHandleFormError($form1))
-                ,
+                    .catch(FormValidation.delegateHandleFormError($form1)),
 
                 service
                     .post('/service-proxy/member/update-profile', $scope.personalInfo)
                     .then(function (res) {
                         console.log(res);
                     })
-                    .catch(FormValidation.delegateHandleFormError($form1))
-            ])
+                    .catch(FormValidation.delegateHandleFormError($form1))])
                 .then(function () {
-                    $shape.shape('flip over').find('.active.side').removeClass('hidden');
+                    $scope.gotoNextStep();
                 })
                 .finally(function () {
                     submitting = false;
-                })
+                });
         };
 
         $scope.gotoNextStep = function () {
-            $form1.form('clear');
-            $shape.shape('flip over').find('.active.side').removeClass('hidden');
+            $shape.shape()
+                .find('.second.side').addClass('active')
+                .end()
+                .find('.first.side').removeClass('active');
         };
 
         $scope.prevStep = function () {
-            $shape.shape('flip back').find('.active.side').removeClass('hidden');
+            $shape.shape().find('.first.side').addClass('active')
+                .end()
+                .find('.second.side').removeClass('active');
+
+            setForm1Value();
         };
+
+        /**
+         * This should not be necessary, but due to some yet unknown angular and semantic issues,
+         * sometimes the value can't be bound to the UI components automatically. (The bindings are
+         * not stable), so make a workaround here
+         */
+        function setForm1Value() {
+            $('input[name=realName]').val($scope.memberInfo.real_name);
+            $('select[name=gender]').val($scope.memberInfo.gender);
+            $('select[name=yearOfBirth]').val($scope.personalInfo.yearOfBirth);
+            $('select[name=monthOfBirth]').val($scope.personalInfo.monthOfBirth);
+            $('select[name=dayOfBirth]').val($scope.personalInfo.dayOfBirth);
+            $('input[name=currentLocation]').val($scope.personalInfo.currentLocation);
+        }
 
         $scope.gotoComplete = function () {
             window.location.href = '/';
@@ -81,11 +99,17 @@
 
             submitting = true;
 
+            var path = '/service-proxy/member/add-education';
+
+            if ($scope.schoolInfo.educationId) {
+                path = '/service-proxy/member/update-education';
+            }
+
             service
-                .post('/service-proxy/member/save-education', $scope.memberInfo)
+                .post(path, $scope.schoolInfo)
                 .then(function (res) {
                     console.log(res);
-                    $scope.gotoComplete();
+                    //$scope.gotoComplete();
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {
@@ -96,7 +120,7 @@
 
         $scope.birthYearList = (function () {
             var res = [];
-            var thisYear = new Date().getFullYear();
+            var thisYear = new Date().getUTCFullYear();
             for (var i = 1980; i < thisYear - 15; i++) {
                 res.push(i.toString());
             }
@@ -114,7 +138,7 @@
             if (!year || !month) {
                 days = prefilledDays;
             } else {
-                var date = new Date(year, month - 1, 1);
+                var date = new Date(Date.UTC(year, month - 1, 1));
 
                 while (date.getMonth() === month - 1) {
                     days.push(date.getDate());
@@ -132,7 +156,7 @@
 
         $scope.startYearList = (function () {
             var res = [];
-            var thisYear = new Date().getFullYear();
+            var thisYear = new Date().getUTCFullYear();
             for (var i = thisYear - 10; i <= thisYear; i++) {
                 res.push(i);
             }
@@ -166,42 +190,42 @@
                     identifier: 'realName',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入真实姓名'
+                        prompt: $filter('translate')('PleaseInputRealName')
                     }]
                 },
                 gender: {
                     identifier: 'gender',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择性别'
+                        prompt: $filter('translate')('PleaseChooseGender')
                     }]
                 },
                 yearOfBirth: {
                     identifier: 'yearOfBirth',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择出生年份'
+                        prompt: $filter('translate')('请选择出生年份')
                     }]
                 },
                 monthOfBirth: {
                     identifier: 'monthOfBirth',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择出生月份'
+                        prompt: $filter('translate')('请选择出生月份')
                     }]
                 },
                 dayOfBirth: {
                     identifier: 'dayOfBirth',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择出生日期'
+                        prompt: $filter('translate')('请选择出生日期')
                     }]
                 },
                 currentLocation: {
                     identifier: 'currentLocation',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入当前所在地'
+                        prompt: $filter('translate')('请输入当前所在地')
                     }]
                 }
             }
@@ -213,7 +237,7 @@
                     identifier: 'schoolName',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入学校名称'
+                        prompt: $filter('translate')('PleaseInputSchoolName')
                     }]
                 },
 
@@ -221,7 +245,7 @@
                     identifier: 'schoolMajor',
                     rules: [{
                         type: 'empty',
-                        prompt: '请输入所学专业'
+                        prompt: $filter('translate')('PleaseInputMajor')
                     }]
                 },
 
@@ -229,7 +253,7 @@
                     identifier: 'schoolEducationBackground',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择学历'
+                        prompt: $filter('translate')('请选择学历')
                     }]
                 },
 
@@ -237,7 +261,7 @@
                     identifier: 'schoolStartYear',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择求学开始年份'
+                        prompt: $filter('translate')('请选择求学开始年份')
                     }]
                 },
 
@@ -245,7 +269,7 @@
                     identifier: 'schoolStartMonth',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择求学开始月份'
+                        prompt: $filter('translate')('请选择求学开始月份')
                     }]
                 },
 
@@ -253,7 +277,7 @@
                     identifier: 'schoolEndYear',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择毕业年份'
+                        prompt: $filter('translate')('请选择毕业年份')
                     }]
                 },
 
@@ -261,13 +285,14 @@
                     identifier: 'schoolEndMonth',
                     rules: [{
                         type: 'empty',
-                        prompt: '请选择毕业月份'
+                        prompt: $filter('translate')('请选择毕业月份')
                     }]
                 }
             }
         }));
 
         $scope.schoolInfo = {
+            educationId: '',
             name: '',
             major: '',
             educationBackground: '',
@@ -285,6 +310,43 @@
             currentLocation: ''
         };
 
+        service
+            .get('/service-proxy/member/bplus-profile')
+            .then(function (res) {
+                if (res.memberExt) {
+                    $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
+                    $scope.personalInfo.currentLocation = res.memberExt.current_location;
+                }
+
+                if (res.education && res.education.length) {
+                    var first = res.education[0];
+
+                    $scope.schoolInfo.educationId = first.education_id;
+                    $scope.schoolInfo.name = first.university;
+                    $scope.schoolInfo.major = first.major;
+                    $scope.schoolInfo.educationBackground = first.qualification_id;
+
+                    var startDate = null;
+                    if (first.start_date) {
+                        startDate = new Date(first.start_date);
+                    }
+                    var endDate = null;
+                    if (first.end_date) {
+                        endDate = new Date(first.end_date);
+                    }
+
+                    $scope.schoolInfo.startYear = startDate ? startDate.getUTCFullYear() : null;
+                    $scope.schoolInfo.startMonth = startDate ? startDate.getUTCMonth() + 1 : null;
+                    $scope.schoolInfo.endYear = endDate ? endDate.getUTCFullYear() : null;
+                    $scope.schoolInfo.endMonth = endDate ? endDate.getUTCMonth() + 1 : null;
+
+                    $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
+                    $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
+                    $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
+                    $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
+                }
+            });
+
         msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
             if ($scope.memberInfo.birthday) {
                 var d = new Date($scope.memberInfo.birthday);
@@ -292,19 +354,41 @@
                 $scope.personalInfo.yearOfBirth = d.getUTCFullYear().toString();
                 $scope.personalInfo.monthOfBirth = (d.getUTCMonth() + 1).toString();
                 $scope.personalInfo.dayOfBirth = d.getUTCDate().toString();
+
+                setSomeForm1Value();
             }
         });
+
+        /**
+         * Workaround for unknown angular and semantic issues
+         */
+        function setSomeForm1Value() {
+            function findGenderText(value) {
+                for (var i = 0; i < $scope.genderList.length; i++) {
+                    if ($scope.genderList[i].value === value) {
+                        return $scope.genderList[i].text;
+                    }
+                }
+
+                return '';
+            }
+
+            $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
+            $('select[name=yearOfBirth]').dropdown('set text', $scope.personalInfo.yearOfBirth);
+            $('select[name=monthOfBirth]').dropdown('set text', $scope.personalInfo.monthOfBirth);
+            $('select[name=dayOfBirth]').dropdown('set text', $scope.personalInfo.dayOfBirth);
+        }
 
         $scope.$watch('personalInfo.yearOfBirth', updateMemberInfoBirthday);
         $scope.$watch('personalInfo.monthOfBirth', updateMemberInfoBirthday);
         $scope.$watch('personalInfo.dayOfBirth', updateMemberInfoBirthday);
 
         function updateMemberInfoBirthday() {
-            var year = $scope.personalInfo.yearOfBirth;
+            var year = Number($scope.personalInfo.yearOfBirth);
             var month = $scope.personalInfo.monthOfBirth ? Number($scope.personalInfo.monthOfBirth) - 1 : 1;
             var day = $scope.personalInfo.dayOfBirth ? Number($scope.personalInfo.dayOfBirth) + 1 : 1;
 
-            $scope.memberInfo.birthday = new Date(year, month, day);
+            $scope.memberInfo.birthday = new Date(Date.UTC(year, month, day));
         }
     };
 
