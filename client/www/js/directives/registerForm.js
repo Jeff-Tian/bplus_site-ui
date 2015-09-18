@@ -125,6 +125,10 @@
                 $scope.internalCtrl.getFormData = function () {
                     return $scope.signUpData;
                 };
+
+                $scope.internalCtrl.getForm = function () {
+                    return getSignUpForm();
+                };
             }
         };
     };

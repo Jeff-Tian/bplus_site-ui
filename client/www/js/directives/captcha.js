@@ -9,6 +9,7 @@
             link: function ($scope, $element, attrs, ngModel) {
                 function errorHandler(res) {
                     console.error(res);
+                    $element.hide();
                 }
 
                 function refreshCaptcha(successCallback) {

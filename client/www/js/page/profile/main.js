@@ -33,9 +33,9 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-        "angular-route":{
+        "angular-route": {
             deps: ["angular"],
-            exports:"angular-route"
+            exports: "angular-route"
         },
         'semantic': {
             deps: ["jquery"]
@@ -48,22 +48,20 @@ require.config({"context": "bplus"})([
     "less",
     "semantic",
     "angular-route"
-], function(
-    pRequire,
-    less,
-    semantic,
-    agRoute
-) {
+], function (pRequire,
+             less,
+             semantic,
+             agRoute) {
     pRequire([
         "angular",
 
         "bplus-ui/page/profile/widget/banner/main",
         "bplus-ui/page/profile/widget/achievement/main",
         "bplus-ui/page/profile/widget/growing/main",
-        
+
         "bplus-ui/view/widgets/common/date",
         "bplus-ui/view/widgets/common/tag",
-        
+
         "bplus-ui/view/widgets/personalinfo/list_skills_widget",
         "bplus-ui/view/widgets/personalinfo/list_personalinfo_widget",
         "bplus-ui/view/widgets/personalinfo/list_educationbackground_widget",
@@ -79,38 +77,33 @@ require.config({"context": "bplus"})([
         "text!bplus-ui/view/widgets/personalinfo/list_workingexperience_container.html",
         "text!bplus-ui/view/widgets/personalinfo/list_award_container.html",
         "text!bplus-ui/view/widgets/personalinfo/list_language_container.html"
-    ], function(
-        angular,
-
-        banner,
-        achievement,
-        growing,
-        
-        Date,
-        Tag,
-
-        Skills,
-        Personalinfo,
-        Educationbackground,
-        Club,
-        Work,
-        Award,
-        Language,
-        Container,
-        personalinfoContainerTemplate,
-        skillsContainerTemplate,
-        eduContainerTemplate,
-        clubContainerTemplate,
-        workContainerTemplate,
-        awardContainerTemplate,
-        languageContainerTemplate
-    ) {
+    ], function (angular,
+                 banner,
+                 achievement,
+                 growing,
+                 Date,
+                 Tag,
+                 Skills,
+                 Personalinfo,
+                 Educationbackground,
+                 Club,
+                 Work,
+                 Award,
+                 Language,
+                 Container,
+                 personalinfoContainerTemplate,
+                 skillsContainerTemplate,
+                 eduContainerTemplate,
+                 clubContainerTemplate,
+                 workContainerTemplate,
+                 awardContainerTemplate,
+                 languageContainerTemplate) {
         var documentMudule = angular.module('docModule', []);
         (function (agModule) {
             banner(agModule);
             achievement(agModule);
             growing(agModule);
-            
+
             var instance = Container;
             instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
             .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
@@ -119,26 +112,25 @@ require.config({"context": "bplus"})([
             .start(agModule, "bplusworkexperienceall", workContainerTemplate)
             .start(agModule, "bplusawardall", awardContainerTemplate)
             .start(agModule, "bpluslanguageall", languageContainerTemplate);
-            
             new Date().start(agModule);
             new Tag().start(agModule);
-            
+
             var listWidgets = [
-              new Personalinfo(),
-              new Skills(),
-              new Educationbackground(),
-              new Club(),
-              new Work(),
-              new Award(),
-              new Language()
+                new Personalinfo(),
+                new Skills(),
+                new Educationbackground(),
+                new Club(),
+                new Work(),
+                new Award(),
+                new Language()
             ];
-            
-            listWidgets.forEach(function(value) {
-              value.start(agModule);
+
+            listWidgets.forEach(function (value) {
+                value.start(agModule);
             });
         })(documentMudule);
 
-        angular.element(window.document).ready(function() {
+        angular.element(window.document).ready(function () {
             angular.bootstrap(window.document, ['docModule']);
         });
     });

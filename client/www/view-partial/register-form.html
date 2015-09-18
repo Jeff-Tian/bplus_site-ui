@@ -2,19 +2,20 @@
     <div class="ui error message brand"></div>
     <div class="ui">
         <div class="field">
-            <div class="ui left icon input">
-                <i class="phone icon"></i>
+            <div class="ui left icon input fluid">
                 <input type="text" name="mobile" placeholder="{{'PleaseInputMobileNumber'| translate}}"
                        ng-model="signUpData.mobile"
                        ng-enter>
+                <i class="phone icon"></i>
             </div>
         </div>
         <div class="field absolute-prompt">
-            <div class="ui left icon input">
-                <i class="write icon"></i>
+            <div class="ui left icon input fluid">
+
                 <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
                        ng-model="signUpData.captcha" ng-enter>
-                &nbsp;
+                <i class="write icon"></i>
+
                 <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
             </div>
             <div class="ui right aligned container subcontainer">
@@ -22,25 +23,30 @@
             </div>
         </div>
         <div class="field" ng-show="sendCodeButtonClicked">
-            <div class="ui left icon input">
-                <i class="write icon"></i>
+            <div class="ui left icon input fluid">
                 <input type="text" name="verificationCode"
                        placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
                        ng-model="signUpData.verificationCode">
+                <i class="write icon"></i>
+                &nbsp;
+                <button type="button" class="ui red button" ng-show='sendCodeButtonClicked'
+                        ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())"
+                        ng-click="getVerificationCode()">
+                    {{verificationCodeButtonText | translate}}
+                </button>
             </div>
         </div>
-        <div class="field">
-            <button type="button" class="ui huge red button" ng-class="{'fluid': !sendCodeButtonClicked}"
-                    ng-click="getVerificationCode()"
+        <div class="field" ng-hide="sendCodeButtonClicked">
+            <button type="button" class="ui huge red button fluid" ng-click="getVerificationCode()"
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                {{verificationCodeButtonText}}
+                {{verificationCodeButtonText | translate}}
             </button>
         </div>
         <div class="field">
-            <div class="ui left icon input">
-                <i class="lock icon"></i>
+            <div class="ui left icon input fluid">
                 <input type="password" name="password" placeholder="{{'PleaseSetSignInPassword' | translate}}"
                        ng-model="signUpData.password">
+                <i class="lock icon"></i>
             </div>
         </div>
         <div class="field">

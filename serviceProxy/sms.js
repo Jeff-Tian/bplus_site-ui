@@ -5,25 +5,42 @@ var sms = require('../config').sms;
 var proxy = require('./proxy');
 
 module.exports = {
-    getVerificationCode: proxy(sms.host, sms.port, '/service/sms/send', function (d) {
-        return {
-            phone: d.mobile,
-            code: sms.code
-        };
-    }),
+    getVerificationCode: function (req, res, next) {
+        if (!sms.enabled) {
+            res.json({isSuccess: true});
+            next();
 
-    validate: proxy({
-        host: sms.host,
-        port: sms.port,
-        path: '/service/sms/validate',
-        dataMapper: function (d) {
+            return;
+        }
+
+        proxy(sms.host, sms.port, '/service/sms/send', function (d) {
             return {
                 phone: d.mobile,
-                value: d.verificationCode
+                code: sms.code
             };
-        },
-        responseInterceptor: function (resStream, json) {
-            return json.isSuccess && json.result;
+        })(req, res, next);
+    },
+
+    validate: function (req, res, next) {
+        if (!sms.enabled) {
+            next();
+
+            return;
         }
-    })
+
+        proxy({
+            host: sms.host,
+            port: sms.port,
+            path: '/service/sms/validate',
+            dataMapper: function (d) {
+                return {
+                    phone: d.mobile,
+                    value: d.verificationCode
+                };
+            },
+            responseInterceptor: function (resStream, json) {
+                return json.isSuccess && json.result;
+            }
+        })(req, res, next);
+    }
 };

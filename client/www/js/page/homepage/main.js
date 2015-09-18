@@ -13,6 +13,7 @@ angular.module('bplus', [
 
 })
     .config(angular.bplus.translate)
+    .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation || function () {
@@ -78,8 +79,8 @@ angular.module('bplus', [
 
     $('.feedback-carousel').owlCarousel({
         items: 1,
-        lazyLoad:true,
-        loop:true,
+        lazyLoad: true,
+        loop: true,
         autoplay: true,
         autoplayTimeout: 8000,
         autoplayHoverPause: true,
@@ -87,24 +88,22 @@ angular.module('bplus', [
         navRewind: true,
         animateIn: 'bounceInRight',
         animateOut: 'bounceOutLeft',
-        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
+        navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>']
     });
     
 
-    
-
-    var client=$('#b-client-list');
+    var client = $('#b-client-list');
     client.owlCarousel({
-        loop:true,
-        lazyLoad:true,
-        responsiveClass:true,
+        loop: true,
+        lazyLoad: true,
+        responsiveClass: true,
         nav: false,
         dots: false,
         autoplay: true,
         navRewind: true,
         autoplayTimeout: 6000,
         slideBy: 'page',
-        responsive:{
+        responsive: {
             0: {
                 items: 1,
             },
@@ -129,28 +128,29 @@ angular.module('bplus', [
         $('#b-client-header').css('visibility', 'hidden');
     });
 
-    var animateGif = function () {
+    // var animateGif = function() {
 
-        if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-            $('.online-gif').find('img').attr('src', 'img/salespage/gif/online-animate.gif');
-            $('.top-gif').find('img').attr('src', 'img/salespage/gif/top-animate.gif');
-            $('.enhance-gif').find('img').attr('src', 'img/salespage/gif/enhance-animate.gif');
+    //     if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
+    //         $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
+    //         $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
+    //         $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
 
-            setTimeout(function () {
-                $('.online-gif').find('img').attr('src', 'img/salespage/gif/online.png');
-                $('.top-gif').find('img').attr('src', 'img/salespage/gif/top.png');
-                $('.enhance-gif').find('img').attr('src', 'img/salespage/gif/enhance.png');
-            }, 950);
-        }
-    };
+    //         setTimeout(function() {
+    //             $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
+    //             $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
+    //             $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
+    //         }, 950);
+    //     }
+    // };
 
-    $('.index-gif').visibility({
-        once: false,
-        onTopVisible: function () {
-            animateGif();
-        },
-        onBottomPassedReverse: function () {
-            animateGif();
-        }
-    });
+    // $('.index-gif').visibility({
+    //     once: false,
+    //     onTopVisible: function() {
+    //         animateGif();
+    //     },
+    //     onBottomPassedReverse: function() {
+    //         animateGif();
+    //     }
+    // });
+
 })();

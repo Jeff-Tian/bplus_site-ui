@@ -11,7 +11,7 @@
             submitting = true;
             service.post('/service-proxy/member/resetPassword', $scope.formCtrl.getFormData())
                 .then(function () {
-                    $('.reset.shape').shape('flip over');
+                    $('.reset.shape').shape('flip over').find('.active.side').removeClass('hidden');
                 }, $scope.formCtrl.handleFormError)
                 .finally(function () {
                     submitting = false;
