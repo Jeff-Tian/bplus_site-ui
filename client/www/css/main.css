@@ -3343,7 +3343,7 @@ body.pushable .pusher {
   border-radius: 0;
 }
 .b-header .menu .item .nav-button:hover,
-.b-header .menu .item .nav-button:active {
+.b-header .menu .item .nav-button.active {
   color: #FF3C42;
 }
 .b-header .menu .center.aligned.item {
@@ -4073,10 +4073,12 @@ body.pushable .pusher {
 }
 .b-captcha {
   cursor: pointer;
-  max-height: 40px;
+  max-height: 40.1563px;
 }
 .b-captcha img {
-  max-height: 40px;
+  height: 40.1563px;
+  border-radius: 0.28571429rem;
+  margin-left: 5px;
 }
 /*
 * - @Bridge+ opportunity

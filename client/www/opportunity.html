@@ -9,7 +9,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplus">
+<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='opportunity'">
     <%- include('view-partial/header.html') -%>
     <!-- Page Contents -->
     <div class="pusher">
@@ -345,22 +345,9 @@
 
 
     <%- include('view-partial/footer.html') -%>
-    <!--JS-->
-    <script src="bower/jquery/dist/jquery.js"></script>
-    <script src="bower/semantic-ui/dist/semantic.js"></script>
-    <script src="bower/underscore/underscore.js"></script>
-    <!--Angular JS-->
-    <script src="bower/angular/angular.min.js"></script>
-    <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+
     <!--Page JS-->
-    <script src="js/controllers/AppCtrl.js"></script>
-    <script src="js/factories/service.js"></script>
-    <script src="js/factories/MessageStore.js"></script>
     <script src="js/page/opportunity/main.js"></script>
-    <!--Utils JS-->
-    <script src="js/utils/utils.js"></script>
-    <script src="js/utils/msgbus.js"></script>
-    <script src="js/utils/underscore.js"></script>
 </body>
 
 </html>

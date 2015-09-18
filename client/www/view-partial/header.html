@@ -20,7 +20,7 @@
             <div class="right item">
                 <a href="<%= localeLink('signin#/login') %>" class="ui button"><%= __('SignIn') %></a>
                 <a href="<%= localeLink('signin#register') %>" class="ui button"><%= __('SignUp') %></a>
-                <a ng-href="<%= otherLocaleLink %>{{hash}}" class="ui button"><%= __('otherLocale') %></a>
+                <a ng-href="<%= otherLocaleLink %>{{hash}}" class="ui button"><%= __(otherLocale) %></a>
             </div>
         </div>
     </div>
@@ -31,20 +31,20 @@
             </a>
 
             <div class="right item">
-                <a href="<%= localeLink('/index') %>" class="ui button nav-button"><%= __('Home') %></a>
-                <a href="<%= localeLink('/study') %>" class="ui button nav-button"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/game') %>" class="ui button nav-button"><%= __('Play') %></a>
-                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button"><%= __('Opportunity') %></a>
+                <a href="<%= localeLink('/index') %>" class="ui button nav-button" ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
+                <a href="<%= localeLink('/study') %>" class="ui button nav-button" ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
+                <a href="<%= localeLink('/game') %>" class="ui button nav-button" ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
+                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button" ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>
 </div>
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
-    <a href="<%= localeLink('/index') %>" class="item active"><%= __('Home') %></a>
-    <a href="<%= localeLink('/study') %>" class="item"><%= __('Learn') %></a>
-    <a href="<%= localeLink('/game') %>" class="item"><%= __('Play') %></a>
-    <a href="<%= localeLink('/opportunity') %>" class="item"><%= __('Opportunity') %></a>
+    <a href="<%= localeLink('/index') %>" class="item" ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
+    <a href="<%= localeLink('/study') %>" class="item" ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
+    <a href="<%= localeLink('/game') %>" class="item" ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
+    <a href="<%= localeLink('/opportunity') %>" class="item" ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
 </div>
 <!-- Initial Menu -->
 <div class="ui b-header">
@@ -85,10 +85,10 @@
             </a>
 
             <div class="right item">
-                <a href="<%= localeLink('/index') %>" class="ui button nav-button"><%= __('Home') %></a>
-                <a href="<%= localeLink('/study') %>" class="ui button nav-button"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/game') %>" class="ui button nav-button"><%= __('Play') %></a>
-                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button"><%= __('Opportunity') %></a>
+                <a href="<%= localeLink('/index') %>" class="ui button nav-button" ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
+                <a href="<%= localeLink('/study') %>" class="ui button nav-button" ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
+                <a href="<%= localeLink('/game') %>" class="ui button nav-button" ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
+                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button" ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
             </div>
         </div>
     </div>
