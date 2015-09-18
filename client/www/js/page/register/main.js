@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('signIn', ['pascalprecht.translate'])
+angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
@@ -65,17 +65,7 @@ angular.module('signIn', ['pascalprecht.translate'])
                 });
         };
     }])
-    .controller('PersonalHistoryCtrl', angular.bplus.PersonalHistoryCtrl || function () {
-    })
-    .directive('dropdown', ['$timeout', function ($timeout) {
-        return function (scope, element, attrs) {
-            if (scope.$last) {
-                $timeout(function () {
-                    $(element).parent().dropdown();
-                });
-            }
-        };
-    }])
+    .directive('dropdown', angular.bplus.dropdown)
     .directive('registerForm', angular.bplus.registerForm || {})
     .directive('tab', angular.bplus.tab || {})
 ;

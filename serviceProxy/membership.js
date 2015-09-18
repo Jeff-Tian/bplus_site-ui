@@ -33,10 +33,9 @@ module.exports = {
 
     ensureAuthenticated: function (req, res, next) {
         if (res.locals.hcd_user) {
+            console.log('authenticated');
             return next();
         }
-
-        console.log('test');
 
         if (req.xhr) {
             res.status(401).send({code: '401', message: 'You are not allowed to access this page.'});

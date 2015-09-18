@@ -11,10 +11,11 @@
         </div>
         <div class="field absolute-prompt">
             <div class="ui left icon input fluid">
-                
+
                 <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
                        ng-model="signUpData.captcha" ng-enter>
                 <i class="write icon"></i>
+
                 <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
             </div>
             <div class="ui right aligned container subcontainer">
@@ -27,13 +28,13 @@
                        placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
                        ng-model="signUpData.verificationCode">
                 <i class="write icon"></i>
-                <button type="button" class="ui red button" ng-show='!allowGetCode' disabled>{{verificationCodeButtonText}}</button>
+                <button type="button" class="ui red button" ng-show='!allowGetCode' disabled>{{verificationCodeButtonText | translate}}</button>
             </div>
         </div>
         <div class="field" ng-show="allowGetCode">
             <button type="button" class="ui huge red button fluid" ng-click="getVerificationCode()"
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
-                {{verificationCodeButtonText}}
+                {{verificationCodeButtonText | translate}}
             </button>
         </div>
         <div class="field">

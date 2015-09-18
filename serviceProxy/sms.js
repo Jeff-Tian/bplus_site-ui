@@ -7,6 +7,7 @@ var proxy = require('./proxy');
 module.exports = {
     getVerificationCode: function (req, res, next) {
         if (!sms.enabled) {
+            res.json({isSuccess: true});
             next();
 
             return;

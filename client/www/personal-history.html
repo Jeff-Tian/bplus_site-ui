@@ -4,61 +4,61 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>个人信息 - Bridge+</title>
-    <meta name="description" content="Bridge+">
+    <title><%= __('SEOTitle_PersonalHistory') %></title>
+    <meta name="description" content="<%= __('SEODesc_PersonalHistory') %>">
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-app="signIn" ng-controller="AppCtrl">
+<body ng-app="personalHistory" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
     <div class="ui success message brand" ng-hide="userHide === true">
         <i class="large close icon" ng-click="userHide = true"></i>
 
         <div class="header">
-            恭喜您完成注册! 填写下方基本资料即可开始游戏!
+            <%= __('CongratulateSignUp') %>
         </div>
     </div>
     <div class="ui column b-step-container b-separator">
         <div class="ui center aligned container subcontainer">
-            <h2 class="grey color">个人信息</h2>
+            <h2 class="grey color"><%= __('PersonalInfo') %></h2>
         </div>
     </div>
     <div class="ui column">
         <div class="ui text shape personal-history" ng-controller="PersonalHistoryCtrl">
             <div class="sides">
-                <div class="active side">
-                    <form name="personalInfoForm" class="ui form personal-history step-1" ng-submit="tryNextStep()">
+                <div class="active first side">
+                    <form name="personalInfoForm" class="ui form personal-history step-1"
+                          ng-submit="tryNextStep($event)">
                         <div class="b-step-container">
+                            <div class="ui error message brand"></div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>真实姓名</label>
-                                <input type="text" name="realName" placeholder="请输入真实姓名"
-                                       ng-model="personalInfo.realName">
+                                <label><i class="ui large red icon">*</i><%= __('RealName') %></label>
+                                <input type="text" name="realName" placeholder="<%= __('PleaseInputRealName') %>"
+                                       ng-model="memberInfo.real_name">
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>性别</label>
-                                <select class="ui dropdown" name="gender" ng-model="personalInfo.gender">
-                                    <option value="">请选择...</option>
-                                    <option value="1">男</option>
-                                    <option value="0">女</option>
+                                <label><i class="ui large red icon">*</i><%= __('Gender') %></label>
+                                <select class="ui dropdown defer" name="gender" ng-model="memberInfo.gender">
+                                    <option value=""><%= __('PleaseSelect') %></option>
+                                    <option value="{{g.value}}" ng-repeat="g in genderList" dropdown>{{g.text}}</option>
                                 </select>
-
                             </div>
                             <div class="fields">
                                 <div class="four wide field">
-                                    <label><i class="ui large red icon">*</i>生日</label>
+                                    <label><i class="ui large red icon">*</i><%= __('Birthday') %></label>
 
                                     <div class="inline fields">
                                         <div class="no-padded field">
                                             <select class="ui fluid search dropdown defer" name="yearOfBirth"
                                                     ng-model="personalInfo.yearOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{y}}" ng-repeat="y in birthYearList" dropdown>{{y}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;年
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Year') %>
                                         </div>
                                     </div>
                                 </div>
@@ -69,13 +69,13 @@
                                         <div class="no-paddedfield">
                                             <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{m}}" ng-repeat="m in monthList" dropdown="">{{m}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;月
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Month') %>
                                         </div>
                                     </div>
                                 </div>
@@ -86,14 +86,14 @@
                                         <div class="no-padded field">
                                             <select class="ui fluid search dropdown defer dayOfBirth" name="dayOfBirth"
                                                     ng-model="personalInfo.dayOfBirth">
-                                                <option value="">选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{d}}" ng-repeat="d in getBirthDayList()" dropdown>
                                                     {{d}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="no-padded field">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;日
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Day') %>
                                         </div>
                                     </div>
                                 </div>
@@ -103,74 +103,76 @@
                                     <div class="ui right aligned container subcontainer"
                                          style="height: 35px; line-height: 35px;">
                                         <div class="ui checkbox">
-                                            <input type="checkbox" checked name="setPrivacy"
+                                            <input type="checkbox" name="setPrivacy"
                                                    ng-model="personalInfo.setPrivacy">
-                                            <label>设置为隐私</label>
+                                            <label><%= __('SetPrivacy') %></label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>目前所在地</label>
+                                <label><i class="ui large red icon">*</i><%= __('CurrentLocation') %></label>
                                 <input type="text" name="currentLocation" ng-model="personalInfo.currentLocation"
-                                       placeholder="请输入目前所在地">
+                                       placeholder="<%= __('PleaseInputCurrentLocation') %>">
                             </div>
                         </div>
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container subcontainer">
-                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()">跳过</button>
-                            <button type="submit" class="ui large red button">下一步: 完善教育背景</button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()"><%= __('Skip') %></button>
+                            <button type="submit" class="ui large red button"><%= __('NextStepEducation') %></button>
                         </div>
 
                     </form>
                 </div>
-                <div class="side">
+                <div class="second side">
                     <form name="personalInfoForm2" class="ui form personal-history step-2 brand"
-                          ng-submit="trySubmit()">
+                          ng-submit="trySubmit($event)">
                         <div class="b-step-container">
                             <div class="ui error message brand"></div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>学校名称</label>
-                                <input type="text" name="schoolName" placeholder="请输入学校名称" ng-model="schoolInfo.name">
+                                <label><i class="ui large red icon">*</i><%= __('SchoolName') %></label>
+                                <input type="text" name="schoolName" placeholder="<%= __('PleaseInputSchoolName') %>"
+                                       ng-model="schoolInfo.name">
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>所学专业</label>
-                                <input type="text" name="schoolMajor" placeholder="请输入所学专业" ng-model="schoolInfo.major">
+                                <label><i class="ui large red icon">*</i><%= __('Major') %></label>
+                                <input type="text" name="schoolMajor" placeholder="<%= __('PleaseInputMajor') %>"
+                                       ng-model="schoolInfo.major">
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i>学历</label>
+                                <label><i class="ui large red icon">*</i><%= __('Qualification') %></label>
                                 <select class="ui fluid search dropdown" ng-model="schoolInfo.educationBackground"
                                         name="schoolEducationBackground">
-                                    <option value="">请选择...</option>
+                                    <option value=""><%= __('PleaseSelect') %></option>
                                     <option value="本科">本科</option>
                                     <option value="硕士">硕士</option>
                                 </select>
                             </div>
                             <div class="two fields">
                                 <div class="nine wide field">
-                                    <label><i class="ui large red icon">*</i>求学时间</label>
+                                    <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
 
-                                    <div class="fields">
+                                    <div class="inline fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolStartYear"
                                                     ng-model="schoolInfo.startYear">
-                                                <option value="">请选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{y}}" ng-repeat="y in startYearList" dropdown>{{y}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="field">
-                                            年
+                                            <%= __('Year') %>
                                         </div>
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolStartMonth"
                                                     ng-model="schoolInfo.startMonth">
-                                                <option value="">请选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
                                             </select>
                                         </div>
                                         <div class="field">
-                                            月
+                                            <%= __('Month') %>
                                         </div>
                                         <div class="field">
                                             —
@@ -178,29 +180,29 @@
                                     </div>
                                 </div>
                                 <div class="eight wide field">
-                                    <label><i class="ui large red icon">*</i>毕业时间</label>
+                                    <label><i class="ui large red icon">*</i><%= __('GraduateIn') %></label>
 
-                                    <div class="fields">
+                                    <div class="inline fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolEndYear"
                                                     ng-model="schoolInfo.endYear">
-                                                <option value="">请选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{y}}" ng-repeat="y in endYearList" dropdown>{{y}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="field">
-                                            年
+                                            <%= __('Year') %>
                                         </div>
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolEndMonth"
                                                     ng-model="schoolInfo.endMonth">
-                                                <option value="">请选择...</option>
+                                                <option value=""><%= __('Select') %></option>
                                                 <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
                                             </select>
                                         </div>
                                         <div class="field">
-                                            月
+                                            <%= __('Month') %>
                                         </div>
                                     </div>
                                 </div>
@@ -210,10 +212,10 @@
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container subcontainer">
                             <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
-                                上一步
+                                <%= __('PreviousStep') %>
                             </button>
-                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()">跳过</button>
-                            <button type="submit" class="ui large red button">完成</button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()"><%= __('Skip') %></button>
+                            <button type="submit" class="ui large red button"><%= __('Done') %></button>
                         </div>
                     </form>
                 </div>
@@ -224,8 +226,9 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 <!--Page JS-->
+<script src="js/directives/dropdown.js"></script>
 <script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
-<script src="js/page/register/main.js"></script>
+<script src="js/page/personal-histroy/main.js"></script>
 </body>
 
 </html>

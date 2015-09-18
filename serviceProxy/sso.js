@@ -146,37 +146,9 @@ module.exports = {
             }
         }
     }),
-    changeMobile: function (req, res, next) {
-        console.log('changing...');
-
-        proxySSO({
-            path: '/profile/update',
-            dataMapper: function (d) {
-                console.log('change mobile');
-                delete d.captcha;
-                delete d.verificationCode;
-                delete d.password;
-                delete d.captchaId;
-                delete d.value;
-
-                console.log(d);
-
-                return d;
-            },
-            responseInterceptor: function (response, json) {
-                console.log('changed password');
-                console.log(json);
-
-                if (json.isSuccess) {
-                    response.send(json);
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        })(req, res, next);
-    },
+    changeMobile: proxySSO({
+        path: '/profile/update'
+    }),
     changeEmail: proxySSO({
         path: '/profile/update',
         dataMapper: function (d) {
@@ -184,28 +156,23 @@ module.exports = {
             d.application_id = sso.applicationId;
             d.mail = d.email;
 
-            console.log('changing mobile:');
-            console.log(d);
-
             return d;
         }
+        // TODO: Send email verification
     }),
-    changePassword: function (req, res, next) {
+    changePassword: proxySSO({
+        path: '/profile/changepassword'
+    }),
+    updateProfile: function (req, res, next) {
+        console.log(req.body);
         proxySSO({
-            path: '/profile/changepassword',
-            dataMapper: function (d) {
-                return d;
-            },
+            path: '/profile/update',
             responseInterceptor: function (response, json) {
-                console.log('changed password.');
                 console.log(json);
 
-                if (json.isSuccess) {
-                    response.send(json);
-                    return true;
-                } else {
-                    return false;
-                }
+                response.send(json);
+
+                return true;
             }
         })(req, res, next);
     }
