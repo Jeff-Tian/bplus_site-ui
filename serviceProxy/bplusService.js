@@ -8,7 +8,7 @@ function proxyBPlus(options) {
         options.port = bplusService.port;
 
         proxy(options)(req, res, next);
-    }
+    };
 }
 
 function mapEducation(d) {
@@ -61,6 +61,23 @@ module.exports = {
             return mapEducation(d);
         }
     }),
+
+    updateData: function(req, res, next) {
+        var operation = req.params.operation;
+        var classification = req.params.classification;
+        return proxyBPlus({
+            path: '/profile/' + classification + "/" + operation,
+            requestInterceptor: function (requestFrom, requestTo) {
+                var formDataString = JSON.stringify(requestFrom.body);
+                console.log(formDataString);
+                formDataString.replace(/[,|{]"(\w+)":/g, function(value, groupValue){
+                    //TODO
+                    //Replace string.
+                })
+                requestTo.write(JSON.stringify(formDataString));
+            }
+        })(req, res, next);
+    },
 
     getResource: function (req, res, next) {
         var language = 'zh-CN';
