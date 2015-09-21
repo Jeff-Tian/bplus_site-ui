@@ -4508,6 +4508,8 @@ body.pushable .pusher {
 .b-popularity .b-theory-content {
   padding-top: 8rem;
   padding-bottom: 8rem;
+  height: 30rem;
+  overflow-y: scroll;
 }
 .b-popularity .b-theory-content > h3 {
   color: #ffffff;
