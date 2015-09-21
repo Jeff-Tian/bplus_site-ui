@@ -3170,30 +3170,55 @@ h3.ui.header.b-sp {
 /*
 * - @Bridge+
 */
-html,
-body {
+.chinese html,
+.chinese body {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
-h1,
-h2,
-h3,
-h4,
-h5 {
+.chinese h1,
+.chinese h2,
+.chinese h3,
+.chinese h4,
+.chinese h5 {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
-.ui.button {
+.chinese .ui.button {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
-.header {
+.chinese .header {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
-.header.ui {
+.chinese .header.ui {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
 }
-.ui.statistics .statistic > .label,
-.ui.statistic > .label {
+.chinese .ui.statistics .statistic > .label,
+.chinese .ui.statistic > .label {
   font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
+}
+.english html,
+.english body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
+  font-size: 13px;
+}
+.english h1,
+.english h2,
+.english h3,
+.english h4,
+.english h5 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
+}
+.english .ui.button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
+}
+.english .header {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
+}
+.english .header.ui {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
+}
+.english .ui.statistics .statistic > .label,
+.english .ui.statistic > .label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
 }
 /*
 * - @Bridge+
@@ -3291,7 +3316,10 @@ body.pushable .pusher {
 }
 [ng\:cloak],
 [ng-cloak],
-.ng-cloak {
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
   display: none !important;
 }
 .no-padded.field {
@@ -3337,7 +3365,7 @@ body.pushable .pusher {
 }
 .b-header .menu .item .ui.button {
   color: #ffffff;
-  font-family: "微软雅黑", "Microsoft Yahei", "黑体", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
   margin: 0;
   background: none;
   border-radius: 0;
@@ -3482,7 +3510,7 @@ body.pushable .pusher {
   top: 42%;
 }
 .b-masthead .owl-theme .owl-dots {
-  margin-top: -25px !important;
+  margin-top: -23px !important;
 }
 .b-masthead .b-slider {
   overflow: hidden;
@@ -3509,9 +3537,10 @@ body.pushable .pusher {
 .b-masthead .third-item {
   background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 650px;
-  height: 650px;
+  background-size: auto 50rem;
+  height: 50rem;
   background-color: #999999;
+  max-height: 50rem;
 }
 .b-masthead .first-item {
   background-image: url("/img/salespage/bg_1.png");

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.theme.default.min.css">
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'">
+<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'" ng-class="{'chinese':language==='zh','english':language==='en'}">
     <%- include('view-partial/header.html') -%>
     <% if (typeof hcd_user === 'undefined' || !hcd_user.member_id) { %>
     <div class="ui">
