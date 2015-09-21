@@ -38,6 +38,7 @@
                     .post('/service-proxy/member/update-profile', $scope.personalInfo)
                     .then(function (res) {
                         console.log(res);
+                        loadBPlusProfile();
                     })
                     .catch(FormValidation.delegateHandleFormError($form1))])
                 .then(function () {
@@ -75,6 +76,7 @@
             $('select[name=monthOfBirth]').val($scope.personalInfo.monthOfBirth);
             $('select[name=dayOfBirth]').val($scope.personalInfo.dayOfBirth);
             $('input[name=currentLocation]').val($scope.personalInfo.currentLocation);
+            $('input[name=setPrivacy]').prop('checked', $scope.personalInfo.setPrivacy);
         }
 
         $scope.gotoComplete = function () {
@@ -173,6 +175,25 @@
         $scope.monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
+            function findGenderText(value) {
+                var $options = $('select[name=gender]').find('option');
+
+                for (var i = 0; i < $options.length; i++) {
+                    var $element = $($options[i]);
+
+                    if (value === $element.val()) {
+                        return $element.text();
+                    }
+                }
+
+                return value;
+            }
+
+            $('select.ui.dropdown[name=gender]')
+                .dropdown()
+                .dropdown('set text', findGenderText($scope.memberInfo.gender))
+            ;
+
             if ($scope.memberInfo.birthday) {
                 var d = new Date($scope.memberInfo.birthday);
 
@@ -197,12 +218,6 @@
                 });
             })
             .finally(function () {
-                $scope.genderList = [{
-                    value: "M", text: $filter('translate')('Male')
-                }, {
-                    value: "F", text: $filter('translate')('Female')
-                }];
-
                 loadBPlusProfile();
             });
 
@@ -350,7 +365,10 @@
                 .get('/service-proxy/member/bplus-profile')
                 .then(function (res) {
                     if (res.memberExt) {
-                        $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
+                        if (res.memberExt.hide_birthday) {
+                            $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
+                        }
+
                         $scope.personalInfo.currentLocation = res.memberExt.current_location;
                     }
 
@@ -390,28 +408,6 @@
          * Workaround for unknown angular and semantic issues
          */
         function setSomeForm1Value() {
-            function findGenderText(value) {
-                for (var i = 0; i < $scope.genderList.length; i++) {
-                    if ($scope.genderList[i].value === value) {
-                        return $scope.genderList[i].text;
-                    }
-                }
-
-                return '';
-            }
-
-            if ($scope.genderList && $scope.genderList.length) {
-                $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
-                $('select[name=gender]').val($scope.memberInfo.gender);
-            } else {
-                $scope.$watch('genderList', function () {
-                    if ($scope.genderList && $scope.genderList.length) {
-                        $('select[name=gender]').dropdown('set text', findGenderText($scope.memberInfo.gender));
-                        $('select[name=gender]').val($scope.memberInfo.gender);
-                    }
-                });
-            }
-
             $('select[name=yearOfBirth]').dropdown('set text', $scope.personalInfo.yearOfBirth);
             $('select[name=monthOfBirth]').dropdown('set text', $scope.personalInfo.monthOfBirth);
             $('select[name=dayOfBirth]').dropdown('set text', $scope.personalInfo.dayOfBirth);

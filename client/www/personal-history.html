@@ -39,9 +39,12 @@
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Gender') %></label>
-                                <select class="ui dropdown defer" name="gender" ng-model="memberInfo.gender">
+                                <select class="ui dropdown" name="gender" ng-model="memberInfo.gender">
                                     <option value=""><%= __('PleaseSelect') %></option>
-                                    <option value="{{g.value}}" ng-repeat="g in genderList" dropdown>{{g.text}}</option>
+                                    <!-- Use ng-bind instead of {{}} to avoid issues caused by semantic ui -->
+                                    <option value="U"><%= __('Unknown') %></option>
+                                    <option value="M"><%= __('Male') %></option>
+                                    <option value="F"><%= __('Female') %></option>
                                 </select>
                             </div>
                             <div class="fields">
@@ -70,7 +73,7 @@
                                             <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
                                                 <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown="">{{m}}
+                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}
                                                 </option>
                                             </select>
                                         </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('accountSetting', ['pascalprecht.translate'])
+angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
     .config(angular.bplus.translate)
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -98,7 +98,7 @@ angular.module('accountSetting', ['pascalprecht.translate'])
                 .post('/service-proxy/member/change-password', $scope.data)
                 .then(function (res) {
                     console.log(res);
-                    
+
                     $form.form('clear');
                     $('.ui.modal.b-modify-password').modal('hide');
                     $scope.$parent.message = $filter('translate')('ChangePasswordSuccess');
