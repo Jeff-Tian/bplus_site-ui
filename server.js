@@ -36,6 +36,14 @@ server
         req.logger = logger;
         req.dualLogError = dualLogError;
         req.dualLog = dualLog;
+
+        res.locals.grunt = {
+            file: {
+                readJSON: function () {
+                    return 'x';
+                }
+            }
+        };
         next();
     })
     .use(bodyParser.json())

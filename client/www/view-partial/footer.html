@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<!-- build:js js/lib.js -->
+<!-- build:js js/lib.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="bower/jquery/dist/jquery.js"></script>
 <script src="bower/semantic-ui/dist/semantic.js"></script>
 <script src="bower/underscore/underscore.js"></script>
@@ -35,7 +35,7 @@
 <script src="bower/angular-translate/angular-translate.min.js"></script>
 <!-- endbuild -->
 
-<!-- build:js js/combined1.js -->
+<!-- build:js js/combined1.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/factories/service.js"></script>
 <script src="js/factories/MessageStore.js"></script>
 <script src="js/config/translate.js"></script>
@@ -44,7 +44,7 @@
 <!-- endbuild -->
 <script src="/translation/localeHelper.js"></script>
 <script src="/config.js"></script>
-<!-- build:js js/combined2.js -->
+<!-- build:js js/combined2.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
 <!--Utils JS-->

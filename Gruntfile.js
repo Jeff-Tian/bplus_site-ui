@@ -64,6 +64,28 @@ module.exports = function (grunt) {
         "useref": {
             html: '<%= config.dist %>view-partial/*.html',
             temp: '<%= config.dist %>'
+        },
+        htmlmin: {                                     // Task
+            dist: {                                      // Target
+                options: {                                 // Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {                                   // Dictionary of files
+                    '<%= config.dist %>index.html': '<%= config.dist %>index.html',
+                    '<%= config.dist %>game.html': '<%= config.dist %>game.html',
+                    '<%= config.dist %>account-setting.html': '<%= config.dist %>account-setting.html',
+                    '<%= config.dist %>map.html': '<%= config.dist %>map.html',
+                    '<%= config.dist %>opportunity.html': '<%= config.dist %>opportunity.html',
+                    '<%= config.dist %>personal-history.html': '<%= config.dist %>personal-history.html',
+                    '<%= config.dist %>profile.html': '<%= config.dist %>profile.html',
+                    '<%= config.dist %>reset-password.html': '<%= config.dist %>reset-password.html',
+                    '<%= config.dist %>reset-password-by-email.html': '<%= config.dist %>reset-password-by-email.html',
+                    '<%= config.dist %>set-password.html': '<%= config.dist %>set-password.html',
+                    '<%= config.dist %>sign-in.html': '<%= config.dist %>sign-in.html',
+                    '<%= config.dist %>sign-up-from.html': '<%= config.dist %>sign-up-from.html'
+                }
+            }
         }
     });
 
@@ -94,5 +116,5 @@ module.exports = function (grunt) {
     // Copy to WEB
     grunt.registerTask('release', ['build']);
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production'/*, 'cssmin'*/]);
+    grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin'/*, 'cssmin'*/]);
 };
