@@ -53,10 +53,18 @@ module.exports = function (grunt) {
                 'nodemon',
                 'jshint',
             ],
+            prd: [
+                'less:production',
+                'jshint'
+            ],
             options: {
                 logConcurrentOutput: true
             }
         },
+        "useref": {
+            html: '<%= config.dist %>view-partial/*.html',
+            temp: '<%= config.dist %>'
+        }
     });
 
     // Load all grunt tasks
@@ -84,5 +92,7 @@ module.exports = function (grunt) {
     ]);
 
     // Copy to WEB
-    grunt.registerTask('release', []);
+    grunt.registerTask('release', ['build']);
+
+    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production'/*, 'cssmin'*/]);
 };
