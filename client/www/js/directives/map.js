@@ -3,7 +3,7 @@
 		return {
 			restrict: 'AE',
 			require: 'ngModel',
-			template: '<div id="main" style="height:300px">',
+			template: '<div id="main" style="height:400px">',
 			link: function($scope, $element, attrs, ngModel) {
 				require.config({
 					paths: {
