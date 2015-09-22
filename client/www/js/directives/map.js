@@ -33,17 +33,17 @@
 						var option = {
 							tooltip: {
 								trigger: 'item',
-								position: function(point){
-									console.log(point[0]);
-									if(point[0]>280){
-										return [point[0]-100,point[1]-20];
+								//position: [200,50],
+								position: function(point) {
+									if (point[0] > 280) {
+										return [point[0] - 50, point[1] - 40];
 									}
 								},
 								formatter: function(params, ticket, callback) {
-									if(copy_param!==params[1]){
+									if (copy_param !== params[1]) {
 										switch (params[1]) {
 											case '东北地区':
-											case 'DoneBei':
+											case 'DongBei':
 												result = $filter('translate')('MapDongBeiList');
 												break;
 											case '华北地区':

@@ -323,11 +323,11 @@
   "MapXiBei": "西北地区",
   "MapGangAoTai": "港澳台",
   "MapDongBeiList": "辽宁、吉林、黑龙江",
-  "MapHuaBeiList": "北京、天津、河北、山西、内蒙古",
-  "MapHuaDongList": "山东、江苏、安徽、浙江、福建、上海",
+  "MapHuaBeiList": "北京、天津、河北</br>山西、内蒙古",
+  "MapHuaDongList": "山东、江苏、安徽、</br>浙江、福建、上海",
   "MapHuaNanList": "广东、广西、海南",
   "MapHuaZhongList": "湖北、湖南、河南、江西",
-  "MapXiNanList": "四川、云南、贵州、西藏、重庆",
-  "MapXiBeiList": "宁夏、新疆、青海、陕西、甘肃",
+  "MapXiNanList": "四川、云南、贵州、</br>西藏、重庆",
+  "MapXiBeiList": "宁夏、新疆、青海、</br>陕西、甘肃",
   "MapGangAoTaiList": "香港、澳门、台湾"
 }
