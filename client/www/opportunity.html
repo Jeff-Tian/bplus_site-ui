@@ -9,18 +9,18 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='opportunity'">
+<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='opportunity'" ng-class="{'chinese':language==='zh','english':language==='en'}">
     <%- include('view-partial/header.html') -%>
     <!-- Page Contents -->
     <div class="pusher">
         <div class="b-opportunity-masthead">
             <div class="ui opportunity-banner">
-                <div class="ui container">
-                    <h1 class="ui header">企业信赖的人才评价方式</h1>
-                    <h2>企业信赖的人才评价方式，你可以用游戏优胜得到的积分来申请职位，<br>
-                    或者换取礼品、1对1导师咨询、企业家午餐会等。</h2>
+                <div class="ui container" ng-cloak>
+                    <h1 class="ui header">{{'OpportunityTitle' | translate}}</h1>
+                    <h2>{{'OpportunityInfoLine1' | translate}}<br>
+                    {{'OpportunityInfoLine2' | translate}}</h2>
                     <div class="column">
-                        <a class="ui opportunity-gray large button b-sp">立即申请</a>
+                        <a class="ui opportunity-gray large button b-sp">{{'OpportunityApply' | translate}}</a>
                     </div>
 
                 </div>
@@ -31,39 +31,39 @@
             <div class="b-opportunity">
                 <div class="ui container">
                     <h3 class="ui header b-sp">
-                        平台现有321个工作机会
+                        {{'OpportunityJobList' | translate}}
                     </h3>
                     <div class="ui container grid opportunity-box">
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-red jobs_administration front">
                                 <div class="content">
-                                    <p>行政管理类</p>
+                                    <p>{{'OpportunityJobList1' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-white back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList1Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList1Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList1Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList1Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -75,33 +75,33 @@
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-white jobs_marketing front">
                                 <div class="content">
-                                    <p>市场类</p>
+                                    <p>{{'OpportunityJobList2' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-red back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList2Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList2Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList2Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList2Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -112,33 +112,33 @@
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-white jobs_sales front">
                                 <div class="content">
-                                    <p>销售类</p>
+                                    <p>{{'OpportunityJobList3' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-red back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList3Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList3Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList3Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList3Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -150,33 +150,33 @@
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-red jobs_technology front">
                                 <div class="content">
-                                    <p>技术类</p>
+                                    <p>{{'OpportunityJobList4' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-white back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList4Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList4Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList4Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList4Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -187,33 +187,33 @@
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-red jobs_service front">
                                 <div class="content">
-                                    <p>运营类</p>
+                                    <p>{{'OpportunityJobList5' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-white back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList5Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList5Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList5Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList5Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -225,49 +225,48 @@
                         <div class="four-eight-column wide column opportunity-container">
                             <div class="column opportunity-list-white jobs_finance front">
                                 <div class="content">
-                                    <p>财务类</p>
+                                    <p>{{'OpportunityJobList6' | translate}}</p>
                                 </div>
                             </div>
                             <div class="column opportunity-list-red back">
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
                                         <tr>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>地点</th>
+                                            <th>{{'OpportunityTablePosition' | translate}}</th>
+                                            <th>{{'OpportunityTableCompany' | translate}}</th>
+                                            <th>{{'OpportunityTablePlace' | translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>市场部实习生</td>
-                                            <td>EF</td>
-                                            <td>上海</td>
+                                            <td>{{'OpportunityJobList6Position1' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Company1' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Place1' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>供应链管理实习生</td>
-                                            <td>可口可乐</td>
-                                            <td>杭州</td>
+                                            <td>{{'OpportunityJobList6Position2' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Company2' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Place2' | translate}}</td>
                                         </tr>
                                         <tr>
-                                            <td>总裁助理</td>
-                                            <td>Admaster</td>
-                                            <td>北京</td>
+                                            <td>{{'OpportunityJobList6Position3' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Company3' | translate}}</td>
+                                            <td>{{'OpportunityJobList6Place3' | translate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                     <div class="ui right aligned container b-opportunity-action">
-                        <a class="ui red large button b-sp check-more-buuton">查看更多职位</a>
+                        <a class="ui red large button b-sp check-more-buuton" ng-cloak>{{'OpportunityCheckMoreJob' | translate}}</a>
                     </div>
                 </div>
             </div>
 
             <div class="b-opportunity-client">
                 <div class="ui container">
-                    <h3 class="ui header b-sp">89家合作公司</h3>
+                    <h3 class="ui header b-sp" ng-cloak>{{'OpportunityCompanies' | translate}}</h3>
                     <div class="ui five column grid">
                         <div class="column">
                             <img class="ui image" src="img/client/1x/tencent.png">
@@ -307,25 +306,25 @@
                         </div>
                     </div>
                     <div class="ui right aligned container b-opportunity-action">
-                        <a class="ui red large button b-sp check-more-buuton">所有合作公司</a>
+                        <a class="ui red large button b-sp check-more-buuton">{{'OpportunityCheckMoreCompany' | translate}}</a>
                     </div>
                 </div>
             </div>
 
             <div class="b-opportunity-jobs">
                 <div class="ui container">
-                    <h3 class="ui header b-sp">为什么企业信赖我们</h3>
+                    <h3 class="ui header b-sp" ng-cloak>{{'OpportunityWhyUs' | translate}}</h3>
                     <div class="ui grid">
                         <div class="eight wide column">
                             <div class="ui embed">
                                 <embed src="http://player.youku.com/player.php/Type/Folder/Fid/26037420/Ob/1/sid/XMTMyMjQ2NzkxMg==/v.swf" quality="high" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
                             </div>
                         </div>
-                        <div class="eight wide column b-opportunity-pokesperson">
-                            <div class="header">李静</div>
-                            <div class="meta">宝洁中国人力资源总监</div>
+                        <div class="eight wide column b-opportunity-pokesperson" ng-cloak>
+                            <div class="header">{{'OpportunityLiJing' | translate}}</div>
+                            <div class="meta">{{'OpportunityLiJingMeta' | translate}}</div>
                             <div class="description">
-                                <p>Bridge+为我们开启了一种全新的招聘模式。<br>宝洁中国现已全面与Bridge+展开合作，以期高效精准地匹配到我们所需的人才。</p>
+                                <p>{{'OpportunityLiJingLine1' | translate}}<br>{{'OpportunityLiJingLine2' | translate}}</p>
                             </div>
                         </div>
                     </div>
@@ -335,7 +334,7 @@
             <div class="b-opportunity-trial">
                 <div class="ui center aligned container grid">
                     <div class="column">
-                        <a class="ui red large button b-sp">立即体验</a>
+                        <a class="ui red large button b-sp">{{'OpportunityStart' | translate}}</a>
                     </div>
                 </div>
             </div>
