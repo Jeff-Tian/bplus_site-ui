@@ -81,13 +81,14 @@ angular.module('bplus', [
         items: 1,
         lazyLoad: true,
         loop: true,
-        autoplay: true,
+        //autoplay: true,
         autoplayTimeout: 8000,
         autoplayHoverPause: true,
         nav: true,
         navRewind: true,
+        smartSpeed: 500,
         // animateIn: 'bounceInRight',
-        // animateOut: 'bounceOutLeft',
+        //animateOut: 'bounceOutLeft',
         navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>']
     });
     
