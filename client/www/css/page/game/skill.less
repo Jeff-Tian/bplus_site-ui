@@ -2,6 +2,27 @@
 * - @Bridge+
 */
 
+.english{
+	.b-skill{
+    	.seventy{
+	    	width: 60% !important;
+	    }
+	    .thirty{
+	    	width: 40% !important;
+	    }
+	    .b-skill-skill {
+	    	.ui.list {
+				.list {
+					font-size:@fontsize-o;
+					> .item{
+						padding-top: 0.5em;
+					}
+				}
+			}
+	    }
+	}
+}
+
 .b-skill {
     background-color: #2e363d;
     padding: 3rem 0;
@@ -70,14 +91,55 @@
     	width: 30% !important;
     }
 }
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.english{
+		.b-skill {
+			.b-skill-skill {
+				margin-right:2em;
+				.ui.list {
+					.list {
+						> .item{
+							padding-top: 1em;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media only screen and (min-width: 1200px) {
+	.english{
+
+		.b-skill {
+			.b-skill-skill {
+				margin-right:2em;
+				.ui.list {
+					.list {
+						> .item{
+							padding-top: 1.5em;
+						}
+					}
+				}
+			}
+			.seventy{
+		    	width: 70% !important;
+		    }
+		    .thirty{
+		    	width: 30% !important;
+		    }
+		}
+	}
+}
 @media only screen and (min-width: 992px) {
-	.b-skill {
-		.b-skill-skill {
-			margin-right:2em;
-			.ui.list {
-				.list {
-					> .item{
-						padding-top: 1.5em;
+	.chinese{
+		.b-skill {
+			.b-skill-skill {
+				margin-right:2em;
+				.ui.list {
+					.list {
+						> .item{
+							padding-top: 1.5em;
+						}
 					}
 				}
 			}

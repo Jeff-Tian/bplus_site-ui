@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.theme.default.min.css">
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'">
+<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'" ng-class="{'chinese':language==='zh','english':language==='en'}">
     <%- include('view-partial/header.html') -%>
     <% if (typeof hcd_user === 'undefined' || !hcd_user.member_id) { %>
     <div class="ui">
@@ -37,20 +37,20 @@
             <div class="owl-carousel owl-theme b-slider masthead-carousel" id="superpulse">
                 <div class="b-slider-item first-item">
                     <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+                        <h1 class="ui header" ng-cloak>{{'IndexFirstItemHeader' | translate}}</h1>
+                        <h2 ng-cloak>{{'IndexFirstItemContent' | translate}}<br>{{'IndexFirstItemSubContent' | translate}}</h2>
                     </div>
                 </div>
                 <div class="b-slider-item second-item">
                     <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+                        <h1 class="ui header" ng-cloak>{{'IndexSecondItemHeader' | translate}}</h1>
+                        <h2 ng-cloak>{{'IndexSecondItemContent' | translate}}<br>{{'IndexSecondItemSubContent' | translate}}</h2>
                     </div>
                 </div>
                 <div class="b-slider-item third-item">
                     <div class="ui container">
-                        <h1 class="ui header">现在就和好朋友一起开公司！</h1>
-                        <h2>全球顶尖团队开发的商战模拟游戏，<br>让你在无风险的环境下享受创业激情！</h2>
+                        <h1 class="ui header" ng-cloak>{{'IndexThirdItemHeader' | translate}}</h1>
+                        <h2 ng-cloak>{{'IndexThirdItemContent' | translate}}<br>{{'IndexThirdItemSubContent' | translate}}</h2>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <div class="page-content">
             <div class="b-client">
                 <div class="ui container" id="b-client-content">
-                    <h3 class="ui header b-sp animated" id="b-client-header">商战游戏部分服务对象</h3>
+                    <h3 class="ui header b-sp animated" id="b-client-header" ng-cloak>{{'IndexServiceTarget' | translate}}</h3>
                     <div class="ui horizontal list owl-carousel owl-theme" id="b-client-list">
                         <div class="item">
                             <img class="ui image" src="img/client/1x/tencent.png">
@@ -101,7 +101,7 @@
             </div>
             <div class="b-advantage">
                 <div class="ui container">
-                    <h3 class="ui header b-sp">全球领先的商战模拟游戏</h3>
+                    <h3 class="ui header b-sp" ng-cloak>{{'IndexBusinessSimulationGame' | translate}}</h3>
 
                     <div class="ui three column grid">
                         <div class="column b-advantage-item">
@@ -109,12 +109,12 @@
                                 <img src="img/salespage/gif/online.png" width="160px" height="160px">
                             </div>
                             <div class="content">
-                                <p class="header">在线模拟运营企业</p>
+                                <p class="header" ng-cloak>{{'IndexOnlineSimulation' | translate}}</p>
 
                                 <div class="description">
-                                    <p>游戏者通过模拟运营企业
-                                        <br>以管理者的视角
-                                        <br>全方位了解整个市场及其运作方式</p>
+                                    <p ng-cloak>{{'IndexOnlineSimulationLine1' | translate}}
+                                        <br>{{'IndexOnlineSimulationLine2' | translate}}
+                                        <br>{{'IndexOnlineSimulationLine3' | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -123,11 +123,11 @@
                                 <img src="img/salespage/gif/top.png" width="160px" height="160px">
                             </div>
                             <div class="content">
-                                <p class="header">全球顶尖团队开发</p>
+                                <p class="header" ng-cloak> {{'IndexDevelopmentTeam' | translate}}</p>
 
                                 <div class="description">
-                                    <p>游戏由中欧商学院的创始人之一
-                                        <br>Wilfried R. Vanhonacker教授主导研发</p>
+                                    <p ng-cloak>{{'IndexDevelopmentTeamLine1' | translate}}
+                                        <br>{{'IndexDevelopmentTeamLine2' | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -136,11 +136,11 @@
                                 <img src="img/salespage/gif/enhance.png" width="160px" height="160px">
                             </div>
                             <div class="content">
-                                <p class="header">真实提高能力水平</p>
+                                <p class="header" ng-cloak>{{'IndexImproveTheLevel' | translate}}</p>
 
                                 <div class="description">
-                                    <p>锻炼游戏者在压力情境下的数据分析、
-                                        <br>商业决策、团队合作能力</p>
+                                    <p ng-cloak>{{'IndexImproveTheLevelLine1' | translate}}
+                                        <br>{{'IndexImproveTheLevelLine2' | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -149,28 +149,27 @@
             </div>
             <div class="b-theory">
                 <div class="ui container equal width grid">
-                    <h3 class="ui header b-sp">权威的学习理论</h3>
+                    <h3 class="ui header b-sp" ng-cloak>{{'IndexLearningTheory' | translate}}</h3>
 
                     <div class="row">
                         <div class="column b-theory-header">
                             <div>
-                                <p>中欧商学院的创始人之一
-                                    <br><b>Wilfried R. Vanhonacker</b>
+                                <p ng-cloak>{{'IndexLearningTheoryTeacherInfo' | translate}}
+                                    <br><b>{{'IndexLearningTheoryTeacher' | translate}}</b>
                                 </p>
                             </div>
                         </div>
                         <div class="column b-theory-content">
-                            <h3>学习方法论</h3>
+                            <h3 ng-cloak>{{'IndexLearningMethodology' | translate}}</h3>
 
-                            <p>体验式学习，结合“做中学learning by doing”、“经验学习圈experiential learning cycle”、“认知发展论theory of cognitive
-                                development”等学习理论，为达到某些预期结果而特别为学员设计。根据美国缅因州国家训练实验室提出的学习金字塔理论，通过实践学习的效率可以达到75%，远远高于传统“说教式”的被动学习方式。</p>
+                            <p ng-cloak>{{'IndexLearningMethodologyInfo' | translate}}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="b-jobs">
                 <div class="ui container">
-                    <h3 class="ui header b-sp">用游戏积分申请真实岗位</h3>
+                    <h3 class="ui header b-sp" ng-cloak>{{'IndexGameCredits' | translate}}</h3>
 
                     <div class="ui grid">
                         <div class="eight wide column b-jobs-pokesperson">
@@ -181,11 +180,11 @@
                                     </div>
                                     <div class="content">
                                         <div class="b-jobs-pokesperson-sink">
-                                            <div class="header">李静</div>
-                                            <div class="meta">宝洁中国人力资源总监</div>
+                                            <div class="header" ng-cloak>{{'IndexLeader' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexLeaderMeta' | translate}}</div>
                                             <div class="ui divider"></div>
-                                            <div class="description">
-                                                <p>Bridge+为我们开启了一种全新的招聘模式。宝洁中国现已全面与Bridge+展开合作，以期高效精准地匹配到我们所需的人才。</p>
+                                            <div class="description" ng-cloak>
+                                                <p>{{'IndexLeaderDescription' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -194,16 +193,16 @@
                         </div>
                         <div class="eight wide column b-jobs-statistics">
                             <div class="b-jobs-statistics-sink">
-                                <h2 class="ui sub header">平台现有</h2>
+                                <h2 class="ui sub header" ng-cloak>{{'IndexPlatform' | translate}}</h2>
 
                                 <div class="ui horizontal statistics">
                                     <div class="statistic">
                                         <div class="value">321</div>
-                                        <div class="label">个职位</div>
+                                        <div class="label" ng-cloak>{{'IndexPlatformJobs' | translate}}</div>
                                     </div>
                                     <div class="statistic">
                                         <div class="value">89</div>
-                                        <div class="label">家公司</div>
+                                        <div class="label" ng-cloak>{{'IndexPlatformCompanies' | translate}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -215,32 +214,32 @@
                                 <h2 class="ui header">
                                     <i class="bookmark icon red"></i>
 
-                                    <div class="content">实习</div>
+                                    <div class="content" ng-cloak>{{'IndexTableInternship' | translate}}</div>
                                 </h2>
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
-                                    <tr>
-                                        <th>职位</th>
-                                        <th>公司</th>
-                                        <th>地点</th>
-                                    </tr>
+                                        <tr>
+                                            <th>{{'IndexTablePosition' | translate}}</th>
+                                            <th>{{'IndexTableCompany' | translate}}</th>
+                                            <th>{{'IndexTablePlace' | translate}}</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>市场部实习生</td>
-                                        <td>EF</td>
-                                        <td>上海</td>
-                                    </tr>
-                                    <tr>
-                                        <td>供应链管理实习生</td>
-                                        <td>可口可乐</td>
-                                        <td>杭州</td>
-                                    </tr>
-                                    <tr>
-                                        <td>总裁助理</td>
-                                        <td>Admaster</td>
-                                        <td>北京</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition1' | translate}}</td>
+                                            <td>{{'IndexTableCompany1' | translate}}</td>
+                                            <td>{{'IndexTablePlace1' | translate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition2' | translate}}</td>
+                                            <td>{{'IndexTableCompany2' | translate}}</td>
+                                            <td>{{'IndexTablePlace2' | translate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition3' | translate}}</td>
+                                            <td>{{'IndexTableCompany3' | translate}}</td>
+                                            <td>{{'IndexTablePlace3' | translate}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -250,44 +249,44 @@
                                 <h2 class="ui header">
                                     <i class="suitcase icon red"></i>
 
-                                    <div class="content">工作</div>
+                                    <div class="content" ng-cloak>{{'IndexTableJobs' | translate}}</div>
                                 </h2>
-                                <table class="ui very basic table unstackable">
+                                <table class="ui very basic table unstackable" ng-cloak>
                                     <thead>
-                                    <tr>
-                                        <th>职位</th>
-                                        <th>公司</th>
-                                        <th>地点</th>
-                                    </tr>
+                                        <tr>
+                                            <th>{{'IndexTablePosition' | translate}}</th>
+                                            <th>{{'IndexTableCompany' | translate}}</th>
+                                            <th>{{'IndexTablePlace' | translate}}</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>市场部实习生</td>
-                                        <td>EF</td>
-                                        <td>上海</td>
-                                    </tr>
-                                    <tr>
-                                        <td>供应链管理实习生</td>
-                                        <td>可口可乐</td>
-                                        <td>杭州</td>
-                                    </tr>
-                                    <tr>
-                                        <td>总裁助理</td>
-                                        <td>Admaster</td>
-                                        <td>北京</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition4' | translate}}</td>
+                                            <td>{{'IndexTableCompany4' | translate}}</td>
+                                            <td>{{'IndexTablePlace4' | translate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition5' | translate}}</td>
+                                            <td>{{'IndexTableCompany5' | translate}}</td>
+                                            <td>{{'IndexTablePlace5' | translate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{'IndexTablePosition6' | translate}}</td>
+                                            <td>{{'IndexTableCompany6' | translate}}</td>
+                                            <td>{{'IndexTablePlace6' | translate}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div class="ui right aligned container b-jobs-action">
-                        <a class="ui red large button check-more-buuton b-sp">查看更多职位</a>
+                        <a class="ui red large button check-more-buuton b-sp" ng-cloak>{{'IndexCheckMoreJobs' | translate}}</a>
                     </div>
                 </div>
             </div>
             <div class="b-feedback">
-                <h3 class="ui header container b-sp">学员们的积极反馈</h3>
+                <h3 class="ui header container b-sp" ng-cloak>{{'IndexStudentFeedback' | translate}}</h3>
                 <div class="owl-carousel owl-theme b-slider feedback-carousel">
                     <div class="b-slider-item">
                         <div class="ui equal width grid ui control-container container">
@@ -298,11 +297,11 @@
                                             <img src="img/feedback_student_1.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName1' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta1' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription1' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -313,11 +312,11 @@
                                             <img src="img/feedback_student_2.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">郭晓静</div>
-                                            <div class="meta">对外经贸大学 / 金融</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName2' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta2' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription2' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -334,11 +333,11 @@
                                             <img src="img/feedback_student_4.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">郭晓静</div>
-                                            <div class="meta">对外经贸大学 / 金融</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName3' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta3' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription3' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -349,11 +348,11 @@
                                             <img src="img/feedback_student_5.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName4' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta4' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription4' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -370,11 +369,11 @@
                                             <img src="img/feedback_student_5.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName1' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta1' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription1' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -385,11 +384,11 @@
                                             <img src="img/feedback_student_6.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">郭晓静</div>
-                                            <div class="meta">对外经贸大学 / 金融</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName2' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta2' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription2' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -406,11 +405,11 @@
                                             <img src="img/feedback_student_8.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">郭晓静</div>
-                                            <div class="meta">对外经贸大学 / 金融</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName3' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta3' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>参加Bridge＋并不需要你专业知识多么丰 富，只要你有一群默契的小伙伴。比赛时 不到最后一轮绝对不要放弃，大家群策群 力，最终一定会有不错的成绩。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription3' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -421,11 +420,11 @@
                                             <img src="img/feedback_student_2.png">
                                         </div>
                                         <div class="content">
-                                            <div class="header">何平</div>
-                                            <div class="meta">东北大学 / 机械工程</div>
+                                            <div class="header" ng-cloak>{{'IndexStudentName4' | translate}}</div>
+                                            <div class="meta" ng-cloak>{{'IndexStudentMeta4' | translate}}</div>
                                             <div class="ui divider"></div>
                                             <div class="description">
-                                                <p>在Bridge+最棒的一点是，你可以发现你 不擅长的地方。它给我指了一个方向，我 不适合做CEO，但是有其他的事可以做好， 感谢。</p>
+                                                <p ng-cloak>{{'IndexStudentDescription4' | translate}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -438,7 +437,7 @@
             <div class="b-trial">
                 <div class="ui center aligned container grid">
                     <div class="column">
-                        <a class="ui red large button b-sp">立即体验</a>
+                        <a class="ui red large button b-sp" ng-cloak>{{'IndexStart' | translate}}</a>
                     </div>
                 </div>
             </div>

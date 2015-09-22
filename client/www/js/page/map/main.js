@@ -23,3 +23,7 @@ angular.module('map', [
     .factory('MessageStore', angular.bplus.MessageStore)
     .directive('chinaMap', angular.bplus.chinaMap || {})
 ;
+(function () {
+
+
+})();

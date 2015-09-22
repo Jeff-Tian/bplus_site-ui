@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function (FormValidation, $scope, service, MessageStore, msgBus) {
+    exports.AppCtrl = function (FormValidation, $scope, service, MessageStore, msgBus, $translate) {
         var $form = $('.ui.form');
 
         $form.form(FormValidation.defaultSetting);
@@ -30,6 +30,8 @@
 
         $scope.message = MessageStore.flash();
 
+        $scope.language = $translate.preferredLanguage();
+
         $scope.signOut = function () {
             service.post('/service-proxy/logon/logout')
                 .finally(function (res) {
@@ -48,5 +50,5 @@
         window.addEventListener('hashchange', locationHashChanged);
     };
 
-    exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore', 'msgBus'];
+    exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore', 'msgBus', '$translate'];
 })(angular.bplus = angular.bplus || {});

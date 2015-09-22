@@ -11,7 +11,7 @@
     height:700px;
 
     > .ui.container {
-        padding-top: 5rem;
+        padding-top: 2rem;
     }
 
     h3 {
@@ -22,6 +22,7 @@
     }
 
     .b-theory-header {
+        padding: 2.8rem 1rem;
         .content{
             > div {
                 color: @color-white;
@@ -33,8 +34,11 @@
         }
     }
     .b-theory-content {
-        padding-top: 8rem;
-        padding-bottom: 8rem;
+        padding-top: 0rem;
+        margin-top: 7rem !important;
+        height: 30rem;
+        overflow-y: scroll;
+
         > h3 {
             color: @color-white;
             font-size: @fontsize-5xl;
@@ -48,10 +52,25 @@
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+.english{
     .b-popularity {
+        > .ui.container {
+            
+        }
+        .b-theory-header{
+            padding: 0 1rem;
+            .content{
+                > div{
+                    p{
+                        line-height:2em;
+                    }
+                }
+            }
+        }
         .b-theory-content {
-            padding-left: 3rem !important;
+            > p{
+                line-height:2em;
+            }
         }
     }
 }

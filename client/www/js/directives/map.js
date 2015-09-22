@@ -7,7 +7,7 @@
 			link: function($scope, $element, attrs, ngModel) {
 				require.config({
 					paths: {
-						echarts: 'bower/echarts/build/dist'
+						echarts: '/bower/echarts/build/dist'
 					}
 				});
 				//使用
@@ -29,50 +29,60 @@
 						var myChart = ec.init(document.getElementById('main'));
 						var mapType = ['area', $filter('translate')('MapDongBei'), $filter('translate')('MapHuaBei'), $filter('translate')('MapHuaDong'), $filter('translate')('MapHuaNan'), $filter('translate')('MapHuaZhong'), $filter('translate')('MapXiNan'), $filter('translate')('MapXiBei'), $filter('translate')('MapGangAoTai')];
 						var result = '';
+						var copy_param = '';
 						var option = {
 							tooltip: {
 								trigger: 'item',
+								//position: [200,50],
+								position: function(point) {
+									if (point[0] > 280) {
+										return [point[0] - 50, point[1] - 40];
+									}
+								},
 								formatter: function(params, ticket, callback) {
-									switch (params[1]) {
-										case '东北地区':
-										case 'DoneBei':
-											result = $filter('translate')('MapDongBeiList');
-											break;
-										case '华北地区':
-										case 'HuaBei':
-											result = $filter('translate')('MapHuaBeiList');
+									if (copy_param !== params[1]) {
+										switch (params[1]) {
+											case '东北地区':
+											case 'DongBei':
+												result = $filter('translate')('MapDongBeiList');
+												break;
+											case '华北地区':
+											case 'HuaBei':
+												result = $filter('translate')('MapHuaBeiList');
 
-											break;
-										case '华东地区':
-										case 'HuaDong':
-											result = $filter('translate')('MapHuaDongList');
+												break;
+											case '华东地区':
+											case 'HuaDong':
+												result = $filter('translate')('MapHuaDongList');
 
-											break;
-										case '华南地区':
-										case 'HuaNan':
-											result = $filter('translate')('MapHuaNanList');
+												break;
+											case '华南地区':
+											case 'HuaNan':
+												result = $filter('translate')('MapHuaNanList');
 
-											break;
-										case '华中地区':
-										case 'HuaZhong':
-											result = $filter('translate')('MapHuaZhongList');
+												break;
+											case '华中地区':
+											case 'HuaZhong':
+												result = $filter('translate')('MapHuaZhongList');
 
-											break;
-										case '西南地区':
-										case 'XiNan':
-											result = $filter('translate')('MapXiNanList');
+												break;
+											case '西南地区':
+											case 'XiNan':
+												result = $filter('translate')('MapXiNanList');
 
-											break;
-										case '西北地区':
-										case 'XiBei':
-											result = $filter('translate')('MapXiBeiList');
+												break;
+											case '西北地区':
+											case 'XiBei':
+												result = $filter('translate')('MapXiBeiList');
 
-											break;
-										case '港澳台':
-										case 'GangAoTai':
-											result = $filter('translate')('MapGangAoTaiList');
+												break;
+											case '港澳台':
+											case 'GangAoTai':
+												result = $filter('translate')('MapGangAoTaiList');
 
-											break;
+												break;
+										}
+										copy_param = params[1];
 									}
 									return result;
 								}
@@ -104,6 +114,7 @@
 
 						// 为echarts对象加载数据 
 						myChart.setOption(option);
+						window.onresize = myChart.resize;
 
 						var ecConfig = require('echarts/config');
 						myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {

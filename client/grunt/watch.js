@@ -1,7 +1,7 @@
 module.exports = function() {
 	return {
 		js: {
-			files: ['client/www/js/**/*.js'],
+			files: ['client/www/js/**/*.js','client/config/*.js','client/serviceProxy/*.js','locales/*.js','locales/*.json'],
 			options: {
 				livereload: true,
 				nospawn: true
