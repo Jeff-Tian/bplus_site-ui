@@ -42,7 +42,7 @@
                 "password": "HCDhcd@123",
                 "keyspace": "logdb",
                 "table": "log",
-                "appName": "HCDGlobal"
+                "appName": "BridgePlus"
             }]
         }
     };

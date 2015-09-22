@@ -25,16 +25,8 @@
     </div>
 </div>
 <%- include('view-partial/footer.html') -%>
-<!--JS-->
-<script src="bower/jquery/dist/jquery.js"></script>
-<script src="bower/jquery-address/src/jquery.address.js"></script>
-<script src="bower/semantic-ui/dist/semantic.js"></script>
-<script src="bower/underscore/underscore.js"></script>
-<!--Angular JS-->
-<script src="bower/angular/angular.min.js"></script>
-<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
-<!--Page JS-->
-<script src="/config.js"></script>
+
+<!-- build:js js/sign-up-from.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/factories/MessageStore.js"></script>
 <script src="js/factories/service.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
@@ -44,10 +36,7 @@
 <script src="js/directives/dropdown.js"></script>
 <script src="js/directives/registerForm.js"></script>
 <script src="js/page/register/main.js"></script>
-<!--Utils JS-->
-<script src="js/utils/utils.js"></script>
-<script src="js/utils/msgbus.js"></script>
-<script src="js/utils/underscore.js"></script>
+<!-- endbuild -->
 </body>
 
 </html>

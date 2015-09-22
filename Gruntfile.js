@@ -62,7 +62,7 @@ module.exports = function (grunt) {
             }
         },
         "useref": {
-            html: '<%= config.dist %>view-partial/*.html',
+            html: ['<%= config.dist %>*.html', '<%= config.dist %>view-partial/*.html'],
             temp: '<%= config.dist %>'
         },
         htmlmin: {                                     // Task
@@ -71,20 +71,18 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true
                 },
-                files: {                                   // Dictionary of files
-                    '<%= config.dist %>index.html': '<%= config.dist %>index.html',
-                    '<%= config.dist %>game.html': '<%= config.dist %>game.html',
-                    '<%= config.dist %>account-setting.html': '<%= config.dist %>account-setting.html',
-                    '<%= config.dist %>map.html': '<%= config.dist %>map.html',
-                    '<%= config.dist %>opportunity.html': '<%= config.dist %>opportunity.html',
-                    '<%= config.dist %>personal-history.html': '<%= config.dist %>personal-history.html',
-                    '<%= config.dist %>profile.html': '<%= config.dist %>profile.html',
-                    '<%= config.dist %>reset-password.html': '<%= config.dist %>reset-password.html',
-                    '<%= config.dist %>reset-password-by-email.html': '<%= config.dist %>reset-password-by-email.html',
-                    '<%= config.dist %>set-password.html': '<%= config.dist %>set-password.html',
-                    '<%= config.dist %>sign-in.html': '<%= config.dist %>sign-in.html',
-                    '<%= config.dist %>sign-up-from.html': '<%= config.dist %>sign-up-from.html'
-                }
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= config.dist %>',
+                        src: '*.html',
+                        dest: '<%= config.dist %>'
+                    }, {
+                        expand: true,
+                        cwd: '<%= config.dist %>view-partial',
+                        src: '*.html',
+                        dest: '<%= config.dist %>'
+                    }]
             }
         }
     });

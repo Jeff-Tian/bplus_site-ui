@@ -108,6 +108,7 @@
   "service-70013": "Token expired",
   "service-20100": "Graphic validation code not correct or expired",
   "service-20003": "missing sms template code",
+  "service-20001": "mobile verification code is not correct or expired",
   "service-20000": "sms validate error",
   "service-401": "You are not allowed to access this page. Please log in and retry.",
   "service-70002": "Unexpected error",

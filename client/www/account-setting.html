@@ -160,6 +160,7 @@
 <%- include('view-partial/footer.html') -%>
 
 <!--Page JS-->
+<!-- build:js js/account-settings.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/directives/captcha.js"></script>
 <script src="js/directives/ngEnter.js"></script>
 <script src="js/directives/registerForm.js"></script>
@@ -167,6 +168,7 @@
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
 <script src="js/page/account-setting/main.js"></script>
+<!-- endbuild -->
 </body>
 
 </html>
