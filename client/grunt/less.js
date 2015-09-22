@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     return {
         development: {
             files: {
@@ -12,7 +12,7 @@ module.exports = function() {
                 optimization: 2
             },
             files: {
-                "client/www/css/main.css": "client/www/css/page/main.less" // destination file and source file
+                "<%= config.dist %>css/main.css": "<%= config.dist %>css/page/main.less" // destination file and source file
             }
         }
     };

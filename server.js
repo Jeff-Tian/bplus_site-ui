@@ -62,15 +62,17 @@ supportedLocales.map(function (l) {
     });
 });
 
+var viewFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
+
 server.use('/config.js', express.static(__dirname + '/config/config_' + (process.env.NODE_ENV || 'dev') + '.js'));
 server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
 server.use('/translation', localeHelper.serveTranslations);
 
 // Customize client file path
-server.set('views', __dirname + '/client/www');
-server.use(express.static(__dirname + '/client/www'));
+server.set('views', viewFolder);
+server.use(express.static(viewFolder));
 supportedLocales.map(function (l) {
-    server.use('/' + l, express.static(__dirname + '/client/www'));
+    server.use('/' + l, express.static(viewFolder));
 });
 
 server.use('/service-proxy', require('./serviceProxy'));
