@@ -7,7 +7,7 @@
 			link: function($scope, $element, attrs, ngModel) {
 				require.config({
 					paths: {
-						echarts: 'bower/echarts/build/dist'
+						echarts: '/bower/echarts/build/dist'
 					}
 				});
 				//使用
@@ -33,8 +33,12 @@
 						var option = {
 							tooltip: {
 								trigger: 'item',
-								position: [150,50],
-								//to do  fix position 
+								position: function(point){
+									console.log(point[0]);
+									if(point[0]>280){
+										return [point[0]-100,point[1]-20];
+									}
+								},
 								formatter: function(params, ticket, callback) {
 									if(copy_param!==params[1]){
 										switch (params[1]) {
