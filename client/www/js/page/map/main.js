@@ -23,3 +23,11 @@ angular.module('map', [
     .factory('MessageStore', angular.bplus.MessageStore)
     .directive('chinaMap', angular.bplus.chinaMap || {})
 ;
+(function () {
+    $('.ui.sticky').sticky({
+        observeChanges: true,
+        context: '#national-list'
+      })
+    ;
+
+})();

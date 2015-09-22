@@ -5054,3 +5054,40 @@ body.pushable > .pusher,
   cursor: pointer;
   margin: -5px -10px 0 0;
 }
+/*
+* - @Bridge+
+*/
+.b-map {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: auto auto;
+  background-color: #ffffff;
+  padding-top: 70px;
+}
+.b-map .content {
+  margin-top: 2rem;
+}
+.b-map .content .national-cars {
+  max-height: 500px;
+  overflow-y: scroll;
+  margin: -0.875em -0.5em !important;
+}
+.b-map .content .national-cars .card {
+  border-radius: 0;
+}
+.b-map .content .national-cars .card .national-name {
+  border-radius: 0 !important;
+}
+.b-map .content .national-cars .card .national-name .header {
+  color: #ffffff;
+}
+.bplus .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}
+.bplus .b-map .content .national-cars .card .national-name {
+  background-color: #ff3c42;
+}
+.hcdlearning .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}

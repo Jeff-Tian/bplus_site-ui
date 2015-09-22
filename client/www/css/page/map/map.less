@@ -1,0 +1,49 @@
+/*
+* - @Bridge+
+*/
+
+.b-map {
+    position: relative;
+    background-repeat: no-repeat;  
+    background-position: center top;  
+    background-size:auto auto;
+    background-color: @color-white;
+    padding-top: 70px;
+
+    .content{
+    	margin-top:2rem;
+        .national-cars{
+            max-height:500px;
+            overflow-y: scroll;
+            margin: -0.875em -0.5em !important;
+            .card{
+                border-radius:0;
+                .national-name{
+                    border-radius:0 !important;
+                    .header{
+                        color: @color-white;
+                    }
+                }
+            }
+        }
+    }
+}
+.bplus{
+	.b-map{
+		background-image: url('/img/salespage/events_bg.png');
+        .content{
+            .national-cars{
+                .card{
+                    .national-name{
+                        background-color:@color-brand;
+                    }
+                }
+            }
+        }
+	}
+}
+.hcdlearning{
+	.b-map{
+		background-image: url('/img/salespage/events_bg.png');
+	}
+}
