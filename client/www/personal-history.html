@@ -39,9 +39,12 @@
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Gender') %></label>
-                                <select class="ui dropdown defer" name="gender" ng-model="memberInfo.gender">
+                                <select class="ui dropdown" name="gender" ng-model="memberInfo.gender">
                                     <option value=""><%= __('PleaseSelect') %></option>
-                                    <option value="{{g.value}}" ng-repeat="g in genderList" dropdown>{{g.text}}</option>
+                                    <!-- Use ng-bind instead of {{}} to avoid issues caused by semantic ui -->
+                                    <option value="U"><%= __('Unknown') %></option>
+                                    <option value="M"><%= __('Male') %></option>
+                                    <option value="F"><%= __('Female') %></option>
                                 </select>
                             </div>
                             <div class="fields">
@@ -70,7 +73,7 @@
                                             <select class="ui fluid search dropdown defer" name="monthOfBirth"
                                                     ng-model="personalInfo.monthOfBirth">
                                                 <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown="">{{m}}
+                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}
                                                 </option>
                                             </select>
                                         </div>
@@ -118,7 +121,9 @@
                         </div>
                         <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container subcontainer">
-                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()"><%= __('Skip') %></button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoNextStep()"><%=
+                                __('Skip') %>
+                            </button>
                             <button type="submit" class="ui large red button"><%= __('NextStepEducation') %></button>
                         </div>
 
@@ -140,12 +145,13 @@
                                        ng-model="schoolInfo.major">
                             </div>
                             <div class="field">
-                                <label><i class="ui large red icon">*</i><%= __('Qualification') %></label>
-                                <select class="ui fluid search dropdown" ng-model="schoolInfo.educationBackground"
+                                <label><i class="ui large red icon">*</i><%= __('Qualification')
+                                    %></label>
+                                <select class="ui fluid search dropdown defer" ng-model="schoolInfo.educationBackground"
                                         name="schoolEducationBackground">
                                     <option value=""><%= __('PleaseSelect') %></option>
-                                    <option value="本科">本科</option>
-                                    <option value="硕士">硕士</option>
+                                    <option value="{{q.value}}" ng-repeat="q in qualifications" dropdown>{{q.text}}
+                                    </option>
                                 </select>
                             </div>
                             <div class="two fields">
@@ -214,7 +220,9 @@
                             <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
                                 <%= __('PreviousStep') %>
                             </button>
-                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()"><%= __('Skip') %></button>
+                            <button type="reset" class="ui large red basic button" ng-click="gotoComplete()"><%=
+                                __('Skip') %>
+                            </button>
                             <button type="submit" class="ui large red button"><%= __('Done') %></button>
                         </div>
                     </form>

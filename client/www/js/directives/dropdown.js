@@ -1,10 +1,14 @@
 (function (exports) {
     exports.dropdown = function ($timeout) {
-        return function (scope, element, attrs) {
-            if (scope.$last) {
-                $timeout(function () {
-                    $(element).parent().dropdown();
-                });
+        return {
+            link: function (scope, element, attrs, ngModel) {
+                if (scope.$last) {
+                    var $select = $(element).parent();
+
+                    $timeout(function () {
+                        $select.dropdown();
+                    });
+                }
             }
         };
     };

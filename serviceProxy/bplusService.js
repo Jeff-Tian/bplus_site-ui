@@ -12,7 +12,7 @@ function proxyBPlus(options) {
 }
 
 function mapEducation(d) {
-    d.qualification_id = d.educationBackground;
+    d.qualifications_id = d.educationBackground;
     delete d.educationBackground;
     d.university = d.name;
     delete d.name;
@@ -60,5 +60,17 @@ module.exports = {
 
             return mapEducation(d);
         }
-    })
+    }),
+
+    getResource: function (req, res, next) {
+        var language = 'zh-CN';
+
+        if (req.params.language === 'en') {
+            language = 'en-US';
+        }
+
+        proxyBPlus({
+            path: '/resource/load/' + req.params.resourceKey + '/' + language
+        })(req, res, next);
+    }
 };

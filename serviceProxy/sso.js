@@ -163,17 +163,7 @@ module.exports = {
     changePassword: proxySSO({
         path: '/profile/changepassword'
     }),
-    updateProfile: function (req, res, next) {
-        console.log(req.body);
-        proxySSO({
-            path: '/profile/update',
-            responseInterceptor: function (response, json) {
-                console.log(json);
-
-                response.send(json);
-
-                return true;
-            }
-        })(req, res, next);
-    }
+    updateProfile: proxySSO({
+        path: '/profile/update'
+    })
 };
