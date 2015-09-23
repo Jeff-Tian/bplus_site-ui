@@ -22,12 +22,12 @@ var ejs = require('ejs');
 
 function setLogger(req, res, next) {
     function dualLogError(o) {
-        req.logger.error(o);
+        logger.error(o);
         console.error(o);
     }
 
     function dualLog(o) {
-        req.logger.log(o);
+        logger.info(o);
         console.log(o);
     }
 

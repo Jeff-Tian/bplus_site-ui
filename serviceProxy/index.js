@@ -7,6 +7,12 @@ var sms = require('./sms'),
     ;
 
 module.exports = require('express').Router()
+    .use(function (req, res, next) {
+        req.dualLog('service-proxy is being calling...');
+        req.dualLog(req.url);
+
+        next();
+    })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
