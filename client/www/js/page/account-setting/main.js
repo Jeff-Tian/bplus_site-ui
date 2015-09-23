@@ -74,6 +74,34 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
                 })
             ;
         };
+
+        $scope.SendVerificationEmail = function () {
+            if (submitting) {
+                return;
+            }
+
+            submitting = true;
+            service
+                .post('/service-proxy/mail/send-verification', {
+                    to: $scope.memberInfo.mail,
+                    subject: $filter('translate')('请验证您的邮箱'),
+                    linkVerification: window.location.origin + '/email-verify',
+                    displayName: $scope.memberInfo.displayName
+                })
+                .then(function (json) {
+                    console.log(json);
+                    $scope.mailSendingText = 'EmailVerificationSent';
+                })
+                .catch(function (reason) {
+                    console.error(reason);
+                    $scope.mailSendingText = 'SentVerificationEmailError';
+                })
+                .finally(function () {
+                    submitting = false;
+                });
+        };
+
+        $scope.mailSendingText = !$scope.memberInfo.is_mail_validated ? 'SendEmailVerification' : 'EmailVerified';
     }])
     .controller('changePasswordCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$rootScope', function ($scope, service, $filter, FormValidation, $rootScope) {
         $scope.data = {};

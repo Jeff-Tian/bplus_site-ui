@@ -1,7 +1,6 @@
 var http = require('http');
 var sso = require('../config').sso;
 var proxy = require('./proxy');
-var membership = require('./membership.js');
 
 function proxySSO(options) {
     options.host = sso.host;
@@ -78,17 +77,7 @@ module.exports = {
                                 console.log('authcurrent response = ');
                                 console.log(responseJson);
 
-                                if (responseJson.isSuccess) {
-                                    //responseStream.cookie('token', responseJson.result.token, {
-                                    //    expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
-                                    //    path: '/',
-                                    //    httpOnly: true
-                                    //});
-
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return !!responseJson.isSuccess;
                             }
                         })(req, res, next);
                     } else {
@@ -103,12 +92,6 @@ module.exports = {
 
             response.on('error', next);
         });
-
-        //var data = req.body;
-        //
-        //if (data) {
-        //    request.write(JSON.stringify(data));
-        //}
 
         request.on('error', next);
 
@@ -146,6 +129,21 @@ module.exports = {
             }
         }
     }),
+    getMailVerificationToken: function (req, res, next) {
+        proxySSO({
+            path: '/member/mailValidation/generate/' + res.locals.hcd_user.member_id,
+            method: 'GET',
+            responseInterceptor: function (res, json) {
+                if (json.isSuccess) {
+                    res.locals.mailToken = json.result;
+                    return true;
+                } else {
+                    res.status(503);
+                    return false;
+                }
+            }
+        })(req, res, next);
+    },
     changeMobile: proxySSO({
         path: '/profile/update'
     }),

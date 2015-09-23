@@ -33,8 +33,7 @@
                 "[all]": "DEBUG"
             },
             "appenders": [{
-                "type": "console",
-                "category": "log"
+                "type": "console"
             }, {
                 "type": "log4js_cassandra",
                 "nodes": ["uat.cass01.server"],
@@ -44,8 +43,7 @@
                 "table": "log",
                 "appName": "BridgePlus"
             }]
-        },
-        cdn: ""
+        }
     };
 
     if (typeof module !== 'undefined' && module.exports) {

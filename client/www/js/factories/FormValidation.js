@@ -88,7 +88,7 @@
             if (reason === null || typeof reason === 'undefined') {
                 $form.addClass('error').form('add errors', [translate('NoResponseFromServer') || '未得到服务器响应']);
             } else {
-                if (typeof reason === 'object' && typeof reason.code !== 'undefined') {
+                if (typeof reason === 'object' && String(reason.code) !== '') {
                     $form.addClass('error').form('add errors', [message(translate('service-' + reason.code)) || reason.message]);
                 } else {
                     $form.addClass('error').form('add errors', [typeof reason === 'string' ? message(reason) : reason]);

@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.ResetPasswordByEmailCtrl = function ($scope, FormValidation, service) {
+    exports.ResetPasswordByEmailCtrl = function ($scope, FormValidation, service, $filter) {
         $scope.resetData = {};
 
         var $shape = $('.shape.reset-by-email');
@@ -33,7 +33,8 @@
                 linkPasswordReset: window.location.origin + '/set-password',
                 displayName: $scope.resetData.email.substr(0, $scope.resetData.email.indexOf('@')),
                 captcha: $scope.resetData.captcha,
-                captchaId: $scope.resetData.captchaId
+                captchaId: $scope.resetData.captchaId,
+                subject: $filter('translate')('请重设您的密码')
             })
                 .then(function (res) {
                     $form.form('clear');
@@ -55,9 +56,7 @@
                 return str.indexOf(suffix, str.length - suffix.length) >= 0;
             }
 
-            var providers = {
-                'hotmail.com': 'https://outlook.com'
-            };
+            var providers = {};
 
             for (var p in providers) {
                 if (endsWith($scope.resetData.email, p)) {
@@ -65,9 +64,11 @@
                 }
             }
 
-            return 'about:blank';
+            return 'mail.' + $scope.resetData.email.substr($scope.resetData.email.indexOf('@') + 1);
+
+            //return 'about:blank';
         };
     };
 
-    exports.ResetPasswordByEmailCtrl.$inject = ['$scope', 'FormValidation', 'service'];
+    exports.ResetPasswordByEmailCtrl.$inject = ['$scope', 'FormValidation', 'service', '$filter'];
 })(angular.bplus = angular.bplus || {});
