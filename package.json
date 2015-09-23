@@ -1,7 +1,7 @@
 {
   "name": "BridgePlus",
   "private": true,
-  "version": "0.0.16",
+  "version": "0.0.22",
   "description": "",
   "repository": "",
   "license": "",
@@ -21,6 +21,7 @@
     "del": "^1.2.1",
     "grunt": "^0.4.5",
     "grunt-bumpup": "~0.4.2",
+    "grunt-cdnify": "^0.1.1",
     "grunt-concurrent": "^2.0.3",
     "grunt-contrib-clean": "*",
     "grunt-contrib-concat": "*",

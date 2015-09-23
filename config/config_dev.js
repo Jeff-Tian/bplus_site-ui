@@ -5,7 +5,7 @@
             //host: '10.20.32.61',
             port: '10002',
             code: "BP_S1",
-            enabled: false
+            enabled: true
         },
         mail: {
             host: 'uat.service.hcd.com',
@@ -44,7 +44,8 @@
                 "table": "log",
                 "appName": "BridgePlus"
             }]
-        }
+        },
+        cdn: ""
     };
 
     if (typeof module !== 'undefined' && module.exports) {

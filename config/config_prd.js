@@ -44,7 +44,8 @@
                 "table": "log",
                 "appName": "HCDGlobal"
             }]
-        }
+        },
+        cdn: ""
     };
 
     if (typeof module !== 'undefined' && module.exports) {

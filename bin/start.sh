@@ -2,7 +2,7 @@
 
 PORT="12000"
 APP_NAME="bplus"
-NODE_ENV="prd"
+#NODE_ENV="prd"
 
 ################################
 #     START PM2 INSTANCE	   #
@@ -12,7 +12,7 @@ if [ -n "$PORT" ]; then
 	export PORT
 fi
 
-export NODE_ENV
+#export NODE_ENV
 
 CURRENT_PATH=`dirname $0`
 pm2 start "$CURRENT_PATH/../server.js" --name "$APP_NAME"

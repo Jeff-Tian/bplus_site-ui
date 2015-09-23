@@ -16,3 +16,5 @@ obj/
 temp/
 dist/
 bower/
+
+client/www/css/main.css

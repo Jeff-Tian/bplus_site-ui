@@ -20,32 +20,47 @@ i18n.configure({
 // Node.js template engine
 var ejs = require('ejs');
 
+function setLogger(req, res, next) {
+    function dualLogError(o) {
+        req.logger.error(o);
+        console.error(o);
+    }
+
+    function dualLog(o) {
+        req.logger.log(o);
+        console.log(o);
+    }
+
+    req.logger = logger;
+    req.dualLogError = dualLogError;
+    req.dualLog = dualLog;
+
+    next();
+}
+
+function shimGrunt(req, res, next) {
+    res.locals.grunt = {
+        file: {
+            readJSON: function () {
+                return 'x';
+            }
+        }
+    };
+
+    next();
+}
+
+function setCDN(req, res, next) {
+    res.cdn = {};
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
-    .use(function (req, res, next) {
-        function dualLogError(o) {
-            req.logger.error(o);
-            console.error(o);
-        }
-
-        function dualLog(o) {
-            req.logger.log(o);
-            console.log(o);
-        }
-
-        req.logger = logger;
-        req.dualLogError = dualLogError;
-        req.dualLog = dualLog;
-
-        res.locals.grunt = {
-            file: {
-                readJSON: function () {
-                    return 'x';
-                }
-            }
-        };
-        next();
-    })
+    .use(setLogger)
+    .use(shimGrunt)
+    .use(setCDN)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true

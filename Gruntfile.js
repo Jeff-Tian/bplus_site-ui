@@ -69,7 +69,8 @@ module.exports = function (grunt) {
             dist: {                                      // Target
                 options: {                                 // Target options
                     removeComments: true,
-                    collapseWhitespace: true
+                    // Sometimes, the whitespaces are meaningful
+                    collapseWhitespace: false
                 },
                 files: [
                     {
@@ -79,10 +80,46 @@ module.exports = function (grunt) {
                         dest: '<%= config.dist %>'
                     }, {
                         expand: true,
-                        cwd: '<%= config.dist %>view-partial',
-                        src: '*.html',
+                        cwd: '<%= config.dist %>',
+                        src: 'view-partial/*.html',
                         dest: '<%= config.dist %>'
                     }]
+            }
+        },
+
+        cdnify: {
+            dist: {
+                options: {
+                    rewriter: function (url) {
+                        grunt.log.writeln(url);
+                        if (url.indexOf('data:') === 0) {
+                            return url; // leave data URIs untouched
+                        } else if (url.indexOf('js/cdn') >= 0) {
+                            if (url[0] === '/') {
+                                url = url.substr(1);
+                            }
+
+                            if (process.env.NODE_ENV === 'prd') {
+                                return '//cdn.example.com/stuff/' + url;
+                            } else {
+                                return url + '?cdnified';
+                            }
+                        } else {
+                            return url; // add query string to all other URLs
+                        }
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'view-partial/*.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: '*.html',
+                    dest: '<%= config.dist %>'
+                }]
             }
         }
     });
@@ -114,5 +151,5 @@ module.exports = function (grunt) {
     // Copy to WEB
     grunt.registerTask('release', ['build']);
 
-    grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin'/*, 'cssmin'*/]);
+    grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
 };
