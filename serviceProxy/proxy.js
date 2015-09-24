@@ -41,6 +41,9 @@ function advancedProxy(req, res, next, settings) {
         chunks = []
         ;
 
+    req.dualLog('proxying...');
+    req.dualLog(options);
+
     var request = http.request(options, function (response) {
         if (typeof settings.responseInterceptor === 'function') {
             response.on('data', function (c) {

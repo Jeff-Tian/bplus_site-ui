@@ -134,6 +134,40 @@ mapRoute2Template('/map');
 //mapRoute2Template('/account-setting');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 
+var proxy = require('./serviceProxy/proxy.js');
+var sso = require('./config').sso;
+server.get(localeHelper.regexPath('/email-verify'), function (req, res, next) {
+    if (!req.query || !req.query.mailToken) {
+        res.locals.result = 'MailTokenNotFound';
+        res.render('email-verify');
+    }
+
+    proxy({
+        host: sso.host,
+        port: sso.port,
+        path: '/member/mailValidation/validate',
+        method: 'POST',
+        dataMapper: function (d) {
+            return {
+                token: req.query.mailToken
+            };
+        },
+        responseInterceptor: function (response, json) {
+            if (typeof json.code !== 'undefined') {
+                res.locals.result = 'service-' + json.code;
+            } else if (json.isSuccess) {
+                res.locals.result = 'EmailVerified';
+            } else {
+                res.locals.result = '发生未知错误';
+            }
+
+            res.render('email-verify');
+
+            return true;
+        }
+    })(req, res, next);
+});
+
 server.use('/healthcheck', function (req, res, next) {
     res.json({
         everything: 'is ok',
