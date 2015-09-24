@@ -18,6 +18,7 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
     .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('WechatLoginCtrl', angular.bplus.WechatLoginCtrl)
     .controller('SetPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         var $form = $('.ui.form.set-password');
         $scope.isSetPasswordFormValid = function () {

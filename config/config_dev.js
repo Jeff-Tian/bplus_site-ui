@@ -29,6 +29,10 @@
             host: 'uat.service.hcd.com',
             port: '12345'
         },
+        wechat: {
+            host: 'uat.service.hcd.com',
+            port: '10101'
+        },
         "logger": {
             "levels": {
                 "[all]": "DEBUG"
