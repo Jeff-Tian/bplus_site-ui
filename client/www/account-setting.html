@@ -87,8 +87,8 @@
             <i class="ui large remove circle close icon"></i>
             <%= __('ModifyWechat') %>
         </div>
-        <div class="content">
-
+        <div class="content" ng-controller="changeWechatCtrl">
+            <iframe name="wechat-frame" class="b-wechat-frame b-background-lighter" ng-src="{{wechatQRPage}}"></iframe>
         </div>
     </div>
     <div class="ui modal b-modify b-modify-email" ng-controller="changeEmailCtrl">

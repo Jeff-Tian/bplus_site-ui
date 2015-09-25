@@ -110,7 +110,7 @@
   "EmailVerified": "已验证",
   "请重设您的密码": "请重设您的密码",
   "请验证您的邮箱": "请验证您的邮箱",
-  "EmailVerified": "恭喜,你的邮箱验证成功",
+  "EmailVerifiedSuccess": "恭喜,你的邮箱验证成功",
   "发生未知错误": "发生未知错误",
   "Cancel": "取消",
   "en": "English",
