@@ -1,5 +1,6 @@
 var http = require('http');
 var sso = require('../config').sso;
+var config = require('../config');
 var proxy = require('./proxy');
 
 function proxySSO(options) {
@@ -7,7 +8,7 @@ function proxySSO(options) {
     options.port = sso.port;
     if (!options.dataMapper) {
         options.dataMapper = function (d) {
-            d.application_id = sso.applicationId;
+            d.application_id = config.applicationId;
             return d;
         };
     }
@@ -68,7 +69,7 @@ module.exports = {
                             path: '/logon/authentication',
                             dataMapper: function (d) {
                                 d.value = chunks.result.mobile;
-                                d.application_id = sso.applicationId;
+                                d.application_id = config.applicationId;
                                 console.log('authcurrent = ' + JSON.stringify(d));
                                 console.log('authcurrent.result = ' + JSON.stringify(chunks.result));
                                 return d;
@@ -151,7 +152,7 @@ module.exports = {
         path: '/profile/update',
         dataMapper: function (d) {
             delete d.mobile;
-            d.application_id = sso.applicationId;
+            d.application_id = config.applicationId;
             d.mail = d.email;
 
             return d;

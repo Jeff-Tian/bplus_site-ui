@@ -27,22 +27,41 @@
         };
 
         // handle Wechat Log On Callback
-        if (window.location.query) {
-            var index = window.location.query.indexOf('token') >= 0;
+        var query = window.location.search || window.location.hash;
+
+        function getValueFromQuery(query, key) {
+            var index = query.indexOf(key);
             if (index >= 0) {
-                var end = window.location.query.indexOf('&', index + 5);
+                var end = query.indexOf('&', index + key.length);
 
                 if (end < 0) {
-                    end = window.location.query.length;
+                    end = query.length;
                 }
 
-                var token = window.location.query.substring(index + 5, end);
-                var now = new Date();
-                now.setUTCFullYear(now.getUTCFullYear());
+                var value = query.substring(index + key.length + 1, end);
+                return value;
+            } else {
+                return '';
+            }
+        }
 
-                document.cookie = 'token=' + '; expires=' + now.toUTCString();
+        if (query) {
+            var value = getValueFromQuery(query, 'token');
+            if (value) {
+                var now = new Date();
+                now.setUTCFullYear(now.getUTCFullYear() + 1);
+
+                var cookie = 'token=' + value + '; path=/; expires=' + now.toUTCString();
+                console.log(cookie);
+
+                document.cookie = cookie;
 
                 window.location.href = '/';
+            } else {
+                var errcode = getValueFromQuery(query, 'errcode');
+                if (errcode) {
+                    $scope.$parent.message = $filter('translate')('wechat-' + errcode);
+                }
             }
         }
 

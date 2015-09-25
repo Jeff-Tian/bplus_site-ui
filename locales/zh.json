@@ -126,6 +126,8 @@
   "service-20000": "短信验证码不正确",
   "service-401": "你没有权限操作,请登录后重试",
   "service-70002": "发生未知错误",
+  "wechat-40001": "40001",
+  "wechat-40029": "invalid code",
   "PleaseInputValidMobileNumber": "请输入有效的手机号码",
   "PleaseInputEmail": "请输入邮箱地址",
   "PleaseInputValidEmail": "请输入有效的邮箱地址",

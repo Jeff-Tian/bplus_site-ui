@@ -152,4 +152,12 @@ module.exports = function (grunt) {
     grunt.registerTask('release', ['build']);
 
     grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
+
+    var KarmaServer = require('karma').Server;
+    grunt.registerTask('ct', 'Client tests', function () {
+        new KarmaServer({
+            configFile: __dirname + '/client/www/test/my.conf.js',
+            singleRun: true
+        }).start();
+    });
 };

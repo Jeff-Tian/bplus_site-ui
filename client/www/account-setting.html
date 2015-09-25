@@ -44,9 +44,16 @@
             <div class="ui divider"></div>
             <div class="row" ng-controller="changeEmailCtrl">
                 <div class="three wide middle aligned column"> <%= __('Email') %></div>
-                <div class="eleven wide middle aligned left aligned column">{{memberInfo.mail}} (<a
-                        href="javascript:void(0);" ng-click="SendVerificationEmail()"
-                        ng-disabled="memberInfo.is_mail_validated">{{ mailSendingText | translate}}</a>)
+                <div class="eleven wide middle aligned left aligned column">
+                    {{memberInfo.mail}}
+                    <span ng-show="memberInfo.mail">
+                        (
+                        <a href="javascript:void(0);" ng-click="SendVerificationEmail()"
+                           ng-disabled="memberInfo.is_mail_validated">
+                            {{ mailSendingText | translate}}
+                        </a>
+                        )
+                    </span>
                 </div>
                 <div class="two wide column">
                     <button class="ui large red right floated button no-wrap"

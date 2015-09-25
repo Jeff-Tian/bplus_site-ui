@@ -1,10 +1,16 @@
 var http = require('http');
-var wechat = require('../config').wechat;
+var config = require('../config');
+var wechat = config.wechat;
 var proxy = require('./proxy');
 
 function proxyWechat(options) {
     options.host = wechat.host;
     options.port = wechat.port;
+    options.dataMapper = function (d) {
+        d.application_id = config.applicationId;
+
+        return d;
+    };
 
     return proxy(options);
 }

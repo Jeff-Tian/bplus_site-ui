@@ -16,7 +16,7 @@
                 .then(function (res) {
                     $scope.memberInfo = res;
 
-                    $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile;
+                    $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile || res.wechat;
 
                     msgBus.emitMsg(msgBus.events.profile.loaded);
 
