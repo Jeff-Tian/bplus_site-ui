@@ -1,17 +1,14 @@
 var constants = {
-    operation: ["add", "update"],
-    //TODO
-    //Missing one here. There are seven in total.
+    operation: ["add", "update", "delete"],
     classification: [
                         "workExperience",
                         "archivement",
                         "communityExperience",
                         "education",
                         "languageSkill",
-                        "memberExt"
+                        "memberExt",
+                        "skill"
                     ],
-    //TODO
-    //Missing language?
     reource: [
                 "englishlevel",
                 "qualifications",
@@ -22,10 +19,80 @@ var constants = {
                 "job",
                 "language"
             ],
-    language: ["zn-CH", "en-US"],
-    mapping: {
-        
+    language: {
+      "zh":"zh-CN", 
+      "en": "en-US"
     },
+    mapping: {
+        //common
+        "name": "name",
+        "description": "description",
+        "tags": "tags",
+        "start_date": "dateFrom",
+        "end_date": "dateTo",
+        //member_ext
+        "member_id": "id",
+        "real_name": "name",
+        "gender": "gender",
+        "birthday": "dateOfBirth.value",
+        "hide_birthday": "dateOfBirth.isPrivate",
+        "current_location": "location",
+        "address": "contractInfo.value",
+        "hide_address": "contractInfo.isPrivate",
+        //archivement
+        "archivement_id": "id",
+//      "name": "name",
+        "issue_by": "organization",
+//      "description": "description",
+//      "tags": "tags",
+        "issue_date": "prizeDate",
+        //communityExperience
+        "experience_id": "id",
+//      "name": "name",
+        "position": "position",
+//      "start_date": "dateFrom",
+//      "end_date": "dateTo",
+//      "description": "description",
+//      "tags": "tags",
+        //education
+        "education_id": "id",
+        "university": "name",
+        "major": "major",
+        "qualifications_id": "background.id",
+//      "start_date": "dateFrom",
+//      "end_date": "dateTo",
+        "special_experience": "description",
+//      "tags": "tags",
+        //languageSkill
+        "skill_id": "id",
+        "language_id": "language.id",
+        "certification": "certification.id",
+        "proficiency_id": "proficiency.id",
+        "score": "score",
+        //skill
+        "skill_id": "id",
+//      "name": "name",
+//      "description": "description",
+//      "tags": "tags",
+        //workExperience
+        "experience_id": "id",
+        "company": "name",
+        "work_type": "type",
+        "industry_id": "industry.id",
+        "job_id": "position.id",
+//      "start_date": "dateFrom",
+//      "end_date": "dateTo",
+//      "description": "description",
+//      "tags": "tags"
+    },
+    memberExt: ["member_id", "hide_birthday", "current_location", "address", "hide_address"],
+    memberSso: ["member_id", "real_name", "birthday", "gender"],
+    archivement: ["archivement_id", "name", "issue_by", "issue_date", "description", "tags"],
+    communityExperience: ["experience_id", "name", "position", "start_date", "end_date", "description", "tags"],
+    education: ["education_id", "university", "major", "qualifications_id", "start_date", "end_date", "special_experience", "tags"],
+    languageSkill: ["skill_id", "language_id", "certification", "proficiency_id", "score"],
+    skill: ["skill_id", "name", "description", "tags"],
+    workExperience: ["experience_id", "company", "work_type", "industry_id", "job_id", "start_date", "end_date", "description", "tags"],
 };
 
 module.exports = constants;

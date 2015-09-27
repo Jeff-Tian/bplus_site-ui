@@ -1,6 +1,8 @@
 var http = require('http');
 var bplusService = require('../config').bplusService;
+var ssoService = require('../config').sso;
 var proxy = require('./proxy');
+var Q = require('q');
 
 function proxyBPlus(options) {
     return function (req, res, next) {
@@ -62,6 +64,42 @@ module.exports = {
         }
     }),
 
+    loadProfileAll: function(req, res, next) {
+      var $noop = function() {};
+      var memberID = res.locals.hcd_user.member_id;
+      var ssoPath = '/profile/load/' + memberID;
+      var bplusPath = '/profile/load/' + memberID;
+      var ssoProfilePromise = Q.promise(function(resolve, reject) {
+         proxy.execute(req, res, $noop, {
+             host: ssoService.host,
+             port: ssoService.port,
+             path: ssoPath,
+             headers: {
+                 'Content-Type': 'application/json;charset=UTF-8',
+                 'User-Agent': 'BridgePlus Web'
+             },
+             responseInterceptor: function(res, chunks) {
+                 resolve(chunks);
+                 return true;
+             } 
+         });
+      });
+      var bplusProfilePromise = Q.promise(function(resolve, reject) {
+          proxyBPlus({
+              path: bplusPath,
+              responseInterceptor: function(res, chunks) {
+                  resolve(chunks);
+                  return true;
+              } 
+          })(req, res, $noop);
+      });
+      Q.all([ssoProfilePromise, bplusProfilePromise]).spread(function(ssoProfile, bplusProfile){
+        bplusProfile.
+      }, function(error) {
+        console.log(error);
+      });
+    },
+    
     updateData: function(req, res, next) {
         var operation = req.params.operation;
         var classification = req.params.classification;
@@ -70,7 +108,7 @@ module.exports = {
             requestInterceptor: function (requestFrom, requestTo) {
                 var formDataString = JSON.stringify(requestFrom.body);
                 console.log(formDataString);
-                formDataString.replace(/[,|{]"(\w+)":/g, function(value, groupValue){
+                formDataString.replace(/[,|{]"([\w_]+)":/g, function(value, groupValue){
                     //TODO
                     //Replace string.
                 })
