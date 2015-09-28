@@ -41,7 +41,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
                 });
         };
     }])
-    .controller('changeEmailCtrl', ['$scope', 'service', '$filter', 'FormValidation', function ($scope, service, $filter, FormValidation) {
+    .controller('changeEmailCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', function ($scope, service, $filter, FormValidation, $timeout, msgBus) {
         $scope.data = {};
 
         $scope.isChangeEmailFormValid = function () {
@@ -62,11 +62,14 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
             service
                 .post('/service-proxy/member/change-email', $scope.data)
                 .then(function (res) {
-                    console.log(res);
                     $scope.fetchProfile();
                     $form.form('clear');
                     $('.ui.modal.b-modify-email').modal('hide');
                     $scope.$parent.message = $filter('translate')('ChangeEmailSuccess');
+
+                    submitting = false;
+
+                    $scope.SendVerificationEmail();
                 })
                 .catch(FormValidation.delegateHandleFormError($form))
                 .finally(function () {
@@ -74,6 +77,45 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
                 })
             ;
         };
+
+        var sending = false;
+        $scope.SendVerificationEmail = function () {
+            function showResendText() {
+                $timeout(function () {
+                    $scope.mailSendingText = 'ResendEmailVerification';
+                }, 3000);
+            }
+
+            if (sending) {
+                return;
+            }
+
+            sending = true;
+            service
+                .post('/service-proxy/mail/send-verification', {
+                    to: $scope.memberInfo.mail,
+                    subject: $filter('translate')('请验证您的邮箱'),
+                    linkVerification: window.location.origin + '/email-verify',
+                    displayName: $scope.memberInfo.displayName
+                })
+                .then(function (json) {
+                    $scope.mailSendingText = 'EmailVerificationSent';
+                })
+                .catch(function (reason) {
+                    console.error(reason);
+                    $scope.mailSendingText = 'SentVerificationEmailError';
+                })
+                .finally(function () {
+                    sending = false;
+
+                    showResendText();
+                });
+        };
+
+        $scope.mailSendingText = 'SendEmailVerification';
+        msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
+            $scope.mailSendingText = !$scope.memberInfo.is_mail_validated ? 'SendEmailVerification' : 'EmailVerified';
+        });
     }])
     .controller('changePasswordCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$rootScope', function ($scope, service, $filter, FormValidation, $rootScope) {
         $scope.data = {};

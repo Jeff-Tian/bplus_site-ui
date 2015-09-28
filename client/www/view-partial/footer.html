@@ -45,28 +45,29 @@
 </div>
 
 <!-- build:js js/lib.js -->
-<script src="/bower/jquery/dist/jquery.js"></script>
-<script src="/bower/semantic-ui/dist/semantic.js"></script>
-<script src="/bower/underscore/underscore.js"></script>
-<script src="/bower/jquery-address/src/jquery.address.js"></script>
+<!-- build:js js/cdn/lib.<%= grunt.file.readJSON('package.json').version %>.js -->
+<script src="bower/jquery/dist/jquery.js"></script>
+<script src="bower/semantic-ui/dist/semantic.js"></script>
+<script src="bower/underscore/underscore.js"></script>
+<script src="bower/jquery-address/src/jquery.address.js"></script>
 <!--Angular JS-->
 <script src="/bower/angular/angular.min.js"></script>
 <script src="/bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/bower/angular-translate/angular-translate.min.js"></script>
 <!-- endbuild -->
 
-<!-- build:js js/combined1.js -->
-<script src="/js/factories/service.js"></script>
-<script src="/js/factories/MessageStore.js"></script>
-<script src="/js/config/translate.js"></script>
-<script src="/js/config/xhr.js"></script>
-<script src="/js/factories/translationLoader.js"></script>
+
+<!-- build:js js/cdn/combined1.<%= grunt.file.readJSON('package.json').version %>.js -->
+<script src="js/factories/service.js"></script>
+<script src="js/factories/MessageStore.js"></script>
+<script src="js/config/translate.js"></script>
+<script src="js/config/xhr.js"></script>
+<script src="js/factories/translationLoader.js"></script>
 <!-- endbuild -->
 <script src="/translation/localeHelper.js"></script>
 <script src="/config.js"></script>
-<!-- build:js js/combined2.js -->
-<script src="/js/factories/FormValidation.js"></script>
-
+<!-- build:js js/cdn/combined2.<%= grunt.file.readJSON('package.json').version %>.js -->
+<script src="js/factories/FormValidation.js"></script>
 <!--Utils JS-->
 <script src="/js/utils/utils.js"></script>
 <script src="/js/utils/msgbus.js"></script>

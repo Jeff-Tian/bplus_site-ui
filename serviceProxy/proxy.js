@@ -32,7 +32,7 @@ function advancedProxy(req, res, next, settings) {
             host: settings.host,
             port: settings.port || '80',
             path: settings.path || req.originalUrl,
-            method: req.method,
+            method: settings.method || req.method,
             headers: settings.headers || {
                 'Content-Type': 'application/json;charset=UTF-8'
             }
@@ -40,6 +40,9 @@ function advancedProxy(req, res, next, settings) {
 
         chunks = []
         ;
+
+    req.dualLog('proxying...');
+    req.dualLog(options);
 
     var request = http.request(options, function (response) {
         if (typeof settings.responseInterceptor === 'function') {

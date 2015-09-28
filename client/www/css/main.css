@@ -4048,6 +4048,7 @@ body.pushable .pusher {
 }
 .ui.brand.error.message .list {
   list-style-type: none;
+  margin-right: 20px;
 }
 .ui.brand.error.message .list li {
   margin: 0;

@@ -7,6 +7,12 @@ var sms = require('./sms'),
     ;
 
 module.exports = require('express').Router()
+    .use(function (req, res, next) {
+        req.dualLog('service-proxy is being calling from ' + req.host + '...');
+        req.dualLog(req.url);
+
+        next();
+    })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
@@ -19,7 +25,8 @@ module.exports = require('express').Router()
     .post('/logon/authentication', sso.authenticate)
     .post('/member/resetPassword', sms.validate, sso.resetPassword)
     .post('/member/resetPasswordByEmail', sso.resetPasswordByEmail)
-    .post('/mail/send', captcha.validate, sso.getMailToken, mail.send)
+    .post('/mail/send', captcha.validate, sso.getMailToken, mail.tokenCheck, mail.send)
+    .post('/mail/send-verification', sso.getMailVerificationToken, mail.tokenCheck, mail.sendVerification)
     .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
     .get('/member/bplus-profile', membership.ensureAuthenticated, bplusService.loadProfile)
     .post('/logon/logout', sso.logout)

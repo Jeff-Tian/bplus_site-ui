@@ -28,3 +28,8 @@ CSS
 
 JS
 - Do not define global object
+
+### Run test
+```
+mocha
+```

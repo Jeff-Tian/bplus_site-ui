@@ -5,13 +5,14 @@
             //host: '10.20.32.61',
             port: '10002',
             code: "BP_S1",
-            enabled: false
+            enabled: true
         },
         mail: {
             host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
             port: '10002',
-            code: 'BP_M1'
+            code: 'BP_M1',
+            verificationCode: 'BP_M2'
         },
         captcha: {
             host: 'uat.captcha.service.hcdlearning.com',
@@ -33,8 +34,7 @@
                 "[all]": "DEBUG"
             },
             "appenders": [{
-                "type": "console",
-                "category": "log"
+                "type": "console"
             }, {
                 "type": "log4js_cassandra",
                 "nodes": ["uat.cass01.server"],
@@ -42,7 +42,7 @@
                 "password": "HCDhcd@123",
                 "keyspace": "logdb",
                 "table": "log",
-                "appName": "HCDGlobal"
+                "appName": "BridgePlus"
             }]
         }
     };
