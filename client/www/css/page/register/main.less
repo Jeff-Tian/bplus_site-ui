@@ -144,3 +144,81 @@
     min-height: 430px;
     border: none;
 }
+
+.hidden {
+    display: none !important;
+}
+
+@media all and (max-width: 414px) {
+    .b-signin-wrapper {
+        width: auto !important;
+    }
+
+    .b-signin-container {
+        width: auto !important;
+        background-color: transparent !important;
+    }
+
+    .b-signin-wide {
+        width: auto !important;
+        margin: auto !important;
+    }
+
+    .ui.secondary.pointing.menu.brand {
+        display: none !important;
+    }
+
+    .login.form .fields .eight.wide.field {
+        width: 50% !important;
+        margin: 0 !important;
+    }
+
+    .hidden.help {
+        display: inline !important;
+    }
+
+    a, a:link, a:visited {
+        color: @color-black !important;
+    }
+
+    a:hover, a:active, a:focus {
+        color: @color-brand !important;
+        text-decoration: none !important;
+    }
+
+    .wechat.link, .wechat.link:link, label[for=remember-me-check-box] {
+        color: @color-grey !important;
+
+        .icon {
+            color: @color-grey-dark;
+        }
+    }
+
+    .wechat.link:hover, .wechat.link:active {
+        text-decoration: none;
+
+        .icon {
+            color: limegreen;
+        }
+    }
+
+    .hidden.mobile-button {
+        display: block !important;
+
+        + div, + button {
+            display: none !important;
+        }
+    }
+
+    .ui.brand.error.message {
+        padding: 10px !important;
+    }
+
+    .b-background {
+        background-color: white !important;
+    }
+
+    .mobile-hidden {
+        display: none !important;
+    }
+}

@@ -3229,7 +3229,8 @@ a:visited {
   color: #ff3c42;
 }
 a:hover,
-a:active {
+a:active,
+a:focus {
   color: #ff3c42;
   text-decoration: underline;
 }
@@ -3317,6 +3318,9 @@ body.pushable .pusher {
 }
 .b-background-lighter {
   background-color: #e5e5e5 !important;
+}
+.half-wide {
+  width: 50% !important;
 }
 /*
 * - @Bridge+
@@ -4129,6 +4133,77 @@ body.pushable .pusher {
 .b-wechat-frame {
   min-height: 430px;
   border: none;
+}
+.hidden {
+  display: none !important;
+}
+@media all and (max-width: 414px) {
+  .b-signin-wrapper {
+    width: auto !important;
+  }
+  .b-signin-container {
+    width: auto !important;
+    background-color: transparent !important;
+  }
+  .b-signin-wide {
+    width: auto !important;
+    margin: auto !important;
+  }
+  .ui.secondary.pointing.menu.brand {
+    display: none !important;
+  }
+  .login.form .fields .eight.wide.field {
+    width: 50% !important;
+    margin: 0 !important;
+  }
+  .hidden.help {
+    display: inline !important;
+  }
+  a,
+  a:link,
+  a:visited {
+    color: #000000 !important;
+  }
+  a:hover,
+  a:active,
+  a:focus {
+    color: #ff3c42 !important;
+    text-decoration: none !important;
+  }
+  .wechat.link,
+  .wechat.link:link,
+  label[for=remember-me-check-box] {
+    color: #999999 !important;
+  }
+  .wechat.link .icon,
+  .wechat.link:link .icon,
+  label[for=remember-me-check-box] .icon {
+    color: #7d7d7d;
+  }
+  .wechat.link:hover,
+  .wechat.link:active {
+    text-decoration: none;
+  }
+  .wechat.link:hover .icon,
+  .wechat.link:active .icon {
+    color: limegreen;
+  }
+  .hidden.mobile-button {
+    display: block !important;
+  }
+  .hidden.mobile-button + div,
+  .hidden.mobile-button + button {
+    display: none !important;
+  }
+  .ui.brand.error.message {
+    padding: 10px !important;
+  }
+  .b-background {
+    background-color: white !important;
+  }
+  .mobile-hidden {
+    display: none !important;
+  }
 }
 /*
 * - @Bridge+ opportunity
