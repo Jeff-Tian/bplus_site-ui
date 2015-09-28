@@ -14,6 +14,9 @@ angular.module('ng.utils')
         msgBus.events = {
             profile: {
                 loaded: 'profile:loaded'
+            },
+            translation: {
+                loaded: 'translation:loaed'
             }
         };
 

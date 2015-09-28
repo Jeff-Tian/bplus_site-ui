@@ -22,12 +22,15 @@
         sso: {
             host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
-            port: '10086',
-            applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504'
+            port: '10086'
         },
         bplusService: {
             host: 'uat.service.hcd.com',
             port: '12345'
+        },
+        wechat: {
+            host: 'uat.service.hcd.com',
+            port: '10101'
         },
         "logger": {
             "levels": {
@@ -44,7 +47,8 @@
                 "table": "log",
                 "appName": "BridgePlus"
             }]
-        }
+        },
+        applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504'
     };
 
     if (typeof module !== 'undefined' && module.exports) {

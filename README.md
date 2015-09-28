@@ -29,7 +29,13 @@ CSS
 JS
 - Do not define global object
 
-### Run test
+### Run server side code test
 ```
 mocha
 ```
+
+### Runn client side code test
+```
+karma start client/www/test/my.conf.js
+```
+Ideally integrate the test task into Grunt task, but currently I can't get it work.

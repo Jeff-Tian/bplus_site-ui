@@ -3315,6 +3315,9 @@ body.pushable .pusher {
 .b-background {
   background-color: #f0f0f0 !important;
 }
+.b-background-lighter {
+  background-color: #e5e5e5 !important;
+}
 /*
 * - @Bridge+
 */
@@ -3889,7 +3892,7 @@ body.pushable .pusher {
   z-index: 10000;
 }
 .b-signin-semi-transparent-wrapper {
-  width: 300px;
+  width: 310px;
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container {
   background-color: rgba(0, 0, 0, 0.4);
@@ -3943,6 +3946,12 @@ body.pushable .pusher {
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.divider {
   border-top-color: #cccccc;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .b-wechat-frame {
+  margin-left: -25px !important;
+}
+.b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .b-background-lighter {
+  background-color: transparent !important;
 }
 .b-signin-semi-transparent-wrapper .b-signin-semi-transparent-container .b-signin-narrow .ui.secondary.pointing.menu.brand {
   border-color: transparent;
@@ -4116,6 +4125,10 @@ body.pushable .pusher {
   height: 40.1563px;
   border-radius: 0.28571429rem;
   margin-left: 5px;
+}
+.b-wechat-frame {
+  min-height: 430px;
+  border: none;
 }
 /*
 * - @Bridge+ opportunity
@@ -5048,7 +5061,10 @@ body.pushable > .pusher,
   border-radius: 0 !important;
 }
 .b-modify {
-  width: 300px !important;
+  width: 340px !important;
+}
+.b-modify iframe {
+  background-color: transparent !important;
 }
 .ui.modal i.icon {
   float: right;

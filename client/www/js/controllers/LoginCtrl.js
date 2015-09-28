@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter) {
+    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -41,7 +41,11 @@
                 submitting = false;
             });
         };
+
+        $scope.logOnViaWechat = function () {
+            $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'wechat-logon');
+        };
     };
 
-    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter'];
+    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce'];
 })(angular.bplus = angular.bplus || {});

@@ -10,6 +10,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('ngEnter', angular.bplus.ngEnter)
@@ -40,6 +41,50 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
                     submitting = false;
                 });
         };
+    }])
+    .controller('changeWechatCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', '$sce', 'queryParser', function ($scope, service, $filter, FormValidation, $timeout, msgBus, $sce, queryParser) {
+        var opening = false;
+        $scope.logOnViaWechat = function () {
+            if (opening) {
+                return;
+            }
+
+            opening = true;
+            service
+                .post('/service-proxy/bind-wechat', {
+                    returnUrl: window.location.protocol + '//' + window.location.host + window.location.pathname
+                })
+                .then(function (res) {
+                    $scope.wechatQRPage = $sce.trustAsResourceUrl(res);
+                })
+                .finally(function () {
+                    opening = false;
+                })
+            ;
+        };
+
+        $scope.logOnViaWechat();
+
+        $scope.cancelWechatLogin = function () {
+            $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'login');
+        };
+
+        // handle Wechat Log On Callback
+        var nickName = queryParser.get('nickName');
+
+        if (nickName) {
+            $scope.memberInfo.wechat = nickName;
+
+            $scope.fetchProfile();
+        } else {
+            var errcode = queryParser.get('errcode');
+
+            if (errcode) {
+                $timeout(function () {
+                    $scope.$parent.message = $filter('translate')('wechat-' + errcode);
+                });
+            }
+        }
     }])
     .controller('changeEmailCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', function ($scope, service, $filter, FormValidation, $timeout, msgBus) {
         $scope.data = {};

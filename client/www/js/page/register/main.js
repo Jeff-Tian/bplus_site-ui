@@ -8,6 +8,7 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
     .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
@@ -18,6 +19,7 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})
     .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('WechatLoginCtrl', angular.bplus.WechatLoginCtrl)
     .controller('SetPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         var $form = $('.ui.form.set-password');
         $scope.isSetPasswordFormValid = function () {

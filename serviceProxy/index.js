@@ -3,7 +3,8 @@ var sms = require('./sms'),
     sso = require('./sso'),
     mail = require('./mail'),
     membership = require('./membership'),
-    bplusService = require('./bplusService')
+    bplusService = require('./bplusService'),
+    wechat = require('./wechat')
     ;
 
 module.exports = require('express').Router()
@@ -23,6 +24,7 @@ module.exports = require('express').Router()
     .post('/member/add-education', membership.ensureAuthenticated, bplusService.addEducation)
     .post('/member/update-education', membership.ensureAuthenticated, bplusService.updateEducation)
     .post('/logon/authentication', sso.authenticate)
+    .post('/logon/by-token', sso.setAuthToken)
     .post('/member/resetPassword', sms.validate, sso.resetPassword)
     .post('/member/resetPasswordByEmail', sso.resetPasswordByEmail)
     .post('/mail/send', captcha.validate, sso.getMailToken, mail.tokenCheck, mail.send)
@@ -30,5 +32,7 @@ module.exports = require('express').Router()
     .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
     .get('/member/bplus-profile', membership.ensureAuthenticated, bplusService.loadProfile)
     .post('/logon/logout', sso.logout)
+    .post('/logon/by-wechat', wechat.qrLogon)
+    .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
 ;

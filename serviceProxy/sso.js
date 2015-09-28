@@ -1,5 +1,6 @@
 var http = require('http');
 var sso = require('../config').sso;
+var config = require('../config');
 var proxy = require('./proxy');
 
 function proxySSO(options) {
@@ -7,7 +8,7 @@ function proxySSO(options) {
     options.port = sso.port;
     if (!options.dataMapper) {
         options.dataMapper = function (d) {
-            d.application_id = sso.applicationId;
+            d.application_id = config.applicationId;
             return d;
         };
     }
@@ -15,23 +16,31 @@ function proxySSO(options) {
     return proxy(options);
 }
 
+function setAuthToken(res, token) {
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+        path: '/',
+        httpOnly: true
+    });
+}
+
 module.exports = {
     signUp: proxySSO({path: '/member/register'}),
     authenticate: function (req, res, next) {
-        console.log('auth: ' + JSON.stringify(req.body));
-
         proxySSO({
             path: '/logon/authentication',
             responseInterceptor: function (responseStream, responseJson) {
                 if (responseJson.isSuccess) {
-                    responseStream.cookie('token', responseJson.result.token, {
-                        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
-                        path: '/',
-                        httpOnly: true
-                    });
+                    setAuthToken(responseStream, responseJson.result.token);
                 }
             }
         })(req, res, next);
+    },
+    setAuthToken: function (req, res, next) {
+        setAuthToken(res, req.body.token);
+        res.send(req.body.token);
+
+        next();
     },
     authenticateCurrentUser: function (req, res, next) {
         var options = {
@@ -68,7 +77,7 @@ module.exports = {
                             path: '/logon/authentication',
                             dataMapper: function (d) {
                                 d.value = chunks.result.mobile;
-                                d.application_id = sso.applicationId;
+                                d.application_id = config.applicationId;
                                 console.log('authcurrent = ' + JSON.stringify(d));
                                 console.log('authcurrent.result = ' + JSON.stringify(chunks.result));
                                 return d;
@@ -110,6 +119,12 @@ module.exports = {
             }
         },
         responseInterceptor: function (responseStream, responseJson) {
+            responseStream.cookie('token', '', {
+                expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+                path: '/',
+                httpOnly: true
+            });
+
             responseStream.location('/');
         }
     }),
@@ -151,7 +166,7 @@ module.exports = {
         path: '/profile/update',
         dataMapper: function (d) {
             delete d.mobile;
-            d.application_id = sso.applicationId;
+            d.application_id = config.applicationId;
             d.mail = d.email;
 
             return d;

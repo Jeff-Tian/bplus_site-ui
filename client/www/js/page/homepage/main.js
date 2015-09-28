@@ -19,12 +19,14 @@ angular.module('bplus', [
     .factory('FormValidation', angular.bplus.FormValidation || function () {
         return {};
     })
+    .factory('queryParser', angular.bplus.queryParser)
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('registerForm', angular.bplus.registerForm)
     .directive('tab', angular.bplus.tab)
     .controller('LoginCtrl', angular.bplus.LoginCtrl)
+    .controller('WechatLoginCtrl', angular.bplus.WechatLoginCtrl)
     .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
 ;
 
@@ -60,17 +62,17 @@ angular.module('bplus', [
         nav: true,
         animateIn: 'b-pulse',
         navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>'],
-        onTranslate: function() {
+        onTranslate: function () {
             // $('.masthead-carousel').removeClass('animated pulse');
             $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
             $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
             //$('.masthead-carousel').removeClass('animated b-pulse');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.active').find('h1').addClass('animated b-fadeInLeft');
                 $('.active').find('h2').addClass('animated b-fadeInRight');
             }, 100);
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.owl-carousel').find('h1').removeClass('animated b-fadeInLeft');
                 $('.owl-carousel').find('h2').removeClass('animated b-fadeInRight');
             }, 1200);
@@ -91,7 +93,7 @@ angular.module('bplus', [
         //animateOut: 'bounceOutLeft',
         navText: ['<i class="angle left icon"></i>', '<i class="angle right icon"></i>']
     });
-    
+
 
     var client = $('#b-client-list');
     client.owlCarousel({
@@ -154,4 +156,11 @@ angular.module('bplus', [
     //     }
     // });
 
+    $(document).ready(function () {
+        $('iframe').load(function () {
+            //$(this).contents().find('body').css({
+            //    color: 'white!important'
+            //});
+        });
+    });
 })();
