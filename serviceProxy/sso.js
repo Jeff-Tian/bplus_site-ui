@@ -16,23 +16,31 @@ function proxySSO(options) {
     return proxy(options);
 }
 
+function setAuthToken(res, token) {
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+        path: '/',
+        httpOnly: true
+    });
+}
+
 module.exports = {
     signUp: proxySSO({path: '/member/register'}),
     authenticate: function (req, res, next) {
-        console.log('auth: ' + JSON.stringify(req.body));
-
         proxySSO({
             path: '/logon/authentication',
             responseInterceptor: function (responseStream, responseJson) {
                 if (responseJson.isSuccess) {
-                    responseStream.cookie('token', responseJson.result.token, {
-                        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
-                        path: '/',
-                        httpOnly: true
-                    });
+                    setAuthToken(responseStream, responseJson.result.token);
                 }
             }
         })(req, res, next);
+    },
+    setAuthToken: function (req, res, next) {
+        setAuthToken(res, req.body.token);
+        res.send(req.body.token);
+
+        next();
     },
     authenticateCurrentUser: function (req, res, next) {
         var options = {
@@ -111,6 +119,12 @@ module.exports = {
             }
         },
         responseInterceptor: function (responseStream, responseJson) {
+            responseStream.cookie('token', '', {
+                expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+                path: '/',
+                httpOnly: true
+            });
+
             responseStream.location('/');
         }
     }),

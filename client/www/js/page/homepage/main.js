@@ -19,6 +19,7 @@ angular.module('bplus', [
     .factory('FormValidation', angular.bplus.FormValidation || function () {
         return {};
     })
+    .factory('queryParser', angular.bplus.queryParser)
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)

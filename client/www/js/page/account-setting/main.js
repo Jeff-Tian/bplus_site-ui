@@ -10,6 +10,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('ngEnter', angular.bplus.ngEnter)
@@ -41,7 +42,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
                 });
         };
     }])
-    .controller('changeWechatCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', '$sce', function ($scope, service, $filter, FormValidation, $timeout, msgBus, $sce) {
+    .controller('changeWechatCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', '$sce', 'queryParser', function ($scope, service, $filter, FormValidation, $timeout, msgBus, $sce, queryParser) {
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {
@@ -50,8 +51,8 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
 
             opening = true;
             service
-                .post('/service-proxy/logon/by-wechat', {
-                    returnUrl: window.location.href
+                .post('/service-proxy/bind-wechat', {
+                    returnUrl: window.location.protocol + '//' + window.location.host + window.location.pathname
                 })
                 .then(function (res) {
                     $scope.wechatQRPage = $sce.trustAsResourceUrl(res);
@@ -69,45 +70,21 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
         };
 
         // handle Wechat Log On Callback
-        var query = window.location.search || window.location.hash;
+        var nickName = queryParser.get('nickName');
 
-        function getValueFromQuery(query, key) {
-            var index = query.indexOf(key);
-            if (index >= 0) {
-                var end = query.indexOf('&', index + key.length);
+        if (nickName) {
+            $scope.memberInfo.wechat = nickName;
 
-                if (end < 0) {
-                    end = query.length;
-                }
+            $scope.fetchProfile();
+        } else {
+            var errcode = queryParser.get('errcode');
 
-                var value = query.substring(index + key.length + 1, end);
-                return value;
-            } else {
-                return '';
-            }
-        }
-
-        if (query) {
-            var value = getValueFromQuery(query, 'token');
-            if (value) {
-                var now = new Date();
-                now.setUTCFullYear(now.getUTCFullYear() + 1);
-
-                var cookie = 'token=' + value + '; path=/; expires=' + now.toUTCString();
-                console.log(cookie);
-
-                document.cookie = cookie;
-
-                window.location.href = '/';
-            } else {
-                var errcode = getValueFromQuery(query, 'errcode');
-                if (errcode) {
+            if (errcode) {
+                $timeout(function () {
                     $scope.$parent.message = $filter('translate')('wechat-' + errcode);
-                }
+                });
             }
         }
-
-        $scope.invertCancelButtonTheme = $('.b-signin-narrow').length > 0;
     }])
     .controller('changeEmailCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', function ($scope, service, $filter, FormValidation, $timeout, msgBus) {
         $scope.data = {};

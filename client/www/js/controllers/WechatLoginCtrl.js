@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce) {
+    exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce, queryParser) {
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {
@@ -9,7 +9,7 @@
             opening = true;
             service
                 .post('/service-proxy/logon/by-wechat', {
-                    returnUrl: window.location.href
+                    returnUrl: window.location.protocol + '//' + window.location.host + window.location.pathname
                 })
                 .then(function (res) {
                     $scope.wechatQRPage = $sce.trustAsResourceUrl(res);
@@ -27,46 +27,36 @@
         };
 
         // handle Wechat Log On Callback
-        var query = window.location.search || window.location.hash;
+        var token = queryParser.get('token');
 
-        function getValueFromQuery(query, key) {
-            var index = query.indexOf(key);
-            if (index >= 0) {
-                var end = query.indexOf('&', index + key.length);
+        if (token) {
+            var now = new Date();
+            now.setUTCFullYear(now.getUTCFullYear() + 1);
 
-                if (end < 0) {
-                    end = query.length;
-                }
+            var cookie = 'token=' + token + '; path=/; expires=' + now.toUTCString();
+            console.log(cookie);
 
-                var value = query.substring(index + key.length + 1, end);
-                return value;
-            } else {
-                return '';
-            }
-        }
+            document.cookie = cookie;
 
-        if (query) {
-            var value = getValueFromQuery(query, 'token');
-            if (value) {
-                var now = new Date();
-                now.setUTCFullYear(now.getUTCFullYear() + 1);
+            service
+                .post('/service-proxy/logon/by-token', {
+                    token: token
+                })
+                .finally(function () {
+                    window.location.href = '/';
+                });
+        } else {
+            var errcode = queryParser.get('errcode');
 
-                var cookie = 'token=' + value + '; path=/; expires=' + now.toUTCString();
-                console.log(cookie);
-
-                document.cookie = cookie;
-
-                window.location.href = '/';
-            } else {
-                var errcode = getValueFromQuery(query, 'errcode');
-                if (errcode) {
+            if (errcode) {
+                $timeout(function () {
                     $scope.$parent.message = $filter('translate')('wechat-' + errcode);
-                }
+                });
             }
         }
 
         $scope.invertCancelButtonTheme = $('.b-signin-narrow').length > 0;
     };
 
-    exports.WechatLoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce'];
+    exports.WechatLoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce', 'queryParser'];
 })(angular.bplus = angular.bplus || {});

@@ -19,5 +19,10 @@ module.exports = {
     qrLogon: proxyWechat({
         path: '/wechat/qr/logon',
         method: 'POST'
+    }),
+
+    bind: proxyWechat({
+        path: '/wechat/qr/bind',
+        method: 'POST'
     })
 };

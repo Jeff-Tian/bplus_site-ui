@@ -127,6 +127,7 @@
   "service-70002": "Unexpected error",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
+  "wechat-70009": "The wechat account has already been bound to another account",
   "PleaseInputValidMobileNumber": "Please input a valid mobile phone number",
   "PleaseInputEmail": "Please input email address",
   "PleaseInputValidEmail": "Please input a valid email address",
