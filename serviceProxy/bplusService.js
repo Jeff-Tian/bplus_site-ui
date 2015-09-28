@@ -3,6 +3,7 @@ var bplusService = require('../config').bplusService;
 var ssoService = require('../config').sso;
 var bplusServiceParams = require('../config').bplusServiceParams;
 var proxy = require('./proxy');
+var extend = require('util')._extend;
 var Q = require('q');
 
 function proxyBPlus(options) {
@@ -33,6 +34,93 @@ function mapEducation(d) {
     delete d.endMonth;
 
     return d;
+}
+
+function updateMemberData(req, res, next) {
+    var $noop = function() {};
+    var operation = req.params.operation;
+    if (operation !== "update") {
+        res.send("Method error! Method is---" + operation);
+        return;
+    }
+    var mapping = bplusServiceParams.mapping;
+    var serviceNames = ["memberExt", "memberSso"];
+    var serviceParams = [
+        {
+            host: bplusService.host,
+            port: bplusService.port,
+            path: "/profile/memberExt/update"
+        },
+        {
+            host: ssoService.host,
+            port: ssoService.port,
+            path: "/profile/update",
+            dataMapper: function (d) {
+                d.application_id = ssoService.applicationId;
+                return d;
+            }
+        }
+    ];
+    var rawData = req.body;
+    var promiseArray = [];
+    serviceNames.forEach(function(serviceValue, index) {
+        var paramKeys = bplusServiceParams[serviceValue];
+        var param = {};
+        var hasData = false;
+        paramKeys.forEach(function(value) {
+            var rawValue = rawData[mapping[value]];
+            if (rawValue) {
+                param[value] = rawValue;
+                hasData = true;
+            }
+        });
+        if (hasData) {
+            promiseArray.push(Q.promise(function(resolve, reject) {
+                var serviceParam = serviceParams[index];
+                var newReq = extend({}, req);
+                serviceParam.responseInterceptor = function(res, chunks) {
+                    resolve(chunks);
+                    return true;
+                };
+                //TODO
+                //TEST CODES BELOW
+                retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+                /////////
+                newReq.body = param;
+                proxy.execute(newReq, res, $noop, serviceParam);
+            }));
+        }
+    });
+    Q.any(promiseArray).then(function(result){
+        res.send(result);
+    }, function(error){
+        console.log(error);
+        res.send(error.toString());
+    });
+}
+
+function updateOtherData(req, res, next) {
+    var classification = req.params.classification;
+    var operation = req.params.operation;
+    var mapping = bplusServiceParams.mapping;
+    return proxyBPlus({
+        path: '/profile/' + classification + '/' + operation,
+        dataMapper: function (d) {
+            var retParam = {};
+            bplusServiceParams[classification].forEach(function(value) {
+                var originKey = mapping[value];
+                var originValue = d[originKey];
+                if (originValue) {
+                    retParam[value] = originValue;
+                }
+            });
+            //TODO
+            //TEST CODES BELOW
+            retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+            /////////
+            return retParam;
+        }
+    })(req, res, next);
 }
 
 module.exports = {
@@ -113,27 +201,21 @@ module.exports = {
             res.send(bplusProfile);
         }, function(error) {
             console.log(error);
+            res.send(error.toString());
         });
     },
     
     updateData: function(req, res, next) {
-        var operation = req.params.operation;
         var classification = req.params.classification;
-        var mapping = bplusServiceParams.mapping;
-        return proxyBPlus({
-            path: '/profile/' + classification + '/' + operation,
-            dataMapper: function (d) {
-            }
-        });
-    },
-
-    getResource: function (req, res, next) {
-        var language = 'zh-CN';
-
-        if (req.params.language === 'en') {
-            language = 'en-US';
+        if (classification === "memberExt") {
+            return updateMemberData(req, res, next);
+        } else {
+            return updateOtherData(req, res, next);
         }
-
+    },
+    
+    getResource: function (req, res, next) {
+        var language = bplusServiceParams.language[req.params.language];
         proxyBPlus({
             path: '/resource/load/' + req.params.resourceKey + '/' + language
         })(req, res, next);

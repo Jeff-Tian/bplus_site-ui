@@ -30,7 +30,7 @@ var constants = {
         "tags": "tags",
         "start_date": "dateFrom",
         "end_date": "dateTo",
-        //member_ext
+        //memberExt
         "member_id": "id",
         "real_name": "name",
         "gender": "gender",

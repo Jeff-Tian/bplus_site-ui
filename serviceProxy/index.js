@@ -22,7 +22,7 @@ module.exports = require('express').Router()
     .post('/mail/send', captcha.validate, sso.getMailToken, mail.send)
     .get('/member/profile', membership.ensureAuthenticated, membership.loadProfile)
     .get('/member/bplus-profile-all', membership.ensureAuthenticated,  bplusService.loadProfileAll)
-    .post('/member/:operation/:classification', membership.ensureAuthenticated, bplusService.updateData)
+    .post('/member/:classification/:operation', membership.ensureAuthenticated, bplusService.updateData)
     .post('/logon/logout', sso.logout)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
 ;
