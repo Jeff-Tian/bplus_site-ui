@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce, queryParser) {
+    exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce, queryParser, $timeout) {
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {
@@ -58,5 +58,5 @@
         $scope.invertCancelButtonTheme = $('.b-signin-narrow').length > 0;
     };
 
-    exports.WechatLoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce', 'queryParser'];
+    exports.WechatLoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce', 'queryParser', '$timeout'];
 })(angular.bplus = angular.bplus || {});
