@@ -8,8 +8,8 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="bower/owl.carousel/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="/bower/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/bower/owl.carousel/dist/assets/owl.theme.default.min.css">
 </head>
 
 <body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'" ng-class="{'chinese':language==='zh','english':language==='en'}">
@@ -445,16 +445,17 @@
     </div>
     <%- include('view-partial/footer.html') -%>
     <!--JS-->
-    <script src="bower/owl.carousel/dist/owl.carousel.js"></script>
+    <script src="/bower/owl.carousel/dist/owl.carousel.js"></script>
 
     <!--Page JS-->
-    <script src="js/directives/captcha.js"></script>
-    <script src="js/directives/ngEnter.js"></script>
-    <script src="js/directives/registerForm.js"></script>
-    <script src="js/directives/tab.js"></script>
-    <script src="js/controllers/LoginCtrl.js"></script>
-    <script src="js/controllers/SignUpCtrl.js"></script>
-    <script src="js/page/homepage/main.js"></script>
+    <script src="/js/directives/captcha.js"></script>
+    <script src="/js/directives/ngEnter.js"></script>
+    <script src="/js/directives/registerForm.js"></script>
+    <script src="/js/directives/tab.js"></script>
+    <script src="/js/controllers/AppCtrl.js"></script>
+    <script src="/js/controllers/LoginCtrl.js"></script>
+    <script src="/js/controllers/SignUpCtrl.js"></script>
+    <script src="/js/page/homepage/main.js"></script>
 </body>
 
 </html>

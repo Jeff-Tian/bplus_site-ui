@@ -5058,6 +5058,7 @@ body.pushable > .pusher,
 * - @Bridge+
 */
 .b-map {
+  min-height: 60rem;
   position: relative;
   background-repeat: no-repeat;
   background-position: center top;
@@ -5065,29 +5066,140 @@ body.pushable > .pusher,
   background-color: #ffffff;
   padding-top: 70px;
 }
-.b-map .content {
+.b-map .official-content {
   margin-top: 2rem;
 }
-.b-map .content .national-cars {
+.b-map .official-content .official-card {
+  border-radius: 0;
+  box-shadow: 0px 2px 0px 1px #d4d4d5;
+}
+.b-map .official-content .official-card .official-name {
+  display: table;
+  border-radius: 0 !important;
+  width: 100%;
+}
+.b-map .official-content .official-card .official-name .header {
+  color: #ffffff;
+  display: table-cell;
+  vertical-align: middle;
+  height: 46px;
+}
+.b-map .official-content .official-card .official-dimmer .content .center {
+  padding: 0 1.5rem;
+}
+.b-map .official-content .official-card .official-dimmer .content .dimmer-label {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-map .official-content .official-card :last-child,
+.b-map .official-content .official-card :first-child {
+  border-radius: 0 !important;
+}
+.b-map .national-content {
+  margin-top: 2rem;
+}
+.b-map .national-content .national-cards {
   max-height: 500px;
   overflow-y: scroll;
   margin: -0.875em -0.5em !important;
 }
-.b-map .content .national-cars .card {
+.b-map .national-content .national-cards .card {
   border-radius: 0;
+  box-shadow: 0px 2px 0px 1px #d4d4d5;
 }
-.b-map .content .national-cars .card .national-name {
+.b-map .national-content .national-cards .card .national-name {
   border-radius: 0 !important;
 }
-.b-map .content .national-cars .card .national-name .header {
+.b-map .national-content .national-cards .card .national-name .header {
+  color: #ffffff;
+}
+.b-map .national-content .national-cards .card :last-child,
+.b-map .national-content .national-cards .card :first-child {
+  border-radius: 0 !important;
+}
+.b-map .ui.vertical.menu {
+  max-width: 230px;
+  border-radius: 0;
+}
+.b-map .ui.vertical.menu .item {
+  border-radius: 0;
+}
+.b-map .ui.vertical.menu .item i.icon {
+  float: left;
+  margin: -0.2em 2rem 0 0;
+  font-size: 1.5em;
+  color: #ff3c42;
+}
+.b-map .ui.vertical.menu .item.active,
+.b-map .ui.vertical.menu .item:hover {
+  background: #5F5F5F;
+  border-radius: 0;
+  color: #ffffff;
+}
+.b-map .ui.vertical.menu .item.active i.icon,
+.b-map .ui.vertical.menu .item:hover i.icon {
   color: #ffffff;
 }
 .bplus .b-map {
   background-image: url('/img/salespage/events_bg.png');
 }
-.bplus .b-map .content .national-cars .card .national-name {
+.bplus .b-map .national-content .national-cards .card .national-name {
+  background-color: #a8a8a8;
+}
+.bplus .b-map .national-content .national-cards .card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.bplus .b-map .national-content .national-cards .card.available .national-name {
   background-color: #ff3c42;
+}
+.bplus .b-map .national-content .national-cards .card.available .ui.dimmer {
+  background-color: #df3b3d;
+}
+.bplus .b-map .official-content .official-card .official-name {
+  background-color: #a8a8a8;
+}
+.bplus .b-map .official-content .official-card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.bplus .b-map .official-content .official-card.available .official-name {
+  background-color: #ff3c42;
+}
+.bplus .b-map .official-content .official-card.available .ui.dimmer {
+  background-color: #df3b3d;
 }
 .hcdlearning .b-map {
   background-image: url('/img/salespage/events_bg.png');
+}
+.hcdlearning .b-map .national-content .national-cards .card .national-name {
+  background-color: #a8a8a8;
+}
+.hcdlearning .b-map .national-content .national-cards .card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.hcdlearning .b-map .national-content .national-cards .card.available .national-name {
+  background-color: #845497;
+}
+.hcdlearning .b-map .national-content .national-cards .card.available .ui.dimmer {
+  background-color: #6e3d82;
+}
+.hcdlearning .b-map .official-content .official-card .official-name {
+  background-color: #a8a8a8;
+}
+.hcdlearning .b-map .official-content .official-card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.hcdlearning .b-map .official-content .official-card.available .official-name {
+  background-color: #845497;
+}
+.hcdlearning .b-map .official-content .official-card.available .ui.dimmer {
+  background-color: #6e3d82;
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .b-map .ui.vertical.menu .item {
+    padding: 0.9rem 0.5rem;
+  }
+  .b-map .ui.vertical.menu .item i.icon {
+    margin-right: 1rem;
+  }
 }

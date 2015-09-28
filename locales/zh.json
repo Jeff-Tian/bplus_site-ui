@@ -329,5 +329,19 @@
   "MapHuaZhongList": "湖北、湖南、河南、江西",
   "MapXiNanList": "四川、云南、贵州、</br>西藏、重庆",
   "MapXiBeiList": "宁夏、新疆、青海、</br>陕西、甘肃",
-  "MapGangAoTaiList": "香港、澳门、台湾"
+  "MapGangAoTaiList": "香港、澳门、台湾",
+  "MapHome":"游戏首页",
+  "MapOfficial":"官方体验赛",
+  "MapNational":"全国大赛",
+  "MapSeason":"赛季",
+  "MapPersonalRecord":"个人参赛纪录",
+  "MapRankingList":"排行榜",
+  "MapTeamLists":"晋级队伍列表",
+  "MapDongBeiDivision": "东北赛区",
+  "MapHuaBeiDivision": "华北赛区",
+  "MapHuaDongDivision": "华东赛区",
+  "MapHuaNanDivision": "华南赛区",
+  "MapHuaZhongDivision": "华中赛区",
+  "MapXiNanDivision": "西南赛区",
+  "MapXiBeiDivision": "西北赛区"
 }
