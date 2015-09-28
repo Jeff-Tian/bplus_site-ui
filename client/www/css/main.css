@@ -5056,7 +5056,7 @@ body.pushable > .pusher,
   margin: -5px -10px 0 0;
 }
 /*
-* - @Bridge+
+* - @Bridge+ map
 */
 .b-map {
   min-height: 60rem;
@@ -5066,58 +5066,6 @@ body.pushable > .pusher,
   background-size: auto auto;
   background-color: #ffffff;
   padding-top: 70px;
-}
-.b-map .official-content {
-  margin-top: 2rem;
-}
-.b-map .official-content .official-card {
-  border-radius: 0;
-  box-shadow: 0px 2px 0px 1px #d4d4d5;
-}
-.b-map .official-content .official-card .official-name {
-  display: table;
-  border-radius: 0 !important;
-  width: 100%;
-}
-.b-map .official-content .official-card .official-name .header {
-  color: #ffffff;
-  display: table-cell;
-  vertical-align: middle;
-  height: 46px;
-}
-.b-map .official-content .official-card .official-dimmer .content .center {
-  padding: 0 1.5rem;
-}
-.b-map .official-content .official-card .official-dimmer .content .dimmer-label {
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 1.5em;
-}
-.b-map .official-content .official-card :last-child,
-.b-map .official-content .official-card :first-child {
-  border-radius: 0 !important;
-}
-.b-map .national-content {
-  margin-top: 2rem;
-}
-.b-map .national-content .national-cards {
-  max-height: 500px;
-  overflow-y: scroll;
-  margin: -0.875em -0.5em !important;
-}
-.b-map .national-content .national-cards .card {
-  border-radius: 0;
-  box-shadow: 0px 2px 0px 1px #d4d4d5;
-}
-.b-map .national-content .national-cards .card .national-name {
-  border-radius: 0 !important;
-}
-.b-map .national-content .national-cards .card .national-name .header {
-  color: #ffffff;
-}
-.b-map .national-content .national-cards .card :last-child,
-.b-map .national-content .national-cards .card :first-child {
-  border-radius: 0 !important;
 }
 .b-map .ui.vertical.menu {
   max-width: 230px;
@@ -5142,6 +5090,47 @@ body.pushable > .pusher,
 .b-map .ui.vertical.menu .item:hover i.icon {
   color: #ffffff;
 }
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .b-map .ui.vertical.menu .item {
+    padding: 0.9rem 0.5rem;
+  }
+  .b-map .ui.vertical.menu .item i.icon {
+    margin-right: 1rem;
+  }
+}
+/*
+* - @Bridge+
+*/
+.b-map .national-content {
+  margin-top: 2rem;
+}
+.b-map .national-content .national-cards {
+  max-height: 500px;
+  overflow-y: scroll;
+  margin: -0.875em -0.5em !important;
+}
+.b-map .national-content .national-cards .card {
+  border-radius: 0;
+  box-shadow: 0px 2px 0px 1px #d4d4d5;
+  background-image: url("/img/salespage/national-content.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 100px 100px;
+}
+.b-map .national-content .national-cards .card .national-name {
+  background-image: url("/img/salespage/card-header.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 48px 48px;
+  border-radius: 0 !important;
+}
+.b-map .national-content .national-cards .card .national-name .header {
+  color: #ffffff;
+}
+.b-map .national-content .national-cards .card :last-child,
+.b-map .national-content .national-cards .card :first-child {
+  border-radius: 0 !important;
+}
 .bplus .b-map {
   background-image: url('/img/salespage/events_bg.png');
 }
@@ -5155,18 +5144,6 @@ body.pushable > .pusher,
   background-color: #ff3c42;
 }
 .bplus .b-map .national-content .national-cards .card.available .ui.dimmer {
-  background-color: #df3b3d;
-}
-.bplus .b-map .official-content .official-card .official-name {
-  background-color: #a8a8a8;
-}
-.bplus .b-map .official-content .official-card .ui.dimmer {
-  background-color: #6e6e6e;
-}
-.bplus .b-map .official-content .official-card.available .official-name {
-  background-color: #ff3c42;
-}
-.bplus .b-map .official-content .official-card.available .ui.dimmer {
   background-color: #df3b3d;
 }
 .hcdlearning .b-map {
@@ -5184,6 +5161,65 @@ body.pushable > .pusher,
 .hcdlearning .b-map .national-content .national-cards .card.available .ui.dimmer {
   background-color: #6e3d82;
 }
+/*
+* - @Bridge+
+*/
+.b-map .official-content {
+  margin-top: 2rem;
+}
+.b-map .official-content .official-card {
+  border-radius: 0;
+  box-shadow: 0px 2px 0px 1px #d4d4d5;
+  background-image: url("/img/salespage/official-content.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 100px 100px;
+}
+.b-map .official-content .official-card .official-name {
+  display: table;
+  border-radius: 0 !important;
+  background-image: url("/img/salespage/card-header.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 70px 70px;
+  width: 100%;
+}
+.b-map .official-content .official-card .official-name .header {
+  color: #ffffff;
+  display: table-cell;
+  vertical-align: middle;
+  height: 46px;
+}
+.b-map .official-content .official-card .official-dimmer .content .center {
+  padding: 0 1.5rem;
+}
+.b-map .official-content .official-card .official-dimmer .content .dimmer-label {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-map .official-content .official-card :last-child,
+.b-map .official-content .official-card :first-child {
+  border-radius: 0 !important;
+}
+.bplus .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}
+.bplus .b-map .official-content .official-card .official-name {
+  background-color: #a8a8a8;
+}
+.bplus .b-map .official-content .official-card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.bplus .b-map .official-content .official-card.available .official-name {
+  background-color: #ff3c42;
+}
+.bplus .b-map .official-content .official-card.available .ui.dimmer {
+  background-color: #df3b3d;
+}
+.hcdlearning .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}
 .hcdlearning .b-map .official-content .official-card .official-name {
   background-color: #a8a8a8;
 }
@@ -5196,11 +5232,106 @@ body.pushable > .pusher,
 .hcdlearning .b-map .official-content .official-card.available .ui.dimmer {
   background-color: #6e3d82;
 }
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-  .b-map .ui.vertical.menu .item {
-    padding: 0.9rem 0.5rem;
-  }
-  .b-map .ui.vertical.menu .item i.icon {
-    margin-right: 1rem;
-  }
+/*
+* - @Bridge+
+*/
+.b-map .season-content {
+  margin-top: 1rem;
+}
+.b-map .season-content .timeline {
+  margin-top: 2rem;
+}
+.b-map .season-content .timeline .timeline-content {
+  padding: 1rem;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card {
+  border-radius: 0;
+  background-image: url("/img/salespage/season-content.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 55px 42px;
+  box-shadow: 0px 2px 0px 1px #d4d4d5;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card .season-name {
+  border-radius: 0 !important;
+  background-image: url("/img/salespage/card-header.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 48px 48px;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card .season-name .header {
+  color: #ffffff;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card .season-dimmer .content .dimmer-label {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card :last-child,
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card :first-child {
+  border-radius: 0 !important;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .twelve.wide {
+  padding-right: 3rem;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .time-line {
+  background-image: url("/img/salespage/time-line.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 28px auto;
+}
+.b-map .season-content .timeline .timeline-content .timeline-content-grid.available.available .time-line {
+  background-image: url("/img/salespage/time-line-active.png");
+}
+.b-map .season-content .timeline .timeline-content.first .timeline-content-grid .time-line {
+  background-image: url("/img/salespage/time-line-first.png");
+}
+.b-map .season-content .timeline .timeline-content.first .timeline-content-grid.available .time-line {
+  background-image: url("/img/salespage/time-line-active-first.png");
+}
+.b-map .season-content .timeline .timeline-content.last .timeline-content-grid .time-line {
+  background-image: url("/img/salespage/time-line-last.png");
+}
+.b-map .season-content .timeline .timeline-content.last .timeline-content-grid.available .time-line {
+  background-image: url("/img/salespage/time-line-active-last.png");
+}
+.b-map .season-content .timeline .timeline-content:nth-child(odd) {
+  background: #e5e5e5;
+}
+.b-map .season-content .timeline .timeline-content:nth-child(even) {
+  background: #dbdbdb;
+}
+.bplus .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}
+.bplus .b-map .season-content .season-card .season-name {
+  background-color: #a8a8a8;
+}
+.bplus .b-map .season-content .season-card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.bplus .b-map .season-content .available .season-card.available .season-name {
+  background-color: #ff3c42;
+}
+.bplus .b-map .season-content .available .season-card.available .ui.dimmer {
+  background-color: #df3b3d;
+}
+.hcdlearning .b-map {
+  background-image: url('/img/salespage/events_bg.png');
+}
+.hcdlearning .b-map .season-content .season-card .season-name {
+  background-color: #a8a8a8;
+}
+.hcdlearning .b-map .season-content .season-card .ui.dimmer {
+  background-color: #6e6e6e;
+}
+.hcdlearning .b-map .season-content .available .season-card.season-card.available .season-name {
+  background-color: #845497;
+}
+.hcdlearning .b-map .season-content .available .season-card.season-card.available .ui.dimmer {
+  background-color: #6e3d82;
 }

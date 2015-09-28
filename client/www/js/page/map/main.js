@@ -29,10 +29,4 @@ angular.module('bplus', [
     .controller('gameCtrl', angular.bplus.gameCtrl)
 ;
 (function() {
-    $('.official-card').dimmer({
-        on: 'click'
-    });
-    $('.card').dimmer({
-        on: 'click'
-    });
 })();
