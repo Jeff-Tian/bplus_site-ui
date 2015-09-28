@@ -1,6 +1,7 @@
 var http = require('http');
 var bplusService = require('../config').bplusService;
 var ssoService = require('../config').sso;
+var bplusServiceParams = require('../config').bplusServiceParams;
 var proxy = require('./proxy');
 var Q = require('q');
 
@@ -65,56 +66,65 @@ module.exports = {
     }),
 
     loadProfileAll: function(req, res, next) {
-      var $noop = function() {};
-      var memberID = res.locals.hcd_user.member_id;
-      var ssoPath = '/profile/load/' + memberID;
-      var bplusPath = '/profile/load/' + memberID;
-      var ssoProfilePromise = Q.promise(function(resolve, reject) {
-         proxy.execute(req, res, $noop, {
-             host: ssoService.host,
-             port: ssoService.port,
-             path: ssoPath,
-             headers: {
-                 'Content-Type': 'application/json;charset=UTF-8',
-                 'User-Agent': 'BridgePlus Web'
-             },
-             responseInterceptor: function(res, chunks) {
-                 resolve(chunks);
-                 return true;
-             } 
-         });
-      });
-      var bplusProfilePromise = Q.promise(function(resolve, reject) {
-          proxyBPlus({
-              path: bplusPath,
-              responseInterceptor: function(res, chunks) {
-                  resolve(chunks);
-                  return true;
-              } 
-          })(req, res, $noop);
-      });
-      Q.all([ssoProfilePromise, bplusProfilePromise]).spread(function(ssoProfile, bplusProfile){
-        bplusProfile.
-      }, function(error) {
-        console.log(error);
-      });
+        var $noop = function() {};
+        var memberID = res.locals.hcd_user.member_id;
+        var ssoPath = '/profile/load/' + memberID;
+        var bplusPath = '/profile/load/' + memberID;
+        var ssoProfilePromise = Q.promise(function(resolve, reject) {
+            proxy.execute(req, res, $noop, {
+                host: ssoService.host,
+                port: ssoService.port,
+                path: ssoPath,
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'User-Agent': 'BridgePlus Web'
+                },
+                responseInterceptor: function(res, chunks) {
+                    resolve(chunks);
+                    return true;
+                }
+            });
+        });
+        var bplusProfilePromise = Q.promise(function(resolve, reject) {
+            proxyBPlus({
+                path: bplusPath,
+                responseInterceptor: function(res, chunks) {
+                    resolve(chunks);
+                    return true;
+                }
+            })(req, res, $noop);
+        });
+        Q.all([ssoProfilePromise, bplusProfilePromise]).spread(function(ssoProfile, bplusProfile){
+            var targetResult = bplusProfile.result;
+            var memberSsoKeys = bplusServiceParams.memberSso;
+            var mapping = bplusServiceParams.mapping;
+            memberSsoKeys.forEach(function(value) {
+                targetResult.memberExt[value] = ssoProfile.result[value];
+            });
+            var resultString = JSON.stringify(targetResult);
+            //Replace service keys to bplus keys
+            resultString = resultString.replace(/[,|{]"([^\"]+)":/g, function(value, groupValue){
+                var mappingValue = mapping[groupValue];
+                var retString = mappingValue ? value.replace(groupValue, mapping[groupValue]) : value;
+                return retString;
+            });
+            targetResult = JSON.parse(resultString);
+            bplusProfile.result = targetResult;
+            res.send(bplusProfile);
+        }, function(error) {
+            console.log(error);
+        });
     },
     
     updateData: function(req, res, next) {
         var operation = req.params.operation;
         var classification = req.params.classification;
+        var mapping = bplusServiceParams.mapping;
         return proxyBPlus({
-            path: '/profile/' + classification + "/" + operation,
-            requestInterceptor: function (requestFrom, requestTo) {
-                var formDataString = JSON.stringify(requestFrom.body);
-                console.log(formDataString);
-                formDataString.replace(/[,|{]"([\w_]+)":/g, function(value, groupValue){
-                    //TODO
-                    //Replace string.
-                })
-                requestTo.write(JSON.stringify(formDataString));
+            path: '/profile/' + classification + '/' + operation,
+            dataMapper: function (d) {
             }
-        })(req, res, next);
+        });
     },
 
     getResource: function (req, res, next) {

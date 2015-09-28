@@ -32,7 +32,7 @@ define([
           paramKey = "0";
         }
         return $.ajax(ajaxParam).then(function(data) {
-          var parsedData = me.parseData(data);
+          var parsedData = self.parseData(data);
           if (!self.rawdata[dataKey]) {
             self.rawdata[dataKey] = {};
           }
@@ -46,7 +46,7 @@ define([
         if (self.rawdata[dataKey] && self.rawdata[dataKey][paramKey]) {
           retValue = when($.extend(true, [], self.rawdata[dataKey][paramKey]));
         } else {
-          retValue = me.getData();
+          retValue = self.getData();
         }
         return retValue;
       };

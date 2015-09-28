@@ -79,7 +79,7 @@ server.use('/service-proxy', require('./serviceProxy'));
 function renderTemplate(name) {
     return function (req, res, next) {
         res.render(name);
-    }
+    };
 }
 
 function mapRoute2Template(url, template) {

@@ -36,6 +36,13 @@ define([
       "getAward": getAward,
       "getLanguage": getLanguage,
     };
+    me.saveData = function(dataKey, dataParam) {
+        //TODO
+        //Update local storage
+        return when();
+    };
+    me.getData = function(service, forceRefresh) {
+    };
     //TEST END
     ///////
     me.parseData = function(data) {

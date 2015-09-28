@@ -6,6 +6,7 @@ define([
 ], function (when, $, angular, personalinfoData) {
     var DATA_PATTERN = {
         "bplusawardall": {
+            "id": "",
             "name": "",
             "organization": "",
             "prizeDate": {
@@ -19,6 +20,7 @@ define([
             "tags": ""
         },
         "bplusworkexperienceall": {
+            "id": "",
             "name": "",
             "position": "",
             "industry": "",
@@ -41,6 +43,7 @@ define([
             "tags": ""
         },
         "bplusclubexperienceall": {
+            "id": "",
             "name": "",
             "position": "",
             "dateFrom": {
@@ -62,6 +65,7 @@ define([
             "tags": ""
         },
         "bpluspersonalinfooverall": {
+            "id": "",
             "name": "",
             "gender": "",
             "dateOfBirth": {
@@ -79,11 +83,13 @@ define([
             }
         },
         "bplusskillsoverall": {
+            "id": "",
             "name": "",
             "description": "",
             "tags": ""
         },
         "bpluseducationbackgroundall": {
+            "id": "",
             "name": "",
             "major": "",
             "background": "",
@@ -101,6 +107,7 @@ define([
             "tags": ""
         },
         "bpluslanguageall": {
+          "id": "",
           "name": "",
           "proficiency": "",
           "certification": "",
@@ -130,14 +137,9 @@ define([
                     scope: {},
                     link: function (scope, element) {
                         var service = model.SERVICES[directiveName];
-                        var updateData = function (isLatestData) {
+                        var updateData = function (forceRefresh) {
                             var returnPromise;
-                            if (isLatestData) {
-                                returnPromise = model.getData(service);
-                            } else {
-                                returnPromise = model.getRawData(service);
-                            }
-                            return returnPromise.then(function (data) {
+                            return model.getData(service, forceRefresh).then(function (data) {
                                 scope.dataCollection = data;
                                 scope.hasData = scope.dataCollection && scope.dataCollection.length > 0;
                                 scope.$apply();
@@ -148,8 +150,6 @@ define([
                         scope.add = function () {
                             scope.dataCollection.push($.extend(true, {}, DATA_PATTERN[directiveName]));
                             scope.showAddButton = false;
-                            //TODO
-                            //Call service
                         };
                         scope.submit = function (data) {
                             scope.showAddButton = true;
