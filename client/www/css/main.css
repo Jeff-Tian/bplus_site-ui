@@ -4177,9 +4177,9 @@ body.pushable .pusher {
   .hidden.help {
     display: inline !important;
   }
-  a,
-  a:link,
-  a:visited {
+  a:not(.button),
+  a:link:not(.button),
+  a:visited:not(.button) {
     color: #000000 !important;
   }
   a:hover,
@@ -4218,6 +4218,47 @@ body.pushable .pusher {
   }
   .b-background {
     background-color: white !important;
+  }
+  .ui.brand.message {
+    background-color: #7d7d7d;
+    border-color: #7d7d7d;
+    box-shadow: 0 0 0 1px #7d7d7d inset, 0 0 0 0 transparent;
+    color: white;
+    padding: 1em 3em 1em 1em;
+    margin: 1em 1.5em;
+  }
+  .ui.brand.message .header {
+    color: #e5e5e5;
+    font-weight: normal;
+    font-size: smaller;
+  }
+  .b-step-container {
+    background-color: transparent;
+    margin: 0 1.5em;
+    padding: 1em 0;
+  }
+  .b-step-container .ui.brand.error.message {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+/*
+* - @Bridge+
+*/
+.b-signin-wider {
+  width: 300px !important;
+}
+/*
+* - @Bridge+
+*/
+@media all and (max-width: 414px) {
+  .ui.form .fields.mobile {
+    display: flex !important;
+  }
+  .ui.form .fields {
+    -webkit-flex-wrap: inherit;
+    -ms-flex-wrap: inherit;
+    flex-wrap: inherit;
   }
 }
 /*

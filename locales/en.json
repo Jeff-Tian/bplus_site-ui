@@ -39,6 +39,7 @@
   "FindPassword": "Reset password",
   "PleaseInputTheSignedUpEmail": "Please input the signed up email",
   "ServicePhoneNumber": "Service Phone Number ",
+  "ServicePhoneNumberValue": "4008-111-111",
   "ResetPasswordViaMobile": "Reset password via mobile",
   "ResetPasswordViaEmail": "Reset password via email",
   "ResetPasswordSucceeded": "Password reset!",

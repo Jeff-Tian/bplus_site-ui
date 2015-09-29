@@ -173,7 +173,7 @@
         display: inline !important;
     }
 
-    a, a:link, a:visited {
+    a:not(.button), a:link:not(.button), a:visited:not(.button) {
         color: @color-black !important;
     }
 
@@ -212,5 +212,31 @@
 
     .b-background {
         background-color: white !important;
+    }
+
+    .ui.brand.message {
+        background-color: @color-grey-dark;
+        border-color: @color-grey-dark;
+        box-shadow: 0 0 0 1px @color-grey-dark inset, 0 0 0 0 transparent;
+        color: white;
+        padding: 1em 3em 1em 1em;
+        margin: 1em 1.5em;
+
+        .header {
+            color: @color-grey-lighter;
+            font-weight: normal;
+            font-size: smaller;
+        }
+    }
+
+    .b-step-container {
+        background-color: transparent;
+        margin: 0 1.5em;
+        padding: 1em 0;
+
+        .ui.brand.error.message {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 }
