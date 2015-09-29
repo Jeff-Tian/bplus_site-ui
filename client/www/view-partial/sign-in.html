@@ -28,17 +28,27 @@
                     </div>
                 </div>
                 <div class="eight wide field ui right aligned container subcontainer">
-                    <a href="/reset-password" class=""><%= __('ForgotPassword') %></a>
+                    <a href="/reset-password"><%= __('ForgotPassword') %> <i
+                            class="hidden help circle icon"></i> </a>
                 </div>
             </div>
             <div class="ui divider horizontal"></div>
+            <button type="submit" class="ui fluid large red submit button hidden mobile-button"
+                    ng-disabled="!isLoginFormValid()">
+                <%= __('SignIn') %>
+            </button>
             <button type="submit" class="ui fluid huge red submit button"
                     ng-disabled="!isLoginFormValid()"><%= __('SignIn') %>
             </button>
         </div>
     </form>
+    <div class="hidden mobile-button">
+        <a class="ui fluid large red basic button" href="#register">
+            <%= __('NoAccount') %> <%= __('SignUpNow') %>
+        </a>
+    </div>
     <div class="ui right aligned container subcontainer">
-        <%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a>
+        <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
     </div>
     <div class="ui divider"></div>
     <div class="ui">
@@ -49,9 +59,12 @@
     </div>
 </div>
 <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
+    <div class="ui center aligned container subcontainer mobile">
+        <h2 class="grey color"><%= __('SignUp') %></h2>
+    </div>
     <register-form action="signUp" control="registerFormCtrl"></register-form>
 
-    <div class="field ui right aligned container subcontainer">
+    <div class="field ui right aligned container subcontainer mobile-hidden">
         <%= __('HasAccount') %> <a href="signin#/login"><%= __('SignInNow') %></a>
     </div>
 </div>

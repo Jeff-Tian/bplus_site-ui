@@ -48,6 +48,10 @@
         };
 
         $scope.getEmailProviderLink = function () {
+            if (!$scope.resetData.email) {
+                return 'about:blank';
+            }
+
             function endsWith(str, suffix) {
                 if (!str || !str.length) {
                     return false;
@@ -64,9 +68,7 @@
                 }
             }
 
-            return 'mail.' + $scope.resetData.email.substr($scope.resetData.email.indexOf('@') + 1);
-
-            //return 'about:blank';
+            return '//mail.' + $scope.resetData.email.substr($scope.resetData.email.indexOf('@') + 1);
         };
     };
 

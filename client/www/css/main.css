@@ -3229,7 +3229,8 @@ a:visited {
   color: #ff3c42;
 }
 a:hover,
-a:active {
+a:active,
+a:focus {
   color: #ff3c42;
   text-decoration: underline;
 }
@@ -3317,6 +3318,30 @@ body.pushable .pusher {
 }
 .b-background-lighter {
   background-color: #e5e5e5 !important;
+}
+.half-wide {
+  width: 50% !important;
+}
+.left.floated {
+  float: left;
+}
+.right.floated {
+  float: right;
+}
+.hidden,
+.mobile {
+  display: none !important;
+}
+.side.hidden {
+  display: block !important;
+}
+@media all and (max-width: 414px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  .mobile {
+    display: block !important;
+  }
 }
 /*
 * - @Bridge+
@@ -4129,6 +4154,112 @@ body.pushable .pusher {
 .b-wechat-frame {
   min-height: 430px;
   border: none;
+}
+@media all and (max-width: 414px) {
+  .b-signin-wrapper {
+    width: auto !important;
+  }
+  .b-signin-container {
+    width: auto !important;
+    background-color: transparent !important;
+  }
+  .b-signin-wide {
+    width: auto !important;
+    margin: auto !important;
+  }
+  .ui.secondary.pointing.menu.brand {
+    display: none !important;
+  }
+  .login.form .fields .eight.wide.field {
+    width: 50% !important;
+    margin: 0 !important;
+  }
+  .hidden.help {
+    display: inline !important;
+  }
+  a:not(.button),
+  a:link:not(.button),
+  a:visited:not(.button) {
+    color: #000000 !important;
+  }
+  a:hover,
+  a:active,
+  a:focus {
+    color: #ff3c42 !important;
+    text-decoration: none !important;
+  }
+  .wechat.link,
+  .wechat.link:link,
+  label[for=remember-me-check-box] {
+    color: #999999 !important;
+  }
+  .wechat.link .icon,
+  .wechat.link:link .icon,
+  label[for=remember-me-check-box] .icon {
+    color: #7d7d7d;
+  }
+  .wechat.link:hover,
+  .wechat.link:active {
+    text-decoration: none;
+  }
+  .wechat.link:hover .icon,
+  .wechat.link:active .icon {
+    color: limegreen;
+  }
+  .hidden.mobile-button {
+    display: block !important;
+  }
+  .hidden.mobile-button + div,
+  .hidden.mobile-button + button {
+    display: none !important;
+  }
+  .ui.brand.error.message {
+    padding: 10px !important;
+  }
+  .b-background {
+    background-color: white !important;
+  }
+  .ui.brand.message {
+    background-color: #7d7d7d;
+    border-color: #7d7d7d;
+    box-shadow: 0 0 0 1px #7d7d7d inset, 0 0 0 0 transparent;
+    color: white;
+    padding: 1em 3em 1em 1em;
+    margin: 1em 1.5em;
+  }
+  .ui.brand.message .header {
+    color: #e5e5e5;
+    font-weight: normal;
+    font-size: smaller;
+  }
+  .b-step-container {
+    background-color: transparent;
+    margin: 0 1.5em;
+    padding: 1em 0;
+  }
+  .b-step-container .ui.brand.error.message {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+/*
+* - @Bridge+
+*/
+.b-signin-wider {
+  width: 300px !important;
+}
+/*
+* - @Bridge+
+*/
+@media all and (max-width: 414px) {
+  .ui.form .fields.mobile {
+    display: flex !important;
+  }
+  .ui.form .fields {
+    -webkit-flex-wrap: inherit;
+    -ms-flex-wrap: inherit;
+    flex-wrap: inherit;
+  }
 }
 /*
 * - @Bridge+ opportunity

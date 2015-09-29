@@ -144,3 +144,99 @@
     min-height: 430px;
     border: none;
 }
+
+@media all and (max-width: 414px) {
+    .b-signin-wrapper {
+        width: auto !important;
+    }
+
+    .b-signin-container {
+        width: auto !important;
+        background-color: transparent !important;
+    }
+
+    .b-signin-wide {
+        width: auto !important;
+        margin: auto !important;
+    }
+
+    .ui.secondary.pointing.menu.brand {
+        display: none !important;
+    }
+
+    .login.form .fields .eight.wide.field {
+        width: 50% !important;
+        margin: 0 !important;
+    }
+
+    .hidden.help {
+        display: inline !important;
+    }
+
+    a:not(.button), a:link:not(.button), a:visited:not(.button) {
+        color: @color-black !important;
+    }
+
+    a:hover, a:active, a:focus {
+        color: @color-brand !important;
+        text-decoration: none !important;
+    }
+
+    .wechat.link, .wechat.link:link, label[for=remember-me-check-box] {
+        color: @color-grey !important;
+
+        .icon {
+            color: @color-grey-dark;
+        }
+    }
+
+    .wechat.link:hover, .wechat.link:active {
+        text-decoration: none;
+
+        .icon {
+            color: limegreen;
+        }
+    }
+
+    .hidden.mobile-button {
+        display: block !important;
+
+        + div, + button {
+            display: none !important;
+        }
+    }
+
+    .ui.brand.error.message {
+        padding: 10px !important;
+    }
+
+    .b-background {
+        background-color: white !important;
+    }
+
+    .ui.brand.message {
+        background-color: @color-grey-dark;
+        border-color: @color-grey-dark;
+        box-shadow: 0 0 0 1px @color-grey-dark inset, 0 0 0 0 transparent;
+        color: white;
+        padding: 1em 3em 1em 1em;
+        margin: 1em 1.5em;
+
+        .header {
+            color: @color-grey-lighter;
+            font-weight: normal;
+            font-size: smaller;
+        }
+    }
+
+    .b-step-container {
+        background-color: transparent;
+        margin: 0 1.5em;
+        padding: 1em 0;
+
+        .ui.brand.error.message {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}

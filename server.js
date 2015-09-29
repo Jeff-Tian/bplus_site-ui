@@ -127,7 +127,7 @@ mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
-mapRoute2Template('/sign-up-from');
+server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
 mapRoute2Template('/profile');
 mapRoute2Template('/map');
@@ -156,7 +156,7 @@ server.get(localeHelper.regexPath('/email-verify'), function (req, res, next) {
             if (typeof json.code !== 'undefined') {
                 res.locals.result = 'service-' + json.code;
             } else if (json.isSuccess) {
-                res.locals.result = 'EmailVerified';
+                res.locals.result = 'EmailVerifiedSuccess';
             } else {
                 res.locals.result = '发生未知错误';
             }
@@ -183,7 +183,7 @@ function logErrors(err, req, res, next) {
 
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
-        res.status(500).send({code: '', message: 'Something blew up!'});
+        res.status(500).send({code: '500', message: 'Something blew up!'});
     } else {
         next(err);
     }

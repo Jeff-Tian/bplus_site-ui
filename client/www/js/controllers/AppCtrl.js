@@ -12,7 +12,7 @@
         $scope.memberInfo = {};
 
         $scope.fetchProfile = function () {
-            service.get('/service-proxy/member/profile/')
+            return service.get('/service-proxy/member/profile/')
                 .then(function (res) {
                     $scope.memberInfo = res;
 
@@ -23,7 +23,19 @@
                     if ($scope.message) {
                         $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
                     }
+
+                    return $scope.memberInfo;
                 });
+        };
+
+        $scope.localeUrl = function (url, locale) {
+            locale = locale || $scope.language;
+
+            if (locale) {
+                url = '/' + locale + url;
+            }
+
+            return url;
         };
 
         $scope.fetchProfile();
