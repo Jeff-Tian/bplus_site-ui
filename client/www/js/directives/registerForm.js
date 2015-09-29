@@ -131,9 +131,6 @@
                     return getSignUpForm();
                 };
 
-                console.log($scope.passwordPlaceholder);
-                console.log($scope.action);
-
                 if (!$scope.passwordPlaceholder) {
                     $scope.passwordPlaceholder = 'PleaseSetSignInPassword';
                 }

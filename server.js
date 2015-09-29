@@ -156,7 +156,7 @@ server.get(localeHelper.regexPath('/email-verify'), function (req, res, next) {
             if (typeof json.code !== 'undefined') {
                 res.locals.result = 'service-' + json.code;
             } else if (json.isSuccess) {
-                res.locals.result = 'EmailVerified';
+                res.locals.result = 'EmailVerifiedSuccess';
             } else {
                 res.locals.result = '发生未知错误';
             }

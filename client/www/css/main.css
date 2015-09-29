@@ -3322,6 +3322,27 @@ body.pushable .pusher {
 .half-wide {
   width: 50% !important;
 }
+.left.floated {
+  float: left;
+}
+.right.floated {
+  float: right;
+}
+.hidden,
+.mobile {
+  display: none !important;
+}
+.side.hidden {
+  display: block !important;
+}
+@media all and (max-width: 414px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  .mobile {
+    display: block !important;
+  }
+}
 /*
 * - @Bridge+
 */
@@ -4134,10 +4155,6 @@ body.pushable .pusher {
   min-height: 430px;
   border: none;
 }
-.hidden,
-.mobile {
-  display: none !important;
-}
 @media all and (max-width: 414px) {
   .b-signin-wrapper {
     width: auto !important;
@@ -4201,12 +4218,6 @@ body.pushable .pusher {
   }
   .b-background {
     background-color: white !important;
-  }
-  .mobile-hidden {
-    display: none !important;
-  }
-  .mobile {
-    display: block !important;
   }
 }
 /*

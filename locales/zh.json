@@ -108,6 +108,7 @@
   "ResendEmailVerification": "重新发送验证邮件",
   "SentVerificationEmailError": "发送验证邮件失败",
   "EmailVerified": "已验证",
+  "EmailVerifiedSuccess": "恭喜,您的邮箱已通过验证",
   "请重设您的密码": "请重设您的密码",
   "请验证您的邮箱": "请验证您的邮箱",
   "EmailVerifiedSuccess": "恭喜,你的邮箱验证成功",

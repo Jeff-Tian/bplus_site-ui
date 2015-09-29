@@ -50,10 +50,13 @@ module.exports = {
                     to: d.to,
                     subject: d.subject,
                     links: [{
-                        code: 'link_password_reset',
+                        code: 'link',
                         value: appendMailToken(d.linkPasswordReset, res.locals.mailToken)
                     }],
                     vars: [{
+                        code: 'link',
+                        value: appendMailToken(d.linkPasswordReset, res.locals.mailToken)
+                    }, {
                         code: 'username',
                         value: d.displayName
                     }]

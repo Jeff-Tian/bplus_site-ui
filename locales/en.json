@@ -107,6 +107,7 @@
   "ResendEmailVerification": "Resend verification email",
   "SentVerificationEmailError": "Sending error",
   "EmailVerified": "Verified",
+  "EmailVerifiedSuccess": "Congratulates, your email has been verified.",
   "请重设您的密码": "Please reset your password",
   "请验证您的邮箱": "Please verify your email",
   "EmailVerifiedSuccess": "Congratulates, your email passes validation",
