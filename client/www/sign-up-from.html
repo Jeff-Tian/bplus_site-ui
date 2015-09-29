@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= __('SEOTitle_MobileBinding') %></title>
-    <meta name="description" content="<%= __('SEODesc_MobileBinding')">
+    <meta name="description" content="<%= __('SEODesc_MobileBinding') %>">
     <%- include('view-partial/head.html') -%>
 </head>
 
@@ -19,7 +19,7 @@
             </div>
 
             <div class="ui bind-mobile" ng-controller="BindMobileCtrl">
-                <register-form action="bindMobile"></register-form>
+                <register-form action="bindMobile" control="bindMobileFormCtrl"></register-form>
             </div>
         </div>
     </div>

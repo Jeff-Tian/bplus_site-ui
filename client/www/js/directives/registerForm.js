@@ -4,7 +4,8 @@
             templateUrl: '../../view-partial/register-form.html',
             scope: {
                 action: '=',
-                control: '='
+                control: '=',
+                passwordPlaceholder: '='
             },
             link: function ($scope, element) {
                 $scope.signUpData = {
@@ -129,6 +130,13 @@
                 $scope.internalCtrl.getForm = function () {
                     return getSignUpForm();
                 };
+
+                console.log($scope.passwordPlaceholder);
+                console.log($scope.action);
+
+                if (!$scope.passwordPlaceholder) {
+                    $scope.passwordPlaceholder = 'PleaseSetSignInPassword';
+                }
             }
         };
     };

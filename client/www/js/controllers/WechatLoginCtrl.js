@@ -43,7 +43,17 @@
                     token: token
                 })
                 .finally(function () {
-                    window.location.href = '/';
+                    $scope.fetchProfile()
+                        .then(function (m) {
+                            if (!m.mobile) {
+                                window.location.href = $scope.localeUrl('/sign-up-from', $scope.language);
+                            } else {
+                                window.location.href = '/';
+                            }
+                        })
+                        .catch(function () {
+                            window.location.href = '/';
+                        });
                 });
         } else {
             var errcode = queryParser.get('errcode');

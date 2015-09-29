@@ -12,9 +12,26 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
     .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
-    .controller('BindMobileCtrl', ['$scope', function ($scope) {
-        $scope.bindMobile = function () {
+    .controller('BindMobileCtrl', ['$scope', 'service', function ($scope, service) {
+        $scope.bindMobileFormCtrl = {};
 
+        var submitting = false;
+
+        $scope.bindMobile = function () {
+            if (submitting) {
+                return false;
+            }
+
+            submitting = true;
+            service
+                .post('/service-proxy/member/bind-mobile', $scope.bindMobileFormCtrl.getFormData())
+                .then(function () {
+                    window.location.href = $scope.localeUrl('/');
+                })
+                .catch($scope.bindMobileFormCtrl.handleFormError)
+                .finally(function () {
+                    submitting = false;
+                });
         };
     }])
     .directive('ngEnter', angular.bplus.ngEnter || {})

@@ -4134,7 +4134,8 @@ body.pushable .pusher {
   min-height: 430px;
   border: none;
 }
-.hidden {
+.hidden,
+.mobile {
   display: none !important;
 }
 @media all and (max-width: 414px) {
@@ -4203,6 +4204,9 @@ body.pushable .pusher {
   }
   .mobile-hidden {
     display: none !important;
+  }
+  .mobile {
+    display: block !important;
   }
 }
 /*

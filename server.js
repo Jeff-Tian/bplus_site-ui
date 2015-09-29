@@ -183,7 +183,7 @@ function logErrors(err, req, res, next) {
 
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
-        res.status(500).send({code: '', message: 'Something blew up!'});
+        res.status(500).send({code: '500', message: 'Something blew up!'});
     } else {
         next(err);
     }
