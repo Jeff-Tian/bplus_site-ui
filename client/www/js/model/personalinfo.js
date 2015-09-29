@@ -56,9 +56,10 @@ define([
 
     var ajaxParam = {
         url: "/service-proxy/member/bplus-profile-all",
-        type: "get"
+        type: "get",
+        dataType: "json"
     };
-
+    
     me.PATTERN = {
       "education" : education,
       "skill": skill,
@@ -75,28 +76,50 @@ define([
       "bplusclubexperienceall": "communityExperience",
       "bplusworkexperienceall": "workExperience",
       "bplusawardall": "archivement",
-      "bpluslanguageall": "languageSkill",
+      "bpluslanguageall": "languageSkill"
+    };
+    me.REOURCE = {
+        //Language
+        "certification": "englishlevel",
+        "proficiency": "langguageproficiency",
+        "name": "language",
+        //Edu
+        "background": "qualifications",
+        //Community
+        "position": "communityposition",
+        //Work
+        "type": "worktype",
+        "industry": "industry",
+        "position": "job"
     };
     me.rawdata = {};
     me.getRawData = function(dataKey, dataParam, forceUpdate) {
         if (forceUpdate || !_data) {
             if (!_getDataPromise) {
-                return $.ajax(ajaxParam).then(function(data) {
-                    if (data && data.isSuccess) {
-                        _data = data.result;
-                        return parseData(_data[dataKey], me.getPattern(dataKey)); 
-                    } else {
-                        return when.reject("bplus-profile-all fails!");
-                    }
-                });
+                _getDataPromise = $.ajax(ajaxParam);
             }
-            return _getDataPromise;
+            return _getDataPromise.then(function(data) {
+                if (data && data.isSuccess) {
+                    if (!_data) {
+                        _data = data.result;
+                    }
+                    return parseData(_data[dataKey], me.getPattern(dataKey)); 
+                } else {
+                    return when.reject("bplus-profile-all fails!");
+                }
+            });
         } else {
             return parseData(_data[dataKey], me.getPattern(dataKey)); 
         }
     };
-    
+    me.updateData = function(dataKey, dataParam){
+        return when();
+    };
+    me.deleteData = function(dataKey, dataParam) {
+        
+    };
   };
+  
   PersonalInfo.prototype = Object.create(BaseClass.prototype);
   PersonalInfo.prototype.constructor = PersonalInfo;
 

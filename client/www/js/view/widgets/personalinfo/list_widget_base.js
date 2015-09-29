@@ -20,6 +20,13 @@ define([
         $scope.$apply();
       });
     };
+    this.getResouce = function($scope, key) {
+        var promise = when();
+        if ($scope && $scope.$parent) {
+            promise = $scope.$parent.getResouce(key);
+        }
+        return promise;
+    };
     this.createActions = function($scope, formname, submitAction, cancelAction, editAction) {
       if (submitAction) {
         $scope.submit = function() {
@@ -28,7 +35,7 @@ define([
             return;
           }
           $scope.isSubmitting = true;
-          var promise;
+          var promise = when();
           if ($scope && $scope.$parent) {
             promise = $scope.$parent.submit($scope.data);
           }

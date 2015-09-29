@@ -42,13 +42,14 @@ define([
                         };
                         scope.submit = function (data) {
                             scope.showAddButton = true;
-                            return model.saveData(service, data).then(function() {
+                            return model.updateData(service, data).then(function() {
                               scope.showAddButton = true;
                               updateData();
                             }, function() {
                               scope.showAddButton = true;
+                              updateData();
                               //TODO
-                              //ERROR HANDLING
+                              //ERROR HANDLING?
                             });
                         };
                         scope.cancel = function (data) {
@@ -60,6 +61,9 @@ define([
                         scope.edit = function (data) {
                             scope.showAddButton = false;
                             // Don't need to do anything on this action
+                        };
+                        scope.getResouce = function (key) {
+                            return model.getResource(key);
                         };
                     }
                 };

@@ -14,7 +14,7 @@ define([
   var createYears = function(begin, end) {
     var year = [];
     for (var i = end.year; i >= begin.year; i--) {
-      year.push({value: i});
+      year.push({value: i, id: i});
     }
     return year;
   };
@@ -29,7 +29,8 @@ define([
     var targetMonths = [];
     for (var i = monthBegin; i <= monthEnd; i++) {
       targetMonths.push({
-        value: i + 1
+        value: i + 1,
+        id: i + 1
       });
     }
     return targetMonths;
@@ -50,7 +51,8 @@ define([
       targetDate.setDate(i);
       if (targetDate.getMonth() === targetMonth) {
         targetDays.push({
-          value: i
+          value: i,
+          id: i
         });
       } else {
         break;

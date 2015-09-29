@@ -7,12 +7,17 @@ define([
   var ModelBase = function() {
     var me = this;
     me.rawData = {};
+    me.resouceData = {};
     me.PATTERN = {};
     me.SERVICES = {};
+    me.REOURCE = {};
     me.SERVICENAME = "";
+    me.SOURCE_URL = "/service-proxy/bplus-resource/";
     me.getPattern = function(key) {
         return $.extend(true, {}, me.PATTERN[key]);
     };
+    me.updateData = function(dataKey, dataParam) {};
+    me.deleteData = function(dataKey, dataParam) {};
   };
   ModelBase.prototype = Object.create(ModelBase);
   ModelBase.prototype.constructor = ModelBase;
@@ -41,14 +46,39 @@ define([
         }
         return retValue;
       };
-      this.saveData = function(dataKey, dataParam) {
-        //TODO
-        //Update local storage
-        return when();
+      this.updateData = function(dataKey, dataParam) {
+        return self.updateData(dataKey, dataParam);
+      };
+      this.deleteData = function(dataKey, dataParam) {
+        return self.deleteData(dataKey, dataParam);
       };
       this.getPattern = function(key) {
           return self.getPattern(key);
       };
+      this.getResource = function(key) {
+          var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
+          var sourceKey = self.REOURCE[key];
+          var url = self.SOURCE_URL + sourceKey + "/" + lng;
+          var cachedData = self.resouceData[url];
+          var promise;
+          if (cachedData) {
+              promise = when(cachedData);
+          } else {
+              promise = $.ajax({
+                  type:"get",
+                  url: url,
+                  dataType: "json"
+              }).then(function(data) {
+                  if (data && data.isSuccess) {
+                      self.resouceData[url] = data.result;
+                      return data.result;
+                  } else {
+                      return when.reject("get resource fails!");
+                  }
+              });
+          }
+          return promise;
+      }
     });
   };
   return ModelBase;

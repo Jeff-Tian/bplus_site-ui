@@ -12,14 +12,14 @@
                     <label>所学专业</label>
                     <input type="text" name="major" ng-model="data.major" required placeholder="计算机工程" />
                 </div>
-                <div class="required field {{data.background ? '' : 'error'}}">
+                <div class="required field {{data.background.id ? '' : 'error'}}">
                     <label>学历</label>
-                    <select name="background" ng-model="data.background" required class="ui fluid dropdown">
+                    <select name="background" ng-model="data.background.id" ng-options="value.id as value.text for value in backgrounds" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
-                        <option value="小学">小学</option>
+                        <!--<option value="小学">小学</option>
                         <option value="中学">中学</option>
                         <option value="大学">大学</option>
-                        <option value="学士">学士</option>
+                        <option value="学士">学士</option>-->
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
@@ -56,7 +56,7 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
         <div ng-bind="data.major" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.background" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.background.value" class="b-profile-right-section-txt"></div>
         <div class="b-profile-right-section-txt">
             <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
             <span>----</span>

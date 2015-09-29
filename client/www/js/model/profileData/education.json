@@ -2,7 +2,10 @@
     "id": "",
     "name": "",
     "major": "",
-    "background": "",
+    "background": {
+        "id": "",
+        "value": ""
+    },
     "dateFrom": {
         "value": {
             "year": "",

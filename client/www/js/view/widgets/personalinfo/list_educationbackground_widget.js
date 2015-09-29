@@ -65,7 +65,19 @@ define([
                                     }
                                 }, true);
                                 me.createActions($scope, "educationbackground", false, true, true);
+                                me.getResouce($scope, "background").then(function(data) {
+                                    $scope.backgrounds = data;
+                                    var i = 0;
+                                    for (i = 0; i < data.length; i++) {
+                                        if (data[i].id === $scope.data.background.id) {
+                                            $scope.data.background.value = data[i].text;
+                                            break;
+                                        }
+                                    }
+                                    $scope.$apply();
+                                });
                                 $scope.submit = function () {
+                                    debugger;
                                     $scope.clicked = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {
                                         return;
