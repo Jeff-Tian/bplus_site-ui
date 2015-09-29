@@ -28,8 +28,8 @@ var constants = {
         "name": "name",
         "description": "description",
         "tags": "tags",
-        "start_date": "dateFrom",
-        "end_date": "dateTo",
+        "start_date": "dateFrom.value",
+        "end_date": "dateTo.value",
         //memberExt
         "member_id": "id",
         "real_name": "name",

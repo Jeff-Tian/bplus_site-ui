@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "position": "",
+  "dateFrom": {
+    "value": {
+      "year": "",
+      "month": "",
+      "day": ""
+    }
+  },
+  "dateTo": {
+    "value": {
+      "year": "",
+      "month": "",
+      "day": "",
+      "tillNow": false
+    }
+  },
+  "description": "",
+  "tags": ""
+}
+

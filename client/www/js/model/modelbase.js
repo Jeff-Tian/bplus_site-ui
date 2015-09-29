@@ -6,10 +6,13 @@ define([
   
   var ModelBase = function() {
     var me = this;
-    me.CONFIG = {};
-    me.rawdata = {};
+    me.rawData = {};
+    me.PATTERN = {};
+    me.SERVICES = {};
     me.SERVICENAME = "";
-    me.parseData = function() {};
+    me.getPattern = function(key) {
+        return $.extend(true, {}, me.PATTERN[key]);
+    };
   };
   ModelBase.prototype = Object.create(ModelBase);
   ModelBase.prototype.constructor = ModelBase;
@@ -22,31 +25,19 @@ define([
       // If $q need to be used, have to use $q.deffer() instead.
       var me = this;
       me.SERVICES = self.SERVICES;
-      this.getData = function(dataKey, dataParam) {
-        var ajaxParam = $.extend({}, self.CONFIG[dataKey], true);
-        var paramKey = "";
-        if (dataParam) {
-          ajaxParam.data = dataParam;
-          paramKey = JSON.stringify(dataParam);
-        } else {
-          paramKey = "0";
-        }
-        return $.ajax(ajaxParam).then(function(data) {
-          var parsedData = self.parseData(data);
-          if (!self.rawdata[dataKey]) {
-            self.rawdata[dataKey] = {};
-          }
-          self.rawdata[dataKey][paramKey] = parsedData;
-          return $.extend(true, [], parsedData);
-        });
-      };
-      this.getRawData = function(dataKey, dataParam) {
+      this.getData = function(dataKey, dataParam, forceUpdate) {
         var paramKey = dataParam ? JSON.stringify(dataParam) : "0";
         var retValue;
-        if (self.rawdata[dataKey] && self.rawdata[dataKey][paramKey]) {
-          retValue = when($.extend(true, [], self.rawdata[dataKey][paramKey]));
+        if (!forceUpdate && self.rawData[dataKey] && self.rawData[dataKey][paramKey]) {
+          retValue = when($.extend(true, [], self.rawData[dataKey][paramKey]));
         } else {
-          retValue = self.getData();
+          retValue = self.getRawData(dataKey, dataParam, forceUpdate).then(function(parsedData) {
+              if (!self.rawData[dataKey]) {
+                self.rawData[dataKey] = {};
+              }
+              self.rawData[dataKey][paramKey] = parsedData;
+              return $.extend(true, [], parsedData);
+          });
         }
         return retValue;
       };
@@ -54,6 +45,9 @@ define([
         //TODO
         //Update local storage
         return when();
+      };
+      this.getPattern = function(key) {
+          return self.getPattern(key);
       };
     });
   };
