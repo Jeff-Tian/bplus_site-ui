@@ -7,7 +7,8 @@ define([
   var ModelBase = function() {
     var me = this;
     me.rawData = {};
-    me.resouceData = {};
+    me.resourceData = {};
+    me.resourcePromiseCache = {};
     me.PATTERN = {};
     me.SERVICES = {};
     me.REOURCE = {};
@@ -59,18 +60,29 @@ define([
           var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
           var sourceKey = self.REOURCE[key];
           var url = self.SOURCE_URL + sourceKey + "/" + lng;
-          var cachedData = self.resouceData[url];
+          var cachedData = self.resourceData[url];
           var promise;
           if (cachedData) {
+              console.log("cache");
               promise = when(cachedData);
           } else {
-              promise = $.ajax({
-                  type:"get",
-                  url: url,
-                  dataType: "json"
-              }).then(function(data) {
+              var bridgePromise;
+              if (self.resourcePromiseCache[url]) {
+                  console.log("promise cache");
+                  bridgePromise = self.resourcePromiseCache[url];
+              } else {
+                  console.log("ajax call");
+                  bridgePromise = $.ajax({
+                      type:"get",
+                      url: url,
+                      dataType: "json"
+                  });
+                  self.resourcePromiseCache[url] = bridgePromise;
+              }
+              promise = bridgePromise.then(function(data) {
+                  delete self.resourcePromiseCache[url];
                   if (data && data.isSuccess) {
-                      self.resouceData[url] = data.result;
+                      self.resourceData[url] = data.result;
                       return data.result;
                   } else {
                       return when.reject("get resource fails!");
