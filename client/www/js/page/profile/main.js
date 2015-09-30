@@ -23,7 +23,7 @@ require.config({
         "image": "requirejs-plugins/src/image",
         "json": "requirejs-plugins/src/json",
         "propertyParser": "requirejs-plugins/src/propertyParser",
-        "angular": "angularjs/angular",
+        "angular": "angular/angular",
         "angular-route": "angular-route/angular-route",
         'domReady': 'requirejs-domready/domReady',
         "semantic": "semantic-ui/dist/semantic",

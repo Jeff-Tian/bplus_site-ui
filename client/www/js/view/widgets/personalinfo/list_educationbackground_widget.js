@@ -26,7 +26,7 @@ define([
                             pre: function ($scope) {
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.property = {
-                                    status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                                    status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
                                 };
                                 $scope.dateFrom = {
                                     config: {
@@ -65,6 +65,17 @@ define([
                                     }
                                 }, true);
                                 me.createActions($scope, "educationbackground", false, true, true);
+                                me.getResouce($scope, "background").then(function(data) {
+                                    $scope.backgrounds = data;
+                                    var i = 0;
+                                    for (i = 0; i < data.length; i++) {
+                                        if (data[i].id === $scope.data.background.id) {
+                                            $scope.data.background.value = data[i].text;
+                                            break;
+                                        }
+                                    }
+                                    $scope.$apply();
+                                });
                                 $scope.submit = function () {
                                     $scope.clicked = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {

@@ -104,7 +104,7 @@ server.use('/service-proxy', require('./serviceProxy'));
 function renderTemplate(name) {
     return function (req, res, next) {
         res.render(name);
-    }
+    };
 }
 
 function mapRoute2Template(url, template) {
@@ -129,7 +129,7 @@ mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
-mapRoute2Template('/profile');
+server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
 mapRoute2Template('/map');
 //mapRoute2Template('/account-setting');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));

@@ -4,19 +4,19 @@
         <form name="personalinfo" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateSelect.fulfilled || personalinfo.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div class="field">
+                <div class="required field {{data.name ? '' : 'error'}}">
                     <label>真实姓名</label>
                     <input type="text" name="personalname" ng-model="data.name" required placeholder="陈大华" />
                 </div>
-                <div class="field">
+                <div class="required field {{data.gender ? '' : 'error'}}">
                     <label>性别</label>
                     <select name="gender" ng-model="data.gender" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
-                        <option value="男">男</option>
-                        <option value="女">女</option>
+                        <option value="M">男</option>
+                        <option value="F">女</option>
                     </select>
                 </div>
-                <div class="field">
+                <div class="required field">
                     <label>生日</label>
                     <div class="inline fields">
                         <div class="twelve wide field">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="field">
+                <div class="required field {{data.location ? '' : 'error'}}">
                     <label>目前所在地</label>
                     <input type="text" name="personallocation" ng-model="data.location" required placeholder="上海" />
                 </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="four wide field">
                             <div class="ui checkbox">
-                                <input type="checkbox" ng-model="data.contractdata.isPrivate">
+                                <input type="checkbox" ng-model="data.contractInfo.isPrivate">
                                 <label>设置为隐私</label>
                             </div>
                         </div>
@@ -67,5 +67,6 @@
         <div ng-bind="data.gender" class="b-profile-right-section-txt"></div>
         <div ng-bind-template="{{data.dateOfBirth.value.year}}年{{data.dateOfBirth.value.month}}月{{data.dateOfBirth.value.day}}日出生" class="b-profile-right-section-txt"></div>
         <div ng-bind-template="目前人在{{data.location}}" class="b-profile-right-section-txt"></div>
+        <div ng-bind-template="{{data.contractInfo.value}}" class="b-profile-right-section-txt"></div>
     </div>
 </div>

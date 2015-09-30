@@ -4,29 +4,31 @@
         <form name="workexperience" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateFrom.fulfilled || !dateTo.fulfilled || workexperience.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div class="field">
+                <div class="required field {{data.name ? '' : 'error'}}">
                     <label>公司名称</label>
                     <input type="text" name="companyname" ng-model="data.name" required />
                 </div>
-                <div class="field">
+                <div class="required field {{data.type.id ? '' : 'error'}}">
                     <label>工作类型</label>
-                    <select name="background" ng-model="data.type" required class="ui fluid dropdown">
+                    <select name="background" ng-model="data.type.id" ng-options="value.id as value.text for value in types" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
-                        <option value="全职">全职</option>
-                        <option value="兼职">兼职</option>
                     </select>
                 </div>
-                <div class="field">
+                <div class="required field {{data.industry.id ? '' : 'error'}}">
                     <label>行业</label>
-                    <input type="text" name="industry" ng-model="data.industry" required />
+                    <select name="background" ng-model="data.industry.id" ng-options="value.id as value.text for value in industrys" required class="ui fluid dropdown">
+                        <option value="">请选择。。</option>
+                    </select>
                 </div>
-                <div class="field">
+                <div class="required field {{data.job.id ? '' : 'error'}}">
                     <label>职位</label>
-                    <input type="text" name="position" ng-model="data.position" required />
+                    <select name="background" ng-model="data.job.id" ng-options="value.id as value.text for value in jobs" required class="ui fluid dropdown">
+                        <option value="">请选择。。</option>
+                    </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
-                        <div class="field">
+                        <div class="required field">
                             <label>工作时间</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields"/>
                         </div>
@@ -42,7 +44,7 @@
                     <div class="eight wide column p-profile-right-section-form-bplusdate-row-bottom">
                         <div class="field">
                             <div class="ui checkbox">
-                                <input type="checkbox" ng-model="data.dateTo.tillNow" />
+                                <input type="checkbox" ng-model="data.dateTo.value.tillNow" />
                                 <label>目前工作中</label>
                             </div>
                         </div>
@@ -66,16 +68,13 @@
     <!--DISPLAY MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
-        <div ng-bind="data.type" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.industry" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.position" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.type.value" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.industry.value" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.job.value" class="b-profile-right-section-txt"></div>
         <div class="b-profile-right-section-txt">
             <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
-            <!--<div>
-              TODO, till now
-            </div>-->
+            <span ng-bind-template="{{data.dateTo.value.tillNow ? '至今' : data.dateTo.value.year + '年' + data.dateTo.value.month + '月'}}"></span>
         </div>
         <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
         <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>

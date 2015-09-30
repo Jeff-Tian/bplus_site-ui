@@ -26,7 +26,7 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
                $scope.dateFrom = {
                  config: {
@@ -65,6 +65,39 @@ define([
                  }
                }, true);
                me.createActions($scope, "workexperience", false, true, true);
+               me.getResouce($scope, "type").then(function(data) {
+                   $scope.types = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.type.id) {
+                           $scope.data.type.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
+               me.getResouce($scope, "industry").then(function(data) {
+                   $scope.industrys = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.industry.id) {
+                           $scope.data.industry.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
+               me.getResouce($scope, "job").then(function(data) {
+                   $scope.jobs = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.job.id) {
+                           $scope.data.job.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
                $scope.submit = function() {
                  $scope.clicked = true;
                  if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.workexperience.$error.required)) {

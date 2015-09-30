@@ -1,4 +1,5 @@
 (function () {
+    var bplusServiceParams = (typeof require === "function") ? require("./config_bplusService") : {};
     var config = {
         sms: {
             host: 'uat.service.hcd.com',
@@ -25,6 +26,7 @@
             port: '10086'
         },
         bplusService: {
+            //host: 'uat.service.hcd.com', //'10.20.32.61'
             host: 'uat.service.hcd.com',
             port: '12345'
         },
@@ -32,6 +34,7 @@
             host: 'uat.service.hcd.com',
             port: '10101'
         },
+        "bplusServiceParams": bplusServiceParams,
         "logger": {
             "levels": {
                 "[all]": "DEBUG"
