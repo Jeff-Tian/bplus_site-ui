@@ -5,31 +5,24 @@
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="two fields">
-                    <div class="required field {{data.name ? '' : 'error'}}">
+                    <div class="required field {{data.language.id ? '' : 'error'}}">
                         <label>使用语言</label>
-                        <select name="languagename" ng-model="data.name" required class="ui fluid dropdown">
+                        <select name="languagename" ng-model="data.language.id" ng-options="value.id as value.text for value in languages" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
-                            <option value="英语">英语</option>
-                            <option value="俄语">俄语</option>
                         </select>
                     </div>
-                    <div class="required field {{data.proficiency ? '' : 'error'}}">
+                    <div class="required field {{data.proficiency.id ? '' : 'error'}}">
                         <label>熟练程度</label>
-                        <select name="proficiency" ng-model="data.proficiency" required class="ui fluid dropdown">
+                        <select name="proficiency" ng-model="data.proficiency.id" ng-options="value.id as value.text for value in proficiencys" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
-                            <option value="初级（入门）">初级（入门）</option>
-                            <option value="中级（运用）">中级（运用）</option>
-                            <option value="高级（熟练）">高级（熟练）</option>
                         </select>
                     </div>
                 </div>
                 <div class="two fields">
                     <div class="field">
                         <label>证书</label>
-                        <select name="certification" ng-model="data.certification" required class="ui fluid dropdown">
+                        <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
-                            <option value="四级">四级</option>
-                            <option value="六级">六级</option>
                         </select>
                     </div>
                     <div class="field">
@@ -50,7 +43,7 @@
     </div>
     <!--DISPLAY MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
-        <h2 ng-bind-template="{{data.name}}{{data.proficiency}}"  ng-click="edit()"></h2>
-        <div ng-bind-template="{{data.certification}}  {{data.score}}" class="b-profile-right-section-txt"></div>
+        <h2 ng-bind-template="{{data.language.value}}{{data.proficiency.value}}"  ng-click="edit()"></h2>
+        <div ng-bind-template="{{data.certification.value}}  {{data.score}}" class="b-profile-right-section-txt"></div>
     </div>
 </div>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="field">
                     <label>颁发机构</label>
-                    <input type="text" name="organization" ng-model="data.organization" required placeholder="" />
+                    <input type="text" name="organization" ng-model="data.organization" placeholder="" />
                 </div>
                 <div class="required field">
                     <label>获奖日期</label>
@@ -36,8 +36,8 @@
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
         <div ng-bind="data.organization" class="b-profile-right-section-txt"></div>
         <div ng-bind-template="{{data.prizeDate.value.year}}年{{data.prizeDate.value.month}}月" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.specialDescription" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.specialTags" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>
     </div>
 </div>
 <!--<div>

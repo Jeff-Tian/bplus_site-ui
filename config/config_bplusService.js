@@ -45,7 +45,7 @@ var constants = {
         "issue_by": "organization",
 //      "description": "description",
 //      "tags": "tags",
-        "issue_date": "prizeDate",
+        "issue_date": "prizeDate.value",
         //communityExperience
         "experience_id": "id",
 //      "name": "name",

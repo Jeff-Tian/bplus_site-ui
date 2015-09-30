@@ -25,7 +25,7 @@ define([
               var keyArray = i.split(".");
               var firstKey = keyArray[0];
               var secondKey = keyArray[1];
-              var isDate = firstKey.indexOf("date") > -1 && secondKey === "value";
+              var isDate = (firstKey.indexOf("date") || firstKey.indexOf("Date") > -1) && secondKey === "value";
               if (isDate) {
                   var targetObject = secondKey ? pattern[firstKey][secondKey] : pattern[firstKey];
                   if (value) {
@@ -119,7 +119,7 @@ define([
         //Language
         "certification": "englishlevel",
         "proficiency": "langguageproficiency",
-        "name": "language",
+        "language": "language",
         //Edu
         "background": "qualifications",
         //Community
