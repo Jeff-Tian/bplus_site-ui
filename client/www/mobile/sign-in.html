@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('SEOTitle_SignIn') %></title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('../view-partial/head.html') -%>
+</head>
+
+<body ng-app="signIn" ng-controller="AppCtrl" class="b-background">
+<%- include('header.html') -%>
+<div class="ui b-signin-wrapper">
+    <div class="ui column b-signin-container b-background-lighter">
+        <div class="b-signin-wide" tab=".b-signin-wide">
+            <%- include('../view-partial/sign-in.html') -%>
+        </div>
+    </div>
+</div>
+<%- include('footer.html') -%>
+
+<!-- build:js js/cdn/m/sign-in.<%= grunt.file.readJSON('package.json').version %>.js -->
+<script src="../js/directives/captcha.js"></script>
+<script src="../js/directives/ngEnter.js"></script>
+<script src="../js/directives/registerForm.js"></script>
+<script src="../js/directives/tab.js"></script>
+<script src="../js/directives/dropdown.js"></script>
+<script src="../js/controllers/LoginCtrl.js"></script>
+<script src="../js/factories/queryParser.js"></script>
+<script src="../js/controllers/WechatLoginCtrl.js"></script>
+<script src="../js/controllers/SignUpCtrl.js"></script>
+<script src="../js/page/register/main.js"></script>
+<!-- endbuild -->
+</body>
+
+</html>

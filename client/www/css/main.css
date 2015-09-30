@@ -4178,13 +4178,13 @@ body.pushable .pusher {
     display: inline !important;
   }
   a:not(.button),
-  a:link:not(.button),
-  a:visited:not(.button) {
+  a:not(.button):link,
+  a:not(.button):visited {
     color: #000000 !important;
   }
-  a:hover,
-  a:active,
-  a:focus {
+  a:not(.button):hover,
+  a:not(.button):active,
+  a:not(.button):focus {
     color: #ff3c42 !important;
     text-decoration: none !important;
   }

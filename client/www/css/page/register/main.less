@@ -173,11 +173,11 @@
         display: inline !important;
     }
 
-    a:not(.button), a:link:not(.button), a:visited:not(.button) {
+    a:not(.button), a:not(.button):link, a:not(.button):visited {
         color: @color-black !important;
     }
 
-    a:hover, a:active, a:focus {
+    a:not(.button):hover, a:not(.button):active, a:not(.button):focus {
         color: @color-brand !important;
         text-decoration: none !important;
     }
