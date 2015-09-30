@@ -84,7 +84,7 @@ function updateMemberData(req, res, next) {
                 };
                 //TODO
                 //TEST CODES BELOW
-                param.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+//              param.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
                 /////////
                 newReq.body = param;
                 proxy.execute(newReq, res, $noop, serviceParam);
@@ -116,7 +116,7 @@ function updateOtherData(req, res, next) {
             });
             //TODO
             //TEST CODES BELOW
-            retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+//          retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
             /////////
             return retParam;
         }
