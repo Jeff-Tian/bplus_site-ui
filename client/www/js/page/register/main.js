@@ -53,7 +53,6 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
 
         var submitting = false;
         $scope.trySetPassword = function ($event) {
-            debugger;
             $event.preventDefault();
             $event.stopPropagation();
 

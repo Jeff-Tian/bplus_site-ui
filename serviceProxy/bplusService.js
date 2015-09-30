@@ -37,7 +37,8 @@ function mapEducation(d) {
 }
 
 function updateMemberData(req, res, next) {
-    var $noop = function() {};
+    var $noop = function () {
+    };
     var operation = req.params.operation;
     if (operation !== "update") {
         res.send("Method error! Method is---" + operation);
@@ -63,11 +64,11 @@ function updateMemberData(req, res, next) {
     ];
     var rawData = req.body;
     var promiseArray = [];
-    serviceNames.forEach(function(serviceValue, index) {
+    serviceNames.forEach(function (serviceValue, index) {
         var paramKeys = bplusServiceParams[serviceValue];
         var param = {};
         var hasData = false;
-        paramKeys.forEach(function(value) {
+        paramKeys.forEach(function (value) {
             var rawValue = rawData[mapping[value]];
             if (rawValue || rawValue === false) {
                 param[value] = rawValue;
@@ -75,10 +76,10 @@ function updateMemberData(req, res, next) {
             }
         });
         if (hasData) {
-            promiseArray.push(Q.promise(function(resolve, reject) {
+            promiseArray.push(Q.promise(function (resolve, reject) {
                 var serviceParam = serviceParams[index];
                 var newReq = extend({}, req);
-                serviceParam.responseInterceptor = function(res, chunks) {
+                serviceParam.responseInterceptor = function (res, chunks) {
                     resolve(chunks);
                     return true;
                 };
@@ -91,9 +92,9 @@ function updateMemberData(req, res, next) {
             }));
         }
     });
-    Q.any(promiseArray).then(function(result){
+    Q.any(promiseArray).then(function (result) {
         res.send(result);
-    }, function(error){
+    }, function (error) {
         console.log(error);
         res.send(error.toString());
     });
@@ -107,7 +108,7 @@ function updateOtherData(req, res, next) {
         path: '/profile/' + classification + '/' + operation,
         dataMapper: function (d) {
             var retParam = {};
-            bplusServiceParams[classification].forEach(function(value) {
+            bplusServiceParams[classification].forEach(function (value) {
                 var originKey = mapping[value];
                 var originValue = d[originKey];
                 if (originValue || originValue === false) {
@@ -117,6 +118,7 @@ function updateOtherData(req, res, next) {
             //TODO
             //TEST CODES BELOW
 //          retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+            retParam = d.member_id;
             /////////
             return retParam;
         }
@@ -153,12 +155,13 @@ module.exports = {
         }
     }),
 
-    loadProfileAll: function(req, res, next) {
-        var $noop = function() {};
+    loadProfileAll: function (req, res, next) {
+        var $noop = function () {
+        };
         var memberID = res.locals.hcd_user.member_id;
         var ssoPath = '/profile/load/' + memberID;
         var bplusPath = '/profile/load/' + memberID;
-        var ssoProfilePromise = Q.promise(function(resolve, reject) {
+        var ssoProfilePromise = Q.promise(function (resolve, reject) {
             proxy.execute(req, res, $noop, {
                 host: ssoService.host,
                 port: ssoService.port,
@@ -167,31 +170,31 @@ module.exports = {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'User-Agent': 'BridgePlus Web'
                 },
-                responseInterceptor: function(res, chunks) {
+                responseInterceptor: function (res, chunks) {
                     resolve(chunks);
                     return true;
                 }
             });
         });
-        var bplusProfilePromise = Q.promise(function(resolve, reject) {
+        var bplusProfilePromise = Q.promise(function (resolve, reject) {
             proxyBPlus({
                 path: bplusPath,
-                responseInterceptor: function(res, chunks) {
+                responseInterceptor: function (res, chunks) {
                     resolve(chunks);
                     return true;
                 }
             })(req, res, $noop);
         });
-        Q.all([ssoProfilePromise, bplusProfilePromise]).spread(function(ssoProfile, bplusProfile){
+        Q.all([ssoProfilePromise, bplusProfilePromise]).spread(function (ssoProfile, bplusProfile) {
             var targetResult = bplusProfile.result;
             var memberSsoKeys = bplusServiceParams.memberSso;
             var mapping = bplusServiceParams.mapping;
-            memberSsoKeys.forEach(function(value) {
+            memberSsoKeys.forEach(function (value) {
                 targetResult.memberExt[value] = ssoProfile.result[value];
             });
             var resultString = JSON.stringify(targetResult);
             //Replace service keys to bplus keys
-            resultString = resultString.replace(/[,|{]"([^\"]+)":/g, function(value, groupValue){
+            resultString = resultString.replace(/[,|{]"([^\"]+)":/g, function (value, groupValue) {
                 var mappingValue = mapping[groupValue];
                 var retString = mappingValue ? value.replace(groupValue, mapping[groupValue]) : value;
                 return retString;
@@ -199,13 +202,13 @@ module.exports = {
             targetResult = JSON.parse(resultString);
             bplusProfile.result = targetResult;
             res.send(bplusProfile);
-        }, function(error) {
+        }, function (error) {
             console.log(error);
             res.send(error.toString());
         });
     },
-    
-    updateData: function(req, res, next) {
+
+    updateData: function (req, res, next) {
         var classification = req.params.classification;
         if (classification === "memberExt") {
             return updateMemberData(req, res, next);
@@ -213,7 +216,7 @@ module.exports = {
             return updateOtherData(req, res, next);
         }
     },
-    
+
     getResource: function (req, res, next) {
         var language = bplusServiceParams.language[req.params.language];
         proxyBPlus({

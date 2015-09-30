@@ -5187,6 +5187,23 @@ body.pushable > .pusher,
 .b-profile-right-section-txt > .b-profile-right-section-txt-tags {
   margin-right: 0.5em;
 }
+.b-profile-right-section-displaymode h2:hover,
+.b-profile-right-section-txt:hover {
+  background-color: #dedede;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+}
+.b-profile-right-section-displaymode h2:hover {
+  background-image: url(/img/profile/icon_profile_edit_title.png);
+}
+.b-profile-right-section-txt:hover {
+  background-image: url(/img/profile/icon_profile_edit_text.png);
+}
+.b-profile-right-section-displaymode h2,
+.b-profile-right-section-txt {
+  cursor: pointer;
+}
 .b-profile-right-section-btn-append button {
   color: #fff !important;
   border-radius: 0 !important;

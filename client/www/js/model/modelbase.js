@@ -78,7 +78,7 @@ define([
               });
           }
           return promise;
-      }
+      };
     });
   };
   return ModelBase;

@@ -174,5 +174,4 @@ define([
   PersonalInfo.prototype.constructor = PersonalInfo;
 
   return PersonalInfo;
-  return {};
 });

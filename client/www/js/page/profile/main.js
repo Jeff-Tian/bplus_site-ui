@@ -98,7 +98,12 @@ require.config({"context": "bplus"})([
                  workContainerTemplate,
                  awardContainerTemplate,
                  languageContainerTemplate) {
-        var documentMudule = angular.module('docModule', []);
+        var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
+                .controller('AppCtrl', angular.bplus.AppCtrl)
+                .factory('FormValidation', angular.bplus.FormValidation)
+                .factory('service', angular.bplus.service)
+                .factory('MessageStore', angular.bplus.MessageStore)
+            ;
         (function (agModule) {
             banner(agModule);
             achievement(agModule);
@@ -106,12 +111,12 @@ require.config({"context": "bplus"})([
 
             var instance = Container;
             instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
-            .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
-            .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
-            .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
-            .start(agModule, "bplusworkexperienceall", workContainerTemplate)
-            .start(agModule, "bplusawardall", awardContainerTemplate)
-            .start(agModule, "bpluslanguageall", languageContainerTemplate);
+                .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
+                .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
+                .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
+                .start(agModule, "bplusworkexperienceall", workContainerTemplate)
+                .start(agModule, "bplusawardall", awardContainerTemplate)
+                .start(agModule, "bpluslanguageall", languageContainerTemplate);
             new Date().start(agModule);
             new Tag().start(agModule);
 
