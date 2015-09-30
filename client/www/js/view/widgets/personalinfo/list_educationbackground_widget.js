@@ -77,7 +77,6 @@ define([
                                     $scope.$apply();
                                 });
                                 $scope.submit = function () {
-                                    debugger;
                                     $scope.clicked = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {
                                         return;

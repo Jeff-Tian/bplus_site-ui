@@ -41,13 +41,12 @@ define([
                             scope.showAddButton = false;
                         };
                         scope.submit = function (data) {
-                            scope.showAddButton = true;
                             return model.updateData(service, data).then(function() {
                               scope.showAddButton = true;
-                              updateData();
+                              return updateData(true);
                             }, function() {
                               scope.showAddButton = true;
-                              updateData();
+                              return updateData();
                               //TODO
                               //ERROR HANDLING?
                             });

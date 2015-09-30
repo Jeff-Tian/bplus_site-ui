@@ -1,9 +1,18 @@
 {
     "id": "",
     "name": "",
-    "position": "",
-    "industry": "",
-    "type": "",
+    "job": {
+        "id": "",
+        "value": ""
+    },
+    "industry": {
+        "id": "",
+        "value": ""
+    },
+    "type": {
+        "id": "",
+        "value": ""
+    },
     "dateFrom": {
         "value": {
             "year": "",

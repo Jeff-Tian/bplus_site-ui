@@ -1,19 +1,17 @@
 <div>
     <!--EDIT MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
-        <form name="clubbackground" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateTo.fulfilled || !dateFrom.fulfilled || clubbackground.$error.required)) ? 'error' : ''}}">
+        <form name="clubbackground" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!(dateTo.fulfilled || data.dateTo.value.tillNow) || !dateFrom.fulfilled || clubbackground.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="required field {{data.name ? '' : 'error'}}">
                     <label>社团名称</label>
                     <input type="text" name="clubname" ng-model="data.name" required />
                 </div>
-                <div class="required field {{data.position ? '' : 'error'}}">
+                <div class="required field {{data.position.id ? '' : 'error'}}">
                     <label>职位</label>
-                    <select name="background" ng-model="data.position" required class="ui fluid dropdown">
+                    <select name="background" ng-model="data.position.id" ng-options="value.id as value.text for value in positions" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
-                        <option value="会长">会长</option>
-                        <option value="小巴辣子">小巴辣子</option>
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
@@ -59,14 +57,11 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
         <div ng-bind="data.major" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.position" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.position.value" class="b-profile-right-section-txt"></div>
         <div class="b-profile-right-section-txt">
             <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
-            <!--<div>
-              TODO, till now
-            </div>-->
+            <span ng-bind-template="{{data.dateTo.value.tillNow ? '至今' : data.dateTo.value.year + '年' + data.dateTo.value.month + '月'}}"></span>
         </div>
         <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
         <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>

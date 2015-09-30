@@ -128,14 +128,11 @@ define([
           });
           
           scope.selectYear = function(fillData) {
-            var chosenYear = "";
-            if (scope.displayData.value.year) {
-              chosenYear = scope.displayData.value.year.value ? scope.displayData.value.year.value : scope.displayData.value.year;
-            }
+            var chosenYear = scope.displayData.value.year;
             if (scope.config.showMonth) {
               if (!fillData) {
-                scope.displayData.value.day = {};
-                scope.displayData.value.month = {};
+                scope.displayData.value.day = "";
+                scope.displayData.value.month = "";
               }
               scope.displayData.months = createMonths(chosenYear, scope.config.begin, scope.config.end);
               if (scope.value.month) {
@@ -144,17 +141,11 @@ define([
             }
           };
           scope.selectMonth = function(fillData) {
-            var chosenYear = "";
-            if (scope.displayData.value.year) {
-              chosenYear = scope.displayData.value.year.value ? scope.displayData.value.year.value : scope.displayData.value.year;
-            }
-            var chosenMonth = "";
-            if (scope.displayData.value.month) {
-              chosenMonth = scope.displayData.value.month.value ? scope.displayData.value.month.value : scope.displayData.value.month;
-            }
+            var chosenYear = scope.displayData.value.year;
+            var chosenMonth = scope.displayData.value.month;
             if (scope.config.showDay) {
               if (!fillData) {
-                scope.displayData.value.day = {};
+                scope.displayData.value.day = "";
               }
               scope.displayData.days = createDays(chosenYear, chosenMonth, scope.config.begin, scope.config.end);
             }
@@ -165,22 +156,22 @@ define([
               return;
             }
             if (scope.value.year !== newValue.year) {
-              if (newValue.year && newValue.year.value) {
-                scope.value.year = newValue.year.value;
+              if (newValue.year) {
+                scope.value.year = newValue.year;
               } else {
                 scope.value.year = "";
               }
             }
             if (scope.value.month !== newValue.month) {
-              if (newValue.month && newValue.month.value) {
-                scope.value.month = newValue.month.value;
+              if (newValue.month) {
+                scope.value.month = newValue.month;
               } else {
                 scope.value.month = "";
               }
             }
             if (scope.value.day !== newValue.day) {
-              if (newValue.day && newValue.day.value) {
-                scope.value.day = newValue.day.value;
+              if (newValue.day) {
+                scope.value.day = newValue.day;
               } else {
                 scope.value.day = "";
               }

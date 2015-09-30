@@ -44,7 +44,7 @@
                         </div>
                         <div class="four wide field">
                             <div class="ui checkbox">
-                                <input type="checkbox" ng-model="data.contractdata.isPrivate">
+                                <input type="checkbox" ng-model="data.contractInfo.isPrivate">
                                 <label>设置为隐私</label>
                             </div>
                         </div>
@@ -67,5 +67,6 @@
         <div ng-bind="data.gender" class="b-profile-right-section-txt"></div>
         <div ng-bind-template="{{data.dateOfBirth.value.year}}年{{data.dateOfBirth.value.month}}月{{data.dateOfBirth.value.day}}日出生" class="b-profile-right-section-txt"></div>
         <div ng-bind-template="目前人在{{data.location}}" class="b-profile-right-section-txt"></div>
+        <div ng-bind-template="{{data.contractInfo.value}}" class="b-profile-right-section-txt"></div>
     </div>
 </div>

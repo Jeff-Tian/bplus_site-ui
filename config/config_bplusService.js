@@ -49,7 +49,7 @@ var constants = {
         //communityExperience
         "experience_id": "id",
 //      "name": "name",
-        "position": "position",
+        "position": "position.id",
 //      "start_date": "dateFrom",
 //      "end_date": "dateTo",
 //      "description": "description",
@@ -77,9 +77,9 @@ var constants = {
         //workExperience
 //      "experience_id": "id",  //Duplicated with the one in communityExperience
         "company": "name",
-        "work_type": "type",
+        "work_type": "type.id",
         "industry_id": "industry.id",
-        "job_id": "position.id",
+        "job_id": "job.id",
 //      "start_date": "dateFrom",
 //      "end_date": "dateTo",
 //      "description": "description",

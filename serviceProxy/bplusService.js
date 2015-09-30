@@ -69,7 +69,7 @@ function updateMemberData(req, res, next) {
         var hasData = false;
         paramKeys.forEach(function(value) {
             var rawValue = rawData[mapping[value]];
-            if (rawValue) {
+            if (rawValue || rawValue === false) {
                 param[value] = rawValue;
                 hasData = true;
             }
@@ -84,7 +84,7 @@ function updateMemberData(req, res, next) {
                 };
                 //TODO
                 //TEST CODES BELOW
-//              retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
+                param.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
                 /////////
                 newReq.body = param;
                 proxy.execute(newReq, res, $noop, serviceParam);
@@ -110,7 +110,7 @@ function updateOtherData(req, res, next) {
             bplusServiceParams[classification].forEach(function(value) {
                 var originKey = mapping[value];
                 var originValue = d[originKey];
-                if (originValue) {
+                if (originValue || originValue === false) {
                     retParam[value] = originValue;
                 }
             });

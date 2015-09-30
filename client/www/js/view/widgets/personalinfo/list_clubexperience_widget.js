@@ -65,9 +65,20 @@ define([
                  }
                }, true);
                me.createActions($scope, "clubbackground", false, true, true);
+               me.getResouce($scope, "position").then(function(data) {
+                   $scope.positions = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.position.id) {
+                           $scope.data.position.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
                $scope.submit = function() {
                  $scope.clicked = true;
-                 if (!!(!$scope.dateTo.fulfilled || !$scope.dateTo.fulfilled || $scope.clubbackground.$error.required)) {
+                 if (!!(!$scope.dateFrom.fulfilled || !($scope.data.dateTo.value.tillNow || $scope.dateTo.fulfilled) || $scope.clubbackground.$error.required)) {
                    return;
                  }
                  if (me.submit) {

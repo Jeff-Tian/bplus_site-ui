@@ -8,21 +8,23 @@
                     <label>公司名称</label>
                     <input type="text" name="companyname" ng-model="data.name" required />
                 </div>
-                <div class="required field {{data.type ? '' : 'error'}}">
+                <div class="required field {{data.type.id ? '' : 'error'}}">
                     <label>工作类型</label>
-                    <select name="background" ng-model="data.type" required class="ui fluid dropdown">
+                    <select name="background" ng-model="data.type.id" ng-options="value.id as value.text for value in types" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
-                        <option value="全职">全职</option>
-                        <option value="兼职">兼职</option>
                     </select>
                 </div>
-                <div class="required field {{data.industry ? '' : 'error'}}">
+                <div class="required field {{data.industry.id ? '' : 'error'}}">
                     <label>行业</label>
-                    <input type="text" name="industry" ng-model="data.industry" required />
+                    <select name="background" ng-model="data.industry.id" ng-options="value.id as value.text for value in industrys" required class="ui fluid dropdown">
+                        <option value="">请选择。。</option>
+                    </select>
                 </div>
-                <div class="required field {{data.position ? '' : 'error'}}">
+                <div class="required field {{data.job.id ? '' : 'error'}}">
                     <label>职位</label>
-                    <input type="text" name="position" ng-model="data.position" required />
+                    <select name="background" ng-model="data.job.id" ng-options="value.id as value.text for value in jobs" required class="ui fluid dropdown">
+                        <option value="">请选择。。</option>
+                    </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
@@ -66,16 +68,13 @@
     <!--DISPLAY MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
-        <div ng-bind="data.type" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.industry" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.position" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.type.value" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.industry.value" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.job.value" class="b-profile-right-section-txt"></div>
         <div class="b-profile-right-section-txt">
             <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
-            <!--<div>
-              TODO, till now
-            </div>-->
+            <span ng-bind-template="{{data.dateTo.value.tillNow ? '至今' : data.dateTo.value.year + '年' + data.dateTo.value.month + '月'}}"></span>
         </div>
         <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
         <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>
