@@ -118,7 +118,7 @@ function updateOtherData(req, res, next) {
             //TODO
             //TEST CODES BELOW
 //          retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
-            retParam = d.member_id;
+            retParam.member_id = d.member_id;
             /////////
             return retParam;
         }
