@@ -48,8 +48,7 @@ module.exports = {
     }),
 
     addEducation: proxyBPlus({
-        path: '/profile/education/add',
-        dataMapper: mapEducation
+        path: '/profile/education/add'
     }),
 
     updateEducation: proxyBPlus({
@@ -58,9 +57,25 @@ module.exports = {
             d.education_id = d.educationId;
             delete d.educationId;
 
-            return mapEducation(d);
+            return d;
         }
     }),
+
+    dataSanitanze: function (req, res, next) {
+        mapEducation(req.body);
+        next();
+    },
+
+    dataValidate: function (req, res, next) {
+        if (req.body.end_date < req.body.start_date) {
+            res.status(401).json({
+                code: 'DATA_ERROR',
+                message: 'The end date should not be earlier than the start date'
+            });
+        } else {
+            next();
+        }
+    },
 
     getResource: function (req, res, next) {
         var language = 'zh-CN';

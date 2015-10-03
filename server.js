@@ -128,7 +128,13 @@ server.get('/data', require('./client/www/api/data.js').getData);
 mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
-mapRoute2Template('/set-password');
+server.get(localeHelper.regexPath('/set-password'), function (req, res, next) {
+    if (!/mobile/i.test(req.headers['user-agent'])) {
+        res.render('set-password');
+    } else {
+        res.render('mobile/set-password');
+    }
+});
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
 mapRoute2Template('/profile');

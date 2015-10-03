@@ -91,6 +91,18 @@
                 return;
             }
 
+            if ($scope.schoolInfo.endYear && !$scope.schoolInfo.endMonth) {
+                FormValidation.handleFormError($form2, $filter('translate')('请选择毕业月份'));
+
+                return;
+            }
+
+            if ($scope.schoolInfo.endMonth && !$scope.schoolInfo.endYear) {
+                FormValidation.handleFormError($form2, $filter('translate')('请选择毕业年份'));
+
+                return;
+            }
+
             if (submitting) {
                 return;
             }
@@ -311,22 +323,6 @@
                         type: 'empty',
                         prompt: $filter('translate')('请选择求学开始月份')
                     }]
-                },
-
-                schoolEndYear: {
-                    identifier: 'schoolEndYear',
-                    rules: [{
-                        type: 'empty',
-                        prompt: $filter('translate')('请选择毕业年份')
-                    }]
-                },
-
-                schoolEndMonth: {
-                    identifier: 'schoolEndMonth',
-                    rules: [{
-                        type: 'empty',
-                        prompt: $filter('translate')('请选择毕业月份')
-                    }]
                 }
             }
         }));
@@ -390,16 +386,29 @@
                         if (first.end_date) {
                             endDate = new Date(first.end_date);
                         }
+                        $timeout(function () {
 
-                        $scope.schoolInfo.startYear = startDate ? startDate.getUTCFullYear() : null;
-                        $scope.schoolInfo.startMonth = startDate ? startDate.getUTCMonth() + 1 : null;
-                        $scope.schoolInfo.endYear = endDate ? endDate.getUTCFullYear() : null;
-                        $scope.schoolInfo.endMonth = endDate ? endDate.getUTCMonth() + 1 : null;
+                            $scope.schoolInfo.startYear = startDate ? startDate.getUTCFullYear().toString() : null;
+                            $scope.schoolInfo.startMonth = startDate ? (startDate.getUTCMonth() + 1).toString() : null;
+                            $scope.schoolInfo.endYear = endDate ? endDate.getUTCFullYear().toString() : null;
+                            $scope.schoolInfo.endMonth = endDate ? (endDate.getUTCMonth() + 1).toString() : null;
 
-                        $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
-                        $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
-                        $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
-                        $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
+                            if ($scope.schoolInfo.startYear) {
+                                $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
+                            }
+
+                            if ($scope.schoolInfo.startMonth) {
+                                $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
+                            }
+
+                            if ($scope.schoolInfo.endYear) {
+                                $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
+                            }
+
+                            if ($scope.schoolInfo.endMonth) {
+                                $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
+                            }
+                        }, 1000);
                     }
                 });
         }

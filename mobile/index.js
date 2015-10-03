@@ -1,11 +1,14 @@
-module.exports = require('express').Router()
-    .use(function (req, res, next) {
-        req.dualLog('mobile is being calling from ' + req.host + '...');
-        req.dualLog(req.url);
+var router = require('express').Router();
 
-        next();
-    })
-    .get('/sign-in', function (req, res, next) {
-        res.render('mobile/sign-in');
-    })
-;
+function mapPath2Template(path) {
+    router.get(path, function (req, res, next) {
+        res.render('mobile' + path);
+    });
+}
+
+mapPath2Template('/sign-in');
+mapPath2Template('/reset-password');
+mapPath2Template('/reset-password-by-email');
+mapPath2Template('/personal-history');
+
+module.exports = router;

@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= __('SEOTitle_SignIn') %></title>
     <meta name="description" content="<%= __('SEODesc_SignIn') %>">
-    <%- include('../view-partial/head.html') -%>
+    <%- include('head.html') -%>
 </head>
 
 <body ng-app="signIn" ng-controller="AppCtrl" class="b-background">
 <%- include('header.html') -%>
-<div class="ui b-signin-wrapper">
-    <div class="ui column b-signin-container b-background-lighter">
-        <div class="b-signin-wide" tab=".b-signin-wide">
+<div class="ui b-signin-wrapper padded container subcontainer">
+    <div class="ui column b-signin-container b-background-lighter padded container subcontainer">
+        <div class="b-signin-wide padded" tab=".b-signin-wide">
             <%- include('../view-partial/sign-in.html') -%>
         </div>
     </div>

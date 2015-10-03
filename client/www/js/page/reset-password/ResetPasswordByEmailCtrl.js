@@ -41,7 +41,9 @@
                     $shape.shape('flip over').find('.active.side').removeClass('hidden');
                 }, function (reason) {
                     FormValidation.handleFormError($form, reason, $scope.resetData.email);
-                    $scope.refreshCaptcha();
+                    $scope.refreshCaptcha(function () {
+                        $scope.resetData.captcha = '';
+                    });
                 }).finally(function () {
                     submitting = false;
                 });
@@ -60,7 +62,9 @@
                 return str.indexOf(suffix, str.length - suffix.length) >= 0;
             }
 
-            var providers = {};
+            var providers = {
+                "hotmail.com": "//outlook.com"
+            };
 
             for (var p in providers) {
                 if (endsWith($scope.resetData.email, p)) {

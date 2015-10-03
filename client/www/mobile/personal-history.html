@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= __('SEOTitle_PersonalHistory') %></title>
     <meta name="description" content="<%= __('SEODesc_PersonalHistory') %>">
-    <%- include('view-partial/head.html') -%>
+    <%- include('head.html') -%>
 </head>
 
 <body ng-app="personalHistory" ng-controller="AppCtrl">
-<%- include('view-partial/header.html') -%>
-<div class="ui b-signin-wrapper">
+<%- include('header.html') -%>
+<div class="ui b-signin-wrapper" style="padding-top: 0;">
     <div class="ui success message brand" ng-hide="userHide === true">
         <i class="large close icon mobile-hidden" ng-click="userHide = true"></i>
         <i class="large close remove circle icon mobile" ng-click="userHide = true"></i>
@@ -220,125 +220,63 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="two fields mobile-hidden">
-                                <div class="nine wide field">
-                                    <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
+                            <div class="field">
+                                <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
 
-                                    <div class="inline tense fields">
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolStartYear"
-                                                    ng-model="schoolInfo.startYear">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{y}}" ng-repeat="y in startYearList" dropdown>{{y}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Year') %>
-                                        </div>
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolStartMonth"
-                                                    ng-model="schoolInfo.startMonth">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Month') %>
-                                        </div>
-                                        <div class="field">
-                                            —
-                                        </div>
+                                <div class="inline fields">
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown defer" name="schoolStartYear"
+                                                ng-model="schoolInfo.startYear">
+                                            <option value=""><%= __('Select') %></option>
+                                            <option value="{{y}}" ng-repeat="y in startYearList" dropdown>{{y}}
+                                            </option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="eight wide field">
-                                    <label><i class="ui large red icon">*</i><%= __('GraduateIn') %> (<%= __('至今请不填')
-                                        %>)</label>
-
-                                    <div class="inline tense fields">
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolEndYear"
-                                                    ng-model="schoolInfo.endYear">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{y}}" ng-repeat="y in endYearList" dropdown>{{y}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Year') %>
-                                        </div>
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolEndMonth"
-                                                    ng-model="schoolInfo.endMonth">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Month') %>
-                                        </div>
+                                    <div class="field">
+                                        <%= __('Year') %>
+                                    </div>
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown defer" name="schoolStartMonth"
+                                                ng-model="schoolInfo.startMonth">
+                                            <option value=""><%= __('Select') %></option>
+                                            <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <%= __('Month') %>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mobile">
-                                <div class="field">
-                                    <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
+                            <div class="field">
+                                <label><i class="ui large red icon">*</i><%= __('GraduateIn') %> (<%= __('至今请不填')
+                                    %>)</label>
 
-                                    <div class="inline tense fields">
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolStartYear"
-                                                    ng-model="schoolInfo.startYear">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{y}}" ng-repeat="y in startYearList" dropdown>{{y}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Year') %>
-                                        </div>
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolStartMonth"
-                                                    ng-model="schoolInfo.startMonth">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Month') %>
-                                        </div>
+                                <div class="inline fields">
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown defer" name="schoolEndYear"
+                                                ng-model="schoolInfo.endYear">
+                                            <option value=""><%= __('Select') %></option>
+                                            <option value="{{y}}" ng-repeat="y in endYearList" dropdown>{{y}}
+                                            </option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="field">
-                                    <label><i class="ui large red icon">*</i><%= __('GraduateIn') %></label>
-
-                                    <div class="inline tense fields">
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolEndYear"
-                                                    ng-model="schoolInfo.endYear">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{y}}" ng-repeat="y in endYearList" dropdown>{{y}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Year') %>
-                                        </div>
-                                        <div class="field">
-                                            <select class="ui fluid search dropdown defer" name="schoolEndMonth"
-                                                    ng-model="schoolInfo.endMonth">
-                                                <option value=""><%= __('Select') %></option>
-                                                <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <%= __('Month') %>
-                                        </div>
+                                    <div class="field">
+                                        <%= __('Year') %>
+                                    </div>
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown defer" name="schoolEndMonth"
+                                                ng-model="schoolInfo.endMonth">
+                                            <option value=""><%= __('Select') %></option>
+                                            <option value="{{m}}" ng-repeat="m in monthList" dropdown>{{m}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <%= __('Month') %>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="ui horizontal divider"></div>
                         <div class="ui right aligned container subcontainer mobile-hidden">
                             <button type="button" class="ui large red basic button left floated" ng-click="prevStep()">
                                 <%= __('PreviousStep') %>
@@ -358,13 +296,13 @@
 
     </div>
 </div>
-<%- include('view-partial/footer.html') -%>
+<%- include('footer.html') -%>
 <!--Page JS-->
 
 <!-- build:js js/cdn/personal-history.<%= grunt.file.readJSON('package.json').version %>.js -->
-<script src="js/directives/dropdown.js"></script>
-<script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
-<script src="js/page/personal-histroy/main.js"></script>
+<script src="../js/directives/dropdown.js"></script>
+<script src="../js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
+<script src="../js/page/personal-histroy/main.js"></script>
 <!-- endbuild -->
 </body>
 
