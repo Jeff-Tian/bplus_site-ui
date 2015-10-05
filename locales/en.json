@@ -115,6 +115,7 @@
   "EmailVerifiedSuccess": "Congratulates, your email passes validation",
   "发生未知错误": "Met an unknown error",
   "Cancel": "Cancel",
+  "绑定": "Bind",
   "zh": "中文",
   "service-70006": "Invalid identity or password",
   "service-70009": "Identity already existed",

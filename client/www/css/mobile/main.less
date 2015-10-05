@@ -11,6 +11,14 @@
 .full-height {
     position: relative;
     height: 100%;
+
+    .mobile.bottom {
+        bottom: 0 !important;
+    }
+
+    .mobile.attached {
+        position: absolute !important;
+    }
 }
 
 .full-wide {
@@ -46,6 +54,10 @@
     padding-top: 0;
 }
 
-.has-bottom {
+.has-bottom, .has-footer {
     padding-bottom: 70px;
+}
+
+.b-bind-mobile-container {
+    padding-bottom: 2em;
 }

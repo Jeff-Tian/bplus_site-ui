@@ -6,9 +6,15 @@ function mapPath2Template(path) {
     });
 }
 
+router.get('/', function (req, res, next) {
+    res.render('mobile/sign-in');
+});
+
 mapPath2Template('/sign-in');
 mapPath2Template('/reset-password');
 mapPath2Template('/reset-password-by-email');
 mapPath2Template('/personal-history');
+mapPath2Template('/bind-mobile');
+mapPath2Template('/bind-mobile-by-password');
 
 module.exports = router;

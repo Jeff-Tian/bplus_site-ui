@@ -19,6 +19,7 @@
         var submitting = false;
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
+            $event.stopPropagation();
 
             if (submitting) {
                 return;

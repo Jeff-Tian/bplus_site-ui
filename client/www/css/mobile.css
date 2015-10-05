@@ -10,6 +10,12 @@
   position: relative;
   height: 100%;
 }
+.full-height .mobile.bottom {
+  bottom: 0 !important;
+}
+.full-height .mobile.attached {
+  position: absolute !important;
+}
 .full-wide {
   width: 100% !important;
 }
@@ -35,6 +41,10 @@
 .b-signin-wide form {
   padding-top: 0;
 }
-.has-bottom {
+.has-bottom,
+.has-footer {
   padding-bottom: 70px;
+}
+.b-bind-mobile-container {
+  padding-bottom: 2em;
 }
