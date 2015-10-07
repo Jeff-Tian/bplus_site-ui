@@ -33,6 +33,7 @@ define([
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: true
                  },
                  value: $scope.data.dateFrom.value,
@@ -43,6 +44,7 @@ define([
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: false
                  },
                  value: $scope.data.dateTo.value,
@@ -78,6 +80,8 @@ define([
                });
                $scope.submit = function() {
                  $scope.clicked = true;
+                 $scope.dateFrom.config.displayError = true;
+                 $scope.dateTo.config.displayError = true;
                  if (!!(!$scope.dateFrom.fulfilled || !($scope.data.dateTo.value.tillNow || $scope.dateTo.fulfilled) || $scope.clubbackground.$error.required)) {
                    return;
                  }
@@ -94,6 +98,3 @@ define([
   
   return ListClubBackground;
 });
-//TODO
-//目前参与中
-//tillnow

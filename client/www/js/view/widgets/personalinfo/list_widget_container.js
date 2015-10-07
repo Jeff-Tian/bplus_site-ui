@@ -47,14 +47,10 @@ define([
                             }, function() {
                               scope.showAddButton = true;
                               return updateData();
-                              //TODO
-                              //ERROR HANDLING?
                             });
                         };
                         scope.cancel = function (data) {
                             scope.showAddButton = true;
-                            //TODO
-                            //Known issue, will refresh all the status.
                             updateData();
                         };
                         scope.edit = function (data) {

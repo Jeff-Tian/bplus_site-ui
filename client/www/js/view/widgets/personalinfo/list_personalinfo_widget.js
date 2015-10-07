@@ -34,6 +34,7 @@ define([
                                         showYear: true,
                                         showMonth: true,
                                         showDay: true,
+                                        displayError: false,
                                         display: true
                                     },
                                     value: $scope.data.dateOfBirth.value,
@@ -42,6 +43,7 @@ define([
                                 me.createActions($scope, "personalinfo", false, true, true);
                                 $scope.submit = function () {
                                     $scope.clicked = true;
+                                    $scope.dateSelect.config.displayError = true;
                                     if (!!(!$scope.dateSelect.fulfilled || $scope.personalinfo.$error.required)) {
                                         return;
                                     }

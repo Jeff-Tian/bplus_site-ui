@@ -63,15 +63,12 @@ define([
           var cachedData = self.resourceData[url];
           var promise;
           if (cachedData) {
-              console.log("cache");
               promise = when(cachedData);
           } else {
               var bridgePromise;
               if (self.resourcePromiseCache[url]) {
-                  console.log("promise cache");
                   bridgePromise = self.resourcePromiseCache[url];
               } else {
-                  console.log("ajax call");
                   bridgePromise = $.ajax({
                       type:"get",
                       url: url,

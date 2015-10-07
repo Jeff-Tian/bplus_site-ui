@@ -5,13 +5,13 @@
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
                 <div class="two fields">
-                    <div class="required field {{data.language.id ? '' : 'error'}}">
+                    <div class="required field {{!clicked || data.language.id ? '' : 'error'}}">
                         <label>使用语言</label>
                         <select name="languagename" ng-model="data.language.id" ng-options="value.id as value.text for value in languages" required class="ui fluid dropdown">
                             <option value="">选择。。</option>
                         </select>
                     </div>
-                    <div class="required field {{data.proficiency.id ? '' : 'error'}}">
+                    <div class="required field {{!clicked || data.proficiency.id ? '' : 'error'}}">
                         <label>熟练程度</label>
                         <select name="proficiency" ng-model="data.proficiency.id" ng-options="value.id as value.text for value in proficiencys" required class="ui fluid dropdown">
                             <option value="">选择。。</option>

@@ -92,9 +92,13 @@ define([
 //        }
           config: "=",
           value: "=",
-          fulfilled: "="
+          fulfilled: "=",
+          displayError: "="
         },
         link: function(scope, element) {
+          if (typeof scope.displayError === "boolean") {
+            debugger;
+          }
           if (!scope.config.begin) {
             scope.config.begin = {
               year: CURRENT_YEAR - YEAR_RANGE,

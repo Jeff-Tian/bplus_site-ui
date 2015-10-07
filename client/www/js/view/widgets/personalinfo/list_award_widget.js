@@ -33,6 +33,7 @@ define([
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: true
                  },
                  value: $scope.data.prizeDate.value,
@@ -41,6 +42,7 @@ define([
                me.createActions($scope, "award", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
+                 $scope.dateSelect.config.displayError = true;
                  if (!!(!$scope.dateSelect.fulfilled || $scope.award.$error.required)) {
                    return;
                  }

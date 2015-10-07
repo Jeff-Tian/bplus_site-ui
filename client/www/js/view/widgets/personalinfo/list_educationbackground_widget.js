@@ -33,6 +33,7 @@ define([
                                         showYear: true,
                                         showMonth: true,
                                         showDay: false,
+                                        displayError: false,
                                         display: true
                                     },
                                     value: $scope.data.dateFrom.value,
@@ -43,6 +44,7 @@ define([
                                         showYear: true,
                                         showMonth: true,
                                         showDay: false,
+                                        displayError: false,
                                         display: false
                                     },
                                     value: $scope.data.dateTo.value,
@@ -78,6 +80,8 @@ define([
                                 });
                                 $scope.submit = function () {
                                     $scope.clicked = true;
+                                    $scope.dateFrom.config.displayError = true;
+                                    $scope.dateTo.config.displayError = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {
                                         return;
                                     }

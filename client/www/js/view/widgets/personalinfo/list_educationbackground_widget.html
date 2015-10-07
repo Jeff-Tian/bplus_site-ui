@@ -4,15 +4,15 @@
         <form name="educationbackground" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateTo.fulfilled || !dateFrom.fulfilled || educationbackground.$error.required)) ? 'error' : ''}}">
             <div>
                 <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
-                <div class="required field {{data.name ? '' : 'error'}}">
+                <div class="required field {{!clicked || data.name ? '' : 'error'}}">
                     <label>学校名称</label>
                     <input type="text" name="schoolname" ng-model="data.name" required placeholder="上海交通大学" />
                 </div>
-                <div class="required field {{data.major ? '' : 'error'}}">
+                <div class="required field {{!clicked || data.major ? '' : 'error'}}">
                     <label>所学专业</label>
                     <input type="text" name="major" ng-model="data.major" required placeholder="计算机工程" />
                 </div>
-                <div class="required field {{data.background.id ? '' : 'error'}}">
+                <div class="required field {{!clicked || data.background.id ? '' : 'error'}}">
                     <label>学历</label>
                     <select name="background" ng-model="data.background.id" ng-options="value.id as value.text for value in backgrounds" required class="ui fluid dropdown">
                         <option value="">请选择。。</option>
@@ -62,7 +62,3 @@
         <div ng-bind="data.specialTags" class="b-profile-right-section-txt" ng-click="edit()"></div>
     </div>
 </div>
-<!--<div>
-  TODO
-  ng-show
-</div>-->
