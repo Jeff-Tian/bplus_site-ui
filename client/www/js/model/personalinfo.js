@@ -33,6 +33,7 @@ define([
                       if (targetObject.hasOwnProperty("tillNow") && (dateValue.getFullYear() === 1900) && (dateValue.getMonth() === 0) && (dateValue.getDate() === 1)) {
                           targetObject.tillNow = true;
                       } else {
+                          targetObject.rawValue = dateValue;
                           targetObject.year = dateValue.getFullYear();
                           targetObject.month = dateValue.getMonth() + 1;
                           targetObject.day = dateValue.getDate();

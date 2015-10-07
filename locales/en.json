@@ -1,4 +1,5 @@
 {
+  "ProfileHint": "Complete \"Personal Information\" and \"Education\" to join the group battle!",
   "Hello": "Hello",
   "SEOTitle_SignIn": "Log On to Bridge+",
   "SEODesc_SignIn": "Bridge+",
@@ -73,7 +74,7 @@
   "Day": "Day",
   "Male": "Male",
   "Female": "Female",
-  "SetPrivacy": "set privacy",
+  "SetPrivacy": "set as privacy",
   "CurrentLocation": "Current location",
   "PleaseInputCurrentLocation": "Please input your current location",
   "NextStepEducation": "Next Step: Complete your education background",

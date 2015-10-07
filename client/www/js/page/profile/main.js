@@ -25,9 +25,9 @@ require.config({
         "propertyParser": "requirejs-plugins/src/propertyParser",
         "angular": "angular/angular",
         "angular-route": "angular-route/angular-route",
+        "angular-translate": "angular-translate/angular-translate.min",
         'domReady': 'requirejs-domready/domReady',
-        "semantic": "semantic-ui/dist/semantic",
-        "bplus-mock": "../mock"
+        "semantic": "semantic-ui/dist/semantic"
     },
     "shim": {
         'angular': {
@@ -36,6 +36,10 @@ require.config({
         "angular-route": {
             deps: ["angular"],
             exports: "angular-route"
+        },
+        "angular-translate": {
+            deps: ["angular"],
+            exports: "angular-translate"
         },
         'semantic': {
             deps: ["jquery"]
@@ -47,11 +51,13 @@ require.config({"context": "bplus"})([
     "require",
     "less",
     "semantic",
-    "angular-route"
+    "angular-route",
+    "angular-translate"
 ], function (pRequire,
              less,
              semantic,
-             agRoute) {
+             agRoute,
+             agTranslate) {
     pRequire([
         "angular",
 
@@ -99,7 +105,9 @@ require.config({"context": "bplus"})([
                  awardContainerTemplate,
                  languageContainerTemplate) {
         var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
+                .config(angular.bplus.translate)
                 .controller('AppCtrl', angular.bplus.AppCtrl)
+                .factory('translationLoader', angular.bplus.translationLoader)
                 .factory('FormValidation', angular.bplus.FormValidation)
                 .factory('service', angular.bplus.service)
                 .factory('MessageStore', angular.bplus.MessageStore)
