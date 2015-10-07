@@ -34,10 +34,10 @@
     <!--DISPLAY MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
-        <div ng-bind="data.organization" class="b-profile-right-section-txt"></div>
-        <div ng-bind-template="{{data.prizeDate.value.year}}年{{data.prizeDate.value.month}}月" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.organization" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind-template="{{data.prizeDate.value.year}}年{{data.prizeDate.value.month}}月" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind="data.description" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind="data.tags" class="b-profile-right-section-txt" ng-click="edit()"></div>
     </div>
 </div>
 <!--<div>

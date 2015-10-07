@@ -100,7 +100,7 @@ define([
                });
                $scope.submit = function() {
                  $scope.clicked = true;
-                 if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.workexperience.$error.required)) {
+                 if (!!(!($scope.data.dateTo.value.tillNow || $scope.dateTo.fulfilled) || !$scope.dateFrom.fulfilled || $scope.workexperience.$error.required)) {
                    return;
                  }
                  if (me.submit) {

@@ -56,15 +56,15 @@
     <!--DISPLAY MODE-->
     <div ng-show="property.status===ENUM_STATUS.STATUS_READONLY" class="b-profile-right-section-displaymode">
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
-        <div ng-bind="data.major" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.position.value" class="b-profile-right-section-txt"></div>
-        <div class="b-profile-right-section-txt">
+        <div ng-bind="data.major" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind="data.position.value" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div class="b-profile-right-section-txt" ng-click="edit()">
             <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
             <span>----</span>
             <span ng-bind-template="{{data.dateTo.value.tillNow ? '至今' : data.dateTo.value.year + '年' + data.dateTo.value.month + '月'}}"></span>
         </div>
-        <div ng-bind="data.description" class="b-profile-right-section-txt"></div>
-        <div ng-bind="data.tags" class="b-profile-right-section-txt"></div>
+        <div ng-bind="data.description" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind="data.tags" class="b-profile-right-section-txt" ng-click="edit()"></div>
     </div>
 </div>
 <!--<div>
