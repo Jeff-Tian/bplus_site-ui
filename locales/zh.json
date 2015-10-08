@@ -12,6 +12,11 @@
   "FormMonth": "月",
   "FormDay": "日",
   "Tag": "标签",
+  "Skill": "技能",
+  "NotFullfilled": "你还没填写",
+  "AddSkill": "添加技能",
+  "SkillName": "技能名称",
+  "SkillDesciption": "技能描述",
   
   "Hello": "你好",
   "SEOTitle_SignIn": "登录到 Bridge+",
