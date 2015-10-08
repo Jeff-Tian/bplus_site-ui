@@ -28,6 +28,11 @@ define([
               $scope.property = {
                 status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
+              if ($scope.data.prizeDate.value.rawValue) {
+                  var lng = me.getLanguage();
+                  var options = {year: 'numeric', month: 'long'};
+                  $scope.data.prizeDate.displayValue = $scope.data.prizeDate.value.rawValue.toLocaleString(lng, options);
+              }
                $scope.dateSelect = {
                  config: {
                    showYear: true,

@@ -3,30 +3,30 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
         <form name="language" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && language.$error.required) ? 'error' : ''}}">
             <div>
-                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="two fields">
                     <div class="required field {{!clicked || data.language.id ? '' : 'error'}}">
-                        <label>使用语言</label>
+                        <label>{{'LanguageName' | translate}}</label>
                         <select name="languagename" ng-model="data.language.id" ng-options="value.id as value.text for value in languages" required class="ui fluid dropdown">
-                            <option value="">选择。。</option>
+                            <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
                     <div class="required field {{!clicked || data.proficiency.id ? '' : 'error'}}">
-                        <label>熟练程度</label>
+                        <label>{{'Proficiency' | translate}}</label>
                         <select name="proficiency" ng-model="data.proficiency.id" ng-options="value.id as value.text for value in proficiencys" required class="ui fluid dropdown">
-                            <option value="">选择。。</option>
+                            <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="two fields">
                     <div class="field">
-                        <label>证书</label>
+                        <label>{{'Certification' | translate}}</label>
                         <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" required class="ui fluid dropdown">
-                            <option value="">选择。。</option>
+                            <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
                     <div class="field">
-                        <label>分数</label>
+                        <label>{{'Score' | translate}}</label>
                         <input type="text" name="score" ng-model="data.score" />
                     </div>
                 </div>
