@@ -83,10 +83,6 @@ function updateMemberData(req, res, next) {
                     resolve(chunks);
                     return true;
                 };
-                //TODO
-                //TEST CODES BELOW
-                param.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
-                /////////
                 newReq.body = param;
                 proxy.execute(newReq, res, $noop, serviceParam);
             }));
@@ -115,11 +111,7 @@ function updateOtherData(req, res, next) {
                     retParam[value] = originValue;
                 }
             });
-            //TODO
-            //TEST CODES BELOW
-//          retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
             retParam.member_id = d.member_id;
-            retParam.member_id = "d74623c0-5265-4b28-b11c-dd8758423a7b";
             return retParam;
         }
     })(req, res, next);
