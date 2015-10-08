@@ -28,6 +28,14 @@ define([
               $scope.property = {
                 status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
+              var lng = me.getLanguage();
+              var options = {year: 'numeric', month: 'long'};
+              if ($scope.data.dateTo.value.rawValue) {
+                  $scope.data.dateTo.displayValue = $scope.data.dateTo.value.rawValue.toLocaleString(lng, options);
+              }
+              if ($scope.data.dateFrom.value.rawValue) {
+                  $scope.data.dateFrom.displayValue = $scope.data.dateFrom.value.rawValue.toLocaleString(lng, options);
+              }
                $scope.dateFrom = {
                  config: {
                    showYear: true,
