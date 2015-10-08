@@ -36,6 +36,7 @@ define([
                                 if ($scope.data.dateFrom.value.rawValue) {
                                     $scope.data.dateFrom.displayValue = $scope.data.dateFrom.value.rawValue.toLocaleString(lng, options);
                                 }
+                                var today = new Date();
                                 $scope.dateFrom = {
                                     config: {
                                         showYear: true,
@@ -53,7 +54,12 @@ define([
                                         showMonth: true,
                                         showDay: false,
                                         displayError: false,
-                                        display: false
+                                        display: false,
+                                        end: {
+                                            year: today.getFullYear() + 10,
+                                            month: 11,
+                                            day: 31
+                                        }
                                     },
                                     value: $scope.data.dateTo.value,
                                     fulfilled: false
