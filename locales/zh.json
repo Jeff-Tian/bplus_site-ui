@@ -8,6 +8,11 @@
   "CurrentLocationIs": "目前人在",
   "M": "男",
   "F": "女",
+  "FormYear": "年",
+  "FormMonth": "月",
+  "FormDay": "日",
+  "Tag": "标签",
+  
   "Hello": "你好",
   "SEOTitle_SignIn": "登录到 Bridge+",
   "SEODesc_SignIn": "Bridge+",
