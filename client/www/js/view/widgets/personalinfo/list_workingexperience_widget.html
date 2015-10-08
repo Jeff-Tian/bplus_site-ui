@@ -3,33 +3,33 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
         <form name="workexperience" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateFrom.fulfilled || !(dateTo.fulfilled || data.dateTo.value.tillNow) || workexperience.$error.required)) ? 'error' : ''}}">
             <div>
-                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="required field {{!clicked || data.name ? '' : 'error'}}">
-                    <label>公司名称</label>
+                    <label>{{'CompanyName' | translate}}</label>
                     <input type="text" name="companyname" ng-model="data.name" required />
                 </div>
                 <div class="required field {{!clicked || data.type.id ? '' : 'error'}}">
-                    <label>工作类型</label>
+                    <label>{{'TypeofWork' | translate}}</label>
                     <select name="background" ng-model="data.type.id" ng-options="value.id as value.text for value in types" required class="ui fluid dropdown">
-                        <option value="">请选择。。</option>
+                        <option value="">{{'PleaseSelect' | translate}}</option>
                     </select>
                 </div>
                 <div class="required field {{!clicked || data.industry.id ? '' : 'error'}}">
-                    <label>行业</label>
+                    <label>{{'Industry' | translate}}</label>
                     <select name="background" ng-model="data.industry.id" ng-options="value.id as value.text for value in industrys" required class="ui fluid dropdown">
-                        <option value="">请选择。。</option>
+                        <option value="">{{'PleaseSelect' | translate}}</option>
                     </select>
                 </div>
                 <div class="required field {{!clicked || data.job.id ? '' : 'error'}}">
-                    <label>职位</label>
+                    <label>{{'Position' | translate}}</label>
                     <select name="background" ng-model="data.job.id" ng-options="value.id as value.text for value in jobs" required class="ui fluid dropdown">
-                        <option value="">请选择。。</option>
+                        <option value="">{{'PleaseSelect' | translate}}</option>
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
                         <div class="required field">
-                            <label>工作时间</label>
+                            <label>{{'WorkingPeriod' | translate}}</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields"/>
                         </div>
                     </div>
@@ -45,21 +45,21 @@
                         <div class="field">
                             <div class="ui checkbox">
                                 <input type="checkbox" ng-model="data.dateTo.value.tillNow" />
-                                <label>目前工作中</label>
+                                <label>{{'WorkingTillNow' | translate}}</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="field">
-                    <label>经历描述</label>
+                    <label>{{'WorkingDescription' | translate}}</label>
                     <bplustag value="data.tags" description="data.description" />
                 </div>
                 <div class="ui three column grid">
                     <div class="column">
-                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">{{'Save' | translate}}</button>
                     </div>
                     <div class="column">
-                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">{{'Cancel' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -72,9 +72,9 @@
         <div ng-bind="data.industry.value" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div ng-bind="data.job.value" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div class="b-profile-right-section-txt" ng-click="edit()">
-            <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
+            <span ng-bind-template="{{data.dateFrom.displayValue}}"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.tillNow ? '至今' : data.dateTo.value.year + '年' + data.dateTo.value.month + '月'}}"></span>
+            <span ng-bind-template="{{data.dateTo.value.tillNow ? ('TillNow' | translate) : data.dateFrom.displayValue}}"></span>
         </div>
         <div ng-bind="data.description" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div ng-bind="data.tags" class="b-profile-right-section-txt" ng-click="edit()"></div>
