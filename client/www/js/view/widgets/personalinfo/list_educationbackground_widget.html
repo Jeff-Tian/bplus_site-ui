@@ -3,46 +3,46 @@
     <div ng-show="property.status===ENUM_STATUS.STATUS_EDIT" class="b-profile-right-section-form">
         <form name="educationbackground" novalidate class="ui {{isSubmitting ? 'loading' : ''}} form {{(clicked && (!dateTo.fulfilled || !dateFrom.fulfilled || educationbackground.$error.required)) ? 'error' : ''}}">
             <div>
-                <div class="ui error message">红框处必填字段未完成，请全部填写完成后按下保存</div>
+                <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="required field {{!clicked || data.name ? '' : 'error'}}">
-                    <label>学校名称</label>
-                    <input type="text" name="schoolname" ng-model="data.name" required placeholder="上海交通大学" />
+                    <label>{{'SchoolName' | translate}}</label>
+                    <input type="text" name="schoolname" ng-model="data.name" required placeholder="" />
                 </div>
                 <div class="required field {{!clicked || data.major ? '' : 'error'}}">
-                    <label>所学专业</label>
-                    <input type="text" name="major" ng-model="data.major" required placeholder="计算机工程" />
+                    <label>{{'Major' | translate}}</label>
+                    <input type="text" name="major" ng-model="data.major" required placeholder="" />
                 </div>
                 <div class="required field {{!clicked || data.background.id ? '' : 'error'}}">
-                    <label>学历</label>
+                    <label>{{'Qualification' | translate}}</label>
                     <select name="background" ng-model="data.background.id" ng-options="value.id as value.text for value in backgrounds" required class="ui fluid dropdown">
-                        <option value="">请选择。。</option>
+                        <option value="">{{'PleaseSelect' | translate}}</option>
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
                     <div class="eight wide column">
                         <div class="required field">
-                            <label>求学时间</label>
+                            <label>{{'StudyPeriod' | translate}}</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
                         </div>
                     </div>
                     <div class="p-profile-right-section-form-bplusdate-shortline"></div>
                     <div class="eight wide column">
                         <div class="required field">
-                            <label>毕业时间</label>
+                            <label>{{'GraduateIn' | translate}}</label>
                             <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled" class="inline fields" />
                         </div>
                     </div>
                 </div>
                 <div class="field">
-                    <label>特殊经历</label>
-                    <bplustag value="data.tags" description="data.description" />
-                </div>
+                  <label>{{'SpecialExperience' | translate}}</label>
+-                    <bplustag value="data.tags" description="data.description" />
+-                </div>
                 <div class="ui three column grid">
                     <div class="column">
-                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">{{'Save' | translate}}</button>
                     </div>
                     <div class="column">
-                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">{{'Cancel' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -54,9 +54,9 @@
         <div ng-bind="data.major" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div ng-bind="data.background.value" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div class="b-profile-right-section-txt" ng-click="edit()">
-            <span ng-bind-template="{{data.dateFrom.value.year}}年{{data.dateFrom.value.month}}月"></span>
+            <span ng-bind-template="{{data.dateFrom.displayValue}}"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.year}}年{{data.dateTo.value.month}}月"></span>
+            <span ng-bind-template="{{data.dateTo.displayValue}}"></span>
         </div>
         <div ng-bind="data.specialDescription" class="b-profile-right-section-txt" ng-click="edit()"></div>
         <div ng-bind="data.specialTags" class="b-profile-right-section-txt" ng-click="edit()"></div>
