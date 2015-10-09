@@ -20,6 +20,10 @@
             //host: '10.20.32.51',
             port: '10001'
         },
+        captchaInternal: {
+            host: 'uat.captcha.service.hcdlearning.com',
+            port: '10001'
+        },
         sso: {
             host: 'uat.service.hcd.com',
             //host: '10.20.32.61',
