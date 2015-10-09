@@ -14,7 +14,7 @@
             verificationCode: 'BP_M2'
         },
         captcha: {
-            host: 'qa.captcha.service.hcdlearning.com',
+            host: 'captcha.service.hcdlearning.com',
             port: '10001'
         },
         captchaInternal: {
@@ -50,7 +50,8 @@
                 "appName": "BridgePlus"
             }]
         },
-        applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504'
+        applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504',
+        port: 12000
     };
 
     if (typeof module !== 'undefined' && module.exports) {

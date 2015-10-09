@@ -13,7 +13,7 @@
       <div ng-repeat="data in dataCollection" class="b-profile-right-section-section">
           <bpluspersonalinfo data="data"/>
       </div>
-      <div ng-hide="hasData" ng-show="showAddButton" class="b-profile-right-section-btn-append">
+      <div ng-show="!hasData && showAddButton" class="b-profile-right-section-btn-append">
           <button class="fluid ui button" type="button" ng-click="add()">{{'AddPersoanlInfo' | translate}}</button>
       </div>
     </div>
