@@ -41,7 +41,7 @@
             "appenders": [{
                 "type": "console"
             }, {
-                "type": "log4js-cassandra",
+                "type": "log4js_cassandra",
                 "nodes": ["live.cass01.server", "live.cass02.server"],
                 "username": "cassandra",
                 "password": "HCDhcd@123",
