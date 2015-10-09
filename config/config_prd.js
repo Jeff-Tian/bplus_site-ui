@@ -42,7 +42,7 @@
                 "type": "console"
             }, {
                 "type": "log4js_cassandra",
-                "nodes": ["qa.cass01.server", "qa.cass02.server"],
+                "nodes": ["live.cass01.server", "live.cass02.server"],
                 "username": "cassandra",
                 "password": "HCDhcd@123",
                 "keyspace": "logdb",
