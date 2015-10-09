@@ -2,19 +2,19 @@
     var bplusServiceParams = (typeof require === "function") ? require("./config_bplusService") : {};
     var config = {
         sms: {
-            host: 'live.service.hcd.com',
+            host: 'qa.service.hcd.com',
             port: '10002',
             code: "BP_S1",
             enabled: true
         },
         mail: {
-            host: 'live.service.hcd.com',
+            host: 'qa.service.hcd.com',
             port: '10002',
             code: 'BP_M1',
             verificationCode: 'BP_M2'
         },
         captcha: {
-            host: 'live.captcha.service.hcdlearning.com',
+            host: 'qa.captcha.service.hcdlearning.com',
             port: '10001'
         },
         captchaInternal: {
@@ -22,15 +22,15 @@
             port: '10001'
         },
         sso: {
-            host: 'live.service.hcd.com',
+            host: 'qa.service.hcd.com',
             port: '10086'
         },
         bplusService: {
-            host: 'live.service.hcd.com',
+            host: 'qa.service.hcd.com',
             port: '12345'
         },
         wechat: {
-            host: 'live.service.hcd.com',
+            host: 'qa.service.hcd.com',
             port: '10101'
         },
         "bplusServiceParams": bplusServiceParams,
@@ -42,7 +42,7 @@
                 "type": "console"
             }, {
                 "type": "log4js_cassandra",
-                "nodes": ["live.cass01.server", "live.cass02.server"],
+                "nodes": ["qa.cass01.server", "qa.cass02.server"],
                 "username": "cassandra",
                 "password": "HCDhcd@123",
                 "keyspace": "logdb",
