@@ -17,6 +17,10 @@
             host: 'live.captcha.service.hcdlearning.com',
             port: '10001'
         },
+        captchaInternal: {
+            host: 'service.hcdlearning.com',
+            port: '10001'
+        },
         sso: {
             host: 'live.service.hcd.com',
             port: '10086'

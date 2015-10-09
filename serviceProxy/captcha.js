@@ -1,5 +1,5 @@
 var http = require('http');
-var captcha = require('../config').captcha;
+var captcha = require('../config').captchaInternal;
 var proxy = require('./proxy');
 
 module.exports = {
