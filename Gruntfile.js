@@ -100,7 +100,8 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return '//cdn.example.com/stuff/' + url;
+                                return url + '?cdnified';
+//                              return '//cdn.example.com/stuff/' + url;
                             } else {
                                 return url + '?cdnified';
                             }
