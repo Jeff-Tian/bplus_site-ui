@@ -87,7 +87,18 @@ supportedLocales.map(function (l) {
 
 var viewFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
 
-server.use('/config.js', express.static(__dirname + '/config/config_' + (process.env.NODE_ENV || 'dev') + '.js'));
+function filterConfig(config) {
+    var filtered = {};
+
+    filtered.captcha = config.captcha;
+
+    return filtered;
+}
+
+server.use('/config.js', function (req, res, next) {
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+});
+
 server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
 server.use('/translation', localeHelper.serveTranslations);
 

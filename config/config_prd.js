@@ -1,5 +1,3 @@
-(function () {
-    var bplusServiceParams = (typeof require === "function") ? require("./config_bplusService") : {};
     var config = {
         sms: {
             host: 'qa.service.hcd.com',
@@ -14,11 +12,11 @@
             verificationCode: 'BP_M2'
         },
         captcha: {
-            host: 'captcha.service.hcdlearning.com',
+            host: 'captcha.service.bridgeplus.cn',
             port: '10001'
         },
         captchaInternal: {
-            host: 'service.hcdlearning.com',
+            host: 'service.bridgeplus.cn',
             port: '10001'
         },
         sso: {
@@ -33,7 +31,7 @@
             host: 'qa.service.hcd.com',
             port: '10101'
         },
-        "bplusServiceParams": bplusServiceParams,
+        "bplusServiceParams": require("./config_bplusService"),
         "logger": {
             "levels": {
                 "[all]": "DEBUG"
@@ -54,10 +52,4 @@
         port: 12000
     };
 
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = config;
-    } else if (typeof angular !== 'undefined') {
-        angular.bplus = angular.bplus || {};
-        angular.bplus.config = config;
-    }
-})();
+module.exports = config;
