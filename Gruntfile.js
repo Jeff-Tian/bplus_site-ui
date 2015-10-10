@@ -10,7 +10,7 @@ var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
 var configStart = require(path + 'grunt/start.js');
-var siteConfig = require('./config');
+var prdConfig = require('./config/config_prd.js');
 
 // Create grunt module
 module.exports = function (grunt) {
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return siteConfig.cdn.normal + url;
+                                return prdConfig.cdn.normal + url;
                             } else {
                                 return url + '?cdnified';
                             }
@@ -151,6 +151,10 @@ module.exports = function (grunt) {
 
     // Copy to WEB
     grunt.registerTask('release', ['build']);
+    grunt.registerTask('local-release', ['mock-release', 'build', 'nodemon']);
+    grunt.registerTask('mock-release', function () {
+        process.env.NODE_ENV = 'prd';
+    });
 
     grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
 

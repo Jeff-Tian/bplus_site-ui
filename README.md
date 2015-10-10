@@ -13,13 +13,24 @@ bower install
 
 !!!BE SURE TO RUN ABOVE SCRIPTS EVERY SYNC UP!!!
 
-### Run project
+### Run project on dev mode
 
 ```
 grunt
 ```
 
-Now browse to the website at `http://localhost:8000/index`
+### Create release version
+LIVE environment will use release version files.
+```
+grunt release
+```
+
+### Create release version and run on local machine 
+```
+grunt local-release
+```
+
+Now browse to the website at `http://localhost:12000`
 
 ### Code format
 

@@ -10,6 +10,7 @@ APP_NAME="bplus"
 if [ -n "$PORT" ]; then
 	echo "Listening on port: $PORT"
 	export PORT
+	#export NODE_ENV
 fi
 
 #export NODE_ENV

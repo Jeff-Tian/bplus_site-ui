@@ -194,6 +194,7 @@ function logErrors(err, req, res, next) {
 
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
+        req.dualLogError(err);
         res.status(500).send({code: '500', message: 'Something blew up!'});
     } else {
         next(err);
@@ -201,6 +202,7 @@ function clientErrorHandler(err, req, res, next) {
 }
 
 function errorHandler(err, req, res, next) {
+    req.dualLogError(err);
     res.status(500).send('Something borke!');
     // TODO: prepare an error template
     //res.render('error', {error: err});

@@ -12,11 +12,11 @@ var config = {
         verificationCode: 'BP_M2'
     },
     captcha: {
-        host: 'uat.captcha.service.hcd.com',
+        host: 'uat.captcha.service.hcdlearning.com',
         port: '10001'
     },
     captchaInternal: {
-        host: 'uat.captcha.service.hcd.com',
+        host: 'uat.captcha.service.hcdlearning.com',
         port: '10001'
     },
     sso: {
@@ -28,7 +28,7 @@ var config = {
         port: '12345'
     },
     wechat: {
-        host: 'qa.service.hcd.com',
+        host: 'uat.service.hcd.com',
         port: '10101'
     },
     "bplusServiceParams": require("./config_bplusService"),
@@ -51,7 +51,7 @@ var config = {
     applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504',
     port: 12000,
     cdn: {
-        normal: "cdn.bridgeplus.cn/"
+        normal: "//cdn.bridgeplus.cn/"
     }
 };
 

@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     return {
         development: {
             options: {
@@ -7,8 +7,7 @@ module.exports = function() {
                 beautify: true
                 /*Sitemap*/
             },
-            files: {
-            }
+            files: {}
         },
         production: {
             options: {
@@ -17,8 +16,13 @@ module.exports = function() {
                 beautify: false
                 /*Sitemap*/
             },
-            files: {
-            }
+            // TODO: Investigate why it doesn't work
+            files: [{
+                expand: true,
+                cwd: '../<%= config.dist %>',
+                src: 'js/**/*.js',
+                dest: 'js'
+            }]
         }
     };
 };
