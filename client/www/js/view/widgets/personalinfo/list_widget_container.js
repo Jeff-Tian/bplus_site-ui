@@ -30,6 +30,7 @@ define([
                             var returnPromise;
                             return model.getData(service, null, forceRefresh).then(function (data) {
                                 scope.dataCollection = data;
+                                scope.dataLoaded = true;
                                 scope.hasData = scope.dataCollection && scope.dataCollection.length > 0;
                                 scope.$apply();
                             });
