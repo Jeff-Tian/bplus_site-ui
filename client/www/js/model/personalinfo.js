@@ -148,7 +148,7 @@ define([
                 }
             });
         } else {
-            return parseData(_data[dataKey], me.getPattern(dataKey)); 
+            return when(parseData(_data[dataKey], me.getPattern(dataKey))); 
         }
     };
     me.updateData = function(dataKey, dataParam){
