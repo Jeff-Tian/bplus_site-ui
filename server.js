@@ -51,7 +51,7 @@ function shimGrunt(req, res, next) {
 }
 
 function setCDN(req, res, next) {
-    res.cdn = {};
+    res.locals.cdn = config.cdn;
 
     next();
 }

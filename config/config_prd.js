@@ -12,11 +12,11 @@ var config = {
         verificationCode: 'BP_M2'
     },
     captcha: {
-        host: 'captcha.service.bridgeplus.cn',
+        host: 'uat.captcha.service.hcd.com',
         port: '10001'
     },
     captchaInternal: {
-        host: 'service.bridgeplus.cn',
+        host: 'uat.captcha.service.hcd.com',
         port: '10001'
     },
     sso: {
@@ -49,7 +49,10 @@ var config = {
         }]
     },
     applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504',
-    port: 12000
+    port: 12000,
+    cdn: {
+        normal: "cdn.bridgeplus.cn/"
+    }
 };
 
 module.exports = config;
