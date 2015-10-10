@@ -29,7 +29,7 @@ define([
               $scope.property = {
                 status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
-              me.createActions($scope, "language", true, true, true);
+              me.createActions($scope, "language", true, true, true, true);
               me.getResouce($scope, "language").then(function(data) {
                   $scope.languages = data;
                   var i = 0;

@@ -37,6 +37,9 @@
                     <div class="column">
                         <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
                     </div>
+                    <div class="column">
+                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui basic large button b-profile-btn-cancle">{{'Delete' | translate}}</button>
+                    </div>
                 </div>
             </div>
         </form>

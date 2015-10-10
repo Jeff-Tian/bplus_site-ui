@@ -167,7 +167,16 @@ define([
         return $.ajax(param);
     };
     me.deleteData = function(dataKey, dataParam) {
-        
+        var data = {
+            id: dataParam.id
+        };
+        var param = {
+            url: "/service-proxy/member/" + dataKey + "/delete",
+            type: "post",
+            dataType: "json",
+            data: data
+        };
+        return $.ajax(param);
     };
   };
   

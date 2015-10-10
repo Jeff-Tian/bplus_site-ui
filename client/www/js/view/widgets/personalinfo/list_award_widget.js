@@ -44,7 +44,7 @@ define([
                  value: $scope.data.prizeDate.value,
                  fulfilled: false
                };
-               me.createActions($scope, "award", false, true, true);
+               me.createActions($scope, "award", false, true, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
                  $scope.dateSelect.config.displayError = true;

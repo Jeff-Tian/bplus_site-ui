@@ -58,6 +58,12 @@ define([
                             scope.showAddButton = false;
                             // Don't need to do anything on this action
                         };
+                        scope.del = function (data) {
+                            return model.deleteData(service, data).then(function() {
+                                scope.showAddButton = true;
+                                return updateData(true);
+                            });
+                        };
                         scope.getResouce = function (key) {
                             return model.getResource(key);
                         };
