@@ -87,7 +87,18 @@ supportedLocales.map(function (l) {
 
 var viewFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
 
-server.use('/config.js', express.static(__dirname + '/config/config_' + (process.env.NODE_ENV || 'dev') + '.js'));
+function filterConfig(config) {
+    var filtered = {};
+
+    filtered.captcha = config.captcha;
+
+    return filtered;
+}
+
+server.use('/config.js', function (req, res, next) {
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+});
+
 server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
 server.use('/translation', localeHelper.serveTranslations);
 
@@ -106,7 +117,7 @@ server.use('/m', express.static(viewFolder));
 function renderTemplate(name) {
     return function (req, res, next) {
         res.render(name);
-    }
+    };
 }
 
 function mapRoute2Template(url, template) {
@@ -137,7 +148,7 @@ server.get(localeHelper.regexPath('/set-password'), function (req, res, next) {
 });
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
-mapRoute2Template('/profile');
+server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
 mapRoute2Template('/map');
 //mapRoute2Template('/account-setting');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
@@ -208,7 +219,7 @@ server.use(clientErrorHandler);
 server.use(errorHandler);
 
 // Host & Port
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || config.port;
 server.listen(port, function () {
     console.log(port + ' is for Bridge+ ');
 });

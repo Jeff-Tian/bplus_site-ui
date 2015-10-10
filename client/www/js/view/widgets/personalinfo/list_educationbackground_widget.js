@@ -26,13 +26,23 @@ define([
                             pre: function ($scope) {
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.property = {
-                                    status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                                    status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
                                 };
+                                var lng = me.getLanguage();
+                                var options = {year: 'numeric', month: 'long'};
+                                if ($scope.data.dateTo.value.rawValue) {
+                                    $scope.data.dateTo.displayValue = $scope.data.dateTo.value.rawValue.toLocaleString(lng, options);
+                                }
+                                if ($scope.data.dateFrom.value.rawValue) {
+                                    $scope.data.dateFrom.displayValue = $scope.data.dateFrom.value.rawValue.toLocaleString(lng, options);
+                                }
+                                var today = new Date();
                                 $scope.dateFrom = {
                                     config: {
                                         showYear: true,
                                         showMonth: true,
                                         showDay: false,
+                                        displayError: false,
                                         display: true
                                     },
                                     value: $scope.data.dateFrom.value,
@@ -43,7 +53,13 @@ define([
                                         showYear: true,
                                         showMonth: true,
                                         showDay: false,
-                                        display: false
+                                        displayError: false,
+                                        display: false,
+                                        end: {
+                                            year: today.getFullYear() + 10,
+                                            month: 11,
+                                            day: 31
+                                        }
                                     },
                                     value: $scope.data.dateTo.value,
                                     fulfilled: false
@@ -65,8 +81,21 @@ define([
                                     }
                                 }, true);
                                 me.createActions($scope, "educationbackground", false, true, true);
+                                me.getResouce($scope, "background").then(function(data) {
+                                    $scope.backgrounds = data;
+                                    var i = 0;
+                                    for (i = 0; i < data.length; i++) {
+                                        if (data[i].id === $scope.data.background.id) {
+                                            $scope.data.background.value = data[i].text;
+                                            break;
+                                        }
+                                    }
+                                    $scope.$apply();
+                                });
                                 $scope.submit = function () {
                                     $scope.clicked = true;
+                                    $scope.dateFrom.config.displayError = true;
+                                    $scope.dateTo.config.displayError = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {
                                         return;
                                     }

@@ -1,0 +1,42 @@
+.b-map {
+	min-height: 60rem;
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: auto auto;
+	background-color: #ffffff;
+	padding-top: 70px;
+    .ui.vertical.menu{
+        max-width:230px;
+        border-radius:0;
+        .item{
+            border-radius:0;
+            i.icon{
+                float:left;
+                margin: -0.2em 2rem 0 0; 
+                font-size:@fontsize-5xl;
+                color: @color-brand;
+            }
+        }
+        .item.active,.item:hover{
+            background:#5F5F5F;
+            border-radius:0;
+            color: @color-white;
+            i.icon{
+                color:@color-white;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px){
+    .b-map{
+        .ui.vertical.menu{
+            .item{
+                padding: 0.9rem 0.5rem;
+                i.icon{
+                    margin-right: 1rem; 
+                }
+            }
+        }
+    }
+}

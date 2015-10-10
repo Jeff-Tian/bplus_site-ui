@@ -1,13 +1,23 @@
 define([
   "when",
-  "jquery"
-], function(when, $) {
+  "jquery",
+  "angular"
+], function(when, $, angular) {
+  var language = {
+      "zh":"zh-CN",
+      "en": "en-US"
+  };
+
   var ListWidgetBase = function() {
     Object.call(this);
     var me = this;
     this.ENUM_STATUS = {
       STATUS_EDIT: "status.edit",
       STATUS_READONLY: "status.readonly"
+    };
+    this.getLanguage = function() {
+        var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
+        return language[lng];
     };
     this.submit = function($scope) {
       $scope.isSubmitting = true;
@@ -20,6 +30,13 @@ define([
         $scope.$apply();
       });
     };
+    this.getResouce = function($scope, key) {
+        var promise = when();
+        if ($scope && $scope.$parent) {
+            promise = $scope.$parent.getResouce(key);
+        }
+        return promise;
+    };
     this.createActions = function($scope, formname, submitAction, cancelAction, editAction) {
       if (submitAction) {
         $scope.submit = function() {
@@ -28,7 +45,7 @@ define([
             return;
           }
           $scope.isSubmitting = true;
-          var promise;
+          var promise = when();
           if ($scope && $scope.$parent) {
             promise = $scope.$parent.submit($scope.data);
           }

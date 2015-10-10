@@ -22,7 +22,8 @@ define(["domReady!",
              Container, personalinfoContainerTemplate, skillsContainerTemplate, eduContainerTemplate, clubContainerTemplate, workContainerTemplate, awardContainerTemplate, languageContainerTemplate) {
     return {
         start: function () {
-            var agModule = angular.module('listSkillsModule', []);
+            var agModule = angular.module('listSkillsModule', ['pascalprecht.translate'])
+            .config(angular.bplus.translate);
             var instance = Container;
             instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
                 .start(agModule, "bplusskillsoverall", skillsContainerTemplate)

@@ -23,11 +23,11 @@ require.config({
         "image": "requirejs-plugins/src/image",
         "json": "requirejs-plugins/src/json",
         "propertyParser": "requirejs-plugins/src/propertyParser",
-        "angular": "angularjs/angular",
+        "angular": "angular/angular",
         "angular-route": "angular-route/angular-route",
+        "angular-translate": "angular-translate/angular-translate.min",
         'domReady': 'requirejs-domready/domReady',
-        "semantic": "semantic-ui/dist/semantic",
-        "bplus-mock": "../mock"
+        "semantic": "semantic-ui/dist/semantic"
     },
     "shim": {
         'angular': {
@@ -36,6 +36,10 @@ require.config({
         "angular-route": {
             deps: ["angular"],
             exports: "angular-route"
+        },
+        "angular-translate": {
+            deps: ["angular"],
+            exports: "angular-translate"
         },
         'semantic': {
             deps: ["jquery"]
@@ -47,11 +51,13 @@ require.config({"context": "bplus"})([
     "require",
     "less",
     "semantic",
-    "angular-route"
+    "angular-route",
+    "angular-translate"
 ], function (pRequire,
              less,
              semantic,
-             agRoute) {
+             agRoute,
+             agTranslate) {
     pRequire([
         "angular",
 
@@ -98,7 +104,14 @@ require.config({"context": "bplus"})([
                  workContainerTemplate,
                  awardContainerTemplate,
                  languageContainerTemplate) {
-        var documentMudule = angular.module('docModule', []);
+        var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
+                .config(angular.bplus.translate)
+                .controller('AppCtrl', angular.bplus.AppCtrl)
+                .factory('translationLoader', angular.bplus.translationLoader)
+                .factory('FormValidation', angular.bplus.FormValidation)
+                .factory('service', angular.bplus.service)
+                .factory('MessageStore', angular.bplus.MessageStore)
+            ;
         (function (agModule) {
             banner(agModule);
             achievement(agModule);
@@ -106,12 +119,12 @@ require.config({"context": "bplus"})([
 
             var instance = Container;
             instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
-            .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
-            .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
-            .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
-            .start(agModule, "bplusworkexperienceall", workContainerTemplate)
-            .start(agModule, "bplusawardall", awardContainerTemplate)
-            .start(agModule, "bpluslanguageall", languageContainerTemplate);
+                .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
+                .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
+                .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
+                .start(agModule, "bplusworkexperienceall", workContainerTemplate)
+                .start(agModule, "bplusawardall", awardContainerTemplate)
+                .start(agModule, "bpluslanguageall", languageContainerTemplate);
             new Date().start(agModule);
             new Tag().start(agModule);
 

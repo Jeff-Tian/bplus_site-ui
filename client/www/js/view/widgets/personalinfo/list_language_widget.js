@@ -27,9 +27,42 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
               me.createActions($scope, "language", true, true, true);
+              me.getResouce($scope, "language").then(function(data) {
+                  $scope.languages = data;
+                  var i = 0;
+                  for (i = 0; i < data.length; i++) {
+                      if (data[i].id === $scope.data.language.id) {
+                          $scope.data.language.value = data[i].text;
+                          break;
+                      }
+                  }
+                  $scope.$apply();
+              });
+              me.getResouce($scope, "proficiency").then(function(data) {
+                  $scope.proficiencys = data;
+                  var i = 0;
+                  for (i = 0; i < data.length; i++) {
+                      if (data[i].id === $scope.data.proficiency.id) {
+                          $scope.data.proficiency.value = data[i].text;
+                          break;
+                      }
+                  }
+                  $scope.$apply();
+              });
+              me.getResouce($scope, "certification").then(function(data) {
+                  $scope.certifications = data;
+                  var i = 0;
+                  for (i = 0; i < data.length; i++) {
+                      if (data[i].id === $scope.data.certification.id) {
+                          $scope.data.certification.value = data[i].text;
+                          break;
+                      }
+                  }
+                  $scope.$apply();
+              });
             }
           };
         }

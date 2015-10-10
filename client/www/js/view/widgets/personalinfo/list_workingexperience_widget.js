@@ -26,13 +26,22 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
+              var lng = me.getLanguage();
+              var options = {year: 'numeric', month: 'long'};
+              if ($scope.data.dateTo.value.rawValue) {
+                  $scope.data.dateTo.displayValue = $scope.data.dateTo.value.rawValue.toLocaleString(lng, options);
+              }
+              if ($scope.data.dateFrom.value.rawValue) {
+                  $scope.data.dateFrom.displayValue = $scope.data.dateFrom.value.rawValue.toLocaleString(lng, options);
+              }
                $scope.dateFrom = {
                  config: {
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: true
                  },
                  value: $scope.data.dateFrom.value,
@@ -43,6 +52,7 @@ define([
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: false
                  },
                  value: $scope.data.dateTo.value,
@@ -65,9 +75,44 @@ define([
                  }
                }, true);
                me.createActions($scope, "workexperience", false, true, true);
+               me.getResouce($scope, "type").then(function(data) {
+                   $scope.types = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.type.id) {
+                           $scope.data.type.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
+               me.getResouce($scope, "industry").then(function(data) {
+                   $scope.industrys = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.industry.id) {
+                           $scope.data.industry.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
+               me.getResouce($scope, "job").then(function(data) {
+                   $scope.jobs = data;
+                   var i = 0;
+                   for (i = 0; i < data.length; i++) {
+                       if (data[i].id === $scope.data.job.id) {
+                           $scope.data.job.value = data[i].text;
+                           break;
+                       }
+                   }
+                   $scope.$apply();
+               });
                $scope.submit = function() {
                  $scope.clicked = true;
-                 if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.workexperience.$error.required)) {
+                 $scope.dateFrom.config.displayError = true;
+                 $scope.dateTo.config.displayError = true;
+                 if (!!(!($scope.data.dateTo.value.tillNow || $scope.dateTo.fulfilled) || !$scope.dateFrom.fulfilled || $scope.workexperience.$error.required)) {
                    return;
                  }
                  if (me.submit) {

@@ -29,11 +29,17 @@ define([
                                 $scope.property = {
                                     status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
                                 };
+                                if ($scope.data.dateOfBirth.value.rawValue) {
+                                    var lng = me.getLanguage();
+                                    var options = {year: 'numeric', month: 'long', day: 'numeric' };
+                                    $scope.data.dateOfBirth.displayValue = $scope.data.dateOfBirth.value.rawValue.toLocaleString(lng, options);
+                                }
                                 $scope.dateSelect = {
                                     config: {
                                         showYear: true,
                                         showMonth: true,
                                         showDay: true,
+                                        displayError: false,
                                         display: true
                                     },
                                     value: $scope.data.dateOfBirth.value,
@@ -42,6 +48,7 @@ define([
                                 me.createActions($scope, "personalinfo", false, true, true);
                                 $scope.submit = function () {
                                     $scope.clicked = true;
+                                    $scope.dateSelect.config.displayError = true;
                                     if (!!(!$scope.dateSelect.fulfilled || $scope.personalinfo.$error.required)) {
                                         return;
                                     }

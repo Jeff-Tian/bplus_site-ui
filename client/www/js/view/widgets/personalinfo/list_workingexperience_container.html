@@ -2,11 +2,11 @@
     <div class="ui clearing segment b-profile-right-section-header"  ng-click="isExtend=!isExtend" ng-init="isExtend=false">
         <div class="ui medium left floated header">
             <i class="icon"></i>
-            <div class="content">工作经历</div>
+            <div class="content">{{'WorkingExperience' | translate}}</div>
         </div>
         <div ng-hide="hasData" class="ui small right floated header b-profile-right-section-tip-fill">
             <img class="ui image" src="/img/profile/icon_remind_g.png" />
-            <div class="content">你还没填写</div>
+            <div class="content">{{'NotFullfilled' | translate}}</div>
         </div>
     </div>
     <div ng-show="isExtend">
@@ -14,7 +14,7 @@
           <bplusworkexperience data="data"/>
       </div>
       <div ng-show="showAddButton" class="b-profile-right-section-btn-append">
-          <button class="fluid ui button" type="button" ng-click="add()">添加工作经历</button>
+          <button class="fluid ui button" type="button" ng-click="add()">{{'AddWorkingExperience' | translate}}</button>
       </div>
     </div>
 </div>

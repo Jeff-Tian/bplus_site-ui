@@ -24,8 +24,10 @@ require.config({
       "propertyParser": "requirejs-plugins/src/propertyParser",
       "angular": "angularjs/angular",
       "angular-route": "angular-route/angular-route",
+      "angular-translate": "angular-translate/angular-translate.min",
       'domReady': 'requirejs-domready/domReady',
-      "semantic": "semantic-ui/dist/semantic"
+      "semantic": "semantic-ui/dist/semantic",
+      "translate-config": "../js/config/translate",
   },
   "shim": {
       'angular': {
@@ -35,14 +37,17 @@ require.config({
         deps: ["angular"],
         exports:"angular-route"
       },
+      "angular-translate": {
+        deps: ["angular"]
+      },
       'semantic': {
         deps: ["jquery"]
       }
   },
-  "deps": ["require", "less","semantic", "angular-route"],
+  "deps": ["require", "less","semantic", "angular-route", "angular-translate", "translate-config"],
   "callback": function(require, less) {
     require(["bplus-ui/app_test"], function(app) {
       app.start();
-    })
+    });
   }
 });

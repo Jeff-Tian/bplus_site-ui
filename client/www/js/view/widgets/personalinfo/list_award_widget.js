@@ -26,13 +26,19 @@ define([
             pre: function($scope) {
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
-                status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
+                status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
+              if ($scope.data.prizeDate.value.rawValue) {
+                  var lng = me.getLanguage();
+                  var options = {year: 'numeric', month: 'long'};
+                  $scope.data.prizeDate.displayValue = $scope.data.prizeDate.value.rawValue.toLocaleString(lng, options);
+              }
                $scope.dateSelect = {
                  config: {
                    showYear: true,
                    showMonth: true,
                    showDay: false,
+                   displayError: false,
                    display: true
                  },
                  value: $scope.data.prizeDate.value,
@@ -41,6 +47,7 @@ define([
                me.createActions($scope, "award", false, true, true);
                $scope.submit = function() {
                  $scope.clicked = true;
+                 $scope.dateSelect.config.displayError = true;
                  if (!!(!$scope.dateSelect.fulfilled || $scope.award.$error.required)) {
                    return;
                  }

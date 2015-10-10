@@ -31,7 +31,8 @@ module.exports = function (grunt) {
             "src": path + 'www/',
             "dist": path + 'dist/',
             "temp": path + 'temp/',
-            "release": ''
+            "release": '',
+            "cdnDomain": ""
         },
         "bumpup": {
             file: 'package.json'
@@ -100,7 +101,7 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return '//cdn.example.com/stuff/' + url;
+                                return '<%= config.cdnDomain %>' + url;
                             } else {
                                 return url + '?cdnified';
                             }
