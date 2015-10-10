@@ -68,6 +68,7 @@ function updateMemberData(req, res, next) {
         var paramKeys = bplusServiceParams[serviceValue];
         var param = {};
         var hasData = false;
+        param['member_id'] = rawData.member_id;
         paramKeys.forEach(function (value) {
             var rawValue = rawData[mapping[value]];
             if (rawValue || rawValue === false) {
@@ -75,6 +76,7 @@ function updateMemberData(req, res, next) {
                 hasData = true;
             }
         });
+
         if (hasData) {
             promiseArray.push(Q.promise(function (resolve, reject) {
                 var serviceParam = serviceParams[index];
@@ -88,7 +90,7 @@ function updateMemberData(req, res, next) {
             }));
         }
     });
-    Q.any(promiseArray).then(function (result) {
+    Q.all(promiseArray).then(function (result) {
         res.send(result);
     }, function (error) {
         console.log(error);

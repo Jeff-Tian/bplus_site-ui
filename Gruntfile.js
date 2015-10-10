@@ -10,6 +10,7 @@ var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
 var configStart = require(path + 'grunt/start.js');
+var siteConfig = require('./config');
 
 // Create grunt module
 module.exports = function (grunt) {
@@ -100,8 +101,7 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return url + '?cdnified';
-//                              return '//cdn.example.com/stuff/' + url;
+                                return siteConfig.cdn.normal + url;
                             } else {
                                 return url + '?cdnified';
                             }

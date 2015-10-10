@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="field" ng-hide="sendCodeButtonClicked">
-            <button type="button" class="ui huge red button fluid" ng-click="getVerificationCode()"
+            <button type="button" class="ui large red button fluid" ng-click="getVerificationCode()"
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
                 {{verificationCodeButtonText | translate}}
             </button>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="field">
-            <button type="submit" class="ui fluid huge red submit button"
+            <button type="submit" class="ui fluid large red submit button"
                     ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
             </button>
         </div>
