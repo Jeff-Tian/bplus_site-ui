@@ -183,6 +183,7 @@
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
   "wechat-70009": "此微信已被别的账户绑定",
+  "wechat-undefined": "",
   "PleaseInputValidMobileNumber": "请输入有效的手机号码",
   "PleaseInputEmail": "请输入邮箱地址",
   "PleaseInputValidEmail": "请输入有效的邮箱地址",
