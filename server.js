@@ -211,7 +211,7 @@ server.use(clientErrorHandler);
 server.use(errorHandler);
 
 // Host & Port
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || config.port;
 server.listen(port, function () {
     console.log(port + ' is for Bridge+ ');
 });

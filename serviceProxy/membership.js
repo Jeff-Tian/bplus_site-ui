@@ -23,6 +23,12 @@ module.exports = {
     },
 
     loadProfile: function (req, res, next) {
+        if (!res.locals.hcd_user || !res.locals.hcd_user.member_id) {
+            res.json({isSuccess: true, code: '0', result: {}});
+
+            next();
+        }
+
         proxy.execute(req, res, next, {
             host: sso.host,
             port: sso.port,

@@ -138,7 +138,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
             sending = true;
             service
                 .post('/service-proxy/mail/send-verification', {
-                    to: $scope.memberInfo.mail,
+                    to: $scope.data.email,
                     subject: $filter('translate')('请验证您的邮箱'),
                     linkVerification: window.location.origin + '/email-verify',
                     displayName: $scope.memberInfo.displayName
