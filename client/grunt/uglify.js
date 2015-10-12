@@ -10,19 +10,16 @@ module.exports = function () {
             files: {}
         },
         production: {
-            options: {
-                mangle: true,
-                compress: true,
-                beautify: false
-                /*Sitemap*/
-            },
             // TODO: Investigate why it doesn't work
             files: [{
                 expand: true,
-                cwd: '../<%= config.dist %>',
-                src: 'js/**/*.js',
-                dest: 'js'
-            }]
+                cwd: '<%= config.dist %>js',
+                src: '**/*.js',
+                dest: '<%= config.dist %>js'
+            }],
+            options: {
+                mangle: true
+            }
         }
     };
 };
