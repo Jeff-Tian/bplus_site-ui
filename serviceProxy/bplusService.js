@@ -58,6 +58,7 @@ function updateMemberData(req, res, next) {
             path: "/profile/update",
             dataMapper: function (d) {
                 d.application_id = ssoService.applicationId;
+                d.member_id = 'ea3ebfee-4133-4cfe-a8f9-0bc375715da2';
                 return d;
             }
         }
@@ -68,7 +69,8 @@ function updateMemberData(req, res, next) {
         var paramKeys = bplusServiceParams[serviceValue];
         var param = {};
         var hasData = false;
-        param['member_id'] = rawData.member_id;
+        // param['member_id'] = rawData.member_id;
+        param['member_id'] = 'ea3ebfee-4133-4cfe-a8f9-0bc375715da2';
         paramKeys.forEach(function (value) {
             var rawValue = rawData[mapping[value]];
             if (rawValue || rawValue === false) {
@@ -113,7 +115,8 @@ function updateOtherData(req, res, next) {
                     retParam[value] = originValue;
                 }
             });
-            retParam.member_id = d.member_id;
+            // retParam.member_id = d.member_id;
+            retParam.member_id = 'ea3ebfee-4133-4cfe-a8f9-0bc375715da2';
             return retParam;
         }
     })(req, res, next);
@@ -136,7 +139,8 @@ function deleteData(req, res, next) {
                     retParam[value] = originValue;
                 }
             }
-            retParam.member_id = d.member_id;
+            // retParam.member_id = d.member_id;
+            retParam.member_id = 'ea3ebfee-4133-4cfe-a8f9-0bc375715da2';
             return retParam;
         }
     })(req, res, next);
