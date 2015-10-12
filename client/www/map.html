@@ -10,60 +10,65 @@
 </head>
 
 <body ng-controller="gameCtrl" ng-app="bplus" ng-class="{'chinese':language==='zh','english':language==='en'}">
-    <%- include('view-partial/header.html') -%>
+<%- include('view-partial/header.html') -%>
 
-    <!-- Page Contents -->
-    <div class="pusher">
-        <div class="page-content" ng-class="{'bplus':select==='bplus','hcdlearning':select==='hcdlearning'}" ng-init="select='bplus'">
+<!-- Page Contents -->
+<div class="pusher">
+    <div class="page-content" ng-class="{'bplus':select==='bplus','hcdlearning':select==='hcdlearning'}"
+         ng-init="select='bplus'">
 
-            <div class="b-map">
-                <div class="ui container grid">
-                    <div class="four wide column">
-                        <div class="ui fluid large vertical menu">
-                            <a class="item" ng-class="{'active':css.home===true}" ng-click="selectItem('home')">
-                                <i class="home icon"></i>游戏首页
-                            </a>
-                            <a class="item" ng-class="{'active':css.official===true}" ng-click="selectItem('official')">
-                                <i class="privacy icon"></i>官方体验赛
-                            </a>
-                            <a class="item" ng-class="{'active':css.national===true}" ng-click="selectItem('national')">
-                                <i class="users icon"></i>全国大赛
-                            </a>
-                            <a class="item" ng-class="{'active':css.season===true}" ng-click="selectItem('season')">
-                                <i class="sitemap icon"></i>赛季
-                            </a>
-                            <a class="item" ng-class="{'active':css.personalRecord===true}" ng-click="selectItem('personalRecord')">
-                                <i class="file text icon"></i>个人参赛纪录
-                            </a>
-                            <a class="item" ng-class="{'active':css.rankingList===true}" ng-click="selectItem('rankingList')">
-                                <i class="trophy icon"></i>排行榜
-                            </a>
-                        </div>
-                        <button class="ui button"ng-click="select='bplus'">bplus</button>
-                        <button class="ui button"ng-click="select='hcdlearning'">hcdlearning</button>
+        <div class="b-map">
+            <div class="ui container grid">
+                <div class="four wide column">
+                    <div class="ui fluid large vertical menu">
+                        <a class="item" ng-class="{'active':css.home===true}" ng-click="selectItem('home')">
+                            <i class="home icon"></i>游戏首页
+                        </a>
+                        <a class="item" ng-class="{'active':css.official===true}" ng-click="selectItem('official')">
+                            <i class="privacy icon"></i>官方体验赛
+                        </a>
+                        <a class="item" ng-class="{'active':css.national===true}" ng-click="selectItem('national')">
+                            <i class="users icon"></i>全国大赛
+                        </a>
+                        <a class="item" ng-class="{'active':css.season===true}" ng-click="selectItem('season')">
+                            <i class="sitemap icon"></i>赛季
+                        </a>
+                        <a class="item" ng-class="{'active':css.personalRecord===true}"
+                           ng-click="selectItem('personalRecord')">
+                            <i class="file text icon"></i>个人参赛纪录
+                        </a>
+                        <a class="item" ng-class="{'active':css.rankingList===true}"
+                           ng-click="selectItem('rankingList')">
+                            <i class="trophy icon"></i>排行榜
+                        </a>
                     </div>
-
-                    <div class="right floated twelve wide column">
-                        <game-home ng-if="css.home"></game-home>
-                        <game-official ng-if="css.official"></game-official>
-                        <game-national ng-if="css.national"></game-national>
-                        <game-season ng-if="css.season"></game-season>
-                        <game-personal-record ng-if="css.personalRecord"></game-personal-record>
-                        <game-ranking-list ng-if="css.rankingList"></game-ranking-list>
-                    </div>
-
-                    
+                    <button class="ui button" ng-click="select='bplus'">bplus</button>
+                    <button class="ui button" ng-click="select='hcdlearning'">hcdlearning</button>
                 </div>
+
+                <div class="right floated twelve wide column">
+                    <game-home ng-if="css.home"></game-home>
+                    <game-official ng-if="css.official"></game-official>
+                    <game-national ng-if="css.national"></game-national>
+                    <game-season ng-if="css.season"></game-season>
+                    <game-personal-record ng-if="css.personalRecord"></game-personal-record>
+                    <game-ranking-list ng-if="css.rankingList"></game-ranking-list>
+                </div>
+
+
             </div>
         </div>
     </div>
-    <%- include('view-partial/footer.html') -%>
-    <!--Page JS-->
-    <script src="bower/echarts/build/dist/echarts.js"></script>
-    <script src="js/directives/map.js"></script>
-    <script src="js/controllers/GameCtrl.js"></script>
-    <script src="js/directives/game.js"></script>
-    <script src="js/page/map/main.js"></script>
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--Page JS-->
+<script src="<%= cdn.normal %>bower/echarts/build/dist/echarts.js"></script>
+<!-- build:js js/cdn/map.<%= grunt.file.readJSON('package.json').version %>.js -->
+<script src="js/directives/map.js"></script>
+<script src="js/controllers/GameCtrl.js"></script>
+<script src="js/directives/game.js"></script>
+<script src="js/page/map/main.js"></script>
+<!-- endbuild -->
 </body>
 
 </html>

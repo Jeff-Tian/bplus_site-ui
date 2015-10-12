@@ -40,7 +40,8 @@
                 <div class="b-profile-face">
                     <div class="b-profile-face-line"></div>
                     <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind="data.rate + '%'"></div>
-                    <div class="b-profile-face-txt" ng-show="dataLoaded" ng-bind-template="{{CompleteRate}}{{data.rate}}% {{data.tip | translate}}"></div>
+                    <div class="b-profile-face-txt" ng-show="dataLoaded"
+                         ng-bind-template="{{CompleteRate}}{{data.rate}}% {{data.tip | translate}}"></div>
                     <div class="progress-circle">
                         <div class="progress-pie-left">
                             <div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div>
@@ -145,10 +146,12 @@
 <!-- Footer End -->
 
 <!--JS-->
-<script src="bower/requirejs/require.js" type="text/javascript"></script>
-<script src="bower/jquery/dist/jquery.js" type="text/javascript"></script>
-<script src="bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/requirejs/require.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
 <!--Page JS-->
+<!-- build:js js/cdn/profile.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/page/profile/main.js" type="text/javascript"></script>
+<!-- endbuild -->
 </body>
 </html>

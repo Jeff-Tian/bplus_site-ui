@@ -150,13 +150,13 @@ module.exports = function (grunt) {
     ]);
 
     // Copy to WEB
-    grunt.registerTask('release', ['build']);
+    grunt.registerTask('release', ['bumpup', 'build']);
     grunt.registerTask('local-release', ['mock-release', 'build', 'nodemon']);
     grunt.registerTask('mock-release', function () {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {
