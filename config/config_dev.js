@@ -39,7 +39,7 @@ var config = {
     "bplusServiceParams": require("./config_bplusService"),
     "logger": {
         "levels": {
-            "[all]": "DEBUG"
+            "[all]": "ERROR"
         },
         "appenders": [{
             "type": "console"
