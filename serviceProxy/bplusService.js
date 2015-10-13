@@ -119,6 +119,29 @@ function updateOtherData(req, res, next) {
     })(req, res, next);
 }
 
+function deleteData(req, res, next) {
+    var classification = req.params.classification;
+    var operation = req.params.operation;
+    var mapping = bplusServiceParams.mapping;
+    return proxyBPlus({
+        path: '/profile/' + classification + '/' + operation,
+        dataMapper: function (d) {
+            var retParam = {};
+            var params = bplusServiceParams[classification];
+            for (var i = 0; i < params.length; i++) {
+                var value = params[i];
+                var originKey = mapping[value];
+                var originValue = d[originKey];
+                if (originKey === "id") {
+                    retParam[value] = originValue;
+                }
+            }
+            retParam.member_id = d.member_id;
+            return retParam;
+        }
+    })(req, res, next);
+}
+
 module.exports = {
     loadProfile: function (req, res, next) {
         proxyBPlus({path: '/profile/load/' + res.locals.hcd_user.member_id})(req, res, next);
@@ -219,8 +242,11 @@ module.exports = {
 
     updateData: function (req, res, next) {
         var classification = req.params.classification;
+        var operation = req.params.operation;
         if (classification === "memberExt") {
             return updateMemberData(req, res, next);
+        } else if (operation === "delete"){
+            return deleteData(req, res, next);
         } else {
             return updateOtherData(req, res, next);
         }

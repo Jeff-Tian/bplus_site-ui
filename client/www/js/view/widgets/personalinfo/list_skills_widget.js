@@ -29,7 +29,7 @@ define([
                                 $scope.property = {
                                     status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
                                 };
-                                me.createActions($scope, "skills", true, true, true);
+                                me.createActions($scope, "skills", true, true, true, true);
                             }
                         };
                     }

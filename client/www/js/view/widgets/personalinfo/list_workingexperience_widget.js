@@ -74,7 +74,7 @@ define([
                    $scope.dateTo.config.display = false;
                  }
                }, true);
-               me.createActions($scope, "workexperience", false, true, true);
+               me.createActions($scope, "workexperience", false, true, true, true);
                me.getResouce($scope, "type").then(function(data) {
                    $scope.types = data;
                    var i = 0;

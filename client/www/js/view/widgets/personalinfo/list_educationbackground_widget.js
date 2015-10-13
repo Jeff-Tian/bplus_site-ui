@@ -80,7 +80,7 @@ define([
                                         $scope.dateTo.config.display = false;
                                     }
                                 }, true);
-                                me.createActions($scope, "educationbackground", false, true, true);
+                                me.createActions($scope, "educationbackground", false, true, true, true);
                                 me.getResouce($scope, "background").then(function(data) {
                                     $scope.backgrounds = data;
                                     var i = 0;

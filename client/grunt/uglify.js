@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     return {
         development: {
             options: {
@@ -7,17 +7,18 @@ module.exports = function() {
                 beautify: true
                 /*Sitemap*/
             },
-            files: {
-            }
+            files: {}
         },
         production: {
+            // TODO: Investigate why it doesn't work
+            files: [{
+                expand: true,
+                cwd: '<%= config.dist %>js',
+                src: '**/*.js',
+                dest: '<%= config.dist %>js'
+            }],
             options: {
-                mangle: true,
-                compress: true,
-                beautify: false
-                /*Sitemap*/
-            },
-            files: {
+                mangle: true
             }
         }
     };

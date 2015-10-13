@@ -1,7 +1,7 @@
 (function (exports) {
     exports.registerForm = function (FormValidation, $timeout, service) {
         return {
-            templateUrl: '../../view-partial/register-form.html',
+            templateUrl: '/view-partial/register-form.html',
             scope: {
                 action: '=',
                 control: '=',

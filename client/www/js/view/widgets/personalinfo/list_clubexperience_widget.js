@@ -74,7 +74,7 @@ define([
                    $scope.dateTo.config.display = false;
                  }
                }, true);
-               me.createActions($scope, "clubbackground", false, true, true);
+               me.createActions($scope, "clubbackground", false, true, true, true);
                me.getResouce($scope, "position").then(function(data) {
                    $scope.positions = data;
                    var i = 0;

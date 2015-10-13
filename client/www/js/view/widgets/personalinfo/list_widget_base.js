@@ -37,7 +37,7 @@ define([
         }
         return promise;
     };
-    this.createActions = function($scope, formname, submitAction, cancelAction, editAction) {
+    this.createActions = function($scope, formname, submitAction, cancelAction, editAction, deleteAction) {
       if (submitAction) {
         $scope.submit = function() {
           $scope.clicked = true;
@@ -69,6 +69,15 @@ define([
           $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
           if ($scope && $scope.$parent) {
             $scope.$parent.edit($scope.data);
+          }
+        };
+      }
+      if (deleteAction) {
+        $scope.del = function() {
+          delete $scope.isSubmitting;
+          $scope.property.status = $scope.ENUM_STATUS.STATUS_EDIT;
+          if ($scope && $scope.$parent) {
+            $scope.$parent.del($scope.data);
           }
         };
       }

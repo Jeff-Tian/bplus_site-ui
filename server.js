@@ -51,7 +51,7 @@ function shimGrunt(req, res, next) {
 }
 
 function setCDN(req, res, next) {
-    res.cdn = {};
+    res.locals.cdn = config.cdn;
 
     next();
 }
@@ -85,7 +85,12 @@ supportedLocales.map(function (l) {
     });
 });
 
-var viewFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
+var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
+var staticSetting = {
+    setHeaders: function (res, path) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+};
 
 function filterConfig(config) {
     var filtered = {};
@@ -99,14 +104,14 @@ server.use('/config.js', function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js'));
+server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
 server.use('/translation', localeHelper.serveTranslations);
 
 // Customize client file path
-server.set('views', viewFolder);
-server.use(express.static(viewFolder));
+server.set('views', staticFolder);
+server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
-    server.use('/' + l, express.static(viewFolder));
+    server.use('/' + l, express.static(staticFolder, staticSetting));
 });
 
 server.use('/service-proxy', require('./serviceProxy'));
@@ -202,6 +207,7 @@ function logErrors(err, req, res, next) {
 
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
+        req.dualLogError(err);
         res.status(500).send({code: '500', message: 'Something blew up!'});
     } else {
         next(err);
@@ -209,6 +215,7 @@ function clientErrorHandler(err, req, res, next) {
 }
 
 function errorHandler(err, req, res, next) {
+    req.dualLogError(err);
     res.status(500).send('Something borke!');
     // TODO: prepare an error template
     //res.render('error', {error: err});

@@ -30,6 +30,7 @@ define([
                             var returnPromise;
                             return model.getData(service, null, forceRefresh).then(function (data) {
                                 scope.dataCollection = data;
+                                scope.dataLoaded = true;
                                 scope.hasData = scope.dataCollection && scope.dataCollection.length > 0;
                                 scope.$apply();
                             });
@@ -56,6 +57,12 @@ define([
                         scope.edit = function (data) {
                             scope.showAddButton = false;
                             // Don't need to do anything on this action
+                        };
+                        scope.del = function (data) {
+                            return model.deleteData(service, data).then(function() {
+                                scope.showAddButton = true;
+                                return updateData(true);
+                            });
                         };
                         scope.getResouce = function (key) {
                             return model.getResource(key);

@@ -10,6 +10,7 @@ var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
 var configStart = require(path + 'grunt/start.js');
+var prdConfig = require('./config/config_prd.js');
 
 // Create grunt module
 module.exports = function (grunt) {
@@ -31,11 +32,10 @@ module.exports = function (grunt) {
             "src": path + 'www/',
             "dist": path + 'dist/',
             "temp": path + 'temp/',
-            "release": '',
-            "cdnDomain": ""
+            "release": ''
         },
         "bumpup": {
-            file: 'package.json'
+            files: ['package.json', 'config/config_dev.json', 'config/config_prd.json']
         },
         "clean": configClean(),
         "copy": configCopy(),
@@ -88,6 +88,52 @@ module.exports = function (grunt) {
             }
         },
 
+        ngtemplates: {
+            bplus: {
+                options: {
+                    prefix: '/'
+                },
+                cwd: '<%= config.dist %>',
+                src: 'view-partial/register-form.html',
+                dest: '<%= config.dist %>js/bplus/templates.js'
+            },
+            accountSetting: {
+                options: {
+                    prefix: '/'
+                },
+                cwd: '<%= config.dist %>',
+                src: 'view-partial/register-form.html',
+                dest: '<%= config.dist %>js/acountSetting/templates.js'
+            },
+            signIn: {
+                options: {
+                    prefix: '/'
+                },
+                cwd: '<%= config.dist %>',
+                src: 'view-partial/register-form.html',
+                dest: '<%= config.dist %>js/signIn/templates.js'
+            },
+            resetPassword: {
+                options: {
+                    prefix: '/'
+                },
+                cwd: '<%= config.dist %>',
+                src: 'view-partial/register-form.html',
+                dest: '<%= config.dist %>js/resetPassword/templates.js'
+            }
+        },
+
+        concat: {
+            production: {
+                files: {
+                    '<%= config.dist %>js/page/homepage/main.js': ['<%= config.dist %>js/page/homepage/main.js', '<%= ngtemplates.bplus.dest %>'],
+                    '<%= config.dist %>js/page/account-setting/main.js': ['<%= config.dist %>js/page/account-setting/main.js', '<%= ngtemplates.accountSetting.dest %>'],
+                    '<%= config.dist %>js/page/register/main.js': ['<%= config.dist %>js/page/register/main.js', '<%= ngtemplates.signIn.dest %>'],
+                    '<%= config.dist %>js/page/reset-password/main.js': ['<%= config.dist %>js/page/reset-password/main.js', '<%= ngtemplates.resetPassword.dest %>']
+                }
+            }
+        },
+
         cdnify: {
             dist: {
                 options: {
@@ -101,7 +147,7 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return '<%= config.cdnDomain %>' + url;
+                                return prdConfig.cdn.normal + url;
                             } else {
                                 return url + '?cdnified';
                             }
@@ -149,10 +195,17 @@ module.exports = function (grunt) {
         'concurrent'
     ]);
 
-    // Copy to WEB
-    grunt.registerTask('release', ['build']);
+    grunt.registerTask('ng', ['ngtemplates', 'concat']);
 
-    grunt.registerTask('build', ['bumpup', 'clean:dist', 'copy', 'less:production', 'useref', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
+    // Copy to WEB
+    grunt.registerTask('release', ['bumpup', 'build']);
+    grunt.registerTask('local-release', ['mock-release', 'build', 'nodemon']);
+    grunt.registerTask('run-release', ['mock-release', 'nodemon']);
+    grunt.registerTask('mock-release', function () {
+        process.env.NODE_ENV = 'prd';
+    });
+
+    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {

@@ -30,7 +30,7 @@
 <!-- Page Contents -->
 <div class="b-profile-body">
     <div class="b-profile-banner" ng-controller="banner">
-        <div class="img" style="background-image:url({{imageBanner}});" ng-mouseover="hoverBtn='hover'"
+        <div class="img" style="background-image:url('img/profile/XXX.jpg');" ng-mouseover="hoverBtn='hover'"
              ng-mouseleave="hoverBtn=''"></div>
         <a href="javascript:void(0);" class="{{hoverBtn}}">&nbsp;</a>
     </div>
@@ -39,8 +39,9 @@
             <div class="b-profile-left-section" ng-controller="achievement">
                 <div class="b-profile-face">
                     <div class="b-profile-face-line"></div>
-                    <div class="b-profile-face-percentage" ng-bind="data.progress + '%'"></div>
-                    <div class="b-profile-face-txt" ng-bind="'简历完成度' + data.progress + '%，' + data.tip"></div>
+                    <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind="data.rate + '%'"></div>
+                    <div class="b-profile-face-txt" ng-show="dataLoaded"
+                         ng-bind-template="{{CompleteRate}}{{data.rate}}% {{data.tip | translate}}"></div>
                     <div class="progress-circle">
                         <div class="progress-pie-left">
                             <div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div>
@@ -52,19 +53,20 @@
                     <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'"
                          ng-mouseleave="classNameFaceEdit=''">
                         <img ng-src="{{data.face}}"/>
-                        <img src="/img/profile/icon_profile_picture_edit.png" class="edit {{classNameFaceEdit}}"/>
+                        <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png?<%= cdn.version %>"
+                             class="edit {{classNameFaceEdit}}"/>
                     </div>
                 </div>
-                <div class="b-profile-preview">
+                <div class="b-profile-preview" style="visibility: hidden;">
                     <button class="ui basic button"><i class="icon"></i>预览简历</button>
                 </div>
                 <div class="b-profile-area">
                     <div class="ui medium header">
-                        <img class="ui image" src="/img/profile/icon_profile_achievement.png">
+                        <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_achievement.png">
 
                         <div class="content"><%= __('Achievement') %></div>
                     </div>
-                    <div class="b-profile-achievement">
+                    <!--<div class="b-profile-achievement">
                         <div class="ui five column grid">
                             <div class="column" ng-repeat="i in data.pics"><img ng-src="{{i.img}}"/></div>
                         </div>
@@ -87,17 +89,17 @@
                                 <div class="content" ng-bind="i.title + i.score"></div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="b-profile-left-section" ng-controller="growing">
                 <div class="b-profile-area">
                     <div class="ui medium header">
-                        <img class="ui image" src="/img/profile/icon_profile_growing.png">
+                        <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_growing.png">
 
-                        <div class="content">成长足迹</div>
+                        <div class="content"><%= __('GrowthRootprints') %></div>
                     </div>
-                    <div class="b-profile-growing">
+                    <!--<div class="b-profile-growing">
                         <div class="ui list b-profile-li">
                             <div class="item" ng-repeat="i in data.list">
                                 <i class="icon"></i>
@@ -108,7 +110,7 @@
                     </div>
                     <div class="b-profile-growing-buttons">
                         <button class="fluid ui basic button" ng-repeat="i in data.buttons" ng-bind="i.title"></button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -144,10 +146,12 @@
 <!-- Footer End -->
 
 <!--JS-->
-<script src="bower/requirejs/require.js" type="text/javascript"></script>
-<script src="bower/jquery/dist/jquery.js" type="text/javascript"></script>
-<script src="bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/requirejs/require.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
 <!--Page JS-->
+<!-- build:js js/cdn/profile.<%= grunt.file.readJSON('package.json').version %>.js -->
 <script src="js/page/profile/main.js" type="text/javascript"></script>
+<!-- endbuild -->
 </body>
 </html>

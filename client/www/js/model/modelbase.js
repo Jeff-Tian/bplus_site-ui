@@ -15,7 +15,7 @@ define([
     me.SERVICENAME = "";
     me.SOURCE_URL = "/service-proxy/bplus-resource/";
     me.getPattern = function(key) {
-        return $.extend(true, {}, me.PATTERN[key]);
+        return key ? $.extend(true, {}, me.PATTERN[key]) : $.extend(true, {}, me.PATTERN);
     };
     me.updateData = function(dataKey, dataParam) {};
     me.deleteData = function(dataKey, dataParam) {};
