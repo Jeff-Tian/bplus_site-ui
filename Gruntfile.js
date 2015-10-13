@@ -176,15 +176,15 @@ module.exports = function (grunt) {
         requirejs: {
           compile: {
             options: {
-              baseUrl: path + "www/bower",
-              mainConfigFile: path + "www/js/page/profile/mainConfig.js",
+              baseUrl: "<%= config.dist %>bower",
+              mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
               name: "bplus-ui/page/profile/main-build",
               findNestedDependencies: true,
               uglify: {
                 no_mangle: true
               },
               exclude: ["angular", "angular-translate", "semantic", "jquery"],
-              out: path + "www/js/page/profile/main.js"
+              out: "<%= config.dist %>/js/page/profile/main.js"
             }
           }
         }
