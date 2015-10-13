@@ -5382,6 +5382,14 @@ body.pushable > .pusher,
 .b-map .national-content .national-cards .card .national-name .header {
   color: #ffffff;
 }
+.b-map .national-content .national-cards .card .national-dimmer .content .center {
+  padding: 0 1.5rem;
+}
+.b-map .national-content .national-cards .card .national-dimmer .content .dimmer-label {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5em;
+}
 .b-map .national-content .national-cards .card:last-child,
 .b-map .national-content .national-cards .card:first-child {
   border-radius: 0 !important;

@@ -37,7 +37,7 @@
 					};
 
 					$('.home-wechat-share').popup({
-						on: 'click',
+						on: 'hover',
 					});
 				}
 				//scope.raderData=[1,2,3,4,5];
