@@ -1,25 +1,23 @@
 /*
 * - @Bridge+
 */
-
 .b-masthead {
     height: 50rem;
 
     .owl-theme {
-        .owl-stage-outer{
+        .owl-stage-outer {
             z-index: -1;
         }
         .owl-nav {
-            .owl-prev,
-            .owl-next {
-                top: 42%; // calc(50% - 3rem);
+            .owl-prev, .owl-next {
+                top: 42%;
+                // calc(50% - 3rem);
             }
         }
         .owl-dots {
-            margin-top:-23px !important;
+            margin-top: -23px !important;
         }
     }
-
     .b-slider {
         overflow: hidden;
 
@@ -28,7 +26,6 @@
             min-height: 50rem;
             overflow: hidden;
         }
-
         h1.ui.header {
             color: @color-white;
             font-size: @fontsize-14xl;
@@ -42,21 +39,21 @@
             line-height: 1.6em;
         }
     }
-    .first-item,.second-item,.third-item{
-        background-repeat: no-repeat;  
-        background-position: center;  
-        background-size:auto 50rem;
-        height:50rem;
+    .first-item, .second-item, .third-item {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto 50rem;
+        height: 50rem;
         background-color: @color-grey;
         max-height: 50rem;
     }
-    .first-item{
+    .first-item {
         background-image: url("/img/salespage/bg_1.png");
     }
-    .second-item{
+    .second-item {
         background-image: url("/img/salespage/bg_2.png");
     }
-    .third-item{
+    .third-item {
         background-image: url("/img/salespage/bg_3.png");
     }
 }

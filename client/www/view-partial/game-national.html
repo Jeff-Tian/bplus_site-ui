@@ -6,11 +6,11 @@
     <div class="ui grid">
         <div class="ten wide column map-column">
             <a class="ui red large button check-more-buuton b-sp" ng-cloak>{{'MapTeamLists' | translate}}</a>
-            <div china-map ng-model='select'></div>
+            <div china-map ng-model='selectPosition'></div>
         </div>
         <div class="six wide column">
-            <div ng-show="select==='东北地区'||select==='DongBei'">
-                <h1>东北赛区</h1>
+            <div ng-show="selectPosition==='东北地区'||selectPosition==='DongBei'">
+                <h1 ng-cloak>{{'MapDongBeiDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card available">
                         <div class="content national-name">
@@ -22,14 +22,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -52,14 +52,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -82,14 +82,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -112,14 +112,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -134,10 +134,10 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='华北地区'||select==='HuaBei'">
-                <h1>华北赛区</h1>
+            <div ng-show="selectPosition==='华北地区'||selectPosition==='HuaBei'">
+                <h1 ng-cloak>{{'MapHuaBeiDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
-                    
+
                     <div class="card available">
                         <div class="content national-name">
                             <div class="header">华北赛区 A</div>
@@ -148,14 +148,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -178,14 +178,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -208,14 +208,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -238,14 +238,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -268,14 +268,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -290,8 +290,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='华东地区'||select==='HuaDong'">
-                <h1>华东赛区</h1>
+            <div ng-show="selectPosition==='华东地区'||selectPosition==='HuaDong'">
+                <h1 ng-cloak>{{'MapHuaDongDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card available">
                         <div class="content national-name">
@@ -303,14 +303,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -333,14 +333,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -363,14 +363,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -393,14 +393,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -423,14 +423,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -445,8 +445,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='华南地区'||select==='HuaNan'">
-                <h1>华南赛区</h1>
+            <div ng-show="selectPosition==='华南地区'||selectPosition==='HuaNan'">
+                <h1 ng-cloak>{{'MapHuaNanDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card available">
                         <div class="content national-name">
@@ -458,14 +458,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -488,14 +488,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -518,14 +518,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -548,14 +548,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -578,14 +578,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -600,8 +600,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='华中地区'||select==='HuaZhong'">
-                <h1>华中赛区</h1>
+            <div ng-show="selectPosition==='华中地区'||selectPosition==='HuaZhong'">
+                <h1 ng-cloak>{{'MapHuaZhongDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card">
                         <div class="content national-name">
@@ -613,14 +613,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -643,14 +643,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -665,8 +665,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='西南地区'||select==='XiNan'">
-                <h1>西南</h1>
+            <div ng-show="selectPosition==='西南地区'||selectPosition==='XiNan'">
+                <h1 ng-cloak>{{'MapXiNanDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card">
                         <div class="content national-name">
@@ -678,14 +678,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -708,14 +708,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -738,14 +738,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -760,8 +760,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="select==='西北地区'||select==='XiBei'">
-                <h1>西北</h1>
+            <div ng-show="selectPosition==='西北地区'||selectPosition==='XiBei'">
+                <h1 ng-cloak>{{'MapXiBeiDivision' | translate}}</h1>
                 <div class="ui cards national-cards">
                     <div class="card">
                         <div class="content national-name">
@@ -773,14 +773,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -803,14 +803,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -833,14 +833,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -863,14 +863,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -893,14 +893,14 @@
                                     <i class="calendar icon"></i>
                                     2015.10.15
                                 </div>
-                                <div>
+                                <div ng-cloak>
                                     <i class="user icon"></i>
-                                    731人报名
+                                    731{{'MapNationalPersons'}}
                                 </div>
                             </div>
                         </div>
                         <div class="extra content">
-                            <div class="right floated">
+                            <div class="text-right">
                                 还有10天截止报名
                             </div>
                         </div>
@@ -919,7 +919,7 @@
     </div>
 </div>
 <script type="text/javascript">
-	$('.card').dimmer({
-        on: 'click'
-    });
+$('.card').dimmer({
+    on: 'click'
+});
 </script>

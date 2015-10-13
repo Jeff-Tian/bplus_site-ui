@@ -10,11 +10,11 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.carousel.min.css?<%= cdn.version %>">
     <link rel="stylesheet" type="text/css"
-          href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.theme.default.min.css?<%= cdn.version %>">
+    href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.theme.default.min.css?<%= cdn.version %>">
 </head>
 
 <body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'"
-      ng-class="{'chinese':language==='zh','english':language==='en'}">
+ng-class="{'chinese':language==='zh','english':language==='en'}">
 <%- include('view-partial/header.html') -%>
 <% if (typeof hcd_user === 'undefined' || !hcd_user.member_id) { %>
 <div class="ui">
@@ -115,41 +115,37 @@
                 <div class="ui three column grid">
                     <div class="column b-advantage-item">
                         <div class="image index-gif online-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/online.png?<%= cdn.version %>" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/online-animate.gif?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak><%= __('IndexOnlineSimulation') %></p>
 
                             <div class="description">
-                                <p ng-cloak><%= __('IndexOnlineSimulationLine1') %>
-                                    <br><%= __('IndexOnlineSimulationLine2') %>
-                                    <br><%= __('IndexOnlineSimulationLine3') %></p>
+                                <p ng-cloak><%= __('IndexOnlineSimulationLine1') %><br><%= __('IndexOnlineSimulationLine2') %><br><%= __('IndexOnlineSimulationLine3') %></p>
                             </div>
                         </div>
                     </div>
                     <div class="column b-advantage-item">
                         <div class="image top-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/top.png?<%= cdn.version %>" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/top-animate.gif?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak> <%= __('IndexDevelopmentTeam') %></p>
 
                             <div class="description">
-                                <p ng-cloak><%= __('IndexDevelopmentTeamLine1') %>
-                                    <br><%= __('IndexDevelopmentTeamLine2') %></p>
+                                <p ng-cloak><%= __('IndexDevelopmentTeamLine1') %><br><%= __('IndexDevelopmentTeamLine2') %></p>
                             </div>
                         </div>
                     </div>
                     <div class="column b-advantage-item">
                         <div class="image enhance-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/enhance.png?<%= cdn.version %>" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/enhance-animate.gif?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak><%= __('IndexImproveTheLevel') %></p>
 
                             <div class="description">
-                                <p ng-cloak><%= __('IndexImproveTheLevelLine1') %>
-                                    <br><%= __('IndexImproveTheLevelLine2') %></p>
+                                <p ng-cloak><%= __('IndexImproveTheLevelLine1') %><br><%= __('IndexImproveTheLevelLine2') %></p>
                             </div>
                         </div>
                     </div>
@@ -163,8 +159,7 @@
                 <div class="row">
                     <div class="column b-theory-header">
                         <div>
-                            <p ng-cloak><%= __('IndexLearningTheoryTeacherInfo') %>
-                                <br><b><%= __('IndexLearningTheoryTeacher') %></b>
+                            <p ng-cloak><%= __('IndexLearningTheoryTeacherInfo') %><br><b><%= __('IndexLearningTheoryTeacher') %></b>
                             </p>
                         </div>
                     </div>
@@ -227,28 +222,28 @@
                             </h2>
                             <table class="ui very basic table unstackable" ng-cloak>
                                 <thead>
-                                <tr>
-                                    <th><%= __('IndexTablePosition') %></th>
-                                    <th><%= __('IndexTableCompany') %></th>
-                                    <th><%= __('IndexTablePlace') %></th>
-                                </tr>
+                                    <tr>
+                                        <th><%= __('IndexTablePosition') %></th>
+                                        <th><%= __('IndexTableCompany') %></th>
+                                        <th><%= __('IndexTablePlace') %></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><%= __('IndexTablePosition1') %></td>
-                                    <td><%= __('IndexTableCompany1') %></td>
-                                    <td><%= __('IndexTablePlace1') %></td>
-                                </tr>
-                                <tr>
-                                    <td><%= __('IndexTablePosition2') %></td>
-                                    <td><%= __('IndexTableCompany2') %></td>
-                                    <td><%= __('IndexTablePlace2') %></td>
-                                </tr>
-                                <tr>
-                                    <td><%= __('IndexTablePosition3') %></td>
-                                    <td><%= __('IndexTableCompany3') %></td>
-                                    <td><%= __('IndexTablePlace3') %></td>
-                                </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition1') %></td>
+                                        <td><%= __('IndexTableCompany1') %></td>
+                                        <td><%= __('IndexTablePlace1') %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition2') %></td>
+                                        <td><%= __('IndexTableCompany2') %></td>
+                                        <td><%= __('IndexTablePlace2') %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition3') %></td>
+                                        <td><%= __('IndexTableCompany3') %></td>
+                                        <td><%= __('IndexTablePlace3') %></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -262,28 +257,28 @@
                             </h2>
                             <table class="ui very basic table unstackable" ng-cloak>
                                 <thead>
-                                <tr>
-                                    <th><%= __('IndexTablePosition') %></th>
-                                    <th><%= __('IndexTableCompany') %></th>
-                                    <th><%= __('IndexTablePlace') %></th>
-                                </tr>
+                                    <tr>
+                                        <th><%= __('IndexTablePosition') %></th>
+                                        <th><%= __('IndexTableCompany') %></th>
+                                        <th><%= __('IndexTablePlace') %></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><%= __('IndexTablePosition4') %></td>
-                                    <td><%= __('IndexTableCompany4') %></td>
-                                    <td><%= __('IndexTablePlace4') %></td>
-                                </tr>
-                                <tr>
-                                    <td><%= __('IndexTablePosition5') %></td>
-                                    <td><%= __('IndexTableCompany5') %></td>
-                                    <td><%= __('IndexTablePlace5') %></td>
-                                </tr>
-                                <tr>
-                                    <td><%= __('IndexTablePosition6') %></td>
-                                    <td><%= __('IndexTableCompany6') %></td>
-                                    <td><%= __('IndexTablePlace6') %></td>
-                                </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition4') %></td>
+                                        <td><%= __('IndexTableCompany4') %></td>
+                                        <td><%= __('IndexTablePlace4') %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition5') %></td>
+                                        <td><%= __('IndexTableCompany5') %></td>
+                                        <td><%= __('IndexTablePlace5') %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><%= __('IndexTablePosition6') %></td>
+                                        <td><%= __('IndexTableCompany6') %></td>
+                                        <td><%= __('IndexTablePlace6') %></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

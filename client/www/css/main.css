@@ -3250,6 +3250,22 @@ a:focus {
 .subcontainer .ui.container {
   min-width: 0 !important;
 }
+img.gender-m {
+  border: 2px solid #0075D5;
+  border-radius: 50%;
+}
+img.gender-f {
+  border: 2px solid #FF6858;
+  border-radius: 50%;
+}
+.ui.b-tiny.images .image,
+.ui.b-tiny.images img,
+.ui.b-tiny.images svg,
+.ui.b-tiny.image {
+  width: 66px;
+  height: auto;
+  font-size: 0.8em;
+}
 body.pushable .pusher {
   background-color: #DCDCDC;
 }
@@ -3484,16 +3500,29 @@ body.pushable .pusher {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
-.footer a.ui.header {
-  font-weight: normal;
-  border-left: 1px solid #7F7F7f;
-  padding-left: 0.25em;
-  font-size: 1em;
+.footer .footer-list {
+  width: 100%;
 }
-.footer a:hover.ui.header,
-.footer a:active.ui.header {
-  color: #FF3C42;
+.footer .footer-list .item .content a span {
+  color: #7F7F7F;
+}
+.footer .footer-list .item .content a.header {
+  font-weight: normal;
+  padding-left: 0.25em;
+  line-height: 80px;
+  font-size: 1em;
+  color: #ffffff !important;
+}
+.footer .footer-list .item .content a.header:hover,
+.footer .footer-list .item .content a.header:active {
+  color: #FF3C42 !important;
   text-decoration: none;
+}
+.footer .footer-list .item:last-child {
+  float: right;
+}
+.footer .footer-list .item .ui.image {
+  border-radius: 0 !important;
 }
 .footer .list > .item {
   font-size: 0.9em;
@@ -5228,8 +5257,9 @@ body.pushable > .pusher,
   background-repeat: no-repeat;
   background-position: center top;
   background-size: auto auto;
-  background-color: #ffffff;
+  background-color: #EFEFEF;
   padding-top: 70px;
+  padding-bottom: 1rem;
 }
 .b-map .ui.vertical.menu {
   max-width: 230px;
@@ -5240,9 +5270,50 @@ body.pushable > .pusher,
 }
 .b-map .ui.vertical.menu .item i.icon {
   float: left;
-  margin: -0.2em 2rem 0 0;
-  font-size: 1.5em;
-  color: #ff3c42;
+  background-repeat: no-repeat;
+  margin-right: 2rem;
+}
+.b-map .ui.vertical.menu .item i.icon.b-home {
+  background: url('/img/icon/home-active.png') no-repeat;
+  width: 32px;
+  height: 26px;
+  margin-top: -5px;
+  margin-left: 1px;
+}
+.b-map .ui.vertical.menu .item i.icon.b-official {
+  background: url('/img/icon/official-active.png') no-repeat;
+  width: 32px;
+  height: 32px;
+  margin-top: -8px;
+  margin-left: 0px;
+}
+.b-map .ui.vertical.menu .item i.icon.b-national {
+  background: url('/img/icon/national-active.png') no-repeat;
+  width: 32px;
+  height: 34px;
+  margin-top: -9px;
+  margin-left: 2.5px;
+}
+.b-map .ui.vertical.menu .item i.icon.b-season {
+  background: url('/img/icon/season-active.png') no-repeat;
+  width: 32px;
+  height: 29px;
+  margin-top: -6.5px;
+  margin-left: 2.5px;
+}
+.b-map .ui.vertical.menu .item i.icon.b-record {
+  background: url('/img/icon/record-active.png') no-repeat;
+  width: 32px;
+  height: 27px;
+  margin-top: -5.5px;
+  margin-left: 4px;
+}
+.b-map .ui.vertical.menu .item i.icon.b-rank {
+  background: url('/img/icon/rank-active.png') no-repeat;
+  width: 32px;
+  height: 27px;
+  margin-top: -5.5px;
+  margin-left: 2.5px;
 }
 .b-map .ui.vertical.menu .item.active,
 .b-map .ui.vertical.menu .item:hover {
@@ -5250,16 +5321,36 @@ body.pushable > .pusher,
   border-radius: 0;
   color: #ffffff;
 }
-.b-map .ui.vertical.menu .item.active i.icon,
-.b-map .ui.vertical.menu .item:hover i.icon {
-  color: #ffffff;
+.b-map .ui.vertical.menu .item.active i.icon.b-home,
+.b-map .ui.vertical.menu .item:hover i.icon.b-home {
+  background: url('/img/icon/home.png') no-repeat;
+}
+.b-map .ui.vertical.menu .item.active i.icon.b-official,
+.b-map .ui.vertical.menu .item:hover i.icon.b-official {
+  background: url('/img/icon/official.png') no-repeat;
+}
+.b-map .ui.vertical.menu .item.active i.icon.b-season,
+.b-map .ui.vertical.menu .item:hover i.icon.b-season {
+  background: url('/img/icon/season.png') no-repeat;
+}
+.b-map .ui.vertical.menu .item.active i.icon.b-national,
+.b-map .ui.vertical.menu .item:hover i.icon.b-national {
+  background: url('/img/icon/national.png') no-repeat;
+}
+.b-map .ui.vertical.menu .item.active i.icon.b-record,
+.b-map .ui.vertical.menu .item:hover i.icon.b-record {
+  background: url('/img/icon/record.png') no-repeat;
+}
+.b-map .ui.vertical.menu .item.active i.icon.b-rank,
+.b-map .ui.vertical.menu .item:hover i.icon.b-rank {
+  background: url('/img/icon/rank.png') no-repeat;
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .b-map .ui.vertical.menu .item {
     padding: 0.9rem 0.5rem;
   }
   .b-map .ui.vertical.menu .item i.icon {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 }
 /*
@@ -5275,7 +5366,7 @@ body.pushable > .pusher,
 }
 .b-map .national-content .national-cards .card {
   border-radius: 0;
-  box-shadow: 0px 2px 0px 1px #d4d4d5;
+  box-shadow: 0px 2px 0px 0px #d4d4d5;
   background-image: url("/img/salespage/national-content.png");
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -5291,8 +5382,8 @@ body.pushable > .pusher,
 .b-map .national-content .national-cards .card .national-name .header {
   color: #ffffff;
 }
-.b-map .national-content .national-cards .card :last-child,
-.b-map .national-content .national-cards .card :first-child {
+.b-map .national-content .national-cards .card:last-child,
+.b-map .national-content .national-cards .card:first-child {
   border-radius: 0 !important;
 }
 .bplus .b-map {
@@ -5333,7 +5424,7 @@ body.pushable > .pusher,
 }
 .b-map .official-content .official-card {
   border-radius: 0;
-  box-shadow: 0px 2px 0px 1px #d4d4d5;
+  box-shadow: 0px 2px 0px 0px #d4d4d5;
   background-image: url("/img/salespage/official-content.png");
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -5362,8 +5453,8 @@ body.pushable > .pusher,
   color: #ffffff;
   font-size: 1.5em;
 }
-.b-map .official-content .official-card :last-child,
-.b-map .official-content .official-card :first-child {
+.b-map .official-content .official-card:last-child,
+.b-map .official-content .official-card:first-child {
   border-radius: 0 !important;
 }
 .bplus .b-map {
@@ -5418,7 +5509,7 @@ body.pushable > .pusher,
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 55px 42px;
-  box-shadow: 0px 2px 0px 1px #d4d4d5;
+  box-shadow: 0px 2px 0px 0px #d4d4d5;
 }
 .b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card .season-name {
   border-radius: 0 !important;
@@ -5435,8 +5526,8 @@ body.pushable > .pusher,
   color: #ffffff;
   font-size: 1.5em;
 }
-.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card :last-child,
-.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card :first-child {
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card:last-child,
+.b-map .season-content .timeline .timeline-content .timeline-content-grid .column .season-card:first-child {
   border-radius: 0 !important;
 }
 .b-map .season-content .timeline .timeline-content .timeline-content-grid .twelve.wide {
@@ -5498,4 +5589,355 @@ body.pushable > .pusher,
 }
 .hcdlearning .b-map .season-content .available .season-card.season-card.available .ui.dimmer {
   background-color: #6e3d82;
+}
+.profile-box {
+  background-color: #ffffff;
+  padding: 1em;
+}
+.profile-box .base-profile .image {
+  width: 50%;
+  height: auto;
+}
+.profile-box .base-profile span {
+  font-size: 2em;
+  font-weight: bold;
+}
+.profile-box .small-rader #rader-map {
+  height: 150px;
+}
+.profile-box .lists {
+  margin: 1rem 0;
+}
+.banner {
+  margin-top: 2em;
+  /*	&.banner_official{
+			background-image: url("/img/salespage/banner_official.png");
+			background-repeat: no-repeat;  
+			background-position: center;  
+			background-size:auto 100%;
+			height:100px;
+		}*/
+}
+.banner:hover,
+.banner:active {
+  opacity: 0.8;
+}
+.banner:first-child {
+  margin-top: 0.5em;
+}
+.available-lists {
+  background-color: #ffffff;
+  margin-top: -4px;
+}
+.available-lists .available-list {
+  border: 1px solid #bebebe;
+  border-bottom: none;
+}
+.available-lists .available-list .list-title,
+.available-lists .available-list .list-content {
+  padding: 1em 0 0 40px;
+}
+.available-lists .available-list .list-content {
+  font-size: 1.06em;
+  padding-bottom: 1em;
+}
+.available-lists .available-list .wechat {
+  padding: 2em;
+}
+.available-lists .available-list .wechat:hover,
+.available-lists .available-list .wechat:active {
+  color: limegreen;
+}
+.available-lists .available-list .wechat i {
+  padding: 0;
+}
+.available-lists .available-list:last-child {
+  box-shadow: 0 2px 0 #bebebe;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .profile-box .base-profile span {
+    font-size: 1.4em;
+  }
+}
+/*
+* - @Bridge+
+*/
+.ui.b-secondary.buttons .button,
+.ui.b-secondary.button {
+  background-color: #1b1c1d;
+  color: #ffffff;
+  text-shadow: none;
+  background-image: none;
+}
+.ui.b-secondary.button {
+  box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+}
+.ui.b-secondary.buttons .button:hover,
+.ui.b-secondary.button:hover,
+.ui.b-secondary.buttons .button:focus,
+.ui.b-secondary.button:focus,
+.ui.b-secondary.buttons .button:active,
+.ui.b-secondary.button:active,
+.ui.b-secondary.buttons .active.button,
+.ui.b-secondary.active.button {
+  color: #ffffff;
+  text-shadow: none;
+}
+.b-map .record-content {
+  padding: 1rem;
+  background-color: #ffffff;
+}
+.b-map .record-content .profile-box {
+  text-align: center;
+  border-right: 2px solid rgba(34, 36, 38, 0.15);
+}
+.b-map .record-content .target-list .target-button {
+  width: 100%;
+  max-width: 120px;
+}
+.b-map .record-content .large-rader #rader-map {
+  height: 300px;
+  min-width: 300px;
+  width: 100%;
+}
+.b-map .record-list {
+  padding: 1em;
+}
+.b-map .record-list .ui.grid {
+  margin-top: 2rem;
+}
+.b-map .record-list .ui.grid .record-card {
+  border-radius: 0;
+  box-shadow: 0px 2px 0px 0px #d4d4d5;
+  width: 100%;
+}
+.b-map .record-list .ui.grid .record-card .ui.grid {
+  margin-top: 0;
+}
+.b-map .record-list .ui.grid .record-card .record-name {
+  border-radius: 0 !important;
+  background-image: url("/img/salespage/card-header.png");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 70px 70px;
+  width: 100%;
+  background-color: #a8a8a8;
+  padding: 1em 1em 0.5em 1em !important;
+}
+.b-map .record-list .ui.grid .record-card .record-name img {
+  float: left;
+  height: 50px;
+  margin-right: 1em;
+}
+.b-map .record-list .ui.grid .record-card .record-name img.national {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.b-map .record-list .ui.grid .record-card .record-name .header {
+  color: #ffffff;
+  font-size: 2.2em !important;
+}
+.b-map .record-list .ui.grid .record-card .record-name .meta {
+  color: #ffffff;
+}
+.b-map .record-list .ui.grid .record-card .sesson-content h2 {
+  padding: 3px 0;
+  float: left;
+  width: 20%;
+  margin-bottom: 0;
+}
+.b-map .record-list .ui.grid .record-card .sesson-content .button {
+  float: right;
+}
+.b-map .record-list .ui.grid .record-card .info-content h2 {
+  padding: 10px 0;
+  float: left;
+  width: 80px;
+  margin-bottom: 0;
+}
+.b-map .record-list .ui.grid .record-card .info-content h5 {
+  float: left;
+  padding: 17px 0;
+  width: 130px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.b-map .record-list .ui.grid .record-card .info-content .button {
+  float: right;
+}
+.b-map .record-list .ui.grid .record-card .info-content .team-list {
+  float: right;
+}
+.b-map .record-list .ui.grid .record-card .info-content .team-list img {
+  width: 50px;
+  height: 50px;
+}
+.b-map .record-list .ui.grid:first-child {
+  margin-top: 0;
+}
+.bplus .ui.b-secondary.buttons .button:hover,
+.bplus .ui.b-secondary.button:hover,
+.bplus .ui.b-secondary.buttons .button:focus,
+.bplus .ui.b-secondary.button:focus,
+.bplus .ui.b-secondary.buttons .button:active,
+.bplus .ui.b-secondary.button:active,
+.bplus .ui.b-secondary.buttons .active.button,
+.bplus .ui.b-secondary.active.button {
+  background-color: #ff3c42;
+}
+.hcdlearning .ui.b-secondary.buttons .button:hover,
+.hcdlearning .ui.b-secondary.button:hover,
+.hcdlearning .ui.b-secondary.buttons .button:focus,
+.hcdlearning .ui.b-secondary.button:focus,
+.hcdlearning .ui.b-secondary.buttons .button:active,
+.hcdlearning .ui.b-secondary.button:active,
+.hcdlearning .ui.b-secondary.buttons .active.button,
+.hcdlearning .ui.b-secondary.active.button {
+  background-color: #845497;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .record-name .ui.horizontal.list .item {
+    margin-left: 0 !important;
+  }
+}
+.b-map .rank-content .rank-menu .item {
+  background-color: #000000;
+  color: #ffffff;
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em !important;
+  border-color: #d4d4d5 !important;
+}
+.b-map .rank-content .rank-menu .item.active,
+.b-map .rank-content .rank-menu .item:hover {
+  color: #ffffff;
+  border-top: none;
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-left: none;
+}
+.b-map .rank-content .rank-menu .item .rank-drop-menu {
+  background: transparent;
+}
+.b-map .rank-content .rank-menu .item .rank-drop-menu .item {
+  background-color: #2E363D !important;
+  color: #ffffff !important;
+  border-radius: 0rem !important;
+}
+.b-map .rank-content .rank-menu .item .rank-drop-menu .item:first-child {
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em !important;
+}
+.b-map .rank-content .rank-menu .item .rank-drop-menu .item:last-child {
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem !important;
+}
+.b-map .rank-content .rank-menu .item .rank-drop-menu .item.active i.icon {
+  margin-right: 0;
+}
+.b-map .rank-content .rank-menu .wechat-button {
+  position: absolute;
+  right: 1em;
+  margin-right: 0;
+}
+.b-map .rank-content .rank-segment {
+  padding: 0;
+  border-radius: 0 !important;
+}
+.b-map .rank-content .rank-segment.active {
+  padding: 0;
+  border-radius: 0 !important;
+  border: 1px solid #EFEFEF !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  margin: 0;
+  margin-top: -1px !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table {
+  width: 100.1%;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table td .crown {
+  width: 20px;
+}
+.b-map .rank-content .rank-segment.active .rank-table td h5 {
+  margin: 0;
+  font-weight: normal;
+}
+.b-map .rank-content .rank-segment.active .rank-table .null-tr td {
+  background-color: #DCDCDC !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table .second-table-tr td {
+  border-top: none !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table tr.error td {
+  background-color: #FFD8D8 !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table tr.error td.error {
+  background-color: #FFB9BA !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table td.error {
+  background-color: #FFD8D8 !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table thead tr:first-child > th:first-child {
+  border-radius: 0 !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table thead tr:last-child > th:last-child {
+  border-radius: 0 !important;
+}
+.b-map .rank-content .rank-segment.active .rank-table tbody tr td:first-child {
+  background-color: #FAFAFA;
+}
+.b-map .rank-content .rank-segment.active .rank-table tbody tr td.avatar {
+  text-align: left;
+  padding-left: 1em;
+}
+.b-map .rank-content .rank-segment.active .rank-table tr td {
+  border-top: 2px solid #B4B4B4;
+}
+.b-map .rank-content .rank-segment.active .rank-table tr:first-child td {
+  border-top: none;
+}
+.b-map .rank-content .rank-segment.active .rank-table tr:last-child td {
+  border-bottom: 2px solid #B4B4B4;
+}
+.bplus .b-map .rank-content .rank-menu .item.active,
+.bplus .b-map .rank-content .rank-menu .item:hover {
+  background-color: #ff3c42;
+}
+.bplus .b-map .rank-content .rank-menu .item .rank-drop-menu .item:hover,
+.bplus .b-map .rank-content .rank-menu .item .rank-drop-menu .item.active {
+  background-color: #ff3c42 !important;
+  color: #ffffff !important;
+}
+.bplus .b-map .rank-content .rank-segment.active .rank-table thead {
+  background-color: #ff3c42;
+}
+.bplus .b-map .rank-content .rank-segment.active .rank-table thead th {
+  background: transparent;
+  color: #ffffff;
+}
+.bplus .b-map .rank-content .rank-segment.active .rank-table thead th.ability:hover,
+.bplus .b-map .rank-content .rank-segment.active .rank-table thead th.ability.active {
+  background-color: #D73637;
+}
+.hcdlearning .b-map .rank-content .rank-menu .item.active,
+.hcdlearning .b-map .rank-content .rank-menu .item:hover {
+  background-color: #845497;
+}
+.hcdlearning .b-map .rank-content .rank-menu .item .rank-drop-menu .item:hover,
+.hcdlearning .b-map .rank-content .rank-menu .item .rank-drop-menu .item.active {
+  background-color: #845497 !important;
+  color: #ffffff !important;
+}
+.hcdlearning .b-map .rank-content .rank-segment.active .rank-table thead {
+  background-color: #845497;
+}
+.hcdlearning .b-map .rank-content .rank-segment.active .rank-table thead th {
+  background: transparent;
+  color: #ffffff;
+}
+.hcdlearning .b-map .rank-content .rank-segment.active .rank-table thead th.ability:hover,
+.hcdlearning .b-map .rank-content .rank-segment.active .rank-table thead th.ability.active {
+  background-color: #736398;
 }
