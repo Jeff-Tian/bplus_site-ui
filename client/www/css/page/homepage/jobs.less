@@ -1,26 +1,23 @@
 /*
 * - @Bridge+
 */
-
 .b-jobs {
 	background-color: @color-white;
 	background-image: url("/img/salespage/jobs_bg.png");
-	background-repeat: no-repeat;  
-	background-position: center;  
+	background-repeat: no-repeat;
+	background-position: center;
 	background-size: auto auto;
 	height: 900px;
 
 	> .ui.container {
 		padding: 13rem 0;
 	}
-
 	h3 {
-        &.ui.header {
+		&.ui.header {
 			color: @color-white;
 			margin-bottom: 3rem;
 		}
 	}
-	
 	.b-jobs-pokesperson {
 		.ui.items {
 			> .item {
@@ -43,8 +40,8 @@
 						font-size: @fontsize-o;
 					}
 					.ui.divider {
-					    border-top-color: @color-white;
-				        margin: .4rem 0 .6rem;
+						border-top-color: @color-white;
+						margin: .4rem 0 .6rem;
 					}
 					.description {
 						> p {
@@ -91,7 +88,6 @@
 					font-weight: normal;
 					vertical-align: super;
 				}
-
 				&:first-child {
 					> .value {
 						color: @color-white;
@@ -100,7 +96,6 @@
 			}
 		}
 	}
-
 	.ui.grid {
 		+ .grid {
 			margin-top: 0;
@@ -122,7 +117,7 @@
 			i.icon {
 				&.red {
 					padding-top: 0;
-					color: @color-brand!important;
+					color: @color-brand !important;
 				}
 			}
 			.content {
@@ -130,23 +125,21 @@
 				line-height: 2.25rem;
 			}
 		}
-
 		.ui.table {
-		    th{
-                font-size:@fontsize-xl;
-            }
-            td{
-                font-size:@fontsize-o;
-                color: #787878;
-            }
+			th {
+				font-size: @fontsize-xl;
+			}
+			td {
+				font-size: @fontsize-o;
+				color: #787878;
+			}
 		}
 	}
 	.b-jobs-action {
 		margin-top: 2rem;
 	}
 }
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width:768px) and (max-width:991px) {
 	.b-jobs {
 		.b-jobs-list {
 			padding: 1.5rem 2rem;
