@@ -1,34 +1,34 @@
 var config = {
     sms: {
-        host: 'qa.service.bridgeplus.cn',
+        host: 'service.bridgeplus.cn',
         port: '10002',
         code: "BP_S1",
         enabled: true
     },
     mail: {
-        host: 'qa.service.bridgeplus.cn',
+        host: 'service.bridgeplus.cn',
         port: '10002',
         code: 'BP_M1',
         verificationCode: 'BP_M2'
     },
     captcha: {
-        host: 'qa.service.bridgeplus.cn',
-        port: '10001'
+        host: (process.env.DATACENTER ? process.env.DATACENTER + '-' : '') + 'captcha.service.bridgeplus.cn',
+        port: '80'
     },
     captchaInternal: {
-        host: process.env.DATACENTER + '-captcha.service.bridgeplus.cn',
+        host: 'service.bridgeplus.cn',
         port: '10001'
     },
     sso: {
-        host: 'qa.service.bridgeplus.cn',
+        host: 'service.bridgeplus.cn',
         port: '10086'
     },
     bplusService: {
-        host: 'qa.service.bridgeplus.cn',
+        host: 'service.bridgeplus.cn',
         port: '12345'
     },
     wechat: {
-        host: 'uat.service.brigeplus.cn',
+        host: 'service.brigeplus.cn',
         port: '10101'
     },
     "bplusServiceParams": require("./config_bplusService"),
