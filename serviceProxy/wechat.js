@@ -8,6 +8,7 @@ function proxyWechat(options) {
     options.port = wechat.port;
     options.dataMapper = function (d) {
         d.application_id = config.applicationId;
+        d.app_id = wechat.app_id;
 
         return d;
     };

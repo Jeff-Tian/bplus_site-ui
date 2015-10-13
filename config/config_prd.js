@@ -1,58 +1,9 @@
-var config = {
-    sms: {
-        host: 'service.bridgeplus.cn',
-        port: '10002',
-        code: "BP_S1",
-        enabled: true
-    },
-    mail: {
-        host: 'service.bridgeplus.cn',
-        port: '10002',
-        code: 'BP_M1',
-        verificationCode: 'BP_M2'
-    },
-    captcha: {
-        host: (process.env.DATACENTER ? process.env.DATACENTER + '-' : '') + 'captcha.service.bridgeplus.cn',
-        port: '80'
-    },
-    captchaInternal: {
-        host: 'service.bridgeplus.cn',
-        port: '10001'
-    },
-    sso: {
-        host: 'service.bridgeplus.cn',
-        port: '10086'
-    },
-    bplusService: {
-        host: 'service.bridgeplus.cn',
-        port: '12345'
-    },
-    wechat: {
-        host: 'service.brigeplus.cn',
-        port: '10101'
-    },
-    "bplusServiceParams": require("./config_bplusService"),
-    "logger": {
-        "levels": {
-            "[all]": "ERROR"
-        },
-        "appenders": [{
-            "type": "console"
-        }, {
-            "type": "log4js_cassandra",
-            "nodes": ["live.cass01.server", "live.cass02.server"],
-            "username": "cassandra",
-            "password": "HCDhcd@123",
-            "keyspace": "logdb",
-            "table": "log",
-            "appName": "BridgePlus"
-        }]
-    },
-    applicationId: '2b33cf2c-e5dd-4e82-8687-d3fe099a3504',
-    port: 12000,
-    cdn: {
-        normal: "//cdn.bridgeplus.cn/"
-    }
-};
+var path = require('path');
+var fs = require('fs');
+var config = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config_prd.json'), 'utf-8'));
+
+config.captcha.host = (process.env.DATACENTER ? process.env.DATACENTER + '-' : '') + config.captcha.host;
+config.bplusServiceParams = require("./config_bplusService");
+config.cdn.version = config.version;
 
 module.exports = config;

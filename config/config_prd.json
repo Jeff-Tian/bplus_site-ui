@@ -1,0 +1,62 @@
+{
+  "sms": {
+    "host": "service.bridgeplus.cn",
+    "port": "10002",
+    "code": "BP_S1",
+    "enabled": true
+  },
+  "mail": {
+    "host": "service.bridgeplus.cn",
+    "port": "10002",
+    "code": "BP_M1",
+    "verificationCode": "BP_M2"
+  },
+  "captcha": {
+    "host": "captcha.service.bridgeplus.cn",
+    "port": "80"
+  },
+  "captchaInternal": {
+    "host": "service.bridgeplus.cn",
+    "port": "10001"
+  },
+  "sso": {
+    "host": "10.171.228.219",
+    "port": "10086"
+  },
+  "bplusService": {
+    "host": "10.171.228.219",
+    "port": "12345"
+  },
+  "wechat": {
+    "host": "service.brigeplus.cn",
+    "port": "10101"
+  },
+  "logger": {
+    "levels": {
+      "[all]": "ERROR"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "log4js_cassandra",
+        "nodes": [
+          "live.cass01.server",
+          "live.cass02.server"
+        ],
+        "username": "cassandra",
+        "password": "HCDhcd@123",
+        "keyspace": "logdb",
+        "table": "log",
+        "appName": "BridgePlus"
+      }
+    ]
+  },
+  "applicationId": "2b33cf2c-e5dd-4e82-8687-d3fe099a3504",
+  "port": 12000,
+  "cdn": {
+    "normal": "//cdn.bridgeplus.cn/"
+  },
+  "version": "0.0.26"
+}

@@ -30,7 +30,7 @@
 <!-- Page Contents -->
 <div class="b-profile-body">
     <div class="b-profile-banner" ng-controller="banner">
-        <div class="img" style="background-image:url({{imageBanner}});" ng-mouseover="hoverBtn='hover'"
+        <div class="img" style="background-image:url('img/profile/XXX.jpg');" ng-mouseover="hoverBtn='hover'"
              ng-mouseleave="hoverBtn=''"></div>
         <a href="javascript:void(0);" class="{{hoverBtn}}">&nbsp;</a>
     </div>
@@ -53,7 +53,7 @@
                     <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'"
                          ng-mouseleave="classNameFaceEdit=''">
                         <img ng-src="{{data.face}}"/>
-                        <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png"
+                        <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png?<%= cdn.version %>"
                              class="edit {{classNameFaceEdit}}"/>
                     </div>
                 </div>

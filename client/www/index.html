@@ -8,9 +8,9 @@
     <meta name="description" content="Bridge+">
     <%- include('view-partial/head.html') -%>
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.carousel.min.css?<%= cdn.version %>">
     <link rel="stylesheet" type="text/css"
-          href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.theme.default.min.css">
+          href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.theme.default.min.css?<%= cdn.version %>">
 </head>
 
 <body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='index'"
@@ -115,7 +115,7 @@
                 <div class="ui three column grid">
                     <div class="column b-advantage-item">
                         <div class="image index-gif online-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/online.png" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/online.png?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak><%= __('IndexOnlineSimulation') %></p>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="column b-advantage-item">
                         <div class="image top-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/top.png" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/top.png?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak> <%= __('IndexDevelopmentTeam') %></p>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="column b-advantage-item">
                         <div class="image enhance-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/enhance.png" width="160px" height="160px">
+                            <img src="<%= cdn.normal %>img/salespage/gif/enhance.png?<%= cdn.version %>" width="160px" height="160px">
                         </div>
                         <div class="content">
                             <p class="header" ng-cloak><%= __('IndexImproveTheLevel') %></p>
@@ -185,7 +185,7 @@
                         <div class="ui items">
                             <div class="item">
                                 <div class="ui small image">
-                                    <img src="<%= cdn.normal %>img/salespage/jobs_lijing.png">
+                                    <img src="<%= cdn.normal %>img/salespage/jobs_lijing.png?<%= cdn.version %>">
                                 </div>
                                 <div class="content">
                                     <div class="b-jobs-pokesperson-sink">
@@ -304,7 +304,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_1.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_1.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName1') %></div>
@@ -319,7 +319,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_2.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_2.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName2') %></div>
@@ -340,7 +340,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_4.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_4.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName3') %></div>
@@ -355,7 +355,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_5.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_5.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName4') %></div>
@@ -376,7 +376,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_5.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_5.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName1') %></div>
@@ -391,7 +391,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_6.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_6.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName2') %></div>
@@ -412,7 +412,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_8.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_8.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName3') %></div>
@@ -427,7 +427,7 @@
                             <div class="column ui items">
                                 <div class="item">
                                     <div class="ui circular small image b-sp">
-                                        <img src="<%= cdn.normal %>img/feedback_student_2.png">
+                                        <img src="<%= cdn.normal %>img/feedback_student_2.png?<%= cdn.version %>">
                                     </div>
                                     <div class="content">
                                         <div class="header" ng-cloak><%= __('IndexStudentName4') %></div>
