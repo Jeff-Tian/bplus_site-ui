@@ -61,6 +61,7 @@ require.config({"context": "bplus"})([
     pRequire([
         "angular",
 
+        "bplus-ui/page/profile/widget/html-class/main",
         "bplus-ui/page/profile/widget/banner/main",
         "bplus-ui/page/profile/widget/achievement/main",
         "bplus-ui/page/profile/widget/growing/main",
@@ -84,6 +85,7 @@ require.config({"context": "bplus"})([
         "text!bplus-ui/view/widgets/personalinfo/list_award_container.html",
         "text!bplus-ui/view/widgets/personalinfo/list_language_container.html"
     ], function (angular,
+                 htmlClass,
                  banner,
                  achievement,
                  growing,
