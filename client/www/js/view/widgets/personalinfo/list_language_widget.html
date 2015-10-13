@@ -21,7 +21,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>{{'Certification' | translate}}</label>
-                        <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" required class="ui fluid dropdown">
+                        <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" class="ui fluid dropdown {{data.language.id === '2dc5e10f-9f2b-4fe8-a5c6-5cf5a571d38d' ? '' : 'disabled'}}">
                             <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
