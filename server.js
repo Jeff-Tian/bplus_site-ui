@@ -116,7 +116,7 @@ supportedLocales.map(function (l) {
 
 server.use('/service-proxy', require('./serviceProxy'));
 server.use('/m', require('./mobile'));
-server.use('/m', express.static(viewFolder));
+server.use('/m', express.static(staticFolder));
 
 // Page route define
 function renderTemplate(name) {
