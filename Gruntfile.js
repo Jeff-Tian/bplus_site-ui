@@ -151,6 +151,9 @@ module.exports = function (grunt) {
                             } else {
                                 return url + '?cdnified';
                             }
+                        } else if (url.indexOf('profile/main-build.js')) {
+                            // For requirejs 
+                            return url.replace('main-build.js', 'main.js');
                         } else {
                             return url; // add query string to all other URLs
                         }
@@ -168,6 +171,22 @@ module.exports = function (grunt) {
                     dest: '<%= config.dist %>'
                 }]
             }
+        },
+
+        requirejs: {
+          compile: {
+            options: {
+              baseUrl: path + "www/bower",
+              mainConfigFile: path + "www/js/page/profile/mainConfig.js",
+              name: "bplus-ui/page/profile/main-build",
+              findNestedDependencies: true,
+              uglify: {
+                no_mangle: true
+              },
+              exclude: ["angular", "angular-translate", "semantic", "jquery"],
+              out: path + "www/js/page/profile/main.js"
+            }
+          }
         }
     });
 
@@ -205,7 +224,7 @@ module.exports = function (grunt) {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {

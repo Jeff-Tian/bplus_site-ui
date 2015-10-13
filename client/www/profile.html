@@ -146,12 +146,9 @@
 <!-- Footer End -->
 
 <!--JS-->
-<script src="<%= cdn.normal %>bower/requirejs/require.js" type="text/javascript"></script>
-<script src="<%= cdn.normal %>bower/jquery/dist/jquery.js" type="text/javascript"></script>
-<script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.js" type="text/javascript"></script>
+<script src="<%= cdn.normal %>bower/requirejs/require.js?<%= cdn.version %>" type="text/javascript"></script>
 <!--Page JS-->
-<!-- build:js js/cdn/profile.<%= grunt.file.readJSON('package.json').version %>.js -->
-<script src="js/page/profile/main.js" type="text/javascript"></script>
-<!-- endbuild -->
+<script src="<%= cdn.normal %>js/page/profile/mainConfig.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/profile/main-build.js?<%= cdn.version %>" type="text/javascript"></script>
 </body>
 </html>
