@@ -10,12 +10,16 @@ module.exports = function () {
             files: {}
         },
         production: {
-            // TODO: Investigate why it doesn't work
             files: [{
                 expand: true,
                 cwd: '<%= config.dist %>js',
                 src: '**/*.js',
                 dest: '<%= config.dist %>js'
+            }, {
+                expand: true,
+                cwd: '<%= config.dist %>translation',
+                src: 'localeHelper.js',
+                dest: '<%= config.dist %>translation'
             }],
             options: {
                 mangle: true

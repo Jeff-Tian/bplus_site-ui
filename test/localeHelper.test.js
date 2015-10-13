@@ -5,5 +5,6 @@ describe('Locale Helper', function () {
     it('should generate other locale link according to requested url', function () {
         assert.equal('/zh/signin', localeHelper.generateLocaleLink('/signin', 'zh'));
         assert.equal('/zh/signin', localeHelper.generateLocaleLink('/en/signin', 'zh'));
+        assert.equal('/en', localeHelper.generateLocaleLink('/zh', 'en'));
     });
 });

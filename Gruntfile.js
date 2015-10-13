@@ -174,19 +174,19 @@ module.exports = function (grunt) {
         },
 
         requirejs: {
-          compile: {
-            options: {
-              baseUrl: "<%= config.dist %>bower",
-              mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
-              name: "bplus-ui/page/profile/main-build",
-              findNestedDependencies: true,
-              uglify: {
-                no_mangle: true
-              },
-              exclude: ["angular", "angular-translate", "semantic", "jquery"],
-              out: "<%= config.dist %>/js/page/profile/main.js"
+            compile: {
+                options: {
+                    baseUrl: "<%= config.dist %>bower",
+                    mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
+                    name: "bplus-ui/page/profile/main-build",
+                    findNestedDependencies: true,
+                    uglify: {
+                        no_mangle: true
+                    },
+                    exclude: ["angular", "angular-translate", "semantic", "jquery"],
+                    out: "<%= config.dist %>/js/page/profile/main.js"
+                }
             }
-          }
         }
     });
 
@@ -224,7 +224,7 @@ module.exports = function (grunt) {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['clean:dist', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {
@@ -232,5 +232,26 @@ module.exports = function (grunt) {
             configFile: __dirname + '/client/www/test/my.conf.js',
             singleRun: true
         }).start();
+    });
+
+    grunt.registerTask('inlineTranslation', 'Inline Translation', function () {
+        var fs = require('fs');
+        var translateSource = '/client/www/js/factories/translationLoader.js';
+        var translateFile = '/client/dist/js/factories/translationLoader.js';
+        var translateFileContent = fs.readFileSync(__dirname + translateSource, 'utf-8').toString();
+
+        var locales = fs.readdirSync(__dirname + '/locales');
+        var data = {};
+        for (var i = 0; i < locales.length; i++) {
+            if (locales[i].indexOf('.json') >= 0) {
+                var locale = locales[i].substr(0, locales[i].indexOf('.json'));
+
+                data[locale] = JSON.parse(fs.readFileSync(__dirname + '/locales/' + locales[i], 'utf-8'));
+            }
+        }
+        translateFileContent = translateFileContent.replace('var data = {};', 'var data = ' + JSON.stringify(data) + ';');
+
+        //console.log(translateFileContent);
+        fs.writeFileSync(__dirname + translateFile, translateFileContent, 'utf-8');
     });
 };
