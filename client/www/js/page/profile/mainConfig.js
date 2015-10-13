@@ -4,7 +4,7 @@ require.config({
     "packages": [{
         "name": "jquery",
         "location": "jquery/dist",
-        "main": "jquery"
+        "main": "jquery.min"
     }, {
         "name": "when",
         "location": "when",
@@ -18,10 +18,10 @@ require.config({
         "image": "requirejs-plugins/src/image",
         "json": "requirejs-plugins/src/json",
         "propertyParser": "requirejs-plugins/src/propertyParser",
-        "angular": "angular/angular",
-        "angular-translate": "angular-translate/angular-translate.min",
         'domReady': 'requirejs-domready/domReady',
-        "semantic": "semantic-ui/dist/semantic"
+        "angular": "angular/angular.min",
+        "angular-translate": "angular-translate/angular-translate.min",
+        "semantic": "semantic-ui/dist/semantic.min"
     },
     "shim": {
         'angular': {
