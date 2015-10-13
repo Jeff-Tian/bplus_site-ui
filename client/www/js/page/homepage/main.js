@@ -2,16 +2,9 @@
 
 // Declare app level module which depends on views, and components
 angular.module('bplus', [
-    'ui.router',
     'ng.utils',
     'pascalprecht.translate'
-]).config([
-    '$urlRouterProvider',
-    function ($urlRouterProvider) {
-    }
-]).run(function () {
-
-})
+])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)

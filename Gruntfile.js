@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             "release": ''
         },
         "bumpup": {
-            file: 'package.json'
+            files: ['package.json', 'config/config_dev.json', 'config/config_prd.json']
         },
         "clean": configClean(),
         "copy": configCopy(),
