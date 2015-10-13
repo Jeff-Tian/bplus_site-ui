@@ -3,6 +3,15 @@
         return function (options) {
             var dfd = $q.defer();
 
+            // Filled by grunt
+            var data = {};
+
+            if (data[options.key]) {
+                dfd.resolve(data[options.key]);
+
+                return dfd.promise;
+            }
+
             $http({
                 method: 'GET',
                 url: '/translation?lang=' + options.key + '&timestamp=' + new Date().getTime()

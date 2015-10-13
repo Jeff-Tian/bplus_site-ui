@@ -104,7 +104,12 @@ server.use('/config.js', function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
+if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
+    server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
+} else {
+    server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
+}
+
 server.use('/translation', localeHelper.serveTranslations);
 
 // Customize client file path
