@@ -1,5 +1,5 @@
 (function(exports) {
-    exports.gameCtrl = function($scope) {
+    exports.gameCtrl = function($scope, $translate) {
         var initItem = function() {
             $scope.css = {
                 home: false,
@@ -11,7 +11,16 @@
             };
         };
 
-        initItem();
+        var initPage = function() {
+            initItem();
+            $scope.css.home = true;
+            $scope.selectedStyle = 'bplus';
+            $scope.language = $translate.preferredLanguage();
+
+            $scope.raderData = [1, 2, 3, 4, 5];
+        };
+
+        initPage();
 
         $scope.selectItem = function(item) {
             switch (item) {
@@ -41,8 +50,13 @@
                     break;
             }
         };
+
+        $scope.selectStyle = function(style) {
+            $scope.selectedStyle = style;
+        };
+
     };
 
-    exports.gameCtrl.$inject = ['$scope'];
+    exports.gameCtrl.$inject = ['$scope', '$translate'];
 
 })(angular.bplus = angular.bplus || {});

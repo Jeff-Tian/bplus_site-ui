@@ -1,7 +1,7 @@
 {
   "name": "BridgePlus",
   "private": true,
-  "version": "0.0.26",
+  "version": "0.1.1",
   "description": "",
   "repository": "",
   "license": "",
@@ -55,7 +55,8 @@
     "protractor": "^2.1.0",
     "require-dot-file": "^0.4.0",
     "shelljs": "^0.2.6",
-    "yamljs": "^0.2.3"
+    "yamljs": "^0.2.3",
+    "grunt-contrib-requirejs": "~0.4.4"
   },
   "scripts": {
     "start": "node server.js"

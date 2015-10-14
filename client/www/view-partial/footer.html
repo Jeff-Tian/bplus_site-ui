@@ -1,47 +1,44 @@
 <div class="ui inverted vertical footer">
     <div class="ui container">
-        <div class="ui seven column grid" ng-show="language==='zh'">
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterAboutUs' | translate}}</a>
+        <div class="ui horizontal list footer-list">
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterAboutUs' | translate}}</a>
+                </div>
             </div>
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterBusinessCooperation' | translate}}</a>
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterBusinessCooperation' | translate}}</a>
+                </div>
             </div>
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterContactUs' | translate}}</a>
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterContactUs' | translate}}</a>
+                </div>
             </div>
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterJoinUs' | translate}}</a>
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterJoinUs' | translate}}</a>
+                </div>
             </div>
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterServiceStatement' | translate}}</a>
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterServiceStatement' | translate}}</a>
+                </div>
             </div>
-            <div class="column">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterFeedbacks' | translate}}</a>
+            <div class="item">
+                <div class="content">
+                    <a class="header" href="#" ng-cloak><span>|</span> {{'FooterFeedbacks' | translate}}</a>
+                </div>
             </div>
-        </div>
-        <div class="ui grid" ng-show="language==='en'">
-            <div class="column" style="width:14%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterAboutUs' | translate}}</a>
-            </div>
-            <div class="column" style="width:14%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterContactUs' | translate}}</a>
-            </div>
-            <div class="column" style="width:14%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterJoinUs' | translate}}</a>
-            </div>
-            <div class="column" style="width:14%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterFeedbacks' | translate}}</a>
-            </div>
-            <div class="column" style="width:23%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterBusinessCooperation' | translate}}</a>
-            </div>
-            <div class="column" style="width:21%">
-                <a class="ui inverted header" href="#" ng-cloak>{{'FooterServiceStatement' | translate}}</a>
+            <div class="item footer-wechat-share" data-html="<img src='/img/b-wechat.jpg' class='ui large image'>"
+                 data-position="left center">
+                <img class="ui tiny image wechat" src="/img/b-wechat.jpg">
             </div>
         </div>
-        <p class="b-copyright" ng-cloak>&copy; 2015 Bridge+ {{'FooterReserved' | translate}} | {{'FooterLicense' |
-            translate}}</p>
+
+        <p class="b-copyright floatd left" ng-cloak>&copy; 2015 Bridge+ {{'FooterReserved' | translate}} |
+            {{'FooterLicense' | translate}}</p>
     </div>
 </div>
 <%- include('../mobile/footer.html') -%>

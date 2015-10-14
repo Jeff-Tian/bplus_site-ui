@@ -52,6 +52,12 @@ define([
                   }
                   $scope.$apply();
               });
+              $scope.$watch("data.language.id", function(newValue, oldValue) {
+                  if (newValue !== oldValue && newValue !== "2dc5e10f-9f2b-4fe8-a5c6-5cf5a571d38d") {
+                      $scope.data.certification.id = "";
+                      $scope.data.certification.value = "";
+                  }
+              });
               me.getResouce($scope, "certification").then(function(data) {
                   $scope.certifications = data;
                   var i = 0;

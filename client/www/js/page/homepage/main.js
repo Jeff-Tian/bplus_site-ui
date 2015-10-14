@@ -122,31 +122,6 @@ angular.module('bplus', [
         $('#b-client-header').css('visibility', 'hidden');
     });
 
-    // var animateGif = function() {
-
-    //     if ($('.online-gif').find('img').attr('src') === "img/salespage/gif/online.png") {
-    //         $('.online-gif').find('img').attr('src','img/salespage/gif/online-animate.gif');
-    //         $('.top-gif').find('img').attr('src','img/salespage/gif/top-animate.gif');
-    //         $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance-animate.gif');
-
-    //         setTimeout(function() {
-    //             $('.online-gif').find('img').attr('src','img/salespage/gif/online.png');
-    //             $('.top-gif').find('img').attr('src','img/salespage/gif/top.png');
-    //             $('.enhance-gif').find('img').attr('src','img/salespage/gif/enhance.png');
-    //         }, 950);
-    //     }
-    // };
-
-    // $('.index-gif').visibility({
-    //     once: false,
-    //     onTopVisible: function() {
-    //         animateGif();
-    //     },
-    //     onBottomPassedReverse: function() {
-    //         animateGif();
-    //     }
-    // });
-
     $(document).ready(function () {
         $('iframe').load(function () {
             //$(this).contents().find('body').css({

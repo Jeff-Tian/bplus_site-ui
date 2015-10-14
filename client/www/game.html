@@ -54,7 +54,8 @@
                             <p><%= __('GameTeamWorkInfo') %></p>
                         </div>
                         <div class="image game-gif team-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/team.png?<%= cdn.version %>" width="100%">
+                            <img src="<%= cdn.normal %>img/salespage/gif/team-animate.gif?<%= cdn.version %>"
+                                 width="100%">
                         </div>
                     </div>
                     <div class="column b-process-item" id="game-column">
@@ -64,14 +65,15 @@
 
                                 <div class="content"><%= __('GameRunning') %></div>
                             </h4>
-                                <span class="b-process-item-next">
-                                    <i class="caret right icon"></i>
-                                </span>
+                            <span class="b-process-item-next">
+                                <i class="caret right icon"></i>
+                            </span>
 
                             <p><%= __('GameRunningInfo') %></p>
                         </div>
                         <div class="image gaming-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/gaming.png?<%= cdn.version %>" width="100%">
+                            <img src="<%= cdn.normal %>img/salespage/gif/gaming-animate.gif?<%= cdn.version %>"
+                                 width="100%">
                         </div>
                     </div>
                     <div class="column b-process-item" id="win-column">
@@ -81,14 +83,15 @@
 
                                 <div class="content"><%= __('GameTarget') %></div>
                             </h4>
-                                <span class="b-process-item-next">
-                                    <i class="caret right icon"></i>
-                                </span>
+                            <span class="b-process-item-next">
+                                <i class="caret right icon"></i>
+                            </span>
 
                             <p><%= __('GameTargetInfo') %></p>
                         </div>
                         <div class="image winning-gif">
-                            <img src="<%= cdn.normal %>img/salespage/gif/winning.png?<%= cdn.version %>" width="100%">
+                            <img src="<%= cdn.normal %>img/salespage/gif/winning-animate.gif?<%= cdn.version %>"
+                                 width="100%">
                         </div>
                     </div>
                 </div>
@@ -100,7 +103,10 @@
                 <div class="ui grid">
                     <div class="seventy wide column">
                         <div class="b-skill-topic">
-                            <img src="<%= cdn.normal %>img/salespage/topics.png?<%= cdn.version %>">
+                            <img src="<%= cdn.normal %>img/salespage/topics.png?<%= cdn.version %>"
+                                 ng-show="language==='zh'">
+                            <img src="<%= cdn.normal %>img/salespage/topics-en.png?<%= cdn.version %>"
+                                 ng-show="language==='en'">
                         </div>
                     </div>
                     <div class="thirty wide column">
@@ -186,13 +192,9 @@
 
                         <p class="text-right"><%= __('GameFeedbackList2Name') %></p>
 
-                        <p><%= __('GameFeedbackList1') %><br><%= __('GameFeedbackList1SubContent') %></p>
+                        <p><%= __('GameFeedbackList3') %><br><%= __('GameFeedbackList3SubContent') %></p>
 
-                        <p class="text-right"><%= __('GameFeedbackList1Name') %></p>
-
-                        <p><%= __('GameFeedbackList2') %></p>
-
-                        <p class="text-right"><%= __('GameFeedbackList2Name') %></p>
+                        <p class="text-right"><%= __('GameFeedbackList3Name') %></p>
                     </div>
                 </div>
             </div>

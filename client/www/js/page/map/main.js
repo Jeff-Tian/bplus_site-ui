@@ -14,6 +14,7 @@ angular.module('bplus', [
     })
     .factory('MessageStore', angular.bplus.MessageStore)
     .directive('chinaMap', angular.bplus.chinaMap || {})
+    .directive('radarMap', angular.bplus.radarMap || {})
     .directive('gameHome', angular.bplus.gameHome)
     .directive('gameOfficial', angular.bplus.gameOfficial)
     .directive('gameNational', angular.bplus.gameNational)

@@ -47,7 +47,7 @@
         $scope.signOut = function () {
             service.post('/service-proxy/logon/logout')
                 .finally(function (res) {
-                    window.location.href = '/';
+                    window.location.href = $scope.localeUrl('/');
                 });
         };
 

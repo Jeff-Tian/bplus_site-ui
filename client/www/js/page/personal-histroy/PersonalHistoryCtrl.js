@@ -80,7 +80,7 @@
         }
 
         $scope.gotoComplete = function () {
-            window.location.href = '/';
+            window.location.href = $scope.localeUrl('/');
         };
 
         $scope.trySubmit = function ($event) {

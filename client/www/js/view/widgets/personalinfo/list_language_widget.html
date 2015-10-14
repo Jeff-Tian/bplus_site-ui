@@ -21,7 +21,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>{{'Certification' | translate}}</label>
-                        <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" required class="ui fluid dropdown">
+                        <select name="certification" ng-model="data.certification.id" ng-options="value.id as value.text for value in certifications" class="ui fluid dropdown {{data.language.id === '2dc5e10f-9f2b-4fe8-a5c6-5cf5a571d38d' ? '' : 'disabled'}}">
                             <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
@@ -35,10 +35,10 @@
                         <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
                     </div>
                     <div class="column">
-                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancle">取消</button>
+                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancel">取消</button>
                     </div>
                     <div class="column">
-                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui basic large button b-profile-btn-cancle">{{'Delete' | translate}}</button>
+                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui basic large button b-profile-btn-cancel">{{'Delete' | translate}}</button>
                     </div>
                 </div>
             </div>

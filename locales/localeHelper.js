@@ -13,7 +13,7 @@
         defaultLocale: supportedLocales[0],
 
         generateLocaleLink: function (url, locale) {
-            var localePattern = new RegExp('^(?:/(?:' + helper.supportedLocales.join('|') + '))?(.+$)', 'i');
+            var localePattern = new RegExp('^(?:/(?:' + helper.supportedLocales.join('|') + '))?(.*$)', 'i');
 
             return url.replace(localePattern, '/' + locale + '$1');
         },
