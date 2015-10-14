@@ -5291,6 +5291,7 @@ html.bplus-lng-en .p-profile-right-section-form-bplusdate-shortline {
 }
 .b-modify {
   width: 340px !important;
+  margin-left: -170px !important;
 }
 .b-modify iframe {
   background-color: transparent !important;

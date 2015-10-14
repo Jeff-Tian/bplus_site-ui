@@ -56,11 +56,17 @@ function setCDN(req, res, next) {
     next();
 }
 
+function setFeatureSwitcher(req, res, next) {
+    res.locals.featureSwitcher = config.featureSwitcher;
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
     .use(shimGrunt)
     .use(setCDN)
+    .use(setFeatureSwitcher)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true

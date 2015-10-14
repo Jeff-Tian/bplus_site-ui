@@ -75,7 +75,12 @@ function advancedProxy(req, res, next, settings) {
         }
     });
 
-    request.on('error', next);
+    request.on('error', function (err) {
+        req.dualLogError('Error met in this request:');
+        req.dualLogError(request);
+        
+        next();
+    });
 
     if (typeof settings.requestInterceptor === 'function') {
         settings.requestInterceptor(req, request);

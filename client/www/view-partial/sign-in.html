@@ -50,6 +50,7 @@
     <div class="ui right aligned container subcontainer">
         <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
     </div>
+    <% if (featureSwitcher.enableWechat === true) { %>
     <div class="ui divider"></div>
     <div class="ui">
         <a class="wechat link" ng-click="logOnViaWechat()">
@@ -57,6 +58,7 @@
             <i class="big wechat icon"></i>
         </a>
     </div>
+    <% } %>
 </div>
 <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
     <div class="ui center aligned container subcontainer mobile">
