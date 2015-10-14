@@ -102,6 +102,7 @@ function filterConfig(config) {
     var filtered = {};
 
     filtered.captcha = config.captcha;
+    filtered.cdn = config.cdn;
 
     return filtered;
 }
