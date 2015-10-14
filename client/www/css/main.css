@@ -5248,6 +5248,7 @@ body.pushable > .pusher,
 }
 .b-modify {
   width: 340px !important;
+  margin-left: -170px !important;
 }
 .b-modify iframe {
   background-color: transparent !important;
