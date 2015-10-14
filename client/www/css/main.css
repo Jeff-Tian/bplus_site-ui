@@ -4906,14 +4906,6 @@ body.pushable > .pusher,
   margin-right: auto;
   border: 0;
   padding: 0;
-  /*
-  width: 1646px;
-  height: 235px;
-  background-color: #e5e5e5;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  */
   min-width: 100%;
   max-width: 1646px;
   max-height: 235px;
@@ -5225,6 +5217,7 @@ body.pushable > .pusher,
   position: absolute;
   top: 50%;
   left: 50%;
+  margin-top: -0.5rem;
   margin-left: -2rem;
   width: 2rem;
   height: 0.25rem;
