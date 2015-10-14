@@ -43,7 +43,6 @@
         </div>
     </div>
     <div class="ui menu b-header-nav">
-        <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
         <div class="ui container">
             <a href="<%= localeLink('/index') %>" class="b-header-logo">
                 <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>" height="60">
@@ -60,25 +59,6 @@
                    ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
             </div>
         </div>
-        <% } else { %>
-        <div class="ui container">
-            <a href="<%= localeLink('/signin#/register') %>" class="b-header-logo">
-                <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>" height="60">
-            </a>
-
-            
-            <div class="right item">
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
-                <a href="##" class="ui button nav-button"
-                   ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
-            </div>
-        </div>
-        <% } %>
     </div>
 </div>
 <!-- Sidebar Menu -->
@@ -125,7 +105,6 @@
         </div>
     </div>
     <div class="ui menu b-header-nav">
-        <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
         <div class="ui container">
             <a href="<%= localeLink('/index') %>" class="b-header-logo">
                 <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>" height="60">
@@ -142,24 +121,5 @@
                    ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
             </div>
         </div>
-        <% } else { %>
-        <div class="ui container">
-            <a href="<%= localeLink('/signin#/register') %>" class="b-header-logo">
-                <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>" height="60">
-            </a>
-
-            
-            <div class="right item">
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
-                <a href="##" class="ui button nav-button"
-                   ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
-                <a href="<%= localeLink('/signin#/register') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
-            </div>
-        </div>
-        <% } %>
     </div>
 </div>
