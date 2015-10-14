@@ -48,3 +48,8 @@
 .b-bind-mobile-container {
   padding-bottom: 2em;
 }
+.b-wechat-frame {
+  background-color: transparent !important;
+  height: 400px !important;
+  max-width: 100%;
+}

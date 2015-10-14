@@ -20,7 +20,9 @@
             ;
         };
 
-        $scope.logOnViaWechat();
+        if (!/MicroMessenger/i.test(window.navigator.userAgent || window.navigator.vender || window.opera)) {
+            $scope.logOnViaWechat();
+        }
 
         $scope.cancelWechatLogin = function () {
             $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'login');
