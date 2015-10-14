@@ -293,7 +293,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-jobs-action">
-                    <a class="ui red large button check-more-buuton b-sp" ng-cloak><%= __('IndexCheckMoreJobs') %></a>
+                    <a class="ui red large button check-more-buuton b-sp" ng-click="redirectUrl('<%= localeLink('/index') %>','<%= localeLink('/signin#/register') %>','indexCheckMoreJob')" ng-cloak><%= __('IndexCheckMoreJobs') %></a>
                 </div>
             </div>
         </div>
@@ -435,7 +435,7 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" ng-cloak><%= __('IndexStart') %></a>
+                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink('/index') %>','<%= localeLink('/signin#/register') %>','indexExperience')" ng-cloak><%= __('IndexStart') %></a>
                 </div>
             </div>
         </div>

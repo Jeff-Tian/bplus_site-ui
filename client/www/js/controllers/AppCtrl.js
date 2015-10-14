@@ -11,6 +11,13 @@
 
         $scope.memberInfo = {};
 
+
+        $scope.redirectUrl = function(from, to, action) {
+            console.log('from:' + from + ',to:' + to + ',action:' + action);
+            //todo
+            window.location.href = to;
+        };
+
         $scope.fetchProfile = function () {
             return service.get('/service-proxy/member/profile/')
                 .then(function (res) {

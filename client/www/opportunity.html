@@ -23,7 +23,7 @@
                     <%= __('OpportunityInfoLine2') %></h2>
 
                 <div class="column">
-                    <a class="ui opportunity-gray large button b-sp"><%= __('OpportunityApply') %></a>
+                    <a class="ui opportunity-gray large button b-sp" ng-click="redirectUrl('<%= localeLink('/game') %>','<%= localeLink('/signin#/register') %>','opportunityApply')"><%= __('OpportunityApply') %></a>
                 </div>
 
             </div>
@@ -263,7 +263,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton" ng-cloak><%= __('OpportunityCheckMoreJob')
+                    <a class="ui red large button b-sp check-more-buuton" ng-click="redirectUrl('<%= localeLink('/game') %>','<%= localeLink('/signin#/register') %>','opportunityCheckMoreJob')" ng-cloak><%= __('OpportunityCheckMoreJob')
                         %></a>
                 </div>
             </div>
@@ -312,7 +312,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton"><%= __('OpportunityCheckMoreCompany') %></a>
+                    <a class="ui red large button b-sp check-more-buuton" ng-click="redirectUrl('<%= localeLink('/game') %>','<%= localeLink('/signin#/register') %>','opportunityCheckMoreCompany')"><%= __('OpportunityCheckMoreCompany') %></a>
                 </div>
             </div>
         </div>
@@ -343,7 +343,7 @@
         <div class="b-opportunity-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp"><%= __('OpportunityStart') %></a>
+                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink('/game') %>','<%= localeLink('/signin#/register') %>','opportunityStart')"><%= __('OpportunityStart') %></a>
                 </div>
             </div>
         </div>
