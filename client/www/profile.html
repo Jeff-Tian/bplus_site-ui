@@ -30,13 +30,13 @@
 <!-- Page Contents -->
 <div class="b-profile-body">
     <div class="b-profile-banner" ng-controller="banner">
-        <div class="img" style="background-image:url({{imageBanner}});" ng-mouseover="hoverBtn='hover'"
-             ng-mouseleave="hoverBtn=''"></div>
-        <div class="ui container b-profile-banner-btns {{hoverBtn}}" ng-mouseover="hoverBtn='hover'"
-             ng-mouseleave="hoverBtn=''">
-            <a href="javascript:void(0);" ng-click="switchBanner(0);">&nbsp;</a>
-            <a href="javascript:void(0);" ng-click="switchBanner(1);">&nbsp;</a>
-            <a href="javascript:void(0);" ng-click="switchBanner(2);">&nbsp;</a>
+        <div class="img" ng-mouseover="hoverBtn='hover'" ng-mouseleave="hoverBtn=''">
+            <img ng-src="{{imageBanner}}" />
+        </div>
+        <div class="ui container b-profile-banner-btns {{hoverBtn}}" ng-mouseover="hoverBtn='hover'" ng-mouseleave="hoverBtn=''">
+            <a href="javascript:void(0);" ng-click="switchBanner(0);"><i class="file image outline big icon"></i></a>
+            <a href="javascript:void(0);" ng-click="switchBanner(1);"><i class="file image outline big icon"></i></a>
+            <a href="javascript:void(0);" ng-click="switchBanner(2);"><i class="file image outline big icon"></i></a>
         </div>
     </div>
     <div class="b-profile-main-wrapper">
