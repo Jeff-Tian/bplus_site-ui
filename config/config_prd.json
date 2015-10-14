@@ -58,5 +58,8 @@
   "cdn": {
     "normal": "//cdn.bridgeplus.cn/"
   },
+  "featureSwitcher": {
+    "enableWechat": false
+  },
   "version": "0.0.26"
 }

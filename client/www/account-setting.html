@@ -31,6 +31,7 @@
                     </button>
                 </div>
             </div>
+            <% if (featureSwitcher.enableWechat === true) { %>
             <div class="ui divider"></div>
             <div class="row">
                 <div class="three wide column middle aligned"> <%= __('Wechat') %></div>
@@ -41,6 +42,7 @@
                     </button>
                 </div>
             </div>
+            <% } %>
             <div class="ui divider"></div>
             <div class="row" ng-controller="changeEmailCtrl">
                 <div class="three wide middle aligned column"> <%= __('Email') %></div>

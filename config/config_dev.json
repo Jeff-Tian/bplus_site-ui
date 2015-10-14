@@ -58,5 +58,8 @@
   "cdn": {
     "normal": "/"
   },
+  "featureSwitcher": {
+    "enableWechat": true
+  },
   "version": "0.0.26"
 }
