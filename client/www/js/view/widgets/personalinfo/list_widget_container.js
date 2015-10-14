@@ -14,10 +14,6 @@ define([
     ListWidgetContainer.prototype.constructor = ListWidgetContainer;
 
     ListWidgetContainer.prototype.start = function (agModel, directiveName, template) {
-        if (!_modelInstance) {
-            _modelInstance = new personalinfoData();
-            _modelInstance.start(agModel);
-        }
         agModel
             .directive(directiveName, ["personalinfoService", function (model) {
                 return {

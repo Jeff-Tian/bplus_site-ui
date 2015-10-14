@@ -17,6 +17,61 @@ body.pushable > .pusher,
 .b-profile-body {
     background-color: #efefef;
 }
+.b-profile-body {
+  overflow: hidden;
+}
+@media only screen and (max-width: 767px) {
+  .b-profile-body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 768px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .b-profile-body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1646px;
+  }
+}
+.b-profile-body-bg-1 {
+  position: absolute;
+  top: -2rem;
+  left: -450px;
+  width: 500px;
+  height: 500px;
+  background-color: #df363d;
+}
+.b-profile-body-bg-2 {
+  position: absolute;
+  top: -439px;
+  left: -154px;
+  width: 305px;
+  height: calc(1500px);
+  background-color: #ff3b42;
+  transform: rotate(30deg);
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .b-profile-body-bg-1 {
+    height: 400px;
+  }
+  .b-profile-body-bg-2 {
+    top: -426px;
+    left: -165px;
+    width: 252px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .b-profile-body-bg-1 {
+    height: 320px;
+  }
+  .b-profile-body-bg-2 {
+    top: -408px;
+    left: -162px;
+    width: 179px;
+  }
+}
 
 .b-profile-li > .item > .icon {
     background: url(/img/profile/icon_profile_li.png) no-repeat center top;
@@ -32,50 +87,32 @@ body.pushable > .pusher,
     margin-right: auto;
     border: 0;
     padding: 0;
-    width: 1600px;
+    width: 1646px;
     height: 235px;
     background-color: #e5e5e5;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
-.b-profile-banner a,
-.b-profile-banner a:hover,
-.b-profile-banner a:visited,
-.b-profile-banner a.hover,
-.b-profile-banner a.hover:hover,
-.b-profile-banner a.hover:visited {
-    position: absolute;
-    left: 50%;
-    bottom: 1em;
-    margin-left: calc( 400.5px );
+.b-profile-banner-btns {
+    margin-top: -5rem;
+    height: 5rem;
+    text-align: right;
+}
+.b-profile-banner-btns a,
+.b-profile-banner-btns a:visited,
+.b-profile-banner-btns a:hover {
+    display: inline-block;
+    margin-left: 1rem;
     width: 54px;
     height: 54px;
     text-decoration: none;
     background: url(/img/profile/btn_profile_addphoto_n.png) no-repeat center center;
 }
-.b-profile-banner a:hover,
-.b-profile-banner a.hover,
-.b-profile-banner a.hover:hover,
-.b-profile-banner a.hover:visited {
-    background-image: url(/img/profile/btn_profile_addphoto_p.png)
-}
-@media only screen and (max-width: 991px) {
-    .b-profile-banner a,
-    .b-profile-banner a:hover,
-    .b-profile-banner a:visited,
-    .b-profile-banner a.hover,
-    .b-profile-banner a.hover:hover,
-    .b-profile-banner a.hover:visited {
-        margin-left: calc( 307.5px );
-    }
-}
-@media only screen and (min-width: 1400px) {
-    .b-profile-banner a,
-    .b-profile-banner a:hover,
-    .b-profile-banner a:visited,
-    .b-profile-banner a.hover,
-    .b-profile-banner a.hover:hover,
-    .b-profile-banner a.hover:visited {
-        margin-left: calc( 497.5px );
-    }
+.b-profile-banner-btns.hover a,
+.b-profile-banner-btns.hover a:visited,
+.b-profile-banner-btns.hover a:hover {
+    background-image: url(/img/profile/btn_profile_addphoto_p.png);
 }
 
 .b-profile-main {
@@ -352,6 +389,9 @@ body.pushable > .pusher,
 .p-profile-right-section-form-bplusdate {
     position: relative;
 }
+.p-profile-right-section-form-bplusdate-select-alt {
+  padding-left: 8px;
+}
 .p-profile-right-section-form-bplusdate-shortline {
     position: absolute;
     top: 50%;
@@ -360,6 +400,9 @@ body.pushable > .pusher,
     width: 2rem;
     height: 0.25rem;
     background-color: black;
+}
+html.bplus-lng-en .p-profile-right-section-form-bplusdate-shortline {
+  margin-top: -0.5rem;
 }
 .b-profile-right-section-clubexperience .p-profile-right-section-form-bplusdate-shortline,
 .b-profile-right-section-workingexperience .p-profile-right-section-form-bplusdate-shortline {

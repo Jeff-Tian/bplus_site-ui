@@ -3,6 +3,8 @@ require([
     "angular-translate",
     "angular",
 
+    "bplus-ui/model/personalinfo",
+
     "bplus-ui/page/profile/widget/banner/main",
     "bplus-ui/page/profile/widget/achievement/main",
     "bplus-ui/page/profile/widget/growing/main",
@@ -29,6 +31,7 @@ require([
      semantic,
      agTranslateangular,
      angular,
+     ProfileModel,
      banner,
      achievement,
      growing,
@@ -62,6 +65,7 @@ require([
         achievement(agModule);
         growing(agModule);
 
+        new ProfileModel().start(agModule);
         var instance = Container;
         instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
             .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
