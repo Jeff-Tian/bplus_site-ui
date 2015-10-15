@@ -23,7 +23,7 @@
                     <%= __('OpportunityInfoLine2') %></h2>
 
                 <div class="column">
-                    <a class="ui opportunity-gray large button b-sp"><%= __('OpportunityApply') %></a>
+                    <a class="ui opportunity-gray large button b-sp" ng-click="redirectUrl('<%= localeLink("/opportunity") %>','opportunityApply','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"><%= __('OpportunityApply') %></a>
                 </div>
 
             </div>
@@ -263,7 +263,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton" ng-cloak><%= __('OpportunityCheckMoreJob')
+                    <a class="ui red large button b-sp check-more-buuton" ng-click="redirectUrl('<%= localeLink("/opportunity") %>','opportunityCheckMoreJob','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')" ng-cloak><%= __('OpportunityCheckMoreJob')
                         %></a>
                 </div>
             </div>
@@ -312,7 +312,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton"><%= __('OpportunityCheckMoreCompany') %></a>
+                    <a class="ui red large button b-sp check-more-buuton" ng-click="redirectUrl('<%= localeLink("/opportunity") %>','opportunityCheckMoreCompany','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"><%= __('OpportunityCheckMoreCompany') %></a>
                 </div>
             </div>
         </div>
@@ -324,9 +324,22 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <div class="ui embed">
-                            <embed src="http://player.youku.com/player.php/sid/XMTMyNjUyMDMzNg==/v.swf"
-                                   quality="high" align="middle" allowScriptAccess="always" allowFullScreen="true"
-                                   mode="transparent" type="application/x-shockwave-flash"></embed>
+                            <video width="320" height="240" controls>
+                                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4' type='video/mp4'/>
+                                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.webm'
+                                        type='video/webm; codecs="vp8, vorbis"'>
+                                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.ogv'
+                                        type='video/ogv; codecs="theora, vorbis"'>
+                                <object id="flowplayer"
+                                        data="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf"
+                                        type="application/x-shockwave-flash" width="320" height="240">
+                                    <param name="movie"
+                                           value="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf">
+                                    <param name="allowfullscreen" value="true">
+                                    <param name="flashvars"
+                                           value="config={'clip':{'url':'http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4','autoPlay':false}}">
+                                </object>
+                            </video>
                         </div>
                     </div>
                     <div class="eight wide column b-opportunity-pokesperson" ng-cloak>
@@ -343,7 +356,7 @@
         <div class="b-opportunity-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp"><%= __('OpportunityStart') %></a>
+                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink("/opportunity") %>','opportunityStart','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"><%= __('OpportunityStart') %></a>
                 </div>
             </div>
         </div>

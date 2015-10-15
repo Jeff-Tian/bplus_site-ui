@@ -1,5 +1,9 @@
 (function (exports) {
     exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce, queryParser, $timeout) {
+        if (angular.bplus.config.featureSwitcher.enableWechat !== true) {
+            return;
+        }
+
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {

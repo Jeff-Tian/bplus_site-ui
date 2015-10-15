@@ -11,6 +11,15 @@
 
         $scope.memberInfo = {};
 
+
+        $scope.redirectUrl = function(from, action, to, redirect) {
+            if($scope.memberInfo !== 'undefined' && $scope.memberInfo.member_id){
+                window.location.href = redirect;
+            }else{
+                window.location.href = to;
+            }
+        };
+
         $scope.fetchProfile = function () {
             return service.get('/service-proxy/member/profile/')
                 .then(function (res) {

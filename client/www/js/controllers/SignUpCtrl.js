@@ -9,7 +9,7 @@
                     password: signUpData.password
                 })
                     .then(function (json) {
-                        window.location.href = 'personal-history';
+                        window.location.href = $scope.localeUrl('/personal-history');
                     }, $scope.registerFormCtrl.handleFormError);
             }
 

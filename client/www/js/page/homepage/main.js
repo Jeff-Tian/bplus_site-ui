@@ -26,6 +26,21 @@ angular.module('bplus', [
     //$(document)
     //  .ready(function() {
     // fix header when passed
+
+        setTimeout(function() {
+        // preload image
+        new Image().src = "img/client/1x/tencent.png";
+        new Image().src = "img/client/1x/cocacola.png";
+        new Image().src = "img/client/1x/huawei.png";
+        new Image().src = "img/client/1x/tsinghua.png";
+        new Image().src = "img/client/1x/ceibs.png";
+        new Image().src = "img/client/1x/cas.png";
+        new Image().src = "img/client/1x/tencent.png";
+        new Image().src = "img/client/1x/cocacola.png";
+    }, 1000);
+
+
+
     $('.b-masthead').visibility({
         once: false,
         onBottomPassed: function () {

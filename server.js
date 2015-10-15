@@ -103,6 +103,7 @@ function filterConfig(config) {
 
     filtered.captcha = config.captcha;
     filtered.cdn = config.cdn;
+    filtered.featureSwitcher = config.featureSwitcher;
 
     return filtered;
 }

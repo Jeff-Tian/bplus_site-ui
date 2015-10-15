@@ -26,7 +26,6 @@ module.exports = {
         if (!res.locals.hcd_user || !res.locals.hcd_user.member_id) {
             res.json({isSuccess: true, code: '0', result: {}});
 
-            next();
             return;
         }
 
