@@ -47,9 +47,9 @@
                 <div class="b-profile-left-section" ng-controller="achievement">
                     <div class="b-profile-face">
                         <div class="b-profile-face-line"></div>
-                        <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind="data.rate + '%'"></div>
+                        <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind-template="{{data.rate}}%"></div>
                         <div class="b-profile-face-txt" ng-show="dataLoaded"
-                             ng-bind-template="{{CompleteRate}}{{data.rate}}% {{data.tip | translate}}"></div>
+                             ng-bind-template="{{data.tip | translate}}"></div>
                         <div class="progress-circle">
                             <div class="progress-pie-left">
                                 <div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div>

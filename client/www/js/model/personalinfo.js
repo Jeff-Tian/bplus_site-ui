@@ -166,6 +166,7 @@ define([
         };
         return $.ajax(param);
     };
+
     me.deleteData = function(dataKey, dataParam) {
         var data = {
             id: dataParam.id
