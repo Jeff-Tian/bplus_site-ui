@@ -18,3 +18,4 @@ dist/
 bower/
 
 client/www/css/main.css
+client/www/css/mobile.css

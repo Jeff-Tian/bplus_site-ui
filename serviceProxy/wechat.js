@@ -23,6 +23,11 @@ module.exports = {
         method: 'POST'
     }),
 
+    oAuthLogon: proxyWechat({
+        path: '/wechat/oauth/logon',
+        method: 'POST'
+    }),
+
     bind: proxyWechat({
         path: '/wechat/qr/bind',
         method: 'POST'

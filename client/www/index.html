@@ -275,7 +275,9 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-jobs-action">
-                    <a class="ui red large button check-more-buuton b-sp" ng-click="redirectUrl('<%= localeLink("/index") %>','indexCheckMoreJob','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')" ng-cloak><%= __('IndexCheckMoreJobs') %></a>
+                    <a class="ui red large button check-more-buuton b-sp" ng-click="redirectUrl('<%= localeLink("/index")
+                    %>','indexCheckMoreJob','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"
+                    ng-cloak><%= __('IndexCheckMoreJobs') %></a>
                 </div>
             </div>
         </div>
@@ -417,7 +419,9 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink("/index") %>','indexExperience','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')" ng-cloak><%= __('IndexStart') %></a>
+                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink("/index")
+                    %>','indexExperience','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"
+                    ng-cloak><%= __('IndexStart') %></a>
                 </div>
             </div>
         </div>
@@ -436,6 +440,7 @@
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
 <script src="js/factories/queryParser.js"></script>
+<script src="js/factories/DeviceHelper.js"></script>
 <script src="js/controllers/WechatLoginCtrl.js"></script>
 <script src="js/page/homepage/main.js"></script>
 <!-- endbuild -->

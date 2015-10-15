@@ -37,6 +37,7 @@ module.exports = require('express').Router()
     .post('/member/:classification/:operation', membership.ensureAuthenticated, bplusService.updateData)
     .post('/logon/logout', sso.logout)
     .post('/logon/by-wechat', wechat.qrLogon)
+    .post('/logon/from-wechat', wechat.oAuthLogon)
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
 ;

@@ -58,6 +58,7 @@
 
         var s = {};
 
+        // Inherits $http to s
         for (var method in $http) {
             if ($http.hasOwnProperty(method) && typeof $http[method] === 'function') {
                 s[method] = (function (m) {
@@ -67,6 +68,18 @@
                 })(method);   // jshint ignore:line
             }
         }
+
+        // s' own methods
+        s.executePromiseAvoidDuplicate = function (flag, promise) {
+            if (flag) {
+                return;
+            }
+
+            flag = true;
+            promise().finally(function () {
+                flag = false;
+            });
+        };
 
         return s;
     };

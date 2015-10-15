@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce) {
+    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper) {
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -43,10 +43,28 @@
             });
         };
 
+        var logging = false;
         $scope.logOnViaWechat = function () {
-            $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'wechat-logon');
+            if (!DeviceHelper.isInWechatBrowser()) {
+                $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'wechat-logon');
+            } else {
+                if ($scope.$parent.oAuthLink) {
+                    window.location.href = $scope.$parent.oAuthLink;
+                } else {
+                    service.executePromiseAvoidDuplicate(logging, function () {
+                        return service
+                            .post('/service-proxy/logon/from-wechat', {
+                                returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
+                            })
+                            .then(function (res) {
+                                $scope.$parent.oAuthLink = res;
+                                window.location.href = $scope.$parent.oAuthLink;
+                            });
+                    });
+                }
+            }
         };
     };
 
-    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', '$sce'];
+    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});
