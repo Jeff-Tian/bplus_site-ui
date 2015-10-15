@@ -4727,7 +4727,7 @@ body.pushable .pusher {
   padding-top: 0rem;
   margin-top: 7rem !important;
   height: 30rem;
-  overflow-y: scroll;
+  overflow: auto;
 }
 .b-popularity .b-theory-content > h3 {
   color: #ffffff;

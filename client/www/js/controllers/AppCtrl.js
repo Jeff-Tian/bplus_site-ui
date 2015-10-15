@@ -12,10 +12,12 @@
         $scope.memberInfo = {};
 
 
-        $scope.redirectUrl = function(from, to, action) {
-            console.log('from:' + from + ',to:' + to + ',action:' + action);
-            //todo
-            window.location.href = to;
+        $scope.redirectUrl = function(from, action, to, redirect) {
+            if($scope.memberInfo !== 'undefined' && $scope.memberInfo.member_id){
+                window.location.href = redirect;
+            }else{
+                window.location.href = to;
+            }
         };
 
         $scope.fetchProfile = function () {
