@@ -5,7 +5,6 @@ define([
 
     function progressFace(val) {
         val = parseInt(val);
-        var isFirstTime = true;
         var progressLeft = document.getElementById('progressLeft'),
             progressRight = document.getElementById('progressRight'),
             step = 1,
