@@ -4507,6 +4507,10 @@ body.pushable .pusher {
   background-color: #F2F2F2;
   padding: 3rem 0;
 }
+.ui.embed video {
+  width: 100% !important;
+  height: auto !important;
+}
 /*
 * - @Bridge+ Homepage/Salespage
 */

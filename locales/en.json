@@ -176,6 +176,7 @@
   "EmailVerifiedSuccess": "Congratulates, your email passes validation",
   "发生未知错误": "Met an unknown error",
   "Cancel": "Cancel",
+  "VideoNotSupport": "Your browser does not support video tag.",
   "zh": "中文",
   "service-70006": "Invalid identity or password",
   "service-70009": "Identity already existed",
