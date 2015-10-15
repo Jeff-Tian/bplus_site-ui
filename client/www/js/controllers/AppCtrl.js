@@ -13,10 +13,11 @@
 
 
         $scope.redirectUrl = function(from, action, to, redirect) {
+//            console.log($scope.localeUrl(redirect));
             if($scope.memberInfo !== 'undefined' && $scope.memberInfo.member_id){
-                window.location.href = redirect;
+                window.location.href = $scope.localeUrl(to);
             }else{
-                window.location.href = to;
+                window.location.href = $scope.localeUrl(redirect);
             }
         };
 
