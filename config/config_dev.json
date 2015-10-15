@@ -59,7 +59,7 @@
     "normal": "/"
   },
   "featureSwitcher": {
-    "enableWechat": false
+    "enableWechat": true
   },
   "version": "0.1.3"
 }
