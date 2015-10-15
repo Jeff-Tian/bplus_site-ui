@@ -4,7 +4,6 @@ define([
     "angular",
     "bplus-ui/model/personalinfo"
 ], function (when, $, angular, personalinfoData) {
-    var _modelInstance;
     var _instance;
 
     var ListWidgetContainer = function () {

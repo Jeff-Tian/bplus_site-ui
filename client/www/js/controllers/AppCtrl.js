@@ -12,11 +12,11 @@
         $scope.memberInfo = {};
 
 
-        $scope.redirectUrl = function(from, action, to, redirect) {
-            if($scope.memberInfo !== 'undefined' && $scope.memberInfo.member_id){
-                window.location.href = redirect;
-            }else{
-                window.location.href = to;
+        $scope.redirectUrl = function (from, action, to, redirect) {
+            if (typeof $scope.memberInfo !== 'undefined' && typeof $scope.memberInfo.mobile) {
+                window.location.href = $scope.localeUrl(to);
+            } else {
+                window.location.href = $scope.localeUrl(redirect);
             }
         };
 

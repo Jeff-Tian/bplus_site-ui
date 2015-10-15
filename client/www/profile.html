@@ -30,13 +30,11 @@
 <!-- Page Contents -->
 <div class="b-profile-body">
     <div class="b-profile-banner" ng-controller="banner">
-        <div class="img" style="background-image:url({{imageBanner}});" ng-mouseover="hoverBtn='hover'"
-             ng-mouseleave="hoverBtn=''"></div>
-        <div class="ui container b-profile-banner-btns {{hoverBtn}}" ng-mouseover="hoverBtn='hover'"
-             ng-mouseleave="hoverBtn=''">
-            <a href="javascript:void(0);" ng-click="switchBanner(0);">&nbsp;</a>
-            <a href="javascript:void(0);" ng-click="switchBanner(1);">&nbsp;</a>
-            <a href="javascript:void(0);" ng-click="switchBanner(2);">&nbsp;</a>
+        <div class="img" ng-mouseover="hoverBtn='hover'" ng-mouseleave="hoverBtn=''">
+            <img ng-src="{{imageBanner}}" />
+        </div>
+        <div class="ui container b-profile-banner-btns {{hoverBtn}}  hidden" ng-mouseover="hoverBtn='hover'" ng-mouseleave="hoverBtn=''">
+            <a href="javascript:void(0);" ng-click="switchBanner();"><i class="photo big icon"></i></a>
         </div>
     </div>
     <div class="b-profile-main-wrapper">
@@ -47,9 +45,9 @@
                 <div class="b-profile-left-section" ng-controller="achievement">
                     <div class="b-profile-face">
                         <div class="b-profile-face-line"></div>
-                        <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind="data.rate + '%'"></div>
+                        <div class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind-template="{{data.rate}}%"></div>
                         <div class="b-profile-face-txt" ng-show="dataLoaded"
-                             ng-bind-template="{{CompleteRate}}{{data.rate}}% {{data.tip | translate}}"></div>
+                             ng-bind-template="{{data.tip | translate}}"></div>
                         <div class="progress-circle">
                             <div class="progress-pie-left">
                                 <div id="progressLeft" class="progress-left" style="transform:rotate(0deg);"></div>

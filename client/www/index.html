@@ -275,9 +275,15 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-jobs-action">
+                    <<<<<<< HEAD
                     <a class="ui red large button check-more-buuton b-sp" ng-click="redirectUrl('<%= localeLink("/index")
                     %>','indexCheckMoreJob','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"
                     ng-cloak><%= __('IndexCheckMoreJobs') %></a>
+                    =======
+                    <a class="ui red large button check-more-buuton b-sp"
+                       ng-click="redirectUrl('/index','indexCheckMoreJob','/profile','/signin#/register')" ng-cloak><%=
+                        __('IndexCheckMoreJobs') %></a>
+                    >>>>>>> release
                 </div>
             </div>
         </div>
@@ -419,9 +425,9 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" ng-click="redirectUrl('<%= localeLink("/index")
-                    %>','indexExperience','<%= localeLink("/profile") %>','<%= localeLink("/signin#/register") %>')"
-                    ng-cloak><%= __('IndexStart') %></a>
+                    <a class="ui red large button b-sp"
+                       ng-click="redirectUrl('/index','indexExperience','/profile','/signin#/register')" ng-cloak><%=
+                        __('IndexStart') %></a>
                 </div>
             </div>
         </div>
