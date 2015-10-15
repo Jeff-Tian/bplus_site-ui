@@ -15,13 +15,15 @@
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
-                    <div class="eight wide column">
+                    <div class="seven wide column">
                         <div class="required field">
                             <label>{{'AssociationPeriod' | translate}}</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
                         </div>
                     </div>
-                    <div class="p-profile-right-section-form-bplusdate-shortline"></div>
+                    <div class="one wide column">
+                        <div class="p-profile-right-section-form-bplusdate-shortline"></div>
+                    </div>
                     <div class="eight wide column">
                         <div class="field">
                             <label>&nbsp;</label>
@@ -64,9 +66,13 @@
         <div class="b-profile-right-section-txt" ng-click="edit()">
             <span ng-bind-template="{{data.dateFrom.displayValue}}"></span>
             <span>----</span>
-            <span ng-bind-template="{{data.dateTo.value.tillNow ? ('TillNow' | translate) : data.dateFrom.displayValue}}"></span>
+            <span ng-bind-template="{{data.dateTo.value.tillNow ? ('TillNow' | translate) : data.dateTo.displayValue}}"></span>
         </div>
         <div ng-bind="data.description" class="b-profile-right-section-txt" ng-click="edit()"></div>
-        <div ng-bind="data.tags" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div class="b-profile-right-section-txt" ng-click="edit()">
+            <i class="tags icon"></i>
+            <span class="b-profile-right-section-txt-tags">{{'Tag' | translate}}:</span>
+            <span ng-bind="data.tags"></span>
+        </div>
     </div>
 </div>

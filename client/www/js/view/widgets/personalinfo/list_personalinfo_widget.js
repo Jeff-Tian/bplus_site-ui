@@ -26,6 +26,8 @@ define([
                         return {
                             pre: function ($scope) {
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
+                                $scope.data.dateOfBirth.isPrivate = $scope.data.dateOfBirth.isPrivate === false ? false : true;
+                                $scope.data.contractInfo.isPrivate = $scope.data.contractInfo.isPrivate === false ? false : true;
                                 $scope.property = {
                                     status: ($scope.data.name === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
                                 };

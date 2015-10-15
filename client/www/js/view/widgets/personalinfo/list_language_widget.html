@@ -25,7 +25,7 @@
                             <option value="">{{'PleaseSelect' | translate}}</option>
                         </select>
                     </div>
-                    <div class="field">
+                    <div class="field {{data.language.id === '2dc5e10f-9f2b-4fe8-a5c6-5cf5a571d38d' ? '' : 'disabled'}}">
                         <label>{{'Score' | translate}}</label>
                         <input type="text" name="score" ng-model="data.score" />
                     </div>

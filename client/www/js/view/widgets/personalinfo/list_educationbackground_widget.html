@@ -19,13 +19,15 @@
                     </select>
                 </div>
                 <div class="ui grid p-profile-right-section-form-bplusdate">
-                    <div class="eight wide column">
+                    <div class="seven wide column">
                         <div class="required field">
                             <label>{{'StudyPeriod' | translate}}</label>
                             <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
                         </div>
                     </div>
-                    <div class="p-profile-right-section-form-bplusdate-shortline"></div>
+                    <div class="one wide column">
+                        <div class="p-profile-right-section-form-bplusdate-shortline"></div>
+                    </div>
                     <div class="eight wide column">
                         <div class="required field">
                             <label>{{'GraduateIn' | translate}}</label>
@@ -45,7 +47,7 @@
                         <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancel">{{'Cancel' | translate}}</button>
                     </div>
                     <div class="column">
-                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui red basic button">{{'Delete' | translate}}</button>
+                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui basic large button b-profile-btn-cancel">{{'Delete' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -62,6 +64,10 @@
             <span ng-bind-template="{{data.dateTo.displayValue}}"></span>
         </div>
         <div ng-bind="data.specialDescription" class="b-profile-right-section-txt" ng-click="edit()"></div>
-        <div ng-bind="data.specialTags" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div class="b-profile-right-section-txt" ng-click="edit()">
+            <i class="tags icon"></i>
+            <span class="b-profile-right-section-txt-tags">{{'Tag' | translate}}:</span>
+            <span ng-bind="data.tags"></span>
+        </div>
     </div>
 </div>

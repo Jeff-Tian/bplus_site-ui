@@ -13,6 +13,7 @@ define([
     me.SERVICES = {};
     me.REOURCE = {};
     me.SERVICENAME = "";
+    me.forceUpdateEvents = [];
     me.SOURCE_URL = "/service-proxy/bplus-resource/";
     me.getPattern = function(key) {
         return key ? $.extend(true, {}, me.PATTERN[key]) : $.extend(true, {}, me.PATTERN);
@@ -31,7 +32,7 @@ define([
       // If $q need to be used, have to use $q.deffer() instead.
       var me = this;
       me.SERVICES = self.SERVICES;
-      this.getData = function(dataKey, dataParam, forceUpdate) {
+      me.getData = function(dataKey, dataParam, forceUpdate) {
         var paramKey = dataParam ? JSON.stringify(dataParam) : "0";
         var retValue;
         if (!forceUpdate && self.rawData[dataKey] && self.rawData[dataKey][paramKey]) {
@@ -42,21 +43,38 @@ define([
                 self.rawData[dataKey] = {};
               }
               self.rawData[dataKey][paramKey] = parsedData;
+              if (forceUpdate) {
+                self.forceUpdateEvents.forEach(function(callbackValue) {
+                    callbackValue.call(this);
+                });
+              }
               return $.extend(true, [], parsedData);
           });
         }
         return retValue;
       };
-      this.updateData = function(dataKey, dataParam) {
+      me.updateData = function(dataKey, dataParam) {
         return self.updateData(dataKey, dataParam);
       };
-      this.deleteData = function(dataKey, dataParam) {
+      me.deleteData = function(dataKey, dataParam) {
         return self.deleteData(dataKey, dataParam);
       };
-      this.getPattern = function(key) {
+      me.addForceDataUpdateEventListener = function(callback) {
+          var index = self.forceUpdateEvents.indexOf(callback);
+          if (index === -1) {
+              self.forceUpdateEvents.push(callback);
+          }
+      };
+      me.removeEventListener = function(callback) {
+          var index = self.forceUpdateEvents.indexOf(callback);
+          if (index > -1) {
+              self.forceUpdateEvents.splice(index, 1);
+          }
+      };
+      me.getPattern = function(key) {
           return self.getPattern(key);
       };
-      this.getResource = function(key) {
+      me.getResource = function(key) {
           var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
           var sourceKey = self.REOURCE[key];
           var url = self.SOURCE_URL + sourceKey + "/" + lng;
