@@ -20,11 +20,11 @@
     "port": "10001"
   },
   "sso": {
-    "host": "10.171.228.219",
+    "host": "service.bridgeplus.cn",
     "port": "10086"
   },
   "bplusService": {
-    "host": "10.171.228.219",
+    "host": "service.bridgeplus.cn",
     "port": "12345"
   },
   "wechat": {
