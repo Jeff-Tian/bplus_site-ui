@@ -26,7 +26,7 @@
             <div class="ui left icon input fluid">
                 <input type="text" name="verificationCode"
                        placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
-                       ng-model="signUpData.verificationCode">
+                       ng-model="signUpData.verificationCode" autocomplete="off">
                 <i class="write icon"></i>
                 &nbsp;
                 <button type="button" class="ui red button" ng-show='sendCodeButtonClicked'
@@ -45,7 +45,7 @@
         <div class="field">
             <div class="ui left icon input fluid">
                 <input type="password" name="password" placeholder="{{passwordPlaceholder | translate}}"
-                       ng-model="signUpData.password">
+                       ng-model="signUpData.password" autocomplete="off">
                 <i class="lock icon"></i>
             </div>
         </div>

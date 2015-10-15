@@ -27,6 +27,7 @@ module.exports = {
             res.json({isSuccess: true, code: '0', result: {}});
 
             next();
+            return;
         }
 
         proxy.execute(req, res, next, {
