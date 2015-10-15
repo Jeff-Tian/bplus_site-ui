@@ -179,6 +179,7 @@
   "VideoNotSupport": "Your browser does not support video tag.",
   "密码长度不正确": "Password: length from 5 to 32",
   "验证码长度不正确": "The image verification text should be 4 letters",
+  "注册即代表你接受我们的隐私条款": "By signing up, you will have accepted our privacy policies",
   "zh": "中文",
   "service-70006": "Invalid identity or password",
   "service-70009": "Identity already existed",
