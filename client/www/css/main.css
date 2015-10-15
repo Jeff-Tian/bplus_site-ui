@@ -5218,13 +5218,13 @@ html.bplus-lng-en .p-profile-right-section-form-bplusdate-shortline {
   margin-top: -0.5rem;
 }
 .b-prifile-date-select-box {
-  min-width: 146px;
-  max-width: 150px;
+  max-width: 104px;
 }
 .b-profile-right-section-clubexperience .p-profile-right-section-form-bplusdate-shortline,
 .b-profile-right-section-educationbackground .p-profile-right-section-form-bplusdate-shortline,
 .b-profile-right-section-workingexperience .p-profile-right-section-form-bplusdate-shortline {
   top: 64px;
+  left: 98%;
 }
 .b-profile-right-section-clubexperience .p-profile-right-section-form-bplusdate .eight.wide.column,
 .b-profile-right-section-educationbackground .p-profile-right-section-form-bplusdate-shortline,
