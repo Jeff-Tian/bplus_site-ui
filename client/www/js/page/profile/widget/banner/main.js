@@ -4,10 +4,10 @@ define([
 ], function ($, angular) {
     var SERVICE_MEMBER = "memberExt";
     var bgBanner = [
-        'img/profile/banner.1.jpg',
-        'img/profile/banner.2.jpg',
-        'img/profile/banner.3.jpg'
     ];
+    for (var i = 0; i < 9; i++) {
+        bgBanner.push('img/profile/banner.' + i + '.jpg');
+    }
     var createImageUrl = function (imagePath) {
         return angular.bplus.config.cdn.normal + imagePath + "?" + angular.bplus.config.cdn.version;
     };
