@@ -1,7 +1,14 @@
 (function (exports) {
     exports.PersonalHistoryCtrl = function ($scope, FormValidation, $timeout, service, $filter, msgBus, $q) {
-        $('.ui.checkbox')
-            .checkbox()
+        $('.ui.checkbox.set-privacy')
+            .checkbox({
+                'onChecked': function () {
+                    $scope.personalInfo.setPrivacy = true;
+                },
+                onUnchecked: function () {
+                    $scope.personalInfo.setPrivacy = false;
+                }
+            })
         ;
 
         var $shape = $('.ui.shape.personal-history');
@@ -114,8 +121,6 @@
                 })
             ;
         };
-
-        window.test = $scope;
 
         $scope.birthYearList = (function () {
             var res = [];
@@ -365,7 +370,7 @@
                 .get('/service-proxy/member/bplus-profile')
                 .then(function (res) {
                     if (res.memberExt) {
-                        if (res.memberExt.hide_birthday) {
+                        if (typeof res.memberExt.hide_birthday !== 'undefined') {
                             $scope.personalInfo.setPrivacy = /^true$/i.test(res.memberExt.hide_birthday);
                         }
 

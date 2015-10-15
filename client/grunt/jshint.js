@@ -27,7 +27,8 @@ module.exports = function() {
                 "require": false,
                 "window": false,
                 "define": false,
-                "document": false
+                "document": false,
+                "Image": false
             }
         },
         //具体任务配置

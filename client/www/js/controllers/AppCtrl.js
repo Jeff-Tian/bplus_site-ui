@@ -12,10 +12,13 @@
         $scope.memberInfo = {};
 
 
-        $scope.redirectUrl = function(from, to, action) {
-            console.log('from:' + from + ',to:' + to + ',action:' + action);
-            //todo
-            window.location.href = to;
+        $scope.redirectUrl = function(from, action, to, redirect) {
+//            console.log($scope.localeUrl(redirect));
+            if($scope.memberInfo !== 'undefined' && $scope.memberInfo.member_id){
+                window.location.href = $scope.localeUrl(to);
+            }else{
+                window.location.href = $scope.localeUrl(redirect);
+            }
         };
 
         $scope.fetchProfile = function () {

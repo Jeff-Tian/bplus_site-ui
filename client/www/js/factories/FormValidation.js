@@ -22,6 +22,12 @@
                     rules: [{
                         type: 'empty',
                         prompt: translate('PleaseInputPassword')
+                    }, {
+                        type: 'minLength[5]',
+                        prompt: translate('密码长度不正确')
+                    }, {
+                        type: 'maxLength[32]',
+                        prompt: translate('密码长度不正确')
                     }]
                 },
 
@@ -41,6 +47,12 @@
                     rules: [{
                         type: 'empty',
                         prompt: translate('PleaseInputCaptcha')
+                    }, {
+                        type: 'minLength[4]',
+                        prompt: translate('验证码长度不正确')
+                    }, {
+                        type: 'maxLength[4]',
+                        prompt: translate('验证码长度不正确')
                     }]
                 }
             },

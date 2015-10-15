@@ -79,7 +79,7 @@
                 }
 
                 $scope.isSignUpFormPartiallyValid = function () {
-                    return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha;
+                    return $scope.signUpData.mobile && $scope.signUpData.mobile.match(new RegExp(validChineseMobileNumberPattern)) && $scope.signUpData.captcha && $scope.signUpData.captcha.length === 4;
                 };
 
                 $scope.isSignUpFormFullyValid = function () {
