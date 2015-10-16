@@ -231,7 +231,7 @@ module.exports = function (grunt) {
         'nodemon'
     ]);
 
-    grunt.registerTask('devtest',[
+    grunt.registerTask('devtest', [
         'replace'
     ]);
 
@@ -250,7 +250,7 @@ module.exports = function (grunt) {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'inlineTranslation', 'replace', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/ ]);
+    grunt.registerTask('build', ['clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {
