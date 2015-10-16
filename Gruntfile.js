@@ -152,7 +152,7 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return prdConfig.cdn.normal + url;
+                                return prdConfig.cdn.normal + url + '?' + grunt.file.readJSON("package.json").version + '_' + grunt.file.readJSON("package.json").date;
                             } else {
                                 return url + '?cdnified';
                             }

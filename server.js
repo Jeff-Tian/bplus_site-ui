@@ -38,18 +38,6 @@ function setLogger(req, res, next) {
     next();
 }
 
-function shimGrunt(req, res, next) {
-    res.locals.grunt = {
-        file: {
-            readJSON: function () {
-                return 'x';
-            }
-        }
-    };
-
-    next();
-}
-
 function setCDN(req, res, next) {
     res.locals.cdn = config.cdn;
 
@@ -64,7 +52,6 @@ function setFeatureSwitcher(req, res, next) {
 server
     .use(Logger.express("auto"))
     .use(setLogger)
-    .use(shimGrunt)
     .use(setCDN)
     .use(setFeatureSwitcher)
     .use(bodyParser.json())
