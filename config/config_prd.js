@@ -5,7 +5,7 @@ var config = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config_prd.json
 if (process.env.DATACENTER) {
     config.captcha.host = process.env.DATACENTER + '-' + config.captcha.host;
 
-    if (process.env.DATACENTER === 'sz') {
+    if (/^SZ$/i.test(process.env.DATACENTER)) {
         config.cdn.normal = '//cdn2.bridgeplus.cn/';
     }
 }
