@@ -53,6 +53,13 @@
 
                 return '/' + i18n.getLocale(req) + path;
             };
+            res.locals.localeLinkSwitch = function (signedInPath, notSignedInPath) {
+                if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
+                    return res.locals.localeLink(signedInPath);
+                } else {
+                    return res.locals.localeLink(notSignedInPath);
+                }
+            };
 
             next();
         },
