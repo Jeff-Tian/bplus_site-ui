@@ -275,7 +275,7 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-jobs-action">
-                    <a class="ui red large button check-more-buuton b-sp" href="<%= localeLink('/profile') %>"><%=
+                    <a class="ui red large button check-more-buuton b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
                         __('IndexCheckMoreJobs') %></a>
                 </div>
             </div>
@@ -418,7 +418,7 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" href="<%= localeLink('/profile') %>"><%= __('IndexStart') %></a>
+                    <a class="ui red large button b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%= __('IndexStart') %></a>
                 </div>
             </div>
         </div>
