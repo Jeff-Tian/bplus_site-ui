@@ -156,9 +156,12 @@ module.exports = function (grunt) {
                             } else {
                                 return url + '?cdnified';
                             }
-                        } else if (url.indexOf('profile/main-build.js')) {
-                            // For requirejs 
-                            return url.replace('main-build.js', 'main.js');
+                        } else if (url.indexOf('profile/main-build.js') > -1) {
+                            // For requirejs
+                            console.log('replacing profile page: ', url);
+                            url = url.replace('main-build.js', 'main.js');
+                            console.log('after replace.', url);
+                            return url;
                         } else {
                             return url; // add query string to all other URLs
                         }
@@ -170,7 +173,8 @@ module.exports = function (grunt) {
                     src: 'view-partial/*.html',
                     dest: '<%= config.dist %>'
                 }, {
-                    expand: false,
+                    // TODO: Must be true, why?
+                    expand: true,
                     cwd: '<%= config.dist %>',
                     src: '*.html',
                     dest: '<%= config.dist %>'
