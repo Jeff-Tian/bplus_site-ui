@@ -46,7 +46,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
         if (angular.bplus.config.featureSwitcher.enableWechat !== true) {
             return;
         }
-        
+
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {
