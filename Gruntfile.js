@@ -35,6 +35,10 @@ module.exports = function (grunt) {
             "release": ''
         },
         "bumpup": {
+            options: {
+                dateformat: 'YYYYMMDD_HHmm',
+                normalize: false
+            },
             files: ['package.json', 'config/config_dev.json', 'config/config_prd.json']
         },
         "clean": configClean(),
