@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<!-- build:js js/cdn/lib.<%= grunt.file.readJSON('package.json').version %>.js -->
+<!-- build:js js/cdn/lib.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
 <script src="bower/jquery/dist/jquery.min.js"></script>
 <script src="bower/semantic-ui/dist/semantic.min.js"></script>
 <script src="bower/underscore/underscore-min.js"></script>
@@ -50,7 +50,7 @@
 <script src="/bower/angular-translate/angular-translate.min.js"></script>
 <!-- endbuild -->
 
-<!-- build:js js/cdn/combined1.<%= grunt.file.readJSON('package.json').version %>.js -->
+<!-- build:js js/cdn/combined1.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
 <script src="js/factories/service.js"></script>
 <script src="js/factories/MessageStore.js"></script>
 <script src="js/config/translate.js"></script>
@@ -60,7 +60,7 @@
 <%# TODO: minify and combine ? %>
 <script src="<%= cdn.normal %>translation/localeHelper.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>config.js?<%= cdn.version %>"></script>
-<!-- build:js js/cdn/combined2.<%= grunt.file.readJSON('package.json').version %>.js -->
+<!-- build:js js/cdn/combined2.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
 <!--Utils JS-->

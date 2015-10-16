@@ -173,7 +173,7 @@
 <%- include('view-partial/footer.html') -%>
 
 <!--Page JS-->
-<!-- build:js /js/cdn/account-settings.<%= grunt.file.readJSON('package.json').version %>.js -->
+<!-- build:js /js/cdn/account-settings.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %> -->
 <script src="js/directives/captcha.js"></script>
 <script src="js/directives/ngEnter.js"></script>
 <script src="js/directives/registerForm.js"></script>
