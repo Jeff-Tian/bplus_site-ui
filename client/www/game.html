@@ -165,7 +165,8 @@
                 </div>
                 <div class="ui center aligned test-button grid">
                     <div class="column">
-                        <a class="ui red large button b-sp"  ng-click="redirectUrl('/game','gameTest','/profile','/signin#/register')" ng-cloak><%= __('GameTest') %></a>
+                        <a class="ui red large button b-sp" href="<%= localeLink('/profile') %>"><%=
+                            __('GameTest') %></a>
                     </div>
                 </div>
             </div>
@@ -208,7 +209,8 @@
                         <td style="width:15%"><%= __('GameList1Place') %></td>
                         <td style="width:15%"><%= __('GameList1Date') %></td>
                         <td style="width:20%" class="text-right">
-                            <a class="ui red button b-normal"  ng-click="redirectUrl('/game','signup','/profile','/signin#/register')"><%= __('GameListStart') %></a>
+                            <a class="ui red button b-normal" href="<%= localeLink('/profile') %>"><%=
+                                __('GameListStart') %></a>
                         </td>
                     </tr>
                     <tr>
@@ -216,7 +218,8 @@
                         <td><%= __('GameList2Place') %></td>
                         <td><%= __('GameList2Date') %></td>
                         <td class="text-right">
-                            <a class="ui red button b-normal"  ng-click="redirectUrl('/game','signup','/profile','/signin#/register')"><%= __('GameListStart') %></a>
+                            <a class="ui red button b-normal" href="<%= localeLink('/profile') %>"><%=
+                                __('GameListStart') %></a>
                         </td>
                     </tr>
                     <tr>
@@ -224,7 +227,8 @@
                         <td><%= __('GameList3Place') %></td>
                         <td><%= __('GameList3Date') %></td>
                         <td class="text-right">
-                            <a class="ui red button b-normal"  ng-click="redirectUrl('/game','signup','/profile','/signin#/register')"><%= __('GameListStart') %></a>
+                            <a class="ui red button b-normal" href="<%= localeLink('/profile') %>"><%=
+                                __('GameListStart') %></a>
                         </td>
                     </tr>
                     <tr>
@@ -232,7 +236,8 @@
                         <td><%= __('GameList4Place') %></td>
                         <td><%= __('GameList4Date') %></td>
                         <td class="text-right">
-                            <a class="ui red button b-normal"  ng-click="redirectUrl('/game','signup','/profile','/signin#/register')"><%= __('GameListStart') %></a>
+                            <a class="ui red button b-normal" href="<%= localeLink('/profile') %>"><%=
+                                __('GameListStart') %></a>
                         </td>
                     </tr>
                     </tbody>
@@ -242,7 +247,8 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" ng-click="redirectUrl('/game','signup','/profile','/signin#/register')" ng-cloak><%= __('GameListStart') %></a>
+                    <a class="ui red large button b-sp" href="<%= localeLink('/profile') %>"><%=
+                        __('GameListStart') %></a>
                 </div>
             </div>
         </div>
