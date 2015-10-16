@@ -93,6 +93,9 @@ supportedLocales.map(function (l) {
 
 var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
 var staticSetting = {
+    etag: true,
+    lastModified: true,
+    maxAge: 1000 * 3600 * 24 * 30,
     setHeaders: function (res, path) {
         res.setHeader('Access-Control-Allow-Origin', '*');
     }

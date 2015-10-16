@@ -31,16 +31,18 @@
                     <a class="header" href="##" ng-cloak><span>|</span> {{'FooterFeedbacks' | translate}}</a>
                 </div>
             </div>
-            <div class="item footer-wechat-share" data-html="<img src='/img/b-wechat.jpg' class='ui large image'>" data-position="left center">
+            <div class="item footer-wechat-share" data-html="<img src='/img/b-wechat.jpg' class='ui large image'>"
+                 data-position="left center">
                 <img class="ui tiny image wechat" src="/img/b-wechat.jpg">
             </div>
         </div>
 
-        <p class="b-copyright floatd left" ng-cloak>&copy; 2015 Bridge+ {{'FooterReserved' | translate}} | {{'FooterLicense' | translate}}</p>
+        <p class="b-copyright floatd left" ng-cloak>&copy; 2015 Bridge+ {{'FooterReserved' | translate}} |
+            {{'FooterLicense' | translate}}</p>
     </div>
 </div>
 
-<!-- build:js js/cdn/lib.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
+<!-- build:js js/cdn/lib.js?<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %> -->
 <script src="bower/jquery/dist/jquery.min.js"></script>
 <script src="bower/semantic-ui/dist/semantic.min.js"></script>
 <script src="bower/underscore/underscore-min.js"></script>
@@ -50,7 +52,7 @@
 <script src="/bower/angular-translate/angular-translate.min.js"></script>
 <!-- endbuild -->
 
-<!-- build:js js/cdn/combined1.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
+<!-- build:js js/cdn/combined1.js?<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %> -->
 <script src="js/factories/service.js"></script>
 <script src="js/factories/MessageStore.js"></script>
 <script src="js/config/translate.js"></script>
@@ -60,7 +62,7 @@
 <%# TODO: minify and combine ? %>
 <script src="<%= cdn.normal %>translation/localeHelper.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>config.js?<%= cdn.version %>"></script>
-<!-- build:js js/cdn/combined2.<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %>.js -->
+<!-- build:js js/cdn/combined2.js?<%= grunt.file.readJSON('package.json').version %>_<%= grunt.file.readJSON('package.json').date %> -->
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
 <!--Utils JS-->
@@ -70,7 +72,7 @@
 <!-- endbuild -->
 
 <script type="text/javascript">
-$('.footer-wechat-share').popup({
-    on: 'hover',
-});
+    $('.footer-wechat-share').popup({
+        on: 'hover',
+    });
 </script>
