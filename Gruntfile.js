@@ -50,6 +50,7 @@ module.exports = function (grunt) {
         'concurrent': {
             dev: [
                 'less:development',
+                'replace',
                 'watch',
                 'nodemon',
                 'jshint',
@@ -187,7 +188,24 @@ module.exports = function (grunt) {
                     out: "<%= config.dist %>/js/page/profile/main.js"
                 }
             }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [{
+                        match: /https:\/\/fonts.googleapis.com\/css/g,
+                        replacement: function () {
+                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar" 
+                        }
+                    }]
+                },
+                files: [{
+                    expand: true,
+                    src: ['client/www/bower/semantic-ui/dist/semantic.min.css'],
+                }]
+            }
         }
+
     });
 
     // Load all grunt tasks
@@ -209,6 +227,10 @@ module.exports = function (grunt) {
         'nodemon'
     ]);
 
+    grunt.registerTask('devtest',[
+        'replace'
+    ]);
+
     // Default task.
     grunt.registerTask('default', [
         'concurrent'
@@ -224,7 +246,7 @@ module.exports = function (grunt) {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['clean:dist', 'copy', 'inlineTranslation', 'replace', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/ ]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {
