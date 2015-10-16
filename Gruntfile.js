@@ -170,7 +170,7 @@ module.exports = function (grunt) {
                     src: 'view-partial/*.html',
                     dest: '<%= config.dist %>'
                 }, {
-                    expand: true,
+                    expand: false,
                     cwd: '<%= config.dist %>',
                     src: '*.html',
                     dest: '<%= config.dist %>'
