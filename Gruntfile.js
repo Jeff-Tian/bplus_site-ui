@@ -35,6 +35,10 @@ module.exports = function (grunt) {
             "release": ''
         },
         "bumpup": {
+            options: {
+                dateformat: 'YYYYMMDD_HHmm',
+                normalize: false
+            },
             files: ['package.json', 'config/config_dev.json', 'config/config_prd.json']
         },
         "clean": configClean(),
@@ -50,6 +54,7 @@ module.exports = function (grunt) {
         'concurrent': {
             dev: [
                 'less:development',
+                'replace',
                 'watch',
                 'nodemon',
                 'jshint',
@@ -147,13 +152,16 @@ module.exports = function (grunt) {
                             }
 
                             if (process.env.NODE_ENV === 'prd') {
-                                return prdConfig.cdn.normal + url;
+                                return prdConfig.cdn.normal + url + '?' + grunt.file.readJSON("package.json").version + '_' + grunt.file.readJSON("package.json").date;
                             } else {
                                 return url + '?cdnified';
                             }
-                        } else if (url.indexOf('profile/main-build.js')) {
-                            // For requirejs 
-                            return url.replace('main-build.js', 'main.js');
+                        } else if (url.indexOf('profile/main-build.js') > -1) {
+                            // For requirejs
+                            console.log('replacing profile page: ', url);
+                            url = url.replace('main-build.js', 'main.js');
+                            console.log('after replace.', url);
+                            return url;
                         } else {
                             return url; // add query string to all other URLs
                         }
@@ -165,6 +173,7 @@ module.exports = function (grunt) {
                     src: 'view-partial/*.html',
                     dest: '<%= config.dist %>'
                 }, {
+                    // TODO: Must be true, why?
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: '*.html',
@@ -187,7 +196,24 @@ module.exports = function (grunt) {
                     out: "<%= config.dist %>/js/page/profile/main.js"
                 }
             }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [{
+                        match: /https:\/\/fonts.googleapis.com\/css/g,
+                        replacement: function () {
+                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar" 
+                        }
+                    }]
+                },
+                files: [{
+                    expand: true,
+                    src: ['client/www/bower/semantic-ui/dist/semantic.min.css'],
+                }]
+            }
         }
+
     });
 
     // Load all grunt tasks
@@ -209,6 +235,10 @@ module.exports = function (grunt) {
         'nodemon'
     ]);
 
+    grunt.registerTask('devtest', [
+        'replace'
+    ]);
+
     // Default task.
     grunt.registerTask('default', [
         'concurrent'
@@ -224,7 +254,7 @@ module.exports = function (grunt) {
         process.env.NODE_ENV = 'prd';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     var KarmaServer = require('karma').Server;
     grunt.registerTask('ct', 'Client tests', function () {

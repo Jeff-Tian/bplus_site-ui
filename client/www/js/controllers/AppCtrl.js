@@ -11,15 +11,6 @@
 
         $scope.memberInfo = {};
 
-
-        $scope.redirectUrl = function (from, action, to, redirect) {
-            if (typeof $scope.memberInfo !== 'undefined' && typeof $scope.memberInfo.mobile) {
-                window.location.href = $scope.localeUrl(to);
-            } else {
-                window.location.href = $scope.localeUrl(redirect);
-            }
-        };
-
         $scope.fetchProfile = function () {
             return service.get('/service-proxy/member/profile/')
                 .then(function (res) {

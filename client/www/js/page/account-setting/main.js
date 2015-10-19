@@ -43,6 +43,10 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
         };
     }])
     .controller('changeWechatCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', '$sce', 'queryParser', function ($scope, service, $filter, FormValidation, $timeout, msgBus, $sce, queryParser) {
+        if (angular.bplus.config.featureSwitcher.enableWechat !== true) {
+            return;
+        }
+
         var opening = false;
         $scope.logOnViaWechat = function () {
             if (opening) {
@@ -138,7 +142,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
             sending = true;
             service
                 .post('/service-proxy/mail/send-verification', {
-                    to: $scope.data.email,
+                    to: $scope.memberInfo.mail,
                     subject: $filter('translate')('请验证您的邮箱'),
                     linkVerification: window.location.origin + '/email-verify',
                     displayName: $scope.memberInfo.displayName

@@ -31,6 +31,7 @@ define([
                 setTimeout(circleLeft, space);
             }
         }
+
         circleRight();
     }
 
@@ -44,14 +45,14 @@ define([
                 progress: 0,
                 rate: 0
             };
-            $scope.avatarMouseOver = function() {
+            $scope.avatarMouseOver = function () {
 
-            }
-            $scope.avatarMouseLeave = function() {
-                
-            }
+            };
+            $scope.avatarMouseLeave = function () {
+
+            };
 //          $http.get('/mock/profile-achievement.json').success( function (data) {
-            var updateAchievement = function() {
+            var updateAchievement = function () {
                 $scope.data.progress = 0;
                 var patterns = model.getPattern();
                 var servicesArray = [];
@@ -61,7 +62,7 @@ define([
                 var servicePromiseArray = servicesArray.map(function (value, key) {
                     return model.getData(value);
                 });
-  
+
                 when.all(servicePromiseArray).then(function (serviceData) {
                     $scope.dataLoaded = true;
                     serviceData.forEach(function (value, index) {
@@ -74,45 +75,45 @@ define([
                     });
 
                     (function () {
-    //                  if (!data.gender || (data.gender.toString().toLowerCase() != 'male' && data.gender.toString().toLowerCase() != 'female')) {
-    //                      data.gender = 'male';
-    //                  }
+                        //                  if (!data.gender || (data.gender.toString().toLowerCase() != 'male' && data.gender.toString().toLowerCase() != 'female')) {
+                        //                      data.gender = 'male';
+                        //                  }
                         // if (!data.face) {
-                            if ($scope.data.gender.toString().toUpperCase() !== 'F') {
-                                $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
-                            } else {
-                                $scope.data.face = '/img/profile/icon_profile_picture_female_big.png';
-                            }
+                        if ($scope.data.gender.toString().toUpperCase() !== 'F') {
+                            $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
+                        } else {
+                            $scope.data.face = '/img/profile/icon_profile_picture_female_big.png';
+                        }
                         // }
                     })();
 
-    //              (function () {
-    //                  var list = (data.list instanceof Array) ? data.list : [];
-    //                  for (var i = 0, len = list.length; i < len; i++) {
-    //                      var item = list[i];
-    //                      if (('score' in item) && !/^[\+\-]/gim.test(item.score.toString())) {
-    //                          item.score = '+' + item.score;
-    //                      }
-    //                  }
-    //              })();
-    //
-    //              if ('score' in data) {
-    //                  data.score = '+' + data.score;
-    //              }
+                    //              (function () {
+                    //                  var list = (data.list instanceof Array) ? data.list : [];
+                    //                  for (var i = 0, len = list.length; i < len; i++) {
+                    //                      var item = list[i];
+                    //                      if (('score' in item) && !/^[\+\-]/gim.test(item.score.toString())) {
+                    //                          item.score = '+' + item.score;
+                    //                      }
+                    //                  }
+                    //              })();
+                    //
+                    //              if ('score' in data) {
+                    //                  data.score = '+' + data.score;
+                    //              }
                     $scope.data.tip = TIP_KEY_PREFIX + $scope.data.progress;
                     var oldRate = $scope.data.rate;
                     $scope.data.rate = Math.floor($scope.data.progress / servicesArray.length * 100);
                     $scope.$apply();
-                   
-                   if (oldRate !== $scope.data.rate) {
-                       when().delay(500).then(function () {
-                           progressFace($scope.data.rate);
-                       });
-                   }
+
+                    if (oldRate !== $scope.data.rate) {
+                        when().delay(500).then(function () {
+                            progressFace($scope.data.rate);
+                        });
+                    }
                 });
-            }
+            };
             updateAchievement();
-            model.addForceDataUpdateEventListener(function() {
+            model.addForceDataUpdateEventListener(function () {
                 updateAchievement();
             });
         }]);
