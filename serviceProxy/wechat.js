@@ -9,6 +9,10 @@ function proxyWechat(options) {
     options.dataMapper = function (d) {
         d.application_id = config.applicationId;
         d.app_id = wechat.app_id;
+        // TODO: Delete it
+        if (options.path === '/wechat/oauth/logon') {
+            d.app_id = 'hcdglobal_corp';
+        }
         d.href = 'https://jeff-tian.github.io/bridge-wechat/stylesheets/wechat.css';
 
         return d;

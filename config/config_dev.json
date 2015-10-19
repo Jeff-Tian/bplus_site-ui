@@ -30,7 +30,7 @@
   "wechat": {
     "host": "uat.service.hcd.com",
     "port": "10101",
-    "app_id": "hcdglobal_corp"
+    "app_id": "bridgeplus_web"
   },
   "logger": {
     "levels": {

@@ -43,30 +43,30 @@
         // handle Wechat Log On Callback
         var token = queryParser.get('token');
 
+        function forceFillMobileNumber() {
+            window.location.href = $scope.localeUrl('/sign-up-from', $scope.language);
+        }
+
+        function gotoHomepage() {
+            window.location.href = $scope.localeUrl('/');
+        }
+
         if (token) {
-            var now = new Date();
-            now.setUTCFullYear(now.getUTCFullYear() + 1);
-
-            var cookie = 'token=' + token + '; path=/; expires=' + now.toUTCString();
-            console.log(cookie);
-
-            document.cookie = cookie;
-
             service
                 .post('/service-proxy/logon/by-token', {
                     token: token
                 })
                 .finally(function () {
                     $scope.fetchProfile()
-                        .then(function (m) {
-                            if (!m.mobile) {
-                                window.location.href = $scope.localeUrl('/sign-up-from', $scope.language);
+                        .then(function (profile) {
+                            if (!profile.mobile) {
+                                forceFillMobileNumber();
                             } else {
-                                window.location.href = '/';
+                                gotoHomepage();
                             }
                         })
                         .catch(function () {
-                            window.location.href = '/';
+                            gotoHomepage();
                         });
                 });
         } else {

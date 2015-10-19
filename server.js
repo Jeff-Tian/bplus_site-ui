@@ -9,6 +9,7 @@ var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+var mobileDetector = require('./mobile/mobileDetector');
 
 var supportedLocales = localeHelper.supportedLocales;
 i18n.configure({
@@ -69,13 +70,17 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
-server.get('/', function (req, res) {
-    res.render('index');
-});
-supportedLocales.map(function (l) {
-    server.get('/' + l, function (req, res) {
+function renderIndex(req, res, next) {
+    if (!mobileDetector.isFromMobile(req.headers['user-agent'])) {
         res.render('index');
-    });
+    } else {
+        res.redirect('m/sign-in');
+    }
+}
+
+server.get('/', renderIndex);
+supportedLocales.map(function (l) {
+    server.get('/' + l, renderIndex);
 });
 
 var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
@@ -118,8 +123,8 @@ supportedLocales.map(function (l) {
 });
 
 server.use('/service-proxy', require('./serviceProxy'));
-server.use('/m', require('./mobile'));
-server.use('/m', express.static(staticFolder));
+server.use(localeHelper.regexPath('/m'), require('./mobile'));
+server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
 
 // Page route define
 function renderTemplate(name) {

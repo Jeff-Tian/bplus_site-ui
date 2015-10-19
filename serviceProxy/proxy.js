@@ -29,7 +29,7 @@ function basicProxy(req, res, next, host, port, requestPath, map) {
  */
 function advancedProxy(req, res, next, settings) {
     var options = {
-            host: settings.host,
+            hostname: settings.host,
             port: settings.port || '80',
             path: settings.path || req.originalUrl,
             method: settings.method || req.method,
@@ -62,6 +62,9 @@ function advancedProxy(req, res, next, settings) {
                     return next(e);
                 }
 
+                req.dualLog('response got from: ' + options.hostname + ':' + options.port + '/' + options.path);
+                req.dualLog(chunks);
+
                 if (settings.responseInterceptor(res, chunks)) {
                     next();
                 } else {
@@ -78,7 +81,7 @@ function advancedProxy(req, res, next, settings) {
     request.on('error', function (err) {
         req.dualLogError('Error met in this request:');
         req.dualLogError(request);
-        
+
         next();
     });
 
