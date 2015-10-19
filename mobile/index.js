@@ -7,10 +7,14 @@ function mapPath2Template(path) {
 }
 
 router.get('/', function (req, res, next) {
-    res.render('mobile/sign-in');
+    res.render('mobile/index');
 });
 
+mapPath2Template('/index');
 mapPath2Template('/sign-in');
+router.get('/signin', function (req, res, next) {
+    res.render('mobile/sign-in');
+});
 mapPath2Template('/reset-password');
 mapPath2Template('/reset-password-by-email');
 mapPath2Template('/personal-history');

@@ -1,4 +1,6 @@
+@import "../basic/variable";
 @import "./profile.less";
+@import "mobile-variable";
 
 .b-signin-wrapper {
     margin-top: 0;
@@ -70,4 +72,54 @@
     min-height: 410px !important;
     max-width: 100%;
     min-width: 100%;
+}
+
+.b-mobile.back-color {
+    background-color: @color-mobile;
+}
+
+.white.color {
+    color: white;
+}
+
+.white.header {
+    color: white !important;
+}
+
+.ui.fixed.inverted.menu.b-mobile {
+    background-color: @color-mobile;
+
+    .left.aligned.item {
+        text-align: left;
+        -webkit-box-pack: initial;
+        -ms-flex-pack: initial;
+        justify-content: initial;
+    }
+
+    .item::before {
+        display: none !important;
+    }
+}
+
+a:hover, a:active, a:focus {
+    color: @color-brand !important;
+}
+
+.header.item a,
+.header.item a:link,
+.header.item a:visited {
+    color: white !important;
+}
+
+.has-header {
+    padding-top: 48px;
+}
+
+.main.body {
+    height: 100%;
+}
+
+.bottom.stuck {
+    position: absolute;
+    bottom: 0;
 }

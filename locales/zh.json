@@ -77,6 +77,8 @@
   "SEODesc_PersonalHistory": "Bridge+",
   "SEOTitle_EmailVerify": "验证邮箱",
   "SEODesc_EmailVerify": "Bridge+",
+  "SEOTitle_Mobile_Index": "Bridge+ ",
+  "SEODesc_Mobile_Index": "Bridge+",
   "SignIn": "登录",
   "SignUp": "注册",
   "Home": "首页",
@@ -476,5 +478,7 @@
   "RankHuaNanDivision": "全国大赛人气榜 - 华南赛区",
   "RankHuaZhongDivision": "全国大赛人气榜 - 华中赛区",
   "RankXiNanDivision": "全国大赛人气榜 - 西南赛区",
-  "RankXiBeiDivision": "全国大赛人气榜 - 西北赛区"
+  "RankXiBeiDivision": "全国大赛人气榜 - 西北赛区",
+  "MobileIndexHeader": "体验最酷的学习方式,边玩边学!",
+  "MobileIndexSubHeader": "对于每个知识点我们设计了有趣的小遊戏, 通过循序渐进的体验式学习在快乐中学到更多。"
 }

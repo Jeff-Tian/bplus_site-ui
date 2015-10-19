@@ -77,6 +77,8 @@
   "SEODesc_PersonalHistory": "Bridge+",
   "SEOTitle_EmailVerify": "Verify email",
   "SEODesc_EmailVerify": "Bridge+",
+  "SEOTitle_Mobile_Index": "Bridge+ ",
+  "SEODesc_Mobile_Index": "Bridge+",
   "SignIn": "Sign In",
   "Home": "Home",
   "Learn": "Learn",
@@ -475,5 +477,7 @@
   "RankHuaNanDivision": "National Popularity Rank - HuaNan",
   "RankHuaZhongDivision": "National Popularity Rank - HuaZhong",
   "RankXiNanDivision": "National Popularity Rank - XiNan",
-  "RankXiBeiDivision": "National Popularity Rank - XiBei"
+  "RankXiBeiDivision": "National Popularity Rank - XiBei",
+  "MobileIndexHeader": "Experience the coolest way to learn, play while you learn!",
+  "MobileIndexSubHeader": "For each of the knowledge we have designed a fun little game, through a gradual experiential learning in a happy learn more."
 }

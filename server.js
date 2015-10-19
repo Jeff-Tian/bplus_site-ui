@@ -74,7 +74,7 @@ function renderIndex(req, res, next) {
     if (!mobileDetector.isFromMobile(req.headers['user-agent'])) {
         res.render('index');
     } else {
-        res.redirect('m/sign-in');
+        res.redirect('m/index');
     }
 }
 

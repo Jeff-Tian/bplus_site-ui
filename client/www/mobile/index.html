@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('SEOTitle_Mobile_Index') %></title>
+    <meta name="description" content="<%= __('SEODesc_Mobile_Index') %>">
+    <%- include('header.html') -%>
+</head>
+<body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
+<%- include('head.html') -%>
+
+<div class="main body b-mobile back-color white color has-header"
+     style="background: url('/img/mobile/mobile_banner.jpg') 50% 50% no-repeat; background-size: cover;">
+    <div class="ui bottom stuck padded container">
+        <div class="ui equal width left aligned padded grid">
+            <div class="row">
+                <div class="column">
+                    <h2 class="ui white header"><%= __('MobileIndexHeader') %></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <p><%= __('MobileIndexSubHeader') %></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"><%= __('SignIn') %></a>
+                </div>
+                <div class="column">
+                    <a href="<%= localeLink('/m/sign-up') %>" class="ui fluid large red button"><%= __('SignUp') %></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer.html') -%>
+
+<!-- build:js js/cdn/m/index.js -->
+<script src="../js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="../js/page/mobile/index.js"></script>
+<!-- endbuild -->
+</body>
+
+</html>

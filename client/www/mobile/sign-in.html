@@ -7,8 +7,9 @@
     <title><%= __('SEOTitle_SignIn') %></title>
     <meta name="description" content="<%= __('SEODesc_SignIn') %>">
     <%- include('header.html') -%>
+    <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/pc-mobile.css?<%= cdn.version %>">
 </head>
-<body ng-app="signIn" ng-controller="AppCtrl" class="b-background">
+<body ng-app="signIn" ng-controller="AppCtrl" class="b-background mobile">
 <%- include('head.html') -%>
 <div class="ui b-signin-wrapper padded container subcontainer">
     <div class="ui column b-signin-container b-background-lighter padded container subcontainer">
