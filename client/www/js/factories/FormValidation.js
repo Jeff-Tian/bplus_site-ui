@@ -114,6 +114,14 @@
             };
         };
 
+        // Form initialize
+        var $form = $('.ui.form');
+
+        $form.form(res.defaultSetting);
+        $form.on('click', '.remove.circle.icon', function () {
+            $form.removeClass('error');
+        });
+
         return res;
     };
 
