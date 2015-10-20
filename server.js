@@ -140,6 +140,7 @@ function mapRoute2Template(url, template) {
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
+mapRoute2Template('/study');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
 mapRoute2Template('/signin', 'sign-in');
