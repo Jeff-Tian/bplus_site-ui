@@ -116,8 +116,13 @@
     }
 }
 
-a:hover, a:active, a:focus {
+a:hover, a:active, a:focus,
+a.icon:hover, a.icon:active, a.icon:focus {
     color: @color-brand !important;
+
+    & .icon {
+        color: @color-brand !important;
+    }
 }
 
 .header.item a,
@@ -137,4 +142,20 @@ a:hover, a:active, a:focus {
 .bottom.stuck {
     position: absolute;
     bottom: 0;
+}
+
+.b-profile.menu {
+    background-color: transparent !important;
+    border-radius: 0;
+}
+
+.b-profile.menu > .item {
+    color: white !important;
+    border-radius: 0;
+
+    &.active, &:hover, &:active, &:focus {
+        background-color: @color-brand !important;
+        color: white !important;
+    }
+
 }

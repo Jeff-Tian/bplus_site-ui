@@ -17,6 +17,9 @@ angular.module('ng.utils')
             },
             translation: {
                 loaded: 'translation:loaed'
+            },
+            viewContent: {
+                loaded: '$viewContentLoaded'
             }
         };
 

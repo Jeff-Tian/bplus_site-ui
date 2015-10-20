@@ -1,8 +1,8 @@
 <div class="ui fixed inverted three item menu b-mobile">
     <div class="header item left aligned">
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a ng-href="{{menuHref}}">
-            <i class="icon sidebar"></i>
+        <a ng-href="{{menuHref}}" class="icon">
+            <i class="icon" ng-class="{'sidebar': menuHref === '#/menu', 'remove': menuHref === '#/home'}"></i>
         </a>
     </div>
 
