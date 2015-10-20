@@ -156,11 +156,9 @@ module.exports = function (grunt) {
                             } else {
                                 return url + '?cdnified';
                             }
-                        } else if (url.indexOf('profile/main-build.js') > -1) {
+                        } else if (url.indexOf('profile/main-build.js') > -1 || url.indexOf('profile/mobile-main-build.js') > -1) {
                             // For requirejs
-                            console.log('replacing profile page: ', url);
                             url = url.replace('main-build.js', 'main.js');
-                            console.log('after replace.', url);
                             return url;
                         } else {
                             return url; // add query string to all other URLs
@@ -183,7 +181,7 @@ module.exports = function (grunt) {
         },
 
         requirejs: {
-            compile: {
+            desktop: {
                 options: {
                     baseUrl: "<%= config.dist %>bower",
                     mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
@@ -194,6 +192,19 @@ module.exports = function (grunt) {
                     },
                     exclude: ["angular", "angular-translate", "semantic", "jquery"],
                     out: "<%= config.dist %>/js/page/profile/main.js"
+                }
+            },
+            mobile: {
+                options: {
+                    baseUrl: "<%= config.dist %>bower",
+                    mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
+                    name: "bplus-ui/page/profile/mobile-main-build",
+                    findNestedDependencies: true,
+                    uglify: {
+                        no_mangle: true
+                    },
+                    exclude: ["angular", "angular-translate", "semantic", "jquery"],
+                    out: "<%= config.dist %>/js/page/profile/mobile-main.js"
                 }
             }
         },
