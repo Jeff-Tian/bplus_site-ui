@@ -1,7 +1,11 @@
 <div class="ui large fluid inverted center aligned vertical b-profile one item menu">
     <a></a>
-    <a class="item">{{'全国大赛' | translate}}</a>
-    <a class="item">{{'关于我们' | translate}}</a>
+    <a class="item"><%= __('MapNational') %></a>
+    <a class="item"><%= __('FooterAboutUs') %></a>
+
+    <% if (signedIn) { %>
+    <a class="item" ng-click="signOut()"><%= __('退出登录') %></a>
+    <% } %>
 
     <div class="ui fitted divider"></div>
 </div>
