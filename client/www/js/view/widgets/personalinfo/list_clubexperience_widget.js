@@ -11,7 +11,8 @@ define([
   ListClubBackground.prototype = Object.create(BaseClass.prototype);
   ListClubBackground.prototype.constructor = ListClubBackground;
   
-  ListClubBackground.prototype.start = function(agModel) {
+  ListClubBackground.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     var me = this;
     agModel
     .directive("bplusclubexperience", function(){

@@ -12,7 +12,8 @@ define([
     ListSkill.prototype = Object.create(BaseClass.prototype);
     ListSkill.prototype.constructor = ListSkill;
 
-    ListSkill.prototype.start = function (agModel) {
+    ListSkill.prototype.start = function (agModel, externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         var me = this;
         agModel
             .directive("bplusskills", function () {

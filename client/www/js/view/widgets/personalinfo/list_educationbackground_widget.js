@@ -11,7 +11,8 @@ define([
     ListEducationBackground.prototype = Object.create(BaseClass.prototype);
     ListEducationBackground.prototype.constructor = ListEducationBackground;
 
-    ListEducationBackground.prototype.start = function (agModel) {
+    ListEducationBackground.prototype.start = function (agModel, externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         var me = this;
         agModel
             .directive("bpluseducationalbackground", function () {

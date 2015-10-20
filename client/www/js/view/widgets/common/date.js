@@ -64,7 +64,8 @@ define([
   var BplusDate = function() {
   };
   BplusDate.prototype.constructor = BplusDate;
-  BplusDate.prototype.start = function(agModel) {
+  BplusDate.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     if (hasStarted) {
       return;
     }

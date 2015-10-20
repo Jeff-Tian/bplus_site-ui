@@ -11,7 +11,8 @@ define([
   ListWorkingBackground.prototype = Object.create(BaseClass.prototype);
   ListWorkingBackground.prototype.constructor = ListWorkingBackground;
   
-  ListWorkingBackground.prototype.start = function(agModel) {
+  ListWorkingBackground.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     var me = this;
     agModel
     .directive("bplusworkexperience", function(){

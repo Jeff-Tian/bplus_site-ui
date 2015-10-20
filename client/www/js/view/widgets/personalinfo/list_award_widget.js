@@ -11,7 +11,8 @@ define([
   ListAward.prototype = Object.create(BaseClass.prototype);
   ListAward.prototype.constructor = ListAward;
   
-  ListAward.prototype.start = function(agModel) {
+  ListAward.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     var me = this;
     agModel
     .directive("bplusaward", function(){

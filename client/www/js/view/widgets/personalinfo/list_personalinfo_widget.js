@@ -12,7 +12,8 @@ define([
     ListPersonalInfo.prototype = Object.create(BaseClass.prototype);
     ListPersonalInfo.prototype.constructor = ListPersonalInfo;
 
-    ListPersonalInfo.prototype.start = function (agModel) {
+    ListPersonalInfo.prototype.start = function (agModel, externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         var me = this;
         agModel
             .directive("bpluspersonalinfo", function () {

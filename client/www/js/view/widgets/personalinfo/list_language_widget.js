@@ -12,7 +12,8 @@ define([
   ListLanguage.prototype = Object.create(BaseClass.prototype);
   ListLanguage.prototype.constructor = ListLanguage;
   
-  ListLanguage.prototype.start = function(agModel) {
+  ListLanguage.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     var me = this;
     agModel
     .directive("bpluslanguage", function(){

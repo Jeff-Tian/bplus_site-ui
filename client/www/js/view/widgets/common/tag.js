@@ -20,7 +20,8 @@ define([
   var BplusTag = function() {
   };
   BplusTag.prototype.constructor = BplusTag;
-  BplusTag.prototype.start = function(agModel) {
+  BplusTag.prototype.start = function(agModel, externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     if (hasStarted) {
       return;
     }
