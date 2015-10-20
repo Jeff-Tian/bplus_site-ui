@@ -11,8 +11,8 @@
 <body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
 <%- include('head.html') -%>
 
-<div class="main body b-mobile back-color white color has-header"
-     style="background: url('/img/mobile/mobile_banner.jpg') 50% 50% no-repeat; background-size: cover;">
+<div class="main body b-mobile back-color white color shadowed has-header"
+     style="background: url('<%= cdn.normal %>img/salespage/game_banner.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
     <div class="ui bottom stuck padded container">
         <div class="ui equal width left aligned padded grid">
             <div class="row">
@@ -25,6 +25,7 @@
                     <p><%= __('MobileIndexSubHeader') %></p>
                 </div>
             </div>
+            <% if (!signedIn) { %>
             <div class="row">
                 <div class="column">
                     <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"><%= __('SignIn') %></a>
@@ -33,7 +34,20 @@
                     <a href="<%= localeLink('/m/sign-up') %>" class="ui fluid large red button"><%= __('SignUp') %></a>
                 </div>
             </div>
+            <% } %>
         </div>
+        <% if (signedIn) { %>
+        <div class="ui six doubling centered cards">
+            <div class="ui transparent card">
+                <div class="ui image">
+                    <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                </div>
+                <div class="center aligned content">
+                    <p><%= __('Bridge+服务号') %></p>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
 

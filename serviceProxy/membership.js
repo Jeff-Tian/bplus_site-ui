@@ -13,6 +13,7 @@ module.exports = {
         if (req.headers.hcd_user) {
             try {
                 res.locals.hcd_user = JSON.parse(req.headers.hcd_user);
+                res.locals.signedIn = !!res.locals.hcd_user.member_id;
                 req.body.member_id = res.locals.hcd_user.member_id;
             } catch (e) {
                 next(e);
