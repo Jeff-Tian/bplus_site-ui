@@ -20,5 +20,6 @@ mapPath2Template('/reset-password-by-email');
 mapPath2Template('/personal-history');
 mapPath2Template('/bind-mobile');
 mapPath2Template('/bind-mobile-by-password');
+mapPath2Template('/menu');
 
 module.exports = router;

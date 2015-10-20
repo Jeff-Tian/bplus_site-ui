@@ -16,8 +16,12 @@ module.exports = {
                 res.locals.signedIn = !!res.locals.hcd_user.member_id;
                 req.body.member_id = res.locals.hcd_user.member_id;
             } catch (e) {
+                res.locals.signedIn = false;
+
                 next(e);
             }
+        } else {
+            res.locals.signedIn = false;
         }
 
         next();

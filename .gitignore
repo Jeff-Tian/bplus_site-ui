@@ -17,6 +17,7 @@ temp/
 dist/
 bower/
 
+client/www/bower
 client/www/css/main.css
 client/www/css/mobile.css
 client/www/css/pc-mobile.css

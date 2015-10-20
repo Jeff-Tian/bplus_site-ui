@@ -11,8 +11,12 @@
 <body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
 <%- include('head.html') -%>
 
-<div class="main body b-mobile back-color white color shadowed has-header"
+<div ui-view class="main body b-mobile back-color white color shadowed has-header"
      style="background: url('<%= cdn.normal %>img/salespage/game_banner.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
+</div>
+
+<a ui-sref="menu">Menu</a>
+<script type="text/ng-template" id="home.html">
     <div class="ui bottom stuck padded container">
         <div class="ui equal width left aligned padded grid">
             <div class="row">
@@ -49,11 +53,13 @@
         </div>
         <% } %>
     </div>
-</div>
+</script>
 
 <%- include('footer.html') -%>
 
 <!-- build:js js/cdn/m/index.js -->
+<script src="../js/page/mobile/MobileMenuCtrl.js"></script>
+<script src="../js/page/mobile/MobileHeadCtrl.js"></script>
 <script src="../js/page/mobile/MobileIndexCtrl.js"></script>
 <script src="../js/page/mobile/index.js"></script>
 <!-- endbuild -->
