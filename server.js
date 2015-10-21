@@ -199,16 +199,6 @@ server.use(logErrors);
 server.use(clientErrorHandler);
 server.use(errorHandler);
 
-server.set('trust proxy', 'loopback');
-server.use(function (req, res) {
-    req.dualLogError('Get hit!');
-    server.set('trust proxy', 'loopback');
-    req.dualLogError(req.ip);
-    req.dualLogError(req.headers['X-Forwarded-For']);
-
-    res.status(404).send('Fuck you!');
-});
-
 // Host & Port
 var port = process.env.PORT || config.port;
 server.listen(port, function () {

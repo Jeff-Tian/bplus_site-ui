@@ -92,11 +92,5 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
 
 // TODO: integrated into JS framework
 (function () {
-    var $form = $('.ui.form');
-
-    $form.on('click', '.remove.circle.icon', function () {
-        $form.removeClass('error');
-    });
-
     $('.checkbox').checkbox();
 })();
