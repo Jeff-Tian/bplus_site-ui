@@ -39,8 +39,8 @@
         <h2 ng-bind="data.name" ng-click="edit()"></h2>
         <div ng-bind="data.organization" class="b-profile-txt" ng-click="edit()"></div>
         <div ng-bind-template="{{data.prizeDate.displayValue}}" class="b-profile-txt" ng-click="edit()"></div>
-        <div ng-bind="data.description" class="b-profile-txt" ng-click="edit()"></div>
-        <div class="b-profile-txt" ng-click="edit()">
+        <div ng-bind="data.description" class="b-profile-txt minorinfo" ng-click="edit()"></div>
+        <div class="b-profile-txt minorinfo" ng-click="edit()">
             <i class="tags icon"></i>
             <span class="b-profile-txt-tags">{{'Tag' | translate}}:</span>
             <span ng-bind="data.tags"></span>

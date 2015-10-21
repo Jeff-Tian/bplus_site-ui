@@ -43,7 +43,7 @@
                     <div class="eight wide column p-profile-right-section-form-bplusdate-row-bottom"></div>
                     <div class="eight wide column p-profile-right-section-form-bplusdate-row-bottom">
                         <div class="field">
-                            <div class="ui checkbox">
+                            <div class="ui toggle checkbox">
                                 <input type="checkbox" ng-model="data.dateTo.value.tillNow" />
                                 <label>{{'WorkingTillNow' | translate}}</label>
                             </div>
@@ -79,7 +79,7 @@
             <span>----</span>
             <span ng-bind-template="{{data.dateTo.value.tillNow ? ('TillNow' | translate) : data.dateTo.displayValue}}"></span>
         </div>
-        <div ng-bind="data.description" class="b-profile-right-section-txt" ng-click="edit()"></div>
+        <div ng-bind="data.description" class="b-profile-right-section-txt minorinfo" ng-click="edit()"></div>
         <div class="b-profile-right-section-txt" ng-click="edit()">
             <i class="tags icon"></i>
             <span class="b-profile-right-section-txt-tags">{{'Tag' | translate}}:</span>

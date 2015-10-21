@@ -60,6 +60,8 @@
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
         window.addEventListener('hashchange', locationHashChanged);
+
+        msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
     };
 
     exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore', 'msgBus', '$translate'];
