@@ -7,6 +7,10 @@ body {
 .b-profile-body {
   display: block;
 }
+.b-profile-body .ui.header{
+  margin: 0px;
+}
+
 /*achievement*/
 .b-profile-body-achievement-bg-1 {
   position: absolute;
@@ -20,7 +24,7 @@ body {
   position: absolute;
   top: -500px;
   left: -50px;
-  width: 160px;
+  width: 150px;
   height: calc(1500px);
   background-color: #ff3b42;
   transform: rotate(30deg);
@@ -29,7 +33,7 @@ body {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 200px;
+  height: 180px;
   background-color: #fff;
 }
 .b-profile-avatar {
@@ -71,19 +75,88 @@ body {
 .b-profile-face-txt {
     font-size: 1.28em;
 }
+
 /*tip*/
 .b-profile-content {
     width: 100%;
     height: 100%;
 }
-.b-profile-tip {
+.ui.header.b-profile-tip {
     color: #db2828;
-    margin-top: 10px;
+    margin-top: 10px !important;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 10px;
     text-align: center;
 }
+
 /*detail lists*/
 .b-profile-detail {
+    margin-bottom: 1em;
     width: 100%;
+}
+/*container*/
+.b-profile-section {
+    margin-bottom: 1px;
+}
+.b-profile-section:last-child {
+    margin-bottom: 0;
+}
+.b-profile-btn-append button {
+    color: #fff !important;
+    border-radius: 0 !important;
+    background-color: #C0C0C0 !important;
+}
+.b-profile-header {
+    margin: 0 !important;
+    border: 0  !important;
+    border-bottom: solid 2px #BEBEBE !important;
+    padding: 1rem 2rem !important;
+    background-color: #fff;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+}
+.b-profile-tip-fill img {
+    margin-top: 4px !important;
+    width: 1.2em !important;
+}
+.b-profile-header > .ui.header.b-profile-tip-title > .content {
+    color: #787878;
+}
+.b-profile-tip-fill {
+    margin-top: 4px !important;
+}
+.b-profile-header > .ui.header.b-profile-tip-fill > .content {
+    padding-left: 1px;
+    margin-top: .14285em;
+}
+.b-profile-header > .ui.header.b-profile-tip-fill.grey > .content {
+    color: #deddde;
+}
+.b-profile-header > .ui.header > .icon {
+    background-size: 100%;
+    width: 30px;
+    height: 30px;
+}
+.b-profile-personalinfo .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_personal.png);
+}
+.b-profile-skills .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_skill.png);
+}
+.b-profile-educationbackground .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_education.png);
+}
+.b-profile-clubexperience .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_league.png);
+}
+.b-profile-workingexperience .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_experience.png);
+}
+.b-profile-language .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_language.png);
+}
+.b-profile-award .b-profile-header > .ui.header > .icon {
+    background-image: url(/img/profile/icon_profile_award.png);
 }

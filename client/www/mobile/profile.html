@@ -27,16 +27,16 @@
                     </div>
                 </div>
                 <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit=''">
-                    <img ng-src="{{data.face}}" class="b-profile-face" src="../img/profile/icon_profile_picture_female_small.png"/>
+                    <img ng-src="{{data.face}}" class="b-profile-face">
                 </div>
             </div>
             <div class="b-profile-completetion">
-                <h2 class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind-template="{{data.rate}}%">100%</h2>
-                <div class="b-profile-face-txt" ng-show="dataLoaded" ng-bind-template="{{data.tip | translate}}">Too much!</div>
+                <h2 class="b-profile-face-percentage" ng-show="dataLoaded" ng-bind-template="{{data.rate}}%"></h2>
+                <div class="b-profile-face-txt" ng-show="dataLoaded" ng-bind-template="{{data.tip | translate}}"></div>
             </div>
         </div>
-        <div class="ui header b-profile-content">
-            <div class="b-profile-tip"><%= __('ProfileHint') %></div>
+        <div class="b-profile-content">
+            <div class="ui header b-profile-tip"><%= __('ProfileHint') %></div>
             <div class="b-profile-detail">
                 <bpluspersonalinfooverall/>
             </div>
@@ -78,6 +78,9 @@
     }, {
         "name": "bplus-ui",
         "location": "../js"
+    }, {
+        "name": "bplus-ui-mobile",
+        "location": "../mobile"
     }],
     "paths": {
         "text": "requirejs-plugins/lib/text",
@@ -104,6 +107,6 @@
 });
 </script>
 <!--Page JS-->
-<script src="<%= cdn.normal %>js/page/profile/main-build.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/profile/mobile-main-build.js?<%= cdn.version %>" type="text/javascript"></script>
 </body>
 </html>
