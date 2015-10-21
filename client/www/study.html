@@ -17,7 +17,10 @@
 	
 	<div class="b-study">
 		<div class="b-study-content">
-			<img src="<%= cdn.normal %>img/salespage/gif/study.gif">
+			<div class="study-gif">
+				<img src="<%= cdn.normal %>img/salespage/gif/study.gif" ng-show="language==='zh'">
+				<img src="<%= cdn.normal %>img/salespage/gif/study-en.gif" ng-show="language==='en'">
+			</div>
 		</div>
 	</div>
 
