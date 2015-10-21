@@ -30,17 +30,9 @@
                         <input type="text" name="score" ng-model="data.score" />
                     </div>
                 </div>
-                <div class="ui three column grid">
-                    <div class="column">
-                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
-                    </div>
-                    <div class="column">
-                        <button type="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancel">取消</button>
-                    </div>
-                    <div class="column">
-                        <button type="button" ng-show="data.id!==''" ng-click="del()" class="fluid ui basic large button b-profile-btn-cancel">{{'Delete' | translate}}</button>
-                    </div>
-                </div>
+                <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">保存</button>
+                <button type="button" ng-click="cancel()" class="b-profile-editmode-other-button fluid ui basic large button b-profile-btn-cancel">取消</button>
+                <button type="button" ng-show="data.id!==''" ng-click="del()" class="b-profile-editmode-other-button fluid ui basic large button b-profile-btn-cancel">{{'Delete' | translate}}</button>
             </div>
         </form>
     </div>
