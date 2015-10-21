@@ -4,50 +4,63 @@
 a, a:link, a:visited {
     color: @color-brand;
 }
+
 a:hover, a:active, a:focus {
     color: @color-brand;
     text-decoration: underline;
 }
+
 .text-left {
     text-align: left !important;
 }
+
 .text-center {
     text-align: center !important;
 }
+
 .text-right {
     text-align: right !important;
 }
+
 .ui.container {
     min-width: 723px;
 }
+
 .ui.container.subcontainer, .subcontainer .ui.container {
     min-width: 0 !important;
 }
+
 img.gender-m {
     border: 2px solid #0075D5;
     border-radius: 50%;
 }
+
 img.gender-f {
     border: 2px solid #FF6858;
     border-radius: 50%;
 }
+
 .ui.b-tiny.images .image, .ui.b-tiny.images img, .ui.b-tiny.images svg, .ui.b-tiny.image {
     width: 66px;
     height: auto;
     font-size: 0.8em;
 }
+
 body.pushable {
     .pusher {
         background-color: #DCDCDC;
     }
 }
+
 .page-content {
     max-width: 1600px;
     margin: 0 auto;
 }
+
 .grey.color {
     color: @color-grey-dark;
 }
+
 .ui.brand.message-wrapper.container {
     z-index: 4;
     position: fixed;
@@ -72,6 +85,7 @@ body.pushable {
         }
     }
 }
+
 .avatar-minor {
     background-color: @color-grey-light;
     border-radius: 50%;
@@ -90,45 +104,80 @@ body.pushable {
         right: 0;
     }
 }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
 .no-padded.field {
     padding: 0 !important;
 }
+
 .no-wrap {
     white-space: nowrap;
 }
+
 .b-background {
     background-color: @color-grey-lightest !important;
 }
+
 .b-background-lighter {
     background-color: @color-grey-lighter !important;
 }
+
 .half-wide {
     width: 50% !important;
 }
+
 .left.floated {
     float: left;
 }
+
 .right.floated {
     float: right;
 }
+
 .hidden, .mobile {
     display: none !important;
 }
+
 .side.hidden {
     display: block !important;
 }
-@media all and (max-width:414px) {
+
+.privacy-declaration {
+    display: none;
+}
+
+.b-sign-in-position {
+    .privacy-declaration {
+        display: block;
+    }
+}
+
+.b-signin-wrapper {
+    .privacy-declaration {
+        display: block;
+    }
+}
+
+.b-reset-password {
+    .privacy-declaration {
+        display: none;
+    }
+}
+
+@media all and (max-width: 414px) {
     .mobile-hidden {
         display: none !important;
     }
+
     .mobile {
         display: block !important;
     }
 }
-@media only screen and (min-width:1200px) {
+
+@media only screen and (min-width: 1200px) {
     .ui.container {
         width: 1130px;
     }
