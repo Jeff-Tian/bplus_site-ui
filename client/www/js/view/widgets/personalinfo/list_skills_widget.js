@@ -6,14 +6,14 @@ define([
     "text!./list_skills_widget.html"
 ], function (when, $, angular, BaseClass, template) {
 
-    var ListSkill = function () {
+    var ListSkill = function (externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         BaseClass.call(this);
     };
     ListSkill.prototype = Object.create(BaseClass.prototype);
     ListSkill.prototype.constructor = ListSkill;
 
-    ListSkill.prototype.start = function (agModel, externalTemplate) {
-        template = externalTemplate ? externalTemplate : template;
+    ListSkill.prototype.start = function (agModel) {
         var me = this;
         agModel
             .directive("bplusskills", function () {

@@ -5,14 +5,14 @@ define([
     "bplus-ui/view/widgets/personalinfo/list_widget_base",
     "text!./list_educationbackground_widget.html"
 ], function (when, $, angular, BaseClass, template) {
-    var ListEducationBackground = function () {
+    var ListEducationBackground = function (externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         BaseClass.call(this);
     };
     ListEducationBackground.prototype = Object.create(BaseClass.prototype);
     ListEducationBackground.prototype.constructor = ListEducationBackground;
 
-    ListEducationBackground.prototype.start = function (agModel, externalTemplate) {
-        template = externalTemplate ? externalTemplate : template;
+    ListEducationBackground.prototype.start = function (agModel) {
         var me = this;
         agModel
             .directive("bpluseducationalbackground", function () {
