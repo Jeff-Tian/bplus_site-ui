@@ -132,7 +132,7 @@ a.icon:hover, a.icon:active, a.icon:focus {
 }
 
 .has-header {
-    padding-top: 48px;
+    padding-top: 48px !important;
 }
 
 .main.body {
@@ -162,4 +162,89 @@ a.icon:hover, a.icon:active, a.icon:focus {
 
 .grey.color {
     color: @color-grey-dark;
+}
+
+.ui.brand.message-wrapper.container {
+    z-index: 4;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+
+    .ui.brand.message {
+        position: relative;
+        margin: 0 auto;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: larger;
+        padding: 10px 50px 10px 20px;
+        box-shadow: 0 0 0 0;
+        border: none;
+
+        .remove.icon, .circle.icon {
+            cursor: pointer;
+            margin-right: -40px;
+            margin-left: 10em;
+            letter-spacing: 2em;
+        }
+    }
+}
+
+.ui.brand.message {
+    background-color: @color-grey-dark;
+    border-color: @color-grey-dark;
+    box-shadow: 0 0 0 1px @color-grey-dark inset, 0 0 0 0 transparent;
+    color: white;
+
+    .header {
+        color: @color-grey-lighter;
+        font-weight: normal;
+    }
+}
+
+.ui.brand.error.message {
+    background-color: @color-brand-darker;
+    border-color: @color-brand-darker;
+    box-shadow: 0 0 0 1px @color-brand-darker inset, 0 0 0 0 transparent;
+    color: white;
+    padding: 5px 10px;
+    font-size: smaller;
+    position: relative;
+
+    .list {
+        list-style-type: none;
+        margin-right: 20px;
+
+        li {
+            margin: 0;
+        }
+
+        li::before {
+            content: '';
+        }
+
+        li:nth-child(n+3) {
+            display: none;
+        }
+    }
+
+    .remove.icon, .circle.icon {
+        position: absolute;
+        right: 5px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        display: block;
+        margin: auto 0 auto auto;
+        cursor: pointer;
+    }
+}
+
+.ui.form .fields.error .field textarea, .ui.form .fields.error .field select, .ui.form .fields.error .field input:not([type]), .ui.form .fields.error .field input[type="date"], .ui.form .fields.error .field input[type="datetime-local"], .ui.form .fields.error .field input[type="email"], .ui.form .fields.error .field input[type="number"], .ui.form .fields.error .field input[type="password"], .ui.form .fields.error .field input[type="search"], .ui.form .fields.error .field input[type="tel"], .ui.form .fields.error .field input[type="time"], .ui.form .fields.error .field input[type="text"], .ui.form .fields.error .field input[type="url"], .ui.form .field.error textarea, .ui.form .field.error select, .ui.form .field.error input:not([type]), .ui.form .field.error input[type="date"], .ui.form .field.error input[type="datetime-local"], .ui.form .field.error input[type="email"], .ui.form .field.error input[type="number"], .ui.form .field.error input[type="password"], .ui.form .field.error input[type="search"], .ui.form .field.error input[type="tel"], .ui.form .field.error input[type="time"], .ui.form .field.error input[type="text"], .ui.form .field.error input[type="url"] {
+    border-color: @color-brand;
+}
+
+.ui.form .fields {
+    -webkit-flex-wrap: inherit;
+    -ms-flex-wrap: inherit;
+    flex-wrap: inherit;
 }
