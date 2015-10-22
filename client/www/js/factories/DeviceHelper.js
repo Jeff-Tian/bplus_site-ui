@@ -1,8 +1,16 @@
 (function (exports) {
+    function getUserAgent() {
+        return window.navigator.userAgent || window.navigator.vender || window.opera;
+    }
+
     exports.DeviceHelper = function () {
         return {
             isInWechatBrowser: function () {
-                return /MicroMessenger/i.test(window.navigator.userAgent || window.navigator.vender || window.opera);
+                return /MicroMessenger/i.test(getUserAgent());
+            },
+
+            isMobile: function () {
+                return /mobile/i.test(getUserAgent());
             },
 
             getCurrentUrlWithoutQueryStringNorHash: function () {

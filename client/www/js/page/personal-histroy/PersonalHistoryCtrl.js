@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.PersonalHistoryCtrl = function ($scope, FormValidation, $timeout, service, $filter, msgBus, $q) {
+    exports.PersonalHistoryCtrl = function ($scope, FormValidation, $timeout, service, $filter, msgBus, $q, DeviceHelper) {
         $('.ui.checkbox.set-privacy')
             .checkbox({
                 'onChecked': function () {
@@ -90,6 +90,10 @@
             window.location.href = $scope.localeUrl('/');
         };
 
+        $scope.gotoGamePage = function () {
+            window.location.href = $scope.localeUrl('/game');
+        };
+
         $scope.trySubmit = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -125,7 +129,11 @@
             service
                 .post(path, $scope.schoolInfo)
                 .then(function (res) {
-                    $scope.gotoComplete();
+                    if (DeviceHelper.isMobile()) {
+                        $scope.gotoComplete();
+                    } else {
+                        $scope.gotoGamePage();
+                    }
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {
@@ -440,5 +448,5 @@
         }
     };
 
-    exports.PersonalHistoryCtrl.$inject = ['$scope', 'FormValidation', '$timeout', 'service', '$filter', 'msgBus', '$q'];
+    exports.PersonalHistoryCtrl.$inject = ['$scope', 'FormValidation', '$timeout', 'service', '$filter', 'msgBus', '$q', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

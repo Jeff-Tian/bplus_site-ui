@@ -90,8 +90,9 @@ function renderOrRedirect(req, res, template) {
         res.redirect(query ? redirectTo + '?' + query : redirectTo);
     }
 }
-function mapRoute2Template(url, template) {
-    if (!template) {
+function mapRoute2Template(url, template, pipes) {
+    if (typeof template !== 'string') {
+        pipes = template;
         template = url;
 
         if (template[0] === '/') {
@@ -99,9 +100,14 @@ function mapRoute2Template(url, template) {
         }
     }
 
-    server.get(localeHelper.regexPath(url), function (req, res, next) {
+    pipes = pipes || [];
+    pipes.push(function (req, res, next) {
         renderOrRedirect(req, res, template);
     });
+
+    var args = [localeHelper.regexPath(url)].concat(pipes);
+
+    server.get.apply(server, args);
 }
 
 function isFromMobile(req) {
@@ -169,7 +175,7 @@ mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
-server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
+mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
