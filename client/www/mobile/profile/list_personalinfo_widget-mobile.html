@@ -19,17 +19,13 @@
                 </div>
                 <div class="required field">
                     <label>{{'Birthday' | translate}}</label>
-                    <div class="inline fields">
-                        <div class="twelve wide field">
-                            <bplusdate value="dateSelect.value" config="dateSelect.config" fulfilled="dateSelect.fulfilled" class="inline fields" />
-                        </div>
-                        <div class="four wide field">
-                            <div class="field">
-                                <div class="ui toggle checkbox">
-                                    <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
-                                    <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
-                                </div>
-                            </div>
+                    <div class="field">
+                        <bplusdate value="dateSelect.value" config="dateSelect.config" fulfilled="dateSelect.fulfilled" class="inline fields" />
+                    </div>
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
+                            <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
                         </div>
                     </div>
                 </div>

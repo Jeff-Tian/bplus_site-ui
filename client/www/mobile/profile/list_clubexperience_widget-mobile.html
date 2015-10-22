@@ -14,28 +14,18 @@
                         <option value="">{{'PleaseSelect' | translate}}</option>
                     </select>
                 </div>
-                <div class="ui grid p-profile-form-bplusdate">
-                    <div class="eight wide column">
-                        <div class="required field">
-                            <label>{{'AssociationPeriod' | translate}}</label>
-                            <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
-                        </div>
-                        <div class="p-profile-form-bplusdate-shortline"></div>
-                    </div>
-                    <div class="eight wide column">
-                        <div class="field">
-                            <label>&nbsp;</label>
-                            <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled" class="inline fields" />
-                        </div>
-                    </div>
-                    <div class="eight wide column p-profile-form-bplusdate-row-bottom"></div>
-                    <div class="eight wide column p-profile-form-bplusdate-row-bottom">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" ng-model="data.dateTo.value.tillNow" />
-                                <label class="b-profile-checkbox-label">{{'AssociationTillNow' | translate}}</label>
-                            </div>
-                        </div>
+                <div class="required field">
+                    <label>{{'AssociationPeriodFrom' | translate}}</label>
+                    <bplusdate value="dateFrom.value" config="dateFrom.config" fulfilled="dateFrom.fulfilled" class="inline fields" />
+                </div>
+                <div class="required field">
+                    <label>{{'AssociationPeriodEnd' | translate}}</label>
+                    <bplusdate value="dateTo.value" config="dateTo.config" fulfilled="dateTo.fulfilled" class="inline fields" />
+                </div>
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" ng-model="data.dateTo.value.tillNow" />
+                        <label class="b-profile-checkbox-label">{{'AssociationTillNow' | translate}}</label>
                     </div>
                 </div>
                 <div class="field">
