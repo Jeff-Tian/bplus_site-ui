@@ -26,7 +26,6 @@ module.exports = function (config) {
             '../js/factories/*.js',
             '../js/controllers/*.js',
             '../js/directives/*.js',
-            '../js/config/*.js',
             '../js/page/register/*.js',
             '../js/page/account-setting/main.js',
             '../bower/angular-mocks/angular-mocks.js',

@@ -10,6 +10,7 @@ var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var mobileDetector = require('./mobile/mobileDetector');
+var urlParser = require('url');
 
 var supportedLocales = localeHelper.supportedLocales;
 i18n.configure({
@@ -71,11 +72,40 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
 function renderIndex(req, res, next) {
-    if (!mobileDetector.isFromMobile(req.headers['user-agent'])) {
-        res.render('index');
+    renderOrRedirect(req, res, 'index');
+}
+
+function renderTemplate(name) {
+    return function (req, res, next) {
+        res.render(name);
+    };
+}
+
+function renderOrRedirect(req, res, template) {
+    if (!isFromMobile(req)) {
+        res.render(template);
     } else {
-        res.redirect('m/index');
+        var redirectTo = '/m/' + template;
+        var query = urlParser.parse(req.url).query;
+        res.redirect(query ? redirectTo + '?' + query : redirectTo);
     }
+}
+function mapRoute2Template(url, template) {
+    if (!template) {
+        template = url;
+
+        if (template[0] === '/') {
+            template = template.substr(1);
+        }
+    }
+
+    server.get(localeHelper.regexPath(url), function (req, res, next) {
+        renderOrRedirect(req, res, template);
+    });
+}
+
+function isFromMobile(req) {
+    return mobileDetector.isFromMobile(req.headers['user-agent']);
 }
 
 server.get('/', renderIndex);
@@ -104,6 +134,7 @@ function filterConfig(config) {
 }
 
 server.use('/config.js', function (req, res, next) {
+    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
@@ -127,38 +158,16 @@ server.use(localeHelper.regexPath('/m'), require('./mobile'));
 server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
 
 // Page route define
-function renderTemplate(name) {
-    return function (req, res, next) {
-        res.render(name);
-    };
-}
-
-function mapRoute2Template(url, template) {
-    if (!template) {
-        template = url;
-
-        if (template[0] === '/') {
-            template = template.substr(1);
-        }
-    }
-
-    server.get(localeHelper.regexPath(url), renderTemplate(template));
-}
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
+mapRoute2Template('/sign-in');
 mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
-server.get(localeHelper.regexPath('/set-password'), function (req, res, next) {
-    if (!/mobile/i.test(req.headers['user-agent'])) {
-        res.render('set-password');
-    } else {
-        res.render('mobile/set-password');
-    }
-});
+mapRoute2Template('/set-password');
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
 server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));

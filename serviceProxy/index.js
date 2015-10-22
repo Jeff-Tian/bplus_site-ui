@@ -7,6 +7,16 @@ var sms = require('./sms'),
     wechat = require('./wechat')
     ;
 
+function checkWechatToken(req, res, next) {
+    if (req.body.wechat_token) {
+        next();
+
+        return;
+    }
+
+    res.status(403).json({code: '403', message: 'Wechat token is missed.'});
+}
+
 module.exports = require('express').Router()
     .use(function (req, res, next) {
         req.dualLog('service-proxy is being calling from ' + req.host + '...');
@@ -23,6 +33,7 @@ module.exports = require('express').Router()
     .post('/member/change-password', membership.ensureAuthenticated, sso.authenticateCurrentUser, sso.changePassword)
     .post('/member/update-sso-profile', membership.ensureAuthenticated, sso.updateProfile)
     .post('/member/update-profile', membership.ensureAuthenticated, bplusService.updateProfile)
+    .post('/member/update-wechat', membership.ensureAuthenticated, checkWechatToken, sso.updateProfile)
     .post('/member/add-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.addEducation)
     .post('/member/update-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.updateEducation)
     .post('/logon/authentication', sso.authenticate)
