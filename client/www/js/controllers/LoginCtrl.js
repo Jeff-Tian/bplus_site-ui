@@ -7,6 +7,12 @@
             wechatToken: queryParser.get('wechat_token')
         };
 
+        var serverResponse = queryParser.get('server_response');
+        if (serverResponse) {
+            console.log(serverResponse);
+            console.log(window.atob(serverResponse));
+        }
+
         var $loginForm = $('.ui.form.login');
 
         $scope.isLoginFormValid = function () {

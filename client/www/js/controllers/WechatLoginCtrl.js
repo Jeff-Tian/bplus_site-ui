@@ -12,8 +12,8 @@
                 window.location.href = $scope.localeUrl('/');
             }
 
-            function bindRegisteredMobileByWechatToken(token) {
-                window.location.href = $scope.localeUrl('/sign-in?wechat_token=' + token);
+            function bindRegisteredMobileByWechatToken(token, serverResponse) {
+                window.location.href = $scope.localeUrl('/sign-in?wechat_token=' + token + '&server_response=' + window.btoa(serverResponse));
             }
 
             if (token) {
@@ -36,7 +36,7 @@
                                 });
                         });
                 } else {
-                    bindRegisteredMobileByWechatToken(token);
+                    bindRegisteredMobileByWechatToken(token, queryParser.getQueryString());
                 }
             } else {
                 var errcode = queryParser.get('errcode');

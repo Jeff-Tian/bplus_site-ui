@@ -1,4 +1,4 @@
-describe('Factories', function () {
+describe('Query parser', function () {
     var queryParser;
 
     angular.bplus = {

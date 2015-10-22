@@ -1,12 +1,13 @@
 (function (exports) {
-    exports.SignUpCtrl = function ($scope, service) {
+    exports.SignUpCtrl = function ($scope, service, queryParser) {
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
             function autoSignIn() {
                 service.post('/service-proxy/logon/authentication', {
                     value: signUpData.mobile,
-                    password: signUpData.password
+                    password: signUpData.password,
+                    wechat_token: queryParser.get('wechat_token')
                 })
                     .then(function (json) {
                         window.location.href = $scope.localeUrl('/personal-history');
@@ -20,5 +21,5 @@
         };
     };
 
-    exports.SignUpCtrl.$inject = ['$scope', 'service'];
+    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser'];
 })(angular.bplus = angular.bplus || {});

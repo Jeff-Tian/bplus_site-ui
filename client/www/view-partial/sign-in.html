@@ -22,7 +22,7 @@
             </div>
             <div class="fields">
                 <div class="eight wide field">
-                    <div class="ui checkbox">
+                    <div class="ui checkbox" ng-hide="!!loginData.wechatToken">
                         <input type="checkbox" ng-model="loginData.rememberMe" id="remember-me-check-box">
                         <label for="remember-me-check-box"><%= __('RememberMe') %></label>
                     </div>
@@ -35,10 +35,11 @@
             <div class="ui divider horizontal"></div>
             <button type="submit" class="ui fluid large red submit button hidden mobile-button"
                     ng-disabled="!isLoginFormValid()">
-                <%= __('SignIn') %>
+                {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>
             <button type="submit" class="ui fluid large red submit button"
-                    ng-disabled="!isLoginFormValid()"><%= __('SignIn') %>
+                    ng-disabled="!isLoginFormValid()">
+                {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>
         </div>
     </form>
@@ -51,8 +52,8 @@
         <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
     </div>
     <% if (featureSwitcher.enableWechat === true) { %>
-    <div class="ui divider"></div>
-    <div class="ui">
+    <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
+    <div class="ui" ng-hide="!!loginData.wechatToken">
         <a class="wechat link" ng-click="logOnViaWechat()">
             <%= __('SignInWithOtherWays') %>
             <i class="big wechat icon"></i>
