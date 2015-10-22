@@ -15,7 +15,7 @@ module.exports = function () {
             },
             files: {
                 "<%= config.dist %>css/mobile.css": "<%= config.dist %>css/mobile/main.less",
-                "<%= config.dist >%css/pc-mobile.css": "<%= config.dist %>css/mobile/pc-mobile.less",
+                "<%= config.dist %>css/pc-mobile.css": "<%= config.dist %>css/mobile/pc-mobile.less",
                 "<%= config.dist %>css/main.css": "<%= config.dist %>css/page/main.less" // destination file and source file
             }
         }
