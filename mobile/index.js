@@ -12,6 +12,8 @@ router.get('/', function (req, res, next) {
 
 mapPath2Template('/index');
 mapPath2Template('/sign-in');
+mapPath2Template('/aboutus');
+mapPath2Template('/national');
 router.get('/signin', function (req, res, next) {
     res.render('mobile/sign-in');
 });

@@ -32,4 +32,6 @@ angular
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
+    .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
+    .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
 ;
