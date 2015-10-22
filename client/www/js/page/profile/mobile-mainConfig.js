@@ -10,6 +10,9 @@ require.config({
         "location": "when",
         "main": "when"
     }, {
+        "name": "bplus-ui",
+        "location": "../js"
+    }, {
         "name": "bplus-ui-mobile",
         "location": "../mobile"
     }],
