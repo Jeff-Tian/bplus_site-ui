@@ -6,14 +6,14 @@ define([
     "text!./list_personalinfo_widget.html"
 ], function (when, $, angular, BaseClass, template) {
 
-    var ListPersonalInfo = function () {
+    var ListPersonalInfo = function (externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         BaseClass.call(this);
     };
     ListPersonalInfo.prototype = Object.create(BaseClass.prototype);
     ListPersonalInfo.prototype.constructor = ListPersonalInfo;
 
-    ListPersonalInfo.prototype.start = function (agModel, externalTemplate) {
-        template = externalTemplate ? externalTemplate : template;
+    ListPersonalInfo.prototype.start = function (agModel) {
         var me = this;
         agModel
             .directive("bpluspersonalinfo", function () {

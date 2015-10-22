@@ -197,7 +197,7 @@ module.exports = function (grunt) {
             mobile: {
                 options: {
                     baseUrl: "<%= config.dist %>bower",
-                    mainConfigFile: "<%= config.dist %>/js/page/profile/mainConfig.js",
+                    mainConfigFile: "<%= config.dist %>/js/page/profile/mobile-mainConfig.js",
                     name: "bplus-ui/page/profile/mobile-main-build",
                     findNestedDependencies: true,
                     uglify: {

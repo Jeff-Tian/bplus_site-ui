@@ -19,17 +19,13 @@
                 </div>
                 <div class="required field">
                     <label>{{'Birthday' | translate}}</label>
-                    <div class="inline fields">
-                        <div class="twelve wide field">
-                            <bplusdate value="dateSelect.value" config="dateSelect.config" fulfilled="dateSelect.fulfilled" class="inline fields" />
-                        </div>
-                        <div class="four wide field">
-                            <div class="field">
-                                <div class="ui checkbox">
-                                    <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
-                                    <label>{{'SetPrivacy' | translate}}</label>
-                                </div>
-                            </div>
+                    <div class="field">
+                        <bplusdate value="dateSelect.value" config="dateSelect.config" fulfilled="dateSelect.fulfilled" class="inline fields" />
+                    </div>
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
+                            <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
                         </div>
                     </div>
                 </div>
@@ -44,20 +40,15 @@
                             <input type="text" name="personalcontractInfo" ng-model="data.contractInfo.value" placeholder="" />
                         </div>
                         <div class="four wide field">
-                            <div class="ui checkbox">
+                            <div class="ui toggle checkbox">
                                 <input type="checkbox" ng-model="data.contractInfo.isPrivate">
-                                <label>{{'SetPrivacy' | translate}}</label>
+                                <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ui three column grid">
-                    <div class="column">
-                        <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">{{'Save' | translate}}</button>
-                    </div>
-                    <div class="column">
-                        <button typeu="button" ng-click="cancel()" class="fluid ui basic large button b-profile-btn-cancel">{{'Cancel' | translate}}</button>
-                    </div>
+                <button type="button" ng-click="submit()" ng-init="clicked=false" class="fluid ui red large button">{{'Save' | translate}}</button>
+                <button typeu="button" ng-click="cancel()" class="b-profile-editmode-other-button fluid ui basic large button b-profile-btn-cancel">{{'Cancel' | translate}}</button>
                 </div>
             </div>
         </form>

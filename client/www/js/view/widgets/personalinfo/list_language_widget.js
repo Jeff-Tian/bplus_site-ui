@@ -6,14 +6,14 @@ define([
   "text!./list_language_widget.html"
 ], function(when, $, angular, BaseClass, template) {
 
-  var ListLanguage = function() {
+  var ListLanguage = function(externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     BaseClass.call(this);
   };
   ListLanguage.prototype = Object.create(BaseClass.prototype);
   ListLanguage.prototype.constructor = ListLanguage;
   
-  ListLanguage.prototype.start = function(agModel, externalTemplate) {
-    template = externalTemplate ? externalTemplate : template;
+  ListLanguage.prototype.start = function(agModel) {
     var me = this;
     agModel
     .directive("bpluslanguage", function(){

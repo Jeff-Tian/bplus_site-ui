@@ -5,14 +5,14 @@ define([
   "bplus-ui/view/widgets/personalinfo/list_widget_base",
   "text!./list_clubexperience_widget.html"
 ], function(when, $, angular, BaseClass, template) {
-  var ListClubBackground = function() {
+  var ListClubBackground = function(externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     BaseClass.call(this);
   };
   ListClubBackground.prototype = Object.create(BaseClass.prototype);
   ListClubBackground.prototype.constructor = ListClubBackground;
   
-  ListClubBackground.prototype.start = function(agModel, externalTemplate) {
-    template = externalTemplate ? externalTemplate : template;
+  ListClubBackground.prototype.start = function(agModel) {
     var me = this;
     agModel
     .directive("bplusclubexperience", function(){
