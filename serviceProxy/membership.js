@@ -7,8 +7,10 @@ module.exports = {
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 
-        req.dualLog('request header hcd_user info:');
-        req.dualLog(req.headers.hcd_user);
+        if (req.headers.hcd_user) {
+            req.dualLog('request header hcd_user info:');
+            req.dualLog(req.headers.hcd_user);
+        }
 
         if (req.headers.hcd_user) {
             try {

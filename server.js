@@ -11,6 +11,7 @@ var membership = require('./serviceProxy/membership.js');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
+var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;
 i18n.configure({
@@ -85,9 +86,19 @@ function renderOrRedirect(req, res, template) {
     if (!isFromMobile(req)) {
         res.render(template);
     } else {
-        var redirectTo = '/m/' + template;
-        var query = urlParser.parse(req.url).query;
-        res.redirect(query ? redirectTo + '?' + query : redirectTo);
+        console.log('request from mobile');
+        try {
+            var stats = fs.lstatSync(staticFolder + '/mobile/' + template + '.html');
+            if (stats.isFile()) {
+                var redirectTo = '/m/' + template;
+                var query = urlParser.parse(req.url).query;
+                res.redirect(query ? redirectTo + '?' + query : redirectTo);
+            } else {
+                res.render(template);
+            }
+        } catch (e) {
+            res.render(template);
+        }
     }
 }
 function mapRoute2Template(url, template, pipes) {
