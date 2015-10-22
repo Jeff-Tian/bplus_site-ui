@@ -49,6 +49,7 @@ angular.module('setPassword', ['pascalprecht.translate', 'ng.utils'])
                 .then(function (json) {
                     console.log(json);
                     $scope.passwordReset = true;
+                    console.log($scope.passwordReset);
                 })
                 .catch(FormValidation.delegateHandleFormError($form))
                 .finally(function () {

@@ -9,6 +9,9 @@ var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+var mobileDetector = require('./mobile/mobileDetector');
+var urlParser = require('url');
+var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;
 i18n.configure({
@@ -69,13 +72,62 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
-server.get('/', function (req, res) {
-    res.render('index');
-});
-supportedLocales.map(function (l) {
-    server.get('/' + l, function (req, res) {
-        res.render('index');
+function renderIndex(req, res, next) {
+    renderOrRedirect(req, res, 'index');
+}
+
+function renderTemplate(name) {
+    return function (req, res, next) {
+        res.render(name);
+    };
+}
+
+function renderOrRedirect(req, res, template) {
+    if (!isFromMobile(req)) {
+        res.render(template);
+    } else {
+        console.log('request from mobile');
+        try {
+            var stats = fs.lstatSync(staticFolder + '/mobile/' + template + '.html');
+            if (stats.isFile()) {
+                var redirectTo = '/m/' + template;
+                var query = urlParser.parse(req.url).query;
+                res.redirect(query ? redirectTo + '?' + query : redirectTo);
+            } else {
+                res.render(template);
+            }
+        } catch (e) {
+            res.render(template);
+        }
+    }
+}
+function mapRoute2Template(url, template, pipes) {
+    if (typeof template !== 'string') {
+        pipes = template;
+        template = url;
+
+        if (template[0] === '/') {
+            template = template.substr(1);
+        }
+    }
+
+    pipes = pipes || [];
+    pipes.push(function (req, res, next) {
+        renderOrRedirect(req, res, template);
     });
+
+    var args = [localeHelper.regexPath(url)].concat(pipes);
+
+    server.get.apply(server, args);
+}
+
+function isFromMobile(req) {
+    return mobileDetector.isFromMobile(req.headers['user-agent']);
+}
+
+server.get('/', renderIndex);
+supportedLocales.map(function (l) {
+    server.get('/' + l, renderIndex);
 });
 
 var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
@@ -99,6 +151,7 @@ function filterConfig(config) {
 }
 
 server.use('/config.js', function (req, res, next) {
+    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
@@ -118,75 +171,27 @@ supportedLocales.map(function (l) {
 });
 
 server.use('/service-proxy', require('./serviceProxy'));
+server.use(localeHelper.regexPath('/m'), require('./mobile'));
+server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
 
 // Page route define
-function renderTemplate(name) {
-    return function (req, res, next) {
-        res.render(name);
-    };
-}
-
-function mapRoute2Template(url, template) {
-    if (!template) {
-        template = url;
-
-        if (template[0] === '/') {
-            template = template.substr(1);
-        }
-    }
-
-    server.get(localeHelper.regexPath(url), renderTemplate(template));
-}
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
 mapRoute2Template('/study');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
+mapRoute2Template('/sign-in');
 mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
-server.get(localeHelper.regexPath('/personal-history'), membership.ensureAuthenticated, renderTemplate('personal-history'));
+mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
 mapRoute2Template('/map');
-//mapRoute2Template('/account-setting');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
-
-var proxy = require('./serviceProxy/proxy.js');
-var sso = require('./config').sso;
-server.get(localeHelper.regexPath('/email-verify'), function (req, res, next) {
-    if (!req.query || !req.query.mailToken) {
-        res.locals.result = 'MailTokenNotFound';
-        res.render('email-verify');
-    }
-
-    proxy({
-        host: sso.host,
-        port: sso.port,
-        path: '/member/mailValidation/validate',
-        method: 'POST',
-        dataMapper: function (d) {
-            return {
-                token: req.query.mailToken
-            };
-        },
-        responseInterceptor: function (response, json) {
-            if (typeof json.code !== 'undefined') {
-                res.locals.result = 'service-' + json.code;
-            } else if (json.isSuccess) {
-                res.locals.result = 'EmailVerifiedSuccess';
-            } else {
-                res.locals.result = '发生未知错误';
-            }
-
-            res.render('email-verify');
-
-            return true;
-        }
-    })(req, res, next);
-});
+server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
 
 server.use('/healthcheck', function (req, res, next) {
     res.json({

@@ -5,7 +5,8 @@ define([
   "bplus-ui/view/widgets/personalinfo/list_widget_base",
   "text!./list_award_widget.html"
 ], function(when, $, angular, BaseClass, template) {
-  var ListAward = function() {
+  var ListAward = function(externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     BaseClass.call(this);
   };
   ListAward.prototype = Object.create(BaseClass.prototype);

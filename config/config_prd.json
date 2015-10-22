@@ -29,7 +29,9 @@
   },
   "wechat": {
     "host": "service.brigeplus.cn",
-    "port": "10101"
+    "port": "10101",
+    "app_id": "bridgeplus_web",
+    "corp_app_id": "bridgeplus_corp"
   },
   "logger": {
     "levels": {

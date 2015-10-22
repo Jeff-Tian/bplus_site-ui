@@ -217,7 +217,7 @@
                                 <div class="nine wide field">
                                     <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
 
-                                    <div class="inline fields">
+                                    <div class="inline tense fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolStartYear"
                                                     ng-model="schoolInfo.startYear">
@@ -245,9 +245,10 @@
                                     </div>
                                 </div>
                                 <div class="eight wide field">
-                                    <label><i class="ui large red icon">*</i><%= __('GraduateIn') %></label>
+                                    <label><i class="ui large red icon">*</i><%= __('GraduateIn') %> (<%= __('至今请不填')
+                                        %>)</label>
 
-                                    <div class="inline fields">
+                                    <div class="inline tense fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolEndYear"
                                                     ng-model="schoolInfo.endYear">
@@ -276,7 +277,7 @@
                                 <div class="field">
                                     <label><i class="ui large red icon">*</i><%= __('StudyPeriod') %></label>
 
-                                    <div class="inline fields">
+                                    <div class="inline tense fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolStartYear"
                                                     ng-model="schoolInfo.startYear">
@@ -303,7 +304,7 @@
                                 <div class="field">
                                     <label><i class="ui large red icon">*</i><%= __('GraduateIn') %></label>
 
-                                    <div class="inline fields">
+                                    <div class="inline tense fields">
                                         <div class="field">
                                             <select class="ui fluid search dropdown defer" name="schoolEndYear"
                                                     ng-model="schoolInfo.endYear">
@@ -355,6 +356,7 @@
 
 <!-- build:js js/cdn/personal-history.js -->
 <script src="js/directives/dropdown.js"></script>
+<script src="js/factories/DeviceHelper.js"></script>
 <script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
 <script src="js/page/personal-histroy/main.js"></script>
 <!-- endbuild -->

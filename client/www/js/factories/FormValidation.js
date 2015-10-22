@@ -103,7 +103,7 @@
                 if (typeof reason === 'object' && String(reason.code) !== '') {
                     $form.addClass('error').form('add errors', [message(translate('service-' + reason.code)) || reason.message]);
                 } else {
-                    $form.addClass('error').form('add errors', [typeof reason === 'string' ? message(reason) : reason]);
+                    $form.addClass('error').form('add errors', [typeof reason === 'string' ? message(reason) : reason.message]);
                 }
             }
         };
@@ -113,6 +113,14 @@
                 res.handleFormError($form, reason);
             };
         };
+
+        // Form initialize
+        var $form = $('.ui.form');
+
+        $form.form(res.defaultSetting);
+        $form.on('click', '.remove.circle.icon', function () {
+            $form.removeClass('error');
+        });
 
         return res;
     };

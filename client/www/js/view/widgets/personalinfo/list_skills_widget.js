@@ -6,7 +6,8 @@ define([
     "text!./list_skills_widget.html"
 ], function (when, $, angular, BaseClass, template) {
 
-    var ListSkill = function () {
+    var ListSkill = function (externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         BaseClass.call(this);
     };
     ListSkill.prototype = Object.create(BaseClass.prototype);

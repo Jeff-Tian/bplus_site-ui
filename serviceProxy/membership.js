@@ -7,16 +7,23 @@ module.exports = {
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 
-        req.dualLog('request header hcd_user info:');
-        req.dualLog(req.headers.hcd_user);
+        if (req.headers.hcd_user) {
+            req.dualLog('request header hcd_user info:');
+            req.dualLog(req.headers.hcd_user);
+        }
 
         if (req.headers.hcd_user) {
             try {
                 res.locals.hcd_user = JSON.parse(req.headers.hcd_user);
+                res.locals.signedIn = !!res.locals.hcd_user.member_id;
                 req.body.member_id = res.locals.hcd_user.member_id;
             } catch (e) {
+                res.locals.signedIn = false;
+
                 next(e);
             }
+        } else {
+            res.locals.signedIn = false;
         }
 
         next();

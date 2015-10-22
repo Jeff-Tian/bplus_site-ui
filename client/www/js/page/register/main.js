@@ -9,6 +9,7 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha || {})
     .controller('SignUpCtrl', angular.bplus.SignUpCtrl)
@@ -91,11 +92,5 @@ angular.module('signIn', ['pascalprecht.translate', 'ng.utils'])
 
 // TODO: integrated into JS framework
 (function () {
-    var $form = $('.ui.form');
-
-    $form.on('click', '.remove.circle.icon', function () {
-        $form.removeClass('error');
-    });
-
     $('.checkbox').checkbox();
 })();

@@ -6,7 +6,8 @@ define([
   "text!./list_language_widget.html"
 ], function(when, $, angular, BaseClass, template) {
 
-  var ListLanguage = function() {
+  var ListLanguage = function(externalTemplate) {
+    template = externalTemplate ? externalTemplate : template;
     BaseClass.call(this);
   };
   ListLanguage.prototype = Object.create(BaseClass.prototype);

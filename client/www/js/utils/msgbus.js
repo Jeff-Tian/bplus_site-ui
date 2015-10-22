@@ -13,10 +13,14 @@ angular.module('ng.utils')
 
         msgBus.events = {
             profile: {
-                loaded: 'profile:loaded'
+                loaded: 'profile:loaded',
+                updated: 'profile:updated'
             },
             translation: {
                 loaded: 'translation:loaed'
+            },
+            viewContent: {
+                loaded: '$viewContentLoaded'
             }
         };
 

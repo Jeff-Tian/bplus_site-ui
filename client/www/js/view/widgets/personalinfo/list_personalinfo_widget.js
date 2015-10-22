@@ -6,7 +6,8 @@ define([
     "text!./list_personalinfo_widget.html"
 ], function (when, $, angular, BaseClass, template) {
 
-    var ListPersonalInfo = function () {
+    var ListPersonalInfo = function (externalTemplate) {
+        template = externalTemplate ? externalTemplate : template;
         BaseClass.call(this);
     };
     ListPersonalInfo.prototype = Object.create(BaseClass.prototype);

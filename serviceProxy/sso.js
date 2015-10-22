@@ -29,10 +29,38 @@ module.exports = {
     authenticate: function (req, res, next) {
         proxySSO({
             path: '/logon/authentication',
-            responseInterceptor: function (responseStream, responseJson) {
+            responseInterceptor: function (originalResponse, responseJson) {
+                var returnValue = false;
+
                 if (responseJson.isSuccess) {
-                    setAuthToken(responseStream, responseJson.result.token);
+                    if (!req.body.wechat_token) {
+                        // Log on directly
+                        setAuthToken(res, responseJson.result.token);
+                    } else {
+                        // Bind wechat to mobile account:
+                        proxySSO({
+                            path: '/profile/update',
+                            dataMapper: function (d) {
+                                d.token = d.wechat_token;
+                                d.member_id = responseJson.result.member_id;
+
+                                return d;
+                            },
+                            responseInterceptor: function (theOriginalResponse, response2Json) {
+                                // Then log on
+                                if (response2Json.isSuccess) {
+                                    setAuthToken(res, responseJson.result.token);
+                                }
+
+                                res.send(response2Json);
+                            }
+                        })(req, res, next);
+
+                        returnValue = undefined;
+                    }
                 }
+
+                return returnValue;
             }
         })(req, res, next);
     },
@@ -126,6 +154,8 @@ module.exports = {
             });
 
             responseStream.location('/');
+
+            return false;
         }
     }),
     getMailToken: proxySSO({
@@ -177,6 +207,11 @@ module.exports = {
         path: '/profile/changepassword'
     }),
     updateProfile: proxySSO({
-        path: '/profile/update'
+        path: '/profile/update',
+        dataMapper: function (d) {
+            d.token = d.wechat_token;
+
+            return d;
+        }
     })
 };

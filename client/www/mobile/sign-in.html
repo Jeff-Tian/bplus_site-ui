@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('SEOTitle_SignIn') %></title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
+    <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/pc-mobile.css?<%= cdn.version %>">
+</head>
+<body ng-app="signIn" ng-controller="AppCtrl" class="b-background mobile">
+<%- include('head.html') -%>
+<div class="ui b-signin-wrapper padded container subcontainer">
+    <div class="ui column b-signin-container b-background-lighter padded container subcontainer">
+        <div class="b-signin-wide padded" tab=".b-signin-wide">
+            <%- include('../view-partial/sign-in.html') -%>
+        </div>
+    </div>
+</div>
+<%- include('footer.html') -%>
+
+<!-- build:js js/cdn/m/sign-in.js -->
+<script src="../js/factories/FormValidation.js"></script>
+<script src="../js/directives/captcha.js"></script>
+<script src="../js/directives/ngEnter.js"></script>
+<script src="../js/directives/registerForm.js"></script>
+<script src="../js/directives/tab.js"></script>
+<script src="../js/directives/dropdown.js"></script>
+<script src="../js/controllers/LoginCtrl.js"></script>
+<script src="../js/factories/queryParser.js"></script>
+<script src="../js/factories/DeviceHelper.js"></script>
+<script src="../js/controllers/WechatLoginCtrl.js"></script>
+<script src="../js/controllers/SignUpCtrl.js"></script>
+<script src="../js/page/register/main.js"></script>
+<!-- endbuild -->
+</body>
+
+</html>

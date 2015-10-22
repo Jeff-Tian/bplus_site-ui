@@ -7,4 +7,9 @@ describe('Locale Helper', function () {
         assert.equal('/zh/signin', localeHelper.generateLocaleLink('/en/signin', 'zh'));
         assert.equal('/en', localeHelper.generateLocaleLink('/zh', 'en'));
     });
+
+    it('should map request path to view accordingly', function () {
+        assert.equal(true, localeHelper.regexPath('/signin').test('/signin'));
+        assert.equal(false, localeHelper.regexPath('/signin').test('/m/signin'));
+    });
 });

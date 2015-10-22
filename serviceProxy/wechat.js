@@ -9,6 +9,10 @@ function proxyWechat(options) {
     options.dataMapper = function (d) {
         d.application_id = config.applicationId;
         d.app_id = wechat.app_id;
+        if (options.path === '/wechat/oauth/logon') {
+            d.app_id = wechat.corp_app_id;
+        }
+        d.href = 'https://jeff-tian.github.io/bridge-wechat/stylesheets/wechat.css';
 
         return d;
     };
@@ -19,6 +23,11 @@ function proxyWechat(options) {
 module.exports = {
     qrLogon: proxyWechat({
         path: '/wechat/qr/logon',
+        method: 'POST'
+    }),
+
+    oAuthLogon: proxyWechat({
+        path: '/wechat/oauth/logon',
         method: 'POST'
     }),
 

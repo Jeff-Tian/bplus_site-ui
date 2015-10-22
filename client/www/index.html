@@ -275,7 +275,8 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-jobs-action">
-                    <a class="ui red large button check-more-buuton b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                    <a class="ui red large button check-more-buuton b-sp"
+                       href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
                         __('IndexCheckMoreJobs') %></a>
                 </div>
             </div>
@@ -418,7 +419,8 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%= __('IndexStart') %></a>
+                    <a class="ui red large button b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                        __('IndexStart') %></a>
                 </div>
             </div>
         </div>
@@ -437,6 +439,7 @@
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
 <script src="js/factories/queryParser.js"></script>
+<script src="js/factories/DeviceHelper.js"></script>
 <script src="js/controllers/WechatLoginCtrl.js"></script>
 <script src="js/page/homepage/main.js"></script>
 <!-- endbuild -->

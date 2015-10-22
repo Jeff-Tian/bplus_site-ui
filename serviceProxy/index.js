@@ -7,6 +7,16 @@ var sms = require('./sms'),
     wechat = require('./wechat')
     ;
 
+function checkWechatToken(req, res, next) {
+    if (req.body.wechat_token) {
+        next();
+
+        return;
+    }
+
+    res.status(403).json({code: '403', message: 'Wechat token is missed.'});
+}
+
 module.exports = require('express').Router()
     .use(function (req, res, next) {
         req.dualLog('service-proxy is being calling from ' + req.host + '...');
@@ -15,15 +25,16 @@ module.exports = require('express').Router()
         next();
     })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
-    .post('/member/register', sms.validate, sso.signUp)
+    .post('/member/register', /*sms.validate,*/ sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
-    .post('/member/bind-mobile', membership.ensureAuthenticated/*, sms.validate*/, sso.changeMobile)
+    .post('/member/bind-mobile', membership.ensureAuthenticated, sms.validate, sso.changeMobile)
+    .post('/member/bind-mobile-by-password', sso.authenticate /* TODO : Bind wechat to member account  */)
     .post('/member/change-email', membership.ensureAuthenticated, sso.changeEmail)
     .post('/member/change-password', membership.ensureAuthenticated, sso.authenticateCurrentUser, sso.changePassword)
     .post('/member/update-sso-profile', membership.ensureAuthenticated, sso.updateProfile)
     .post('/member/update-profile', membership.ensureAuthenticated, bplusService.updateProfile)
-    .post('/member/add-education', membership.ensureAuthenticated, bplusService.addEducation)
-    .post('/member/update-education', membership.ensureAuthenticated, bplusService.updateEducation)
+    .post('/member/add-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.addEducation)
+    .post('/member/update-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.updateEducation)
     .post('/logon/authentication', sso.authenticate)
     .post('/logon/by-token', sso.setAuthToken)
     .post('/member/resetPassword', sms.validate, sso.resetPassword)
@@ -36,6 +47,7 @@ module.exports = require('express').Router()
     .post('/member/:classification/:operation', membership.ensureAuthenticated, bplusService.updateData)
     .post('/logon/logout', sso.logout)
     .post('/logon/by-wechat', wechat.qrLogon)
+    .post('/logon/from-wechat', wechat.oAuthLogon)
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
 ;

@@ -26,7 +26,7 @@ define([
   
   ModelBase.prototype.start = function(agModel) {
     var self = this;
-    agModel.service(self.SERVICENAME, function($http, $q) {
+    agModel.service(self.SERVICENAME, function($http, $q, msgBus) {
       // Use when instead of $q because when provide something better
       // $.ajax itself is a promise A+ method. Just use it.
       // If $q need to be used, have to use $q.deffer() instead.
@@ -44,6 +44,9 @@ define([
               }
               self.rawData[dataKey][paramKey] = parsedData;
               if (forceUpdate) {
+                if (dataKey === "memberExt") {
+                    msgBus.emitMsg(msgBus.events.profile.updated);
+                }
                 self.forceUpdateEvents.forEach(function(callbackValue) {
                     callbackValue.call(this);
                 });

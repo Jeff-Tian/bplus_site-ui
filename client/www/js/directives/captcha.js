@@ -1,5 +1,15 @@
 (function (exports) {
-    exports.captcha = function (service) {
+    exports.captcha = function (service, $timeout) {
+        function pollWait(condition, callback) {
+            if (condition()) {
+                callback();
+            } else {
+                $timeout(function () {
+                    pollWait(condition, callback);
+                }, 500);
+            }
+        }
+
         var captchaServiceDomain = '//' + angular.bplus.config.captcha.host + ':' + angular.bplus.config.captcha.port;
 
         return {
@@ -9,7 +19,7 @@
             link: function ($scope, $element, attrs, ngModel) {
                 function errorHandler(res) {
                     console.error(res);
-                    $element.hide();
+                    //$element.hide();
                 }
 
                 function refreshCaptcha(successCallback) {
@@ -25,10 +35,12 @@
 
                 $scope.refreshCaptcha = refreshCaptcha;
 
-                refreshCaptcha();
+                pollWait(function () {
+                    return $element.is(':visible');
+                }, refreshCaptcha);
             }
         };
     };
 
-    exports.captcha.$inject = ['service'];
+    exports.captcha.$inject = ['service', '$timeout'];
 })(angular.bplus = angular.bplus || {});

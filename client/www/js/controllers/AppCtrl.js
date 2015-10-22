@@ -1,11 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function (FormValidation, $scope, service, MessageStore, msgBus, $translate) {
-        var $form = $('.ui.form');
-
-        $form.form(FormValidation.defaultSetting);
-        $form.on('click', '.remove.circle.icon', function () {
-            $form.removeClass('error');
-        });
+    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate) {
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -60,7 +54,9 @@
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
         window.addEventListener('hashchange', locationHashChanged);
+
+        msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
     };
 
-    exports.AppCtrl.$inject = ['FormValidation', '$scope', 'service', 'MessageStore', 'msgBus', '$translate'];
+    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate'];
 })(angular.bplus = angular.bplus || {});

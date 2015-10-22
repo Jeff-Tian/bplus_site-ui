@@ -15,7 +15,7 @@
                 <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
                        ng-model="signUpData.captcha" ng-enter>
                 <i class="write icon"></i>
-
+                &nbsp;
                 <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
             </div>
             <div class="ui right aligned container subcontainer">
@@ -53,7 +53,7 @@
             <button type="submit" class="ui fluid large red submit button"
                     ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
             </button>
-            <p class="ui mini grey color" style="font-size: small;">{{ '注册即代表你接受我们的隐私条款' | translate}}</p>
+            <p class="ui mini grey color privacy-declaration" style="font-size: small;">{{ '注册即代表你接受我们的隐私条款' | translate}}</p>
         </div>
     </div>
 </form>

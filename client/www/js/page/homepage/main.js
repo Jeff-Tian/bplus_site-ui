@@ -12,6 +12,7 @@ angular.module('bplus', [
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('queryParser', angular.bplus.queryParser)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('registerForm', angular.bplus.registerForm)
@@ -27,7 +28,7 @@ angular.module('bplus', [
     //  .ready(function() {
     // fix header when passed
 
-        setTimeout(function() {
+    setTimeout(function () {
         // preload image
         new Image().src = "img/client/1x/tencent.png";
         new Image().src = "img/client/1x/cocacola.png";
@@ -38,7 +39,6 @@ angular.module('bplus', [
         new Image().src = "img/client/1x/tencent.png";
         new Image().src = "img/client/1x/cocacola.png";
     }, 1000);
-
 
 
     $('.b-masthead').visibility({

@@ -26,10 +26,15 @@ function basicProxy(req, res, next, host, port, requestPath, map) {
  * @param res
  * @param next
  * @param settings
+ *          {
+ *              // Note: the upstream response stream is not used, the first argument is the original
+ *              // response object, i.e., the res
+ *              responseInterceptor: function (originalResponse, upstreamJson) {}
+ *          }
  */
 function advancedProxy(req, res, next, settings) {
     var options = {
-            host: settings.host,
+            hostname: settings.host,
             port: settings.port || '80',
             path: settings.path || req.originalUrl,
             method: settings.method || req.method,
@@ -62,9 +67,14 @@ function advancedProxy(req, res, next, settings) {
                     return next(e);
                 }
 
-                if (settings.responseInterceptor(res, chunks)) {
+                req.dualLog('response got from: ' + options.hostname + ':' + options.port + '/' + options.path);
+                req.dualLog(chunks);
+
+                var continueNext = settings.responseInterceptor(res, chunks);
+
+                if (continueNext === true) {
                     next();
-                } else {
+                } else if (continueNext === false) {
                     res.send(chunks);
                 }
             });
@@ -78,7 +88,7 @@ function advancedProxy(req, res, next, settings) {
     request.on('error', function (err) {
         req.dualLogError('Error met in this request:');
         req.dualLogError(request);
-        
+
         next();
     });
 

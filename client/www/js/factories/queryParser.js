@@ -12,7 +12,12 @@
                 query = q.getQueryString();
             }
 
-            var index = query.indexOf(key);
+            var index = query.search(new RegExp(key, 'i'));
+
+            if (query[index - 1] && query[index - 1] !== '?' && query[index - 1] !== '&') {
+                index = -1;
+            }
+
             if (index >= 0) {
                 var end = query.indexOf('&', index + key.length);
 

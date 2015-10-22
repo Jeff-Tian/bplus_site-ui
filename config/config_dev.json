@@ -30,7 +30,8 @@
   "wechat": {
     "host": "uat.service.hcd.com",
     "port": "10101",
-    "app_id": "bridgeplus_web"
+    "app_id": "bridgeplus_web",
+    "corp_app_id": "bridgeplus_corp"
   },
   "logger": {
     "levels": {
@@ -59,7 +60,7 @@
     "normal": "/"
   },
   "featureSwitcher": {
-    "enableWechat": false
+    "enableWechat": true
   },
   "version": "0.2.0",
   "date": "20151016_0812"
