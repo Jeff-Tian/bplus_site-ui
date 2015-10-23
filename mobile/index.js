@@ -10,18 +10,25 @@ router.get('/', function (req, res, next) {
     res.render('mobile/index');
 });
 
-mapPath2Template('/index');
-mapPath2Template('/sign-in');
-mapPath2Template('/aboutus');
-mapPath2Template('/national');
 router.get('/signin', function (req, res, next) {
     res.render('mobile/sign-in');
 });
-mapPath2Template('/reset-password');
-mapPath2Template('/reset-password-by-email');
-mapPath2Template('/personal-history');
-mapPath2Template('/bind-mobile');
-mapPath2Template('/bind-mobile-by-password');
-mapPath2Template('/menu');
+
+var mobileRoutes = [
+    'index',
+    'sign-in',
+    'aboutus',
+    'national',
+    'reset-password',
+    'reset-password-by-email',
+    'personal-history',
+    'bind-mobile',
+    'bind-mobile-by-password',
+    'menu'
+];
+
+mobileRoutes.map(function (r) {
+    mapPath2Template('/' + r);
+});
 
 module.exports = router;
