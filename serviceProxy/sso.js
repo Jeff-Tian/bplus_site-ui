@@ -2,6 +2,7 @@ var http = require('http');
 var sso = require('../config').sso;
 var config = require('../config');
 var proxy = require('./proxy');
+var localeHelper = require('../locales/localeHelper');
 
 function proxySSO(options) {
     options.host = sso.host;
@@ -24,6 +25,23 @@ function setAuthToken(res, token) {
     });
 }
 
+function jumpToReturnUrl(req, res) {
+    if (req.body.return_url) {
+        if (!req.xhr) {
+            res.redirect(decodeURIComponent(req.body.return_url));
+        } else {
+            res.json({
+                code: 302,
+                message: decodeURIComponent(req.body.return_url)
+            });
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
 module.exports = {
     signUp: proxySSO({path: '/member/register'}),
     authenticate: function (req, res, next) {
@@ -36,6 +54,9 @@ module.exports = {
                     if (!req.body.wechat_token) {
                         // Log on directly
                         setAuthToken(res, responseJson.result.token);
+                        if (jumpToReturnUrl(req, res)) {
+                            return undefined;
+                        }
                     } else {
                         // Bind wechat to mobile account:
                         proxySSO({
@@ -50,6 +71,9 @@ module.exports = {
                                 // Then log on
                                 if (response2Json.isSuccess) {
                                     setAuthToken(res, responseJson.result.token);
+                                    if (jumpToReturnUrl(req, res)) {
+                                        return undefined;
+                                    }
                                 }
 
                                 res.send(response2Json);
@@ -66,7 +90,10 @@ module.exports = {
     },
     setAuthToken: function (req, res, next) {
         setAuthToken(res, req.body.token);
-        res.send(req.body.token);
+
+        if (!jumpToReturnUrl(req, res)) {
+            res.send(req.body.token);
+        }
 
         next();
     },
@@ -138,26 +165,30 @@ module.exports = {
         path: '/member/resetPassword'
     }),
     resetPasswordByEmail: proxySSO({path: '/member/password/resetByMail'}),
-    logout: proxySSO({
-        path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
-            if (requestFrom.headers.cookie) {
-                var token = requestFrom.headers.cookie.match(/(?:^|;) *token=([^;]*)/)[1];
+    logout: function (req, res, next) {
+        proxySSO({
+            path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
+                if (requestFrom.headers.cookie) {
+                    var token = requestFrom.headers.cookie.match(/(?:^|;) *token=([^;]*)/)[1];
 
-                requestTo.write(JSON.stringify({token: token}));
+                    requestTo.write(JSON.stringify({token: token}));
+                }
+            },
+            responseInterceptor: function (originalResponse, responseJson) {
+                res.cookie('token', '', {
+                    expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+                    path: '/',
+                    httpOnly: true
+                });
+
+                var locale = localeHelper.getLocale(req.url, req);
+                // TODO: Investigate why no effect
+                res.location(localeHelper.generateLocaleLink('/', locale));
+
+                return false;
             }
-        },
-        responseInterceptor: function (responseStream, responseJson) {
-            responseStream.cookie('token', '', {
-                expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
-                path: '/',
-                httpOnly: true
-            });
-
-            responseStream.location('/');
-
-            return false;
-        }
-    }),
+        })(req, res, next);
+    },
     getMailToken: proxySSO({
         path: '/member/password/mailToken',
         dataMapper: function (d) {

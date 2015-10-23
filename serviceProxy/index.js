@@ -4,7 +4,8 @@ var sms = require('./sms'),
     mail = require('./mail'),
     membership = require('./membership'),
     bplusService = require('./bplusService'),
-    wechat = require('./wechat')
+    wechat = require('./wechat'),
+    commerceService = require('./commerceService')
     ;
 
 function checkWechatToken(req, res, next) {
@@ -50,4 +51,5 @@ module.exports = require('express').Router()
     .post('/logon/from-wechat', wechat.oAuthLogon)
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
+    .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
 ;

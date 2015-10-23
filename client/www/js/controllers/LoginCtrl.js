@@ -41,7 +41,8 @@
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe,
-                wechat_token: $scope.loginData.wechatToken
+                wechat_token: $scope.loginData.wechatToken,
+                return_url: queryParser.get('return_url')
             }).then(function (res) {
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
