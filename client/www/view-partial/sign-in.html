@@ -3,6 +3,8 @@
     <a class="item" data-tab="register"><%= __('SignUp') %></a>
 </div>
 <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
+    <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
+
     <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">
         <div class="ui error message brand"></div>
         <div class="ui">

@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var membership = require('../serviceProxy/membership');
 
 function mapPath2Template(path) {
     router.get(path, function (req, res, next) {
@@ -24,12 +25,15 @@ var mobileRoutes = [
     'personal-history',
     'bind-mobile',
     'bind-mobile-by-password',
-    'menu',
-    'profile'
+    'menu'
 ];
 
 mobileRoutes.map(function (r) {
     mapPath2Template('/' + r);
+});
+
+router.get('/profile', membership.ensureAuthenticated, function (req, res, next) {
+    res.render('mobile/profile');
 });
 
 module.exports = router;
