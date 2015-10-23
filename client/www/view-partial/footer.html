@@ -3,32 +3,23 @@
         <div class="ui horizontal list footer-list">
             <div class="item">
                 <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterAboutUs' | translate}}</a>
+                    <a class="header" href="<%= localeLink('/aboutus') %>" ng-cloak><span>|</span> <%=__('FooterAboutUs') %></a>
                 </div>
             </div>
             <div class="item">
                 <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterBusinessCooperation' | translate}}</a>
+                    <a class="header" href="<%= localeLink('/school') %>" ng-cloak><span>|</span> <%=__('FooterBusinessCooperation') %></a>
                 </div>
             </div>
             <div class="item">
                 <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterContactUs' | translate}}</a>
+                    <a class="header" href="<%= localeLink('/contractus') %>" ng-cloak><span>|</span> <%=__('FooterContactUs') %></a>
                 </div>
             </div>
             <div class="item">
                 <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterJoinUs' | translate}}</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterServiceStatement' | translate}}</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="content">
-                    <a class="header" href="##" ng-cloak><span>|</span> {{'FooterFeedbacks' | translate}}</a>
+                    <!--<a class="header" href="<%= localeLink('/statement') %>" ng-cloak><span>|</span> <%=__('FooterServiceStatement') %></a>-->
+                    <a class="header" href="##" ng-cloak><span>|</span> <%=__('FooterServiceStatement') %></a>
                 </div>
             </div>
             <div class="item footer-wechat-share"
@@ -38,8 +29,8 @@
             </div>
         </div>
 
-        <p class="b-copyright floatd left" ng-cloak>&copy; 2015 Bridge+ {{'FooterReserved' | translate}} |
-            {{'FooterLicense' | translate}}</p>
+        <p class="b-copyright floatd left" ng-cloak>&copy; 2015 Bridge+ <%=__('FooterReserved') %> |
+            <%=__('FooterLicense') %></p>
     </div>
 </div>
 <%- include('js.html') -%>

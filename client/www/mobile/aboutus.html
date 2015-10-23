@@ -7,19 +7,20 @@
     <meta name="description" content="<%= __('SEODesc_SignIn') %>">
     <%- include('header.html') -%>
 </head>
-<body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
+<body ng-app="mobile" ng-controller="AppCtrl" class="b-mobile back-color white color shadowed">
 <%- include('head.html') -%>
 
-	<div class="full-height">
-        	<div class="center stuck padded">
-	        	<div class="content center">
-	        		<img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
-	        		<h3 class="ui header"><%= __('MobileAoutusHeader') %></h3>
-	        		<h5><%= __('MobileAoutusInfo') %></h5>
-	        	</div>
-	        </div>
+<div class="full-height">
+    <div class="center stuck padded">
+        <div class="content center">
+            <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
+
+            <h3 class="ui white header"><%= __('MobileAoutusHeader') %></h3>
+            <h5><%= __('MobileAoutusInfo') %></h5>
         </div>
     </div>
+</div>
+</div>
 
 <%- include('footer.html') -%>
 

@@ -24,7 +24,8 @@ var mobileRoutes = [
     'personal-history',
     'bind-mobile',
     'bind-mobile-by-password',
-    'menu'
+    'menu',
+    'profile'
 ];
 
 mobileRoutes.map(function (r) {

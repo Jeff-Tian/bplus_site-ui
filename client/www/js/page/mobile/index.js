@@ -18,7 +18,7 @@ angular
             })
             .state('menu', {
                 url: "/menu",
-                templateUrl: "menu",
+                templateUrl: "/m/menu",
                 controller: 'MobileMenuCtrl'
             })
             .state('select-payment-method', {
