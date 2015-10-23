@@ -4,7 +4,7 @@
     <a class="item" href="<%= localeLink('/m/profile') %>"><%= __('Profile') %></a>
     <a class="item" href="<%= localeLink('/m/aboutus') %>"><%= __('FooterAboutUs') %></a>
 
-    <% if (signedIn) { %>
+    <% if (signedIn && featureSwitcher.enableLogoutOnMobile) { %>
     <a class="item" ng-click="signOut()"><%= __('退出登录') %></a>
     <% } %>
 

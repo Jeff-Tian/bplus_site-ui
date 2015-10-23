@@ -61,7 +61,8 @@
     "normal": "//cdn.bridgeplus.cn/"
   },
   "featureSwitcher": {
-    "enableWechat": false
+    "enableWechat": false,
+    "enableLogoutOnMobile": false
   },
   "version": "0.2.2",
   "date": "20151022_0853"
