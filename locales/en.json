@@ -498,5 +498,7 @@
   "兑换码": "Redemption code",
   "确定": "Confirm",
   "报名{{competition}}, 报名费{{fee}}": "Register the {{competition}}, with registration fee of {{fee}}",
-  "当前仅支持兑换码": "Only redemption code is supported now"
+  "当前仅支持兑换码": "Only redemption code is supported now",
+  "您已经付费报名成功！": "You have registered successfully!",
+  "请在比赛开始前用电脑登录完成组队。": "Please log on before the start of the game with a computer to complete the team."
 }

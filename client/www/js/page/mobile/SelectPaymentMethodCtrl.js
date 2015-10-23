@@ -12,6 +12,9 @@
                     .post('/service-proxy/commerce/create-order/by-redemption-code', {
                         redemptionCode: $scope.payData.redemptionCode
                     })
+                    .then(function (result) {
+                        window.location.href = $scope.localeUrl('/index#/payed');
+                    })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
             });

@@ -26,6 +26,10 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
+            .state('payed', {
+                url: '/payed',
+                templateUrl: 'payed.html'
+            })
         ;
     }])
     .config(angular.bplus.translate)

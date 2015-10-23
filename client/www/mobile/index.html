@@ -75,7 +75,8 @@
                 </div>
             </h2>
 
-            <form name="redemptionForm" novalidate class="ui form redemption-form" ng-submit="buyWithRedemptionCode($event)">
+            <form name="redemptionForm" novalidate class="ui form redemption-form"
+                  ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
@@ -86,6 +87,39 @@
                     __('确定') %>
                 </button>
             </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="payed.html">
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui center aligned container">
+        <div class="ui left aligned container">
+            <h3 class="ui white header">
+                <i class="checkmark icon"></i>
+
+                <div class="content">
+                    <%= __('您已经付费报名成功！') %>
+                    <div class="sub white header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
+                </div>
+            </h3>
+        </div>
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui centered grid">
+        <div class="row">
+            <div class="ui six doubling centered cards">
+                <div class="ui transparent card">
+                    <div class="ui image">
+                        <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                    </div>
+                    <div class="center aligned content">
+                        <p><%= __('Bridge+服务号') %></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </script>
