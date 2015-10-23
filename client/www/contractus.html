@@ -1,1 +1,47 @@
-contractus
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('ContractusTitle') %></title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.carousel.min.css?<%= cdn.version %>">
+    <link rel="stylesheet" type="text/css"
+          href="<%= cdn.normal %>bower/owl.carousel/dist/assets/owl.theme.default.min.css?<%= cdn.version %>">
+</head>
+
+<body ng-controller="AppCtrl" ng-app="bplus" ng-class="{'chinese':language==='zh','english':language==='en'}">
+<%- include('view-partial/header.html') -%>
+<!-- Page Contents -->
+<div class="pusher">
+    <div class="b-contractus footer-main"></div>
+
+    <div class="page-content">
+    	<div class="b-contractus-content">
+    		<div class="ui container">
+    			<div class="ui grid">
+    				<div class="eight wide column right floated content-column">
+    					<h2><%= __('ContractusContentTitle') %></h2>
+    					<h4><%= __('ContractusContentLine1') %></h4>
+			    		<h4><%= __('ContractusContentLine2') %></h4>
+			    		<h4><%= __('ContractusContentLine3') %></h4>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+</div>
+<%- include('view-partial/footer.html') -%>
+<!--JS-->
+<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js"></script>
+<!--Page JS-->
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/page/footer/main.js"></script>
+</body>
+
+</html>
