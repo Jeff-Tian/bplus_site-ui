@@ -494,5 +494,9 @@
   "MobileNationalHeader": "全国大赛介绍",
   "MobileNationalInfo": "和来自全国各地各个年龄段的高手一起商战！",
   "MobileNationalSubInfo": "关注B+服务号,加入18-22岁年龄段的比赛。",
-  "等你来战": "等你来战"
+  "等你来战": "等你来战",
+  "兑换码": "兑换码",
+  "确定": "确定",
+  "报名{{competition}}, 报名费{{fee}}": "报名{{competition}}, 报名费{{fee}}",
+  "当前仅支持兑换码": "当前仅支持兑换码"
 }

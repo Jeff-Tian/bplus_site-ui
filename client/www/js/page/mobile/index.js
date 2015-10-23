@@ -21,6 +21,11 @@ angular
                 templateUrl: "menu",
                 controller: 'MobileMenuCtrl'
             })
+            .state('select-payment-method', {
+                url: '/select-payment-method',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
         ;
     }])
     .config(angular.bplus.translate)
@@ -34,4 +39,5 @@ angular
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
+    .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;

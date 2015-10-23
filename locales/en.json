@@ -493,5 +493,9 @@
   "MobileNationalHeader": "National Information",
   "MobileNationalInfo": "And the masters of all ages from all over the country business together!",
   "MobileNationalSubInfo": "Focus on B + service, join those aged between 18 to 22 games.",
-  "等你来战": "Fight now"
+  "等你来战": "Fight now",
+  "兑换码": "Redemption code",
+  "确定": "Confirm",
+  "报名{{competition}}, 报名费{{fee}}": "Register the {{competition}}, with registration fee of {{fee}}",
+  "当前仅支持兑换码": "Only redemption code is supported now"
 }
