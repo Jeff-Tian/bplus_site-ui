@@ -26,7 +26,7 @@ define([
   
   ModelBase.prototype.start = function(agModel) {
     var self = this;
-    agModel.service(self.SERVICENAME, function($http, $q, msgBus) {
+    agModel.service(self.SERVICENAME, ["msgBus", function(msgBus) {
       // Use when instead of $q because when provide something better
       // $.ajax itself is a promise A+ method. Just use it.
       // If $q need to be used, have to use $q.deffer() instead.
@@ -109,7 +109,7 @@ define([
           }
           return promise;
       };
-    });
+    }]);
   };
   return ModelBase;
 });
