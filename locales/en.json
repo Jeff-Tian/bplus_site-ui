@@ -203,6 +203,7 @@
   "service-401": "You are not allowed to access this page. Please log in and retry.",
   "service-500": "Server side error",
   "service-70002": "Unexpected error",
+  "service-20208": "redemption code not found",
   "service-DATA_ERROR": "The end date should not be earlier than the start date",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",

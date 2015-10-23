@@ -32,6 +32,7 @@ angular
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
+    .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)

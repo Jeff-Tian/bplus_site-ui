@@ -7,6 +7,10 @@ module.exports = {
     createOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
         port: commerceConfig.port,
-        path: '/redemption/redeem'
+        path: '/service/redemption/redeem',
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+            return d;
+        }
     })
 };

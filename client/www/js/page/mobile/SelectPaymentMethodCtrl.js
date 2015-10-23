@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service) {
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation) {
         $scope.payData = {
             redemptionCode: ''
         };
@@ -12,15 +12,11 @@
                     .post('/service-proxy/commerce/create-order/by-redemption-code', {
                         redemptionCode: $scope.payData.redemptionCode
                     })
-                    .then()
-                    .catch(function (ex) {
-                        if (String(ex.code) === '401') {
-                            window.location.href = $scope.localeUrl('/sign-in?return_url=' + encodeURIComponent(window.location.href) + '#/login');
-                        }
-                    });
+                    .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
+                    ;
             });
         };
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation'];
 })(angular.bplus = angular.bplus || {});
