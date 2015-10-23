@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate) {
+    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout) {
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -21,6 +21,14 @@
                     return $scope.memberInfo;
                 });
         };
+
+        $scope.$watch('message', function (newValue, oldValue) {
+            if (newValue) {
+                $timeout(function () {
+                    $scope.message = '';
+                }, 3000);
+            }
+        });
 
         $scope.localeUrl = function (url, locale) {
             locale = locale || $scope.language;
@@ -58,5 +66,5 @@
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
     };
 
-    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate'];
+    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout'];
 })(angular.bplus = angular.bplus || {});
