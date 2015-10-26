@@ -52,11 +52,23 @@ function setFeatureSwitcher(req, res, next) {
     next();
 }
 
+function setDeviceHelper(req, res, next) {
+    var ua = req.headers['user-agent'];
+
+    res.locals.device = {
+        isFromMobile: mobileDetector.isFromMobile(ua),
+        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua)
+    };
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
     .use(setCDN)
     .use(setFeatureSwitcher)
+    .use(setDeviceHelper)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true

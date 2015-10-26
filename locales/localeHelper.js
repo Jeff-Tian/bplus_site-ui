@@ -56,10 +56,14 @@
                 } else {
                     // server side
                     if (req && req.headers && req.headers.cookie) {
-                        var cookie = req.headers.cookie.match(/(?:^|;) *locale=([^;]*)/i)[1];
+                        var cookie = req.headers.cookie.match(/(?:^|;) *locale=([^;]*)/i);
 
                         if (cookie) {
-                            locale = cookie;
+                            cookie = cookie[1];
+
+                            if (cookie) {
+                                locale = cookie;
+                            }
                         }
                     }
                 }
