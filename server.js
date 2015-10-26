@@ -192,7 +192,7 @@ mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
-server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
+mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
