@@ -18,8 +18,17 @@ angular
             })
             .state('menu', {
                 url: "/menu",
-                templateUrl: "menu",
+                templateUrl: "/m/menu",
                 controller: 'MobileMenuCtrl'
+            })
+            .state('select-payment-method', {
+                url: '/select-payment-method',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
+            .state('payed', {
+                url: '/payed',
+                templateUrl: 'payed.html'
             })
         ;
     }])
@@ -27,6 +36,7 @@ angular
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
+    .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
@@ -34,4 +44,5 @@ angular
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
+    .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;

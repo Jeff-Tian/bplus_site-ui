@@ -45,6 +45,10 @@
 
                         if (typeof res.code !== 'undefined') {
                             dfd.reject(res);
+
+                            if (String(res.code) === '302') {
+                                window.location.href = res.message;
+                            }
                         } else {
                             dfd.reject(res.message || '服务器返回错误的数据');
                         }

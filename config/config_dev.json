@@ -33,6 +33,10 @@
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
   },
+  "commerce": {
+    "host": "uat.service.hcd.com",
+    "port": "10222"
+  },
   "logger": {
     "levels": {
       "[all]": "ERROR"
@@ -60,7 +64,8 @@
     "normal": "/"
   },
   "featureSwitcher": {
-    "enableWechat": true
+    "enableWechat": true,
+    "enableLogoutOnMobile": false
   },
   "version": "0.2.2",
   "date": "20151022_0853"

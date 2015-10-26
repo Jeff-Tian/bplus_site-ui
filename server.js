@@ -204,6 +204,10 @@ server.use('/healthcheck', function (req, res, next) {
     });
 });
 
+server.get('/locale', function (req, res, next) {
+    res.send(req.getLocale());
+});
+
 function logErrors(err, req, res, next) {
     req.logger.error(err);
     console.error(err.stack);

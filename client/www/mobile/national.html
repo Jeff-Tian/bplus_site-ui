@@ -7,7 +7,7 @@
     <meta name="description" content="<%= __('SEODesc_SignIn') %>">
     <%- include('header.html') -%>
 </head>
-<body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
+<body ng-app="mobile" ng-controller="AppCtrl" class="b-mobile back-color white color shadowed">
 <%- include('head.html') -%>
 
 <div class="full-height">
@@ -16,13 +16,13 @@
             <div class="content center">
                 <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
 
-                <h3 class="ui header"><%= __('MobileNationalHeader') %></h3>
+                <h3 class="ui white header"><%= __('MobileNationalHeader') %></h3>
                 <h5><%= __('MobileNationalInfo') %></h5>
                 <h5><%= __('MobileNationalSubInfo') %></h5>
 
-                <!--<div class="ui horizontal divider"></div>-->
-                <!--<a href="index#/select-payment-method" class="ui large red button"><%= __('等你来战') %></a>-->
-                <!--</div>-->
+                <div class="ui horizontal divider"></div>
+                <a href="index#/select-payment-method" class="ui large red button"><%= __('等你来战') %></a>
+            </div>
         </div>
     </div>
 </div>

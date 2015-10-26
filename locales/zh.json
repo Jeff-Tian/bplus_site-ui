@@ -204,6 +204,7 @@
   "service-401": "你没有权限操作,请登录后重试",
   "service-500": "服务器端错误",
   "service-70002": "发生未知错误",
+  "service-20208": "兑换码不正确",
   "service-DATA_ERROR": "结束日期不能早于开始日期",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
@@ -494,6 +495,13 @@
   "MobileNationalHeader": "全国大赛介绍",
   "MobileNationalInfo": "和来自全国各地各个年龄段的高手一起商战！",
   "MobileNationalSubInfo": "关注B+服务号,加入18-22岁年龄段的比赛。",
+  "等你来战": "等你来战",
+  "兑换码": "兑换码",
+  "确定": "确定",
+  "报名{{competition}}, 报名费{{fee}}": "报名{{competition}}, 报名费{{fee}}",
+  "当前仅支持兑换码": "当前仅支持兑换码",
+  "您已经付费报名成功！": "您已经付费报名成功！",
+  "请在比赛开始前用电脑登录完成组队。": "请在比赛开始前用电脑登录完成组队。",
   "AboutusTitle": "关于我们 - Bridge+",
   "AboutusContentTitle": "关于我们",
   "AboutusSection1": "Bridge+是由一群极具理想抱负的资深人士和青年领袖联合打造的。他们放下麦肯锡、英孚教育等企业的光环、婉拒名企名校的邀请，脱下西装，挽起袖子，一切从头开始，动手改变世界。",
@@ -560,5 +568,5 @@
   "SchoolTeamP6": "沈媛",
   "SchoolTeamP6meta": "上海外国语大学",
   "SchoolTeamP6Info": "我们是平凡路上追寻卓越的人。",
-  "等你来战": "等你来战"
+  "绑定手机": "绑定手机"
 }
