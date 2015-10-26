@@ -56,7 +56,7 @@
                 } else {
                     // server side
                     if (req && req.headers && req.headers.cookie) {
-                        var cookie = req.headers.cookie.match(/(?:^|;) *locale=([^;]*)/i);
+                        cookie = req.headers.cookie.match(/(?:^|;) *locale=([^;]*)/i);
 
                         if (cookie) {
                             cookie = cookie[1];

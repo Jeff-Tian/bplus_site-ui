@@ -5,7 +5,8 @@
             scope: {
                 action: '=',
                 control: '=',
-                passwordPlaceholder: '='
+                passwordPlaceholder: '=',
+                footerTip: '='
             },
             link: function ($scope, element) {
                 $scope.signUpData = {
@@ -133,6 +134,10 @@
 
                 if (!$scope.passwordPlaceholder) {
                     $scope.passwordPlaceholder = 'PleaseSetSignInPassword';
+                }
+
+                if (!$scope.footerTip) {
+                    $scope.footerTip = '注册即代表你接受我们的隐私条款';
                 }
             }
         };

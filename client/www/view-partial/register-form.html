@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="field" ng-hide="sendCodeButtonClicked">
-            <button type="button" class="ui large red button fluid" ng-click="getVerificationCode()"
+            <button type="button" class="ui red button fluid" ng-click="getVerificationCode()"
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
                 {{verificationCodeButtonText | translate}}
             </button>
@@ -50,10 +50,11 @@
             </div>
         </div>
         <div class="field">
-            <button type="submit" class="ui fluid large red submit button"
+            <button type="submit" class="ui fluid red submit button"
                     ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
             </button>
-            <p class="ui mini grey color privacy-declaration" style="font-size: small;">{{ '注册即代表你接受我们的隐私条款' | translate}}</p>
+            <p class="ui mini grey color privacy-declaration" style="font-size: small;">{{ footerTip |
+                translate}}</p>
         </div>
     </div>
 </form>

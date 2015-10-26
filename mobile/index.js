@@ -23,6 +23,7 @@ var mobileRoutes = [
     'reset-password',
     'reset-password-by-email',
     'personal-history',
+    // TODO: Requires Login
     'bind-mobile',
     'bind-mobile-by-password',
     'menu'
