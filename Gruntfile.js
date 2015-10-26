@@ -176,6 +176,11 @@ module.exports = function (grunt) {
                     cwd: '<%= config.dist %>',
                     src: '*.html',
                     dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/*.html',
+                    dest: '<%= config.dist %>'
                 }]
             }
         },
