@@ -20,7 +20,7 @@ function checkWechatToken(req, res, next) {
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
-        req.dualLog('service-proxy is being calling from ' + req.host + '...');
+        req.dualLog('service-proxy is being calling from ' + req.hostname + '...');
         req.dualLog(req.url);
 
         next();

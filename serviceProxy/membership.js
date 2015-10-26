@@ -53,9 +53,9 @@ module.exports = {
         if (res.locals.hcd_user) {
             return next();
         } else {
-            var locale = localeHelper.getLocale(req.url, req);
+            var locale = localeHelper.getLocale(req.originalUrl, req);
             var url = '/sign-in';
-            url += '?return_url=' + encodeURIComponent(req.url);
+            url += '?return_url=' + encodeURIComponent(req.originalUrl);
 
             if (!req.xhr) {
                 res.redirect(localeHelper.generateLocaleLink(url, locale));
