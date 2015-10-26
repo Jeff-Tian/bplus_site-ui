@@ -53,7 +53,7 @@
     <div class="ui right aligned container subcontainer">
         <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
     </div>
-    <% if (featureSwitcher.enableWechat === true) { %>
+    <% if (featureSwitcher.enableWechat === true && (!device.isFromMobile || device.isFromWechatBrowser)) { %>
     <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
     <div class="ui" ng-hide="!!loginData.wechatToken">
         <a class="wechat link" ng-click="logOnViaWechat()">
