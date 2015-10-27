@@ -28,7 +28,8 @@ angular
             })
             .state('payed', {
                 url: '/payed',
-                templateUrl: 'payed.html'
+                templateUrl: 'payed.html',
+                controller: 'PayedCtrl'
             })
         ;
     }])
@@ -44,5 +45,6 @@ angular
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
+    .controller('PayedCtrl', angular.bplus.MobilePayedCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;

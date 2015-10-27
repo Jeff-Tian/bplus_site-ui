@@ -500,7 +500,6 @@
   "兑换码": "Redemption code",
   "确定": "Confirm",
   "报名{{competition}}, 报名费{{fee}}": "Register the {{competition}}, with registration fee of {{fee}}",
-  "当前仅支持兑换码": "Only redemption code is supported now",
   "您已经付费报名成功！": "You have registered successfully!",
   "请在比赛开始前用电脑登录完成组队。": "Please log on before the start of the game with a computer to complete the team.",
   "AboutusTitle": "关于我们 - Bridge+",
@@ -569,5 +568,10 @@
   "SchoolTeamP6": "沈媛",
   "SchoolTeamP6meta": "上海外国语大学",
   "SchoolTeamP6Info": "known we are normal but still stick to be distinguished.",
-  "绑定手机": "Bind mobile"
+  "绑定手机": "Bind mobile",
+  "全国大赛": "National Game",
+  "{{how_much}}元": "$ {{how_much}}",
+  "微信支付": "Wechat Pay",
+  "支付宝支付": "Alipay",
+  "邀请朋友一起参赛: ": "Invite your friends to this game: "
 }
