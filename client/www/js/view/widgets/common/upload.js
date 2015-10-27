@@ -1,8 +1,9 @@
 define([
-  "text!./upload.html"
-], function(template) {
+    "angular",
+    "text!./upload.html"
+], function(angular, template) {
     return function(agModel) {
-        agModel.directive("upload", ['uploadHandlerService', function(uploadService) {
+        agModel.directive("upload", ['uploadHandlerService', function(uploadHandlerService) {
             return {
                 restrict: "A",
                 scope: {
@@ -10,6 +11,7 @@ define([
                 },
                 template: template,
                 link: function($scope, $element) {
+                    debugger;
                     var category = $scope.category = 'upload-' + Math.random().toString();
                     var iframe = document.createElement('iframe');
                     var form = $element.children('form');
@@ -19,7 +21,7 @@ define([
                     iframe.className = 'upload-iframe';
                     document.body.appendChild(iframe);
                     $scope.name = 'file';
-                    $scope.action = service_upload + '/upload/hcd-resource';
+                    $scope.action = angular.bplus.config.service_upload + '/upload/hcd-resource';
                     $scope.callback = location.origin + '/upload/callback';
                     form.attr('action', $scope.action);
                     form.attr('target', category);
@@ -28,6 +30,6 @@ define([
                     };
                 }
             };
-        });
+        }]);
     }
-})
+});
