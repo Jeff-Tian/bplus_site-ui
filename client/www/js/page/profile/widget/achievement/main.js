@@ -41,6 +41,7 @@ define([
             $scope.dataLoaded = false;
             $scope.data = {
                 gender: "",
+                avatar: "",
                 face: "",
                 progress: 0,
                 rate: 0
@@ -68,6 +69,7 @@ define([
                     serviceData.forEach(function (value, index) {
                         if (servicesArray[index] === "memberExt") {
                             $scope.data.gender = value[0].gender;
+                            $scope.data.avatar = value[0].avatar || "";
                         }
                         if (value.length > 0) {
                             $scope.data.progress++;
@@ -75,11 +77,9 @@ define([
                     });
 
                     (function () {
-                        //                  if (!data.gender || (data.gender.toString().toLowerCase() != 'male' && data.gender.toString().toLowerCase() != 'female')) {
-                        //                      data.gender = 'male';
-                        //                  }
-                        // if (!data.face) {
-                        if ($scope.data.gender.toString().toUpperCase() !== 'F') {
+                        if ($scope.data.avatar !== "") {
+                            $scope.data.face = $scope.data.avatar;
+                        } else if ($scope.data.gender.toString().toUpperCase() !== 'F') {
                             $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
                         } else {
                             $scope.data.face = '/img/profile/icon_profile_picture_female_big.png';
