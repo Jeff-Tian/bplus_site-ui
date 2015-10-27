@@ -81,11 +81,17 @@
             <% } %>
 
             <% if (!device.isFromWechatBrowser) { %>
-            <a class="ui fluid basic button">
-                <img class="ui middle aligned" style="height: 25px;"
-                     src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
-                <%= __('支付宝支付') %>
-            </a>
+            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay($event)">
+                <div class="ui error message brand"></div>
+
+                <button type="submit" class="ui fluid basic button"
+                        ng-href="//<%= config.payment.public.host %>:<%= config.payment.public.port %>/service/payment/<%= device.isFromMobile ? 'alipaymobile' : 'alipay' %>/pay?orderId=<%=  %>&returnUrl="
+                        {{alipayReturnUrl}}>
+                    <img class="ui middle aligned" style="height: 25px;"
+                         src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
+                    <%= __('支付宝支付') %>
+                </button>
+            </form>
             <% } %>
 
             <div class="ui horizontal divider"></div>

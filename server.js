@@ -52,6 +52,11 @@ function setFeatureSwitcher(req, res, next) {
     next();
 }
 
+function setConfig(req, res, next) {
+    res.locals.config = config;
+    next();
+}
+
 function setDeviceHelper(req, res, next) {
     var ua = req.headers['user-agent'];
 
@@ -68,6 +73,7 @@ server
     .use(setLogger)
     .use(setCDN)
     .use(setFeatureSwitcher)
+    .use(setConfig)
     .use(setDeviceHelper)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
@@ -156,6 +162,7 @@ function filterConfig(config) {
     var filtered = {};
 
     filtered.captcha = config.captcha;
+    filtered.payment = config.payment.public;
     filtered.cdn = config.cdn;
     filtered.featureSwitcher = config.featureSwitcher;
 

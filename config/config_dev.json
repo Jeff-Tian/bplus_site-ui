@@ -34,8 +34,22 @@
     "corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
-    "host": "uat.service.hcd.com",
-    "port": "10222"
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "10222"
+    }
+  },
+  "payment": {
+    "public": {
+      "host": "uat.service.hcd.com",
+      "port": "10111"
+    }
+  },
+  "games": {
+    "national-2015": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "d00b2d92-1995-4a22-a86c-3115518bd635"
+    }
   },
   "logger": {
     "levels": {

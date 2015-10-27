@@ -52,4 +52,5 @@ module.exports = require('express').Router()
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
+    .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
 ;
