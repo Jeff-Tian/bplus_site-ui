@@ -188,6 +188,7 @@
   "密码长度不正确": "Password: length from 5 to 32",
   "验证码长度不正确": "The image verification text should be 4 letters",
   "注册即代表你接受我们的隐私条款": "By signing up, you will have accepted our privacy policies",
+  "绑定手机即代表你接受我们的隐私条款": "By binding your mobile phone number, you will have accepted our privacy policies",
   "zh": "中文",
   "service-70006": "Invalid identity or password",
   "service-70009": "Identity already existed",
@@ -203,6 +204,7 @@
   "service-401": "You are not allowed to access this page. Please log in and retry.",
   "service-500": "Server side error",
   "service-70002": "Unexpected error",
+  "service-20208": "redemption code not found",
   "service-DATA_ERROR": "The end date should not be earlier than the start date",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
@@ -493,6 +495,13 @@
   "MobileNationalHeader": "National Information",
   "MobileNationalInfo": "And the masters of all ages from all over the country business together!",
   "MobileNationalSubInfo": "Focus on B + service, join those aged between 18 to 22 games.",
+  "等你来战": "Fight now",
+  "兑换码": "Redemption code",
+  "确定": "Confirm",
+  "报名{{competition}}, 报名费{{fee}}": "Register the {{competition}}, with registration fee of {{fee}}",
+  "当前仅支持兑换码": "Only redemption code is supported now",
+  "您已经付费报名成功！": "You have registered successfully!",
+  "请在比赛开始前用电脑登录完成组队。": "Please log on before the start of the game with a computer to complete the team.",
   "AboutusTitle": "关于我们 - Bridge+",
   "AboutusContentTitle": "关于我们",
   "AboutusSection1": "Bridge+是由一群极具理想抱负的资深人士和青年领袖联合打造的。他们放下麦肯锡、英孚教育等企业的光环、婉拒名企名校的邀请，脱下西装，挽起袖子，一切从头开始，动手改变世界。",
@@ -559,5 +568,5 @@
   "SchoolTeamP6": "沈媛",
   "SchoolTeamP6meta": "上海外国语大学",
   "SchoolTeamP6Info": "known we are normal but still stick to be distinguished.",
-  "等你来战": "Fight now"
+  "绑定手机": "Bind mobile"
 }

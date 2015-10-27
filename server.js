@@ -52,11 +52,23 @@ function setFeatureSwitcher(req, res, next) {
     next();
 }
 
+function setDeviceHelper(req, res, next) {
+    var ua = req.headers['user-agent'];
+
+    res.locals.device = {
+        isFromMobile: mobileDetector.isFromMobile(ua),
+        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua)
+    };
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
     .use(setCDN)
     .use(setFeatureSwitcher)
+    .use(setDeviceHelper)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -191,9 +203,10 @@ mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
-server.get(localeHelper.regexPath('/sign-up-from'), membership.ensureAuthenticated, renderTemplate('sign-up-from'));
+mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticated]);
+mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
-server.get(localeHelper.regexPath('/profile'), membership.ensureAuthenticated, renderTemplate('profile'));
+mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
@@ -203,6 +216,10 @@ server.use('/healthcheck', function (req, res, next) {
         everything: 'is ok',
         time: new Date()
     });
+});
+
+server.get('/locale', function (req, res, next) {
+    res.send(req.getLocale());
 });
 
 function logErrors(err, req, res, next) {

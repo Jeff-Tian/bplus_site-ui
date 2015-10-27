@@ -18,7 +18,7 @@
 <script type="text/ng-template" id="home.html">
     <div class="full-height"
          style="background: url('<%= cdn.normal %>img/salespage/game_banner.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
-        <div class="ui bottom stuck padded container">
+        <div class="ui bottom stuck extra vertical padded container">
             <div class="ui equal width left aligned padded grid">
                 <div class="row">
                     <div class="column">
@@ -60,8 +60,68 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="pay.html">
+<script type="text/ng-template" id="select-payment-method.html">
+    <div class="white background b-mobile stretch has-header">
+        <div class="ui container">
+            <div class="ui horizontal divider"></div>
+            <h2 class="ui header">
+                <div class="sub header">
+                    <%= __('报名{{competition}}, 报名费{{fee}}', {competition: '全国大赛', fee: '100元'}) %>
+                </div>
+                选择支付方式:
+                <div class="ui horizontal divider"></div>
+                <div class="sub header">
+                    <%= __('当前仅支持兑换码') %>
+                </div>
+            </h2>
 
+            <form name="redemptionForm" novalidate class="ui form redemption-form"
+                  ng-submit="buyWithRedemptionCode($event)">
+                <div class="ui divider"></div>
+                <div class="ui error message brand"></div>
+                <div class="field">
+                    <label><%= __('兑换码') %></label>
+                    <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+                </div>
+                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit"><%=
+                    __('确定') %>
+                </button>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="payed.html">
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui center aligned container">
+        <div class="ui left aligned container">
+            <h3 class="ui white header">
+                <i class="checkmark icon"></i>
+
+                <div class="content">
+                    <%= __('您已经付费报名成功！') %>
+                    <div class="sub white header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
+                </div>
+            </h3>
+        </div>
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui centered grid">
+        <div class="row">
+            <div class="ui six doubling centered cards">
+                <div class="ui transparent card">
+                    <div class="ui image">
+                        <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                    </div>
+                    <div class="center aligned content">
+                        <p><%= __('Bridge+服务号') %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <%- include('footer.html') -%>
@@ -72,6 +132,8 @@
 <script src="../js/page/mobile/MobileNationalCtrl.js"></script>
 <script src="../js/page/mobile/MobileAboutusCtrl.js"></script>
 <script src="../js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="../js/page/mobile/SelectPaymentMethodCtrl.js"></script>
+<script src="../js/factories/FormValidation.js"></script>
 <script src="../js/page/mobile/index.js"></script>
 <!-- endbuild -->
 </body>

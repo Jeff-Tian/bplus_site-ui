@@ -15,13 +15,16 @@
 <div class="ui b-signin-wrapper">
     <div class="ui column b-signin-container padded container subcontainer">
         <div class="b-signin-wide ui padded container subcontainer">
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
             <div class="ui center aligned container subcontainer">
                 <h2 class="grey color"><%= __('BindMobile') %></h2>
             </div>
 
             <div class="ui horizontal divider"></div>
             <div class="ui bind-mobile" ng-controller="BindMobileCtrl">
-                <register-form action="bindMobile" control="bindMobileFormCtrl"></register-form>
+                <register-form action="bindMobile" control="bindMobileFormCtrl"
+                               footer-tip="'绑定手机即代表你接受我们的隐私条款'"></register-form>
             </div>
         </div>
     </div>

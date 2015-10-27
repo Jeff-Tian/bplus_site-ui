@@ -3,6 +3,8 @@
     <a class="item" data-tab="register"><%= __('SignUp') %></a>
 </div>
 <div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
+    <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
+
     <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">
         <div class="ui error message brand"></div>
         <div class="ui">
@@ -51,7 +53,7 @@
     <div class="ui right aligned container subcontainer">
         <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
     </div>
-    <% if (featureSwitcher.enableWechat === true) { %>
+    <% if (featureSwitcher.enableWechat === true && (!device.isFromMobile || device.isFromWechatBrowser)) { %>
     <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
     <div class="ui" ng-hide="!!loginData.wechatToken">
         <a class="wechat link" ng-click="logOnViaWechat()">

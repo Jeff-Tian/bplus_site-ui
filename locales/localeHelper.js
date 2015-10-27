@@ -22,20 +22,64 @@
             return new RegExp('^(?:/(' + helper.supportedLocales.join('|') + '))?' + p, 'i');
         },
 
-        getLocale: function (url) {
+        getLocale: function (url, req) {
             var locale = 'zh';
             var l = new RegExp('^/(' + helper.supportedLocales.join('|') + ')', 'i');
 
             if (l.test(url)) {
                 var a = l.exec(url);
                 locale = a[1];
+            } else {
+                // try get locale from cookie
+                if ((typeof document !== 'undefined') && document.cookie) {
+                    // client side
+                    function getCookie(name) {
+                        if (document.cookie.length > 0) {
+                            var start = document.cookie.indexOf(name + '=');
+                            if (start >= 0) {
+                                start += name.length + 1;
+                                var end = document.cookie.indexOf(';', start);
+                                if (end === -1) {
+                                    end = document.cookie.length;
+                                }
+                                return unescape(document.cookie.substring(start, end));
+                            }
+                        }
+
+                        return null;
+                    }
+
+                    var cookie = getCookie('locale');
+                    if (cookie) {
+                        locale = cookie;
+                    }
+                } else {
+                    // server side
+                    if (req && req.headers && req.headers.cookie) {
+                        cookie = req.headers.cookie.match(/(?:^|;) *locale=([^;]*)/i);
+
+                        if (cookie) {
+                            cookie = cookie[1];
+
+                            if (cookie) {
+                                locale = cookie;
+                            }
+                        }
+                    }
+                }
             }
 
             return locale;
         },
 
         setLocale: function (req, res, next) {
-            var locale = helper.getLocale(req.url);
+            var locale = helper.getLocale(req.url, req);
+
+            res.cookie('locale', locale, {
+                expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+                path: '/',
+                httpOnly: false
+            });
 
             i18n.setLocale(locale);
             res.setLocale(locale);

@@ -20,7 +20,8 @@
                 if (/^true$/i.test(registered)) {
                     service
                         .post('/service-proxy/logon/by-token', {
-                            token: token
+                            token: token,
+                            return_url: queryParser.get('return_url')
                         })
                         .finally(function () {
                             $scope.fetchProfile()

@@ -1,15 +1,17 @@
 var http = require('http'),
     config = require('../config'),
     sso = config.sso,
-    proxy = require('./proxy');
+    proxy = require('./proxy'),
+    localeHelper = require('../locales/localeHelper')
+    ;
 
 module.exports = {
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 
         if (req.headers.hcd_user) {
-            req.dualLog('request header hcd_user info:');
-            req.dualLog(req.headers.hcd_user);
+            req.logger.info('request header hcd_user info:');
+            req.logger.info(req.headers.hcd_user);
         }
 
         if (req.headers.hcd_user) {
@@ -49,16 +51,17 @@ module.exports = {
 
     ensureAuthenticated: function (req, res, next) {
         if (res.locals.hcd_user) {
-            console.log('authenticated');
             return next();
-        }
-
-        if (req.xhr) {
-            res.status(401).send({code: '401', message: 'You are not allowed to access this page.'});
         } else {
-            // TODO: check language
-            // TODO: append return url
-            res.redirect('/signin');
+            var locale = localeHelper.getLocale(req.originalUrl, req);
+            var url = '/sign-in';
+            url += '?return_url=' + encodeURIComponent(req.originalUrl);
+
+            if (!req.xhr) {
+                res.redirect(localeHelper.generateLocaleLink(url, locale));
+            } else {
+                res.status(401).send({code: '401', message: 'You are not allowed to access this page.'});
+            }
         }
     }
 };
