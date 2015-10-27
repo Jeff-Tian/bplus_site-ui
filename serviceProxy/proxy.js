@@ -48,6 +48,8 @@ function advancedProxy(req, res, next, settings) {
 
     req.dualLog('proxying...');
     req.dualLog(options);
+    req.dualLog('data: ');
+    req.dualLog(req.body);
 
     var request = http.request(options, function (response) {
         if (typeof settings.responseInterceptor === 'function') {

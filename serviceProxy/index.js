@@ -6,8 +6,8 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService')
-    uploadCallbackService = require('./uploadCallbackService')
-    ;
+uploadCallbackService = require('./uploadCallbackService')
+;
 
 function checkWechatToken(req, res, next) {
     if (req.body.wechat_token) {
@@ -54,4 +54,5 @@ module.exports = require('express').Router()
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .get('/upload/callback', uploadCallbackService)
+    .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
 ;
