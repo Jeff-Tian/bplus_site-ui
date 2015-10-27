@@ -65,7 +65,7 @@
     "normal": "//cdn.bridgeplus.cn/"
   },
   "featureSwitcher": {
-    "enableWechat": false,
+    "enableWechat": true,
     "enableLogoutOnMobile": false
   },
   "version": "0.2.2",
