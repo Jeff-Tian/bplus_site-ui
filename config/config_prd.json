@@ -34,7 +34,7 @@
     "corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
-    "host": "uat.service.hcd.com",
+    "host": "service.bridgeplus.com",
     "port": "10222"
   },
   "logger": {
