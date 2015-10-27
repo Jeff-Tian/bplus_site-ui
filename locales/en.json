@@ -202,6 +202,7 @@
   "service-20000": "sms validate error",
   "service-20002": "Missing mobile code",
   "service-401": "You are not allowed to access this page. Please log in and retry.",
+  "service-302": "Redirecting ...",
   "service-500": "Server side error",
   "service-70002": "Unexpected error",
   "service-20208": "redemption code not found",
