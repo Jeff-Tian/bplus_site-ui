@@ -1,7 +1,10 @@
 define([
+    "jquery",
     "when"
-], function (when) {
+], function ($, when) {
     var TIP_KEY_PREFIX = "CompleteRateTip";
+
+    var MEMBER_EXT_SERVICE = "memberExt";
 
     function progressFace(val) {
         val = parseInt(val);
@@ -41,16 +44,28 @@ define([
             $scope.dataLoaded = false;
             $scope.data = {
                 gender: "",
+                avatar: "",
                 face: "",
                 progress: 0,
                 rate: 0
             };
+            $scope.editface = function() {
+                return $("#avatarUpload .upload-file")[0].click();
+            }
             $scope.avatarMouseOver = function () {
 
             };
             $scope.avatarMouseLeave = function () {
 
             };
+            $scope.handle = function (ret) {
+                var imgUrl = "//" + ret.host + "/" + ret.key;
+                var dataToUpdate = {avatar: imgUrl};
+                $scope.data.avatar = imgUrl;
+                $scope.data.face = $scope.data.avatar + "-small";
+                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate);
+                $scope.$apply();
+            }
 //          $http.get('/mock/profile-achievement.json').success( function (data) {
             var updateAchievement = function () {
                 $scope.data.progress = 0;
@@ -66,8 +81,9 @@ define([
                 when.all(servicePromiseArray).then(function (serviceData) {
                     $scope.dataLoaded = true;
                     serviceData.forEach(function (value, index) {
-                        if (servicesArray[index] === "memberExt") {
+                        if (servicesArray[index] === MEMBER_EXT_SERVICE) {
                             $scope.data.gender = value[0].gender;
+                            $scope.data.avatar = value[0].avatar || "";
                         }
                         if (value.length > 0) {
                             $scope.data.progress++;
@@ -75,11 +91,9 @@ define([
                     });
 
                     (function () {
-                        //                  if (!data.gender || (data.gender.toString().toLowerCase() != 'male' && data.gender.toString().toLowerCase() != 'female')) {
-                        //                      data.gender = 'male';
-                        //                  }
-                        // if (!data.face) {
-                        if ($scope.data.gender.toString().toUpperCase() !== 'F') {
+                        if ($scope.data.avatar !== "") {
+                            $scope.data.face = $scope.data.avatar + "-small";
+                        } else if ($scope.data.gender.toString().toUpperCase() !== 'F') {
                             $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
                         } else {
                             $scope.data.face = '/img/profile/icon_profile_picture_female_big.png';

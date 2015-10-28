@@ -19,6 +19,13 @@
     "host": "uat.captcha.service.hcdlearning.com",
     "port": "10001"
   },
+  "upload": {
+      "public": {
+          "host": "uat.hcd.com",
+          "port": 10003,
+          "code": "HCD_S1"
+      }
+  },
   "sso": {
     "host": "uat.service.hcd.com",
     "port": "10086"
