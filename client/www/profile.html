@@ -57,15 +57,12 @@
                             </div>
                         </div>
                         <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'"
-                             ng-mouseleave="classNameFaceEdit=''">
+                             ng-mouseleave="classNameFaceEdit=''" ng-click="editface()">
                             <img ng-src="{{data.face}}"/>
                             <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png"
                                  class="edit {{classNameFaceEdit}}"/>
                         </div>
-                        <div class="upload-action">
-                            <button class="action large">{{'10023'|translate}}</button>
-                            <div upload handle="handle">
-                            </div>
+                        <div id="avatarUpload" class="hidden" upload handle="handle">
                         </div>
                     </div>
                     <div class="b-profile-preview" style="visibility: hidden;">

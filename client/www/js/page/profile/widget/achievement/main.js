@@ -1,7 +1,10 @@
 define([
+    "jquery",
     "when"
-], function (when) {
+], function ($, when) {
     var TIP_KEY_PREFIX = "CompleteRateTip";
+
+    var MEMBER_EXT_SERVICE = "memberExt";
 
     function progressFace(val) {
         val = parseInt(val);
@@ -46,12 +49,23 @@ define([
                 progress: 0,
                 rate: 0
             };
+            $scope.editface = function() {
+                return $("#avatarUpload .upload-file")[0].click();
+            }
             $scope.avatarMouseOver = function () {
 
             };
             $scope.avatarMouseLeave = function () {
 
             };
+            $scope.handle = function (ret) {
+                var imgUrl = "//" + ret.host + "/" + ret.key;
+                var dataToUpdate = {avatar: imgUrl};
+                $scope.data.avatar = imgUrl;
+                $scope.data.face = $scope.data.avatar + "-small";
+                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate);
+                $scope.$apply();
+            }
 //          $http.get('/mock/profile-achievement.json').success( function (data) {
             var updateAchievement = function () {
                 $scope.data.progress = 0;
@@ -67,7 +81,7 @@ define([
                 when.all(servicePromiseArray).then(function (serviceData) {
                     $scope.dataLoaded = true;
                     serviceData.forEach(function (value, index) {
-                        if (servicesArray[index] === "memberExt") {
+                        if (servicesArray[index] === MEMBER_EXT_SERVICE) {
                             $scope.data.gender = value[0].gender;
                             $scope.data.avatar = value[0].avatar || "";
                         }
@@ -78,7 +92,7 @@ define([
 
                     (function () {
                         if ($scope.data.avatar !== "") {
-                            $scope.data.face = $scope.data.avatar;
+                            $scope.data.face = $scope.data.avatar + "-small";
                         } else if ($scope.data.gender.toString().toUpperCase() !== 'F') {
                             $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
                         } else {

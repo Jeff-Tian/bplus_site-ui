@@ -6,6 +6,7 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService')
+    uploadCallbackService = require('./uploadCallbackService')
     ;
 
 function checkWechatToken(req, res, next) {
@@ -52,4 +53,5 @@ module.exports = require('express').Router()
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
+    .get('/upload/callback', uploadCallbackService)
 ;
