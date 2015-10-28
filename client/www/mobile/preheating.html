@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('MobilePreheatingTitle') %></title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
+</head>
+<body ng-app="mobile" ng-controller="AppCtrl"  class="b-mobile color">
+<div class="full-height" ng-controller="MobileQACtrl">
+    <div class="center stuck padded">
+        <div class="content center qa-loading" ng-show="css.showPage==='loading'">
+            <img class="qa logo" src="<%= cdn.normal %>img/salespage/aboutus-logo.png?<%= cdn.version %>">
+        </div>
+        <div class="content center qa-start" ng-show="css.showPage==='start'">
+            <div class="bg">
+                <img src="<%= cdn.normal %>img/mobile/qa/start_bg.gif?<%= cdn.version %>">
+            </div>
+            <div class="start-button" ng-click="setPage('q1')">
+                <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
+            </div>
+        </div>
+        <div class="content center qa-content" ng-show="css.showPage==='q1'">
+            <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
+            <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
+            <div class="ui grid container">
+                <div class="five wide column">
+                    <img src="<%= cdn.normal %>img/mobile/qa/icon/1.png?<%= cdn.version %>" class="number">
+                </div>
+                <div class="eleven wide column">
+                    <p class="q-conetnt"><%= __('MobilePreheatingQ1') %></p>
+                </div>
+            </div>
+            <div class="ui list container">
+                <div class="item answer A">
+                    <p><%= __('MobilePreheatingQ1A') %></p>
+                    <span>
+                        <img src="/img/mobile/qa/wrong.gif">
+                    </span>
+                </div>
+                <div class="item answer B">
+                    <p><%= __('MobilePreheatingQ1B') %></p>
+                </div>
+                <div class="item answer C">
+                    <p><%= __('MobilePreheatingQ1C') %></p>
+                </div>
+                <div class="item answer D">
+                    <p><%= __('MobilePreheatingQ1D') %></p>
+                </div>
+            </div>
+            <div class="clear:both"></div>
+            <div class="ui dimmer q1">
+                <div class="content">
+                    <div class="ui grid one column container">
+                        <div class="column">
+                            <img src="<%= cdn.normal %>img/mobile/qa/icon/AA.png?<%= cdn.version %>" class="r-answer">
+                        </div>
+                        <div class="column content-column">
+                            <h3><%= __('MobilePreheatingQ1R') %></h3>
+                            <p><%= __('MobilePreheatingQ1R1') %></p>
+                            <p><%= __('MobilePreheatingQ1R2') %></p>
+                            <p><%= __('MobilePreheatingQ1R3') %></p>
+                            <div class="next-button" ng-click="setPage('next')">
+                                <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<%- include('footer.html') -%>
+<script type="text/javascript">
+$('.ui.dimmer.q1').dimmer({
+    on: 'click'
+});
+</script>
+
+<!-- build:js js/cdn/m/index.js -->
+<script src="../js/page/mobile/MobileQACtrl.js"></script>
+<script src="../js/page/mobile/mobile.js"></script>
+
+
+<!-- endbuild -->
+</body>
+
+</html>

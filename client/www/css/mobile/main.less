@@ -253,3 +253,126 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         }
     }
 }
+
+/*qa*/
+.full-height {
+    .qa-loading {
+        background-color: white;
+
+        .qa.logo {
+            max-width: 250px;
+            width: 100%;
+        }
+    }
+    .qa-start {
+        background-color: #F53E3E;
+
+        .bg {
+            img {
+                width: 100%;
+                max-width: 375px;
+            }
+        }
+        .start-button {
+            margin-top: -200px;
+
+            img {
+                width: 40%;
+                max-width: 150px;
+            }
+        }
+    }
+    .qa-content {
+        background-color: #F0F0F0;
+
+        .triangle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 56px;
+        }
+        .logo {
+            position: absolute;
+            right: 1.5em;
+            bottom: 1.5em;
+            width: 100px;
+        }
+        .number {
+            width: 100%;
+            max-width: 100px;
+        }
+        .q-conetnt {
+            font-size: 1.25em;
+            text-align: left;
+            color: #2E363D;
+        }
+        .answer {
+            background-repeat: no-repeat;
+            background-position: left;
+            background-size: cover;
+            height: 40px;
+            width: 262px;
+            float: right;
+            text-align: left;
+            padding: 0;
+            padding-left: 4.2em;
+            margin-bottom: 0.5em;
+            margin-right: 40px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+            p {
+                font-size: 1.125em;
+                padding: 8px 0;
+                margin-bottom: 0;
+                color: #F0F0F0;
+            }
+            &.A {
+                background-image: url('/img/mobile/qa/icon/A.png');
+            }
+            &.B {
+                background-image: url('/img/mobile/qa/icon/B.png');
+            }
+            &.C {
+                background-image: url('/img/mobile/qa/icon/C.png');
+            }
+            &.D {
+                background-image: url('/img/mobile/qa/icon/D.png');
+            }
+        }
+        .ui.dimmer {
+            .content {
+                display: table;
+
+                .one.column.grid {
+                    text-align: left;
+
+                    img.r-answer {
+                        width: 20%;
+                        max-width: 186px;
+                    }
+                    .content-column {
+                        h3, p {
+                            text-align: left;
+                            font-size: 1em;
+                            line-height: 1.5em;
+                        }
+                        h3 {
+                            margin: 0 0 1em 0;
+                        }
+                        .next-button {
+                            margin-top: 2em;
+                            text-align: left;
+
+                            img {
+                                width: 50%;
+                                max-width: 128px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
