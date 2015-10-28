@@ -35,7 +35,7 @@
     "port": "12345"
   },
   "wechat": {
-    "host": "service.brigeplus.cn",
+    "host": "service.bridgeplus.cn",
     "port": "10101",
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
