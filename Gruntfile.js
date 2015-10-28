@@ -151,8 +151,13 @@ module.exports = function (grunt) {
                                 url = url.substr(1);
                             }
 
+                            var pack = grunt.file.readJSON('package.json');
+
                             if (process.env.NODE_ENV === 'prd') {
-                                return prdConfig.cdn.normal + url + '?' + grunt.file.readJSON("package.json").version + '_' + grunt.file.readJSON("package.json").date;
+                                return prdConfig.cdn.normal + url + '?' + pack.version + '_' + pack.date;
+                            }
+                            if (process.env.NODE_ENV === 'qa') {
+                                return 'qa-' + prdConfig.cdn.normal + url + '?' + pack.version + '_' + pack.date;
                             } else {
                                 return url + '?cdnified';
                             }
