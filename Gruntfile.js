@@ -157,7 +157,7 @@ module.exports = function (grunt) {
                                 return prdConfig.cdn.normal + url + '?' + pack.version + '_' + pack.date;
                             }
                             if (process.env.NODE_ENV === 'qa') {
-                                return 'qa-' + prdConfig.cdn.normal + url + '?' + pack.version + '_' + pack.date;
+                                return prdConfig.cdn.normal.replace('//cdn', '//qa-cdn') + url + '?' + pack.version + '_' + pack.date;
                             } else {
                                 return url + '?cdnified';
                             }

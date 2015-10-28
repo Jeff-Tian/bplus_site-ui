@@ -1,7 +1,8 @@
 @import "../basic/variable";
 @import "./profile.less";
 @import "mobile-variable";
-.hidden{
+
+.hidden {
     display: none !important;
 }
 
@@ -10,9 +11,11 @@
     padding-top: 2em;
     margin-bottom: 0;
 }
+
 .b-signin-container {
     padding: 0 0 70px;
 }
+
 .full-height {
     position: relative;
     min-height: 100%;
@@ -24,37 +27,48 @@
         position: absolute !important;
     }
 }
+
 .full-wide {
     width: 100% !important;
 }
+
 .mobile.bottom {
     bottom: 0;
 }
+
 .mobile.attached {
     position: fixed !important;
 }
+
 .bottom.button {
     bottom: 0;
 }
+
 .attached.button {
     position: absolute !important;
 }
+
 .ui.brand.error.message {
     margin-left: 0;
     margin-right: 0;
 }
+
 .invisible {
     visibility: hidden;
 }
+
 .b-signin-wide form {
     padding-top: 0;
 }
+
 .has-bottom, .has-footer {
     padding-bottom: 70px;
 }
+
 .b-bind-mobile-container {
     padding-bottom: 2em;
 }
+
 .b-wechat-frame {
     background-color: transparent !important;
     height: 410px !important;
@@ -63,19 +77,23 @@
     min-width: 100%;
     border: none;
 }
+
 .b-mobile.back-color {
     background-color: @color-mobile;
 }
+
 .b-mobile.stretch {
     position: absolute;
     width: 100%;
     min-height: 100%;
 }
+
 .white.background {
     background-color: white;
     color: black;
     text-shadow: none;
 }
+
 .transparent {
     background-color: transparent !important;
     border: none !important;
@@ -86,15 +104,19 @@
         box-shadow: none !important;
     }
 }
+
 .white.color {
     color: white;
 }
+
 .shadowed {
     text-shadow: 2px 2px 5px #000000;
 }
+
 .white.header {
     color: white !important;
 }
+
 .ui.fixed.inverted.menu.b-mobile {
     background-color: @color-mobile;
 
@@ -108,9 +130,11 @@
         display: none !important;
     }
 }
+
 a {
     color: black;
 }
+
 a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
     color: @color-brand !important;
 
@@ -118,19 +142,24 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         color: @color-brand !important;
     }
 }
+
 .header.item a, .header.item a:link, .header.item a:visited {
     color: white !important;
 }
+
 .has-header {
     padding-top: 48px !important;
 }
+
 .stretch.has-header {
     padding-top: 0;
     margin-top: -48px;
 }
+
 .main.body {
     height: 100%;
 }
+
 .bottom.stuck {
     position: absolute;
     bottom: 0;
@@ -141,15 +170,18 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         padding-right: 15px;
     }
 }
+
 .extra.vertical.padded.container {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
 }
+
 .b-profile.menu {
     background-color: transparent !important;
     border-radius: 0;
 }
+
 .b-profile.menu > .item {
     color: white !important;
     border-radius: 0;
@@ -159,9 +191,11 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         color: white !important;
     }
 }
+
 .grey.color {
     color: @color-grey-dark;
 }
+
 .ui.brand.message-wrapper.container {
     z-index: 4;
     position: fixed;
@@ -186,6 +220,7 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         }
     }
 }
+
 .ui.brand.message {
     background-color: @color-grey-dark;
     border-color: @color-grey-dark;
@@ -197,6 +232,7 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         font-weight: normal;
     }
 }
+
 .ui.brand.error.message {
     background-color: @color-brand-darker;
     border-color: @color-brand-darker;
@@ -231,14 +267,21 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         cursor: pointer;
     }
 }
+
 .ui.form .fields.error .field textarea, .ui.form .fields.error .field select, .ui.form .fields.error .field input:not([type]), .ui.form .fields.error .field input[type="date"], .ui.form .fields.error .field input[type="datetime-local"], .ui.form .fields.error .field input[type="email"], .ui.form .fields.error .field input[type="number"], .ui.form .fields.error .field input[type="password"], .ui.form .fields.error .field input[type="search"], .ui.form .fields.error .field input[type="tel"], .ui.form .fields.error .field input[type="time"], .ui.form .fields.error .field input[type="text"], .ui.form .fields.error .field input[type="url"], .ui.form .field.error textarea, .ui.form .field.error select, .ui.form .field.error input:not([type]), .ui.form .field.error input[type="date"], .ui.form .field.error input[type="datetime-local"], .ui.form .field.error input[type="email"], .ui.form .field.error input[type="number"], .ui.form .field.error input[type="password"], .ui.form .field.error input[type="search"], .ui.form .field.error input[type="tel"], .ui.form .field.error input[type="time"], .ui.form .field.error input[type="text"], .ui.form .field.error input[type="url"] {
     border-color: @color-brand;
 }
+
+.ui.form .ui.input > input {
+    width: 100% !important;
+}
+
 .ui.form .fields {
     -webkit-flex-wrap: inherit;
     -ms-flex-wrap: inherit;
     flex-wrap: inherit;
 }
+
 .center.stuck {
     display: table;
     height: 100%;
