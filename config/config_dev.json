@@ -67,6 +67,6 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "0.2.2",
-  "date": "20151022_0853"
+  "version": "0.3.0",
+  "date": "20151028_0604"
 }
