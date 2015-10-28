@@ -41,7 +41,7 @@
     "corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
-    "host": "service.bridgeplus.com",
+    "host": "service.bridgeplus.cn",
     "port": "10222"
   },
   "payment": {
