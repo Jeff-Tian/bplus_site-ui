@@ -26,6 +26,11 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
+            .state('alipayed', {
+                url: '/select-payment-method/:payedBy',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
             .state('payed', {
                 url: '/payed',
                 templateUrl: 'payed.html',

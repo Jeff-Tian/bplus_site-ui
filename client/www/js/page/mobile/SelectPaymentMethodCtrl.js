@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation) {
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams) {
         $scope.payData = {
             redemptionCode: ''
         };
@@ -35,14 +35,18 @@
                         } else {
                             // Goto pay
                             // TODO: the returnUrl should contain info about if the payment is success
-                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href);
+                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/alipay');
                         }
                     })
                     .catch(FormValidation.delegateHandleFormError($('.alipay-form')))
                     ;
             });
         };
+        
+        if ($stateParams.payedBy === 'alipay' || $stateParams.payedBy === 'wechat') {
+            $scope.alipay();
+        }
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams'];
 })(angular.bplus = angular.bplus || {});
