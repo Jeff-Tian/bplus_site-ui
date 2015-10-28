@@ -153,11 +153,8 @@ module.exports = function (grunt) {
 
                             var pack = grunt.file.readJSON('package.json');
 
-                            if (process.env.NODE_ENV === 'prd') {
-                                return prdConfig.cdn.normal + url + '?' + pack.version + '_' + pack.date;
-                            }
-                            if (process.env.NODE_ENV === 'qa') {
-                                return prdConfig.cdn.normal.replace('//cdn', '//qa-cdn') + url + '?' + pack.version + '_' + pack.date;
+                            if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
+                                return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
                             } else {
                                 return url + '?cdnified';
                             }
