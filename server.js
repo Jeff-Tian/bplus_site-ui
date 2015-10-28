@@ -158,6 +158,7 @@ function filterConfig(config) {
     filtered.captcha = config.captcha;
     filtered.cdn = config.cdn;
     filtered.featureSwitcher = config.featureSwitcher;
+    filtered.service_upload = config.service_upload;
 
     return filtered;
 }
