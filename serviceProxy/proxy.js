@@ -87,7 +87,7 @@ function advancedProxy(req, res, next, settings) {
 
     request.on('error', function (err) {
         req.dualLogError('Error met in this request: ' + JSON.stringify(options));
-        req.dualLogError(request);
+        req.dualLogError(err);
 
         next();
     });
