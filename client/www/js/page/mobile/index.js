@@ -27,14 +27,14 @@ angular
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('alipayed', {
-                url: '/select-payment-method/:payedBy',
+                url: '/select-payment-method/:paidBy',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
-            .state('payed', {
-                url: '/payed',
-                templateUrl: 'payed.html',
-                controller: 'PayedCtrl'
+            .state('paid', {
+                url: '/paid',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
             })
         ;
     }])

@@ -55,4 +55,5 @@ module.exports = require('express').Router()
     .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .get('/upload/callback', uploadCallbackService)
     .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
+    .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
 ;
