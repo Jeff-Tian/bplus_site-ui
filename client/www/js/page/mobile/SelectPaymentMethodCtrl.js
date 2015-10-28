@@ -34,7 +34,6 @@
                             window.location.href = '#/payed';
                         } else {
                             // Goto pay
-                            // TODO: the returnUrl should contain info about if the payment is success
                             window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/alipay');
                         }
                     })
@@ -42,9 +41,34 @@
                     ;
             });
         };
-        
-        if ($stateParams.payedBy === 'alipay' || $stateParams.payedBy === 'wechat') {
+
+        var wechatPaying = false;
+        $scope.wechatPay = function () {
+            var paymentMethod = 'wechat';
+
+            service.executePromiseAvoidDuplicate(wechatPaying, function () {
+                return service
+                    .post('/service-proxy/payment/create-order/national-game-2015/by-wechat', {
+                        payment: paymentMethod
+                    })
+                    .then(function (result) {
+                        if (/^true$/i.test(result.hasRight)) {
+                            window.location.href = '#/paid';
+                        } else {
+                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/wechat');
+                        }
+                    })
+                    .catch(FormValidation.delegateHandleFormError($('.wechat-pay-form')))
+                    ;
+            });
+        };
+
+        if ($stateParams.paidBy === 'alipay') {
             $scope.alipay();
+        }
+
+        if ($stateParams.paidBy === 'wechat') {
+            $scope.wechatPay();
         }
     };
 
