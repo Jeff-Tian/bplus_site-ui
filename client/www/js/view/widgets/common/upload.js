@@ -21,14 +21,14 @@ define([
                     document.body.appendChild(iframe);
                     $scope.name = 'file';
                     $scope.action = angular.bplus.config.service_upload + '/service-proxy/upload/hcd-resource';
-                    $scope.callback = location.origin + '/service-proxy/upload/callback';
+                    $scope.callback = window.location.origin + '/service-proxy/upload/callback';
                     form.attr('action', $scope.action);
                     form.attr('target', category);
                     form.on("change", function(event) {
                         form.submit();
-                    })
+                    });
                 }
             };
         }]);
-    }
+    };
 });

@@ -51,7 +51,7 @@ define([
             };
             $scope.editface = function() {
                 return $("#avatarUpload .upload-file")[0].click();
-            }
+            };
             $scope.avatarMouseOver = function () {
 
             };
@@ -65,7 +65,7 @@ define([
                 $scope.data.face = $scope.data.avatar + "-small";
                 model.updateData(MEMBER_EXT_SERVICE, dataToUpdate);
                 $scope.$apply();
-            }
+            };
 //          $http.get('/mock/profile-achievement.json').success( function (data) {
             var updateAchievement = function () {
                 $scope.data.progress = 0;
