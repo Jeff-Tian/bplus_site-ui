@@ -1,10 +1,10 @@
 @import "../basic/variable";
 @import "./profile.less";
 @import "mobile-variable";
-.hidden{
+
+.hidden {
     display: none !important;
 }
-
 .b-signin-wrapper {
     margin-top: 0;
     padding-top: 2em;
@@ -285,6 +285,35 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
             }
         }
     }
+    .qa-end {
+        background-color: #F53E3E;
+        padding: 0 2em;
+
+        .end-header {
+            background: #2C363D;
+            border-radius: 8px;
+            color: #F0F0F0;
+            text-align: center;
+            padding: 1em;
+
+            h3 {
+                font-size: 1.25em;
+                color: #F0F0F0;
+                margin: 0 !important;
+            }
+        }
+        .end-body {
+            padding: 1em;
+
+            p {
+                font-size: 1.25em;
+                color: #F0F0F0;
+            }
+        }
+        img.wechat {
+            width: 120px;
+        }
+    }
     .qa-content {
         background-color: #F0F0F0;
 
@@ -316,6 +345,26 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
             .two.wide.column {
                 padding-left: 0;
                 margin-left: -6.25%;
+            }
+        }
+        .qa-bar {
+            padding: 2em 2em 0 2em;
+
+            .ui.mobile-bar {
+                border-radius: 8px;
+                height: 10px;
+                margin-top: 2em;
+
+                .bar {
+                    background-color: #F53E3E;
+                    border-radius: 8px;
+                    height: 10px;
+                }
+            }
+            .ui.progress.success.mobile-bar {
+                .bar {
+                    background-color: #F53E3E !important;
+                }
             }
         }
         .answer {

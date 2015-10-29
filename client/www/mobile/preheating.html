@@ -21,88 +21,50 @@
                 <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
             </div>
         </div>
-        <div class="content center qa-content" ng-show="css.showPage==='question1'">
+        <div class="content center qa-content" ng-show="css.showPage==={{q.q_id}}" ng-repeat='q in questions'>
             <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
             <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
             <div class="ui grid container">
-                <div class="five wide column">
-                    <img src="<%= cdn.normal %>img/mobile/qa/icon/1.png?<%= cdn.version %>" class="number">
+                <div class="five wide column" ng-cloak>
+                    <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.q_id}}.png?<%= cdn.version %>" class="number">
                 </div>
                 <div class="eleven wide column">
-                    <p class="q-conetnt"><%= __('MobilePreheatingQ1') %></p>
+                    <p class="q-conetnt">{{q.q_content | translate}}</p>
                 </div>
             </div>
             <div class="ui list container">
-                <div class="item" ng-click="answer(1,'A')">
+                <div class="item" ng-repeat='i in q.items'>
                     <div class="ui grid answer-grid">
                         <div class="fourteen wide column">
-                            <div class="answer A">
-                                <p><%= __('MobilePreheatingQ1A') %></p>
+                            <div class="answer {{i.select}}" ng-click="answer(q.q_id,i.select)">
+                                <p>{{i.content | translate}}</p>
                             </div>
                         </div>
                         
-                        <div class="two wide column" ng-show="q_answer==='A'">
+                        <div class="two wide column" ng-show="q_answer===i.select">
                             <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
                             <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
                         </div>
 
                     </div>
                 </div>
-                <div class="item" ng-click="answer(1,'B')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer B">
-                                <p><%= __('MobilePreheatingQ1B') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='B'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="item" ng-click="answer(1,'C')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer C">
-                                <p><%= __('MobilePreheatingQ1C') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='C'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="item" ng-click="answer(1,'D')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer D">
-                                <p><%= __('MobilePreheatingQ1D') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='D'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
+                <div class="qa-bar">
+                    <div class="ui indicating progress active mobile-bar">
+                        <div class="bar" style="transition-duration: 300ms;"></div>
                     </div>
                 </div>
             </div>
-            <div class="ui dimmer q1">
+            <div class="ui dimmer {{'q'+q.q_id}}">
                 <div class="content">
                     <div class="ui grid one column container">
-                        <div class="column">
-                            <img src="<%= cdn.normal %>img/mobile/qa/icon/AA.png?<%= cdn.version %>" class="r-answer">
+                        <div class="column" ng-cloak>
+                            <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.rightAnswer}}.png?<%= cdn.version %>" class="r-answer">
                         </div>
                         <div class="column content-column">
-                            <h3><%= __('MobilePreheatingQ1R') %></h3>
-                            <p><%= __('MobilePreheatingQ1R1') %></p>
-                            <p><%= __('MobilePreheatingQ1R2') %></p>
-                            <p><%= __('MobilePreheatingQ1R3') %></p>
-                            <div class="next-button" ng-click="nextPage(1)">
+                            <h3>{{q.result | translate}}</h3>
+                            <p ng-repeat="r in q.reasons">
+                                {{r.reason | translate}}</p>
+                            <div class="next-button" ng-click="nextPage(q.q_id)">
                                 <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
                             </div>
                         </div>
@@ -112,95 +74,15 @@
             </div>
         </div>
 
-        <div class="content center qa-content" ng-show="css.showPage==='question2'">
-            <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
-            <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
-            <div class="ui grid container">
-                <div class="five wide column">
-                    <img src="<%= cdn.normal %>img/mobile/qa/icon/2.png?<%= cdn.version %>" class="number">
-                </div>
-                <div class="eleven wide column">
-                    <p class="q-conetnt"><%= __('MobilePreheatingQ2') %></p>
-                </div>
+        <div class="content center qa-end" ng-show="css.showPage==='end'">
+            <div class="end-header">
+                <h3>您已经完成了所有的试题，相信您此刻对MarkSimos已经有了一定的认识。祝您在比赛中获得好成绩！</h3>
             </div>
-            <div class="ui list container">
-                <div class="item" ng-click="answer(2,'A')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer A">
-                                <p><%= __('MobilePreheatingQ2A') %></p>
-                            </div>
-                        </div>
-                        
-                        <div class="two wide column" ng-show="q_answer==='A'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="item" ng-click="answer(2,'B')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer B">
-                                <p><%= __('MobilePreheatingQ2B') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='B'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="item" ng-click="answer(2,'C')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer C">
-                                <p><%= __('MobilePreheatingQ2C') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='C'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="item" ng-click="answer(2,'D')">
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer D">
-                                <p><%= __('MobilePreheatingQ2D') %></p>
-                            </div>
-                        </div>
-                        <div class="two wide column" ng-show="q_answer==='D'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
+            <img src="<%= cdn.normal %>img/mobile/qa/down.gif?<%= cdn.version %>">
+            <div class="end-body">
+                <p>关注Bridge+官方微信，掌握第一手活动和职业发展资讯！</p>
             </div>
-            <div class="ui dimmer q2">
-                <div class="content">
-                    <div class="ui grid one column container">
-                        <div class="column">
-                            <img src="<%= cdn.normal %>img/mobile/qa/icon/AA.png?<%= cdn.version %>" class="r-answer">
-                        </div>
-                        <div class="column content-column">
-                            <h3><%= __('MobilePreheatingQ2R') %></h3>
-                            <p><%= __('MobilePreheatingQ2R1') %></p>
-                            <p><%= __('MobilePreheatingQ2R2') %></p>
-                            <p><%= __('MobilePreheatingQ2R3') %></p>
-                            <div class="next-button" ng-click="nextPage(2)">
-                                <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <img src="<%= cdn.normal %>img/mobile/qa/b-wechat.jpg?<%= cdn.version %>" class="wechat">
         </div>
     </div>
 </div>
