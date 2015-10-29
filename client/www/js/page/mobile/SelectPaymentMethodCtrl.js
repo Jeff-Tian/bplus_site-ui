@@ -21,7 +21,7 @@
 
         var alipaying = false;
         $scope.alipay = function () {
-            pay(alipaying, 'alipay', $('.alipay-form'));
+            pay(alipaying, 'alipaymobile', $('.alipay-form'));
         };
 
         var wechatPaying = false;
@@ -47,7 +47,7 @@
             });
         }
 
-        if ($stateParams.paidBy === 'alipay') {
+        if ($stateParams.paidBy === 'alipay' || $stateParams.paidBy === 'alipaymobile') {
             $scope.alipay();
         }
 

@@ -79,7 +79,7 @@
   },
   "featureSwitcher": {
     "enableWechat": true,
-    "enableLogoutOnMobile": false
+    "enableLogoutOnMobile": true
   },
   "version": "0.2.2",
   "date": "20151022_0853"
