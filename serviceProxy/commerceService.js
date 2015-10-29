@@ -1,8 +1,11 @@
 var http = require('http');
 var config = require('../config');
 var commerceConfig = config.commerce.inner;
+var paymentConfig = config.payment.public;
 var gameConfig = config.games;
 var proxy = require('./proxy');
+var wechat = require('./wechat');
+var qs = require('querystring');
 
 module.exports = {
     createOrderByRedemptionCode: proxy({
@@ -56,5 +59,67 @@ module.exports = {
 
             return d;
         }
-    })
+    }),
+
+    createOrderByWechat: function (req, res, next) {
+        if (!req.query.openid) {
+            var returnUrl = req.query.returnUrl || req.body.returnUrl;
+
+            if (returnUrl) {
+                req.query.returnUrl = returnUrl;
+            }
+            return wechat.getOpenId(req, res, next);
+        } else {
+            req.dualLog('open id got: ');
+            req.dualLog(req.query.openid);
+        }
+
+        proxy({
+            host: commerceConfig.host,
+            port: commerceConfig.port,
+            path: '/service/order/create',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+
+                return d;
+            },
+            responseInterceptor: function (res, json, req) {
+                if (json.isSuccess) {
+                    var ip = req.headers['x-forwarded-for'] || req.ip || req._remoteAddress ||
+                        (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
+
+                    console.log('original url config: ');
+                    console.log(req.originalUrl);
+
+                    var wechatConfig = {
+                        orderId: json.result.orderId,
+                        returnUrl: req.body.requestFrom || req.originalUrl,
+                        payType: 'JSAPI',
+                        openId: req.query.openid,
+                        ip: ip.replace(/[^0-9\.]/g, '')
+                    };
+
+                    console.log('stringified config:');
+                    console.log(qs.stringify(wechatConfig));
+
+                    proxy({
+                        host: paymentConfig.host,
+                        port: paymentConfig.port,
+                        path: '/service/payment/wechat/pay?' + qs.stringify(wechatConfig),
+                        method: 'GET',
+                        responseInterceptor: function (res, json, req) {
+                            console.log('got wechat pay response:');
+                            console.log(json);
+
+                            return false;
+                        }
+                    })(req, res, next);
+
+                    return undefined;
+                } else {
+                    return false;
+                }
+            }
+        })(req, res, next);
+    }
 };

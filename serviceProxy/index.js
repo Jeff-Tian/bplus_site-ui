@@ -9,16 +9,6 @@ var sms = require('./sms'),
 uploadCallbackService = require('./uploadCallbackService')
 ;
 
-function checkWechatToken(req, res, next) {
-    if (req.body.wechat_token) {
-        next();
-
-        return;
-    }
-
-    res.status(403).json({code: '403', message: 'Wechat token is missed.'});
-}
-
 module.exports = require('express').Router()
     .use(function (req, res, next) {
         req.dualLog('service-proxy is being calling from ' + req.hostname + '...');
@@ -54,5 +44,6 @@ module.exports = require('express').Router()
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
-    .post('/payment/create-order/national-game-2015/by-payment', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
+    .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
+    .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrderByWechat)
 ;
