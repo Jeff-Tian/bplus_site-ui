@@ -21,7 +21,7 @@
   },
   "upload": {
       "public": {
-          "host": "uat.hcd.com",
+          "host": "uat.bridgeplus.cn",
           "port": 10003,
           "code": "HCD_S1"
       }
