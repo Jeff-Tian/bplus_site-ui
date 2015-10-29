@@ -9,6 +9,8 @@ require([
     "bplus-ui/page/profile/widget/achievement/main",
     "bplus-ui/page/profile/widget/growing/main",
 
+    "bplus-ui/view/widgets/common/upload",
+    "bplus-ui/view/widgets/common/upload_handler",
     "bplus-ui/view/widgets/common/date",
     "bplus-ui/view/widgets/common/tag",
     "text!bplus-ui-mobile/profile/common/date-mobile.html",
@@ -46,6 +48,8 @@ require([
      banner,
      achievement,
      growing,
+     upload,
+     uploadHandler,
      BDate,
      Tag,
      BDateTemplate,
@@ -84,6 +88,8 @@ require([
         banner(agModule);
         achievement(agModule);
         growing(agModule);
+        upload(agModule);
+        uploadHandler(agModule);
 
         new ProfileModel().start(agModule);
         var instance = Container;

@@ -41,6 +41,7 @@
             "address": "contractInfo.value",
             "hide_address": "contractInfo.isPrivate",
             "bg_url": "userBackground",
+            "avatar": "avatar",
             //archivement
             "archivement_id": "id",
     //      "name": "name",
@@ -88,7 +89,7 @@
     //      "tags": "tags"
         },
         memberExt: ["hide_birthday", "current_location", "address", "hide_address", "bg_url"],
-        memberSso: ["real_name", "birthday", "gender"],
+        memberSso: ["real_name", "birthday", "gender", "avatar"],
         archivement: ["archivement_id", "name", "issue_by", "issue_date", "description", "tags"],
         communityExperience: ["experience_id", "name", "position", "start_date", "end_date", "description", "tags"],
         education: ["education_id", "university", "major", "qualifications_id", "start_date", "end_date", "special_experience", "tags"],

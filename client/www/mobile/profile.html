@@ -26,8 +26,10 @@
                         <div id="progressRight" class="progress-right" style="transform:rotate(0deg);"></div>
                     </div>
                 </div>
-                <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit=''">
+                <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'" ng-mouseleave="classNameFaceEdit=''"  ng-click="editface()">
                     <img ng-src="{{data.face}}" class="b-profile-face">
+                </div>
+                <div id="avatarUpload" class="hidden" upload handle="handle">
                 </div>
             </div>
             <div class="b-profile-completetion">
