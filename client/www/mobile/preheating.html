@@ -17,11 +17,11 @@
             <div class="bg">
                 <img src="<%= cdn.normal %>img/mobile/qa/start_bg.gif?<%= cdn.version %>">
             </div>
-            <div class="start-button" ng-click="setPage('q1')">
+            <div class="start-button" ng-click="setPage('question')">
                 <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
             </div>
         </div>
-        <div class="content center qa-content" ng-show="css.showPage==='q1'">
+        <div class="content center qa-content" ng-show="css.showPage==='question1'">
             <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
             <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
             <div class="ui grid container">
@@ -33,23 +33,64 @@
                 </div>
             </div>
             <div class="ui list container">
-                <div class="item answer A">
-                    <p><%= __('MobilePreheatingQ1A') %></p>
-                    <span>
-                        <img src="/img/mobile/qa/wrong.gif">
-                    </span>
+                <div class="item" ng-click="answer(1,'A')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer A">
+                                <p><%= __('MobilePreheatingQ1A') %></p>
+                            </div>
+                        </div>
+                        
+                        <div class="two wide column" ng-show="q_answer==='A'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
                 </div>
-                <div class="item answer B">
-                    <p><%= __('MobilePreheatingQ1B') %></p>
+                <div class="item" ng-click="answer(1,'B')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer B">
+                                <p><%= __('MobilePreheatingQ1B') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='B'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
                 </div>
-                <div class="item answer C">
-                    <p><%= __('MobilePreheatingQ1C') %></p>
+                <div class="item" ng-click="answer(1,'C')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer C">
+                                <p><%= __('MobilePreheatingQ1C') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='C'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
                 </div>
-                <div class="item answer D">
-                    <p><%= __('MobilePreheatingQ1D') %></p>
+                <div class="item" ng-click="answer(1,'D')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer D">
+                                <p><%= __('MobilePreheatingQ1D') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='D'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="clear:both"></div>
             <div class="ui dimmer q1">
                 <div class="content">
                     <div class="ui grid one column container">
@@ -61,7 +102,98 @@
                             <p><%= __('MobilePreheatingQ1R1') %></p>
                             <p><%= __('MobilePreheatingQ1R2') %></p>
                             <p><%= __('MobilePreheatingQ1R3') %></p>
-                            <div class="next-button" ng-click="setPage('next')">
+                            <div class="next-button" ng-click="nextPage(1)">
+                                <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content center qa-content" ng-show="css.showPage==='question2'">
+            <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
+            <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
+            <div class="ui grid container">
+                <div class="five wide column">
+                    <img src="<%= cdn.normal %>img/mobile/qa/icon/2.png?<%= cdn.version %>" class="number">
+                </div>
+                <div class="eleven wide column">
+                    <p class="q-conetnt"><%= __('MobilePreheatingQ2') %></p>
+                </div>
+            </div>
+            <div class="ui list container">
+                <div class="item" ng-click="answer(2,'A')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer A">
+                                <p><%= __('MobilePreheatingQ2A') %></p>
+                            </div>
+                        </div>
+                        
+                        <div class="two wide column" ng-show="q_answer==='A'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="item" ng-click="answer(2,'B')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer B">
+                                <p><%= __('MobilePreheatingQ2B') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='B'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="item" ng-click="answer(2,'C')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer C">
+                                <p><%= __('MobilePreheatingQ2C') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='C'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="item" ng-click="answer(2,'D')">
+                    <div class="ui grid answer-grid">
+                        <div class="fourteen wide column">
+                            <div class="answer D">
+                                <p><%= __('MobilePreheatingQ2D') %></p>
+                            </div>
+                        </div>
+                        <div class="two wide column" ng-show="q_answer==='D'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="ui dimmer q2">
+                <div class="content">
+                    <div class="ui grid one column container">
+                        <div class="column">
+                            <img src="<%= cdn.normal %>img/mobile/qa/icon/AA.png?<%= cdn.version %>" class="r-answer">
+                        </div>
+                        <div class="column content-column">
+                            <h3><%= __('MobilePreheatingQ2R') %></h3>
+                            <p><%= __('MobilePreheatingQ2R1') %></p>
+                            <p><%= __('MobilePreheatingQ2R2') %></p>
+                            <p><%= __('MobilePreheatingQ2R3') %></p>
+                            <div class="next-button" ng-click="nextPage(2)">
                                 <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
                             </div>
                         </div>
@@ -75,11 +207,6 @@
 </div>
 
 <%- include('footer.html') -%>
-<script type="text/javascript">
-$('.ui.dimmer.q1').dimmer({
-    on: 'click'
-});
-</script>
 
 <!-- build:js js/cdn/m/index.js -->
 <script src="../js/page/mobile/MobileQACtrl.js"></script>

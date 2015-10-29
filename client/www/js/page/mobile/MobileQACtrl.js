@@ -5,13 +5,21 @@
         $scope.css = {
             'loading': false,
             'start': false,
-            'q1': false,
+            'question': false,
         };
+        var currentPage = 1;
 
+        var answerList = ['A', 'B', 'C', 'D'];
 
         var setPage = function(page) {
 
-            $scope.css.showPage = page;
+            if (page !== "question") {
+                $scope.css.showPage = page;
+            } else {
+                $scope.css.showPage = 'question' + currentPage;
+            }
+            $scope.q_answer = '';
+            $scope.q_answer_result = '';
         };
 
         $scope.setPage = setPage;
@@ -22,6 +30,28 @@
                 $scope.$apply();
             }, 300);
         };
+
+        $scope.nextPage = function(index) {
+            currentPage = index + 1;
+
+            var id = '.ui.dimmer.q' + index;
+            $(id).dimmer('hide');
+            setPage('question');
+        };
+        $scope.answer = function(index, select) {
+            if (answerList[index - 1] === select) {
+                $scope.q_answer_result = 'right';
+            } else {
+                $scope.q_answer_result = 'wrong';
+            }
+            $scope.q_answer = select;
+            var id = '.ui.dimmer.q' + index;
+
+            setTimeout(function() {
+                $(id).dimmer('show');
+            }, 3000);
+        };
+
 
 
         initpage();
