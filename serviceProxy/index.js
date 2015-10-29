@@ -26,7 +26,7 @@ module.exports = require('express').Router()
         next();
     })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
-    .post('/member/register', /*sms.validate,*/ sso.signUp)
+    .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
     .post('/member/bind-mobile', membership.ensureAuthenticated, sms.validate, sso.changeMobile)
     .post('/member/bind-mobile-by-password', sso.authenticate /* TODO : Bind wechat to member account  */)
