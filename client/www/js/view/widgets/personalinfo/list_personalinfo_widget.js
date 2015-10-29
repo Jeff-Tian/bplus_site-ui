@@ -36,6 +36,9 @@ define([
                                     var lng = me.getLanguage();
                                     var options = {year: 'numeric', month: 'long', day: 'numeric' };
                                     $scope.data.dateOfBirth.displayValue = $scope.data.dateOfBirth.value.rawValue.toLocaleString(lng, options);
+                                    if ($scope.data.dateOfBirth.displayValue.indexOf("GMT") > -1) {
+                                        $scope.data.dateOfBirth.displayValue = $scope.data.dateOfBirth.value.year + "-" + $scope.data.dateOfBirth.value.month;
+                                    }
                                 }
                                 $scope.dateSelect = {
                                     config: {
