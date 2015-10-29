@@ -26,9 +26,9 @@ define([
                     form.attr('target', category);
                     form.on("change", function(event) {
                         form.submit();
-                    })
+                    });
                 }
             };
         }]);
-    }
+    };
 });
