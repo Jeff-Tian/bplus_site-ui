@@ -268,7 +268,11 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
         }
     }
     .qa-start {
-        background-color: #F53E3E;
+        background-color: #FF3C42;
+        background-image: url('/img/mobile/qa/bg.png');
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: cover;
 
         .bg {
             img {
@@ -276,17 +280,56 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
                 max-width: 375px;
             }
         }
+        .start-logo {
+            background-image: url('/img/mobile/qa/q.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 200px;
+            height: 221px;
+            margin: 0 auto;
+            padding: 50px 15px;
+
+            h1, h2 {
+                text-align: left;
+                color: white;
+            }
+            h1.mk {
+                font-size: 2.5em;
+                margin-bottom: 0;
+            }
+            h2.qa {
+                margin-top: 0;
+                font-size: 1.5em;
+                font-weight: normal;
+            }
+        }
         .start-button {
-            margin-top: -200px;
+            margin-top: 80px;
 
             img {
                 width: 40%;
                 max-width: 150px;
             }
         }
+        .b-site {
+            margin-top: 50px;
+
+            a {
+                font-size: 1em;
+                color: #f0f0f0;
+                margin-top: 50px;
+
+                &:hover, &:active {
+                    color: #F0F0F0;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
     .qa-end {
-        background-color: #F53E3E;
+        background-color: #FF3C42;
+        background-image: url('/img/mobile/qa/bg_end.png');
+        background-repeat: no-repeat;
         padding: 0 2em;
 
         .end-header {
@@ -356,14 +399,14 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
                 margin-top: 2em;
 
                 .bar {
-                    background-color: #F53E3E;
+                    background-color: #FF3C42;
                     border-radius: 8px;
                     height: 10px;
                 }
             }
             .ui.progress.success.mobile-bar {
                 .bar {
-                    background-color: #F53E3E !important;
+                    background-color: #FF3C42 !important;
                 }
             }
         }

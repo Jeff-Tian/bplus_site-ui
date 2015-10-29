@@ -14,11 +14,16 @@
             <img class="qa logo" src="<%= cdn.normal %>img/salespage/aboutus-logo.png?<%= cdn.version %>">
         </div>
         <div class="content center qa-start" ng-show="css.showPage==='start'">
-            <div class="bg">
-                <img src="<%= cdn.normal %>img/mobile/qa/start_bg.gif?<%= cdn.version %>">
+            <div class="start-logo">
+                <h1 class="mk">Marksimos</h1>
+                <h2 class="qa">预热问答</h2>
             </div>
+
             <div class="start-button" ng-click="setPage('question')">
                 <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
+            </div>
+            <div class="b-site">
+                <a  href="<%= localeLink('/m/home') %>">www.brigeplus.cn</a>
             </div>
         </div>
         <div class="content center qa-content" ng-show="css.showPage==={{q.q_id}}" ng-repeat='q in questions'>
@@ -42,8 +47,8 @@
                         </div>
                         
                         <div class="two wide column" ng-show="q_answer===i.select">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-show="q_answer_result==='right'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-if="q_answer_result==='wrong'">
+                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-if="q_answer_result==='right'">
                         </div>
 
                     </div>

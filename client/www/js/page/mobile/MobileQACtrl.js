@@ -178,8 +178,6 @@
                 'reason': 'MobilePreheatingQ9R2'
             }, {
                 'reason': 'MobilePreheatingQ9R3'
-            }, {
-                'reason': 'MobilePreheatingQ9R4'
             }]
         }, {
             q_id: 10,
@@ -430,7 +428,7 @@
             setTimeout(function() {
                 setPage('start');
                 $scope.$apply();
-            }, 300);
+            }, 3000);
         };
 
         $scope.nextPage = function(index) {
@@ -451,7 +449,7 @@
 
             setTimeout(function() {
                 $(id).dimmer('show');
-            }, 300);
+            }, 1000);
         };
 
 
