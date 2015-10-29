@@ -8,7 +8,7 @@
         $scope.buyWithRedemptionCode = function () {
             service.executePromiseAvoidDuplicate(buying, function () {
                 return service
-                    .post('/service-proxy/commerce/create-order/by-redemption-code', {
+                    .post('/service-proxy/commerce/create-order/national-game-2015/by-redemption-code', {
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
@@ -21,47 +21,31 @@
 
         var alipaying = false;
         $scope.alipay = function () {
-            var paymentMethod = 'alipaymobile';
-
-            service.executePromiseAvoidDuplicate(alipaying, function () {
-                return service
-                    .post('/service-proxy/payment/create-order/national-game-2015/by-alipay', {
-                        payment: paymentMethod
-                    })
-                    .then(function (result) {
-                        if (/^true$/i.test(result.hasRight)) {
-                            // Already payed
-                            window.location.href = '#/payed';
-                        } else {
-                            // Goto pay
-                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/alipay');
-                        }
-                    })
-                    .catch(FormValidation.delegateHandleFormError($('.alipay-form')))
-                    ;
-            });
+            pay(alipaying, 'alipay', $('.alipay-form'));
         };
 
         var wechatPaying = false;
         $scope.wechatPay = function () {
-            var paymentMethod = 'wechat';
+            pay(wechatPaying, 'wechat', $('.wechat-pay-form'));
+        };
 
-            service.executePromiseAvoidDuplicate(wechatPaying, function () {
+        function pay(payingFlag, paymentMethod, $form) {
+            service.executePromiseAvoidDuplicate(payingFlag, function () {
                 return service
-                    .post('/service-proxy/payment/create-order/national-game-2015/by-wechat', {
+                    .post('/service-proxy/payment/create-order/national-game-2015/by-payment', {
                         payment: paymentMethod
                     })
                     .then(function (result) {
                         if (/^true$/i.test(result.hasRight)) {
                             window.location.href = '#/paid';
                         } else {
-                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/wechat');
+                            window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + '&returnUrl=' + encodeURIComponent(window.location.href + '/' + paymentMethod);
                         }
                     })
-                    .catch(FormValidation.delegateHandleFormError($('.wechat-pay-form')))
+                    .catch(FormValidation.delegateHandleFormError($form))
                     ;
             });
-        };
+        }
 
         if ($stateParams.paidBy === 'alipay') {
             $scope.alipay();

@@ -50,6 +50,6 @@ angular
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
-    .controller('PayedCtrl', angular.bplus.MobilePayedCtrl)
+    .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;
