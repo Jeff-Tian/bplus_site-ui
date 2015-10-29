@@ -19,6 +19,13 @@
     "host": "service.bridgeplus.cn",
     "port": "10001"
   },
+  "upload": {
+      "public": {
+          "host": "resource.service.bridgeplus.cn",
+          "port": 80,
+          "code": "HCD_S1"
+      }
+  },
   "sso": {
     "host": "service.bridgeplus.cn",
     "port": "10086"
