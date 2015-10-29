@@ -61,10 +61,9 @@ define([
             $scope.handle = function (ret) {
                 var imgUrl = "//" + ret.host + "/" + ret.key;
                 var dataToUpdate = {avatar: imgUrl};
-                $scope.data.avatar = imgUrl;
-                $scope.data.face = $scope.data.avatar + "-small";
-                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate);
-                $scope.$apply();
+                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate).then(function() {
+                    model.getData(MEMBER_EXT_SERVICE, null, true);
+                });
             }
 //          $http.get('/mock/profile-achievement.json').success( function (data) {
             var updateAchievement = function () {
