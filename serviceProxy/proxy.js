@@ -50,6 +50,8 @@ function advancedProxy(req, res, next, settings) {
     req.dualLog(options);
     req.dualLog('data: ');
     req.dualLog(req.body);
+    req.dualLog('req original url');
+    req.dualLog((req.headers['origin'] || req.headers['host']) + req.originalUrl);
 
     var request = http.request(options, function (response) {
         if (typeof settings.responseInterceptor === 'function') {
@@ -72,7 +74,7 @@ function advancedProxy(req, res, next, settings) {
                 req.dualLog('response got from: ' + options.hostname + ':' + options.port + '/' + options.path);
                 req.dualLog(chunks);
 
-                var continueNext = settings.responseInterceptor(res, chunks);
+                var continueNext = settings.responseInterceptor(res, chunks, req);
 
                 if (continueNext === true) {
                     next();
@@ -101,7 +103,7 @@ function advancedProxy(req, res, next, settings) {
             var data = req.body;
 
             if (typeof settings.dataMapper === 'function') {
-                data = settings.dataMapper(data);
+                data = settings.dataMapper(data, req);
             }
 
             if (data) {

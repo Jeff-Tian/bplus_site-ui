@@ -31,7 +31,8 @@
     "host": "uat.service.hcd.com",
     "port": "10101",
     "app_id": "bridgeplus_web",
-    "corp_app_id": "bridgeplus_corp"
+    "corp_app_id": "hcdglobal_corp",
+    "bk_corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
     "inner": {

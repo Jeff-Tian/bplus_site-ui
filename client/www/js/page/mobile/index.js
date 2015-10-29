@@ -26,8 +26,13 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
-            .state('alipayed', {
+            .state('paidBy', {
                 url: '/select-payment-method/:paidBy',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
+            .state('continue-paying', {
+                url: '/continue-paying/:paymentMethod',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
@@ -44,6 +49,7 @@ angular
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)
