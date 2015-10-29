@@ -68,7 +68,7 @@ module.exports = function (grunt) {
             }
         },
         "useref": {
-            html: ['<%= config.dist %>*.html', '<%= config.dist %>view-partial/*.html'],
+            html: ['<%= config.dist %>*.html', '<%= config.dist %>view-partial/*.html', '<%= config.dist %>mobile/*.html'],
             temp: '<%= config.dist %>'
         },
         htmlmin: {                                     // Task
@@ -195,7 +195,6 @@ module.exports = function (grunt) {
                     uglify: {
                         no_mangle: true
                     },
-                    exclude: ["angular", "angular-translate", "semantic", "jquery"],
                     out: "<%= config.dist %>/js/page/profile/main.js"
                 }
             },
@@ -208,7 +207,6 @@ module.exports = function (grunt) {
                     uglify: {
                         no_mangle: true
                     },
-                    exclude: ["angular", "angular-translate", "semantic", "jquery"],
                     out: "<%= config.dist %>/js/page/profile/mobile-main.js"
                 }
             }
