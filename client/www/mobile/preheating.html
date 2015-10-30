@@ -3,104 +3,106 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
     <title><%= __('MobilePreheatingTitle') %></title>
     <meta name="description" content="<%= __('SEODesc_SignIn') %>">
     <%- include('header.html') -%>
+    <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/qa.css?<%= cdn.version %>">
 </head>
-<body ng-app="mobile" ng-controller="AppCtrl"  class="b-mobile color">
-<div class="full-height" ng-controller="MobileQACtrl">
-    <div class="center stuck padded">
-        <div class="content center qa-loading" ng-show="css.showPage==='loading'">
-            <img class="qa logo" src="<%= cdn.normal %>img/salespage/aboutus-logo.png?<%= cdn.version %>">
-        </div>
-        <div class="content center qa-start" ng-show="css.showPage==='start'">
-            <div class="start-logo">
-                <h1 class="mk">Marksimos</h1>
-                <h2 class="qa">预热问答</h2>
+<body ng-app="mobile" ng-controller="AppCtrl" class="qa-body">
+    <div class="qa-page" ng-controller="MobileQACtrl" ng-class="{'red':css.showPage==='start'||css.showPage==='end','white':css.showPage==='loading'}">
+        <div class="qa-box">
+            <div class="qa-box-content qa-loading" ng-show="css.showPage==='loading'">
+                <img class="qa logo" src="<%= cdn.normal %>img/salespage/aboutus-logo.png?<%= cdn.version %>">
             </div>
+            <div class="qa-box-content qa-start" ng-show="css.showPage==='start'">
+                <div class="start-logo">
+                    <h1 class="mk">MarkSimos</h1>
+                    <h2 class="qa">预热问答</h2>
+                </div>
 
-            <div class="start-button" ng-click="setPage('question')">
-                <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
-            </div>
-            <div class="b-site">
-                <a  href="<%= localeLink('/m/home') %>">www.brigeplus.cn</a>
-            </div>
-        </div>
-        <div class="content center qa-content" ng-show="css.showPage==={{q.q_id}}" ng-repeat='q in questions'>
-            <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
-            <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
-            <div class="ui grid container">
-                <div class="five wide column" ng-cloak>
-                    <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.q_id}}.png?<%= cdn.version %>" class="number">
+                <div class="start-button" ng-click="setPage('question')">
+                    <img class="button" src="<%= cdn.normal %>img/mobile/qa/start_button.png?<%= cdn.version %>">
                 </div>
-                <div class="eleven wide column">
-                    <p class="q-conetnt">{{q.q_content | translate}}</p>
+                <div class="b-site">
+                    <a  href="<%= localeLink('/') %>">www.bridgeplus.cn</a>
                 </div>
             </div>
-            <div class="ui list container">
-                <div class="item" ng-repeat='i in q.items'>
-                    <div class="ui grid answer-grid">
-                        <div class="fourteen wide column">
-                            <div class="answer {{i.select}}" ng-click="answer(q.q_id,i.select)">
-                                <p>{{i.content | translate}}</p>
+            <div class="qa-box-content qa-content" ng-show="css.showPage==={{q.q_id}}" ng-repeat='q in questions'>
+                <img src="<%= cdn.normal %>img/mobile/qa/icon/triangle.png?<%= cdn.version %>" class="triangle">
+                <img src="<%= cdn.normal %>img/mobile/qa/icon/logo.png?<%= cdn.version %>" class="logo">
+                <div class="ui grid container">
+                    <div class="five wide column" ng-cloak>
+                        <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.q_id}}.png?<%= cdn.version %>" class="number">
+                    </div>
+                    <div class="eleven wide column">
+                        <p class="q-conetnt">{{q.q_content | translate}}</p>
+                    </div>
+                </div>
+                <div class="ui list container">
+                    <div class="item" ng-repeat='i in q.items'>
+                        <div class="ui grid answer-grid">
+                            <div class="fourteen wide column">
+                                <div class="answer {{i.select}}" ng-click="answer(q.q_id,i.select)">
+                                    <p>{{i.content | translate}}</p>
+                                </div>
+                            </div>
+
+                            <div class="two wide column" ng-show="q_answer===i.select">
+                                <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" class="wrong" ng-if="q_answer_result==='wrong'">
+                                <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" class="right" ng-if="q_answer_result==='right'">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="qa-bar">
+                        <div class="ui indicating progress active mobile-bar">
+                            <div class="bar" style="transition-duration: 300ms;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui dimmer {{'q'+q.q_id}}">
+                    <div class="content">
+                        <div class="ui grid one column container">
+                            <div class="column" ng-cloak>
+                                <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.rightAnswer}}.png?<%= cdn.version %>" class="r-answer">
+                            </div>
+                            <div class="column content-column">
+                                <h3>{{q.result | translate}}</h3>
+                                <p ng-repeat="r in q.reasons">{{r.reason | translate}}</p>
+                                <div class="next-button" ng-click="nextPage(q.q_id)">
+                                    <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="two wide column" ng-show="q_answer===i.select">
-                            <img src="<%= cdn.normal %>img/mobile/qa/wrong.gif?<%= cdn.version %>" width="30px;" ng-if="q_answer_result==='wrong'">
-                            <img src="<%= cdn.normal %>img/mobile/qa/right.gif?<%= cdn.version %>" width="30px;" ng-if="q_answer_result==='right'">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="qa-bar">
-                    <div class="ui indicating progress active mobile-bar">
-                        <div class="bar" style="transition-duration: 300ms;"></div>
                     </div>
                 </div>
             </div>
-            <div class="ui dimmer {{'q'+q.q_id}}">
-                <div class="content">
-                    <div class="ui grid one column container">
-                        <div class="column" ng-cloak>
-                            <img src="<%= cdn.normal %>img/mobile/qa/icon/{{q.rightAnswer}}.png?<%= cdn.version %>" class="r-answer">
-                        </div>
-                        <div class="column content-column">
-                            <h3>{{q.result | translate}}</h3>
-                            <p ng-repeat="r in q.reasons">
-                                {{r.reason | translate}}</p>
-                            <div class="next-button" ng-click="nextPage(q.q_id)">
-                                <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
-                            </div>
-                        </div>
 
-                    </div>
+            <div class="qa-box-content qa-end" ng-show="css.showPage==='end'">
+                <div class="end-header">
+                    <h3>您已经完成了所有的试题，相信您此刻对MarkSimos已经有了一定的认识。祝您在比赛中获得好成绩！</h3>
+                </div>
+                <img src="<%= cdn.normal %>img/mobile/qa/down.gif?<%= cdn.version %>" class="down">
+                <div class="end-body">
+                    <p>关注Bridge+官方微信，掌握第一手活动和职业发展资讯！</p>
+                </div>
+                <img src="<%= cdn.normal %>img/mobile/qa/b-wechat.jpg?<%= cdn.version %>" class="wechat">
+                <div class="b-site">
+                    <a href="<%= localeLink('/') %>">www.bridgeplus.cn</a>
                 </div>
             </div>
-        </div>
-
-        <div class="content center qa-end" ng-show="css.showPage==='end'">
-            <div class="end-header">
-                <h3>您已经完成了所有的试题，相信您此刻对MarkSimos已经有了一定的认识。祝您在比赛中获得好成绩！</h3>
-            </div>
-            <img src="<%= cdn.normal %>img/mobile/qa/down.gif?<%= cdn.version %>">
-            <div class="end-body">
-                <p>关注Bridge+官方微信，掌握第一手活动和职业发展资讯！</p>
-            </div>
-            <img src="<%= cdn.normal %>img/mobile/qa/b-wechat.jpg?<%= cdn.version %>" class="wechat">
         </div>
     </div>
-</div>
-</div>
-
-<%- include('footer.html') -%>
-
-<!-- build:js js/cdn/m/index.js -->
-<script src="../js/page/mobile/MobileQACtrl.js"></script>
-<script src="../js/page/mobile/mobile.js"></script>
 
 
-<!-- endbuild -->
+    <%- include('footer.html') -%>
+
+
+    <script src="../js/page/mobile/MobileQACtrl.js"></script>
+    <script src="../js/page/mobile/mobile.js"></script>
+
+
 </body>
 
 </html>

@@ -7,12 +7,12 @@
             'start': false,
             'question': false,
         };
-        var currentPage = 1;
+        var currentPage = 22;
 
         var answerList = ['A', 'A', 'A', 'D', 'A', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'C', 'B', 'A', 'A', 'C', 'B', 'B', 'D', 'B'];
 
 
-        /*data*/
+    /*data*/
         $scope.questions = [{
             q_id: 1,
             q_content: 'MobilePreheatingQ1',
@@ -399,7 +399,7 @@
                 'reason': 'MobilePreheatingQ21R1'
             }]
         }];
-        /*data*/
+    /*data*/
 
 
         var setPage = function(page) {
