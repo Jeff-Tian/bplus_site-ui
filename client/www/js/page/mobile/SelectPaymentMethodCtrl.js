@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser) {
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus) {
         function mockWechat() {
             function nonce() {
             }
@@ -53,11 +53,17 @@
 
         var invokingWechatPay = false;
 
+        function wechatPaid() {
+            invokingWechatPay = false;
+            msgBus.hideLoading();
+        }
+
         function pay(payingFlag, paymentMethod, url, $form) {
             if (invokingWechatPay) {
                 return;
             }
 
+            msgBus.showLoading();
             service.executePromiseAvoidDuplicate(payingFlag, function () {
                     return service
                         .post(url, {
@@ -91,19 +97,19 @@
                                     wechat_config.payment.success = function (res) {
                                         if (res.errMsg === 'chooseWXPay:ok') {
                                             window.alert('支付成功!');
-                                            invokingWechatPay = false;
+                                            wechatPaid();
                                             window.location.href = '#/paid';
                                         } else {
                                             window.alert('支付失败!');
-                                            invokingWechatPay = false;
+                                            wechatPaid();
                                         }
                                     };
                                     wechat_config.payment.cancel = function (res) {
                                         window.alert('支付取消！');
-                                        invokingWechatPay = false;
+                                        wechatPaid();
                                     };
                                     wechat_config.payment.fail = function (res) {
-                                        invokingWechatPay = false;
+                                        wechatPaid();
                                     };
 
                                     var wechat = getWechat();
@@ -148,6 +154,6 @@
         }
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus'];
 })
 (angular.bplus = angular.bplus || {});

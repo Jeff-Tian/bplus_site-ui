@@ -21,7 +21,28 @@ angular.module('ng.utils')
             },
             viewContent: {
                 loaded: '$viewContentLoaded'
+            },
+            loading: {
+                show: 'loading:show',
+                hide: 'loading:hide',
+                ready: 'loading:ready'
             }
+        };
+
+        msgBus.showLoading = function () {
+            if (angular.bplus.loading && angular.bplus.loading.ready === true) {
+                msgBus.emitMsg(msgBus.events.loading.show);
+            } else {
+                msgBus.onMsg(msgBus.events.loading.ready, $rootScope, function () {
+                    msgBus.emitMsg(msgBus.events.loading.show);
+                });
+            }
+        };
+        msgBus.hideLoading = function () {
+            msgBus.emitMsg(msgBus.events.loading.hide);
+        };
+        msgBus.notifyLoadingReady = function () {
+            msgBus.emitMsg(msgBus.events.loading.ready);
         };
 
         return msgBus;

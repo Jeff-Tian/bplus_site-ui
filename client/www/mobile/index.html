@@ -77,7 +77,7 @@
             <form name="wechatPayForm" novalidate class="ui form wehcat-pay-form" ng-submit="wechatPay($event)">
                 <div class="ui error message brand"></div>
 
-                <button type="submit" class="ui fluid basic button">
+                <button loading type="submit" class="ui fluid basic button">
                     <i class="wechat icon"></i>
                     <%= __('微信支付') %>
                 </button>
@@ -88,7 +88,7 @@
             <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay($event)">
                 <div class="ui error message brand"></div>
 
-                <button type="submit" class="ui fluid basic button">
+                <button loading type="submit" class="ui fluid basic button">
                     <img class="ui middle aligned" style="height: 25px;"
                          src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
                     <%= __('支付宝支付') %>
@@ -106,7 +106,8 @@
                     <label><%= __('兑换码') %></label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
-                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit"><%=
+                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
+                    <%=
                     __('确定') %>
                 </button>
             </form>
@@ -155,11 +156,11 @@
 <script src="js/page/mobile/MobileHeadCtrl.js"></script>
 <script src="js/page/mobile/MobileNationalCtrl.js"></script>
 <script src="js/page/mobile/MobileAboutusCtrl.js"></script>
-<script src="js/page/mobile/MobileIndexCtrl.js?v=asdfxxxxyyysss"></script>
-<script src="js/page/mobile/SelectPaymentMethodCtrl.js?v=xxxzzzzyyysssxyyyxxx"></script>
+<script src="js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
-<script src="js/page/mobile/index.js?v=xxyy"></script>
+<script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
 </body>
 
