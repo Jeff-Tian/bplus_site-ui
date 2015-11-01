@@ -7,7 +7,7 @@
             'start': false,
             'question': false,
         };
-        var currentPage = 22;
+        var currentPage = 11;
 
         var answerList = ['A', 'A', 'A', 'D', 'A', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'C', 'B', 'A', 'A', 'C', 'B', 'B', 'D', 'B'];
 

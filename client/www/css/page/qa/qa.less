@@ -106,7 +106,7 @@
                     width: 69px;
                 }
                 .end-body {
-                    padding: 1.5em 2em 1.5em 1.5em;
+                    padding: 1.5em;
 
                     p {
                         font-size: @fontsize-mobile-large;
@@ -226,6 +226,8 @@
                     }
                 }
                 .ui.dimmer {
+                    padding: 0 2em;
+
                     .content {
                         display: table;
 
@@ -233,14 +235,14 @@
                             text-align: left;
 
                             img.r-answer {
-                                width: 20%;
-                                max-width: 186px;
+                                width: 100%;
+                                max-width: 90px;
                             }
                             .content-column {
                                 h3, p {
                                     text-align: left;
                                     font-size: 1em;
-                                    line-height: 1.4285em;
+                                    line-height: 2em;                                    /*line-height: 1.4285em;*/
                                 }
                                 h3 {
                                     margin: 0 0 1em 0;
@@ -255,14 +257,6 @@
                                     }
                                 }
                             }
-                        }
-                    }
-                    &.q11 {
-                        h3, p {
-                            margin-bottom: 0.75em;
-                        }
-                        .next-button {
-                            margin-top: 1em;
                         }
                     }
                 }
@@ -283,8 +277,8 @@
 
             .qa-box {
                 display: table;
-                width: 512px;
-                height: 768px;
+                width: 375px;
+                height: 667px;
                 margin: 0 auto;
 
                 .qa-box-content {
@@ -297,9 +291,9 @@
                     }
                     &.qa-start {
                         .start-logo {
-                            width: 300px;
-                            height: 331px;
-                            padding: 100px 30px;
+                            width: 280px;
+                            height: 309px;
+                            padding: 80px 30px;
 
                             h1.hk {
                                 font-size: 3em;
@@ -309,7 +303,7 @@
                             }
                         }
                         .start-button {
-                            margin-top: 120px;
+                            margin-top: 80px;
 
                             img {
                                 width: 40%;
@@ -317,7 +311,7 @@
                             }
                         }
                         .b-site {
-                            margin-top: 150px;
+                            margin-top: 100px;
 
                             a {
                                 font-size: @fontsize-mobile;
@@ -325,21 +319,35 @@
                         }
                     }
                     &.qa-end {
-                        padding: 0 1em;
+                        padding: 0 2em;
 
-                        img {
-                            margin-top: 50px;
+                        .end-header {
+                            h3 {
+                                font-size: 1.25em;
+                            }
+                        }
+                        img.down {
+                            margin-top: 20px;
+                            width: 69px;
                         }
                         .end-body {
-                            margin-top: 50px;
+                            margin-top: 0px;
+
+                            p {
+                                font-size: 1.25em;
+                            }
                         }
                         img.wechat {
-                            width: 150px;
+                            width: 130px;
                             margin-top: 10px;
                         }
                         .b-site {
                             display: block;
                             margin-top: 100px;
+
+                            a {
+                                font-size: 1em;
+                            }
                         }
                     }
                     &.qa-content {
@@ -347,7 +355,11 @@
                         background-size: cover;
 
                         .ui.container {
-                            width: 512px !important;
+                            width: 375px !important;
+                        }
+                        .number {
+                            width: 100%;
+                            max-width: 105px;
                         }
                         img.triangle {
                             display: none;
@@ -357,6 +369,23 @@
                         }
                         .qa-bar {
                             padding: 10em 5em 0 5em;
+                        }
+                        .ui.dimmer {
+                            padding: 0 2em;
+
+                            .content {
+                                .one.column.grid {
+                                    img.r-answer {
+                                        width: 100%;
+                                        max-width: 93px;
+                                    }
+                                    .content-column {
+                                        p {
+                                            line-height: 2em;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -369,6 +398,111 @@
             }
             &.white {
                 background-color: white;
+            }
+        }
+    }
+}
+@media only screen and (min-width:319px) and (max-width:375px) {
+    .qa-page {
+        .qa-box {
+            .qa-box-content {
+                &.qa-start {
+                    .start-logo {
+                        width: 180px;
+                        height: 197px;
+
+                        h1.mk {
+                            font-size: 2em;
+                        }
+                        h2.qa {
+                            font-size: 1.125em;
+                        }
+                    }
+                }
+                &.qa-end {
+                    img.wechat {
+                        width: 120px;
+                    }
+                    .end-body {
+                        padding: 1em;
+                    }
+                }
+                &.qa-content {
+                    .ui.dimmer {
+                        padding: 0 1em;
+
+                        .content {
+                            .one.column.grid {
+                                img.r-answer {
+                                    max-width: 80px;
+                                }
+                                .content-column {
+                                    h3, p {
+                                        line-height: 1.5em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-height:479px) {
+    .qa-page {
+        .qa-box {
+            .qa-box-content {
+                &.qa-start {
+                    .start-logo {
+                        margin-top: 0px;
+                    }
+                }
+                &.qa-end {
+                    img.wechat {
+                        width: 100px;
+                    }
+                    .end-header {
+                        h3 {
+                            font-size: 1em;
+                        }
+                    }
+                    .end-body {
+                        p {
+                            font-size: 1em;
+                        }
+                    }
+                }
+                &.qa-content {
+                    .logo {
+                        bottom: 1em;
+                        right: 1em;
+                    }
+                    .ui.dimmer {
+                        padding: 0;
+
+                        .content {
+                            .one.column.grid {
+                                img.r-answer {
+                                    max-width: 65px;
+                                }
+                                .content-column {
+                                    h3, p {
+                                        line-height: 1.4285em;
+                                    }
+                                    .next-button {
+                                        margin-top: 2em;
+                                    }
+                                    &.q11 {
+                                        .next-button {
+                                            margin-top: 1em;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

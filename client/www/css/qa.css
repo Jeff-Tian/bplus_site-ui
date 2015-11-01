@@ -94,7 +94,7 @@
   width: 69px;
 }
 .qa-page .qa-box .qa-box-content.qa-end .end-body {
-  padding: 1.5em 2em 1.5em 1.5em;
+  padding: 1.5em;
 }
 .qa-page .qa-box .qa-box-content.qa-end .end-body p {
   font-size: 1.125em;
@@ -204,6 +204,9 @@
 .qa-page .qa-box .qa-box-content.qa-content .answer.D {
   background-image: url('/img/mobile/qa/icon/D.png');
 }
+.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer {
+  padding: 0 2em;
+}
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content {
   display: table;
 }
@@ -211,14 +214,15 @@
   text-align: left;
 }
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid img.r-answer {
-  width: 20%;
-  max-width: 186px;
+  width: 100%;
+  max-width: 90px;
 }
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3,
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column p {
   text-align: left;
   font-size: 1em;
-  line-height: 1.4285em;
+  line-height: 2em;
+  /*line-height: 1.4285em;*/
 }
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3 {
   margin: 0 0 1em 0;
@@ -230,13 +234,6 @@
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column .next-button img {
   width: 50%;
   max-width: 128px;
-}
-.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer.q11 h3,
-.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer.q11 p {
-  margin-bottom: 0.75em;
-}
-.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer.q11 .next-button {
-  margin-top: 1em;
 }
 @media only screen and (min-width: 768px) {
   .qa-body {
@@ -251,8 +248,8 @@
   }
   .qa-body .qa-page .qa-box {
     display: table;
-    width: 512px;
-    height: 768px;
+    width: 375px;
+    height: 667px;
     margin: 0 auto;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-loading {
@@ -262,9 +259,9 @@
     max-width: 250px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .start-logo {
-    width: 300px;
-    height: 331px;
-    padding: 100px 30px;
+    width: 280px;
+    height: 309px;
+    padding: 80px 30px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .start-logo h1.hk {
     font-size: 3em;
@@ -273,41 +270,55 @@
     font-size: 2em;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .start-button {
-    margin-top: 120px;
+    margin-top: 80px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .start-button img {
     width: 40%;
     max-width: 200px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .b-site {
-    margin-top: 150px;
+    margin-top: 100px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-start .b-site a {
     font-size: 1em;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-end {
-    padding: 0 1em;
+    padding: 0 2em;
   }
-  .qa-body .qa-page .qa-box .qa-box-content.qa-end img {
-    margin-top: 50px;
+  .qa-body .qa-page .qa-box .qa-box-content.qa-end .end-header h3 {
+    font-size: 1.25em;
+  }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-end img.down {
+    margin-top: 20px;
+    width: 69px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-end .end-body {
-    margin-top: 50px;
+    margin-top: 0px;
+  }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-end .end-body p {
+    font-size: 1.25em;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-end img.wechat {
-    width: 150px;
+    width: 130px;
     margin-top: 10px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-end .b-site {
     display: block;
     margin-top: 100px;
   }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-end .b-site a {
+    font-size: 1em;
+  }
   .qa-body .qa-page .qa-box .qa-box-content.qa-content {
     background-image: url('/img/mobile/qa/q_bg.png');
     background-size: cover;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-content .ui.container {
-    width: 512px !important;
+    width: 375px !important;
+  }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-content .number {
+    width: 100%;
+    max-width: 105px;
   }
   .qa-body .qa-page .qa-box .qa-box-content.qa-content img.triangle {
     display: none;
@@ -318,6 +329,16 @@
   .qa-body .qa-page .qa-box .qa-box-content.qa-content .qa-bar {
     padding: 10em 5em 0 5em;
   }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer {
+    padding: 0 2em;
+  }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid img.r-answer {
+    width: 100%;
+    max-width: 93px;
+  }
+  .qa-body .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column p {
+    line-height: 2em;
+  }
   .qa-body .qa-page.red {
     background-color: #FF3C42;
   }
@@ -326,5 +347,67 @@
   }
   .qa-body .qa-page.white {
     background-color: white;
+  }
+}
+@media only screen and (min-width: 319px) and (max-width: 375px) {
+  .qa-page .qa-box .qa-box-content.qa-start .start-logo {
+    width: 180px;
+    height: 197px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-start .start-logo h1.mk {
+    font-size: 2em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-start .start-logo h2.qa {
+    font-size: 1.125em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-end img.wechat {
+    width: 120px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-end .end-body {
+    padding: 1em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer {
+    padding: 0 1em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid img.r-answer {
+    max-width: 80px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3,
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column p {
+    line-height: 1.5em;
+  }
+}
+@media only screen and (max-height: 479px) {
+  .qa-page .qa-box .qa-box-content.qa-start .start-logo {
+    margin-top: 0px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-end img.wechat {
+    width: 100px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-end .end-header h3 {
+    font-size: 1em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-end .end-body p {
+    font-size: 1em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .logo {
+    bottom: 1em;
+    right: 1em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer {
+    padding: 0;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid img.r-answer {
+    max-width: 65px;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3,
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column p {
+    line-height: 1.4285em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column .next-button {
+    margin-top: 2em;
+  }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column.q11 .next-button {
+    margin-top: 1em;
   }
 }
