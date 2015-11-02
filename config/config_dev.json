@@ -20,11 +20,11 @@
     "port": "10001"
   },
   "upload": {
-      "public": {
-          "host": "uat.bridgeplus.cn",
-          "port": 10003,
-          "code": "HCD_S1"
-      }
+    "public": {
+      "host": "uat.bridgeplus.cn",
+      "port": 10003,
+      "code": "HCD_S1"
+    }
   },
   "sso": {
     "host": "uat.service.hcd.com",
@@ -89,6 +89,6 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "0.5.0",
-  "date": "20151028_1004"
+  "version": "0.6.0",
+  "date": "20151102_0854"
 }

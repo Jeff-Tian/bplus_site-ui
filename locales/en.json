@@ -642,5 +642,6 @@
   "选择支付方式": "Select payment method",
   "下一步: 付费": "Next step: Pay",
   "完成信息填写与付费,即可组队参赛!": "{{competition}} with {{fee}}. Complete your background information and pay, then you can join the competition with your team!",
-  "请记得在比赛开始前,完成组队。": "Please remember that before the start of the game to complete the team."
+  "请记得在比赛开始前,完成组队。": "Please remember that before the start of the game to complete the team.",
+  "大赛报名": "Contest entry"
 }
