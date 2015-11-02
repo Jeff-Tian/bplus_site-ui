@@ -70,6 +70,8 @@
                             <div class="column content-column">
                                 <h3>{{q.result | translate}}</h3>
                                 <p ng-repeat="r in q.reasons">{{r.reason | translate}}</p>
+                            </div>
+                            <div class="column">
                                 <div class="next-button" ng-click="nextPage(q.q_id)">
                                     <img class="button" src="<%= cdn.normal %>img/mobile/qa/next-button.png?<%= cdn.version %>">
                                 </div>

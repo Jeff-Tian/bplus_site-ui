@@ -227,11 +227,11 @@
 .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3 {
   margin: 0 0 1em 0;
 }
-.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column .next-button {
-  margin-top: 2em;
+.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .column .next-button {
+  margin-top: 1em;
   text-align: left;
 }
-.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column .next-button img {
+.qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .column .next-button img {
   width: 50%;
   max-width: 128px;
 }
@@ -360,6 +360,9 @@
   .qa-page .qa-box .qa-box-content.qa-start .start-logo h2.qa {
     font-size: 1.125em;
   }
+  .qa-page .qa-box .qa-box-content.qa-end {
+    padding: 0 1.5em;
+  }
   .qa-page .qa-box .qa-box-content.qa-end img.wechat {
     width: 120px;
   }
@@ -390,6 +393,9 @@
   .qa-page .qa-box .qa-box-content.qa-end .end-body p {
     font-size: 1em;
   }
+  .qa-page .qa-box .qa-box-content.qa-end .b-site {
+    margin-top: 40px;
+  }
   .qa-page .qa-box .qa-box-content.qa-content .logo {
     bottom: 1em;
     right: 1em;
@@ -400,14 +406,15 @@
   .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid img.r-answer {
     max-width: 65px;
   }
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column {
+    max-height: 210px;
+    overflow-y: scroll;
+  }
   .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column h3,
   .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column p {
     line-height: 1.4285em;
   }
-  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column .next-button {
-    margin-top: 2em;
-  }
-  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .content-column.q11 .next-button {
+  .qa-page .qa-box .qa-box-content.qa-content .ui.dimmer .content .one.column.grid .column .next-button {
     margin-top: 1em;
   }
 }
