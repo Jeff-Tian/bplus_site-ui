@@ -5,7 +5,8 @@ angular
     .module('mobile', [
         'ng.utils',
         'pascalprecht.translate',
-        'ui.router'
+        'ui.router',
+        'preheating'
     ])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
@@ -14,5 +15,4 @@ angular
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    .controller('MobileQACtrl', angular.bplus.MobileQACtrl)
 ;

@@ -17,7 +17,8 @@
     "angular-translate": "~2.7.2",
     "echarts": "~2.2.7",
     "jquery-address": "https://github.com/asual/jquery-address.git",
-    "owl.carousel": "~2.0.0-beta.3"
+    "owl.carousel": "~2.0.0-beta.3",
+    "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6",
