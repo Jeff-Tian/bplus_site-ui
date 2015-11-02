@@ -94,6 +94,14 @@
             window.location.href = $scope.localeUrl('/game');
         };
 
+        $scope.gotoPay = function () {
+            if (!DeviceHelper.isMobile()) {
+                window.location.href = $scope.localeUrl('/select-payment-method');
+            } else {
+                window.location.href = $scope.localeUrl('/m/index#/select-payment-method');
+            }
+        };
+
         $scope.trySubmit = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -129,11 +137,7 @@
             service
                 .post(path, $scope.schoolInfo)
                 .then(function (res) {
-                    if (DeviceHelper.isMobile()) {
-                        $scope.gotoComplete();
-                    } else {
-                        $scope.gotoGamePage();
-                    }
+                    $scope.gotoPay();
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {
