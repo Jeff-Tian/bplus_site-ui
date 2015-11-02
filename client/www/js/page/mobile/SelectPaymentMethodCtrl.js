@@ -34,7 +34,7 @@
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
-                        window.location.href = $scope.localeUrl('/index#/payed');
+                        $state.go('paid');
                     })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
@@ -44,6 +44,10 @@
         var alipaying = false;
         $scope.alipay = function () {
             pay(alipaying, 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
+        };
+
+        $scope.pcAlipay = function () {
+            pay(alipaying, 'alipay', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
         };
 
         var wechatPaying = false;
@@ -72,7 +76,7 @@
                         })
                         .then(function (result) {
                             if (/^true$/i.test(result.hasRight)) {
-                                window.location.href = '#/paid';
+                                $state.go('paid');
                             } else {
                                 if (paymentMethod === 'wechat') {
 

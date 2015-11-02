@@ -83,6 +83,8 @@
   "SEODesc_EmailVerify": "Bridge+",
   "SEOTitle_Mobile_Index": "Bridge+ ",
   "SEODesc_Mobile_Index": "Bridge+",
+  "SEOTitle_SelectPaymentMethod": "Select payment method",
+  "SEODesc_SelectPaymentMethod": "Bridge+",
   "SignIn": "Sign In",
   "Home": "Home",
   "Learn": "Learn",
@@ -635,7 +637,8 @@
   "微信支付": "Wechat Pay",
   "支付宝支付": "Alipay",
   "邀请朋友一起参赛: ": "Invite your friends to this game: ",
-  "选择支付方式:": "Select payment method",
+  "选择支付方式:": "Select payment method:",
+  "选择支付方式": "Select payment method",
   "下一步: 付费": "Next step: Pay",
   "完成信息填写与付费,即可组队参赛!": "{{competition}} with {{fee}}. Complete your background information and pay, then you can join the competition with your team!"
 }

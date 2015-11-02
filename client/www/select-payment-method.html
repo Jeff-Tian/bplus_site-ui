@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('SEOTitle_SelectPaymentMethod') %></title>
+    <meta name="description" content="<%= __('SEODesc_SelectPaymentMethod') %>">
+    <%- include('view-partial/head.html') -%>
+</head>
+
+<body ng-app="selectPaymentMethod" ng-controller="AppCtrl">
+<%- include('view-partial/header.html') -%>
+<div class="ui b-signin-wrapper">
+
+    <div ui-view class="main body b-mobile back-color white color shadowed has-header">
+    </div>
+
+    <script type="text/ng-template" id="select-payment-method.html">
+
+        <h4 class="ui centered header">
+            <%= __('完成信息填写与付费,即可组队参赛!', {competition: __('全国大赛'), fee: __('{{how_much}}元', {how_much: '300'})}) %>
+        </h4>
+
+        <div class="ui column b-step-container b-separator">
+            <div class="ui center aligned container subcontainer">
+                <h2 class="grey color"><%= __('选择支付方式') %></h2>
+            </div>
+        </div>
+        <div class="ui column b-step-container">
+            <div class="ui centered padded center aligned container subcontainer"
+                 ng-controller="SelectPaymentMethodCtrl">
+                <% if (!device.isFromWechatBrowser) { %>
+                <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="pcAlipay($event)">
+                    <div class="ui error message brand"></div>
+
+                    <button loading type="submit" class="ui basic white background button "
+                            style="padding-left: 3em; padding-right: 3em;">
+                        <img class="ui middle aligned" style="height: 25px;"
+                             src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
+                        <%= __('支付宝支付') %>
+                    </button>
+                </form>
+                <% } %>
+
+                <div class="ui horizontal divider"></div>
+                <div class="ui horizontal divider"></div>
+                <form name="redemptionForm" novalidate class="ui form redemption-form"
+                      ng-submit="buyWithRedemptionCode($event)">
+                    <div class="ui error message brand"></div>
+                    <div class="ui left aligned container subcontainer">
+                        <h5 class="ui header"><%= __('兑换码') %></h5>
+                    </div>
+                    <div class="fields">
+                        <div class="thirteen wide field">
+                            <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+                        </div>
+                        <div class="three wide field">
+                            <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
+                                    type="submit"
+                                    style="padding-left: 2em; padding-right: 2em;">
+                                <%=
+                                __('确定') %>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="paid.html">
+        <div class="ui center aligned container subcontainer b-background-lighter">
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+
+            <i class="ui green massive checkmark icon"></i>
+
+            <h5 class="ui header">
+                <%= __('您已经付费报名成功！') %>
+                <div class="ui horizontal divider"></div>
+                <div class="sub header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
+            </h5>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+        </div>
+    </script>
+</div>
+
+<%- include('view-partial/footer.html') -%>
+<!--Page JS-->
+
+<!-- build:js js/cdn/personal-history.js -->
+<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="js/factories/DeviceHelper.js"></script>
+<script src="js/factories/queryParser.js"></script>
+<script src="js/directives/loading.js"></script>
+<script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
+<script src="js/page/mobile/MobilePaidCtrl.js"></script>
+<script src="js/page/select-payment-method/main.js"></script>
+<!-- endbuild -->
+</body>
+
+</html>
