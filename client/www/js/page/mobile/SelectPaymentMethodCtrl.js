@@ -48,7 +48,7 @@
 
         var wechatPaying = false;
         $scope.wechatPay = function () {
-            pay(wechatPaying, 'wechat', '/service-proxy/payment/create-order/national-game-2015/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + window.location.pathname + '?continue=continue-paying&payment_method=wechat'), $('.wechat-pay-form'));
+            pay(wechatPaying, 'wechat', '/service-proxy/payment/create-order/national-game-2015/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m' + '?continue=continue-paying&payment_method=wechat'), $('.wechat-pay-form'));
         };
 
         var invokingWechatPay = false;
