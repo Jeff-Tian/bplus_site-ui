@@ -10,19 +10,21 @@
 <body ng-app="mobile" ng-controller="AppCtrl" class="b-mobile back-color white color shadowed">
 <%- include('head.html') -%>
 
-<div class="full-height">
+<div class="full-height national" style="background: url('<%= cdn.normal %>img/mobile/e_bg.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
     <div class="ui container">
         <div class="center stuck padded">
             <div class="content center">
-                <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
+                <img src="<%= cdn.normal %>img/mobile/e.png?<%= cdn.version %>" class="e">
 
-                <h3 class="ui white header"><%= __('MobileNationalHeader') %></h3>
-                <h5><%= __('MobileNationalInfo') %></h5>
-                <h5><%= __('MobileNationalSubInfo') %></h5>
+                <h3 class="national-header"><%= __('MobileNationalInfo') %></h3>
+                <div class="national-content">
+                    <h5 class="national-info"><%= __('MobileNationalData') %></h5>
+                    <h5 class="national-info"><%= __('MobileNationalOrganizer') %></h5>
+                </div>
 
                 <div class="ui horizontal divider"></div>
                 <a href="<%= localeLinkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
-                   class="ui large red button"><%=
+                   class="ui large button e-button fluid"><%=
                     __('等你来战') %></a>
             </div>
         </div>
