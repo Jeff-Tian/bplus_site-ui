@@ -11,5 +11,6 @@ if (process.env.DATACENTER) {
 }
 config.bplusServiceParams = require("./config_bplusService");
 config.cdn.version = config.version + "_" + config.date;
+config.service_upload = "//" + config.upload.public.host + ":" + config.upload.public.port;
 
 module.exports = config;
