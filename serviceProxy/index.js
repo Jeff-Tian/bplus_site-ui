@@ -5,9 +5,9 @@ var sms = require('./sms'),
     membership = require('./membership'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
-    commerceService = require('./commerceService')
-uploadCallbackService = require('./uploadCallbackService')
-;
+    commerceService = require('./commerceService'),
+    uploadCallbackService = require('./uploadCallbackService')
+    ;
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
