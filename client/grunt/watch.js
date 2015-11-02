@@ -13,7 +13,7 @@ module.exports = function() {
 			tasks: ['jshint'],
 		},
 		html: {
-			files: ['client/www/*.html', 'client/www/view-partial/*.html'],
+			files: ['client/www/*.html', 'client/www/view-partial/*.html', 'client/www/mobile/*.html'],
 			options: {
 				livereload: true
 			}
