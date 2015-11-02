@@ -52,6 +52,11 @@ function setFeatureSwitcher(req, res, next) {
     next();
 }
 
+function setConfig(req, res, next) {
+    res.locals.config = config;
+    next();
+}
+
 function setDeviceHelper(req, res, next) {
     var ua = req.headers['user-agent'];
 
@@ -68,6 +73,7 @@ server
     .use(setLogger)
     .use(setCDN)
     .use(setFeatureSwitcher)
+    .use(setConfig)
     .use(setDeviceHelper)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
@@ -156,6 +162,7 @@ function filterConfig(config) {
     var filtered = {};
 
     filtered.captcha = config.captcha;
+    filtered.payment = config.payment.public;
     filtered.cdn = config.cdn;
     filtered.featureSwitcher = config.featureSwitcher;
     filtered.service_upload = config.service_upload;
@@ -176,6 +183,11 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 
 server.use('/translation', localeHelper.serveTranslations);
 
+server.use(localeHelper.regexPath('/m'), require('./mobile'));
+server.use(localeHelper.regexPath('/mobile'), require('./mobile'));
+server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
+server.use(localeHelper.regexPath('/mobile'), express.static(staticFolder));
+
 // Customize client file path
 server.set('views', staticFolder);
 server.use(express.static(staticFolder, staticSetting));
@@ -184,8 +196,6 @@ supportedLocales.map(function (l) {
 });
 
 server.use('/service-proxy', require('./serviceProxy'));
-server.use(localeHelper.regexPath('/m'), require('./mobile'));
-server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
 
 // Page route define
 

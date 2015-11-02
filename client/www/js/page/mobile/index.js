@@ -26,23 +26,37 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
-            .state('payed', {
-                url: '/payed',
-                templateUrl: 'payed.html'
+            .state('paidBy', {
+                url: '/select-payment-method/:paidBy',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
+            .state('continue-paying', {
+                url: '/continue-paying/:paymentMethod',
+                templateUrl: 'select-payment-method.html',
+                controller: 'SelectPaymentMethodCtrl'
+            })
+            .state('paid', {
+                url: '/paid',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
             })
         ;
     }])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
+    .directive('loading', angular.bplus.loading)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)
     .controller('MobileHeadCtrl', angular.bplus.MobileHeadCtrl)
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
+    .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;

@@ -151,8 +151,10 @@ module.exports = function (grunt) {
                                 url = url.substr(1);
                             }
 
-                            if (process.env.NODE_ENV === 'prd') {
-                                return prdConfig.cdn.normal + url + '?' + grunt.file.readJSON("package.json").version + '_' + grunt.file.readJSON("package.json").date;
+                            var pack = grunt.file.readJSON('package.json');
+
+                            if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
+                                return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
                             } else {
                                 return url + '?cdnified';
                             }

@@ -5,19 +5,9 @@ var sms = require('./sms'),
     membership = require('./membership'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
-    commerceService = require('./commerceService')
+    commerceService = require('./commerceService'),
     uploadCallbackService = require('./uploadCallbackService')
     ;
-
-function checkWechatToken(req, res, next) {
-    if (req.body.wechat_token) {
-        next();
-
-        return;
-    }
-
-    res.status(403).json({code: '403', message: 'Wechat token is missed.'});
-}
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
@@ -27,7 +17,7 @@ module.exports = require('express').Router()
         next();
     })
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
-    .post('/member/register', /*sms.validate,*/ sso.signUp)
+    .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
     .post('/member/bind-mobile', membership.ensureAuthenticated, sms.validate, sso.changeMobile)
     .post('/member/bind-mobile-by-password', sso.authenticate /* TODO : Bind wechat to member account  */)
@@ -52,6 +42,8 @@ module.exports = require('express').Router()
     .post('/logon/from-wechat', wechat.oAuthLogon)
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
-    .post('/commerce/create-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .get('/upload/callback', uploadCallbackService)
+    .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
+    .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
+    .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrderByWechat)
 ;

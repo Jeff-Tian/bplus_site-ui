@@ -183,9 +183,9 @@ module.exports = {
 
                 var locale = localeHelper.getLocale(req.url, req);
                 // TODO: Investigate why no effect
-                res.location(localeHelper.generateLocaleLink('/', locale));
+                res.redirect(localeHelper.generateLocaleLink('/', locale));
 
-                return false;
+                return undefined;
             }
         })(req, res, next);
     },

@@ -64,17 +64,40 @@
     <div class="white background b-mobile stretch has-header">
         <div class="ui container">
             <div class="ui horizontal divider"></div>
-            <h2 class="ui header">
+            <h3 class="ui header">
                 <div class="sub header">
-                    <%= __('报名{{competition}}, 报名费{{fee}}', {competition: '全国大赛', fee: '100元'}) %>
+                    <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
+                    {how_much: '300'})}) %>
                 </div>
                 选择支付方式:
                 <div class="ui horizontal divider"></div>
-                <div class="sub header">
-                    <%= __('当前仅支持兑换码') %>
-                </div>
-            </h2>
+            </h3>
 
+            <% if (device.isFromWechatBrowser) { %>
+            <form name="wechatPayForm" novalidate class="ui form wehcat-pay-form" ng-submit="wechatPay($event)">
+                <div class="ui error message brand"></div>
+
+                <button loading type="submit" class="ui fluid basic button">
+                    <i class="wechat icon"></i>
+                    <%= __('微信支付') %>
+                </button>
+            </form>
+            <% } %>
+
+            <% if (!device.isFromWechatBrowser) { %>
+            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay($event)">
+                <div class="ui error message brand"></div>
+
+                <button loading type="submit" class="ui fluid basic button">
+                    <img class="ui middle aligned" style="height: 25px;"
+                         src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
+                    <%= __('支付宝支付') %>
+                </button>
+            </form>
+            <% } %>
+
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
@@ -83,7 +106,8 @@
                     <label><%= __('兑换码') %></label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
-                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit"><%=
+                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
+                    <%=
                     __('确定') %>
                 </button>
             </form>
@@ -91,32 +115,31 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="payed.html">
-    <div class="ui hidden divider"></div>
-    <div class="ui hidden divider"></div>
-    <div class="ui center aligned container">
-        <div class="ui left aligned container">
-            <h3 class="ui white header">
-                <i class="checkmark icon"></i>
+<script type="text/ng-template" id="paid.html">
+    <div class="white background b-mobile stretch ">
+        <div class="ui center aligned container">
 
-                <div class="content">
-                    <%= __('您已经付费报名成功！') %>
-                    <div class="sub white header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
-                </div>
+            <i class="ui green massive checkmark icon"></i>
+
+            <h3 class="ui header">
+
+                <%= __('您已经付费报名成功！') %>
+                <div class="ui horizontal divider"></div>
+                <div class="sub header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
+                <div class="sub header"><%= __('邀请朋友一起参赛: ') %> {{gameLink}}</div>
             </h3>
         </div>
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui hidden divider"></div>
-    <div class="ui centered grid">
-        <div class="row">
-            <div class="ui six doubling centered cards">
-                <div class="ui transparent card">
-                    <div class="ui image">
-                        <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
-                    </div>
-                    <div class="center aligned content">
-                        <p><%= __('Bridge+服务号') %></p>
+        <div class="ui centered grid">
+            <div class="row">
+                <div class="ui six doubling centered cards">
+                    <div class="ui transparent card">
+                        <div class="ui image">
+                            <img class="ui small image"
+                                 src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                        </div>
+                        <div class="center aligned content">
+                            <p><%= __('Bridge+服务号') %></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,15 +149,18 @@
 
 <%- include('footer.html') -%>
 
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!-- build:js js/cdn/m/index.js -->
-<script src="../js/page/mobile/MobileMenuCtrl.js"></script>
-<script src="../js/page/mobile/MobileHeadCtrl.js"></script>
-<script src="../js/page/mobile/MobileNationalCtrl.js"></script>
-<script src="../js/page/mobile/MobileAboutusCtrl.js"></script>
-<script src="../js/page/mobile/MobileIndexCtrl.js"></script>
-<script src="../js/page/mobile/SelectPaymentMethodCtrl.js"></script>
-<script src="../js/factories/FormValidation.js"></script>
-<script src="../js/page/mobile/index.js"></script>
+<script src="js/factories/queryParser.js"></script>
+<script src="js/page/mobile/MobileMenuCtrl.js"></script>
+<script src="js/page/mobile/MobileHeadCtrl.js"></script>
+<script src="js/page/mobile/MobileNationalCtrl.js"></script>
+<script src="js/page/mobile/MobileAboutusCtrl.js"></script>
+<script src="js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
+<script src="js/factories/FormValidation.js"></script>
+<script src="js/page/mobile/MobilePaidCtrl.js"></script>
+<script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
 </body>
 

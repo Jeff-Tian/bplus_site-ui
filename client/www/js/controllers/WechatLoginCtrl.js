@@ -26,7 +26,7 @@
                         .finally(function () {
                             $scope.fetchProfile()
                                 .then(function (profile) {
-                                    if (!profile.mobile) {
+                                    if (profile.member_id && !profile.mobile) {
                                         forceFillMobileNumber();
                                     } else {
                                         gotoHomepage();

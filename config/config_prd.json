@@ -35,14 +35,26 @@
     "port": "12345"
   },
   "wechat": {
-    "host": "service.brigeplus.cn",
+    "host": "service.bridgeplus.cn",
     "port": "10101",
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
-    "host": "service.bridgeplus.com",
+    "host": "service.bridgeplus.cn",
     "port": "10222"
+  },
+  "payment": {
+    "public": {
+      "host": "service.bridgeplus.com",
+      "port": "10111"
+    }
+  },
+  "games": {
+    "national-2015": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "d00b2d92-1995-4a22-a86c-3115518bd635"
+    }
   },
   "logger": {
     "levels": {
@@ -75,6 +87,6 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "0.2.2",
-  "date": "20151022_0853"
+  "version": "0.5.0",
+  "date": "20151028_1004"
 }

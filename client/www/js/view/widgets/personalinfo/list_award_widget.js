@@ -33,6 +33,9 @@ define([
                   var lng = me.getLanguage();
                   var options = {year: 'numeric', month: 'long'};
                   $scope.data.prizeDate.displayValue = $scope.data.prizeDate.value.rawValue.toLocaleString(lng, options);
+                  if ($scope.data.prizeDate.displayValue.indexOf("GMT") > -1) {
+                      $scope.data.prizeDate.displayValue = $scope.data.prizeDate.value.year + "-" + $scope.data.prizeDate.value.month;
+                  }
               }
                $scope.dateSelect = {
                  config: {
