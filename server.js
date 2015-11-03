@@ -207,6 +207,7 @@ mapRoute2Template('/aboutus');
 mapRoute2Template('/school');
 mapRoute2Template('/statement');
 mapRoute2Template('/youth');
+mapRoute2Template('/preheating');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
 mapRoute2Template('/sign-in');
