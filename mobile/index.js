@@ -20,7 +20,6 @@ var mobileRoutes = [
     'sign-in',
     'aboutus',
     'national',
-    'preheating',
     'reset-password',
     'reset-password-by-email',
     'personal-history',
