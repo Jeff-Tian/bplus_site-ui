@@ -24,7 +24,11 @@
 
         function gotoPaid() {
             function gotoPaidInner() {
-                $state.go('paid', {who: $scope.memberInfo.displayName, redemptionCode: 'coming-soon'});
+                $state.go('paid', {
+                    who: $scope.memberInfo.member_id,
+                    displayName: $scope.memberInfo.displayName,
+                    redemptionCode: 'coming-soon'
+                });
             }
 
             msgBus.onMemberLoaded($scope, gotoPaidInner);
