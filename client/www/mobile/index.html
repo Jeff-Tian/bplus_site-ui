@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mobile" ng-controller="AppCtrl">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= __('SEOTitle_Mobile_Index') %></title>
+    <title>{{pageTitle || '<%= __("SEOTitle_Mobile_Index") %>'}}</title>
     <meta name="description" content="<%= __('SEODesc_Mobile_Index') %>">
     <%- include('header.html') -%>
 </head>
-<body ng-app="mobile" ng-controller="AppCtrl" class="b-background">
+<body class="b-background">
 <%- include('head.html') -%>
 
 <div ui-view class="main body b-mobile back-color white color shadowed has-header">
