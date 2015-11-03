@@ -27,6 +27,7 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="<%= cdn.normal %>icon/ms-icon-144x144.png?<%= cdn.version %>">
 	<meta name="theme-color" content="#ffffff">
+	<title>E战成名</title>
 	<!--CSS-->
 	<link rel="stylesheet" type="text/css"
 	      href="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.css?<%= cdn.version %>">
@@ -42,11 +43,16 @@
 			<div class="ui container">
 				<div class="header-wechat">
 					<img src="<%=cdn.normal%>img/hp/header_wechat.jpg?<%=cdn.version%>">
-					<p class="wechat">微信扫一扫</p>
-					<p class="wechat">关注该公众号</p>
+					<p class="wechat table-show">微信扫一扫</p>
+					<p class="wechat table-show">关注该公众号</p>
 				</div>
 
-				<p class="header-title">MarkSimos全民商战模拟游戏大赛</p>
+				<div class="e">
+					<img src="<%=cdn.normal%>img/hp/youth_e.png?<%=cdn.version%>">
+				</div>
+				<p class="header-title table-show">MarkSimos全民商战模拟游戏大赛</p>
+				<p class="header-title mobile-show">MarkSimos</br>全民商战模拟游戏大赛</p>
+
 				<p class="header-content">(18~22岁)</p>
 				<button class="ui button hp-button-gray">等你来战</button>
 
@@ -124,7 +130,7 @@
 					<div class="column simulation">
 						<img src="<%=cdn.normal%>img/hp/simulation.png?<%=cdn.version%>">
 					</div>
-					<div class="bottom aligned row">
+					<div class="bottom aligned row table-show">
 						<div class="four wide column info-column-left">
 							<img src="<%=cdn.normal%>img/hp/wf.png?<%=cdn.version%>" style="width:100%">
 						</div>
@@ -138,6 +144,15 @@
 								</p>
 							</div>
 						</div>
+					</div>
+					<div class="column mobile-show">
+						<p class="content">
+							世界商战模拟游戏学习革命的序幕被拉开之后，经历了无数次的迭代升级，最终由世界级营销大师温伟德教授(Wilfried Vanhonacker) 指导世界一流研发团队研发出MarkSimos营销商战模拟游戏，成为商战模拟游戏的集大成者。
+						</p>
+						<img src="<%=cdn.normal%>img/hp/wf.png?<%=cdn.version%>">
+						<p class="content">
+							温伟德教授是合得国际首批签约的世界级大师之一。之前曾任俄罗斯总统顾问，是莫斯科SKOLKOVO商学院前院长，是原中欧国际工商学院早期联合创始人之一、前院长。
+						</p>
 					</div>
 				</div>
 			</div>
@@ -260,7 +275,7 @@
 					<span>6</span> 大赛赛制
 				</p>
 
-				<div class="format-grid-parent">
+				<div class="format-grid-parent table-show">
 					<div class="ui grid two column format-grid">
 						<div class="column left">
 							<div class="ui list">
@@ -340,156 +355,166 @@
 						</div>
 					</div>
 				</div>
-				<!--1-->
-				<div class="ui grid national-grid">
-					<div class="middle aligned row">
-						<div class="two wide column">
-							<img src="<%=cdn.normal%>img/hp/icon/x1.png?<%=cdn.version%>">
-						</div>
-						<div class="fourteen wide column">
-							<div class="pk-column">
-								<div class="header national">
-									<h1>全国总冠军赛</h1>
-								</div>
-								<div class="footer">
-									<p>2016年1月10日 - 11日</p>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="format-grid-parent mobile-show">
+					<img src="<%=cdn.normal%>img/hp/group.png?<%=cdn.version%>">
 				</div>
-				<div class="ui grid national-grid">
-					<div class="middle aligned row">
-						<div class="two wide column"></div>
-						<div class="fourteen wide column">
-							<div class="ui grid four column list-grid">
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/personal.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/company.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/student.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/youth.png?<%=cdn.version%>">
-								</div>
-							</div>
-						</div>
-					</div>
+
+				<div class="data-img mobile-show">
+					<img src="<%=cdn.normal%>img/hp/data.png?<%=cdn.version%>">
 				</div>
-				<!--2-->
-				<div class="ui grid national-grid">
-					<div class="middle aligned row">
-						<div class="two wide column">
-							<img src="<%=cdn.normal%>img/hp/icon/x2.png?<%=cdn.version%>">
-						</div>
-						<div class="fourteen wide column">
-							<div class="ui grid four column list-grid">
-								<div class="pk-column column">
-									<div class="header personal">
-										<h1>个人组</h1>
-										<h3>冠军赛</h3>
+
+				<div class="table-show">
+					<!--1-->
+					<div class="ui grid national-grid">
+						<div class="middle aligned row">
+							<div class="two wide column">
+								<img src="<%=cdn.normal%>img/hp/icon/x1.png?<%=cdn.version%>">
+							</div>
+							<div class="fourteen wide column">
+								<div class="pk-column">
+									<div class="header national">
+										<h1>全国总冠军赛</h1>
 									</div>
 									<div class="footer">
-										<p>2015年12月6日</p>
-									</div>
-								</div>
-								<div class="pk-column column">
-									<div class="header company">
-										<h1>企业组</h1>
-										<h3>冠军赛</h3>
-									</div>
-									<div class="footer">
-										<p>2015年12月6日</p>
-									</div>
-								</div>
-								<div class="pk-column column">
-									<div class="header student">
-										<h1>大学生组</h1>
-										<h3>冠军赛</h3>
-									</div>
-									<div class="footer">
-										<p>2015年12月20日</p>
-									</div>
-								</div>
-								<div class="pk-column column">
-									<div class="header youth">
-										<h1>青少年组</h1>
-										<h3>冠军赛</h3>
-									</div>
-									<div class="footer">
-										<p>2015年12月13日</p>
+										<p>2016年1月10日 - 11日</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="ui grid national-grid">
-					<div class="middle aligned row">
-						<div class="two wide column"></div>
-						<div class="fourteen wide column">
-							<div class="ui grid four column list-grid">
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/personal.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/company.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/student.png?<%=cdn.version%>">
-								</div>
-								<div class="column">
-									<img src="<%=cdn.normal%>img/hp/icon/youth.png?<%=cdn.version%>">
+					<div class="ui grid national-grid">
+						<div class="middle aligned row">
+							<div class="two wide column"></div>
+							<div class="fourteen wide column">
+								<div class="ui grid four column list-grid">
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/personal.png?<%=cdn.version%>">
+									</div>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/company.png?<%=cdn.version%>">
+									</div>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/student.png?<%=cdn.version%>">
+									</div>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/youth.png?<%=cdn.version%>">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!--3-->
-				<div class="ui grid national-grid">
-					<div class="middle aligned row">
-						<div class="two wide column">
-							<img src="<%=cdn.normal%>img/hp/icon/x3.png?<%=cdn.version%>">
+					<!--2-->
+					<div class="ui grid national-grid">
+						<div class="middle aligned row">
+							<div class="two wide column">
+								<img src="<%=cdn.normal%>img/hp/icon/x2.png?<%=cdn.version%>">
+							</div>
+							<div class="fourteen wide column">
+								<div class="ui grid four column list-grid">
+									<div class="pk-column column">
+										<div class="header personal">
+											<h1>个人组</h1>
+											<h3>冠军赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年12月6日</p>
+										</div>
+									</div>
+									<div class="pk-column column">
+										<div class="header company">
+											<h1>企业组</h1>
+											<h3>冠军赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年12月6日</p>
+										</div>
+									</div>
+									<div class="pk-column column">
+										<div class="header student">
+											<h1>大学生组</h1>
+											<h3>冠军赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年12月20日</p>
+										</div>
+									</div>
+									<div class="pk-column column">
+										<div class="header youth">
+											<h1>青少年组</h1>
+											<h3>冠军赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年12月13日</p>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="fourteen wide column">
-							<div class="ui grid four column list-grid">
-								<div class="pk-column column">
-									<div class="header personal">
-										<h1>个人组</h1>
-										<h3>初赛</h3>
+					</div>
+					<div class="ui grid national-grid">
+						<div class="middle aligned row">
+							<div class="two wide column"></div>
+							<div class="fourteen wide column">
+								<div class="ui grid four column list-grid">
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/personal.png?<%=cdn.version%>">
 									</div>
-									<div class="footer">
-										<p>2015年11月</p>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/company.png?<%=cdn.version%>">
 									</div>
-								</div>
-								<div class="pk-column column">
-									<div class="header company">
-										<h1>企业组</h1>
-										<h3>初赛</h3>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/student.png?<%=cdn.version%>">
 									</div>
-									<div class="footer">
-										<p>2015年11月</p>
-									</div>
-								</div>
-								<div class="pk-column column">
-									<div class="header student">
-										<h1>大学生组</h1>
-										<h3>初赛</h3>
-									</div>
-									<div class="footer">
-										<p>2015年11月</p>
+									<div class="column">
+										<img src="<%=cdn.normal%>img/hp/icon/youth.png?<%=cdn.version%>">
 									</div>
 								</div>
-								<div class="pk-column column">
-									<div class="header youth">
-										<h1>青少年组</h1>
-										<h3>初赛</h3>
+							</div>
+						</div>
+					</div>
+					<!--3-->
+					<div class="ui grid national-grid">
+						<div class="middle aligned row">
+							<div class="two wide column">
+								<img src="<%=cdn.normal%>img/hp/icon/x3.png?<%=cdn.version%>">
+							</div>
+							<div class="fourteen wide column">
+								<div class="ui grid four column list-grid">
+									<div class="pk-column column">
+										<div class="header personal">
+											<h1>个人组</h1>
+											<h3>初赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年11月</p>
+										</div>
 									</div>
-									<div class="footer">
-										<p>2015年11月</p>
+									<div class="pk-column column">
+										<div class="header company">
+											<h1>企业组</h1>
+											<h3>初赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年11月</p>
+										</div>
+									</div>
+									<div class="pk-column column">
+										<div class="header student">
+											<h1>大学生组</h1>
+											<h3>初赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年11月</p>
+										</div>
+									</div>
+									<div class="pk-column column">
+										<div class="header youth">
+											<h1>青少年组</h1>
+											<h3>初赛</h3>
+										</div>
+										<div class="footer">
+											<p>2015年11月</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -507,7 +532,7 @@
 
 				<div class="ui grid hcd">
 					<div class="middle aligned row">
-						<div class="three wide column">
+						<div class="three wide column logo">
 							<img src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
 						</div>
 						<div class="thirteen wide column">
@@ -550,8 +575,8 @@
 
 				<div class="ui grid bpuls">
 					<div class="middle aligned row">
-						<div class="four wide column">
-							<img src="<%=cdn.normal%>img/hp/b-logo.png?<%=cdn.version%>">
+						<div class="four wide column logo">
+							<img src="<%=cdn.normal%>img/hp/b-logo.png?<%=cdn.version%>" class="b-logo">
 						</div>
 						<div class="twelve wide column">
 							<h2 class="sub-title">Bridge+</h2>

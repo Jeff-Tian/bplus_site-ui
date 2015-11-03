@@ -20,11 +20,11 @@
     "port": "10001"
   },
   "upload": {
-      "public": {
-          "host": "resource.service.bridgeplus.cn",
-          "port": 80,
-          "code": "HCD_S1"
-      }
+    "public": {
+      "host": "resource.service.bridgeplus.cn",
+      "port": 80,
+      "code": "HCD_S1"
+    }
   },
   "sso": {
     "host": "service.bridgeplus.cn",
@@ -41,12 +41,14 @@
     "corp_app_id": "bridgeplus_corp"
   },
   "commerce": {
-    "host": "service.bridgeplus.cn",
-    "port": "10222"
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": "10222"
+    }
   },
   "payment": {
     "public": {
-      "host": "service.bridgeplus.com",
+      "host": "payment.service.bridgeplus.cn",
       "port": "10111"
     }
   },

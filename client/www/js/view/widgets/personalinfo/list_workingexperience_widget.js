@@ -33,8 +33,8 @@ define([
               var options = {year: 'numeric', month: 'long'};
               if ($scope.data.dateTo.value.rawValue) {
                   $scope.data.dateTo.displayValue = $scope.data.dateTo.value.rawValue.toLocaleString(lng, options);
-                  if ($scope.data.dateTo.displayvalue.indexOf("GMT") > -1) {
-                      $scope.data.dateTo.displayvalue = $scope.data.dateTo.value.year + "-" + $scope.data.dateTo.value.month;
+                  if ($scope.data.dateTo.displayValue.indexOf("GMT") > -1) {
+                      $scope.data.dateTo.displayValue = $scope.data.dateTo.value.year + "-" + $scope.data.dateTo.value.month;
                   }
               }
               if ($scope.data.dateFrom.value.rawValue) {
