@@ -268,6 +268,7 @@ module.exports = function (grunt) {
     grunt.registerTask('run-release', ['mock-release', 'nodemon']);
     grunt.registerTask('mock-release', function () {
         process.env.NODE_ENV = 'prd';
+        process.env.RUN_FROM = 'local';
     });
 
     grunt.registerTask('build', ['clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
