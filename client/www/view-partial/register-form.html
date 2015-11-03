@@ -53,8 +53,11 @@
             <button type="submit" class="ui fluid red submit button"
                     ng-disabled="!isSignUpFormFullyValid()">{{'Done' | translate}}
             </button>
-            <p class="ui mini grey color privacy-declaration" style="font-size: small;">{{ footerTip |
-                translate}}</p>
+            <p class="ui mini grey color privacy-declaration" style="font-size: small;">
+                <a class="ui mini grey color privacy-declaration"
+                   ng-href="/statement" target="_blank">{{ footerTip |
+                    translate}}</a>
+            </p>
         </div>
     </div>
 </form>
