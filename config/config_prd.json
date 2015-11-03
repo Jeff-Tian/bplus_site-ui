@@ -48,7 +48,7 @@
   },
   "payment": {
     "public": {
-      "host": "service.bridgeplus.com",
+      "host": "payment.service.bridgeplus.cn",
       "port": "10111"
     }
   },
