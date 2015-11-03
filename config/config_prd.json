@@ -21,7 +21,7 @@
   },
   "upload": {
     "public": {
-      "host": "resource.service.bridgeplus.cn",
+      "host": "upload.service.bridgeplus.cn",
       "port": 80,
       "code": "HCD_S1"
     }
