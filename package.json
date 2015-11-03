@@ -32,7 +32,6 @@
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-imagemin": "^0.9.2",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-less": "*",
     "grunt-contrib-uglify": "*",
