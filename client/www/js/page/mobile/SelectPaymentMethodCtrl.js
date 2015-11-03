@@ -143,6 +143,15 @@
             ;
         }
 
+        if ($state.current.name === 'select-payment-method') {
+            service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
+                .then(function (result) {
+                    if (/^true$/i.test(result.hasRight)) {
+                        $state.go('paid');
+                    }
+                });
+        }
+
         if ($state.current.name === 'continue-paying') {
             if ($stateParams.paymentMethod === 'wechat') {
                 $scope.wechatPay();
