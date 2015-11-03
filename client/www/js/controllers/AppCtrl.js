@@ -9,6 +9,7 @@
             return service.get('/service-proxy/member/profile/')
                 .then(function (res) {
                     $scope.memberInfo = res;
+                    $scope.memberLoaded = true;
 
                     $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile || res.wechat;
 
@@ -64,6 +65,10 @@
         window.addEventListener('hashchange', locationHashChanged);
 
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
+
+        $scope.serviceUrls = {
+            checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right'
+        };
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout'];

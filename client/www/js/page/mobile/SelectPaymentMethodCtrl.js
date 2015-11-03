@@ -22,6 +22,14 @@
             return wechat;
         }
 
+        function gotoPaid() {
+            function gotoPaidInner() {
+                $state.go('paid', {who: $scope.memberInfo.displayName, redemptionCode: 'coming-soon'});
+            }
+
+            msgBus.onMemberLoaded($scope, gotoPaidInner);
+        }
+
         $scope.payData = {
             redemptionCode: ''
         };
@@ -34,7 +42,7 @@
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
-                        $state.go('paid');
+                        gotoPaid();
                     })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
@@ -76,7 +84,7 @@
                         })
                         .then(function (result) {
                             if (/^true$/i.test(result.hasRight)) {
-                                $state.go('paid');
+                                gotoPaid();
                             } else {
                                 if (paymentMethod === 'wechat') {
 
@@ -102,7 +110,7 @@
                                         if (res.errMsg === 'chooseWXPay:ok') {
                                             window.alert('支付成功!');
                                             wechatPaid();
-                                            window.location.href = '#/paid';
+                                            gotoPaid();
                                         } else {
                                             window.alert('支付失败!');
                                             wechatPaid();
@@ -147,7 +155,7 @@
             service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
                 .then(function (result) {
                     if (/^true$/i.test(result.hasRight)) {
-                        $state.go('paid');
+                        gotoPaid();
                     }
                 });
         }

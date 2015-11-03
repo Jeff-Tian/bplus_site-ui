@@ -37,7 +37,7 @@ angular
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('paid', {
-                url: '/paid',
+                url: '/paid/:who/:redemptionCode',
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })

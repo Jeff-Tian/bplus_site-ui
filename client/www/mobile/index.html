@@ -116,7 +116,11 @@
 </script>
 
 <script type="text/ng-template" id="paid.html">
-    <div class="white background b-mobile stretch ">
+    <div class="white background b-mobile stretch" ng-show="!showPaid">
+        <div class="ui horizontal divider"></div>
+        <div class="ui very padded vertical loading segment"></div>
+    </div>
+    <div class="white background b-mobile stretch" ng-show="showPaid" ng-cloak>
         <div class="ui center aligned container">
 
             <i class="ui green massive checkmark icon"></i>
