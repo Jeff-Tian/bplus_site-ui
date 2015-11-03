@@ -46,4 +46,7 @@ module.exports = require('express').Router()
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrder)
     .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.createOrderByWechat)
+    .post('/payment/create-order/national-game-2015/check-has-right', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, function (req, res, next) {
+        res.send(req.chunks);
+    })
 ;

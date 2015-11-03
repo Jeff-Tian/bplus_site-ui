@@ -70,7 +70,11 @@
     </script>
 
     <script type="text/ng-template" id="paid.html">
-        <div class="ui center aligned container subcontainer b-background-lighter">
+        <div class="ui center aligned container subcontainer b-background-lighter" ng-show="!showPaid">
+            <div class="ui very padded loading vertical segment">
+            </div>
+        </div>
+        <div class="ui center aligned container subcontainer b-background-lighter" ng-cloak ng-show="showPaid">
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>

@@ -116,17 +116,24 @@
 </script>
 
 <script type="text/ng-template" id="paid.html">
-    <div class="white background b-mobile stretch ">
+    <div class="white background b-mobile stretch" ng-show="!showPaid">
+        <div class="ui horizontal divider"></div>
+        <div class="ui very padded vertical loading segment"></div>
+    </div>
+    <div class="white background b-mobile stretch" ng-show="showPaid" ng-cloak>
         <div class="ui center aligned container">
 
             <i class="ui green massive checkmark icon"></i>
 
-            <h3 class="ui header">
+            <h3 class="ui header" ng-show="currentUserIsMe">
 
                 <%= __('您已经付费报名成功！') %>
                 <div class="ui horizontal divider"></div>
                 <div class="sub header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
                 <div class="sub header"><%= __('邀请朋友一起参赛: ') %> {{gameLink}}</div>
+            </h3>
+            <h3 class="ui header" ng-show="!currentUserIsMe">
+                {{paidUser.displayName}} <%= __('已经成功购买了{{competition}}', {competition: '全国大赛'}) %>
             </h3>
         </div>
         <div class="ui centered grid">

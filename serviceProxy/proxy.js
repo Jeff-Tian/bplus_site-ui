@@ -77,6 +77,7 @@ function advancedProxy(req, res, next, settings) {
                 var continueNext = settings.responseInterceptor(res, chunks, req);
 
                 if (continueNext === true) {
+                    req.chunks = chunks;
                     next();
                 } else if (continueNext === false) {
                     res.send(chunks);
