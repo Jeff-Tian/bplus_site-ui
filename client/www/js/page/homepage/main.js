@@ -24,20 +24,12 @@ angular.module('bplus', [
 
 // TODO: integrated into JS framework
 (function () {
-    //$(document)
-    //  .ready(function() {
-    // fix header when passed
-
     setTimeout(function () {
         // preload image
-        new Image().src = "img/client/1x/tencent.png";
-        new Image().src = "img/client/1x/cocacola.png";
-        new Image().src = "img/client/1x/huawei.png";
-        new Image().src = "img/client/1x/tsinghua.png";
-        new Image().src = "img/client/1x/ceibs.png";
-        new Image().src = "img/client/1x/cas.png";
-        new Image().src = "img/client/1x/tencent.png";
-        new Image().src = "img/client/1x/cocacola.png";
+        var toBeLoaded = ["img/client/1x/tencent.png", "img/client/1x/cocacola.png", "img/client/1x/huawei.png", "img/client/1x/tsinghua.png", "img/client/1x/ceibs.png", "img/client/1x/cas.png"];
+        for (var i = 0; i < toBeLoaded.length; i++) {
+            new Image().src = angular.bplus.config.cdn.normal + toBeLoaded[i] + '?' + angular.bplus.config.cdn.version;
+        }
     }, 1000);
 
 
@@ -75,7 +67,7 @@ angular.module('bplus', [
             //$('.masthead-carousel').removeClass('animated b-pulse');
             $('.owl-carousel').find('h1').hide();
             $('.owl-carousel').find('h2').hide();
-            
+
             setTimeout(function () {
                 $('.active').find('h1').show();
                 $('.active').find('h2').show();
@@ -139,13 +131,5 @@ angular.module('bplus', [
         $('#b-client-header').css('visibility', 'visible');
     }).mouseout(function () {
         $('#b-client-header').css('visibility', 'hidden');
-    });
-
-    $(document).ready(function () {
-        $('iframe').load(function () {
-            //$(this).contents().find('body').css({
-            //    color: 'white!important'
-            //});
-        });
     });
 })();

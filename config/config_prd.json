@@ -21,7 +21,7 @@
   },
   "upload": {
     "public": {
-      "host": "resource.service.bridgeplus.cn",
+      "host": "upload.service.bridgeplus.cn",
       "port": 80,
       "code": "HCD_S1"
     }
@@ -89,6 +89,6 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "0.6.0",
-  "date": "20151102_0854"
+  "version": "0.7.0",
+  "date": "20151103_0553"
 }
