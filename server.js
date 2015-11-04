@@ -220,7 +220,13 @@ mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
-mapRoute2Template('/select-payment-method');
+server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('select-payment-method');
+    } else {
+        res.redirect('/m#/select-payment-method');
+    }
+});
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
 
