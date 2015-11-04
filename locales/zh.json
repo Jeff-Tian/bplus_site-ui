@@ -211,6 +211,7 @@
   "service-20208": "兑换码不正确",
   "service-20202": "没有找到商品信息",
   "service-20212": "没有找到支付方式",
+  "service-20215": "支付失败",
   "service-DATA_ERROR": "结束日期不能早于开始日期",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
