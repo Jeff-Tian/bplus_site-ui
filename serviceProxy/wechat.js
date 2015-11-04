@@ -50,7 +50,9 @@ module.exports = {
         path: '/wechat/oauth/openid',
         method: 'POST',
         dataMapper: function (d, req) {
-            d.app_id = wechat.corp_app_id;
+            // TODO: Use wechat.corp_app_id;
+            //d.app_id = wechat.corp_app_id;
+            d.app_id = 'hcdglobal_corp';
             d.returnUrl = req.query.returnUrl || req.body.returnUrl || req.headers['referer'] || (req.headers['origin'] + req.originalUrl);
             delete d.href;
 

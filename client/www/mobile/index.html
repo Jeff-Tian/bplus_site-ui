@@ -19,43 +19,39 @@
     <div class="full-height"
          style="background: url('<%= cdn.normal %>img/salespage/game_banner.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
         <div class="ui bottom stuck extra vertical padded container">
-            <div class="ui equal width left aligned padded grid">
-                <div class="row">
-                    <div class="column">
-                        <h2 class="ui white header"><%= __('MobileIndexHeader') %></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column">
-                        <p><%= __('MobileIndexSubHeader') %></p>
-                    </div>
-                </div>
+            <div class="ui vertical padded segment" style="border-bottom: none;">
+                <h2 class="ui white header"><%= __('MobileIndexHeader') %></h2>
+
+                <p><%= __('MobileIndexSubHeader') %></p>
+
                 <% if (!signedIn) { %>
-                <div class="row">
-                    <div class="column">
+                <div class="ui horizontal segments" style="background: transparent; border:none; box-shadow: none;">
+                    <div class="ui segment" style="padding-left: 0;">
                         <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"><%= __('SignIn')
                             %></a>
                     </div>
-                    <div class="column">
+                    <div class="ui segment" style="padding-right: 0; border:none;">
                         <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button"><%=
                             __('SignUp')
                             %></a>
                     </div>
                 </div>
                 <% } %>
-            </div>
-            <% if (signedIn) { %>
-            <div class="ui six doubling centered cards">
-                <div class="ui transparent card">
-                    <div class="ui image">
-                        <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
-                    </div>
-                    <div class="center aligned content">
-                        <p><%= __('Bridge+服务号') %></p>
+
+                <% if (signedIn) { %>
+                <div class="ui six doubling centered cards">
+                    <div class="ui transparent card">
+                        <div class="ui image">
+                            <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>"
+                                 style="max-width: 111px; margin: 0 auto;">
+                        </div>
+                        <div class="center aligned content">
+                            <p><%= __('Bridge+服务号') %></p>
+                        </div>
                     </div>
                 </div>
+                <% } %>
             </div>
-            <% } %>
         </div>
     </div>
 </script>
@@ -74,7 +70,7 @@
             </h3>
 
             <% if (device.isFromWechatBrowser) { %>
-            <form name="wechatPayForm" novalidate class="ui form wehcat-pay-form" ng-submit="wechatPay($event)">
+            <form name="wechatPayForm" novalidate class="ui form wechat-pay-form" ng-submit="wechatPay($event)">
                 <div class="ui error message brand"></div>
 
                 <button loading type="submit" class="ui fluid basic button">

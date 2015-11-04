@@ -210,6 +210,7 @@
   "service-20208": "redemption code not found",
   "service-20202": "offer info not found",
   "service-20212": "payment method not found",
+  "service-20215": "create payment failed",
   "service-DATA_ERROR": "The end date should not be earlier than the start date",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",
