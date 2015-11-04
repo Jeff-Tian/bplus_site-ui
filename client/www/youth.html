@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset='utf-8'>
-	<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -37,7 +37,8 @@
      	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
    	<![endif]-->
 </head>
-<body>
+<body ng-controller="AppCtrl" ng-app="bplus">
+	<%- include('view-partial/header.html') -%>
 	<div class="pusher">
 		<div class="hp-mastead youth">
 			<div class="ui container">
@@ -594,10 +595,11 @@
 			<h1>商务合作</h1>
 			<p class="content">邮箱: ms2015@hcdlearning.com </p>
 			<img src="<%=cdn.normal%>img/hp/qrcode_hcd_service.jpg?<%=cdn.version%>">
-			<p class="footer-title">大赛夺冠攻略全在这</p>
-			<button class="ui button hp-button-red">阅读原文</button>
 		</div>
 
 	</div>
+	<%- include('view-partial/footer.html') -%>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/page/hp/main.js"></script>
 </body>
 </html>

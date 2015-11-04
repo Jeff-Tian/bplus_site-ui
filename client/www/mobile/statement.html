@@ -1,21 +1,19 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= __('StatementTitle') %></title>
-    <meta name="description" content="Bridge+">
-    <%- include('view-partial/head.html') -%>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
 </head>
+<body ng-app="mobile" ng-controller="AppCtrl" class="b-mobile back-color white color shadowed">
+<%- include('head.html') -%>
 
-<body ng-controller="AppCtrl" ng-app="bplus">
-<%- include('view-partial/header.html') -%>
-<!-- Page Contents -->
-<div class="pusher">
+<div class="pusher" style="margin-bottom:2em;">
     <div class="page-content">
-    	<div class="b-statement-content">
-    		<div class="ui container">
+        <div class="b-statement-content">
+            <div class="ui container">
                 <h1 class="statement-header"><%= __('StatementHeader') %></h1>
                 <div class="ui divider"></div>
 
@@ -91,19 +89,22 @@
 
                 </div>
                 <div class="ui divider end"></div>
-                <h3 class="statement-footer"><%= __('StatementWar1') %></h3>
-                <h3 class="statement-footer"><%= __('StatementWar2') %></h3>
-    		</div>
-    	</div>
+                <h3 class="statement-footer"><%= __('StatementWar1') %><%= __('StatementWar2') %></h3>
+            </div>
+        </div>
     </div>
 
 </div>
-<%- include('view-partial/footer.html') -%>
-<!--JS-->
-<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js"></script>
-<!--Page JS-->
-<script src="js/controllers/AppCtrl.js"></script>
-<script src="js/page/footer/main.js"></script>
+
+<%- include('footer.html') -%>
+
+<!-- build:js js/cdn/m/statement.js -->
+<script src="js/page/mobile/MobileMenuCtrl.js"></script>
+<script src="js/page/mobile/MobileHeadCtrl.js"></script>
+<script src="js/page/mobile/MobileNationalCtrl.js"></script>
+<script src="js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="js/page/mobile/index.js"></script>
+<!-- endbuild -->
 </body>
 
 </html>
