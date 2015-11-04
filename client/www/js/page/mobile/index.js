@@ -51,6 +51,7 @@ angular
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
+    .factory('WechatWrapper', angular.bplus.WechatWrapper)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)

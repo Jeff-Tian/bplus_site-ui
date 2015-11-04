@@ -1,26 +1,5 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus) {
-        function mockWechat() {
-            function nonce() {
-            }
-
-            return {
-                config: nonce,
-                ready: nonce,
-                checkJsApi: nonce,
-                chooseWXPay: nonce
-            };
-        }
-
-        function getWechat() {
-            var wechat = mockWechat();
-
-            if (typeof window.wx !== 'undefined') {
-                wechat = window.wx;
-            }
-
-            return wechat;
-        }
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper) {
 
         function gotoPaid() {
             function gotoPaidInner() {
@@ -128,7 +107,7 @@
                                         wechatPaid();
                                     };
 
-                                    var wechat = getWechat();
+                                    var wechat = WechatWrapper;
 
                                     if (!invokingWechatPay) {
                                         invokingWechatPay = true;
@@ -179,6 +158,6 @@
         }
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper'];
 })
 (angular.bplus = angular.bplus || {});
