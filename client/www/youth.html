@@ -37,7 +37,8 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-init="current_page = 'poster'">
+<body ng-controller="AppCtrl" ng-app="bplus" ng-init="current_page='poster'">
+<%- include('view-partial/header.html') -%>
 <div class="pusher">
     <div class="hp-mastead youth">
         <div class="ui container">
@@ -77,7 +78,7 @@
 
     <div class="hp-white-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>1</span> 大赛简介
             </p>
 
@@ -105,7 +106,7 @@
 
     <div class="hp-gray-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>2</span> 大赛宗旨
             </p>
 
@@ -124,7 +125,7 @@
 
     <div class="hp-white-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>3</span> 大赛缘起
             </p>
 
@@ -180,7 +181,7 @@
 
     <div class="hp-gray-dark-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>4</span> 大赛背景
             </p>
 
@@ -236,7 +237,7 @@
 
     <div class="hp-gray-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>5</span> 大赛规则
             </p>
 
@@ -300,7 +301,7 @@
 
     <div class="hp-white-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>6</span> 大赛赛制
             </p>
 
@@ -401,10 +402,10 @@
                         </div>
                         <div class="fourteen wide column">
                             <div class="pk-column">
-                                <div class="header national">
+                                <div class="hp-header national">
                                     <h1>全国总冠军赛</h1>
                                 </div>
-                                <div class="footer">
+                                <div class="hp-footer">
                                     <p>2016年1月10日 - 11日</p>
                                 </div>
                             </div>
@@ -441,42 +442,42 @@
                         <div class="fourteen wide column">
                             <div class="ui grid four column list-grid">
                                 <div class="pk-column column">
-                                    <div class="header personal">
+                                    <div class="hp-header personal">
                                         <h1>个人组</h1>
 
                                         <h3>冠军赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年12月6日</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header company">
+                                    <div class="hp-header company">
                                         <h1>企业组</h1>
 
                                         <h3>冠军赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年12月6日</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header student">
+                                    <div class="hp-header student">
                                         <h1>大学生组</h1>
 
                                         <h3>冠军赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年12月20日</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header youth">
+                                    <div class="hp-header youth">
                                         <h1>青少年组</h1>
 
                                         <h3>冠军赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年12月13日</p>
                                     </div>
                                 </div>
@@ -514,42 +515,42 @@
                         <div class="fourteen wide column">
                             <div class="ui grid four column list-grid">
                                 <div class="pk-column column">
-                                    <div class="header personal">
+                                    <div class="hp-header personal">
                                         <h1>个人组</h1>
 
                                         <h3>初赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年11月</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header company">
+                                    <div class="hp-header company">
                                         <h1>企业组</h1>
 
                                         <h3>初赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年11月</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header student">
+                                    <div class="hp-header student">
                                         <h1>大学生组</h1>
 
                                         <h3>初赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年11月</p>
                                     </div>
                                 </div>
                                 <div class="pk-column column">
-                                    <div class="header youth">
+                                    <div class="hp-header youth">
                                         <h1>青少年组</h1>
 
                                         <h3>初赛</h3>
                                     </div>
-                                    <div class="footer">
+                                    <div class="hp-footer">
                                         <p>2015年11月</p>
                                     </div>
                                 </div>
@@ -563,7 +564,7 @@
 
     <div class="hp-gray-space">
         <div class="ui container">
-            <p class="title">
+            <p class="hp-title">
                 <span>7</span> 大赛主办方
             </p>
 
@@ -583,7 +584,7 @@
                 </div>
             </div>
             <div class="hp-tech">
-                <p class="title">科技如何让学习更简单</p>
+                <p class="hp-title">科技如何让学习更简单</p>
 
                 <div class="ui grid five column">
                     <div class="column">
@@ -635,13 +636,13 @@
     <div class="hp-contract-space">
         <h1>商务合作</h1>
 
-        <p class="content">邮箱: <a href="mailto:ms2015@hcdlearning.com">ms2015@hcdlearning.com</a></p>
+        <p class="content">邮箱: ms2015@hcdlearning.com </p>
         <img src="<%=cdn.normal%>img/hp/qrcode_hcd_service.jpg?<%=cdn.version%>">
-
-        <p class="footer-title">大赛夺冠攻略全在这</p>
-        <button class="ui button hp-button-red">阅读原文</button>
     </div>
 
 </div>
+<%- include('view-partial/footer.html') -%>
+<script src="js/controllers/AppCtrl.js"></script>
+<script src="js/page/hp/main.js"></script>
 </body>
 </html>
