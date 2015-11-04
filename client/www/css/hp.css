@@ -291,14 +291,14 @@
   padding-top: 5em;
   padding-bottom: 5em;
 }
-.hp-white-space p.title,
-.hp-gray-dark-space p.title,
-.hp-gray-space p.title {
+.hp-white-space p.hp-title,
+.hp-gray-dark-space p.hp-title,
+.hp-gray-space p.hp-title {
   font-size: 2em;
 }
-.hp-white-space p.title span,
-.hp-gray-dark-space p.title span,
-.hp-gray-space p.title span {
+.hp-white-space p.hp-title span,
+.hp-gray-dark-space p.hp-title span,
+.hp-gray-space p.hp-title span {
   border-radius: 50%;
   background-color: black;
   padding: 0 8px;
@@ -480,100 +480,100 @@
   width: 100%;
   max-width: 77px;
 }
-.hp-white-space .national-grid .column .pk-column .header,
-.hp-gray-dark-space .national-grid .column .pk-column .header,
-.hp-gray-space .national-grid .column .pk-column .header {
+.hp-white-space .national-grid .column .pk-column .hp-header,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header,
+.hp-gray-space .national-grid .column .pk-column .hp-header {
   text-align: center;
 }
-.hp-white-space .national-grid .column .pk-column .header.national,
-.hp-gray-dark-space .national-grid .column .pk-column .header.national,
-.hp-gray-space .national-grid .column .pk-column .header.national {
+.hp-white-space .national-grid .column .pk-column .hp-header.national,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.national,
+.hp-gray-space .national-grid .column .pk-column .hp-header.national {
   background-color: #df160c;
 }
-.hp-white-space .national-grid .column .pk-column .header.national h1,
-.hp-gray-dark-space .national-grid .column .pk-column .header.national h1,
-.hp-gray-space .national-grid .column .pk-column .header.national h1 {
+.hp-white-space .national-grid .column .pk-column .hp-header.national h1,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.national h1,
+.hp-gray-space .national-grid .column .pk-column .hp-header.national h1 {
   line-height: 2em;
   color: white;
   font-size: 2.5em;
 }
-.hp-white-space .national-grid .column .pk-column .header.personal,
-.hp-gray-dark-space .national-grid .column .pk-column .header.personal,
-.hp-gray-space .national-grid .column .pk-column .header.personal,
-.hp-white-space .national-grid .column .pk-column .header.company,
-.hp-gray-dark-space .national-grid .column .pk-column .header.company,
-.hp-gray-space .national-grid .column .pk-column .header.company,
-.hp-white-space .national-grid .column .pk-column .header.student,
-.hp-gray-dark-space .national-grid .column .pk-column .header.student,
-.hp-gray-space .national-grid .column .pk-column .header.student,
-.hp-white-space .national-grid .column .pk-column .header.youth,
-.hp-gray-dark-space .national-grid .column .pk-column .header.youth,
-.hp-gray-space .national-grid .column .pk-column .header.youth {
+.hp-white-space .national-grid .column .pk-column .hp-header.personal,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.personal,
+.hp-gray-space .national-grid .column .pk-column .hp-header.personal,
+.hp-white-space .national-grid .column .pk-column .hp-header.company,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.company,
+.hp-gray-space .national-grid .column .pk-column .hp-header.company,
+.hp-white-space .national-grid .column .pk-column .hp-header.student,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.student,
+.hp-gray-space .national-grid .column .pk-column .hp-header.student,
+.hp-white-space .national-grid .column .pk-column .hp-header.youth,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.youth,
+.hp-gray-space .national-grid .column .pk-column .hp-header.youth {
   padding: 1em 0;
 }
-.hp-white-space .national-grid .column .pk-column .header.personal h1,
-.hp-gray-dark-space .national-grid .column .pk-column .header.personal h1,
-.hp-gray-space .national-grid .column .pk-column .header.personal h1,
-.hp-white-space .national-grid .column .pk-column .header.company h1,
-.hp-gray-dark-space .national-grid .column .pk-column .header.company h1,
-.hp-gray-space .national-grid .column .pk-column .header.company h1,
-.hp-white-space .national-grid .column .pk-column .header.student h1,
-.hp-gray-dark-space .national-grid .column .pk-column .header.student h1,
-.hp-gray-space .national-grid .column .pk-column .header.student h1,
-.hp-white-space .national-grid .column .pk-column .header.youth h1,
-.hp-gray-dark-space .national-grid .column .pk-column .header.youth h1,
-.hp-gray-space .national-grid .column .pk-column .header.youth h1 {
+.hp-white-space .national-grid .column .pk-column .hp-header.personal h1,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.personal h1,
+.hp-gray-space .national-grid .column .pk-column .hp-header.personal h1,
+.hp-white-space .national-grid .column .pk-column .hp-header.company h1,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.company h1,
+.hp-gray-space .national-grid .column .pk-column .hp-header.company h1,
+.hp-white-space .national-grid .column .pk-column .hp-header.student h1,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.student h1,
+.hp-gray-space .national-grid .column .pk-column .hp-header.student h1,
+.hp-white-space .national-grid .column .pk-column .hp-header.youth h1,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.youth h1,
+.hp-gray-space .national-grid .column .pk-column .hp-header.youth h1 {
   font-size: 2em;
   color: white;
   margin: 0;
   margin-bottom: 0.25em;
 }
-.hp-white-space .national-grid .column .pk-column .header.personal h3,
-.hp-gray-dark-space .national-grid .column .pk-column .header.personal h3,
-.hp-gray-space .national-grid .column .pk-column .header.personal h3,
-.hp-white-space .national-grid .column .pk-column .header.company h3,
-.hp-gray-dark-space .national-grid .column .pk-column .header.company h3,
-.hp-gray-space .national-grid .column .pk-column .header.company h3,
-.hp-white-space .national-grid .column .pk-column .header.student h3,
-.hp-gray-dark-space .national-grid .column .pk-column .header.student h3,
-.hp-gray-space .national-grid .column .pk-column .header.student h3,
-.hp-white-space .national-grid .column .pk-column .header.youth h3,
-.hp-gray-dark-space .national-grid .column .pk-column .header.youth h3,
-.hp-gray-space .national-grid .column .pk-column .header.youth h3 {
+.hp-white-space .national-grid .column .pk-column .hp-header.personal h3,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.personal h3,
+.hp-gray-space .national-grid .column .pk-column .hp-header.personal h3,
+.hp-white-space .national-grid .column .pk-column .hp-header.company h3,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.company h3,
+.hp-gray-space .national-grid .column .pk-column .hp-header.company h3,
+.hp-white-space .national-grid .column .pk-column .hp-header.student h3,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.student h3,
+.hp-gray-space .national-grid .column .pk-column .hp-header.student h3,
+.hp-white-space .national-grid .column .pk-column .hp-header.youth h3,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.youth h3,
+.hp-gray-space .national-grid .column .pk-column .hp-header.youth h3 {
   font-size: 1.8em;
   color: white;
   margin: 0;
 }
-.hp-white-space .national-grid .column .pk-column .header.personal,
-.hp-gray-dark-space .national-grid .column .pk-column .header.personal,
-.hp-gray-space .national-grid .column .pk-column .header.personal {
+.hp-white-space .national-grid .column .pk-column .hp-header.personal,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.personal,
+.hp-gray-space .national-grid .column .pk-column .hp-header.personal {
   background-color: #1c6599;
 }
-.hp-white-space .national-grid .column .pk-column .header.youth,
-.hp-gray-dark-space .national-grid .column .pk-column .header.youth,
-.hp-gray-space .national-grid .column .pk-column .header.youth {
+.hp-white-space .national-grid .column .pk-column .hp-header.youth,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.youth,
+.hp-gray-space .national-grid .column .pk-column .hp-header.youth {
   background-color: #f58e22;
 }
-.hp-white-space .national-grid .column .pk-column .header.company,
-.hp-gray-dark-space .national-grid .column .pk-column .header.company,
-.hp-gray-space .national-grid .column .pk-column .header.company {
+.hp-white-space .national-grid .column .pk-column .hp-header.company,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.company,
+.hp-gray-space .national-grid .column .pk-column .hp-header.company {
   background-color: #8c5b8c;
 }
-.hp-white-space .national-grid .column .pk-column .header.student,
-.hp-gray-dark-space .national-grid .column .pk-column .header.student,
-.hp-gray-space .national-grid .column .pk-column .header.student {
+.hp-white-space .national-grid .column .pk-column .hp-header.student,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-header.student,
+.hp-gray-space .national-grid .column .pk-column .hp-header.student {
   background-color: #cc353d;
 }
-.hp-white-space .national-grid .column .pk-column .footer,
-.hp-gray-dark-space .national-grid .column .pk-column .footer,
-.hp-gray-space .national-grid .column .pk-column .footer {
+.hp-white-space .national-grid .column .pk-column .hp-footer,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-footer,
+.hp-gray-space .national-grid .column .pk-column .hp-footer {
   text-align: center;
   background-color: #DCDCDC;
   border-bottom: 2px solid #bebebe;
 }
-.hp-white-space .national-grid .column .pk-column .footer p,
-.hp-gray-dark-space .national-grid .column .pk-column .footer p,
-.hp-gray-space .national-grid .column .pk-column .footer p {
+.hp-white-space .national-grid .column .pk-column .hp-footer p,
+.hp-gray-dark-space .national-grid .column .pk-column .hp-footer p,
+.hp-gray-space .national-grid .column .pk-column .hp-footer p {
   font-size: 1.125em;
   line-height: 35px;
 }
@@ -591,9 +591,9 @@
   text-align: center;
   margin-bottom: 2em;
 }
-.hp-white-space .hp-tech p.title,
-.hp-gray-dark-space .hp-tech p.title,
-.hp-gray-space .hp-tech p.title {
+.hp-white-space .hp-tech p.hp-title,
+.hp-gray-dark-space .hp-tech p.hp-title,
+.hp-gray-space .hp-tech p.hp-title {
   font-size: 2em;
 }
 .hp-white-space .hp-tech p.sub-title,
@@ -660,7 +660,7 @@
   background-color: #828282;
   color: white;
 }
-.hp-gray-dark-space p.title span {
+.hp-gray-dark-space p.hp-title span {
   background-color: white;
   color: #646464;
 }
