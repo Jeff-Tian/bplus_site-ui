@@ -51,6 +51,10 @@
     "public": {
       "host": "uat.service.hcd.com",
       "port": "10111"
+    },
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "10111"
     }
   },
   "games": {
