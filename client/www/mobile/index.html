@@ -111,8 +111,117 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="interest.html">
+    <div class="grey background b-mobile stretch" ng-cloak>
+        <div class="ui center aligned container">
+            &nbsp;
+            <h3 class="ui header">
+                <%= __('我们提供更多服务') %>
+                <div class="sub header">
+                    <%= __('请选择你觉得感兴趣的学习机会') %>
+                </div>
+            </h3>
+        </div>
+        <div class="ui horizontal divider"></div>
+        <form class="ui form" name="interest-form" novalidate>
+            <div class="ui white background">
+                <div class="ui container">
+                    <div class="ui items">
+                        <div class="ui fitted divider"></div>
+                        <div class="item">
+                            <div class="middle aligned content">
+                                <div class="ui tiny image">
+                                    <img src="<%= cdn.normal %>img/nan.jpg?<%= cdn.version %>">
+                                </div>
+                                <a class="header"><%= __('商务英语') %></a>
+
+                                <div class="ui right floated toggle checkbox">
+                                    <div class="ui horizontal divider"></div>
+                                    <input type="checkbox">
+                                    <label>&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="middle aligned content">
+                                <div class="ui tiny image">
+                                    <img src="<%= cdn.normal %>img/nan.jpg?<%= cdn.version %>">
+                                </div>
+                                <a class="header"><%= __('海外游学') %></a>
+
+                                <div class="ui right floated toggle checkbox">
+                                    <div class="ui horizontal divider"></div>
+                                    <input type="checkbox">
+                                    <label>&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="middle aligned content">
+                                <div class="ui tiny image">
+                                    <img src="<%= cdn.normal %>img/nan.jpg?<%= cdn.version %>">
+                                </div>
+                                <a class="header"><%= __('IT培训') %></a>
+
+                                <div class="ui right floated toggle checkbox">
+                                    <div class="ui horizontal divider"></div>
+                                    <input type="checkbox">
+                                    <label>&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="middle aligned content">
+                                <div class="ui tiny image">
+                                    <img src="<%= cdn.normal %>img/nan.jpg?<%= cdn.version %>">
+                                </div>
+                                <a class="header"><%= __('MBA') %></a>
+
+                                <div class="ui right floated toggle checkbox">
+                                    <div class="ui horizontal divider"></div>
+                                    <input type="checkbox">
+                                    <label>&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="middle aligned content">
+                                <div class="ui tiny image">
+                                    <img src="<%= cdn.normal %>img/nan.jpg?<%= cdn.version %>">
+                                </div>
+                                <a class="header"><%= __('财务会计') %></a>
+
+                                <div class="ui right floated toggle checkbox">
+                                    <div class="ui horizontal divider"></div>
+                                    <input type="checkbox">
+                                    <label>&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui horizontal divider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui container">
+                <div class="filed">
+                    <label><%= __('其他') %></label>
+                    <textarea rows="2"></textarea>
+                </div>
+
+                <div class="ui horizontal divider"></div>
+                <button type="submit" class="ui red fluid button"><%= __('确定') %></button>
+                <div class="ui horizontal divider"></div>
+            </div>
+        </form>
+    </div>
+</script>
+
 <script type="text/ng-template" id="paid.html">
-    <div class="white background b-mobile stretch" ng-show="!showPaid">
+    <div class="grey background b-mobile stretch" ng-show="!showPaid">
         <div class="ui horizontal divider"></div>
         <div class="ui very padded vertical loading segment"></div>
     </div>
@@ -169,6 +278,7 @@
 <script src="js/page/mobile/MobileNationalCtrl.js"></script>
 <script src="js/page/mobile/MobileAboutusCtrl.js"></script>
 <script src="js/page/mobile/MobileIndexCtrl.js"></script>
+<script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>

@@ -3,12 +3,10 @@
 
         function gotoPaid(result) {
             function gotoPaidInner() {
-                debugger;
                 $state.go('paid', {
                     who: $scope.memberInfo.member_id,
                     displayName: $scope.memberInfo.displayName,
-                    redemptionCode: result && result.generatedRedemption
-                        ? (result.generatedRedemption.result || '') : ''
+                    redemptionCode: result && result.generatedRedemption ? (result.generatedRedemption.result || '') : ''
                 });
             }
 

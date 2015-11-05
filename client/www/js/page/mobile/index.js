@@ -36,6 +36,11 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
+            .state('select-interest', {
+                url: '/select-interest/:who/:displayName/:redemptionCode',
+                templateUrl: 'interest.html',
+                controller: 'SelectInterestCtrl'
+            })
             .state('paid', {
                 url: '/paid/:who/:displayName/:redemptionCode',
                 templateUrl: 'paid.html',
@@ -59,5 +64,6 @@ angular
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
     .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
+    .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;
