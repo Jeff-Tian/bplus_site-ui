@@ -50,6 +50,10 @@
     "public": {
       "host": "payment.service.bridgeplus.cn",
       "port": "80"
+    },
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": "10111"
     }
   },
   "games": {
