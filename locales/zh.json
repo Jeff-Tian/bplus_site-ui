@@ -212,6 +212,7 @@
   "service-20202": "没有找到商品信息",
   "service-20212": "没有找到支付方式",
   "service-20215": "支付失败",
+  "service-20225": "该兑换码不能用于当前产品",
   "service-DATA_ERROR": "结束日期不能早于开始日期",
   "wechat-40001": "40001",
   "wechat-40029": "invalid code",

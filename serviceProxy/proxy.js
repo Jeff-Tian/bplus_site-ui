@@ -74,7 +74,7 @@ function advancedProxy(req, res, next, settings) {
                 req.dualLog('response got from: ' + options.hostname + ':' + options.port + '/' + options.path);
                 req.dualLog(chunks);
 
-                var continueNext = settings.responseInterceptor(res, chunks, req);
+                var continueNext = settings.responseInterceptor(res, chunks, req, next);
 
                 if (continueNext === true) {
                     req.chunks = chunks;
@@ -94,7 +94,7 @@ function advancedProxy(req, res, next, settings) {
         req.dualLogError('Error met in this request: ' + JSON.stringify(options));
         req.dualLogError(err);
 
-        next();
+        next(err);
     });
 
     if (typeof settings.requestInterceptor === 'function') {

@@ -14,7 +14,38 @@ module.exports = {
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
+            d.productTypeId = gameConfig['national-2015'].productTypeId;
             return d;
+        },
+        responseInterceptor: function (res, json, req, next) {
+            if (json.isSuccess) {
+                proxy({
+                    host: commerceConfig.host,
+                    port: commerceConfig.port,
+                    path: '/service/redemption/generate',
+                    dataMapper: function (d) {
+                        d.userId = d.member_id;
+                        d.productTypeId = gameConfig['national-2015'].productTypeId;
+
+                        return d;
+                    },
+                    responseInterceptor: function (res, json2, req) {
+                        console.log('generated redemption result;');
+                        console.log(json2);
+                        if (json2.isSuccess) {
+                            json.generatedRedemption = json2;
+                        }
+
+                        res.send(json);
+
+                        return undefined;
+                    }
+                })(req, res, next);
+
+                return undefined;
+            } else {
+                return false;
+            }
         }
     }),
 
@@ -27,6 +58,7 @@ module.exports = {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015'].productTypeId;
                 d.egameId = gameConfig['national-2015'].egameId;
+                d.matchId = gameConfig['national-2015'].egameId;
 
                 return d;
             },
