@@ -7,6 +7,10 @@
             wechatToken: queryParser.get('wechat_token')
         };
 
+        if(!window.location.hash) {
+            window.sendTrack('m.login');
+        }
+
         var serverResponse = queryParser.get('server_response');
         if (serverResponse) {
             console.log(serverResponse);
@@ -44,10 +48,16 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
+                window.sendTrack('m.login.login.click', {isLoginSuc: true});
+
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                 window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
-            }).catch(FormValidation.delegateHandleFormError($loginForm)).finally(function () {
+            }).catch((function() {
+                window.sendTrack('m.login.login.click', {isLoginSuc: false});
+
+                FormValidation.delegateHandleFormError($loginForm);
+            })()).finally(function () {
                 submitting = false;
             });
         };

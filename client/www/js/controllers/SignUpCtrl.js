@@ -1,5 +1,9 @@
 (function (exports) {
     exports.SignUpCtrl = function ($scope, service, queryParser) {
+        if(window.location.hash === '#register') {
+            window.sendTrack('m.register');
+        }
+
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {

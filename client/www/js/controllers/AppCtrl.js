@@ -1,5 +1,7 @@
 (function (exports) {
     exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout) {
+        sendIndexTrack();
+
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -62,7 +64,11 @@
 
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
-        window.addEventListener('hashchange', locationHashChanged);
+        window.addEventListener('hashchange', function(){
+            sendIndexTrack();
+
+            locationHashChanged();
+        });
 
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
 
@@ -70,6 +76,16 @@
             checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right',
             logonByToken: '/service-proxy/logon/by-token'
         };
+
+
+        function sendIndexTrack(){
+            if(window.location.hash === '#/home'){
+                window.sendTrack('m.index');
+            }
+            else if(window.location.hash === '#/menu'){
+                window.sendTrack('m.menu');
+            }
+        }
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout'];
