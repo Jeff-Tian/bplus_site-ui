@@ -67,7 +67,8 @@
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
 
         $scope.serviceUrls = {
-            checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right'
+            checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right',
+            logonByToken: '/service-proxy/logon/by-token'
         };
     };
 

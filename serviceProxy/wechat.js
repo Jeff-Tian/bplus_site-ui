@@ -26,6 +26,11 @@ module.exports = {
         method: 'POST'
     }),
 
+    /**
+     * Typical Response:
+     { isSuccess: true,
+       result: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx271d071e2bd32a96&redirect_uri=http%3A%2F%2Fuat.hcdlearning.com%2Fwechat%2Flogon&response_type=code&scope=snsapi_userinfo&state=trd_we_act_144660664220539045682456344366&connect_redirect=1#wechat_redirect https%3A%2F%2Fjeff-tian.github.io%2Fbridge-wechat%2Fstylesheets%2Fwechat.css' }
+     */
     oAuthLogon: proxyWechat({
         path: '/wechat/oauth/logon',
         method: 'POST',
@@ -45,7 +50,9 @@ module.exports = {
         path: '/wechat/oauth/openid',
         method: 'POST',
         dataMapper: function (d, req) {
-            d.app_id = wechat.corp_app_id;
+            // TODO: Use wechat.corp_app_id;
+            //d.app_id = wechat.corp_app_id;
+            d.app_id = 'hcdglobal_corp';
             d.returnUrl = req.query.returnUrl || req.body.returnUrl || req.headers['referer'] || (req.headers['origin'] + req.originalUrl);
             delete d.href;
 

@@ -104,6 +104,13 @@
                     return res.locals.localeLink(notSignedInPath);
                 }
             };
+            res.locals.linkSwitch = function (signedInPath, notSignedInPath) {
+                if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
+                    return signedInPath;
+                } else {
+                    return notSignedInPath;
+                }
+            };
 
             next();
         },
