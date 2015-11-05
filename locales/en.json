@@ -784,5 +784,6 @@
   "完成信息填写与付费,即可组队参赛!": "{{competition}} with {{fee}}. Complete your background information and pay, then you can join the competition with your team!",
   "请记得在比赛开始前,完成组队。": "Please remember that before the start of the game to complete the team.",
   "大赛报名": "Contest entry",
-  "已经成功购买了{{competition}}": "has successfully bought {{competition}}"
+  "已经成功购买了{{competition}}": "has successfully bought {{competition}}",
+  "分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!": "Share this page to your friend to use the redemption code {{code}} to join the game for free!"
 }

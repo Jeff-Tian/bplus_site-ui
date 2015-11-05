@@ -1,12 +1,14 @@
 (function (exports) {
     exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper) {
 
-        function gotoPaid() {
+        function gotoPaid(result) {
             function gotoPaidInner() {
+                debugger;
                 $state.go('paid', {
                     who: $scope.memberInfo.member_id,
                     displayName: $scope.memberInfo.displayName,
-                    redemptionCode: 'coming-soon'
+                    redemptionCode: result && result.generatedRedemption
+                        ? (result.generatedRedemption.result || '') : ''
                 });
             }
 
@@ -25,7 +27,7 @@
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
-                        gotoPaid();
+                        gotoPaid(result);
                     })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
@@ -67,7 +69,7 @@
                         })
                         .then(function (result) {
                             if (/^true$/i.test(result.hasRight)) {
-                                gotoPaid();
+                                gotoPaid(result);
                             } else {
                                 if (paymentMethod === 'wechat') {
 
@@ -93,7 +95,8 @@
                                         if (res.errMsg === 'chooseWXPay:ok') {
                                             window.alert('支付成功!');
                                             wechatPaid();
-                                            gotoPaid();
+                                            //gotoPaid();
+                                            window.location.reload();
                                         } else {
                                             window.alert('支付失败!');
                                             wechatPaid();
@@ -138,6 +141,7 @@
             service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
                 .then(function (result) {
                     if (/^true$/i.test(result.hasRight)) {
+                        // Don't generate redemption code
                         gotoPaid();
                     }
                 });

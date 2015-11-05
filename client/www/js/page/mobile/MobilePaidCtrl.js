@@ -11,6 +11,8 @@
             displayName: $stateParams.displayName
         };
 
+        $scope.generatedCode = $stateParams.redemptionCode || '';
+
         msgBus.onMemberLoaded($scope, function () {
             if ($scope.paidUser.member_id === $scope.memberInfo.member_id) {
                 $scope.currentUserIsMe = true;

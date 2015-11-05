@@ -131,18 +131,26 @@
             <h3 class="ui header" ng-show="!currentUserIsMe">
                 {{paidUser.displayName}} <%= __('已经成功购买了{{competition}}', {competition: '全国大赛'}) %>
             </h3>
+
+            <p ng-show="generatedCode && currentUserIsMe"><%= __('分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!', {code:
+                '{{generatedCode}}'}) %></p>
+
+            <p ng-show="generatedCode && !currentUserIsMe"><%= __('使用此兑换码{{code}}即可免费参赛!', {code: '{{generatedCode}}'})
+                %></p>
+
+            <div ng-show="generatedCode">
+                <input type="text" ng-model="generatedCode" readonly style="border: none;">
+            </div>
         </div>
-        <div class="ui centered grid">
-            <div class="row">
-                <div class="ui six doubling centered cards">
-                    <div class="ui transparent card">
-                        <div class="ui image">
-                            <img class="ui small image"
-                                 src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
-                        </div>
-                        <div class="center aligned content">
-                            <p><%= __('Bridge+服务号') %></p>
-                        </div>
+        <div class="ui centered container">
+            <div class="ui six doubling centered cards">
+                <div class="ui transparent card">
+                    <div class="ui image">
+                        <img class="ui small image"
+                             src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                    </div>
+                    <div class="center aligned content">
+                        <p><%= __('Bridge+服务号') %></p>
                     </div>
                 </div>
             </div>

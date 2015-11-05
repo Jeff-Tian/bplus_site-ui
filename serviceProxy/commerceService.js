@@ -7,6 +7,38 @@ var proxy = require('./proxy');
 var wechat = require('./wechat');
 var qs = require('querystring');
 
+function injectRedemptionGeneration(res, json, req, next) {
+    if (json.isSuccess) {
+        proxy({
+            host: commerceConfig.host,
+            port: commerceConfig.port,
+            path: '/service/redemption/generate',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.productTypeId = gameConfig['national-2015'].productTypeId;
+
+                return d;
+            },
+            responseInterceptor: function (res, json2, req) {
+                console.log('generated redemption result;');
+                console.log(json2);
+                if (json2.isSuccess) {
+                    json.result = json.result || {};
+                    json.result.generatedRedemption = json2;
+                }
+
+                res.send(json);
+
+                return undefined;
+            }
+        })(req, res, next);
+
+        return undefined;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     createOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
@@ -17,36 +49,7 @@ module.exports = {
             d.productTypeId = gameConfig['national-2015'].productTypeId;
             return d;
         },
-        responseInterceptor: function (res, json, req, next) {
-            if (json.isSuccess) {
-                proxy({
-                    host: commerceConfig.host,
-                    port: commerceConfig.port,
-                    path: '/service/redemption/generate',
-                    dataMapper: function (d) {
-                        d.userId = d.member_id;
-                        d.productTypeId = gameConfig['national-2015'].productTypeId;
-
-                        return d;
-                    },
-                    responseInterceptor: function (res, json2, req) {
-                        console.log('generated redemption result;');
-                        console.log(json2);
-                        if (json2.isSuccess) {
-                            json.generatedRedemption = json2;
-                        }
-
-                        res.send(json);
-
-                        return undefined;
-                    }
-                })(req, res, next);
-
-                return undefined;
-            } else {
-                return false;
-            }
-        }
+        responseInterceptor: injectRedemptionGeneration
     }),
 
     checkUserAccessForNationalGame2015: function (req, res, next) {
@@ -77,6 +80,37 @@ module.exports = {
                     //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
                     //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
                     //return true;
+                }
+            }
+        })(req, res, next);
+    },
+
+    checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
+        proxy({
+            host: commerceConfig.host,
+            port: commerceConfig.port,
+            path: '/service/useraccess/check',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.productTypeId = gameConfig['national-2015'].productTypeId;
+                d.egameId = gameConfig['national-2015'].egameId;
+                d.matchId = gameConfig['national-2015'].egameId;
+
+                return d;
+            },
+            responseInterceptor: function (res, json) {
+                console.log('reuslt:');
+                console.log(json);
+                if (json.result.hasRight === false) {
+                    req.body.offerId = json.result.productType.offerId;
+                    req.body.productId = json.result.productType.productId;
+                    req.body.productTypeId = json.result.productType.productTypeId;
+
+                    return true;
+                } else {
+                    injectRedemptionGeneration(res, json, req, next);
+
+                    return undefined;
                 }
             }
         })(req, res, next);
