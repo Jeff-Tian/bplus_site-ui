@@ -36,6 +36,8 @@
 
         $rootScope.pageTitle = '报名 Bridge+ 全国大赛';
         $rootScope.pageDescription = '快来一起报名吧!';
+
+        $(document).attr('title', $rootScope.pageTitle);
     };
 
     exports.MobilePaidCtrl.$inject = ['$scope', '$stateParams', '$state', 'service', 'msgBus', '$rootScope', 'WechatWrapper'];
