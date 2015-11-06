@@ -39,6 +39,7 @@ angular
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)

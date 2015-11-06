@@ -13,6 +13,7 @@ angular.module('bplus', [
         return {};
     })
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .controller('AppCtrl', angular.bplus.AppCtrl)
 ;
 // TODO: integrated into JS framework

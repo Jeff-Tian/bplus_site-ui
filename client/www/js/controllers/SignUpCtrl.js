@@ -1,7 +1,9 @@
 (function (exports) {
-    exports.SignUpCtrl = function ($scope, service, queryParser) {
+    exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
         if(window.location.hash === '#register') {
-            window.sendTrack('m.register');
+            if(DeviceHelper.isMobile()){
+                window.sendTrack('m.register', {isLoginSuc: false});
+            }
         }
 
         $scope.registerFormCtrl = {};
@@ -25,5 +27,5 @@
         };
     };
 
-    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser'];
+    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

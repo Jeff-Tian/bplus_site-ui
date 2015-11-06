@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout) {
+    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper) {
         sendIndexTrack();
 
         $('.checkbox').checkbox();
@@ -79,14 +79,16 @@
 
 
         function sendIndexTrack(){
-            if(window.location.hash === '#/home'){
-                window.sendTrack('m.index');
-            }
-            else if(window.location.hash === '#/menu'){
-                window.sendTrack('m.menu');
+            if(DeviceHelper.isMobile()) {
+                if (window.location.hash === '#/home') {
+                    window.sendTrack('m.index');
+                }
+                else if (window.location.hash === '#/menu') {
+                    window.sendTrack('m.menu');
+                }
             }
         }
     };
 
-    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout'];
+    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

@@ -8,7 +8,9 @@
         };
 
         if(!window.location.hash) {
-            window.sendTrack('m.login');
+            if(DeviceHelper.isMobile()) {
+                window.sendTrack('m.login');
+            }
         }
 
         var serverResponse = queryParser.get('server_response');
@@ -48,13 +50,17 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
-                window.sendTrack('m.login.login.click', {isLoginSuc: true});
+                if(DeviceHelper.isMobile()){
+                    window.sendTrack('m.login.login.click', {isLoginSuc: true});
+                }
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                 window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
             }).catch((function() {
-                window.sendTrack('m.login.login.click', {isLoginSuc: false});
+                if(DeviceHelper.isMobile()){
+                    window.sendTrack('m.login.login.click', {isLoginSuc: false});
+                }
 
                 FormValidation.delegateHandleFormError($loginForm);
             })()).finally(function () {
