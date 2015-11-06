@@ -123,7 +123,8 @@
             </h3>
         </div>
         <div class="ui horizontal divider"></div>
-        <form class="ui form" name="interest-form" novalidate>
+        <form class="ui form interests-form" name="interest-form" novalidate ng-submit="saveInterests()">
+            <div class="ui error message brand"></div>
             <div class="ui white background">
                 <div class="ui container">
                     <div class="ui items">
@@ -137,7 +138,7 @@
 
                                 <div class="ui right floated toggle checkbox">
                                     <div class="ui horizontal divider"></div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="interests.businessEnglish">
                                     <label>&nbsp;</label>
                                 </div>
                             </div>
@@ -152,7 +153,7 @@
 
                                 <div class="ui right floated toggle checkbox">
                                     <div class="ui horizontal divider"></div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="interests.overseesStudy">
                                     <label>&nbsp;</label>
                                 </div>
                             </div>
@@ -167,7 +168,7 @@
 
                                 <div class="ui right floated toggle checkbox">
                                     <div class="ui horizontal divider"></div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="interests.itTraining">
                                     <label>&nbsp;</label>
                                 </div>
                             </div>
@@ -182,7 +183,7 @@
 
                                 <div class="ui right floated toggle checkbox">
                                     <div class="ui horizontal divider"></div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="interests.mba">
                                     <label>&nbsp;</label>
                                 </div>
                             </div>
@@ -197,7 +198,7 @@
 
                                 <div class="ui right floated toggle checkbox">
                                     <div class="ui horizontal divider"></div>
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-model="interests.accounting">
                                     <label>&nbsp;</label>
                                 </div>
                             </div>
@@ -209,7 +210,7 @@
             <div class="ui container">
                 <div class="filed">
                     <label><%= __('其他') %></label>
-                    <textarea rows="2"></textarea>
+                    <textarea rows="2" ng-model="interests.other"></textarea>
                 </div>
 
                 <div class="ui horizontal divider"></div>
