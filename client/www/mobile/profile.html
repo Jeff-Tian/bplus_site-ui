@@ -110,5 +110,13 @@
 </script>
 <!--Page JS-->
 <script src="<%= cdn.normal %>js/page/profile/mobile-main-build.js?<%= cdn.version %>" type="text/javascript"></script>
+<script>
+    window.t_PageName = "m.profile";
+</script>
+<% if (config.env != 'dev') { %>
+<script src="http://tracking.bridgeplus.cn/trackingLoader.js"></script>
+<% }else{ %>
+<script src="http://localhost:3000/trackingLoader.js"></script>
+<% } %>
 </body>
 </html>

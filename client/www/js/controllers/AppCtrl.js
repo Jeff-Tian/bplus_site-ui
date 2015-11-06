@@ -86,6 +86,12 @@
                 else if (window.location.hash === '#/menu') {
                     window.sendTrack('m.menu');
                 }
+                else if(window.location.hash.indexOf('#/paid/') >= 0){
+                    window.sendTrack('m.MS2015Paid');
+                }
+                else if(window.location.hash.indexOf('#/select-payment-method') >= 0){
+                    window.sendTrack('m.MS2015Pay');
+                }
             }
         }
     };
