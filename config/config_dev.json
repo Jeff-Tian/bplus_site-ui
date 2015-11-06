@@ -16,7 +16,7 @@
     "port": "10001"
   },
   "captchaInternal": {
-    "host": "uat.bridgeplus.cn",
+    "host": "uat.service.hcd.com",
     "port": "10001"
   },
   "upload": {
