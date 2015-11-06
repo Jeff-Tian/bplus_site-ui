@@ -50,7 +50,7 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
-                if (DeviceHelper.isMobile() && typeof (window.sendTrack === 'function')) {
+                if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
                     window.sendTrack('m.login.login.click', {isLoginSuc: true});
                 }
 
