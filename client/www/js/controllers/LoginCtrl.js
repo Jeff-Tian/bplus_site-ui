@@ -8,7 +8,7 @@
         };
 
         if (!window.location.hash) {
-            if (DeviceHelper.isMobile() && window.sendTrack) {
+            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
                 window.sendTrack('m.login');
             }
         }
@@ -50,7 +50,7 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
-                if (DeviceHelper.isMobile() && window.sendTrack) {
+                if (DeviceHelper.isMobile() && typeof (window.sendTrack === 'function')) {
                     window.sendTrack('m.login.login.click', {isLoginSuc: true});
                 }
 
@@ -60,7 +60,7 @@
             }).catch(function (reason) {
                 FormValidation.delegateHandleFormError($loginForm)(reason);
 
-                if (DeviceHelper.isMobile() && window.sendTrack) {
+                if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
                     window.sendTrack('m.login.login.click', {isLoginSuc: false});
                 }
             }).finally(function () {

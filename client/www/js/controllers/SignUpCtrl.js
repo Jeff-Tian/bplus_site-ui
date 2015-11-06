@@ -1,7 +1,7 @@
 (function (exports) {
     exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
-        if(window.location.hash === '#register') {
-            if(DeviceHelper.isMobile() && window.sendTrack){
+        if (window.location.hash === '#register') {
+            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
                 window.sendTrack('m.register', {isLoginSuc: false});
             }
         }
