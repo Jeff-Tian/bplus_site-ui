@@ -27,11 +27,11 @@
                 <% if (!signedIn) { %>
                 <div class="ui horizontal segments" style="background: transparent; border:none; box-shadow: none;">
                     <div class="ui segment" style="padding-left: 0;">
-                        <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button" onclick="javascript:sendTrack('m.index.login.click');"><%= __('SignIn')
+                        <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button" onclick="javascript:if(window.sendTrack) sendTrack('m.index.login.click');"><%= __('SignIn')
                             %></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
-                        <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button" onclick="javascript:sendTrack('m.index.register.click');"><%=
+                        <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button" onclick="javascript:if(window.sendTrack) sendTrack('m.index.register.click');"><%=
                             __('SignUp')
                             %></a>
                     </div>

@@ -79,7 +79,7 @@
 
 
         function sendIndexTrack(){
-            if(DeviceHelper.isMobile()) {
+            if(DeviceHelper.isMobile() && window.sendTrack) {
                 if (window.location.hash === '#/home') {
                     window.sendTrack('m.index');
                 }
