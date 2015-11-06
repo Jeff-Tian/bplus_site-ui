@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SelectInterestCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper) {
+    exports.SelectInterestCtrl = function ($scope, service, FormValidation, $stateParams, $state) {
         $('.ui.checkbox').checkbox();
 
         $scope.interests = {
@@ -45,6 +45,7 @@
                     })
                     .then(function (result) {
                         console.log(result);
+                        $state.go('paid', $stateParams);
                     })
                     .catch(FormValidation.delegateHandleFormError($('.ui.form.interests-form')))
                     ;
@@ -52,6 +53,6 @@
         };
     };
 
-    exports.SelectInterestCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper'];
+    exports.SelectInterestCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state'];
 })
 (angular.bplus = angular.bplus || {});

@@ -13,6 +13,18 @@
             msgBus.onMemberLoaded($scope, gotoPaidInner);
         }
 
+        function gotoInterests(result) {
+            function gotoInterestsInner() {
+                $state.go('select-interests', {
+                    who: $scope.memberInfo.member_id,
+                    displayName: $scope.memberInfo.displayName,
+                    redemptionCode: result && result.generatedRedemption ? (result.generatedRedemption.result || '') : ''
+                });
+            }
+
+            msgBus.onMemberLoaded($scope, gotoInterestsInner);
+        }
+
         $scope.payData = {
             redemptionCode: ''
         };
@@ -25,7 +37,7 @@
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
-                        gotoPaid(result);
+                        gotoInterests(result);
                     })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
@@ -67,7 +79,7 @@
                         })
                         .then(function (result) {
                             if (/^true$/i.test(result.hasRight)) {
-                                gotoPaid(result);
+                                gotoInterests(result);
                             } else {
                                 if (paymentMethod === 'wechat') {
 
