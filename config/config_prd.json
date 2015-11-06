@@ -94,5 +94,6 @@
     "enableLogoutOnMobile": false
   },
   "version": "0.8.0",
-  "date": "20151103_0810"
+  "date": "20151103_0810",
+  "env": "prd"
 }
