@@ -101,6 +101,12 @@ body {
     text-shadow: none;
 }
 
+.grey.background {
+    background-color: #d2d2d2;
+    color: black;
+    text-shadow: none;
+}
+
 .transparent {
     background-color: transparent !important;
     border: none !important;
@@ -278,6 +284,7 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
     border-color: @color-brand;
 }
 
+// TODO: Delete the following hack and find a solution for old mobile browsers.
 .ui.form .ui.input > input {
     width: 100% !important;
 }
@@ -285,6 +292,12 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
 .ui.form .field.absolute-prompt .ui.input > input {
     width: 0 !important;
 }
+
+.ui.form .field .ui.input > input[name=verificationCode] {
+    width: 0 !important;
+}
+
+// end TODO
 
 .ui.form .fields {
     -webkit-flex-wrap: inherit;
@@ -340,4 +353,16 @@ a:hover, a:active, a:focus, a.icon:hover, a.icon:active, a.icon:focus {
 
 .middle.aligned {
     vertical-align: middle;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .interests-form .ui.items > .item {
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+    }
+}
+
+.interests-form .item .header {
+    margin-left: 1em !important;
 }

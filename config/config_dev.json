@@ -12,11 +12,11 @@
     "verificationCode": "BP_M2"
   },
   "captcha": {
-    "host": "uat.captcha.service.hcdlearning.com",
+    "host": "uat.bridgeplus.cn",
     "port": "10001"
   },
   "captchaInternal": {
-    "host": "uat.captcha.service.hcdlearning.com",
+    "host": "uat.bridgeplus.cn",
     "port": "10001"
   },
   "upload": {
