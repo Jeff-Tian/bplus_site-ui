@@ -15,7 +15,7 @@
 
         function gotoInterests(result) {
             function gotoInterestsInner() {
-                $state.go('select-interests', {
+                $state.go('select-interest', {
                     who: $scope.memberInfo.member_id,
                     displayName: $scope.memberInfo.displayName,
                     redemptionCode: result && result.generatedRedemption ? (result.generatedRedemption.result || '') : ''
