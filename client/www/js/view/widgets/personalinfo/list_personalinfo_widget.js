@@ -26,7 +26,6 @@ define([
                     compile: function () {
                         return {
                             pre: function ($scope) {
-                                $(".checkbox").checkbox();
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.data.dateOfBirth.isPrivate = $scope.data.dateOfBirth.isPrivate === false ? false : true;
                                 $scope.data.contractInfo.isPrivate = $scope.data.contractInfo.isPrivate === false ? false : true;
