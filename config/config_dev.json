@@ -16,7 +16,7 @@
     "port": "10001"
   },
   "captchaInternal": {
-    "host": "uat.service.hcd.com",
+    "host": "10.20.32.51",
     "port": "10001"
   },
   "upload": {

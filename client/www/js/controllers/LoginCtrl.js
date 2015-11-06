@@ -7,8 +7,8 @@
             wechatToken: queryParser.get('wechat_token')
         };
 
-        if(!window.location.hash) {
-            if(DeviceHelper.isMobile()) {
+        if (!window.location.hash) {
+            if (DeviceHelper.isMobile()) {
                 window.sendTrack('m.login');
             }
         }
@@ -50,20 +50,20 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
-                if(DeviceHelper.isMobile()){
+                if (DeviceHelper.isMobile()) {
                     window.sendTrack('m.login.login.click', {isLoginSuc: true});
                 }
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                 window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
-            }).catch((function() {
-                if(DeviceHelper.isMobile()){
+            }).catch(function (reason) {
+                FormValidation.delegateHandleFormError($loginForm)(reason);
+
+                if (DeviceHelper.isMobile()) {
                     window.sendTrack('m.login.login.click', {isLoginSuc: false});
                 }
-
-                FormValidation.delegateHandleFormError($loginForm);
-            })()).finally(function () {
+            }).finally(function () {
                 submitting = false;
             });
         };

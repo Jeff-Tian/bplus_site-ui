@@ -188,8 +188,15 @@ module.exports = {
                 });
 
                 var locale = localeHelper.getLocale(req.url, req);
-                // TODO: Investigate why no effect
-                res.redirect(localeHelper.generateLocaleLink('/', locale));
+                if (!req.xhr) {
+                    res.redirect(localeHelper.generateLocaleLink('/', locale));
+                } else {
+                    res.json({
+                        isSuccess: false,
+                        code: '302',
+                        message: localeHelper.generateLocaleLink('/', locale)
+                    });
+                }
 
                 return undefined;
             }
