@@ -1,8 +1,10 @@
 <div class="ui large fluid inverted center aligned vertical b-profile one item menu">
     <a></a>
-    <a class="item" href="<%= localeLink('/m/national') %>"><%= __('MapNational') %></a>
+    <a class="item" href="<%= localeLink('/m/youth') %>"><%= __('MapNational') %></a>
+    <a class="item" href="<%= localeLink('/m/national') %>"><%= __('大赛报名') %></a>
     <a class="item" href="<%= localeLink('/m/profile') %>"><%= __('Profile') %></a>
     <a class="item" href="<%= localeLink('/m/aboutus') %>"><%= __('FooterAboutUs') %></a>
+    <a class="item" href="<%= localeLink('/m/statement') %>"><%= __('FooterServiceStatement') %></a>
 
     <% if (signedIn && featureSwitcher.enableLogoutOnMobile) { %>
     <a class="item" ng-click="signOut()"><%= __('退出登录') %></a>
@@ -20,7 +22,8 @@
             <div class="ui six doubling centered cards">
                 <div class="ui transparent card">
                     <div class="ui image" style="margin: 0 auto;">
-                        <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                        <img class="ui small image"
+                             src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
                     </div>
                     <div class="center aligned content">
                         <p><%= __('Bridge+服务号') %></p>

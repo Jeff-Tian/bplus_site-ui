@@ -17,13 +17,12 @@
     "angular-translate": "~2.7.2",
     "echarts": "~2.2.7",
     "jquery-address": "https://github.com/asual/jquery-address.git",
-    "owl.carousel": "~2.0.0-beta.3"
+    "owl.carousel": "~2.0.0-beta.3",
+    "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6",
-    "angular-route": "~1.4.4",
     "angular-ui-router": "~0.2.15",
-    "angularjs": "~1.3.0",
     "less": "~2.5.1",
     "semantic-ui": "~2.0.8",
     "requirejs": "~2.1.15",
@@ -33,6 +32,6 @@
     "when": "~3.7.3"
   },
   "resolutions": {
-    "angular": "1.4.5"
+    "angular": "1.4.7"
   }
 }

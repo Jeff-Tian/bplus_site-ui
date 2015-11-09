@@ -157,6 +157,10 @@ module.exports = {
         }
     }),
 
+    saveInterests: proxyBPlus({
+        path: '/profile/extension'
+    }),
+
     addEducation: proxyBPlus({
         path: '/profile/education/add'
     }),
@@ -245,7 +249,7 @@ module.exports = {
         var operation = req.params.operation;
         if (classification === "memberExt") {
             return updateMemberData(req, res, next);
-        } else if (operation === "delete"){
+        } else if (operation === "delete") {
             return deleteData(req, res, next);
         } else {
             return updateOtherData(req, res, next);
@@ -254,7 +258,7 @@ module.exports = {
 
     getResource: function (req, res, next) {
         var language = bplusServiceParams.language[req.params.language] || 'zh-CN';
-        
+
         proxyBPlus({
             path: '/resource/load/' + req.params.resourceKey + '/' + language
         })(req, res, next);

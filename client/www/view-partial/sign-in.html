@@ -1,8 +1,8 @@
 <div class="ui fluid two item top pointing secondary menu brand">
-    <a class="item" data-tab="login"><%= __('SignIn') %></a>
+    <a class="active item" data-tab="login"><%= __('SignIn') %></a>
     <a class="item" data-tab="register"><%= __('SignUp') %></a>
 </div>
-<div class="ui bottom attached tab" data-tab="login" ng-controller="LoginCtrl">
+<div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
     <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
 
     <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">

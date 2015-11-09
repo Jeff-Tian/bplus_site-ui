@@ -61,6 +61,7 @@ require([
         .controller('AppCtrl', angular.bplus.AppCtrl)
         .factory('translationLoader', angular.bplus.translationLoader)
         .factory('FormValidation', angular.bplus.FormValidation)
+        .factory('DeviceHelper', angular.bplus.DeviceHelper)
         .factory('service', angular.bplus.service)
         .factory('MessageStore', angular.bplus.MessageStore)
     ;

@@ -215,6 +215,7 @@ mapRoute2Template('/aboutus');
 mapRoute2Template('/school');
 mapRoute2Template('/statement');
 mapRoute2Template('/youth');
+mapRoute2Template('/preheating');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
 mapRoute2Template('/sign-in');
@@ -227,7 +228,13 @@ mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
-mapRoute2Template('/select-payment-method');
+server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('select-payment-method');
+    } else {
+        res.redirect('/m#/select-payment-method');
+    }
+});
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
 

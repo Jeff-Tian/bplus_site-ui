@@ -12,11 +12,11 @@
     "verificationCode": "BP_M2"
   },
   "captcha": {
-    "host": "uat.captcha.service.hcdlearning.com",
+    "host": "uat.bridgeplus.cn",
     "port": "10001"
   },
   "captchaInternal": {
-    "host": "uat.captcha.service.hcdlearning.com",
+    "host": "10.20.32.51",
     "port": "10001"
   },
   "upload": {
@@ -94,5 +94,6 @@
     "enableLogoutOnMobile": true
   },
   "version": "0.8.0",
-  "date": "20151103_0810"
+  "date": "20151103_0810",
+  "env": "dev"
 }

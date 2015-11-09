@@ -7,6 +7,12 @@
             wechatToken: queryParser.get('wechat_token')
         };
 
+        if (!window.location.hash) {
+            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
+                window.sendTrack('m.login');
+            }
+        }
+
         var serverResponse = queryParser.get('server_response');
         if (serverResponse) {
             console.log(serverResponse);
@@ -44,10 +50,20 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
+                if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
+                    window.sendTrack('m.login.login.click', {isLoginSuc: true});
+                }
+
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                 window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
-            }).catch(FormValidation.delegateHandleFormError($loginForm)).finally(function () {
+            }).catch(function (reason) {
+                FormValidation.delegateHandleFormError($loginForm)(reason);
+
+                if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
+                    window.sendTrack('m.login.login.click', {isLoginSuc: false});
+                }
+            }).finally(function () {
                 submitting = false;
             });
         };

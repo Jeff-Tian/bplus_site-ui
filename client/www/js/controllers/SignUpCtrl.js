@@ -1,5 +1,11 @@
 (function (exports) {
-    exports.SignUpCtrl = function ($scope, service, queryParser) {
+    exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
+        if (window.location.hash === '#register') {
+            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
+                window.sendTrack('m.register', {isLoginSuc: false});
+            }
+        }
+
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
@@ -21,5 +27,5 @@
         };
     };
 
-    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser'];
+    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

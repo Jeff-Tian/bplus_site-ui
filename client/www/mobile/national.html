@@ -22,6 +22,11 @@
                 <div class="national-content">
                     <h5 class="national-info"><%= __('MobileNationalData') %></h5>
                     <h5 class="national-info"><%= __('MobileNationalOrganizer') %></h5>
+
+                    <div class="ui horizontal divider"></div>
+                    <h5 class="national-info"><%= __('第一名30,000元') %></h5>
+                    <h5 class="national-info"><%= __('第二名15,000元') %></h5>
+                    <h5 class="national-info"><%= __('第三名5,000元') %></h5>
                 </div>
 
                 <div class="ui horizontal divider"></div>
@@ -43,6 +48,14 @@
 <script src="js/page/mobile/MobileIndexCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
+<script>
+    window.t_PageName = "m.ms2015";
+</script>
+<% if (config.env != 'dev') { %>
+<script src="http://tracking.bridgeplus.cn/trackingLoader.js"></script>
+<% }else{ %>
+<script src="http://uat.tracking.hcd.com/trackingLoader.js"></script>
+<% } %>
 </body>
 
 </html>

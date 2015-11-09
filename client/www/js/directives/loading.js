@@ -11,7 +11,9 @@
                 msgBus.onMsg(msgBus.events.loading.show, $scope, function () {
                     $scope.showLoading = true;
                     //$element.addClass('loading');
-                    $element.append('<i class="ui loading spinner icon" style="margin-left: 10px;"></i>');
+                    if ($element.find('.ui.loading.spinner.icon').length < 0) {
+                        $element.append('<i class="ui loading spinner icon" style="margin-left: 10px;"></i>');
+                    }
                 });
 
                 msgBus.onMsg(msgBus.events.loading.hide, $scope, function () {
