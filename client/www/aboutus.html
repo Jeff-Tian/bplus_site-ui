@@ -21,22 +21,22 @@
     <div class="b-aboutus footer-main"></div>
 
     <div class="page-content">
-    	<div class="b-aboutus-content">
-    		<div class="ui container">
-    			<div class="ui grid">
-    				<div class="eleven wide column content-column">
-    					<h2><%= __('AboutusContentTitle') %></h2>
-    					<h4><%= __('AboutusSection1') %></h4>
-			    		<h4><%= __('AboutusSection2') %></h4>
-			    		<h4><%= __('AboutusSection3') %></h4>
-    				</div>
-    				<div class="four wide column right floated img-column">
-    					<img src="/img/salespage/aboutus-logo.png" width="100%">
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="b-feedback">
+        <div class="b-aboutus-content">
+            <div class="ui container">
+                <div class="ui grid">
+                    <div class="eleven wide column content-column">
+                        <h2><%= __('AboutusContentTitle') %></h2>
+                        <h4><%= __('AboutusSection1') %></h4>
+                        <h4><%= __('AboutusSection2') %></h4>
+                        <h4><%= __('AboutusSection3') %></h4>
+                    </div>
+                    <div class="four wide column right floated img-column">
+                        <img src="/img/salespage/aboutus-logo.png" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="b-feedback">
             <h3 class="ui header container b-sp" ng-cloak><%= __('AboutusTeam') %></h3>
 
             <div class="owl-carousel owl-theme b-slider feedback-carousel">
@@ -189,10 +189,10 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 <!--JS-->
-<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js"></script>
+<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js?<%= cdn.version %>"></script>
 <!--Page JS-->
-<script src="js/controllers/AppCtrl.js"></script>
-<script src="js/page/footer/main.js"></script>
+<script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/footer/main.js?<%= cdn.version %>"></script>
 </body>
 
 </html>

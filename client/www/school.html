@@ -171,10 +171,10 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 <!--JS-->
-<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js"></script>
+<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js?<%= cdn.version %>"></script>
 <!--Page JS-->
-<script src="js/controllers/AppCtrl.js"></script>
-<script src="js/page/footer/main.js"></script>
+<script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/footer/main.js?<%= cdn.version %>"></script>
 </body>
 
 </html>
