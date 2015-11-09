@@ -19,7 +19,7 @@
         },
 
         regexPath: function (p) {
-            return new RegExp('^(?:/(' + helper.supportedLocales.join('|') + '))' + p + '$', 'i');
+            return new RegExp('^(?:/(' + helper.supportedLocales.join('|') + '))?' + p + '', 'i');
         },
 
         getLocale: function (url, req) {
