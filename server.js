@@ -184,8 +184,8 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 server.use('/translation', localeHelper.serveTranslations);
 function checkWechatHostAndSetCookie(req, res, next) {
     var query = urlParser.parse(req.url).query;
-    if (query && query.indexOf("source=wechatServerAccount") > -1) {
-        res.cookie('source', "wechatServerAccount");
+    if (query && query.indexOf("source=wechatServiceAccount") > -1) {
+        res.cookie('source', "wechatServiceAccount");
     }
     next();
 }
