@@ -183,10 +183,8 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 
 server.use('/translation', localeHelper.serveTranslations);
 
-server.use(localeHelper.regexPath('/m'), require('./mobile'));
-server.use(localeHelper.regexPath('/mobile'), require('./mobile'));
-server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
-server.use(localeHelper.regexPath('/mobile'), express.static(staticFolder));
+server.use(localeHelper.regexPath('/m', false), require('./mobile'));
+server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
 // Customize client file path
 server.set('views', staticFolder);
