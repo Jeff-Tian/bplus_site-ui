@@ -33,7 +33,8 @@ define([
                   onUnchecked: function() {
                       $scope.data.dateTo.value.tillNow = false;
                   }
-              })
+              });
+
               $scope.property = {
                 status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
               };
