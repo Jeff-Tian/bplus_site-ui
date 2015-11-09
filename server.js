@@ -257,11 +257,19 @@ function clientErrorHandler(err, req, res, next) {
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
     //res.status(500).send('Something borke!');
-    res.status(500).render('error', {error: err});
+    if (!isFromMobile(req)) {
+        res.status(500).render('error', {error: err});
+    } else {
+        res.status(500).render('mobile/error', {error: err});
+    }
 }
 
 server.use('*', function (req, res) {
-    res.render('404.html');
+    if (!isFromMobile(req)) {
+        res.render('404.html');
+    } else {
+        res.render('mobile/404.html');
+    }
 });
 
 server.use(logErrors);
