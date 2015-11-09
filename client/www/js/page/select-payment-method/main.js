@@ -26,11 +26,10 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
-            // PC no select interest state for now, regard it as paid state
             .state('select-interest', {
-                url: '/paid',
-                templateUrl: 'paid.html',
-                controller: 'PaidCtrl'
+                url: '/select-interest/:who/:displayName/:redemptionCode',
+                templateUrl: 'interest.html',
+                controller: 'SelectInterestCtrl'
             })
             .state('paid', {
                 url: '/paid',
@@ -50,6 +49,7 @@ angular
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)
     .controller('AppCtrl', angular.bplus.AppCtrl)
+    .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
     .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
 ;
