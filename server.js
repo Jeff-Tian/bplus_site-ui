@@ -248,7 +248,7 @@ function logErrors(err, req, res, next) {
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
         req.dualLogError(err);
-        res.status(500).send({code: '500', message: 'Something blew up!'});
+        res.status(500).send({isSuccess: false, code: '500', message: 'Something blew up!'});
     } else {
         next(err);
     }
@@ -256,10 +256,13 @@ function clientErrorHandler(err, req, res, next) {
 
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
-    res.status(500).send('Something borke!');
-    // TODO: prepare an error template
-    //res.render('error', {error: err});
+    //res.status(500).send('Something borke!');
+    res.status(500).render('error', {error: err});
 }
+
+server.use('*', function (req, res) {
+    res.render('404.html');
+});
 
 server.use(logErrors);
 server.use(clientErrorHandler);
