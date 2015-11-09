@@ -70,6 +70,111 @@
         </div>
     </script>
 
+    <script type="text/ng-template" id="interest.html">
+        <div class="grey background b-mobile stretch" ng-cloak>
+            <h3 class="ui center aligned header" style="margin-top: 1rem;">
+                <%= __('我感兴趣的学习机会') %>
+            </h3>
+
+            <form class="ui form interests-form" name="interest-form" novalidate ng-submit="saveInterests()">
+                <div class="ui error message brand"></div>
+                <div class="ui white background">
+                    <div class="ui container">
+                        <div class="ui horizontal divider"></div>
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/business-english.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('商务英语') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.businessEnglish">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/oversees-study.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('海外游学') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.overseesStudy">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/it-training.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('IT培训') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.itTraining">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/mba.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('MBA') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.mba">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/accounting.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('财务会计') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.accounting">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui horizontal divider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui container">
+                    <div class="filed">
+                        <textarea placeholder="<%= __('输入其他你感兴趣的') %>" rows="2" ng-model="interests.other"></textarea>
+                    </div>
+                    &nbsp;
+                    <button type="submit" class="ui red fluid button"><%= __('确定') %></button>
+                    &nbsp;
+                </div>
+            </form>
+        </div>
+    </script>
+
     <script type="text/ng-template" id="paid.html">
         <div class="ui center aligned container subcontainer b-background-lighter" ng-show="!showPaid">
             <div class="ui very padded loading vertical segment">
@@ -115,6 +220,7 @@
 <script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
+<script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/select-payment-method/main.js"></script>
 <!-- endbuild -->
 </body>
