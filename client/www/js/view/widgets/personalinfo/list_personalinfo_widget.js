@@ -25,7 +25,23 @@ define([
                     },
                     compile: function () {
                         return {
-                            pre: function ($scope) {
+                            pre: function ($scope, $element) {
+                               $($element).find(".isPrivateBirthday").checkbox({
+                                    onChecked: function() {
+                                        $scope.data.dateOfBirth.isPrivate = true;
+                                    },
+                                    onUnchecked: function() {
+                                        $scope.data.dateOfBirth.isPrivate = false;
+                                    }
+                                })
+                                $($element).find(".isPrivateContractInfo").checkbox({
+                                    onChecked: function() {
+                                        $scope.data.contractInfo.isPrivate = true;
+                                    },
+                                    onUnchecked: function() {
+                                        $scope.data.contractInfo.isPrivate = false;
+                                    }
+                                })
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.data.dateOfBirth.isPrivate = $scope.data.dateOfBirth.isPrivate === false ? false : true;
                                 $scope.data.contractInfo.isPrivate = $scope.data.contractInfo.isPrivate === false ? false : true;
