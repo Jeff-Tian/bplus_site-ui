@@ -182,7 +182,15 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 }
 
 server.use('/translation', localeHelper.serveTranslations);
-
+function checkWechatHostAndSetCookie(req, res, next) {
+    var query = urlParser.parse(req.url).query;
+    if (query && query.indexOf("source=wechatServerAccount") > -1) {
+        res.cookie('source', "wechatServerAccount");
+    }
+    next();
+}
+server.use(localeHelper.regexPath('/m'), checkWechatHostAndSetCookie);
+server.use(localeHelper.regexPath('/mobile'), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m'), require('./mobile'));
 server.use(localeHelper.regexPath('/mobile'), require('./mobile'));
 server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
