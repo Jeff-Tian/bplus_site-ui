@@ -18,6 +18,7 @@
         </a>
 
         <div class="ui basic button wechat-button rank-wechat-share"
+             ng-show="showQRCode"
              data-html="<img src='<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>' class='ui large image'>"
              data-position="bottom center">
             <i class="wechat icon"></i>{{'MapRankWechatShare' | translate}}

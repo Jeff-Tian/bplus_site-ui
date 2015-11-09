@@ -10,7 +10,7 @@
 
 			link: {
 				pre: function(scope, element, attrs) {
-					console.log('home');
+			        $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
 					scope.selectDirectiveItem = function(item) {
 						switch (item) {
 							case 'official':
@@ -104,6 +104,7 @@
 			restrict: "E",
 			link: {
 				pre: function(scope, element, attrs) {
+			        $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
 					scope.catetories = [{
 						value: 1,
 						title: 'RankDongBeiDivision',
