@@ -1,6 +1,17 @@
 (function (exports) {
     exports.SelectInterestCtrl = function ($scope, service, FormValidation, $stateParams, $state) {
-        $('.ui.checkbox').checkbox();
+        $('.ui.checkbox').checkbox({
+            'onChecked': function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = true;
+            },
+            onUnchecked: function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = false;
+            }
+        });
 
         $scope.interests = {
             businessEnglish: false,

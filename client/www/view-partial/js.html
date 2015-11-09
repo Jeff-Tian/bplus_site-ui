@@ -1,12 +1,10 @@
-<!-- build:js js/cdn/lib.js -->
-<script src="bower/jquery/dist/jquery.min.js"></script>
-<script src="bower/semantic-ui/dist/semantic.min.js"></script>
-<script src="bower/underscore/underscore-min.js"></script>
-<script src="bower/jquery-address/src/jquery.address.js"></script>
+<script src="<%= cdn.normal %>bower/jquery/dist/jquery.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/underscore/underscore-min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/jquery-address/src/jquery.address.js?<%= cdn.version %>"></script>
 <!--Angular JS-->
-<script src="/bower/angular/angular.min.js"></script>
-<script src="/bower/angular-translate/angular-translate.min.js"></script>
-<!-- endbuild -->
+<script src="<%= cdn.normal %>bower/angular/angular.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angular-translate/angular-translate.min.js?<%= cdn.version %>"></script>
 
 <!-- build:js js/cdn/combined1.js -->
 <script src="js/factories/service.js"></script>
@@ -22,6 +20,7 @@
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
+<script src="js/page/bplusModule.js"></script>
 <!--Utils JS-->
 <script src="/js/utils/utils.js"></script>
 <script src="/js/utils/msgbus.js"></script>

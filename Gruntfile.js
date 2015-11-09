@@ -167,21 +167,120 @@ module.exports = function (grunt) {
                         }
                     }
                 },
-                files: [{
+                files: [{}, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'view-partial/*.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    // TODO: Must be true, why?
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: '*.html',
+                    src: 'view-partial/js.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'mobile/*.html',
+                    src: 'account-setting.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'bind-mobile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'index.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'opportunity.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'personal-history.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'reset-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'reset-password-by-email.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'select-payment-method.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'set-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'sign-in.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/aboutus.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/bind-mobile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/bind-mobile-by-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/index.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/national.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/personal-history.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/reset-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/reset-password-by-email.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/set-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/sign-in.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/statement.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/youth.html',
                     dest: '<%= config.dist %>'
                 }]
             }

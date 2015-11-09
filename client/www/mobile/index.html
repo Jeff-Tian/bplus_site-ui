@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html ng-app="mobile" ng-controller="AppCtrl">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{pageTitle || '<%= __("SEOTitle_Mobile_Index") %>'}}</title>
+    <title><%= __("SEOTitle_Mobile_Index") %></title>
     <meta name="description" content="<%= __('SEODesc_Mobile_Index') %>">
     <%- include('header.html') -%>
 </head>
-<body class="b-background">
+<body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
 <%- include('head.html') -%>
 
 <div ui-view class="main body b-mobile back-color white color shadowed has-header">
@@ -25,13 +25,15 @@
                 <p><%= __('MobileIndexSubHeader') %></p>
 
                 <% if (!signedIn) { %>
-                <div class="ui horizontal segments" style="background: transparent; border:none; box-shadow: none;">
+                <div class="ui horizontal segments transparent">
                     <div class="ui segment" style="padding-left: 0;">
-                        <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button" onclick="javascript:if(window.sendTrack) sendTrack('m.index.login.click');"><%= __('SignIn')
+                        <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"
+                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.login.click');"><%= __('SignIn')
                             %></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
-                        <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button" onclick="javascript:if(window.sendTrack) sendTrack('m.index.register.click');"><%=
+                        <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button"
+                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.register.click');"><%=
                             __('SignUp')
                             %></a>
                     </div>
@@ -42,7 +44,8 @@
                 <div class="ui six doubling centered cards">
                     <div class="ui transparent card">
                         <div class="ui image">
-                            <img class="ui small image" src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>"
+                            <img class="ui small image"
+                                 src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
                                  style="max-width: 111px; margin: 0 auto;">
                         </div>
                         <div class="center aligned content">
@@ -252,7 +255,7 @@
                 <div class="ui transparent card">
                     <div class="ui image">
                         <img class="ui small image"
-                             src="<%= cdn.normal %>img/b-wechat.jpg?<%= cdn.version %>">
+                             src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
                     </div>
                     <div class="center aligned content">
                         <p><%= __('Bridge+服务号') %></p>
@@ -278,7 +281,6 @@
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
-<script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
 <% if (config.env != 'dev') { %>
 <script src="http://tracking.bridgeplus.cn/trackingLoader.js"></script>
