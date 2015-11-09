@@ -26,6 +26,12 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
+            // PC no select interest state for now, regard it as paid state
+            .state('select-interest', {
+                url: '/paid',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
+            })
             .state('paid', {
                 url: '/paid',
                 templateUrl: 'paid.html',
