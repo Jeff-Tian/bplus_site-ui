@@ -9,7 +9,7 @@
                     if (end === -1) {
                         end = document.cookie.length;
                     }
-                    return unescape(document.cookie.substring(start, end));
+                    return window.unescape(document.cookie.substring(start, end));
                 }
             }
 

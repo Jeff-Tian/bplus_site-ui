@@ -10,7 +10,7 @@
 </head>
 <body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
 <img src="<%= cdn.normal %>icon/ms-icon-310x310.png?<%= cdn.version %>"
-     style="margin-left: -100000px; margin-top: -100000px;">
+     style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
 
 <div ui-view class="main body b-mobile back-color white color shadowed has-header">
@@ -101,7 +101,7 @@
             <% } %>
 
             <div class="ui horizontal divider"></div>
-            <button class="ui primary button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
+            <button class="ui red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
@@ -253,13 +253,13 @@
             <p><%= __('了解组队方法、获取培训资料、掌握赛事动态请关注Bridge+服务号') %></p>
         </div>
         <div class="ui center aligned container" ng-show="!currentUserIsMe">
-            <i class="ui green massive checkmark icon"></i>
+            <div class="ui horizontal divider"></div>
 
             <h3 class="ui header">
                 {{paidUser.displayName}} <%= __('已经付费报名参加了 Bridge+ 全国商战模拟游戏大赛！') %>
             </h3>
 
-            <p ng-show="generatedCode"><%= __('使用他的兑换码') %></p>
+            <p ng-show="generatedCode"><%= __('使用他的兑换码 (') %>&#8595;<%= __('长按复制)') %></p>
 
             <p ng-show="generatedCode">
                 <input type="text" ng-model="generatedCode" readonly
@@ -269,7 +269,7 @@
             <p ng-show="generatedCode"><%= __('即可免费参赛！（限额三人）') %></p>
 
             <h3 class="ui header">
-                <a class="" style="text-decoration: underline;" href="/m/national"><%= __('立即报名') %></a>
+                <a class="ui red button" href="/m/national"><%= __('立即报名') %></a>
             </h3>
         </div>
         <div class="ui centered container">
