@@ -1,5 +1,18 @@
 (function (exports) {
     exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser) {
+        $('.ui.checkbox.remember-me').checkbox({
+            'onChecked': function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = true;
+            },
+            onUnchecked: function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = false;
+            }
+        });
+
         $scope.loginData = {
             mobile: '',
             password: '',
@@ -9,7 +22,7 @@
 
         if (!window.location.hash) {
             if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                window.sendTrack('m.login');
+                window.sendTrack('m.login', {checkAutoLogin: $scope.loginData.rememberMe});
             }
         }
 
@@ -51,7 +64,7 @@
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
                 if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                    window.sendTrack('m.login.login.click', {isLoginSuc: true});
+                    window.sendTrack('m.login.login.click', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
                 }
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
@@ -61,7 +74,7 @@
                 FormValidation.delegateHandleFormError($loginForm)(reason);
 
                 if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                    window.sendTrack('m.login.login.click', {isLoginSuc: false});
+                    window.sendTrack('m.login.login.click', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
                 }
             }).finally(function () {
                 submitting = false;

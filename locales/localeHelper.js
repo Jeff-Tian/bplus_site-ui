@@ -18,8 +18,18 @@
             return url.replace(localePattern, '/' + locale + '$1');
         },
 
-        regexPath: function (p) {
-            return new RegExp('^(?:/(' + helper.supportedLocales.join('|') + '))?' + p + '', 'i');
+        regexPath: function (p, strict) {
+            if (typeof strict === 'undefined') {
+                strict = true;
+            }
+
+            var pattern = '^(?:/(' + helper.supportedLocales.join('|') + '))?' + p;
+
+            if (strict) {
+                pattern = pattern + '$';
+            }
+
+            return new RegExp(pattern, 'i');
         },
 
         getLocale: function (url, req) {

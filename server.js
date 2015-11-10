@@ -166,6 +166,7 @@ function filterConfig(config) {
     filtered.cdn = config.cdn;
     filtered.featureSwitcher = config.featureSwitcher;
     filtered.service_upload = config.service_upload;
+    filtered.trackingUrl = config.trackingUrl;
 
     return filtered;
 }
@@ -183,10 +184,8 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 
 server.use('/translation', localeHelper.serveTranslations);
 
-server.use(localeHelper.regexPath('/m'), require('./mobile'));
-server.use(localeHelper.regexPath('/mobile'), require('./mobile'));
-server.use(localeHelper.regexPath('/m'), express.static(staticFolder));
-server.use(localeHelper.regexPath('/mobile'), express.static(staticFolder));
+server.use(localeHelper.regexPath('/m', false), require('./mobile'));
+server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
 // Customize client file path
 server.set('views', staticFolder);
@@ -250,7 +249,7 @@ function logErrors(err, req, res, next) {
 function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
         req.dualLogError(err);
-        res.status(500).send({code: '500', message: 'Something blew up!'});
+        res.status(500).send({isSuccess: false, code: '500', message: 'Something blew up!'});
     } else {
         next(err);
     }
@@ -258,10 +257,21 @@ function clientErrorHandler(err, req, res, next) {
 
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
-    res.status(500).send('Something borke!');
-    // TODO: prepare an error template
-    //res.render('error', {error: err});
+    //res.status(500).send('Something borke!');
+    if (!isFromMobile(req)) {
+        res.status(500).render('error', {error: err});
+    } else {
+        res.status(500).render('mobile/error', {error: err});
+    }
 }
+
+server.use('*', function (req, res) {
+    if (!isFromMobile(req)) {
+        res.render('404.html');
+    } else {
+        res.render('mobile/404.html');
+    }
+});
 
 server.use(logErrors);
 server.use(clientErrorHandler);

@@ -170,6 +170,10 @@
         if ($stateParams.paidBy === 'wechat') {
             $scope.wechatPay();
         }
+
+        $scope.showGameDetailModal = function () {
+            $('.b-game-detail.modal').modal('show');
+        };
     };
 
     exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper'];

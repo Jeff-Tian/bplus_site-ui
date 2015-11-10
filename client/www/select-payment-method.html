@@ -21,6 +21,7 @@
         <h4 class="ui centered header">
             <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
             {how_much: '300'})}) %>
+            <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
         </h4>
 
         <div class="ui column b-step-container b-separator">
@@ -45,12 +46,18 @@
                 <% } %>
 
                 <div class="ui horizontal divider"></div>
+                <div class="ui left aligned container">
+                    <button class="ui primary button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                    </button>
+                </div>
                 <div class="ui horizontal divider"></div>
                 <form name="redemptionForm" novalidate class="ui form redemption-form"
                       ng-submit="buyWithRedemptionCode($event)">
                     <div class="ui error message brand"></div>
                     <div class="ui left aligned container subcontainer">
-                        <h5 class="ui header"><%= __('兑换码') %></h5>
+                        <h5 class="ui header"><%= __('兑换码') %>
+                            <span class="ui red header"><%= __('限时免费邀请码') %> </span>
+                        </h5>
                     </div>
                     <div class="fields">
                         <div class="thirteen wide field">
@@ -68,6 +75,7 @@
                 </form>
             </div>
         </div>
+        <%- include('view-partial/game-detail-modal.html') -%>
     </script>
 
     <script type="text/ng-template" id="interest.html">
@@ -183,23 +191,25 @@
         <div class="ui center aligned container subcontainer b-background-lighter" ng-cloak ng-show="showPaid">
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
 
             <i class="ui green massive checkmark icon"></i>
 
             <h5 class="ui header">
                 <%= __('您已经付费报名成功！') %>
                 <div class="ui horizontal divider"></div>
-                <div class="sub header"><%= __('请记得在比赛开始前,完成组队。') %></div>
+                <div class="sub header"><%= __('别忘了在报名截止前完成组队！') %></div>
+                <div class="sub header"><%= __('用你的专属兑换码 {{code}} 邀请小伙伴，即可免费参赛！（限额邀请三人）', {code: '{{generatedCode}}'})
+                    %>
+                </div>
             </h5>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态') %></p>
+
+            <p><%= __('请关注Bridge+服务号') %></p>
+
+            <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>

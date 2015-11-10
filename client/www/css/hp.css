@@ -192,7 +192,7 @@
   color: #DC4A48;
 }
 .hp-mastead {
-  height: 1000px;
+  height: 768px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -203,12 +203,9 @@
 .hp-mastead .header-wechat {
   float: right;
   margin-top: 70px;
-  padding: 1em;
-  background: rgba(255, 255, 255, 0.2);
 }
 .hp-mastead .header-wechat img {
   width: 100px;
-  margin-bottom: 5px;
 }
 .hp-mastead .header-wechat p.wechat {
   margin-bottom: 0;
@@ -216,11 +213,11 @@
   color: black;
 }
 .hp-mastead .e {
-  padding-top: 350px;
+  padding-top: 180px;
 }
 .hp-mastead .e img {
   width: 100%;
-  max-width: 572px;
+  max-width: 300px;
 }
 .hp-mastead p.header-title {
   font-size: 3em;
@@ -228,7 +225,7 @@
 }
 .hp-mastead p.header-content {
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .hp-mastead .link-item {
   margin: 10px 0;
@@ -250,7 +247,7 @@
   border: 1px solid white;
   color: white;
   width: 200px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-size: 1.2em;
 }
 .hp-mastead .ui.button.hp-button-gray:hover {
@@ -269,8 +266,8 @@
   width: 72px;
   background: url('/img/hp/icon/down.png') no-repeat;
   height: 30px;
-  margin-top: 30px;
   margin-right: 0;
+  margin-top: 10px;
 }
 .hp-mastead .marksimos-info img {
   max-width: 1000px;
@@ -317,6 +314,12 @@
 .hp-gray-space h2.sub-title {
   font-size: 1.5em;
 }
+.hp-white-space span.sub-title,
+.hp-gray-dark-space span.sub-title,
+.hp-gray-space span.sub-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
 .hp-white-space p.intensive-content,
 .hp-gray-dark-space p.intensive-content,
 .hp-gray-space p.intensive-content {
@@ -324,17 +327,18 @@
   font-size: 1.125em;
   margin-bottom: 30px;
 }
+.hp-white-space p.features-content,
+.hp-gray-dark-space p.features-content,
+.hp-gray-space p.features-content {
+  line-height: 2em;
+  font-size: 1.125em;
+}
 .hp-white-space .simulation img,
 .hp-gray-dark-space .simulation img,
 .hp-gray-space .simulation img {
   width: 100%;
   max-width: 500px;
   float: right;
-}
-.hp-white-space .bottom.aligned.row .info-column-left,
-.hp-gray-dark-space .bottom.aligned.row .info-column-left,
-.hp-gray-space .bottom.aligned.row .info-column-left {
-  padding-right: 0 !important;
 }
 .hp-white-space .bottom.aligned.row .info-column-left img,
 .hp-gray-dark-space .bottom.aligned.row .info-column-left img,
@@ -345,7 +349,6 @@
 .hp-white-space .bottom.aligned.row .info-column-right,
 .hp-gray-dark-space .bottom.aligned.row .info-column-right,
 .hp-gray-space .bottom.aligned.row .info-column-right {
-  padding-left: 0 !important;
   margin-bottom: 4px;
 }
 .hp-white-space .bottom.aligned.row .info-content,
@@ -361,6 +364,28 @@
   font-size: 1.6em;
   line-height: 2em;
   margin: 0;
+}
+.hp-white-space .ui.grid.four.column .column,
+.hp-gray-dark-space .ui.grid.four.column .column,
+.hp-gray-space .ui.grid.four.column .column {
+  text-align: center;
+}
+.hp-white-space .ui.grid.four.column .column .rules-list,
+.hp-gray-dark-space .ui.grid.four.column .column .rules-list,
+.hp-gray-space .ui.grid.four.column .column .rules-list {
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  background-color: #ff3c42;
+  color: #F0F0F0;
+  padding: 4em 0;
+}
+.hp-white-space .ui.grid.four.column .column .rules-list p,
+.hp-gray-dark-space .ui.grid.four.column .column .rules-list p,
+.hp-gray-space .ui.grid.four.column .column .rules-list p {
+  margin-bottom: 0;
+  font-size: 1.125em;
 }
 .hp-white-space .ui.grid.game,
 .hp-gray-dark-space .ui.grid.game,
@@ -468,6 +493,17 @@
 .hp-gray-dark-space .data-img img,
 .hp-gray-space .data-img img {
   width: 100%;
+}
+.hp-white-space .time-line-img img,
+.hp-gray-dark-space .time-line-img img,
+.hp-gray-space .time-line-img img {
+  width: 100%;
+  max-width: 889px;
+}
+.hp-white-space .time-line-img.mobile-show img,
+.hp-gray-dark-space .time-line-img.mobile-show img,
+.hp-gray-space .time-line-img.mobile-show img {
+  max-width: 393px;
 }
 .hp-white-space .national-grid,
 .hp-gray-dark-space .national-grid,
@@ -650,6 +686,148 @@
 .hp-gray-space .bpuls .column.logo {
   text-align: left !important;
 }
+.hp-white-space .ui.grid .column.b-process-item > .content,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content,
+.hp-gray-space .ui.grid .column.b-process-item > .content,
+.hp-white-space .ui.container .column.b-process-item > .content,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content,
+.hp-gray-space .ui.container .column.b-process-item > .content {
+  background-color: #ff3c42;
+  padding: 1.6rem 1.3rem;
+  position: relative;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content > .b-process-item-next,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content > .b-process-item-next,
+.hp-gray-space .ui.grid .column.b-process-item > .content > .b-process-item-next,
+.hp-white-space .ui.container .column.b-process-item > .content > .b-process-item-next,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content > .b-process-item-next,
+.hp-gray-space .ui.container .column.b-process-item > .content > .b-process-item-next {
+  position: absolute;
+  left: -2.4rem;
+  top: 44%;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content > .b-process-item-next i.icon,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content > .b-process-item-next i.icon,
+.hp-gray-space .ui.grid .column.b-process-item > .content > .b-process-item-next i.icon,
+.hp-white-space .ui.container .column.b-process-item > .content > .b-process-item-next i.icon,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content > .b-process-item-next i.icon,
+.hp-gray-space .ui.container .column.b-process-item > .content > .b-process-item-next i.icon {
+  color: #ff3c42;
+  font-size: 2.00em;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content h4.ui.header,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content h4.ui.header,
+.hp-gray-space .ui.grid .column.b-process-item > .content h4.ui.header,
+.hp-white-space .ui.container .column.b-process-item > .content h4.ui.header,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content h4.ui.header,
+.hp-gray-space .ui.container .column.b-process-item > .content h4.ui.header {
+  color: white;
+  font-weight: normal;
+  font-size: 1.125em;
+  line-height: 2em;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content h4.ui.header i.icon,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content h4.ui.header i.icon,
+.hp-gray-space .ui.grid .column.b-process-item > .content h4.ui.header i.icon,
+.hp-white-space .ui.container .column.b-process-item > .content h4.ui.header i.icon,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content h4.ui.header i.icon,
+.hp-gray-space .ui.container .column.b-process-item > .content h4.ui.header i.icon {
+  font-size: 1.3em;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content h4.ui.header .content,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content h4.ui.header .content,
+.hp-gray-space .ui.grid .column.b-process-item > .content h4.ui.header .content,
+.hp-white-space .ui.container .column.b-process-item > .content h4.ui.header .content,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content h4.ui.header .content,
+.hp-gray-space .ui.container .column.b-process-item > .content h4.ui.header .content {
+  padding-top: 0.2em;
+}
+.hp-white-space .ui.grid .column.b-process-item > .content p,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .content p,
+.hp-gray-space .ui.grid .column.b-process-item > .content p,
+.hp-white-space .ui.container .column.b-process-item > .content p,
+.hp-gray-dark-space .ui.container .column.b-process-item > .content p,
+.hp-gray-space .ui.container .column.b-process-item > .content p {
+  color: white;
+  font-size: 1em;
+}
+.hp-white-space .ui.grid .column.b-process-item > .image,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .image,
+.hp-gray-space .ui.grid .column.b-process-item > .image,
+.hp-white-space .ui.container .column.b-process-item > .image,
+.hp-gray-dark-space .ui.container .column.b-process-item > .image,
+.hp-gray-space .ui.container .column.b-process-item > .image {
+  background-color: #d2d2d2;
+  text-align: center;
+}
+.hp-white-space .ui.grid .column.b-process-item > .image img,
+.hp-gray-dark-space .ui.grid .column.b-process-item > .image img,
+.hp-gray-space .ui.grid .column.b-process-item > .image img,
+.hp-white-space .ui.container .column.b-process-item > .image img,
+.hp-gray-dark-space .ui.container .column.b-process-item > .image img,
+.hp-gray-space .ui.container .column.b-process-item > .image img {
+  max-width: 358px;
+}
+.hp-white-space .ui.grid .column.b-process-list > .content,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .content,
+.hp-gray-space .ui.grid .column.b-process-list > .content,
+.hp-white-space .ui.container .column.b-process-list > .content,
+.hp-gray-dark-space .ui.container .column.b-process-list > .content,
+.hp-gray-space .ui.container .column.b-process-list > .content {
+  background-color: #ff3c42;
+  padding: 1em;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+.hp-white-space .ui.grid .column.b-process-list > .content h4.ui.header,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .content h4.ui.header,
+.hp-gray-space .ui.grid .column.b-process-list > .content h4.ui.header,
+.hp-white-space .ui.container .column.b-process-list > .content h4.ui.header,
+.hp-gray-dark-space .ui.container .column.b-process-list > .content h4.ui.header,
+.hp-gray-space .ui.container .column.b-process-list > .content h4.ui.header {
+  color: white;
+  font-weight: bold;
+  font-size: 1.125em;
+  margin-bottom: 0;
+}
+.hp-white-space .ui.grid .column.b-process-list > .content p,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .content p,
+.hp-gray-space .ui.grid .column.b-process-list > .content p,
+.hp-white-space .ui.container .column.b-process-list > .content p,
+.hp-gray-dark-space .ui.container .column.b-process-list > .content p,
+.hp-gray-space .ui.container .column.b-process-list > .content p {
+  color: white;
+  font-size: 1em;
+  text-align: center;
+}
+.hp-white-space .ui.grid .column.b-process-list > .info,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .info,
+.hp-gray-space .ui.grid .column.b-process-list > .info,
+.hp-white-space .ui.container .column.b-process-list > .info,
+.hp-gray-dark-space .ui.container .column.b-process-list > .info,
+.hp-gray-space .ui.container .column.b-process-list > .info {
+  background-color: white;
+  margin: 0 2em;
+  padding: 2.5em;
+}
+.hp-white-space .ui.grid .column.b-process-list > .info p,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .info p,
+.hp-gray-space .ui.grid .column.b-process-list > .info p,
+.hp-white-space .ui.container .column.b-process-list > .info p,
+.hp-gray-dark-space .ui.container .column.b-process-list > .info p,
+.hp-gray-space .ui.container .column.b-process-list > .info p {
+  height: 120px;
+}
+.hp-white-space .ui.grid .column.b-process-list > .info img,
+.hp-gray-dark-space .ui.grid .column.b-process-list > .info img,
+.hp-gray-space .ui.grid .column.b-process-list > .info img,
+.hp-white-space .ui.container .column.b-process-list > .info img,
+.hp-gray-dark-space .ui.container .column.b-process-list > .info img,
+.hp-gray-space .ui.container .column.b-process-list > .info img {
+  width: 100%;
+  max-width: 460px;
+}
 .hp-white-space {
   background-color: white;
 }
@@ -744,11 +922,32 @@
   .hp-gray-space .format-grid-parent .format-grid .column.right.bottom {
     margin-top: 0.2em;
   }
+  .hp-white-space .ui.grid .column.b-process-list > .info,
+  .hp-gray-dark-space .ui.grid .column.b-process-list > .info,
+  .hp-gray-space .ui.grid .column.b-process-list > .info,
+  .hp-white-space .ui.container .column.b-process-list > .info,
+  .hp-gray-dark-space .ui.container .column.b-process-list > .info,
+  .hp-gray-space .ui.container .column.b-process-list > .info {
+    background-color: white;
+    margin: 0 1em;
+    padding: 1em;
+  }
+  .hp-white-space .ui.grid .column.b-process-list > .info p,
+  .hp-gray-dark-space .ui.grid .column.b-process-list > .info p,
+  .hp-gray-space .ui.grid .column.b-process-list > .info p,
+  .hp-white-space .ui.container .column.b-process-list > .info p,
+  .hp-gray-dark-space .ui.container .column.b-process-list > .info p,
+  .hp-gray-space .ui.container .column.b-process-list > .info p {
+    height: 120px;
+  }
   .bottom.aligned.row .four.wide.column.info-column-left {
     width: 40% !important;
   }
   .bottom.aligned.row .twelve.wide.column.info-column-right {
     width: 60% !important;
+  }
+  .hp-gray-dark-space .partners .item img {
+    max-width: 100px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -910,6 +1109,30 @@
   .ui[class*="three column"].grid > .row > .column h2 {
     text-align: left;
   }
+  .ui.column.grid > [class*="two wide"].column,
+  .ui.grid > .column.row > [class*="two wide"].column,
+  .ui.grid > .row > [class*="two wide"].column,
+  .ui.grid > [class*="two wide"].column {
+    width: 20% !important;
+  }
+  .ui.column.grid > [class*="fourteen wide"].column,
+  .ui.grid > .column.row > [class*="fourteen wide"].column,
+  .ui.grid > .row > [class*="fourteen wide"].column,
+  .ui.grid > [class*="fourteen wide"].column {
+    width: 80% !important;
+  }
+  .ui.column.container.grid > [class*="two wide"].column,
+  .ui.container.grid > .column.row > [class*="two wide"].column,
+  .ui.container.grid > .row > [class*="two wide"].column,
+  .ui.container.grid > [class*="two wide"].column {
+    width: 20% !important;
+  }
+  .ui.column.container.grid > [class*="fourteen wide"].column,
+  .ui.container.grid > .column.row > [class*="fourteen wide"].column,
+  .ui.container.grid > .row > [class*="fourteen wide"].column,
+  .ui.container.grid > [class*="fourteen wide"].column {
+    width: 80% !important;
+  }
   .hp-mastead {
     height: 600px;
     padding: 1em;
@@ -985,5 +1208,13 @@
   .hp-gray-dark-space .simulation img,
   .hp-gray-space .simulation img {
     float: none;
+  }
+  .hp-white-space .ui.grid .column,
+  .hp-gray-dark-space .ui.grid .column,
+  .hp-gray-space .ui.grid .column,
+  .hp-white-space .ui.container .column,
+  .hp-gray-dark-space .ui.container .column,
+  .hp-gray-space .ui.container .column {
+    margin-bottom: 1em;
   }
 }
