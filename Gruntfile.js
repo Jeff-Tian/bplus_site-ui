@@ -306,6 +306,16 @@ module.exports = function (grunt) {
                     cwd: '<%= config.dist %>',
                     src: 'mobile/youth.html',
                     dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'profile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/profile.html',
+                    dest: '<%= config.dist %>'
                 }]
             }
         },
