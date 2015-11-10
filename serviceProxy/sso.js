@@ -27,6 +27,7 @@ function setAuthToken(res, token, member_id) {
     res.cookie('token', token, cookieOption);
 
     if (member_id) {
+        cookieOption.httpOnly = false;
         res.cookie('mid', member_id, cookieOption);
     }
 }

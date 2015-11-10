@@ -68,7 +68,7 @@ module.exports = {
             responseInterceptor: function (res, json) {
                 console.log('reuslt:');
                 console.log(json);
-                if (json.result.hasRight === false) {
+                if (json.result && (json.result.hasRight === false)) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
