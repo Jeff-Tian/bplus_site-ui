@@ -9,6 +9,8 @@
     <%- include('header.html') -%>
 </head>
 <body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
+<img src="<%= cdn.normal %>icon/ms-icon-310x310.png?<%= cdn.version %>"
+     style="margin-left: -100000px; margin-top: -100000px;">
 <%- include('head.html') -%>
 
 <div ui-view class="main body b-mobile back-color white color shadowed has-header">
@@ -68,6 +70,9 @@
                     <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
                     {how_much: '300'})}) %>
                 </div>
+                <div class="sub header">
+                    <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
+                </div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>
             </h3>
@@ -96,13 +101,13 @@
             <% } %>
 
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+            <button class="ui primary button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('兑换码') %></label>
+                    <label><%= __('兑换码') %> <span class="ui red header"><%= __('限时免费邀请码') %> </span> </label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
                 <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
@@ -112,6 +117,7 @@
             </form>
         </div>
     </div>
+    <%- include('../view-partial/game-detail-modal.html') -%>
 </script>
 
 <script type="text/ng-template" id="interest.html">
@@ -225,30 +231,46 @@
         <div class="ui very padded vertical loading segment"></div>
     </div>
     <div class="white background b-mobile stretch" ng-show="showPaid" ng-cloak>
-        <div class="ui center aligned container">
+        <div class="ui center aligned container" ng-show="currentUserIsMe">
 
             <i class="ui green massive checkmark icon"></i>
 
-            <h3 class="ui header" ng-show="currentUserIsMe">
-
+            <h3 class="ui header">
                 <%= __('您已经付费报名成功！') %>
                 <div class="ui horizontal divider"></div>
                 <div class="sub header"><%= __('请在比赛开始前用电脑登录完成组队。') %></div>
-                <div class="sub header"><%= __('邀请朋友一起参赛: ') %> {{gameLink}}</div>
-            </h3>
-            <h3 class="ui header" ng-show="!currentUserIsMe">
-                {{paidUser.displayName}} <%= __('已经成功购买了{{competition}}', {competition: '全国大赛'}) %>
             </h3>
 
-            <p ng-show="generatedCode && currentUserIsMe"><%= __('分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!', {code:
-                '{{generatedCode}}'}) %></p>
+            <p ng-show="generatedCode"><%= __('邀请朋友一起参赛: ') %></p>
 
-            <p ng-show="generatedCode && !currentUserIsMe"><%= __('使用此兑换码{{code}}即可免费参赛!', {code: '{{generatedCode}}'})
-                %></p>
+            <p ng-show="generatedCode" class="ui center aligned">
+                <input class="ui center aligned" type="text" ng-model="generatedCode" readonly
+                       style="border: none; text-align: center; font-size: large;">
+            </p>
 
-            <div ng-show="generatedCode">
-                <input type="text" ng-model="generatedCode" readonly style="border: none;">
-            </div>
+            <p ng-show="generatedCode"><%= __('即可免费参赛! (限额邀请三人)') %></p>
+
+            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态请关注Bridge+服务号') %></p>
+        </div>
+        <div class="ui center aligned container" ng-show="!currentUserIsMe">
+            <i class="ui green massive checkmark icon"></i>
+
+            <h3 class="ui header">
+                {{paidUser.displayName}} <%= __('已经付费报名参加了 Bridge+ 全国商战模拟游戏大赛！') %>
+            </h3>
+
+            <p ng-show="generatedCode"><%= __('使用他的兑换码') %></p>
+
+            <p ng-show="generatedCode">
+                <input type="text" ng-model="generatedCode" readonly
+                       style="border: none; text-align: center; font-size: large;">
+            </p>
+
+            <p ng-show="generatedCode"><%= __('即可免费参赛！（限额三人）') %></p>
+
+            <h3 class="ui header">
+                <a class="" style="text-decoration: underline;" href="/m/national"><%= __('立即报名') %></a>
+            </h3>
         </div>
         <div class="ui centered container" ng-show="showQRCode">
             <div class="ui six doubling centered cards">
@@ -283,11 +305,7 @@
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
-<% if (config.env != 'dev') { %>
-<script src="http://tracking.bridgeplus.cn/trackingLoader.js"></script>
-<% }else{ %>
-<script src="http://uat.tracking.hcd.com/trackingLoader.js"></script>
-<% } %>
+<script src="js/utils/trackingSender.js"></script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@ angular
                 controller: 'SelectInterestCtrl'
             })
             .state('paid', {
-                url: '/paid',
+                url: '/paid/:who/:displayName/:redemptionCode',
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })
