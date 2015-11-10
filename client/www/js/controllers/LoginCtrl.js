@@ -1,5 +1,18 @@
 (function (exports) {
     exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser) {
+        $('.ui.checkbox.remember-me').checkbox({
+            'onChecked': function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = true;
+            },
+            onUnchecked: function () {
+                var ngModel = $(this).attr('ng-model');
+                var ngModels = ngModel.split('.');
+                $scope[ngModels[0]][ngModels[1]] = false;
+            }
+        });
+
         $scope.loginData = {
             mobile: '',
             password: '',
