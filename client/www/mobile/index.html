@@ -43,7 +43,7 @@
                 <% } %>
 
                 <% if (signedIn) { %>
-                <div class="ui six doubling centered cards">
+                <div class="ui six doubling centered cards" ng-show="showQRCode">
                     <div class="ui transparent card">
                         <div class="ui image">
                             <img class="ui small image"
@@ -272,7 +272,7 @@
                 <a class="ui red button" href="/m/national"><%= __('立即报名') %></a>
             </h3>
         </div>
-        <div class="ui centered container">
+        <div class="ui centered container" ng-show="showQRCode">
             <div class="ui six doubling centered cards">
                 <div class="ui transparent card">
                     <div class="ui image">

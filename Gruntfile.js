@@ -68,7 +68,31 @@ module.exports = function (grunt) {
             }
         },
         "useref": {
-            html: ['<%= config.dist %>*.html', '<%= config.dist %>view-partial/*.html', '<%= config.dist %>mobile/*.html'],
+            html: [
+                '<%= config.dist %>account-setting.html',
+                '<%= config.dist %>bind-mobile.html',
+                '<%= config.dist %>index.html',
+                '<%= config.dist %>opportunity.html',
+                '<%= config.dist %>personal-history.html',
+                '<%= config.dist %>reset-password.html',
+                '<%= config.dist %>select-payment-method.html',
+                '<%= config.dist %>set-password.html',
+                '<%= config.dist %>sign-in.html',
+                '<%= config.dist %>view-partial/js.html',
+                '<%= config.dist %>mobile/aboutus.html',
+                '<%= config.dist %>mobile/bind-mobile.html',
+                '<%= config.dist %>mobile/bind-mobile-by-password.html',
+                '<%= config.dist %>mobile/footer.html',
+                '<%= config.dist %>mobile/index.html',
+                '<%= config.dist %>mobile/national.html',
+                '<%= config.dist %>mobile/personal-history.html',
+                '<%= config.dist %>mobile/reset-password.html',
+                '<%= config.dist %>mobile/reset-password-by-email.html',
+                '<%= config.dist %>mobile/set-password.html',
+                '<%= config.dist %>mobile/sign-in.html',
+                '<%= config.dist %>mobile/statement.html',
+                '<%= config.dist %>mobile/youth.html'
+            ],
             temp: '<%= config.dist %>'
         },
         htmlmin: {                                     // Task

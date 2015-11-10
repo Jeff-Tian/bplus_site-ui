@@ -1,5 +1,6 @@
 (function (exports) {
     exports.MobileIndexCtrl = function ($scope, $stateParams, $state, $rootScope, msgBus, queryParser) {
+        $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
         msgBus.onMsg(msgBus.events.viewContent.loaded, $scope, function (event, viewConfig) {
             if ($state.current.name === 'home' && $scope.$parent) {
                 $scope.$parent.menuHref = '#/menu';

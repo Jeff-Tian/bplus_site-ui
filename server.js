@@ -184,6 +184,14 @@ if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
 
 server.use('/translation', localeHelper.serveTranslations);
 
+function checkWechatHostAndSetCookie(req, res, next) {
+    var query = urlParser.parse(req.url).query;
+    if (query && query.indexOf("source=wechatServiceAccount") > -1) {
+        res.cookie('source', "wechatServiceAccount");
+    }
+    next();
+}
+server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
