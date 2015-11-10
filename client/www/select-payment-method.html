@@ -191,23 +191,25 @@
         <div class="ui center aligned container subcontainer b-background-lighter" ng-cloak ng-show="showPaid">
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
 
             <i class="ui green massive checkmark icon"></i>
 
             <h5 class="ui header">
                 <%= __('您已经付费报名成功！') %>
                 <div class="ui horizontal divider"></div>
-                <div class="sub header"><%= __('请记得在比赛开始前,完成组队。') %></div>
+                <div class="sub header"><%= __('别忘了在报名截止前完成组队！') %></div>
+                <div class="sub header"><%= __('用你的专属兑换码 {{code}} 邀请小伙伴，即可免费参赛！（限额邀请三人）', {code: '{{generatedCode}}'})
+                    %>
+                </div>
             </h5>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态') %></p>
+
+            <p><%= __('请关注Bridge+服务号') %></p>
+
+            <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
