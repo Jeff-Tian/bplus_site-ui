@@ -182,11 +182,14 @@ module.exports = {
                 }
             },
             responseInterceptor: function (originalResponse, responseJson) {
-                res.cookie('token', '', {
+                var deleteCookieOption = {
                     expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
                     path: '/',
                     httpOnly: true
-                });
+                };
+
+                res.cookie('token', '', deleteCookieOption);
+                res.cookie('mid', '', deleteCookieOption);
 
                 var locale = localeHelper.getLocale(req.url, req);
                 if (!req.xhr) {
