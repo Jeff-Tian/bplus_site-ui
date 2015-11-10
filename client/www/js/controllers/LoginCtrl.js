@@ -22,7 +22,7 @@
 
         if (!window.location.hash) {
             if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                window.sendTrack('m.login');
+                window.sendTrack('m.login', {checkAutoLogin: $scope.loginData.rememberMe});
             }
         }
 
@@ -64,7 +64,7 @@
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
                 if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                    window.sendTrack('m.login.login.click', {isLoginSuc: true});
+                    window.sendTrack('m.login.login.click', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
                 }
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
@@ -74,7 +74,7 @@
                 FormValidation.delegateHandleFormError($loginForm)(reason);
 
                 if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                    window.sendTrack('m.login.login.click', {isLoginSuc: false});
+                    window.sendTrack('m.login.login.click', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
                 }
             }).finally(function () {
                 submitting = false;

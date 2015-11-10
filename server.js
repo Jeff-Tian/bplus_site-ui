@@ -166,6 +166,7 @@ function filterConfig(config) {
     filtered.cdn = config.cdn;
     filtered.featureSwitcher = config.featureSwitcher;
     filtered.service_upload = config.service_upload;
+    filtered.trackingUrl = config.trackingUrl;
 
     return filtered;
 }
