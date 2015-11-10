@@ -38,9 +38,7 @@
         </div>
     </div>
     <div class="twelve wide column">
-
         <h3>{{'MapHomeNews' | translate}}：Bridge+商赛华东区／2015.5.30／731人已报名！</h3>
-
         <div class="banner" ng-click="selectDirectiveItem('official')">
             <img src="<%= cdn.normal %>img/salespage/banner_official.png?<%= cdn.version %>" width="100%"
                  style="max-width:843px">
@@ -57,7 +55,7 @@
                             5/5 陈大民的团队
                         </div>
                     </div>
-                    <div class="two wide column">
+                    <div class="two wide column" ng-show="showQRCode">
                         <div class="wechat">
                             <i class="big wechat icon home-wechat-share"
                                data-html="<img src='<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg<%= cdn.version %>' class='ui large image'>"
@@ -77,7 +75,7 @@
                             5/5 陈大民的团队
                         </div>
                     </div>
-                    <div class="two wide column">
+                    <div class="two wide column" ng-show="showQRCode">
                         <div class="wechat">
                             <i class="big wechat icon home-wechat-share"
                                data-html="<img src='<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>' class='ui large image'>"
@@ -97,7 +95,7 @@
                             5/5 陈大民的团队
                         </div>
                     </div>
-                    <div class="two wide column">
+                    <div class="two wide column" ng-show="showQRCode">
                         <div class="wechat">
                             <i class="big wechat icon home-wechat-share"
                                data-html="<img src='<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>' class='ui large image'>"

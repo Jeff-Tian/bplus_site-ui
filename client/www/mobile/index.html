@@ -41,7 +41,7 @@
                 <% } %>
 
                 <% if (signedIn) { %>
-                <div class="ui six doubling centered cards">
+                <div class="ui six doubling centered cards" ng-show="showQRCode">
                     <div class="ui transparent card">
                         <div class="ui image">
                             <img class="ui small image"
@@ -250,7 +250,7 @@
                 <input type="text" ng-model="generatedCode" readonly style="border: none;">
             </div>
         </div>
-        <div class="ui centered container">
+        <div class="ui centered container" ng-show="showQRCode">
             <div class="ui six doubling centered cards">
                 <div class="ui transparent card">
                     <div class="ui image">

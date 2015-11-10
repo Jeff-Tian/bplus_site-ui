@@ -23,7 +23,7 @@
                         <bplusdate value="dateSelect.value" config="dateSelect.config" fulfilled="dateSelect.fulfilled" class="inline fields" />
                     </div>
                     <div class="field">
-                        <div class="ui toggle checkbox">
+                        <div class="ui toggle checkbox isPrivateBirthday">
                             <input type="checkbox" ng-model="data.dateOfBirth.isPrivate" />
                             <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
                         </div>
@@ -39,7 +39,7 @@
                         <input type="text" name="personalcontractInfo" ng-model="data.contractInfo.value" placeholder="" />
                     </div>
                     <div class="field">
-                        <div class="ui toggle checkbox">
+                        <div class="ui toggle checkbox isPrivateContractInfo">
                             <input type="checkbox" ng-model="data.contractInfo.isPrivate">
                             <label class="b-profile-checkbox-label">{{'SetPrivacy' | translate}}</label>
                         </div>
