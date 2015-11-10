@@ -68,6 +68,9 @@
                     <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
                     {how_much: '300'})}) %>
                 </div>
+                <div class="sub header">
+                    <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
+                </div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>
             </h3>
@@ -96,13 +99,13 @@
             <% } %>
 
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+            <button class="ui primary button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('兑换码') %></label>
+                    <label><%= __('兑换码') %> <span class="ui red header"><%= __('限时免费邀请码') %> </span> </label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
                 <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
@@ -112,6 +115,7 @@
             </form>
         </div>
     </div>
+    <%- include('../view-partial/game-detail-modal.html') -%>
 </script>
 
 <script type="text/ng-template" id="interest.html">
