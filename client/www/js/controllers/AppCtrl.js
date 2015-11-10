@@ -93,6 +93,8 @@
                 }
             }
         }
+
+        $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper'];
