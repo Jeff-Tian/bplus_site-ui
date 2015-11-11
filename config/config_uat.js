@@ -1,1 +1,1 @@
-module.exports = require('./config_prd');
+module.exports = require('./config_dev');
