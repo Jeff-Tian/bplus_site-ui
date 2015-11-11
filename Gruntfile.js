@@ -72,23 +72,17 @@ module.exports = function (grunt) {
                 '<%= config.dist %>account-setting.html',
                 '<%= config.dist %>bind-mobile.html',
                 '<%= config.dist %>index.html',
-                '<%= config.dist %>opportunity.html',
-                '<%= config.dist %>personal-history.html',
                 '<%= config.dist %>reset-password.html',
                 '<%= config.dist %>select-payment-method.html',
-                '<%= config.dist %>set-password.html',
                 '<%= config.dist %>sign-in.html',
                 '<%= config.dist %>view-partial/js.html',
                 '<%= config.dist %>mobile/aboutus.html',
                 '<%= config.dist %>mobile/bind-mobile.html',
-                '<%= config.dist %>mobile/bind-mobile-by-password.html',
                 '<%= config.dist %>mobile/footer.html',
                 '<%= config.dist %>mobile/index.html',
                 '<%= config.dist %>mobile/national.html',
                 '<%= config.dist %>mobile/personal-history.html',
                 '<%= config.dist %>mobile/reset-password.html',
-                '<%= config.dist %>mobile/reset-password-by-email.html',
-                '<%= config.dist %>mobile/set-password.html',
                 '<%= config.dist %>mobile/sign-in.html',
                 '<%= config.dist %>mobile/statement.html',
                 '<%= config.dist %>mobile/youth.html'
@@ -214,32 +208,12 @@ module.exports = function (grunt) {
                 }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'opportunity.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'personal-history.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
                     src: 'reset-password.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'reset-password-by-email.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
                     src: 'select-payment-method.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'set-password.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
@@ -255,11 +229,6 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'mobile/bind-mobile.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/bind-mobile-by-password.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
@@ -280,16 +249,6 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'mobile/reset-password.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/reset-password-by-email.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/set-password.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
