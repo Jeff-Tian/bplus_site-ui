@@ -828,6 +828,27 @@
   width: 100%;
   max-width: 460px;
 }
+.mobile .hp-white-space,
+.hp-gray-dark-space,
+.hp-gray-space {
+  padding: 0;
+}
+.mobile .hcd {
+  margin-bottom: 0;
+}
+.mobile .hcd .row {
+  padding: 0;
+}
+.mobile .hcd .row img {
+  padding-bottom: 0 !important;
+}
+.mobile .hp-title {
+  margin-bottom: 10px;
+}
+.mobile .info {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
 .hp-white-space {
   background-color: white;
 }

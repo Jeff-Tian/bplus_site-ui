@@ -11,7 +11,7 @@
 <body ng-app="mobile" ng-controller="AppCtrl">
 <%- include('head.html') -%>
 
-<div class="pusher" style="margin-top:30px;">
+<div class="mobile pusher" style="margin-top:30px;">
     <div class="hp-mastead youth">
         <div class="ui container">
             <div class="header-wechat" ng-show="showQRCode">
@@ -76,7 +76,7 @@
                         <p>3万元 5名</p>
                     </div>
                     <div class="info">
-                        <p>Bridge+ 与知名的公司合作提供冠军队伍5个免费的海外访学名额，目前暂定于新加坡与美国西岸限额自由选择。</p>
+                        <div>Bridge+ 与知名的公司合作提供冠军队伍5个免费的海外访学名额，目前暂定于新加坡与美国西岸限额自由选择。</div>
                         <img src="<%=cdn.normal%>img/hp/prize-1.png?<%=cdn.version%>">
                     </div>
 
@@ -90,7 +90,7 @@
                         <p>总金额5万元 5名</p>
                     </div>
                     <div class="info">
-                        <p>我们将提供共5万元的Bridge+奖学金给分配给优胜队伍。</p>
+                        <div>我们将提供共5万元的Bridge+奖学金给分配给优胜队伍。</div>
                         <img src="<%=cdn.normal%>img/hp/prize-2.png?<%=cdn.version%>">
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                         <p>2千元 约250名</p>
                     </div>
                     <div class="info">
-                        <p>选入决赛的队伍将获邀请参与于中欧商学院与Bridge+ 共同举办的企业人才峰会，我们同时也邀请50位企业导师和你近距离接触)</p>
+                        <div>选入决赛的队伍将获邀请参与于中欧商学院与Bridge+ 共同举办的企业人才峰会，我们同时也邀请50位企业导师和你近距离接触)</div>
                         <img src="<%=cdn.normal%>img/hp/prize-3.png?<%=cdn.version%>">
                     </div>
                 </div>
@@ -360,7 +360,7 @@
                 <span>6</span> 大赛主办方
             </p>
 
-            <div class="ui grid bpuls">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
                         <img src="<%=cdn.normal%>img/hp/b-logo.png?<%=cdn.version%>" class="b-logo">
@@ -382,7 +382,7 @@
                 <span>7</span> 学术特别合作
             </p>
 
-            <div class="ui grid hcd">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
                         <img src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
@@ -397,7 +397,7 @@
                 <span>8</span> 公益特别合作
             </p>
 
-            <div class="ui grid hcd">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
                         <img src="<%=cdn.normal%>img/hp/tree.png?<%=cdn.version%>">
@@ -405,13 +405,30 @@
                 </div>
             </div>
         </div>
-
-        <div class="ui center aligned centered container">
-            <a href="/#select-payment-method" class="ui red button">立即报名</a>
-        </div>
     </div>
 
+    <div class="hp-white-space">
+        <div class="ui container">
+            <p class="hp-title">
+                <span>9</span> 合作机构
+            </p>
 
+            <div class="ui container">
+                <a href="http://www.shixiseng.com" target="_blank">
+                    <img class="ui small image" style="display: inline;"
+                         src="<%= cdn.normal %>img/partners/shixiseng_logo.png?<%= cdn.version %>">
+                </a>
+                <a href="http://www.wyzc.com" target="_blank">
+                    <img class="ui small image" src="<%= cdn.normal %>img/partners/wyzc.png?<%= cdn.version %>"
+                         style="display: inline;">
+                </a>
+            </div>
+
+            <div class="ui center aligned centered container">
+                <a href="/#select-payment-method" class="ui large fluid red button">立即报名</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <%- include('footer.html') -%>
