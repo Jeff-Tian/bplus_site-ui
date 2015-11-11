@@ -1,7 +1,5 @@
 (function (exports) {
     exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper) {
-        sendIndexTrack();
-
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -65,8 +63,6 @@
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
         window.addEventListener('hashchange', function () {
-            sendIndexTrack();
-
             locationHashChanged();
         });
 
@@ -76,23 +72,6 @@
             checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right',
             logonByToken: '/service-proxy/logon/by-token'
         };
-        
-        function sendIndexTrack() {
-            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                if (window.location.hash === '#/home') {
-                    window.sendTrack('m.index');
-                }
-                else if (window.location.hash === '#/menu') {
-                    window.sendTrack('m.menu');
-                }
-                else if (window.location.hash.indexOf('#/paid/') >= 0) {
-                    window.sendTrack('m.MS2015Paid');
-                }
-                else if (window.location.hash.indexOf('#/select-payment-method') >= 0) {
-                    window.sendTrack('m.MS2015Pay');
-                }
-            }
-        }
 
         $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
     };

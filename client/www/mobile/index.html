@@ -30,12 +30,12 @@
                 <div class="ui horizontal segments transparent">
                     <div class="ui segment" style="padding-left: 0;">
                         <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"
-                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.login.click');"><%= __('SignIn')
+                           onclick="window.sendTrack('m.index.login.click');"><%= __('SignIn')
                             %></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
                         <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button"
-                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.register.click');"><%=
+                           onclick="window.sendTrack('m.index.register.click');"><%=
                             __('SignUp')
                             %></a>
                     </div>
@@ -302,7 +302,33 @@
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
-<script src="js/utils/trackingSender.js"></script>
+<script>
+    (function(){
+
+        function sendIndexTrack(sender, hash) {
+            if (hash === 'home') {
+                sender.send('m.index');
+            }
+            else if (hash === 'menu') {
+                sender.send('m.menu');
+            }
+            else if (hash.indexOf('paid/') >= 0) {
+                sender.send('m.MS2015Paid');
+            }
+            else if (hash.indexOf('select-payment-method') >= 0) {
+                sender.send('m.MS2015Pay');
+            }
+        }
+
+        var moduleTrack = new window.ModuleTrack(null, function(sender, args){
+            sendIndexTrack(sender, args.hash);
+        });
+
+        $(document).ready(function(){
+            sendIndexTrack(moduleTrack, moduleTrack.currentHash());
+        });
+    })();
+</script>
 </body>
 
 </html>

@@ -3,9 +3,6 @@
         $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
         msgBus.onMsg(msgBus.events.viewContent.loaded, $scope, function (event, viewConfig) {
             if ($state.current.name === 'menu' && $scope.$parent) {
-                if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                    window.sendTrack('m.index.menu');
-                }
                 $scope.$parent.menuHref = '#/home';
             }
         });

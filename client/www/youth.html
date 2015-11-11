@@ -61,7 +61,7 @@
 
             <p class="header-content">限额100席!</p>
 
-            <a href="select-payment-method" class="ui button hp-button-gray">立即报名</a>
+            <a href="select-payment-method" class="ui button hp-button-gray" onclick="window.sendTrack('ms2015LP.join.click');">立即报名</a>
 
             <p><i class="hp icon"></i></p>
         </div>
@@ -590,5 +590,8 @@
 <%- include('view-partial/footer.html') -%>
 <script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/hp/main.js?<%= cdn.version %>"></script>
+<script>
+    window.t_PageName = "ms2015LP";
+</script>
 </body>
 </html>

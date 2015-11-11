@@ -48,6 +48,45 @@
         }
     };
 
+    window.ModuleTrack = function(moduleName, locationChangeCall){
+        var _moduleName = moduleName;
+
+        var me = this;
+        if(typeof locationChangeCall === 'function'){
+            window.addEventListener('hashchange', function () {
+                locationChangeCall(me, { hash: me.currentHash() });
+            });
+        }
+
+        this.currentHash = function(){
+            var hash = window.location.hash;
+            if(hash){
+                if(hash.indexOf('#') === 0){
+                    hash = hash.substr(1, hash.length - 1);
+                }
+
+                if(hash.indexOf('/') === 0){
+                    hash = hash.substr(1, hash.length - 1);
+                }
+            }
+
+            return hash;
+        };
+
+        this.send = function(name, data, isDelay){
+            if(!_moduleName && !name){
+                return;
+            }
+
+            if(_moduleName){
+                name = name ? _moduleName + '.' + name : _moduleName;
+            }
+
+            window.sendTrack(name, data, isDelay);
+        };
+    };
+
+
     function _load(call){
         try {
             var scriptUrl = context.config.trackingUrl + "/track.js";
@@ -79,13 +118,6 @@
         return sender;
     }
 
-    function _getUserAgent() {
-        return window.navigator.userAgent || window.navigator.vender || window.opera;
-    }
-
-    function _isMobile(){
-        return /mobile/i.test(_getUserAgent());
-    }
 
     $(document).ready(function(){
         window.sendTrack(window.t_PageName, null, true);

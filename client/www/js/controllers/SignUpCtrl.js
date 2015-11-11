@@ -1,9 +1,15 @@
 (function (exports) {
     exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
-        if (window.location.hash === '#register') {
-            if (DeviceHelper.isMobile() && (typeof window.sendTrack === 'function')) {
-                window.sendTrack('m.register', {isLoginSuc: false});
-            }
+        var moduleTrack = new window.ModuleTrack(
+            DeviceHelper.isMobile() ? 'm.register' : 'register',
+            function(sender, args){
+                if(args.hash === 'register'){
+                    sender.send(null);
+                }
+            });
+
+        if (moduleTrack.currentHash() === 'register') {
+            moduleTrack.send(null);
         }
 
         $scope.registerFormCtrl = {};
