@@ -73,7 +73,7 @@ module.exports = {
                             responseInterceptor: function (theOriginalResponse, response2Json) {
                                 // Then log on
                                 if (response2Json.isSuccess) {
-                                    setAuthToken(res, responseJson.result.token, req.body.remember);
+                                    setAuthToken(res, responseJson.result.token, true);
                                     if (jumpToReturnUrl(req, res)) {
                                         return undefined;
                                     }
@@ -92,7 +92,7 @@ module.exports = {
         })(req, res, next);
     },
     setAuthToken: function (req, res, next) {
-        setAuthToken(res, req.body.token);
+        setAuthToken(res, req.body.token, true);
 
         if (!jumpToReturnUrl(req, res)) {
             res.send(req.body.token);

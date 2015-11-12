@@ -56,8 +56,8 @@ module.exports = {
 
         if (res.locals.signedIn) {
             setMemberCookie(res, res.locals.hcd_user.member_id);
-        } else {
-            unsetSensativeCookies(res);
+            //} else {
+            //    unsetSensativeCookies(res);
         }
 
         next();

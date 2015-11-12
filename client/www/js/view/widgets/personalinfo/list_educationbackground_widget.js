@@ -24,7 +24,7 @@ define([
                     },
                     compile: function () {
                         return {
-                            pre: function ($scope) {
+                            pre: function ($scope, $element) {
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.property = {
                                     status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
@@ -101,6 +101,8 @@ define([
                                 });
                                 $scope.submit = function () {
                                     $scope.clicked = true;
+                                    $scope.data.name = $($element).find('[name="schoolname"]').val();
+                                    $scope.data.major = $($element).find('[name="major"]').val();
                                     $scope.dateFrom.config.displayError = true;
                                     $scope.dateTo.config.displayError = true;
                                     if (!!(!$scope.dateTo.fulfilled || !$scope.dateFrom.fulfilled || $scope.educationbackground.$error.required)) {
