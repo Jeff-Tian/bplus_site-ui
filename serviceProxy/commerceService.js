@@ -25,6 +25,21 @@ function injectRedemptionGeneration(res, json, req, next) {
                 if (json2.isSuccess) {
                     json.result = json.result || {};
                     json.result.generatedRedemption = json2;
+
+                    // Save generated redemption code to member extension
+                    //proxy({
+                    //    host: bplusService.host,
+                    //    port: bplusService.port,
+                    //    path: '/profile/extension',
+                    //    dataMapper: function (d) {
+                    //        d.data = [{
+                    //            key: 'redemption-code',
+                    //            value: json2.result
+                    //        }];
+                    //
+                    //        return d;
+                    //    }
+                    //})(req, res, next);
                 }
 
                 res.send(json);

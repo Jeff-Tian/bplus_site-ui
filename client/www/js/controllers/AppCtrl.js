@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper) {
+    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper, queryParser) {
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -74,7 +74,12 @@
         };
 
         $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
+
+        var prefilledRedemptionCode = queryParser.get('redemption_code');
+        if (prefilledRedemptionCode) {
+            DeviceHelper.setCookie('pre_redemption_code', prefilledRedemptionCode);
+        }
     };
 
-    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper'];
+    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser'];
 })(angular.bplus = angular.bplus || {});
