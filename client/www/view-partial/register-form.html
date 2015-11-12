@@ -9,8 +9,8 @@
                 <i class="phone icon"></i>
             </div>
         </div>
-        <div class="field absolute-prompt">
-            <div class="ui left icon input fluid" style="min-width: 50px; max-width: 999px;">
+        <div class="field absolute-prompt" ng-hide="isFromAndroid" ng-cloak>
+            <div class="ui left icon input fluid">
 
                 <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
                        ng-model="signUpData.captcha" ng-enter>
@@ -22,7 +22,21 @@
                 <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
             </div>
         </div>
-        <div class="field" ng-show="sendCodeButtonClicked">
+        <div class="field" ng-show="isFromAndroid" ng-cloak>
+            <div class="ui left icon input fluid">
+
+                <input type="text" name="captcha" placeholder="{{'PleaseInputCaptcha' | translate}}"
+                       ng-model="signUpData.captcha" ng-enter>
+                <i class="write icon"></i>
+            </div>
+        </div>
+        <div class="field" ng-show="isFromAndroid" ng-cloak>
+            <div class="ui right floated" style="float: right;">
+                <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
+            </div>
+            <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
+        </div>
+        <div class="field" ng-show="sendCodeButtonClicked && !isFromAndroid" ng-cloak>
             <div class="ui left icon input fluid">
                 <input type="text" name="verificationCode"
                        placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
@@ -35,6 +49,21 @@
                     {{verificationCodeButtonText | translate}}
                 </button>
             </div>
+        </div>
+        <div class="field" ng-show="sendCodeButtonClicked && isFromAndroid" ng-cloak>
+            <div class="ui left icon input fluid">
+                <input type="text" name="verificationCode"
+                       placeholder="{{'PleaseInputMobileVerificationCode' | translate}}"
+                       ng-model="signUpData.verificationCode" autocomplete="off">
+                <i class="write icon"></i>
+            </div>
+        </div>
+        <div class="field" ng-show="sendCodeButtonClicked && isFromAndroid" ng-cloak>
+            <button type="button" class="ui red fluid button" ng-show='sendCodeButtonClicked'
+                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())"
+                    ng-click="getVerificationCode()">
+                {{verificationCodeButtonText | translate}}
+            </button>
         </div>
         <div class="field" ng-hide="sendCodeButtonClicked">
             <button type="button" class="ui red button fluid" ng-click="getVerificationCode()"
