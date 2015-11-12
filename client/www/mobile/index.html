@@ -73,6 +73,8 @@
                 <div class="sub header">
                     <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
                 </div>
+                <button class="ui right floated red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
+                <div class="ui clearing horizontal divider"></div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>
             </h3>
@@ -101,19 +103,28 @@
             <% } %>
 
             <div class="ui horizontal divider"></div>
-            <button class="ui red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('兑换码') %> <span class="ui red header"><%= __('限时免费邀请码') %> </span> </label>
+                    <label><%= __('兑换码') %> </label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
-                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
-                    <%=
-                    __('确定') %>
-                </button>
+
+                <div class="field">
+                    <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
+                        <%=
+                        __('确定') %>
+                    </button>
+                    <div class="ui tiny left floated grey" style="font-size: small;">
+                        没有邀请码？扫码关注服务号回复"邀请码"立即赢取！
+                    </div>
+                </div>
+                <div class="field">
+                    <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
+                         class="ui small image centered">
+                </div>
             </form>
         </div>
     </div>
@@ -303,7 +314,7 @@
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
 <script>
-    (function(){
+    (function () {
 
         function sendIndexTrack(sender, hash) {
             if (hash === 'home') {
@@ -320,7 +331,7 @@
             }
         }
 
-        var moduleTrack = new window.ModuleTrack(null, function(sender, args){
+        var moduleTrack = new window.ModuleTrack(null, function (sender, args) {
             sendIndexTrack(sender, args.hash);
         });
 
