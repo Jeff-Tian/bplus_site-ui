@@ -21,7 +21,8 @@ require.config({
         'domReady': 'requirejs-domready/domReady',
         "angular": "angular/angular.min",
         "angular-translate": "angular-translate/angular-translate.min",
-        "semantic": "semantic-ui/dist/semantic.min"
+        "semantic": "semantic-ui/dist/semantic.min",
+        "autoComplete": "devbridge-autocomplete/dist/jquery.autocomplete.min"
     },
     "shim": {
         'angular': {
@@ -30,6 +31,9 @@ require.config({
         "angular-translate": {
             deps: ["angular"],
             exports: "angular-translate"
+        },
+        'autoComplete': {
+            deps: ["jquery"]
         },
         'semantic': {
             deps: ["jquery"]
