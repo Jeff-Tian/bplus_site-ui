@@ -92,7 +92,7 @@ module.exports = {
         })(req, res, next);
     },
     setAuthToken: function (req, res, next) {
-        setAuthToken(res, req.body.token);
+        setAuthToken(res, req.body.token, true);
 
         if (!jumpToReturnUrl(req, res)) {
             res.send(req.body.token);
