@@ -8,8 +8,7 @@
     <meta name="description" content="Bridge+">
     <link type="text/css" rel="stylesheet" href="/bower/semantic-ui/dist/semantic.min.css" media="all" />
     <link type="text/css" rel="stylesheet" href="/css/main.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/dist/epic.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/dist/gameui.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/cmpt/dist/competion.css" media="all" />
 </head>
 
 <body class="bplus" ng-init="page='<%=page%>';lang='<%=lang%>'" ng-app="bplus" ng-controller="AppCtrl">
@@ -19,10 +18,10 @@
         <div class="ui container">
             <div class="ui grid">
                 <div class="four wide column">
-                    <game-menu class="cloak"></game-menu>
+                    <game-menu></game-menu>
                 </div>
                 <div class="twelve wide column">
-                    <series-list class="cloak"></series-list>
+                    <series-list></series-list>
                 </div>
             </div>
         </div>
@@ -30,6 +29,7 @@
 
     <%- include('../view-partial/footer.html') -%>
     <script src="/cmpt/config.js"></script>
+    <script src="/cmpt/libs/jquery-qrcode/jquery.qrcode.min.js"></script>
     <script src="/cmpt/dist/main.js"></script>
     <script src="/js/page/competion/main.js"></script>
 </body>

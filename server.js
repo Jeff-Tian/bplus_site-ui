@@ -205,6 +205,9 @@ server
             return next();
         }
         var page = req.params.page || 'index';
+        if (page == 'index' && !res.locals.hcd_user) {
+            return membership.ensureAuthenticated(req, res, next);
+        }
         res.render('competion/' + page, {
             page: page,
             lang: lang
