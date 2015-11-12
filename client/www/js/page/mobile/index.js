@@ -46,6 +46,11 @@ angular
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })
+            .state('my-code', {
+                url: '/my-code',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
+            })
         ;
     }])
     .config(angular.bplus.translate)

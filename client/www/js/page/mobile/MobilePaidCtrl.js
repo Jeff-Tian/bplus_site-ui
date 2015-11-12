@@ -22,7 +22,14 @@
                 if ($scope.generatedCode) {
                     // Got the code then refresh the page to let the url contains the redemption code
                     // to easy the sharing it outward
-                    $state.go('paid', angular.extend({}, $stateParams, {redemptionCode: $scope.generatedCode}));
+                    var params = angular.extend({}, $stateParams, {redemptionCode: $scope.generatedCode});
+                    if (!params.who) {
+                        params.who = $scope.memberInfo.member_id;
+                    }
+                    if (!params.displayName) {
+                        params.displayName = $scope.memberInfo.displayName;
+                    }
+                    $state.go('paid', params, {reload: true});
                 }
             }
         }
@@ -30,6 +37,7 @@
         gotRedemptionCode();
 
         msgBus.onMemberLoaded($scope, function () {
+            console.log('member loaded');
             if ($scope.paidUser.member_id === $scope.memberInfo.member_id) {
                 $scope.currentUserIsMe = true;
 
@@ -50,6 +58,7 @@
             }
 
             service.post('/service-proxy/member/get-setting', {
+                member_id: $scope.paidUser.member_id,
                 code: 'redemption-code'
             })
                 .then(function (result) {
@@ -62,6 +71,29 @@
                         gotRedemptionCode();
                     }
                 });
+
+
+            if ($state.current.name === 'my-code') {
+                if (!$scope.memberInfo || !$scope.memberInfo.member_id) {
+                    window.location.href = 'sign-in?return_url=' + encodeURIComponent('/m/index#/my-code');
+                } else {
+                    service.post('/service-proxy/member/get-setting', {
+                        member_id: $scope.memberInfo.member_id,
+                        code: 'redemption-code'
+                    }).then(function (result) {
+                        $state.go('paid', {
+                            who: $scope.memberInfo.member_id,
+                            displayName: $scope.memberInfo.displayName,
+                            redemptionCode: result
+                        }, {reload: true});
+                    }).catch(function () {
+                        $state.go('paid', {
+                            who: $scope.memberInfo.member_id,
+                            displayName: $scope.memberInfo.displayName
+                        }, {reload: true});
+                    });
+                }
+            }
         });
 
         $rootScope.pageTitle = '火遍各大高校的商赛，快来拿免费门票!';
