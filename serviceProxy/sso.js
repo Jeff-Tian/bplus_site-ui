@@ -17,19 +17,14 @@ function proxySSO(options) {
     return proxy(options);
 }
 
-function setAuthToken(res, token, member_id) {
+function setAuthToken(res, token, rememberMe) {
     var cookieOption = {
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+        expires: rememberMe ? new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)) : 0,
         path: '/',
         httpOnly: true
     };
 
     res.cookie('token', token, cookieOption);
-
-    if (member_id) {
-        cookieOption.httpOnly = false;
-        res.cookie('mid', member_id, cookieOption);
-    }
 }
 
 function jumpToReturnUrl(req, res) {
@@ -60,7 +55,7 @@ module.exports = {
                 if (responseJson.isSuccess) {
                     if (!req.body.wechat_token) {
                         // Log on directly
-                        setAuthToken(res, responseJson.result.token, responseJson.result.member_id);
+                        setAuthToken(res, responseJson.result.token, req.body.remember);
                         if (jumpToReturnUrl(req, res)) {
                             return undefined;
                         }
@@ -77,7 +72,7 @@ module.exports = {
                             responseInterceptor: function (theOriginalResponse, response2Json) {
                                 // Then log on
                                 if (response2Json.isSuccess) {
-                                    setAuthToken(res, responseJson.result.token, responseJson.result.member_id);
+                                    setAuthToken(res, responseJson.result.token, req.body.remember);
                                     if (jumpToReturnUrl(req, res)) {
                                         return undefined;
                                     }
