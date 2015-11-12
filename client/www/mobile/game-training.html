@@ -11,30 +11,62 @@
 </head>
 <body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
 <%- include('head.html') -%>
-<div ui-view class="main body b-mobile back-color white color has-header">
-      <div class="ui container">
-        <div class="ui two item stackable tabs menu">
-            <a class="item" data-tab="download">
-              Home
-            </a>
-            <a class="item" data-tab="video">
-              Browse
-            </a>
-        </div>
-        <div data-tab="download">
-            download
-        </div>
-        <div data-tab="video">
-            video
-        </div>
+<div class="main body b-mobile back-color white color has-header">
+    <div class="ui container b-mobile-game-training-container">
+      <div class="ui two item tabs menu">
+          <a class="active item" data-tab="download">培训资料(pdf)下载</a>
+          <a class="item" data-tab="video">观看教学视频</a>
       </div>
-</div>
+      <div class="ui container">
+          <div class="ui active tab" data-tab="download">
+              <div>
+                  <a href="">学院手册</a>
+              </div>
+              <div>
+                 <a href="">比赛形式及界面介绍</a>
+              </div>
+              <div>
+                 <a href="">赛前阅读材料</a>
+              </div>
+              <div>
+                 <a href="">快消品行业常用术语</a>
+              </div>
+              <div>
+                  <a href="">常见问题</a>
+              </div>
+          </div>
+          <div class="ui tab" data-tab="video">
+              <div>
+                 <a href="">介绍视频</a>
+              </div>
+              <div>
+                 <a href="">预习视频一</a>
+              </div>
+              <div>
+                 <a href="">预习视频二</a>
+              </div>
+              <div>
+                 <a href="">游戏操作介绍</a>
+              </div>
+              <div>
+                 <a href="">MarkSimos Intro</a>
+              </div>
+              <div>
+                 <a href="">MarkSimos Training-Analyzing Reports</a>
+              </div>
+              <div>
+                  <a href="">MarkSimos Training-Strategy</a>
+              </div>
+              <a href="">MarkSimos Training-Decision Making</a>
+          </div>
+      </div>
+    </div>
+</div> 
 <!-- Page Contents -->
 <%- include('footer.html') -%>
 <!--JS-->
 <!--Page JS-->
 <script>
-    $(".menu .item").tab();
     angular
     .module('mobile', [
         'ng.utils',
@@ -47,7 +79,8 @@
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('MessageStore', angular.bplus.MessageStore);
+    $(".menu .item").tab();
 </script>
 <script>
     window.t_PageName = "m.profile";

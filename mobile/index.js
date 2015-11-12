@@ -25,6 +25,7 @@ var mobileRoutes = [
     'personal-history',
     'youth',
     'statement',
+    'game-training',
     // TODO: Requires Login
     'bind-mobile',
     'bind-mobile-by-password',
