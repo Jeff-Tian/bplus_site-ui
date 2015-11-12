@@ -19,7 +19,7 @@
 <!--<a ui-sref="menu">Menu</a>-->
 <script type="text/ng-template" id="home.html">
     <div class="full-height"
-         style="background: url('<%= cdn.normal %>img/salespage/game_banner.png?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
+         style="background: url('<%= cdn.normal %>img/mobile/mobile_banner.jpg?<%= cdn.version %>') 50% 50% no-repeat; background-size: cover;">
         <div class="ui bottom stuck extra vertical padded container">
             <div class="ui vertical padded segment" style="border-bottom: none;">
                 <h2 class="ui white header"><%= __('MobileIndexHeader') %></h2>
@@ -30,12 +30,12 @@
                 <div class="ui horizontal segments transparent">
                     <div class="ui segment" style="padding-left: 0;">
                         <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"
-                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.login.click');"><%= __('SignIn')
+                           onclick="window.sendTrack('m.index.login.click');"><%= __('SignIn')
                             %></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
                         <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button"
-                           onclick="javascript:if(window.sendTrack) sendTrack('m.index.register.click');"><%=
+                           onclick="window.sendTrack('m.index.register.click');"><%=
                             __('SignUp')
                             %></a>
                     </div>
@@ -73,6 +73,8 @@
                 <div class="sub header">
                     <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
                 </div>
+                <button class="ui right floated red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
+                <div class="ui clearing horizontal divider"></div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>
             </h3>
@@ -101,19 +103,28 @@
             <% } %>
 
             <div class="ui horizontal divider"></div>
-            <button class="ui red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('兑换码') %> <span class="ui red header"><%= __('限时免费邀请码') %> </span> </label>
+                    <label><%= __('邀请码') %> </label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
-                <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
-                    <%=
-                    __('确定') %>
-                </button>
+
+                <div class="field">
+                    <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
+                        <%=
+                        __('确定') %>
+                    </button>
+                    <div class="ui tiny left floated grey" style="font-size: small;">
+                        没有邀请码？扫码关注服务号回复"邀请码"立即赢取！
+                    </div>
+                </div>
+                <div class="field">
+                    <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
+                         class="ui small image centered">
+                </div>
             </form>
         </div>
     </div>
@@ -302,7 +313,31 @@
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
-<script src="js/utils/trackingSender.js"></script>
+<script>
+    (function () {
+
+        function sendIndexTrack(sender, hash) {
+            if (hash === 'home') {
+                sender.send('m.index');
+            }
+            else if (hash === 'menu') {
+                sender.send('m.menu');
+            }
+            else if (hash.indexOf('paid/') >= 0) {
+                sender.send('m.MS2015Paid');
+            }
+            else if (hash.indexOf('select-payment-method') >= 0) {
+                sender.send('m.MS2015Pay');
+            }
+        }
+
+        var moduleTrack = new window.ModuleTrack(null, function (sender, args) {
+            sendIndexTrack(sender, args.hash);
+        });
+
+        sendIndexTrack(moduleTrack, moduleTrack.currentHash());
+    })();
+</script>
 </body>
 
 </html>

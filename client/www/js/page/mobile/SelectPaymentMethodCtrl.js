@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper) {
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper, DeviceHelper) {
 
         function gotoPaid(result) {
             function gotoPaidInner() {
@@ -25,24 +25,8 @@
             msgBus.onMemberLoaded($scope, gotoInterestsInner);
         }
 
-        function getCookie(name) {
-            if (document.cookie.length > 0) {
-                var start = document.cookie.indexOf(name + '=');
-                if (start >= 0) {
-                    start += name.length + 1;
-                    var end = document.cookie.indexOf(';', start);
-                    if (end === -1) {
-                        end = document.cookie.length;
-                    }
-                    return window.unescape(document.cookie.substring(start, end));
-                }
-            }
-
-            return null;
-        }
-
         $scope.payData = {
-            redemptionCode: getCookie('redemption_code') || ''
+            redemptionCode: DeviceHelper.getCookie('redemption_code') || DeviceHelper.getCookie('pre_redemption_code') || ''
         };
 
         var buying = false;
@@ -192,6 +176,6 @@
         };
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper', 'DeviceHelper'];
 })
 (angular.bplus = angular.bplus || {});

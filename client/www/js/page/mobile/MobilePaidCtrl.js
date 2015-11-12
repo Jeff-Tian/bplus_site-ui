@@ -1,21 +1,5 @@
 (function (exports) {
-    exports.MobilePaidCtrl = function ($scope, $stateParams, $state, service, msgBus, $rootScope, WechatWrapper) {
-        function getCookie(name) {
-            if (document.cookie.length > 0) {
-                var start = document.cookie.indexOf(name + '=');
-                if (start >= 0) {
-                    start += name.length + 1;
-                    var end = document.cookie.indexOf(';', start);
-                    if (end === -1) {
-                        end = document.cookie.length;
-                    }
-                    return window.unescape(document.cookie.substring(start, end));
-                }
-            }
-
-            return null;
-        }
-
+    exports.MobilePaidCtrl = function ($scope, $stateParams, $state, service, msgBus, $rootScope, DeviceHelper) {
         function askForPay() {
             $state.go('select-payment-method');
         }
@@ -29,17 +13,31 @@
 
         $scope.generatedCode = $stateParams.redemptionCode || '';
 
-        if ($scope.generatedCode !== '') {
-            document.cookie = 'redemption_code=' + $scope.generatedCode + ';path=/;';
-        } else {
-            $scope.generatedCode = getCookie('redemption_code');
+        function gotRedemptionCode() {
+            if ($scope.generatedCode !== '') {
+                DeviceHelper.setCookie('redemption_code', $scope.generatedCode);
+            } else {
+                $scope.generatedCode = DeviceHelper.getCookie('redemption_code');
 
-            if ($scope.generatedCode) {
-                $state.go('paid', angular.extend({}, $stateParams, {redemptionCode: $scope.generatedCode}));
+                if ($scope.generatedCode) {
+                    // Got the code then refresh the page to let the url contains the redemption code
+                    // to easy the sharing it outward
+                    var params = angular.extend({}, $stateParams, {redemptionCode: $scope.generatedCode});
+                    if (!params.who) {
+                        params.who = $scope.memberInfo.member_id;
+                    }
+                    if (!params.displayName) {
+                        params.displayName = $scope.memberInfo.displayName;
+                    }
+                    $state.go('paid', params, {reload: true});
+                }
             }
         }
 
+        gotRedemptionCode();
+
         msgBus.onMemberLoaded($scope, function () {
+            console.log('member loaded');
             if ($scope.paidUser.member_id === $scope.memberInfo.member_id) {
                 $scope.currentUserIsMe = true;
 
@@ -58,6 +56,44 @@
             } else {
                 $scope.showPaid = true;
             }
+
+            service.post('/service-proxy/member/get-setting', {
+                member_id: $scope.paidUser.member_id,
+                code: 'redemption-code'
+            })
+                .then(function (result) {
+                    console.log('redemption code got:');
+                    console.log(result);
+
+                    if (result) {
+                        $scope.generatedCode = result;
+
+                        gotRedemptionCode();
+                    }
+                });
+
+
+            if ($state.current.name === 'my-code') {
+                if (!$scope.memberInfo || !$scope.memberInfo.member_id) {
+                    window.location.href = 'sign-in?return_url=' + encodeURIComponent('/m/index#/my-code');
+                } else {
+                    service.post('/service-proxy/member/get-setting', {
+                        member_id: $scope.memberInfo.member_id,
+                        code: 'redemption-code'
+                    }).then(function (result) {
+                        $state.go('paid', {
+                            who: $scope.memberInfo.member_id,
+                            displayName: $scope.memberInfo.displayName,
+                            redemptionCode: result
+                        }, {reload: true});
+                    }).catch(function () {
+                        $state.go('paid', {
+                            who: $scope.memberInfo.member_id,
+                            displayName: $scope.memberInfo.displayName
+                        }, {reload: true});
+                    });
+                }
+            }
         });
 
         $rootScope.pageTitle = '火遍各大高校的商赛，快来拿免费门票!';
@@ -66,5 +102,5 @@
         $(document).attr('title', $rootScope.pageTitle);
     };
 
-    exports.MobilePaidCtrl.$inject = ['$scope', '$stateParams', '$state', 'service', 'msgBus', '$rootScope', 'WechatWrapper'];
+    exports.MobilePaidCtrl.$inject = ['$scope', '$stateParams', '$state', 'service', 'msgBus', '$rootScope', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

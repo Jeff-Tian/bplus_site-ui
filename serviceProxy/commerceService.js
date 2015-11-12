@@ -6,6 +6,7 @@ var gameConfig = config.games;
 var proxy = require('./proxy');
 var wechat = require('./wechat');
 var qs = require('querystring');
+var bplusService = config.bplusService;
 
 function injectRedemptionGeneration(res, json, req, next) {
     if (json.isSuccess) {
@@ -25,6 +26,23 @@ function injectRedemptionGeneration(res, json, req, next) {
                 if (json2.isSuccess) {
                     json.result = json.result || {};
                     json.result.generatedRedemption = json2;
+
+                    // Save generated redemption code to member extension
+                    proxy({
+                        host: bplusService.host,
+                        port: bplusService.port,
+                        path: '/profile/membersetting/save',
+                        dataMapper: function (d) {
+                            d.code = 'redemption-code';
+                            d.value = json2.result;
+
+                            return d;
+                        },
+                        responseInterceptor: function () {
+                            // do nothing with this request and response
+                            return undefined;
+                        }
+                    })(req, res, next);
                 }
 
                 res.send(json);

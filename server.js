@@ -62,7 +62,8 @@ function setDeviceHelper(req, res, next) {
 
     res.locals.device = {
         isFromMobile: mobileDetector.isFromMobile(ua),
-        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua)
+        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua),
+        isFromAndroid: mobileDetector.isFromAndroid(ua)
     };
 
     next();

@@ -13,6 +13,7 @@ angular.module('bplus', [
     .factory('queryParser', angular.bplus.queryParser)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('registerForm', angular.bplus.registerForm)

@@ -5,6 +5,44 @@
         trackSender = _getTrackSender();
     });
 
+    window.setPageStatus = function(status, isDelay){
+        try {
+            if (trackSender) {
+                if (isDelay === true) {
+                    (function (status) {
+                        setTimeout(function () {
+                            trackSender.setPageStatus(status);
+                        }, 300);
+                    })(status);
+                }
+                else {
+                    trackSender.setPageStatus(status);
+                }
+            }
+            else {
+                _load(function () {
+                    trackSender = _getTrackSender();
+
+                    if (isDelay === true) {
+                        (function (status) {
+                            setTimeout(function () {
+                                trackSender.setPageStatus(status);
+                            }, 300);
+                        })(status);
+                    }
+                    else {
+                        trackSender.setPageStatus(status);
+                    }
+                });
+            }
+        }
+        catch(e){
+            console.log('Faild to set page status', {
+                status: status
+            });
+        }
+    };
+
     window.sendTrack = function (pageName, data, isDelay) {
         try {
             if (!pageName) {
@@ -13,11 +51,11 @@
 
             if (trackSender) {
                 if (isDelay === true) {
-                    (function (data) {
+                    (function (pageName, data) {
                         setTimeout(function () {
                             trackSender.track(pageName, data);
                         }, 300);
-                    })(data);
+                    })(pageName, data);
                 }
                 else {
                     trackSender.track(pageName, data);
@@ -28,11 +66,11 @@
                     trackSender = _getTrackSender();
 
                     if (isDelay === true) {
-                        (function (data) {
+                        (function (pageName, data) {
                             setTimeout(function () {
                                 trackSender.track(pageName, data);
                             }, 300);
-                        })(data);
+                        })(pageName, data);
                     }
                     else {
                         trackSender.track(pageName, data);
@@ -47,6 +85,51 @@
             });
         }
     };
+
+    window.ModuleTrack = function(moduleName, locationChangeCall){
+        var _moduleName = moduleName;
+
+        var me = this;
+        if(typeof locationChangeCall === 'function'){
+            window.addEventListener('hashchange', function () {
+                locationChangeCall(me, { hash: me.currentHash() });
+            });
+        }
+
+        this.currentHash = function(){
+            var hash = window.location.hash;
+            if(hash){
+                if(hash.indexOf('#') === 0){
+                    hash = hash.substr(1, hash.length - 1);
+                }
+
+                if(hash.indexOf('/') === 0){
+                    hash = hash.substr(1, hash.length - 1);
+                }
+
+                hash = hash.toLowerCase();
+            }
+
+            return hash;
+        };
+
+        this.send = function(name, data, isDelay){
+            if(!_moduleName && !name){
+                return;
+            }
+
+            if(_moduleName){
+                name = name ? _moduleName + '.' + name : _moduleName;
+            }
+
+            window.sendTrack(name, data, isDelay);
+        };
+
+        this.setStatus = function(status, isDelay){
+            window.setPageStatus(status, isDelay);
+        };
+    };
+
 
     function _load(call){
         try {
@@ -79,13 +162,6 @@
         return sender;
     }
 
-    function _getUserAgent() {
-        return window.navigator.userAgent || window.navigator.vender || window.opera;
-    }
-
-    function _isMobile(){
-        return /mobile/i.test(_getUserAgent());
-    }
 
     $(document).ready(function(){
         window.sendTrack(window.t_PageName, null, true);

@@ -46,6 +46,11 @@ angular
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })
+            .state('my-code', {
+                url: '/my-code',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
+            })
         ;
     }])
     .config(angular.bplus.translate)
@@ -58,6 +63,7 @@ angular
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)

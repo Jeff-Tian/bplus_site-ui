@@ -18,11 +18,15 @@
 
     <script type="text/ng-template" id="select-payment-method.html">
 
-        <h4 class="ui centered header">
+        <h4 class="ui left aligned header">
+            <button class="ui red button right floated" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+            </button>
             <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
             {how_much: '300'})}) %>
             <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
+
         </h4>
+        <div class="ui clearing horizontal divider"></div>
 
         <div class="ui column b-step-container b-separator">
             <div class="ui center aligned container subcontainer">
@@ -46,22 +50,19 @@
                 <% } %>
 
                 <div class="ui horizontal divider"></div>
-                <div class="ui left aligned container">
-                    <button class="ui red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
-                    </button>
-                </div>
                 <div class="ui horizontal divider"></div>
                 <form name="redemptionForm" novalidate class="ui form redemption-form"
                       ng-submit="buyWithRedemptionCode($event)">
                     <div class="ui error message brand"></div>
                     <div class="ui left aligned container subcontainer">
-                        <h5 class="ui header"><%= __('兑换码') %>
-                            <span class="ui red header"><%= __('限时免费邀请码') %> </span>
+                        <h5 class="ui header"><%= __('邀请码') %>
                         </h5>
                     </div>
                     <div class="fields">
                         <div class="thirteen wide field">
                             <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+
+                            <p class="ui left floated grey">没有邀请码？扫码关注服务号回复"邀请码"立即赢取！</p>
                         </div>
                         <div class="three wide field">
                             <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
@@ -71,6 +72,10 @@
                                 __('确定') %>
                             </button>
                         </div>
+                    </div>
+                    <div class="field">
+                        <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
+                             class="ui small image centered">
                     </div>
                 </form>
             </div>
@@ -225,7 +230,6 @@
 <!-- build:js js/cdn/pc-select-payment-method.js -->
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
-<script src="js/factories/queryParser.js"></script>
 <script src="js/directives/loading.js"></script>
 <script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
@@ -233,6 +237,24 @@
 <script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/select-payment-method/main.js"></script>
 <!-- endbuild -->
+<script>
+    (function () {
+        function sendPageTrack(sender, hash) {
+            if (hash.indexOf('paid/') >= 0) {
+                sender.send('MS2015Paid');
+            }
+            else if (hash.indexOf('select-payment-method') >= 0) {
+                sender.send('MS2015Pay');
+            }
+        }
+
+        var moduleTrack = new window.ModuleTrack(null, function (sender, args) {
+            sendPageTrack(sender, args.hash);
+        });
+
+        sendPageTrack(moduleTrack, moduleTrack.currentHash());
+    })();
+</script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@
 <body ng-app="mobile" ng-controller="AppCtrl">
 <%- include('head.html') -%>
 
-<div class="pusher" style="margin-top:30px;">
+<div class="mobile pusher" style="margin-top:30px;">
     <div class="hp-mastead youth">
         <div class="ui container">
             <div class="header-wechat" ng-show="showQRCode">
@@ -23,17 +23,18 @@
             </div>
             <p class="header-title table-show">全国商战模拟游戏大赛</p>
 
-            <p class="header-title mobile-show">MarkSimos</br>全民商战模拟游戏大赛</p>
+            <p class="header-title mobile-show">MarkSimos</br>全国商战模拟游戏大赛</p>
 
-            <p class="header-content">早鸟报名</p>
+            <p class="header-content">&nbsp;</p>
 
-            <p class="header-content">享有千元专家点评</p>
+            <p class="header-content">总奖项价值超50万</p>
 
-            <p class="header-content">即日起至11.11</p>
+            <p class="header-content">即日起至11.15</p>
 
-            <p class="header-content">限额100席!</p>
+            <p class="header-content">每所高校限额30人</p>
 
-            <a href="/#select-payment-method" class="ui button hp-button-gray">立即报名</a>
+            <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
+               class="ui button hp-button-gray">立即报名</a>
 
             <p><i class="hp icon"></i></p>
         </div>
@@ -75,7 +76,7 @@
                         <p>3万元 5名</p>
                     </div>
                     <div class="info">
-                        <p>Bridge+ 与知名的公司合作提供冠军队伍5个免费的海外访学名额，目前暂定于新加坡与美国西岸限额自由选择。</p>
+                        <div>Bridge+ 与知名的公司合作提供冠军队伍5个免费的海外访学名额，目前暂定于新加坡与美国西岸限额自由选择。</div>
                         <img src="<%=cdn.normal%>img/hp/prize-1.png?<%=cdn.version%>">
                     </div>
 
@@ -89,7 +90,7 @@
                         <p>总金额5万元 5名</p>
                     </div>
                     <div class="info">
-                        <p>我们将提供共5万元的Bridge+奖学金给分配给优胜队伍。</p>
+                        <div>我们将提供共5万元的Bridge+奖学金给分配给优胜队伍。</div>
                         <img src="<%=cdn.normal%>img/hp/prize-2.png?<%=cdn.version%>">
                     </div>
                 </div>
@@ -102,7 +103,7 @@
                         <p>2千元 约250名</p>
                     </div>
                     <div class="info">
-                        <p>选入决赛的队伍将获邀请参与于中欧商学院与Bridge+ 共同举办的企业人才峰会，我们同时也邀请50位企业导师和你近距离接触)</p>
+                        <div>选入决赛的队伍将获邀请参与于中欧商学院与Bridge+ 共同举办的企业人才峰会，我们同时也邀请50位企业导师和你近距离接触。</div>
                         <img src="<%=cdn.normal%>img/hp/prize-3.png?<%=cdn.version%>">
                     </div>
                 </div>
@@ -313,7 +314,7 @@
                 <span>5</span> 大赛系统
             </p>
 
-            <h2 class="sub-title">商战模拟游戏 Marksimos</h2>
+            <h2 class="sub-title">商战模拟游戏 MarkSimos</h2>
 
             <p class="content">
                 MarkSimos模拟了一个高度竞争的新兴市场，有多家公司在该市场中平行竞争，每个小组接手管理虚拟世界中的一家公司，你们将进行4-6轮决策，每个阶段代表现实世界中的一个季度。最后以相对增加的市场份额和累计净利润决定优胜者。
@@ -348,7 +349,7 @@
             </div>
 
             <h2 class="sub-title text-center danger">
-                Marksimos已被上千间中外名企使用，欢迎你来一起体验！
+                MarkSimos已被上千间中外名企使用，欢迎你来一起体验！
             </h2>
 
         </div>
@@ -359,7 +360,7 @@
                 <span>6</span> 大赛主办方
             </p>
 
-            <div class="ui grid bpuls">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
                         <img src="<%=cdn.normal%>img/hp/b-logo.png?<%=cdn.version%>" class="b-logo">
@@ -381,10 +382,10 @@
                 <span>7</span> 学术特别合作
             </p>
 
-            <div class="ui grid hcd">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
-                        <img src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
+                        <img style="width: 100px;" src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
                     </div>
                 </div>
             </div>
@@ -396,21 +397,41 @@
                 <span>8</span> 公益特别合作
             </p>
 
-            <div class="ui grid hcd">
+            <div class="ui container hcd">
                 <div class="middle aligned row">
                     <div class="three wide column logo">
-                        <img src="<%=cdn.normal%>img/hp/tree.png?<%=cdn.version%>">
+                        <img class="ui small image" src="<%=cdn.normal%>img/hp/tree.png?<%=cdn.version%>">
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="ui center aligned centered container">
-            <a href="/#select-payment-method" class="ui red button">立即报名</a>
-        </div>
     </div>
 
+    <div class="hp-white-space">
+        <div class="ui container">
+            <p class="hp-title">
+                <span>9</span> 合作机构
+            </p>
 
+            <div class="ui container">
+                <a href="http://www.shixiseng.com" target="_blank">
+                    <img class="ui small image" style="display: inline; width: 120px;"
+                         src="<%= cdn.normal %>img/partners/shixiseng_logo.png?<%= cdn.version %>">
+                </a>
+                <!--<a href="http://www.wyzc.com" target="_blank">-->
+                <!--<img class="ui small image" src="<%= cdn.normal %>img/partners/wyzc.png?<%= cdn.version %>"-->
+                <!--style="display: inline;">-->
+                <!--</a>-->
+                <!--<img class="ui small image"-->
+                <!--src="<%= cdn.normal %>img/partners/shixiseng_qr_code.jpg?<%= cdn.version %>">-->
+            </div>
+
+            <div class="ui center aligned centered container">
+                <a href="/#select-payment-method" class="ui large fluid red button">立即报名</a>
+            </div>
+            <div class="ui horizontal divider"></div>
+        </div>
+    </div>
 </div>
 
 <%- include('footer.html') -%>
@@ -421,7 +442,9 @@
 <script src="js/page/mobile/MobileIndexCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
 <!-- endbuild -->
-
+<script>
+    window.t_PageName = "m.MS2015LP";
+</script>
 </body>
 
 </html>

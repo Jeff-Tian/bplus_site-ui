@@ -9,6 +9,7 @@ angular.module('setPassword', ['pascalprecht.translate', 'ng.utils'])
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('SetPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         var $form = $('.ui.form.set-password');

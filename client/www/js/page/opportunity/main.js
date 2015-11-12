@@ -14,6 +14,7 @@ angular.module('bplus', [
     })
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
 ;
 (function() {

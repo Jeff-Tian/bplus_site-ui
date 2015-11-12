@@ -5,7 +5,33 @@ var http = require('http'),
     localeHelper = require('../locales/localeHelper')
     ;
 
+function setMemberCookie(res, member_id) {
+    var cookieOption = {
+        expires: 0,
+        path: '/',
+        httpOnly: false
+    };
+
+    if (member_id) {
+        res.cookie('mid', member_id, cookieOption);
+    }
+}
+
+function unsetSensativeCookies(res) {
+    var deleteCookieOption = {
+        expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+        path: '/',
+        httpOnly: true
+    };
+
+    res.cookie('token', '', deleteCookieOption);
+    res.cookie('mid', '', deleteCookieOption);
+    res.cookie('redemption_code', '', deleteCookieOption);
+    res.cookie('pre_redemption_code', '', deleteCookieOption);
+}
+
 module.exports = {
+    unsetSensativeCookies: unsetSensativeCookies,
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 
@@ -26,6 +52,12 @@ module.exports = {
             }
         } else {
             res.locals.signedIn = false;
+        }
+
+        if (res.locals.signedIn) {
+            setMemberCookie(res, res.locals.hcd_user.member_id);
+        } else {
+            unsetSensativeCookies(res);
         }
 
         next();
