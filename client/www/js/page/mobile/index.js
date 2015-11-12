@@ -58,6 +58,7 @@ angular
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)

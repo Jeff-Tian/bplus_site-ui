@@ -30,43 +30,43 @@ require([
     "text!bplus-ui/view/widgets/personalinfo/list_workingexperience_container.html",
     "text!bplus-ui/view/widgets/personalinfo/list_award_container.html",
     "text!bplus-ui/view/widgets/personalinfo/list_language_container.html"
-], function (
-     semantic,
-     agTranslateangular,
-     angular,
-     ProfileModel,
-     banner,
-     achievement,
-     growing,
-     autocomplete,
-     upload,
-     uploadHandler,
-     BDate,
-     Tag,
-     Skills,
-     Personalinfo,
-     Educationbackground,
-     Club,
-     Work,
-     Award,
-     Language,
-     Container,
-     personalinfoContainerTemplate,
-     skillsContainerTemplate,
-     eduContainerTemplate,
-     clubContainerTemplate,
-     workContainerTemplate,
-     awardContainerTemplate,
-     languageContainerTemplate) {
+], function (semantic,
+             agTranslateangular,
+             angular,
+             ProfileModel,
+             banner,
+             achievement,
+             growing,
+             autocomplete,
+             upload,
+             uploadHandler,
+             BDate,
+             Tag,
+             Skills,
+             Personalinfo,
+             Educationbackground,
+             Club,
+             Work,
+             Award,
+             Language,
+             Container,
+             personalinfoContainerTemplate,
+             skillsContainerTemplate,
+             eduContainerTemplate,
+             clubContainerTemplate,
+             workContainerTemplate,
+             awardContainerTemplate,
+             languageContainerTemplate) {
     var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
-        .config(angular.bplus.translate)
-        .controller('AppCtrl', angular.bplus.AppCtrl)
-        .factory('translationLoader', angular.bplus.translationLoader)
-        .factory('FormValidation', angular.bplus.FormValidation)
-        .factory('DeviceHelper', angular.bplus.DeviceHelper)
-        .factory('service', angular.bplus.service)
-        .factory('MessageStore', angular.bplus.MessageStore)
-    ;
+            .config(angular.bplus.translate)
+            .controller('AppCtrl', angular.bplus.AppCtrl)
+            .factory('translationLoader', angular.bplus.translationLoader)
+            .factory('FormValidation', angular.bplus.FormValidation)
+            .factory('DeviceHelper', angular.bplus.DeviceHelper)
+            .factory('service', angular.bplus.service)
+            .factory('MessageStore', angular.bplus.MessageStore)
+            .factory('queryParser', angular.bplus.queryParser)
+        ;
     (function (agModule) {
         banner(agModule);
         achievement(agModule);

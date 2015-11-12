@@ -41,52 +41,52 @@ require([
     "text!bplus-ui-mobile/profile/list_workingexperience_container-mobile.html",
     "text!bplus-ui-mobile/profile/list_award_container-mobile.html",
     "text!bplus-ui-mobile/profile/list_language_container-mobile.html"
-], function (
-     semantic,
-     agTranslateangular,
-     angular,
-     ProfileModel,
-     banner,
-     achievement,
-     growing,
-     autocomplete,
-     upload,
-     uploadHandler,
-     BDate,
-     Tag,
-     BDateTemplate,
-     TagTemplate,
-     Skills,
-     Personalinfo,
-     Educationbackground,
-     Club,
-     Work,
-     Award,
-     Language,
-     SkillsTemplate,
-     PersonalinfoTemplate,
-     EducationbackgroundTemplate,
-     ClubTemplate,
-     WorkTemplate,
-     AwardTemplate,
-     LanguageTemplate,
-     Container,
-     personalinfoContainerTemplate,
-     skillsContainerTemplate,
-     eduContainerTemplate,
-     clubContainerTemplate,
-     workContainerTemplate,
-     awardContainerTemplate,
-     languageContainerTemplate) {
+], function (semantic,
+             agTranslateangular,
+             angular,
+             ProfileModel,
+             banner,
+             achievement,
+             growing,
+             autocomplete,
+             upload,
+             uploadHandler,
+             BDate,
+             Tag,
+             BDateTemplate,
+             TagTemplate,
+             Skills,
+             Personalinfo,
+             Educationbackground,
+             Club,
+             Work,
+             Award,
+             Language,
+             SkillsTemplate,
+             PersonalinfoTemplate,
+             EducationbackgroundTemplate,
+             ClubTemplate,
+             WorkTemplate,
+             AwardTemplate,
+             LanguageTemplate,
+             Container,
+             personalinfoContainerTemplate,
+             skillsContainerTemplate,
+             eduContainerTemplate,
+             clubContainerTemplate,
+             workContainerTemplate,
+             awardContainerTemplate,
+             languageContainerTemplate) {
     var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
-        .config(angular.bplus.translate)
-        .controller('AppCtrl', angular.bplus.AppCtrl)
-        .factory('translationLoader', angular.bplus.translationLoader)
-        .factory('FormValidation', angular.bplus.FormValidation)
-        .factory('DeviceHelper', angular.bplus.DeviceHelper)
-        .factory('service', angular.bplus.service)
-        .factory('MessageStore', angular.bplus.MessageStore)
-    ;
+            .config(angular.bplus.translate)
+            .controller('AppCtrl', angular.bplus.AppCtrl)
+            .factory('translationLoader', angular.bplus.translationLoader)
+            .factory('FormValidation', angular.bplus.FormValidation)
+            .factory('DeviceHelper', angular.bplus.DeviceHelper)
+            .factory('service', angular.bplus.service)
+            .factory('MessageStore', angular.bplus.MessageStore)
+            .factory('queryParser', angular.bplus.queryParser)
+        ;
     (function (agModule) {
         banner(agModule);
         achievement(agModule);

@@ -3,6 +3,7 @@ var sso = require('../config').sso;
 var config = require('../config');
 var proxy = require('./proxy');
 var localeHelper = require('../locales/localeHelper');
+var membership = require('./membership');
 
 function proxySSO(options) {
     options.host = sso.host;
@@ -177,14 +178,7 @@ module.exports = {
                 }
             },
             responseInterceptor: function (originalResponse, responseJson) {
-                var deleteCookieOption = {
-                    expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
-                    path: '/',
-                    httpOnly: true
-                };
-
-                res.cookie('token', '', deleteCookieOption);
-                res.cookie('mid', '', deleteCookieOption);
+                membership.unsetSensativeCookies(res);
 
                 var locale = localeHelper.getLocale(req.url, req);
                 if (!req.xhr) {

@@ -17,7 +17,7 @@ function setMemberCookie(res, member_id) {
     }
 }
 
-function unsetAuthToken(res) {
+function unsetSensativeCookies(res) {
     var deleteCookieOption = {
         expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
         path: '/',
@@ -26,9 +26,12 @@ function unsetAuthToken(res) {
 
     res.cookie('token', '', deleteCookieOption);
     res.cookie('mid', '', deleteCookieOption);
+    res.cookie('redemption_code', '', deleteCookieOption);
+    res.cookie('pre_redemption_code', '', deleteCookieOption);
 }
 
 module.exports = {
+    unsetSensativeCookies: unsetSensativeCookies,
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 
@@ -54,7 +57,7 @@ module.exports = {
         if (res.locals.signedIn) {
             setMemberCookie(res, res.locals.hcd_user.member_id);
         } else {
-            unsetAuthToken(res);
+            unsetSensativeCookies(res);
         }
 
         next();
