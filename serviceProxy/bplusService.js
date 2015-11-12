@@ -161,6 +161,10 @@ module.exports = {
         path: '/profile/extension'
     }),
 
+    getSetting: proxyBPlus({
+        path: '/profile/membersetting/load'
+    }),
+
     addEducation: proxyBPlus({
         path: '/profile/education/add'
     }),
