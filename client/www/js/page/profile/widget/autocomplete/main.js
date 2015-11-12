@@ -1,17 +1,17 @@
 ﻿define([
     'angular',
     'jquery',
-    'bplus-ui/../jquery-autocomplate/dist/jquery.autocomplete.min'
+    'autoComplete'
 ], function (
     angular,
     $,
-    jqueryAutocomplate
+    jqueryautocomplete
 ) {
     return function (agModule) {
-        agModule.directive('bplusAutocomplate', ['$http', function ($http) {
+        agModule.directive('bplusAutocomplete', ['$http', function ($http) {
             var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
             function link(scope, element, attrs) {
-                var url = attrs.datasourceBplusAutocomplate ? ('/mock/' + attrs.datasourceBplusAutocomplate.replace('.json', '.' + lng + '.json')) : undefined;
+                var url = attrs.datasourceBplusAutocomplete ? ('/mock/' + attrs.datasourceBplusAutocomplete.replace('.json', '.' + lng + '.json')) : undefined;
                 if (url) {
                     $http.get(url).success(function(data) {
                         $(element).autocomplete({

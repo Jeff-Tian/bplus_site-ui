@@ -6,11 +6,11 @@
                 <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="required field {{!clicked || data.name ? '' : 'error'}}">
                     <label>{{'SchoolName' | translate}}</label>
-                    <input type="text" name="schoolname" ng-model="data.name" required placeholder="" />
+                    <input type="text" name="schoolname" bplus-autocomplete datasource-bplus-autocomplete="schoolname.json" ng-model="data.name" required placeholder="" />
                 </div>
                 <div class="required field {{!clicked || data.major ? '' : 'error'}}">
                     <label>{{'Major' | translate}}</label>
-                    <input type="text" name="major" ng-model="data.major" required placeholder="" />
+                    <input type="text" name="major" bplus-autocomplete datasource-bplus-autocomplete="major.json" ng-model="data.major" required placeholder="" />
                 </div>
                 <div class="required field {{!clicked || data.background.id ? '' : 'error'}}">
                     <label>{{'Qualification' | translate}}</label>
