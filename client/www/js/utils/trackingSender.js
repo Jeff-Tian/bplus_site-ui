@@ -5,6 +5,44 @@
         trackSender = _getTrackSender();
     });
 
+    window.setPageStatus = function(status, isDelay){
+        try {
+            if (trackSender) {
+                if (isDelay === true) {
+                    (function (status) {
+                        setTimeout(function () {
+                            trackSender.setPageStatus(status);
+                        }, 300);
+                    })(status);
+                }
+                else {
+                    trackSender.setPageStatus(status);
+                }
+            }
+            else {
+                _load(function () {
+                    trackSender = _getTrackSender();
+
+                    if (isDelay === true) {
+                        (function (status) {
+                            setTimeout(function () {
+                                trackSender.setPageStatus(status);
+                            }, 300);
+                        })(status);
+                    }
+                    else {
+                        trackSender.setPageStatus(status);
+                    }
+                });
+            }
+        }
+        catch(e){
+            console.log('Faild to set page status', {
+                status: status
+            });
+        }
+    };
+
     window.sendTrack = function (pageName, data, isDelay) {
         try {
             if (!pageName) {
@@ -13,11 +51,11 @@
 
             if (trackSender) {
                 if (isDelay === true) {
-                    (function (data) {
+                    (function (pageName, data) {
                         setTimeout(function () {
                             trackSender.track(pageName, data);
                         }, 300);
-                    })(data);
+                    })(pageName, data);
                 }
                 else {
                     trackSender.track(pageName, data);
@@ -28,11 +66,11 @@
                     trackSender = _getTrackSender();
 
                     if (isDelay === true) {
-                        (function (data) {
+                        (function (pageName, data) {
                             setTimeout(function () {
                                 trackSender.track(pageName, data);
                             }, 300);
-                        })(data);
+                        })(pageName, data);
                     }
                     else {
                         trackSender.track(pageName, data);
@@ -68,6 +106,8 @@
                 if(hash.indexOf('/') === 0){
                     hash = hash.substr(1, hash.length - 1);
                 }
+
+                hash = hash.toLowerCase();
             }
 
             return hash;
@@ -83,6 +123,10 @@
             }
 
             window.sendTrack(name, data, isDelay);
+        };
+
+        this.setStatus = function(status, isDelay){
+            window.setPageStatus(status, isDelay);
         };
     };
 

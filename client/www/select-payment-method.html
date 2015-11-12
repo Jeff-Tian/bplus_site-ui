@@ -233,6 +233,24 @@
 <script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/select-payment-method/main.js"></script>
 <!-- endbuild -->
+<script>
+    (function(){
+        function sendPageTrack(sender, hash) {
+            if (hash.indexOf('paid/') >= 0) {
+                sender.send('MS2015Paid');
+            }
+            else if (hash.indexOf('select-payment-method') >= 0) {
+                sender.send('MS2015Pay');
+            }
+        }
+
+        var moduleTrack = new window.ModuleTrack(null, function(sender, args){
+            sendPageTrack(sender, args.hash);
+        });
+
+        sendPageTrack(moduleTrack, moduleTrack.currentHash());
+    })();
+</script>
 </body>
 
 </html>
