@@ -24,7 +24,7 @@ define([
                     },
                     compile: function () {
                         return {
-                            pre: function ($scope) {
+                            pre: function ($scope, $element) {
                                 $scope.ENUM_STATUS = me.ENUM_STATUS;
                                 $scope.property = {
                                     status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
