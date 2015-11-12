@@ -128,7 +128,6 @@ function mapRoute2Template(url, template, pipes) {
             template = template.substr(1);
         }
     }
-
     pipes = pipes || [];
     pipes.push(function (req, res, next) {
         renderOrRedirect(req, res, template);
@@ -226,6 +225,7 @@ mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticate
 mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
+mapRoute2Template('/game-training');
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {

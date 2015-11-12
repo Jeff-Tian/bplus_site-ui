@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bridge+</title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
+</head>
+<body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
+<%- include('head.html') -%>
+<div ui-view class="main body b-mobile back-color white color has-header">
+      <div class="ui container">
+        <div class="ui two item stackable tabs menu">
+            <a class="item" data-tab="download">
+              Home
+            </a>
+            <a class="item" data-tab="video">
+              Browse
+            </a>
+        </div>
+        <div data-tab="download">
+            download
+        </div>
+        <div data-tab="video">
+            video
+        </div>
+      </div>
+</div>
+<!-- Page Contents -->
+<%- include('footer.html') -%>
+<!--JS-->
+<!--Page JS-->
+<script>
+    $(".menu .item").tab();
+    angular
+    .module('mobile', [
+        'ng.utils',
+        'pascalprecht.translate',
+        'ui.router'
+    ])
+    .config(angular.bplus.translate)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .factory('translationLoader', angular.bplus.translationLoader)
+    .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('service', angular.bplus.service)
+    .factory('MessageStore', angular.bplus.MessageStore)
+</script>
+<script>
+    window.t_PageName = "m.profile";
+</script>
+<script src="js/utils/trackingSender.js"></script>
+</body>
+</html>
