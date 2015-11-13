@@ -169,7 +169,7 @@ module.exports = function (grunt) {
                             if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
                                 return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
                             } else {
-                                return url + '?cdnified';
+                                return '/' + url + '?cdnified';
                             }
                         } else if (url.indexOf('profile/main-build.js') > -1 || url.indexOf('profile/mobile-main-build.js') > -1) {
                             // For requirejs
