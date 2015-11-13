@@ -5,7 +5,8 @@
 <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
     <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
 
-    <form class="ui large fluid form login" ng-submit="tryLogin($event)" name="loginForm">
+    <form class="ui large fluid form login" ng-class="{'loading': submitting}" ng-submit="tryLogin($event)"
+          name="loginForm">
         <div class="ui error message brand"></div>
         <div class="ui">
             <div class="field">
@@ -35,11 +36,11 @@
                 </div>
             </div>
             <div class="ui divider horizontal"></div>
-            <button type="submit" class="ui fluid large red submit button hidden mobile-button"
+            <button loading type="submit" class="ui fluid large red submit button hidden mobile-button"
                     ng-disabled="!isLoginFormValid()">
                 {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>
-            <button type="submit" class="ui fluid large red submit button"
+            <button loading type="submit" class="ui fluid large red submit button"
                     ng-disabled="!isLoginFormValid()">
                 {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>

@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser) {
+    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser, msgBus) {
 
         $('.ui.checkbox.remember-me').checkbox({
             'onChecked': function () {
@@ -23,7 +23,7 @@
 
         var moduleTrack = new window.ModuleTrack(
             DeviceHelper.isMobile() ? 'm.login' : 'login',
-            function(sender, args){
+            function (sender, args) {
                 if (args.hash === 'login') {
                     moduleTrack.send(null, {checkAutoLogin: $scope.loginData.rememberMe});
                 }
@@ -50,12 +50,12 @@
             return $loginForm.form('is valid');
         };
 
-        var submitting = false;
+        $scope.submitting = false;
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            if (submitting) {
+            if ($scope.submitting) {
                 return;
             }
 
@@ -63,7 +63,8 @@
                 return;
             }
 
-            submitting = true;
+            $scope.submitting = true;
+            msgBus.showLoading();
             service.post('/service-proxy/logon/authentication', {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
@@ -74,13 +75,19 @@
                 moduleTrack.send('login.click', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
-                window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
+
+                setTimeout(function () {
+                    window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
+
+                }, 300);
             }).catch(function (reason) {
                 FormValidation.delegateHandleFormError($loginForm)(reason);
 
                 moduleTrack.send('login.click', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
+
+                msgBus.hideLoading();
             }).finally(function () {
-                submitting = false;
+                $scope.submitting = false;
             });
         };
 
@@ -107,5 +114,5 @@
         };
     };
 
-    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser'];
+    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus'];
 })(angular.bplus = angular.bplus || {});

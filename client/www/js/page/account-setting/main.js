@@ -16,6 +16,7 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
     .directive('captcha', angular.bplus.captcha)
     .directive('ngEnter', angular.bplus.ngEnter)
     .directive('registerForm', angular.bplus.registerForm)
+    .directive('loading', angular.bplus.loading)
     .controller('changeMobileCtrl', ['$scope', 'service', '$filter', function ($scope, service, $filter) {
         $scope.changeMobileFormCtrl = {};
 

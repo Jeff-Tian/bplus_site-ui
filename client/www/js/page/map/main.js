@@ -24,6 +24,7 @@ angular.module('bplus', [
     .directive('gamePersonalRecord', angular.bplus.gamePersonalRecord)
     .directive('gameRankingList', angular.bplus.gameRankingList)
     .controller('gameCtrl', angular.bplus.gameCtrl)
+    .directive('loading', angular.bplus.loading)
 ;
 (function() {
 })();
