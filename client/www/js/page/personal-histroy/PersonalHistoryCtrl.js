@@ -450,6 +450,8 @@
 
             $scope.memberInfo.birthday = new Date(Date.UTC(year, month, day));
         }
+
+        $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
     };
 
     exports.PersonalHistoryCtrl.$inject = ['$scope', 'FormValidation', '$timeout', 'service', '$filter', 'msgBus', '$q', 'DeviceHelper'];
