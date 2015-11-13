@@ -86,7 +86,6 @@
                 moduleTrack.send('login.click', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
 
                 msgBus.hideLoading();
-            }).finally(function () {
                 $scope.submitting = false;
             });
         };
