@@ -12,6 +12,10 @@
             moduleTrack.send(null);
         }
 
+        $scope.login = function () {
+            moduleTrack.send('loginBtn.click');
+        };
+
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
@@ -22,14 +26,23 @@
                     wechat_token: queryParser.get('wechat_token')
                 })
                     .then(function (json) {
-                        window.location.href = $scope.localeUrl('/personal-history');
+                        moduleTrack.send('register.afterClick', {isRegisterSuc: true});
+
+                        window.setTimeout(function(){
+                            window.location.href = $scope.localeUrl('/personal-history');
+                        }, 500);
                     }, $scope.registerFormCtrl.handleFormError);
             }
 
             var signUpData = $scope.registerFormCtrl.getFormData();
 
             service.post('/service-proxy/member/register', signUpData)
-                .then(autoSignIn, $scope.registerFormCtrl.handleFormError);
+                .then(function(){
+                    autoSignIn();
+                }, $scope.registerFormCtrl.handleFormError)
+                .catch(function(reason){
+                    moduleTrack.send('register.afterClick', {isRegisterSuc: false});
+                });
         };
     };
 

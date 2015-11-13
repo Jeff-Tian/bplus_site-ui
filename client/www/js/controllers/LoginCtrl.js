@@ -50,7 +50,26 @@
             return $loginForm.form('is valid');
         };
 
+<<<<<<< 0a9bbee9e572e13d3d945a7bf36caa2e35f9d544
         $scope.submitting = false;
+=======
+        $scope.resetPassword = function($event){
+            $event.preventDefault();
+
+            moduleTrack.send('forgetPwd.click', {checkAutoLogin: $scope.loginData.rememberMe});
+
+            window.setTimeout(function(){
+                window.location.href = $($event.target).attr('href');
+            }, 300);
+        };
+
+        $scope.register = function(){
+            moduleTrack.send('registerBtn.click', {checkAutoLogin: $scope.loginData.rememberMe});
+        };
+
+
+        var submitting = false;
+>>>>>>> update pc tracking
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -59,6 +78,7 @@
                 return;
             }
 
+            moduleTrack.send('login.beforeclick', {checkAutoLogin: $scope.loginData.rememberMe});
             if (!$scope.isLoginFormValid()) {
                 return;
             }
@@ -72,18 +92,18 @@
                 wechat_token: $scope.loginData.wechatToken,
                 return_url: queryParser.get('return_url')
             }).then(function (res) {
-                moduleTrack.send('login.click', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
+                moduleTrack.send('login.afterClick', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
 
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                 setTimeout(function () {
                     window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
 
-                }, 300);
+                }, 500);
             }).catch(function (reason) {
                 FormValidation.delegateHandleFormError($loginForm)(reason);
 
-                moduleTrack.send('login.click', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
+                moduleTrack.send('login.afterClick', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
 
                 msgBus.hideLoading();
                 $scope.submitting = false;
@@ -92,11 +112,15 @@
 
         var logging = false;
         $scope.logOnViaWechat = function () {
+            moduleTrack.send('loginWechat.click', {checkAutoLogin: $scope.loginData.rememberMe});
+
             if (!DeviceHelper.isInWechatBrowser()) {
                 $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'wechat-logon');
             } else {
                 if ($scope.$parent.oAuthLink) {
-                    window.location.href = $scope.$parent.oAuthLink;
+                    window.setTimeout(function(){
+                        window.location.href = $scope.$parent.oAuthLink;
+                    }, 300);
                 } else {
                     service.executePromiseAvoidDuplicate(logging, function () {
                         return service

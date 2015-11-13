@@ -16,10 +16,10 @@
                        ng-model="signUpData.captcha" ng-enter>
                 <i class="write icon"></i>
                 &nbsp;
-                <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
+                <div captcha ng-model="signUpData.captchaId" refresh-callback="" class="ui fluid b-captcha"></div>
             </div>
             <div class="ui right aligned container subcontainer">
-                <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
+                <a href="javascript: void(0);" ng-click="refreshCaptchaInRegister()">{{'RefreshCaptcha' | translate}}</a>
             </div>
         </div>
         <div class="field" ng-show="isFromAndroid" ng-cloak>
@@ -32,7 +32,7 @@
         </div>
         <div class="field" ng-show="isFromAndroid" ng-cloak>
             <div class="ui right floated" style="float: right;">
-                <a href="javascript: void(0);" ng-click="refreshCaptcha()">{{'RefreshCaptcha' | translate}}</a>
+                <a href="javascript: void(0);" ng-click="refreshCaptchaInRegister()">{{'RefreshCaptcha' | translate}}</a>
             </div>
             <div captcha ng-model="signUpData.captchaId" class="ui fluid b-captcha"></div>
         </div>

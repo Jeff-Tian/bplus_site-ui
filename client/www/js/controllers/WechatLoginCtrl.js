@@ -1,5 +1,7 @@
 (function (exports) {
     exports.WechatLoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, $sce, queryParser, $timeout, DeviceHelper) {
+        var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.login' : 'login');
+
         function handleWechatLogOnCallback() {
             var token = queryParser.get('token');
             var registered = queryParser.get('is_registed');
@@ -87,6 +89,7 @@
         }
 
         $scope.cancelWechatLogin = function () {
+            moduleTrack.send('cancel.click');
             $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'login');
         };
 

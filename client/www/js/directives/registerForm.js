@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.registerForm = function (FormValidation, $timeout, service) {
+    exports.registerForm = function (FormValidation, $timeout, service, DeviceHelper) {
         return {
             templateUrl: '/view-partial/register-form.html',
             scope: {
@@ -9,6 +9,8 @@
                 footerTip: '='
             },
             link: function ($scope, element) {
+                var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.register' : 'register');
+
                 $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
 
                 $scope.signUpData = {
@@ -89,7 +91,20 @@
                     return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
                 };
 
+                $scope.refreshCaptchaInRegister = function(){
+                    moduleTrack.send('changeIdentityCode.click');
+
+                    $scope.refreshCaptcha();
+                }
+
                 $scope.getVerificationCode = function () {
+                    if($scope.sendCodeButtonClicked) {
+                        moduleTrack.send('identifyPhoneAgain.click');
+                    }
+                    else{
+                        moduleTrack.send('identifyPhone.click');
+                    }
+
                     partiallyValidateSignUpForm();
 
                     if ($scope.isSignUpFormPartiallyValid()) {
@@ -109,6 +124,7 @@
                     $event.preventDefault();
                     $event.stopPropagation();
 
+                    moduleTrack.send('register.beforeClick');
                     if (!$scope.isSignUpFormFullyValid()) {
                         return;
                     }
@@ -145,5 +161,5 @@
         };
     };
 
-    exports.registerForm.$inject = ['FormValidation', '$timeout', 'service'];
+    exports.registerForm.$inject = ['FormValidation', '$timeout', 'service', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});
