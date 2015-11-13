@@ -3,14 +3,11 @@ var path = "./client/";
 var configClean = require(path + 'grunt/clean.js');
 var configCopy = require(path + 'grunt/copy.js');
 var configLess = require(path + 'grunt/less.js');
-var configImagemin = require(path + 'grunt/imagemin.js');
 var configUglify = require(path + 'grunt/uglify.js');
 var configJshint = require(path + 'grunt/jshint.js');
-var configHtml2js = require(path + 'grunt/html2js.js');
 var configWatch = require(path + 'grunt/watch.js');
 var configStringreplace = require(path + 'grunt/stringreplace.js');
 var configStart = require(path + 'grunt/start.js');
-var prdConfig = require('./config/config_prd.js');
 
 // Create grunt module
 module.exports = function (grunt) {
@@ -44,10 +41,8 @@ module.exports = function (grunt) {
         "clean": configClean(),
         "copy": configCopy(),
         "less": configLess(),
-        "imagemin": configImagemin(),
         "uglify": configUglify(),
         "jshint": configJshint(),
-        "html2js": configHtml2js(),
         "string-replace": configStringreplace(),
         "watch": configWatch(),
         "nodemon": configStart(),
@@ -68,7 +63,25 @@ module.exports = function (grunt) {
             }
         },
         "useref": {
-            html: ['<%= config.dist %>*.html', '<%= config.dist %>view-partial/*.html', '<%= config.dist %>mobile/*.html'],
+            html: [
+                '<%= config.dist %>account-setting.html',
+                '<%= config.dist %>bind-mobile.html',
+                '<%= config.dist %>index.html',
+                '<%= config.dist %>reset-password.html',
+                '<%= config.dist %>select-payment-method.html',
+                '<%= config.dist %>sign-in.html',
+                '<%= config.dist %>view-partial/js.html',
+                '<%= config.dist %>mobile/aboutus.html',
+                '<%= config.dist %>mobile/bind-mobile.html',
+                '<%= config.dist %>mobile/footer.html',
+                '<%= config.dist %>mobile/index.html',
+                '<%= config.dist %>mobile/national.html',
+                '<%= config.dist %>mobile/personal-history.html',
+                '<%= config.dist %>mobile/reset-password.html',
+                '<%= config.dist %>mobile/sign-in.html',
+                '<%= config.dist %>mobile/statement.html',
+                '<%= config.dist %>mobile/youth.html'
+            ],
             temp: '<%= config.dist %>'
         },
         htmlmin: {                                     // Task
@@ -167,21 +180,95 @@ module.exports = function (grunt) {
                         }
                     }
                 },
-                files: [{
+                files: [{}, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'view-partial/*.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    // TODO: Must be true, why?
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: '*.html',
+                    src: 'view-partial/js.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: 'mobile/*.html',
+                    src: 'account-setting.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'bind-mobile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'index.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'reset-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'select-payment-method.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'sign-in.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/aboutus.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/bind-mobile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/index.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/national.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/personal-history.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/reset-password.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/sign-in.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/statement.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/youth.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'profile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'mobile/profile.html',
                     dest: '<%= config.dist %>'
                 }]
             }
@@ -228,6 +315,12 @@ module.exports = function (grunt) {
                     src: ['client/www/bower/semantic-ui/dist/semantic.min.css'],
                 }]
             }
+        },
+        karma: {
+            unit: {
+                configFile: __dirname + '/client/www/test/my.conf.js',
+                singleRun: true
+            }
         }
 
     });
@@ -272,14 +365,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', ['clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
-
-    var KarmaServer = require('karma').Server;
-    grunt.registerTask('ct', 'Client tests', function () {
-        new KarmaServer({
-            configFile: __dirname + '/client/www/test/my.conf.js',
-            singleRun: true
-        }).start();
-    });
 
     grunt.registerTask('inlineTranslation', 'Inline Translation', function () {
         var fs = require('fs');

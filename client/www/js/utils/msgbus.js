@@ -44,6 +44,13 @@ angular.module('ng.utils')
         msgBus.notifyLoadingReady = function () {
             msgBus.emitMsg(msgBus.events.loading.ready);
         };
+        msgBus.onMemberLoaded = function ($scope, callback) {
+            if ($scope.memberLoaded) {
+                callback();
+            } else {
+                msgBus.onMsg(msgBus.events.profile.loaded, $scope, callback);
+            }
+        };
 
         return msgBus;
     }]);

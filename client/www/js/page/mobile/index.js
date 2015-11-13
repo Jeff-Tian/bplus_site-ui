@@ -36,8 +36,18 @@ angular
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
+            .state('select-interest', {
+                url: '/select-interest/:who/:displayName/:redemptionCode',
+                templateUrl: 'interest.html',
+                controller: 'SelectInterestCtrl'
+            })
             .state('paid', {
-                url: '/paid',
+                url: '/paid/:who/:displayName/:redemptionCode',
+                templateUrl: 'paid.html',
+                controller: 'PaidCtrl'
+            })
+            .state('my-code', {
+                url: '/my-code',
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })
@@ -51,6 +61,9 @@ angular
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
+    .factory('WechatWrapper', angular.bplus.WechatWrapper)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('queryParser', angular.bplus.queryParser)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('MobileIndexCtrl', angular.bplus.MobileIndexCtrl)
     .controller('MobileMenuCtrl', angular.bplus.MobileMenuCtrl)
@@ -58,5 +71,6 @@ angular
     .controller('MobileAboutusCtrl', angular.bplus.MobileAboutusCtrl)
     .controller('MobileNationalCtrl', angular.bplus.MobileNationalCtrl)
     .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
+    .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
 ;

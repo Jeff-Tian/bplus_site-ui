@@ -1,29 +1,32 @@
 (function (exports) {
-    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus) {
-        function mockWechat() {
-            function nonce() {
+    exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper, DeviceHelper) {
+
+        function gotoPaid(result) {
+            function gotoPaidInner() {
+                $state.go('paid', {
+                    who: $scope.memberInfo.member_id,
+                    displayName: $scope.memberInfo.displayName,
+                    redemptionCode: result && result.generatedRedemption ? (result.generatedRedemption.result || '') : ''
+                });
             }
 
-            return {
-                config: nonce,
-                ready: nonce,
-                checkJsApi: nonce,
-                chooseWXPay: nonce
-            };
+            msgBus.onMemberLoaded($scope, gotoPaidInner);
         }
 
-        function getWechat() {
-            var wechat = mockWechat();
-
-            if (typeof window.wx !== 'undefined') {
-                wechat = window.wx;
+        function gotoInterests(result) {
+            function gotoInterestsInner() {
+                $state.go('select-interest', {
+                    who: $scope.memberInfo.member_id,
+                    displayName: $scope.memberInfo.displayName,
+                    redemptionCode: result && result.generatedRedemption ? (result.generatedRedemption.result || '') : ''
+                });
             }
 
-            return wechat;
+            msgBus.onMemberLoaded($scope, gotoInterestsInner);
         }
 
         $scope.payData = {
-            redemptionCode: ''
+            redemptionCode: DeviceHelper.getCookie('redemption_code') || DeviceHelper.getCookie('pre_redemption_code') || ''
         };
 
         var buying = false;
@@ -34,7 +37,7 @@
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
-                        $state.go('paid');
+                        gotoInterests(result);
                     })
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
@@ -76,7 +79,7 @@
                         })
                         .then(function (result) {
                             if (/^true$/i.test(result.hasRight)) {
-                                $state.go('paid');
+                                gotoInterests(result);
                             } else {
                                 if (paymentMethod === 'wechat') {
 
@@ -102,7 +105,8 @@
                                         if (res.errMsg === 'chooseWXPay:ok') {
                                             window.alert('支付成功!');
                                             wechatPaid();
-                                            window.location.href = '#/paid';
+                                            //gotoPaid();
+                                            window.location.reload();
                                         } else {
                                             window.alert('支付失败!');
                                             wechatPaid();
@@ -116,7 +120,7 @@
                                         wechatPaid();
                                     };
 
-                                    var wechat = getWechat();
+                                    var wechat = WechatWrapper;
 
                                     if (!invokingWechatPay) {
                                         invokingWechatPay = true;
@@ -143,6 +147,16 @@
             ;
         }
 
+        if ($state.current.name === 'select-payment-method') {
+            service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
+                .then(function (result) {
+                    if (/^true$/i.test(result.hasRight)) {
+                        // Don't generate redemption code
+                        gotoPaid();
+                    }
+                });
+        }
+
         if ($state.current.name === 'continue-paying') {
             if ($stateParams.paymentMethod === 'wechat') {
                 $scope.wechatPay();
@@ -156,8 +170,12 @@
         if ($stateParams.paidBy === 'wechat') {
             $scope.wechatPay();
         }
+
+        $scope.showGameDetailModal = function () {
+            $('.b-game-detail.modal').modal('show');
+        };
     };
 
-    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus'];
+    exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper', 'DeviceHelper'];
 })
 (angular.bplus = angular.bplus || {});

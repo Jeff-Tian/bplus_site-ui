@@ -12,7 +12,9 @@ angular.module('bplus', [
     .factory('FormValidation', angular.bplus.FormValidation || function() {
         return {};
     })
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('queryParser', angular.bplus.queryParser)
     .directive('chinaMap', angular.bplus.chinaMap || {})
     .directive('radarMap', angular.bplus.radarMap || {})
     .directive('gameHome', angular.bplus.gameHome)

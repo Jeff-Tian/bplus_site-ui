@@ -11,7 +11,7 @@ define([
   };
   ListWorkingBackground.prototype = Object.create(BaseClass.prototype);
   ListWorkingBackground.prototype.constructor = ListWorkingBackground;
-  
+
   ListWorkingBackground.prototype.start = function(agModel) {
     var me = this;
     agModel
@@ -24,7 +24,15 @@ define([
         },
         compile: function() {
           return {
-            pre: function($scope) {
+            pre: function($scope, $element) {
+              $($element).find(".tillnow").checkbox({
+                  onChecked: function() {
+                      $scope.data.dateTo.value.tillNow = true;
+                  },
+                  onUnchecked: function() {
+                      $scope.data.dateTo.value.tillNow = false;
+                  }
+              });
               $scope.ENUM_STATUS = me.ENUM_STATUS;
               $scope.property = {
                 status: ($scope.data.id === "") ? me.ENUM_STATUS.STATUS_EDIT : me.ENUM_STATUS.STATUS_READONLY
@@ -132,6 +140,6 @@ define([
       };
     });
   };
-  
+
   return ListWorkingBackground;
 });

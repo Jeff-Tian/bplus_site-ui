@@ -47,6 +47,12 @@ mocha
 
 ### Runn client side code test
 ```
+grunt karma
+```
+
+Or
+
+```
 karma start client/www/test/my.conf.js
 ```
 Ideally integrate the test task into Grunt task, but currently I can't get it work.

@@ -89,6 +89,8 @@
             });
         };
 
+        // s' own properties
+
         return s;
     };
 

@@ -18,9 +18,15 @@
 
     <script type="text/ng-template" id="select-payment-method.html">
 
-        <h4 class="ui centered header">
-            <%= __('完成信息填写与付费,即可组队参赛!', {competition: __('全国大赛'), fee: __('{{how_much}}元', {how_much: '300'})}) %>
+        <h4 class="ui left aligned header">
+            <button class="ui red button right floated" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+            </button>
+            <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
+            {how_much: '300'})}) %>
+            <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
+
         </h4>
+        <div class="ui clearing horizontal divider"></div>
 
         <div class="ui column b-step-container b-separator">
             <div class="ui center aligned container subcontainer">
@@ -49,11 +55,14 @@
                       ng-submit="buyWithRedemptionCode($event)">
                     <div class="ui error message brand"></div>
                     <div class="ui left aligned container subcontainer">
-                        <h5 class="ui header"><%= __('兑换码') %></h5>
+                        <h5 class="ui header"><%= __('邀请码') %>
+                        </h5>
                     </div>
                     <div class="fields">
                         <div class="thirteen wide field">
                             <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+
+                            <p class="ui left floated grey">没有邀请码？扫码关注服务号回复"邀请码"立即赢取！</p>
                         </div>
                         <div class="three wide field">
                             <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
@@ -64,16 +73,127 @@
                             </button>
                         </div>
                     </div>
+                    <div class="field">
+                        <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
+                             class="ui small image centered">
+                    </div>
                 </form>
             </div>
+        </div>
+        <%- include('view-partial/game-detail-modal.html') -%>
+    </script>
+
+    <script type="text/ng-template" id="interest.html">
+        <div class="grey background b-mobile stretch" ng-cloak>
+            <h3 class="ui center aligned header" style="margin-top: 1rem;">
+                <%= __('我感兴趣的学习机会') %>
+            </h3>
+
+            <form class="ui form interests-form" name="interest-form" novalidate ng-submit="saveInterests()">
+                <div class="ui error message brand"></div>
+                <div class="ui white background">
+                    <div class="ui container">
+                        <div class="ui horizontal divider"></div>
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/business-english.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('商务英语') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.businessEnglish">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/oversees-study.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('海外游学') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.overseesStudy">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/it-training.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('IT培训') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.itTraining">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/mba.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('MBA') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.mba">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+                            <div class="item">
+                                <div class="middle aligned content">
+                                    <div class="ui tiny image">
+                                        <img src="<%= cdn.normal %>img/my-interests/accounting.png?<%= cdn.version %>">
+                                    </div>
+                                    <a class="header">&nbsp;&nbsp;<%= __('财务会计') %></a>
+
+                                    <div class="ui right floated toggle checkbox">
+                                        <div class="ui horizontal divider"></div>
+                                        <input type="checkbox" ng-model="interests.accounting">
+                                        <label class="b-profile-checkbox-label">&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui horizontal divider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui container">
+                    <div class="filed">
+                        <textarea placeholder="<%= __('输入其他你感兴趣的') %>" rows="2" ng-model="interests.other"></textarea>
+                    </div>
+                    &nbsp;
+                    <button type="submit" class="ui red fluid button"><%= __('确定') %></button>
+                    &nbsp;
+                </div>
+            </form>
         </div>
     </script>
 
     <script type="text/ng-template" id="paid.html">
-        <div class="ui center aligned container subcontainer b-background-lighter">
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+        <div class="ui center aligned container subcontainer b-background-lighter" ng-show="!showPaid">
+            <div class="ui very padded loading vertical segment">
+            </div>
+        </div>
+        <div class="ui center aligned container subcontainer b-background-lighter" ng-cloak ng-show="showPaid">
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
 
@@ -82,14 +202,19 @@
             <h5 class="ui header">
                 <%= __('您已经付费报名成功！') %>
                 <div class="ui horizontal divider"></div>
-                <div class="sub header"><%= __('请记得在比赛开始前,完成组队。') %></div>
+                <div class="sub header"><%= __('别忘了在报名截止前完成组队！') %></div>
+                <div class="sub header"><%= __('用你的专属兑换码 {{code}} 邀请小伙伴，即可免费参赛！（限额邀请三人）', {code: '{{generatedCode}}'})
+                    %>
+                </div>
             </h5>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
+            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态') %></p>
+
+            <p><%= __('请关注Bridge+服务号') %></p>
+
+            <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
@@ -105,12 +230,31 @@
 <!-- build:js js/cdn/pc-select-payment-method.js -->
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
-<script src="js/factories/queryParser.js"></script>
 <script src="js/directives/loading.js"></script>
+<script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
+<script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/select-payment-method/main.js"></script>
 <!-- endbuild -->
+<script>
+    (function () {
+        function sendPageTrack(sender, hash) {
+            if (hash.indexOf('paid/') >= 0) {
+                sender.send('MS2015Paid');
+            }
+            else if (hash.indexOf('select-payment-method') >= 0) {
+                sender.send('MS2015Pay');
+            }
+        }
+
+        var moduleTrack = new window.ModuleTrack(null, function (sender, args) {
+            sendPageTrack(sender, args.hash);
+        });
+
+        sendPageTrack(moduleTrack, moduleTrack.currentHash());
+    })();
+</script>
 </body>
 
 </html>

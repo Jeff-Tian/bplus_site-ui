@@ -11,15 +11,16 @@
 <%- include('head.html') -%>
 
 <div class="full-height">
-    <div class="ui center stuck padded container">
+    <div class="ui center stuck">
         <div class="content center">
-            <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
+            <div class="ui padded container">
+                <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>">
 
-            <h3 class="ui white header"><%= __('MobileAoutusHeader') %></h3>
-            <h5><%= __('MobileAoutusInfo') %></h5>
+                <h3 class="ui white header"><%= __('MobileAoutusHeader') %></h3>
+                <h5><%= __('MobileAoutusInfo') %></h5>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <%- include('footer.html') -%>

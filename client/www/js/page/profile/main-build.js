@@ -8,6 +8,7 @@ require([
     "bplus-ui/page/profile/widget/banner/main",
     "bplus-ui/page/profile/widget/achievement/main",
     "bplus-ui/page/profile/widget/growing/main",
+    "bplus-ui/page/profile/widget/autocomplete/main",
 
     "bplus-ui/view/widgets/common/upload",
     "bplus-ui/view/widgets/common/upload_handler",
@@ -29,47 +30,50 @@ require([
     "text!bplus-ui/view/widgets/personalinfo/list_workingexperience_container.html",
     "text!bplus-ui/view/widgets/personalinfo/list_award_container.html",
     "text!bplus-ui/view/widgets/personalinfo/list_language_container.html"
-], function (
-     semantic,
-     agTranslateangular,
-     angular,
-     ProfileModel,
-     banner,
-     achievement,
-     growing,
-     upload,
-     uploadHandler,
-     BDate,
-     Tag,
-     Skills,
-     Personalinfo,
-     Educationbackground,
-     Club,
-     Work,
-     Award,
-     Language,
-     Container,
-     personalinfoContainerTemplate,
-     skillsContainerTemplate,
-     eduContainerTemplate,
-     clubContainerTemplate,
-     workContainerTemplate,
-     awardContainerTemplate,
-     languageContainerTemplate) {
+], function (semantic,
+             agTranslateangular,
+             angular,
+             ProfileModel,
+             banner,
+             achievement,
+             growing,
+             autocomplete,
+             upload,
+             uploadHandler,
+             BDate,
+             Tag,
+             Skills,
+             Personalinfo,
+             Educationbackground,
+             Club,
+             Work,
+             Award,
+             Language,
+             Container,
+             personalinfoContainerTemplate,
+             skillsContainerTemplate,
+             eduContainerTemplate,
+             clubContainerTemplate,
+             workContainerTemplate,
+             awardContainerTemplate,
+             languageContainerTemplate) {
     var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
-        .config(angular.bplus.translate)
-        .controller('AppCtrl', angular.bplus.AppCtrl)
-        .factory('translationLoader', angular.bplus.translationLoader)
-        .factory('FormValidation', angular.bplus.FormValidation)
-        .factory('service', angular.bplus.service)
-        .factory('MessageStore', angular.bplus.MessageStore)
-    ;
+            .config(angular.bplus.translate)
+            .controller('AppCtrl', angular.bplus.AppCtrl)
+            .factory('translationLoader', angular.bplus.translationLoader)
+            .factory('FormValidation', angular.bplus.FormValidation)
+            .factory('DeviceHelper', angular.bplus.DeviceHelper)
+            .factory('service', angular.bplus.service)
+            .factory('MessageStore', angular.bplus.MessageStore)
+            .factory('queryParser', angular.bplus.queryParser)
+        ;
     (function (agModule) {
         banner(agModule);
         achievement(agModule);
         growing(agModule);
         upload(agModule);
         uploadHandler(agModule);
+        autocomplete(agModule);
 
         new ProfileModel().start(agModule);
         var instance = Container;

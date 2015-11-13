@@ -9,6 +9,8 @@
                 footerTip: '='
             },
             link: function ($scope, element) {
+                $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
+
                 $scope.signUpData = {
                     mobile: '',
                     captcha: '',

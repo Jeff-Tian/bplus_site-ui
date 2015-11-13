@@ -49,14 +49,7 @@
             </a>
 
             <div class="right item">
-                <a href="<%= localeLink('/index') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
-                <a href="<%= localeLink('/study') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/game') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
-                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
+                <%- include('main_nav.html') %>
             </div>
         </div>
     </div>
@@ -70,6 +63,8 @@
     <a href="<%= localeLink('/game') %>" class="item" ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
     <a href="<%= localeLink('/opportunity') %>" class="item" ng-class="{'active':current_page==='opportunity'}"><%=
         __('Opportunity') %></a>
+    <a href="<%= localeLink('/youth') %>" class="item"
+       ng-class="{'active': current_page === 'poster'}"><%= __('全国大赛') %></a>
 </div>
 <!-- Initial Menu -->
 <div class="ui b-header">
@@ -111,14 +106,7 @@
             </a>
 
             <div class="right item">
-                <a href="<%= localeLink('/index') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='index'}"><%= __('Home') %></a>
-                <a href="<%= localeLink('/study') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='study'}"><%= __('Learn') %></a>
-                <a href="<%= localeLink('/game') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
-                <a href="<%= localeLink('/opportunity') %>" class="ui button nav-button"
-                   ng-class="{'active':current_page==='opportunity'}"><%= __('Opportunity') %></a>
+                <%- include('main_nav.html') %>
             </div>
         </div>
     </div>

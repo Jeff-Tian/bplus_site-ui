@@ -92,7 +92,8 @@
         'domReady': 'requirejs-domready/domReady',
         "angular": "angular/angular.min",
         "angular-translate": "angular-translate/angular-translate.min",
-        "semantic": "semantic-ui/dist/semantic.min"
+        "semantic": "semantic-ui/dist/semantic.min",
+        "autoComplete": "devbridge-autocomplete/dist/jquery.autocomplete.min"
     },
     "shim": {
         'angular': {
@@ -102,6 +103,9 @@
             deps: ["angular"],
             exports: "angular-translate"
         },
+        'autoComplete': {
+            deps: ["jquery"]
+        },
         'semantic': {
             deps: ["jquery"]
         }
@@ -110,5 +114,8 @@
 </script>
 <!--Page JS-->
 <script src="<%= cdn.normal %>js/page/profile/mobile-main-build.js?<%= cdn.version %>" type="text/javascript"></script>
+<script>
+    window.t_PageName = "m.profile";
+</script>
 </body>
 </html>

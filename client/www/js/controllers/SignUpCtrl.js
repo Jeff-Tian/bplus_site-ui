@@ -1,5 +1,17 @@
 (function (exports) {
-    exports.SignUpCtrl = function ($scope, service, queryParser) {
+    exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
+        var moduleTrack = new window.ModuleTrack(
+            DeviceHelper.isMobile() ? 'm.register' : 'register',
+            function(sender, args){
+                if(args.hash === 'register'){
+                    sender.send(null);
+                }
+            });
+
+        if (moduleTrack.currentHash() === 'register') {
+            moduleTrack.send(null);
+        }
+
         $scope.registerFormCtrl = {};
 
         $scope.signUp = function () {
@@ -21,5 +33,5 @@
         };
     };
 
-    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser'];
+    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper'];
 })(angular.bplus = angular.bplus || {});

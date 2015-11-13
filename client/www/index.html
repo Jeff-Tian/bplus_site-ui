@@ -40,7 +40,7 @@
         <div class="owl-carousel owl-theme b-slider masthead-carousel" id="superpulse">
             <div class="b-slider-item first-item">
                 <div class="ui container">
-                    <h1 class="ui header" ng-cloak><%= __('IndexFirstItemHeader') %></h1>
+                    <h1 class="ui header"><%= __('IndexFirstItemHeader') %></h1>
 
                     <h2 ng-cloak><%= __('IndexFirstItemContent') %><br><%= __('IndexFirstItemSubContent') %>
                     </h2>
@@ -62,6 +62,54 @@
                     </h2>
                 </div>
             </div>
+            <% if (featureSwitcher.enablePartnerSlide) { %>
+            <div class="b-slider-item fourth-item"
+                 style="background: white url(<%= cdn.normal %>img/partners/hcd_youth.png?<%= cdn.version %>) no-repeat left 15px top 70px; background-size: 100px;">
+                <div class="ui container">
+                    <div class="ui container subcontainer"
+                         style="width: 700px!important; padding-right: 150px; background: white url(<%= cdn.normal %>img/partners/e-war-youth.png?<%= cdn.version %>) no-repeat right 180px top 120px; background-size: 480px;">
+                        <h1 class="ui centered header" style="color: black; margin-top: 0;padding-top: 8em;">
+                            <%= __('MarkSimos全国商战模拟游戏大赛') %>
+                            <div class="ui sub header" style="font-size: 2rem;">
+                                <%= __('(18~22岁)') %>
+                            </div>
+                        </h1>
+                        <h1 class="ui centered orange header"
+                            style="color: #EB544C!important; margin-top: auto; font-size: 2em;">
+                            <%= __('HCD MarkSimos Business Stimulate') %>
+
+                        </h1>
+
+                        <div class="ui left aligned container"
+                             style="padding-left: 8em; overflow: hidden;">
+                            <p style="text-indent: -4.5em;">
+                                时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: 2015年11月 - 2016年2月
+                            </p>
+
+                            <p style="text-indent: -4.5em; line-height: 2em;">
+                                比赛方式: MS大赛采用海选淘汰制,每轮角逐只会有一个小组胜出,最终四个
+                                大区的四个冠军小组将代表各自大区进行总决赛
+                            </p>
+
+                            <p style="text-indent: -4.5em;">
+                                奖励信息: 总决赛的冠军小组将会获得神秘大奖
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui subcontainer" style="padding-left: 20px;">
+                    <p class="">主办方: 合得教育</p>
+
+                    <p class="">
+                        赞助商:
+                        <a href="http://www.shixiseng.com" target="_blank">
+                            <img class="ui small image" style="display: inline;"
+                                 src="<%= cdn.normal %>img/partners/shixiseng_logo.png?<%= cdn.version %>">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <% } %>
         </div>
     </div>
     <div class="page-content">
@@ -428,7 +476,7 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 <!--JS-->
-<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js"></script>
+<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js?<%= cdn.version %>"></script>
 
 <!--Page JS-->
 <!-- build:js js/cdn/index.js -->
@@ -438,8 +486,6 @@
 <script src="js/directives/tab.js"></script>
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
-<script src="js/factories/queryParser.js"></script>
-<script src="js/factories/DeviceHelper.js"></script>
 <script src="js/controllers/WechatLoginCtrl.js"></script>
 <script src="js/page/homepage/main.js"></script>
 <!-- endbuild -->

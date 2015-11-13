@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout) {
+    exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper, queryParser) {
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -9,6 +9,7 @@
             return service.get('/service-proxy/member/profile/')
                 .then(function (res) {
                     $scope.memberInfo = res;
+                    $scope.memberLoaded = true;
 
                     $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile || res.wechat;
 
@@ -61,10 +62,25 @@
 
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
-        window.addEventListener('hashchange', locationHashChanged);
+        window.addEventListener('hashchange', function () {
+            locationHashChanged();
+        });
 
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
+
+        // TODO: Move to service.js
+        $scope.serviceUrls = {
+            checkNationalGame2015OrderPayment: '/service-proxy/payment/create-order/national-game-2015/check-has-right',
+            logonByToken: '/service-proxy/logon/by-token'
+        };
+
+        $scope.showQRCode = document.cookie.indexOf("source=wechatServiceAccount") === -1;
+
+        var prefilledRedemptionCode = queryParser.get('redemption_code');
+        if (prefilledRedemptionCode) {
+            DeviceHelper.setCookie('pre_redemption_code', prefilledRedemptionCode);
+        }
     };
 
-    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout'];
+    exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser'];
 })(angular.bplus = angular.bplus || {});

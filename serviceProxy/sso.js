@@ -3,6 +3,7 @@ var sso = require('../config').sso;
 var config = require('../config');
 var proxy = require('./proxy');
 var localeHelper = require('../locales/localeHelper');
+var membership = require('./membership');
 
 function proxySSO(options) {
     options.host = sso.host;
@@ -17,12 +18,14 @@ function proxySSO(options) {
     return proxy(options);
 }
 
-function setAuthToken(res, token) {
-    res.cookie('token', token, {
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)),
+function setAuthToken(res, token, rememberMe) {
+    var cookieOption = {
+        expires: rememberMe ? new Date(Date.now() + (1000 * 60 * 60 * 24 * 365)) : 0,
         path: '/',
         httpOnly: true
-    });
+    };
+
+    res.cookie('token', token, cookieOption);
 }
 
 function jumpToReturnUrl(req, res) {
@@ -53,7 +56,7 @@ module.exports = {
                 if (responseJson.isSuccess) {
                     if (!req.body.wechat_token) {
                         // Log on directly
-                        setAuthToken(res, responseJson.result.token);
+                        setAuthToken(res, responseJson.result.token, req.body.remember);
                         if (jumpToReturnUrl(req, res)) {
                             return undefined;
                         }
@@ -70,7 +73,7 @@ module.exports = {
                             responseInterceptor: function (theOriginalResponse, response2Json) {
                                 // Then log on
                                 if (response2Json.isSuccess) {
-                                    setAuthToken(res, responseJson.result.token);
+                                    setAuthToken(res, responseJson.result.token, true);
                                     if (jumpToReturnUrl(req, res)) {
                                         return undefined;
                                     }
@@ -89,7 +92,7 @@ module.exports = {
         })(req, res, next);
     },
     setAuthToken: function (req, res, next) {
-        setAuthToken(res, req.body.token);
+        setAuthToken(res, req.body.token, true);
 
         if (!jumpToReturnUrl(req, res)) {
             res.send(req.body.token);
@@ -175,15 +178,18 @@ module.exports = {
                 }
             },
             responseInterceptor: function (originalResponse, responseJson) {
-                res.cookie('token', '', {
-                    expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
-                    path: '/',
-                    httpOnly: true
-                });
+                membership.unsetSensativeCookies(res);
 
                 var locale = localeHelper.getLocale(req.url, req);
-                // TODO: Investigate why no effect
-                res.redirect(localeHelper.generateLocaleLink('/', locale));
+                if (!req.xhr) {
+                    res.redirect(localeHelper.generateLocaleLink('/', locale));
+                } else {
+                    res.json({
+                        isSuccess: false,
+                        code: '302',
+                        message: localeHelper.generateLocaleLink('/', locale)
+                    });
+                }
 
                 return undefined;
             }
