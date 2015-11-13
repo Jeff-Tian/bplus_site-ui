@@ -16,6 +16,7 @@
     "extend": "^3.0.0",
     "i18n": "^0.5.0",
     "logger": "git://github.com/HCDLearning/logger.git#v1.0.0",
+    "competion-api": "git@bitbucket.org:hcdlearning/cmpt2015-api.git#develop",
     "q": "^1.4.1"
   },
   "devDependencies": {
@@ -39,6 +40,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-html2js": "^0.3.3",
     "grunt-karma": "^0.12.1",
+    "grunt-mocha": "^0.4.13",
+    "grunt-mocha-cli": "^2.0.0",
     "grunt-nodemon": "^0.4.0",
     "grunt-replace": "^0.11.0",
     "grunt-string-replace": "*",

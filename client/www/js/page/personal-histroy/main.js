@@ -13,4 +13,5 @@ angular.module('personalHistory', ['pascalprecht.translate', 'ng.utils'])
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('PersonalHistoryCtrl', angular.bplus.PersonalHistoryCtrl)
     .directive('dropdown', angular.bplus.dropdown)
+    .directive('loading', angular.bplus.loading)
 ;

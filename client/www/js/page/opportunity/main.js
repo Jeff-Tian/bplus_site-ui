@@ -7,6 +7,7 @@ angular.module('bplus', [
 ])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
+    .directive('loading', angular.bplus.loading)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation || function () {

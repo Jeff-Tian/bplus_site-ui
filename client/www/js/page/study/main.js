@@ -15,6 +15,7 @@ angular.module('bplus', [
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('queryParser', angular.bplus.queryParser)
+    .directive('loading', angular.bplus.loading)
     .controller('AppCtrl', angular.bplus.AppCtrl)
 ;
 // TODO: integrated into JS framework

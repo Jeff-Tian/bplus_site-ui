@@ -169,7 +169,7 @@ module.exports = function (grunt) {
                             if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
                                 return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
                             } else {
-                                return url + '?cdnified';
+                                return '/' + url + '?cdnified';
                             }
                         } else if (url.indexOf('profile/main-build.js') > -1 || url.indexOf('profile/mobile-main-build.js') > -1) {
                             // For requirejs
@@ -321,8 +321,10 @@ module.exports = function (grunt) {
                 configFile: __dirname + '/client/www/test/my.conf.js',
                 singleRun: true
             }
+        },
+        mochacli: {
+            src: ['test/**/*.js']
         }
-
     });
 
     // Load all grunt tasks
@@ -349,9 +351,7 @@ module.exports = function (grunt) {
     ]);
 
     // Default task.
-    grunt.registerTask('default', [
-        'concurrent'
-    ]);
+    grunt.registerTask('default', ['mochacli', 'karma', 'concurrent']);
 
     grunt.registerTask('ng', ['ngtemplates', 'concat']);
 
@@ -364,7 +364,7 @@ module.exports = function (grunt) {
         process.env.RUN_FROM = 'local';
     });
 
-    grunt.registerTask('build', ['clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['mochacli', 'karma', 'clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     grunt.registerTask('inlineTranslation', 'Inline Translation', function () {
         var fs = require('fs');

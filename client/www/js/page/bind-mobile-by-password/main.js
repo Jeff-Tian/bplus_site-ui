@@ -10,6 +10,7 @@ angular.module('bindMobileByPassword', ['pascalprecht.translate', 'ng.utils'])
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('queryParser', angular.bplus.queryParser)
+    .directive('loading', angular.bplus.loading)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('BindMobileByPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         $scope.bindData = {
