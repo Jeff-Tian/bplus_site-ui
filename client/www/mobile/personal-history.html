@@ -31,7 +31,7 @@
             <div class="sides">
                 <div class="active first side">
                     <form name="personalInfoForm" class="ui form personal-history step-1"
-                          ng-submit="tryNextStep($event)">
+                          ng-submit="tryNextStep($event)" ng-class="{'loading': tryingNextStep}">
                         <div class="b-step-container">
                             <div class="ui error message brand"></div>
                             <div class="field">
