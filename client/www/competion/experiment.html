@@ -29,8 +29,8 @@
 
     <%- include('../view-partial/footer.html') -%>
     <script src="/cmpt/config.js"></script>
-    <script src="<%= (cdn.normal.length == 1 ? '' : cdn.normal) %>/cmpt/dist/main.js?<%= cdn.version %>"></script>
-    <script src="<%= (cdn.normal.length == 1 ? '' : cdn.normal) %>/js/page/competion/main.js?<%= cdn.version %>"></script>
+    <script src="<%= cdn.normal %>cmpt/dist/main.js?<%= cdn.version %>"></script>
+    <script src="<%= cdn.normal %>js/page/competion/main.js?<%= cdn.version %>"></script>
 </body>
 
 </html>
