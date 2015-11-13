@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>赛事详情 Bridge+</title>
     <meta name="description" content="Bridge+">
-    <link type="text/css" rel="stylesheet" href="/bower/semantic-ui/dist/semantic.min.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/css/main.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/dist/competion.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.css?<%= cdn.version %>" media="all" />
+    <link type="text/css" rel="stylesheet" href="<%= cdn.normal %>css/main.css?<%= cdn.version %>" media="all" />
+    <link type="text/css" rel="stylesheet" href="<%= cdn.normal %>cmpt/dist/competion.css?<%= cdn.version %>" media="all" />
 </head>
 
 <body class="bplus" ng-init="page='<%=page%>';lang='<%=lang%>'" ng-app="bplus" ng-controller="AppCtrl">
@@ -29,9 +29,9 @@
 
     <%- include('../view-partial/footer.html') -%>
     <script src="/cmpt/config.js"></script>
-    <script src="<%= (cdn.normal.length == 1 ? '' : cdn.normal) %>/cmpt/libs/jquery-qrcode/jquery.qrcode.min.js?<%= cdn.version %>"></script>
-    <script src="<%= (cdn.normal.length == 1 ? '' : cdn.normal) %>/cmpt/dist/main.js?<%= cdn.version %>"></script>
-    <script src="<%= (cdn.normal.length == 1 ? '' : cdn.normal) %>/js/page/competion/main.js?<%= cdn.version %>"></script>
+    <script src="<%= cdn.normal %>cmpt/libs/jquery-qrcode/jquery.qrcode.min.js?<%= cdn.version %>"></script>
+    <script src="<%= cdn.normal %>cmpt/dist/main.js?<%= cdn.version %>"></script>
+    <script src="<%= cdn.normal %>js/page/competion/main.js?<%= cdn.version %>"></script>
 </body>
 
 </html>
