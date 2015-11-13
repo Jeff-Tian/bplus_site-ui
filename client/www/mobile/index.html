@@ -9,6 +9,7 @@
     <%- include('header.html') -%>
 </head>
 <body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
+<%/* For wechat browser link share */%>
 <img src="<%= cdn.normal %>icon/ms-icon-310x310.png?<%= cdn.version %>"
      style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
@@ -73,7 +74,8 @@
                 <div class="sub header">
                     <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
                 </div>
-                <button class="ui right floated red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %></button>
+                <button class="ui right floated red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                </button>
                 <div class="ui clearing horizontal divider"></div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>

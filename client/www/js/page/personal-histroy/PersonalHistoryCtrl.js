@@ -14,7 +14,7 @@
         var $shape = $('.ui.shape.personal-history');
         $shape.shape();
 
-        var submitting = false;
+        $scope.tryingNextStep = false;
         $scope.tryNextStep = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -23,11 +23,11 @@
                 return;
             }
 
-            if (submitting) {
+            if ($scope.tryingNextStep) {
                 return;
             }
 
-            submitting = true;
+            $scope.tryingNextStep = true;
 
             $q.all([
                 service
@@ -52,7 +52,7 @@
                     $scope.gotoNextStep();
                 })
                 .finally(function () {
-                    submitting = false;
+                    $scope.tryingNextStep = false;
                 });
         };
 
@@ -102,6 +102,7 @@
             }
         };
 
+        $scope.tryingSubmit = false;
         $scope.trySubmit = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -122,11 +123,11 @@
                 return;
             }
 
-            if (submitting) {
+            if ($scope.tryingSubmit) {
                 return;
             }
 
-            submitting = true;
+            $scope.tryingSubmit = true;
 
             var path = '/service-proxy/member/add-education';
 
@@ -141,7 +142,7 @@
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {
-                    submitting = false;
+                    $scope.tryingSubmit = false;
                 })
             ;
         };
@@ -149,7 +150,7 @@
         $scope.birthYearList = (function () {
             var res = [];
             var thisYear = new Date().getUTCFullYear();
-            for (var i = 1980; i < thisYear - 15; i++) {
+            for (var i = 1960; i < thisYear - 15; i++) {
                 res.push(i.toString());
             }
 
@@ -450,6 +451,8 @@
 
             $scope.memberInfo.birthday = new Date(Date.UTC(year, month, day));
         }
+
+        $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
     };
 
     exports.PersonalHistoryCtrl.$inject = ['$scope', 'FormValidation', '$timeout', 'service', '$filter', 'msgBus', '$q', 'DeviceHelper'];

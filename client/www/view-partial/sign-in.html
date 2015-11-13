@@ -1,6 +1,6 @@
 <div class="ui fluid two item top pointing secondary menu brand">
-    <a class="active item" data-tab="login"><%= __('SignIn') %></a>
-    <a class="item" data-tab="register"><%= __('SignUp') %></a>
+    <a class="active item" data-tab="login" onclick="window.sendTrack('register.loginTab.click');"><%= __('SignIn') %></a>
+    <a class="item" data-tab="register" onclick="window.sendTrack('login.registerTab.click');"><%= __('SignUp') %></a>
 </div>
 <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
     <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="eight wide field ui right aligned container subcontainer">
-                    <a href="reset-password"><%= __('ForgotPassword') %> <i
+                    <a href="reset-password" ng-click="resetPassword($event)"><%= __('ForgotPassword') %> <i
                             class="hidden help circle icon"></i> </a>
                 </div>
             </div>
@@ -47,12 +47,12 @@
         </div>
     </form>
     <div class="hidden mobile-button">
-        <a class="ui fluid large red basic button" href="#register">
+        <a class="ui fluid large red basic button" href="#register" ng-click="register()">
             <%= __('NoAccount') %> <%= __('SignUpNow') %>
         </a>
     </div>
     <div class="ui right aligned container subcontainer">
-        <div><%= __('NoAccount') %> <a href="#register"><%= __('SignUpNow') %></a></div>
+        <div><%= __('NoAccount') %> <a href="#register" ng-click="register()"><%= __('SignUpNow') %></a></div>
     </div>
     <% if (featureSwitcher.enableWechat === true && (!device.isFromMobile || device.isFromWechatBrowser)) { %>
     <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
@@ -71,7 +71,7 @@
     <register-form action="signUp" control="registerFormCtrl"></register-form>
 
     <div class="field ui right aligned container subcontainer">
-        <%= __('HasAccount') %> <a href="#/login"><%= __('SignInNow') %></a>
+        <%= __('HasAccount') %> <a href="#/login" ng-click="login()"><%= __('SignInNow') %></a>
     </div>
 </div>
 <div class="ui bottom attached tab" data-tab="wechat-logon" ng-controller="WechatLoginCtrl">

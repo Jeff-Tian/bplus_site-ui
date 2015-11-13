@@ -76,7 +76,6 @@ module.exports = function (grunt) {
                 '<%= config.dist %>mobile/footer.html',
                 '<%= config.dist %>mobile/index.html',
                 '<%= config.dist %>mobile/national.html',
-                '<%= config.dist %>mobile/personal-history.html',
                 '<%= config.dist %>mobile/reset-password.html',
                 '<%= config.dist %>mobile/sign-in.html',
                 '<%= config.dist %>mobile/statement.html',
@@ -234,11 +233,6 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'mobile/national.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/personal-history.html',
                     dest: '<%= config.dist %>'
                 }, {
                     expand: true,

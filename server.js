@@ -206,7 +206,7 @@ server.use('/service-proxy', require('./serviceProxy'));
 
 //Competion Integration
 server
-    .get('/:lang/cmpt/:page?', function(req, res, next) {
+    .get('/:lang/cmpt/:page?', function (req, res, next) {
         var lang = req.params.lang;
         if (['zh', 'en'].indexOf(lang) < 0) {
             return next();
@@ -292,6 +292,7 @@ function errorHandler(err, req, res, next) {
 }
 
 server.use('*', function (req, res) {
+    res.status(404);
     if (!isFromMobile(req)) {
         res.render('404.html');
     } else {

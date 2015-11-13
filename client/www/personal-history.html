@@ -194,12 +194,14 @@
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('SchoolName') %></label>
                                 <input type="text" name="schoolName" placeholder="<%= __('PleaseInputSchoolName') %>"
-                                       ng-model="schoolInfo.name">
+                                       ng-model="schoolInfo.name" auto-complete
+                                       datasource-bplus-autocomplete="schoolname.json">
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Major') %></label>
                                 <input type="text" name="schoolMajor" placeholder="<%= __('PleaseInputMajor') %>"
-                                       ng-model="schoolInfo.major">
+                                       ng-model="schoolInfo.major" auto-complete
+                                       datasource-bplus-autocomplete="major.json">
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Qualification')
@@ -353,10 +355,11 @@
 <%- include('view-partial/footer.html') -%>
 <!--Page JS-->
 
-<script src="js/directives/dropdown.js"></script>
-<script src="js/factories/DeviceHelper.js"></script>
-<script src="js/page/personal-histroy/PersonalHistoryCtrl.js"></script>
-<script src="js/page/personal-histroy/main.js"></script>
+<script src="<%= cdn.normal %>js/directives/dropdown.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/devbridge-autocomplete/dist/jquery.autocomplete.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/directives/autocomplete.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/personal-histroy/PersonalHistoryCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/personal-histroy/main.js?<%= cdn.version %>"></script>
 <script>
     window.t_PageName = "personalHis";
 </script>
