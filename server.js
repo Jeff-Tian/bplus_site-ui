@@ -129,7 +129,6 @@ function mapRoute2Template(url, template, pipes) {
             template = template.substr(1);
         }
     }
-
     pipes = pipes || [];
     pipes.push(function (req, res, next) {
         renderOrRedirect(req, res, template);

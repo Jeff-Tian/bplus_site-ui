@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bridge+</title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
+</head>
+<body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
+<%- include('head.html') -%>
+<div class="main body b-mobile back-color white color has-header">
+    <div class="ui container b-mobile-game-training-container">
+      <div class="ui two item tabs menu">
+          <a class="item active" data-tab="download">培训资料(pdf)下载</a>
+          <a class="item" data-tab="video">观看教学视频</a>
+      </div>
+      <div class="ui container b-mobile-game-training-detail-container">
+          <div class="ui active tab" data-tab="download">
+              <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining1.pdf" class="ui grid b-mobile-game-training-detail-item">
+                  <div class="eleven wide column">学院手册</div>
+                  <div class="five wide column">
+                      <img src="/img/game-training/downloadIcon/download4.png" class="b-mobile-game-training-downloadicon">
+                  </div>
+              </a>
+              <div class="ui inverted divider b-mobile-game-training-divider"></div>
+              <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining2.pdf" class="ui grid b-mobile-game-training-detail-item">
+                  <div class="eleven wide column">比赛形式及界面介绍</div>
+                  <div class="five wide column">
+                      <img src="/img/game-training/downloadIcon/download4.png" class="b-mobile-game-training-downloadicon">
+                  </div>
+              </a>
+              <div class="ui inverted divider b-mobile-game-training-divider"></div>
+              <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining3.pdf" class="ui grid b-mobile-game-training-detail-item">
+                  <div class="eleven wide column">赛前阅读材料</div>
+                  <div class="five wide column">
+                      <img src="/img/game-training/downloadIcon/download4.png" class="b-mobile-game-training-downloadicon">
+                  </div>
+              </a>
+              <div class="ui inverted divider b-mobile-game-training-divider"></div>
+              <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining4.pdf" class="ui grid b-mobile-game-training-detail-item">
+                  <div class="eleven wide column">快消品行业常用术语</div>
+                  <div class="five wide column">
+                      <img src="/img/game-training/downloadIcon/download4.png" class="b-mobile-game-training-downloadicon">
+                  </div>
+              </a>
+              <div class="ui inverted divider b-mobile-game-training-divider"></div>
+              <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining5.pdf" class="ui grid b-mobile-game-training-detail-item">
+                  <div class="eleven wide column">常见问题</div>
+                  <div class="five wide column">
+                      <img src="/img/game-training/downloadIcon/download4.png" class="b-mobile-game-training-downloadicon">
+                  </div>
+              </a>
+              <div class="ui inverted divider b-mobile-game-training-divider"></div>
+          </div>
+          <div class="ui tab" data-tab="video">
+              <div>
+                 <a href="">介绍视频</a>
+              </div>
+              <div>
+                 <a href="">预习视频一</a>
+              </div>
+              <div>
+                 <a href="">预习视频二</a>
+              </div>
+              <div>
+                 <a href="">游戏操作介绍</a>
+              </div>
+              <div>
+                 <a href="">MarkSimos Intro</a>
+              </div>
+              <div>
+                 <a href="">MarkSimos Training-Analyzing Reports</a>
+              </div>
+              <div>
+                  <a href="">MarkSimos Training-Strategy</a>
+              </div>
+              <a href="">MarkSimos Training-Decision Making</a>
+          </div>
+      </div>
+    </div>
+</div> 
+<!-- Page Contents -->
+<%- include('footer.html') -%>
+<!--JS-->
+<!--Page JS-->
+<script>
+    angular
+    .module('mobile', [
+        'ng.utils',
+        'pascalprecht.translate',
+        'ui.router'
+    ])
+    .config(angular.bplus.translate)
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .factory('translationLoader', angular.bplus.translationLoader)
+    .factory('FormValidation', angular.bplus.FormValidation)
+    .factory('DeviceHelper', angular.bplus.DeviceHelper)
+    .factory('service', angular.bplus.service)
+    .factory('MessageStore', angular.bplus.MessageStore);
+    $(".menu .item").tab();
+</script>
+<script>
+    window.t_PageName = "m.profile";
+</script>
+<script src="js/utils/trackingSender.js"></script>
+</body>
+</html>
