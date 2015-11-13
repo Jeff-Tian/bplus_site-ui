@@ -50,9 +50,8 @@
             return $loginForm.form('is valid');
         };
 
-<<<<<<< 0a9bbee9e572e13d3d945a7bf36caa2e35f9d544
+
         $scope.submitting = false;
-=======
         $scope.resetPassword = function($event){
             $event.preventDefault();
 
@@ -68,8 +67,6 @@
         };
 
 
-        var submitting = false;
->>>>>>> update pc tracking
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
