@@ -23,6 +23,7 @@ module.exports = function (config) {
             '../js/config/*.js',
             '../js/utils/utils.js',
             '../js/utils/msgbus.js',
+            '../js/utils/trackingSender.js',
             '../js/factories/*.js',
             '../js/controllers/*.js',
             '../js/directives/*.js',

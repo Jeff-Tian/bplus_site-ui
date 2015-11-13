@@ -91,17 +91,17 @@
                     return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
                 };
 
-                $scope.refreshCaptchaInRegister = function(){
+                $scope.refreshCaptchaInRegister = function () {
                     moduleTrack.send('changeIdentityCode.click');
 
                     $scope.refreshCaptcha();
-                }
+                };
 
                 $scope.getVerificationCode = function () {
-                    if($scope.sendCodeButtonClicked) {
+                    if ($scope.sendCodeButtonClicked) {
                         moduleTrack.send('identifyPhoneAgain.click');
                     }
-                    else{
+                    else {
                         moduleTrack.send('identifyPhone.click');
                     }
 
