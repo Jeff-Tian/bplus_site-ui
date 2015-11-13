@@ -205,6 +205,24 @@ supportedLocales.map(function (l) {
 
 server.use('/service-proxy', require('./serviceProxy'));
 
+//Competion Integration
+server
+    .get('/:lang/cmpt/:page?', function(req, res, next) {
+        var lang = req.params.lang;
+        if (['zh', 'en'].indexOf(lang) < 0) {
+            return next();
+        }
+        var page = req.params.page || 'index';
+        if (page == 'index' && !res.locals.hcd_user) {
+            return membership.ensureAuthenticated(req, res, next);
+        }
+        res.render('competion/' + page, {
+            page: page,
+            lang: lang
+        });
+    })
+    .use('/cmpt', require('competion-api')(express));
+
 // Page route define
 
 mapRoute2Template('/index');
