@@ -23,13 +23,16 @@
                     // Got the code then refresh the page to let the url contains the redemption code
                     // to easy the sharing it outward
                     var params = angular.extend({}, $stateParams, {redemptionCode: $scope.generatedCode});
-                    if (!params.who) {
-                        params.who = $scope.memberInfo.member_id;
+                    if (!params.who || !params.displayName) {
+                        msgBus.onMemberLoaded($scope, function () {
+                            params.who = $scope.memberInfo.member_id;
+                            params.displayName = $scope.memberInfo.displayName;
+
+                            $state.go('paid', params, {reload: true});
+                        });
+                    } else {
+                        $state.go('paid', params, {reload: true});
                     }
-                    if (!params.displayName) {
-                        params.displayName = $scope.memberInfo.displayName;
-                    }
-                    $state.go('paid', params, {reload: true});
                 }
             }
         }
