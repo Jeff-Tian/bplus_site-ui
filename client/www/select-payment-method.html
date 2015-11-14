@@ -11,14 +11,14 @@
 
 <body ng-app="selectPaymentMethod" ng-controller="AppCtrl">
 <%- include('view-partial/header.html') -%>
-<div class="ui b-signin-wrapper">
+<div class="ui b-signin-wrapper" style="width: 800px;">
 
     <div ui-view class="main body b-mobile back-color white color shadowed has-header">
     </div>
 
     <script type="text/ng-template" id="select-payment-method.html">
 
-        <h4 class="ui left aligned header">
+        <h4 class="ui left aligned header" style="display: none;">
             <button class="ui red button right floated" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
             </button>
             <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
@@ -28,43 +28,106 @@
         </h4>
         <div class="ui clearing horizontal divider"></div>
 
-        <div class="ui column b-step-container b-separator">
-            <div class="ui center aligned container subcontainer">
-                <h2 class="grey color"><%= __('选择支付方式') %></h2>
+        <div class="ui b-step-container">
+            <div class="ui left aligned container subcontainer">
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付款项') %></h5>
+
+                <div class="ui divider"></div>
             </div>
         </div>
-        <div class="ui column b-step-container">
+        <div class="ui b-step-container" style="padding-top: 0">
             <div class="ui centered padded center aligned container subcontainer"
                  ng-controller="SelectPaymentMethodCtrl">
+                <table class="ui right floated very basic table" style="width: 550px;">
+                    <tbody>
+                    <tr style="border-bottom: none;">
+                        <td>
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="howMuch" checked="checked" tabindex="0"
+                                       ng-model="offerData.kind" value="first"
+                                       ng-class="{'disabled': offerData.kind !== 'first'}"
+                                       class="hidden">
+                                <label>
+                                    <button class="ui large red button"
+                                            ng-class="{'disabled': offerData.kind !== 'first'}"
+                                            style="margin-top: -0.5em; width: 120px;">
+                                        {{300 |
+                                        currency: "¥ "}}
+                                    </button>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+
+                            <strong>包含报名费</strong>
+                            <ul style="padding: 0; margin: 0; list-style-position: inside;">
+                                <li>价值千元的专家点评结果报告</li>
+                                <li>纸质精美证书</li>
+                                <li>本次大赛限量纪念品</li>
+                            </ul>
+                        </td>
+                        <td>
+
+                            <button class="ui yellow button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: none;">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
+                                       value="second" ng-class="{'disabled': offerData.kind !== 'second'}">
+                                <label>
+                                    <button class="ui large red button"
+                                            ng-class="{'disabled': offerData.kind !== 'second'}"
+                                            style="margin-top: -0.5em; width: 120px;">
+                                        {{30 |
+                                        currency: "¥ "}}
+                                    </button>
+                                </label>
+                            </div>
+                        </td>
+                        <td style="border-top: none;">
+                            <strong>报名费</strong>
+                            &nbsp;
+                        </td>
+                        <td style="border-top: none;">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="ui clearing horizontal fitted divider" style="margin: 0;"></div>
+                <h5 class="ui left aligned header">&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付方式') %></h5>
+
+                <div class="ui clearing divider"></div>
+                <div class="ui horizontal divider"></div>
                 <% if (!device.isFromWechatBrowser) { %>
                 <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="pcAlipay($event)">
                     <div class="ui error message brand"></div>
 
                     <button loading type="submit" class="ui basic white background button "
-                            style="padding-left: 3em; padding-right: 3em;">
+                            style="padding-left: 8em; padding-right: 8em;">
                         <img class="ui middle aligned" style="height: 25px;"
                              src="<%= cdn.normal %>img/icon/alipay.png?<%= cdn.version %>">
                         <%= __('支付宝支付') %>
                     </button>
                 </form>
                 <% } %>
-
+                <div class="ui horizontal divider"></div>
+                <div class="ui divider"></div>
                 <div class="ui horizontal divider"></div>
                 <div class="ui horizontal divider"></div>
                 <form name="redemptionForm" novalidate class="ui form redemption-form"
                       ng-submit="buyWithRedemptionCode($event)">
                     <div class="ui error message brand"></div>
-                    <div class="ui left aligned container subcontainer">
-                        <h5 class="ui header"><%= __('邀请码') %>
-                        </h5>
-                    </div>
-                    <div class="fields">
-                        <div class="thirteen wide field">
-                            <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+                    <div class="inline fields">
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('使用邀请码 免费参赛') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-                            <p class="ui left floated grey">没有邀请码？扫码关注服务号回复"邀请码"立即赢取！</p>
+                        <div class="field">
+                            <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                         </div>
-                        <div class="three wide field">
+                        <div class="field">
                             <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
                                     type="submit"
                                     style="padding-left: 2em; padding-right: 2em;">
@@ -73,13 +136,29 @@
                             </button>
                         </div>
                     </div>
-                    <div class="field">
-                        <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>"
-                             class="ui small image centered">
+                    <div class="ui horizontal divider"></div>
+                    <div class="ui horizontal divider"></div>
+                    <div class="ui segment" style="width: 350px; margin: 0 auto;">
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="ui tiny image" style="width: 0;"></div>
+                                <div class="middle aligned content" style="padding-left: 0;">
+                                    <h5 class="ui left aligned header">没有邀请码？
+                                        <div class="sub header">
+                                            扫码关注服务号回复"邀请码"立即赢取！
+                                        </div>
+                                    </h5>
+                                </div>
+                                <div class="ui middle aligned tiny image">
+                                    <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
+
         <%- include('view-partial/game-detail-modal.html') -%>
     </script>
 

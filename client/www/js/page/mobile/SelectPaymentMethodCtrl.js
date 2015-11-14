@@ -174,6 +174,29 @@
         $scope.showGameDetailModal = function () {
             $('.b-game-detail.modal').modal('show');
         };
+
+        function updateNgModel(element) {
+            var ngModelString = $(element).attr('ng-model');
+            var a = ngModelString.split('.');
+            $scope.$apply(function () {
+                $scope[a[0]][a[1]] = $(element).val();
+            });
+        }
+
+        $('.ui.radio.checkbox')
+            .checkbox({
+                onChecked: function () {
+                    updateNgModel(this);
+                },
+                onUnchecked: function () {
+                    updateNgModel(this);
+                }
+            })
+        ;
+
+        $scope.offerData = {
+            kind: 'first'
+        };
     };
 
     exports.SelectPaymentMethodCtrl.$inject = ['$scope', 'service', 'FormValidation', '$stateParams', '$state', 'queryParser', 'msgBus', 'WechatWrapper', 'DeviceHelper'];
