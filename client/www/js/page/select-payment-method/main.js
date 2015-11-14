@@ -17,12 +17,12 @@ angular
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('paidBy', {
-                url: '/select-payment-method/:paidBy',
+                url: '/select-payment-method/:paidBy/:kind',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('continue-paying', {
-                url: '/continue-paying/:paymentMethod',
+                url: '/continue-paying/:paymentMethod/:kind',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })

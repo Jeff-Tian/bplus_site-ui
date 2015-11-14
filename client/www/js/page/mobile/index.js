@@ -27,7 +27,7 @@ angular
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('paidBy', {
-                url: '/select-payment-method/:paidBy',
+                url: '/select-payment-method/:paidBy/:kind',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
