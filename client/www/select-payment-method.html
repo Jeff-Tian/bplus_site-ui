@@ -42,6 +42,13 @@
                     <tbody>
                     <tr style="border-bottom: none;">
                         <td>
+                            <p style="padding-left: 75px;">
+                                <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'first'"
+                                     class="ui tiny image" style="width: 20px;">
+                                <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
+                                     ng-show="offerData.kind !== 'first'" class="ui tiny image" style="width: 20px;">
+                            </p>
+
                             <div class="ui radio checkbox">
                                 <input type="radio" name="howMuch" checked="checked" tabindex="0"
                                        ng-model="offerData.kind" value="first"
@@ -68,7 +75,14 @@
                         </td>
                         <td>
 
-                            <button class="ui yellow button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                            <button class="ui yellow button" ng-click="showGameDetailModal()"
+                                    style="position: relative;">
+
+                                <img src="<%= cdn.normal %>img/pay/light.png?<%= cdn.version %>"
+                                     class="ui tiny image"
+                                     style="width: 20px; position: absolute; right: -10px; top: -10px;">
+                                <%= __('了解物超所值') %>
+
                             </button>
                         </td>
                     </tr>

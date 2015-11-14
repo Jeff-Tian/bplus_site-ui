@@ -64,18 +64,79 @@
 
 <script type="text/ng-template" id="select-payment-method.html">
     <div class="white background b-mobile stretch has-header">
+        <div class="ui horizontal divider"></div>
         <div class="ui container">
-            <div class="ui horizontal divider"></div>
             <h3 class="ui header">
-                <div class="sub header">
-                    <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
-                    {how_much: '300'})}) %>
+                <%= __('选择支付款项:') %>
+            </h3>
+
+            <div class="ui divider"></div>
+            <div class="right floated middle aligned content" style="float: right;">
+
+                <strong>包含报名费</strong>
+                <ul style="padding: 0; margin: 0; list-style-position: inside;">
+                    <li>价值千元的专家点评结果报告</li>
+                    <li>纸质精美证书</li>
+                    <li>本次大赛限量纪念品</li>
+                </ul>
+
+                <p>
+                    <button class="ui yellow tiny button" style="position: relative;" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                        <img src="<%= cdn.normal %>img/pay/light_mobile.png?<%= cdn.version %>" class="ui tiny image"
+                             style="width: 20px; position: absolute; right: -15px;">
+                    </button>
+                </p>
+            </div>
+            <div class="middle aligned content">
+                <p style="padding-left: 80px;">
+                    <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'first'"
+                         class="ui tiny image" style="width: 20px;">
+                    <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
+                         ng-show="offerData.kind !== 'first'" class="ui tiny image" style="width: 20px;">
+                </p>
+
+                <div class="ui radio checkbox">
+                    <input type="radio" name="howMuch" checked="checked" tabindex="0"
+                           ng-model="offerData.kind" value="first"
+                           ng-class="{'disabled': offerData.kind !== 'first'}"
+                           class="hidden">
+                    <label>
+                        <button class="ui large red button"
+                                ng-class="{'disabled': offerData.kind !== 'first'}"
+                                style="margin-top: -0.5em; width: 120px;">
+                            {{300 |
+                            currency: "¥ "}}
+                        </button>
+                    </label>
                 </div>
-                <div class="sub header">
-                    <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
+
+            </div>
+            <div class="ui horizontal clearing divider"></div>
+            <div class="middle aligned content" style="float: left;">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
+                           value="second" ng-class="{'disabled': offerData.kind !== 'second'}">
+                    <label>
+                        <button class="ui large red button"
+                                ng-class="{'disabled': offerData.kind !== 'second'}"
+                                style="margin-top: -0.5em; width: 120px;">
+                            {{30 |
+                            currency: "¥ "}}
+                        </button>
+                    </label>
                 </div>
-                <button class="ui right floated red button" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
-                </button>
+            </div>
+            <div class="middle aligned content" style="float: left;">
+
+                <strong>&nbsp;&nbsp;报名费</strong>
+                &nbsp;
+            </div>
+            <div class="ui horizontal clearing divider"></div>
+            <div class="ui horizontal clearing divider"></div>
+        </div>
+        <div class="ui container">
+            <h3 class="ui header">
+                <div class="ui divider"></div>
                 <div class="ui clearing horizontal divider"></div>
                 <%= __('选择支付方式:') %>
                 <div class="ui horizontal divider"></div>
@@ -110,7 +171,7 @@
                 <div class="ui divider"></div>
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('邀请码') %> </label>
+                    <label><%= __('使用邀请码 免费参赛') %> </label>
                     <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                 </div>
 
