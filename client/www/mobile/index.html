@@ -71,7 +71,7 @@
             </h3>
 
             <div class="ui divider"></div>
-            <div class="right floated middle aligned content" style="float: right;">
+            <div class="right floated middle aligned content" style="float: right; max-width: 50%;">
 
                 <strong>包含报名费</strong>
                 <ul style="padding: 0; margin: 0; list-style-position: inside;">
@@ -88,7 +88,8 @@
                 </p>
             </div>
             <div class="middle aligned content">
-                <p style="padding-left: 80px;">
+                <p style="padding-left: 70px;">
+                    <br />
                     <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'first'"
                          class="ui tiny image" style="width: 20px;">
                     <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
@@ -101,9 +102,9 @@
                            ng-class="{'disabled': offerData.kind !== 'first'}"
                            class="hidden">
                     <label>
-                        <button class="ui large red button"
+                        <button class="ui red button"
                                 ng-class="{'disabled': offerData.kind !== 'first'}"
-                                style="margin-top: -0.5em; width: 120px;">
+                                style="margin-top: -0.5em; width: 110px;">
                             {{300 |
                             currency: "¥ "}}
                         </button>
@@ -117,9 +118,9 @@
                     <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
                            value="second" ng-class="{'disabled': offerData.kind !== 'second'}">
                     <label>
-                        <button class="ui large red button"
+                        <button class="ui red button"
                                 ng-class="{'disabled': offerData.kind !== 'second'}"
-                                style="margin-top: -0.5em; width: 120px;">
+                                style="margin-top: -0.5em; width: 110px;">
                             {{30 |
                             currency: "¥ "}}
                         </button>
