@@ -11,7 +11,9 @@
 
         if (continueAction) {
             var paymentMethod = queryParser.get('payment_method');
-            $state.go(continueAction, {paymentMethod: paymentMethod});
+            var kind = queryParser.get('kind');
+
+            $state.go(continueAction, {paymentMethod: paymentMethod, kind: kind});
         }
     };
 

@@ -61,6 +61,10 @@
     "national-2015": {
       "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
       "productTypeId": "aab1a3f3-fb46-41da-8a6d-326f09c0a79c"
+    },
+    "national-2015-economy": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "aab1a3f3-fb46-41da-8a6d-326f09c0a79c"
     }
   },
   "logger": {
