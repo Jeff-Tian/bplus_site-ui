@@ -12,11 +12,24 @@
             moduleTrack.send(null);
         }
 
+        $scope.sendTracking = function(event, data){
+            if(!event){
+                return;
+            }
+
+            if(data){
+                moduleTrack.send(event, data);
+            }
+            else{
+                moduleTrack.send(event);
+            }
+        };
+
         $scope.login = function () {
             moduleTrack.send('loginBtn.click');
         };
 
-        $scope.registerFormCtrl = {};
+        $scope.registerFormCtrl = { };
 
         $scope.signUp = function () {
             function autoSignIn() {
