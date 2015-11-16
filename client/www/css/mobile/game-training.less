@@ -21,17 +21,53 @@
 .b-mobile-game-training-detail-icon-download {
     background-image: url(/img/game-training/downloadIcon/download4.png);
 }
-.b-mobile-game-training-detail-text  {
-    color: grey;
+.b-mobile-game-training-detail-text {
+    color: #dbdcdc;
+}
+.b-mobile-game-training-divider {
+    color: #242c33;
 }
 .b-mobile-game-training-container-menu {
     border-color: #ff3c42!important;
+    background-color: #ff3c42!important;
+    border-width: 2px!important;
 }
-.b-mobile-game-training-container-item {
+.b-mobile-game-training-container-item-download,
+.b-mobile-game-training-container-item-watch {
     background-color: #2e363d!important;
     color:#ff3c42!important;
+    font-size: 12px;
 }
-.active.b-mobile-game-training-container-item {
+.ui.menu .item.b-mobile-game-training-container-item-download.active:before {
+    content: '\00a0\00a0'!important;
+    background-image: url(/img/game-training/downloadIcon/download1.png)!important;
+}
+.ui.menu .item.b-mobile-game-training-container-item-download:before {
+    content: '\00a0\00a0'!important;
+    background-image: url(/img/game-training/downloadIcon/download4.png)!important;
+}
+.ui.menu .item.b-mobile-game-training-container-item-watch.active:before {
+    content: '\00a0\00a0'!important;
+    background-image: url(/img/game-training/playIcon/play1.png)!important;
+}
+.ui.menu .item.b-mobile-game-training-container-item-watch:before {
+    content: '\00a0\00a0'!important;
+    background-image: url(/img/game-training/playIcon/play4.png)!important;
+}
+.ui.menu .item.b-mobile-game-training-container-item-download.active:before,
+.ui.menu .item.b-mobile-game-training-container-item-download:before,
+.ui.menu .item.b-mobile-game-training-container-item-watch.active:before,
+.ui.menu .item.b-mobile-game-training-container-item-watch:before {
+    position: relative!important;
+    width: 2.5em!important;
+    height: 2em!important;
+    background-size: 2em;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: 0, 0.2em;
+}
+.active.b-mobile-game-training-container-item-download,
+.active.b-mobile-game-training-container-item-watch {
     background-color: #ff3c42!important;
-    color:#2e363d!important;
+    color:#dbdcdc!important;
 }
