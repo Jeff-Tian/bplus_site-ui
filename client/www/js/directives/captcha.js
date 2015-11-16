@@ -2,7 +2,7 @@
     exports.captcha = function (service, $timeout) {
         function pollWait(condition, callback) {
             if (condition()) {
-                callback();
+                callback(null, true);
             } else {
                 $timeout(function () {
                     pollWait(condition, callback);
@@ -22,7 +22,11 @@
                     //$element.hide();
                 }
 
-                function refreshCaptcha(successCallback) {
+                function refreshCaptcha(successCallback, isInit) {
+                    if(isInit !== true && typeof $scope.sendTracking === 'function'){
+                        $scope.sendTracking('changeIdentityCode.click');
+                    }
+
                     service.jsonp(captchaServiceDomain + '/captcha/generator/p?callback=JSON_CALLBACK&appid=bplus').then(function (result) {
                         $scope.captchaImageUrl = captchaServiceDomain + result.url;
                         ngModel.$setViewValue(result.id);

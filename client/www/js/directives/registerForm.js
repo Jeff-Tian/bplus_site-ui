@@ -4,13 +4,12 @@
             templateUrl: '/view-partial/register-form.html',
             scope: {
                 action: '=',
+                sendTracking: '=',
                 control: '=',
                 passwordPlaceholder: '=',
                 footerTip: '='
             },
             link: function ($scope, element) {
-                var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.register' : 'register');
-
                 $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
 
                 $scope.signUpData = {
@@ -91,18 +90,12 @@
                     return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
                 };
 
-                $scope.refreshCaptchaInRegister = function () {
-                    moduleTrack.send('changeIdentityCode.click');
-
-                    $scope.refreshCaptcha();
-                };
-
                 $scope.getVerificationCode = function () {
                     if ($scope.sendCodeButtonClicked) {
-                        moduleTrack.send('identifyPhoneAgain.click');
+                        sendModuleTracking('identifyPhoneAgain.click');
                     }
                     else {
-                        moduleTrack.send('identifyPhone.click');
+                        sendModuleTracking('identifyPhone.click');
                     }
 
                     partiallyValidateSignUpForm();
@@ -124,7 +117,7 @@
                     $event.preventDefault();
                     $event.stopPropagation();
 
-                    moduleTrack.send('register.beforeClick');
+                    sendModuleTracking('register.beforeClick');
                     if (!$scope.isSignUpFormFullyValid()) {
                         return;
                     }
@@ -156,6 +149,17 @@
 
                 if (!$scope.footerTip) {
                     $scope.footerTip = '注册即代表你接受我们的隐私条款';
+                }
+
+
+                function sendModuleTracking(event, data){
+                    if(!event) {
+                        return;
+                    }
+
+                    if($scope.sendTracking){
+                        $scope.sendTracking(event, data);
+                    }
                 }
             }
         };
