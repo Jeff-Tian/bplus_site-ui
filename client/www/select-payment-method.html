@@ -17,15 +17,6 @@
     </div>
 
     <script type="text/ng-template" id="select-payment-method.html">
-
-        <h4 class="ui left aligned header" style="display: none;">
-            <button class="ui red button right floated" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
-            </button>
-            <%= __('报名{{competition}}, 报名费{{fee}}', {competition: __('全国大赛'), fee: __('{{how_much}}元',
-            {how_much: '300'})}) %>
-            <%= __('若你是合作社团邀请的朋友，请输入渠道伙伴的优惠兑换码免费参赛') %>
-
-        </h4>
         <div class="ui clearing horizontal divider"></div>
 
         <div class="ui b-step-container">
@@ -43,10 +34,6 @@
                     <tr style="border-bottom: none;">
                         <td>
                             <p style="padding-left: 75px;">
-                                <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'first'"
-                                     class="ui tiny image" style="width: 20px;">
-                                <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
-                                     ng-show="offerData.kind !== 'first'" class="ui tiny image" style="width: 20px;">
                             </p>
 
                             <div class="ui radio checkbox">
@@ -66,11 +53,11 @@
                         </td>
                         <td>
 
-                            <strong>包含报名费</strong>
                             <ul style="padding: 0; margin: 0; list-style-position: inside;">
-                                <li>价值千元的专家点评结果报告</li>
+                                <li>1对1专家点评</li>
+                                <li>比赛结果分析报告</li>
                                 <li>纸质精美证书</li>
-                                <li>本次大赛限量纪念品</li>
+                                <li>报名费</li>
                             </ul>
                         </td>
                         <td>
@@ -86,14 +73,47 @@
                             </button>
                         </td>
                     </tr>
+                     <tr style="border-bottom: none;">
+                        <td style="border-top: none;">
+                            <p style="padding-left: 75px;">
+                                <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'second'"
+                                     class="ui tiny image" style="width: 20px;">
+                                <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
+                                     ng-show="offerData.kind !== 'second'" class="ui tiny image" style="width: 20px;">
+                            </p>
+
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="howMuch" checked="checked" tabindex="0"
+                                       ng-model="offerData.kind" value="second"
+                                       ng-class="{'disabled': offerData.kind !== 'second'}"
+                                       class="hidden">
+                                <label>
+                                    <button class="ui large red button"
+                                            ng-class="{'disabled': offerData.kind !== 'second'}"
+                                            style="margin-top: -0.5em; width: 120px;">
+                                        {{100 |
+                                        currency: "¥ "}}
+                                    </button>
+                                </label>
+                            </div>
+                        </td>
+                        <td style="border-top: none;">
+
+                            <ul style="padding: 1em 0 0 0; margin: 0; list-style-position: inside;">
+                                <li>小组专家点评</li>
+                                <li>纸质精美证书</li>
+                                <li>报名费</li>
+                            </ul>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="border-top: none;">
                             <div class="ui radio checkbox">
                                 <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
-                                       value="second" ng-class="{'disabled': offerData.kind !== 'second'}">
+                                       value="third" ng-class="{'disabled': offerData.kind !== 'third'}">
                                 <label>
                                     <button class="ui large red button"
-                                            ng-class="{'disabled': offerData.kind !== 'second'}"
+                                            ng-class="{'disabled': offerData.kind !== 'third'}"
                                             style="margin-top: -0.5em; width: 120px;">
                                         {{30 |
                                         currency: "¥ "}}
@@ -102,8 +122,10 @@
                             </div>
                         </td>
                         <td style="border-top: none;">
-                            <strong>报名费</strong>
-                            &nbsp;
+
+                            <ul style="padding: 0; margin: 0; list-style-position: inside;">
+                                <li>报名费</li>
+                            </ul>
                         </td>
                         <td style="border-top: none;">
 
