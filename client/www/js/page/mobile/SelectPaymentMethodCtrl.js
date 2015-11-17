@@ -26,7 +26,7 @@
         }
 
         $scope.offerData = {
-            kind: 'first'
+            kind: 'second'
         };
 
         $scope.payData = {
@@ -53,6 +53,8 @@
             if ($scope.offerData.kind === 'first') {
                 pay(alipaying, 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
             } else if ($scope.offerData.kind === 'second') {
+                pay(alipaying, 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015-middle/by-alipay', $('.alipay-form'));
+            } else if ($scope.offerData.kind === 'third') {
                 pay(alipaying, 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015-economy/by-alipay', $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
@@ -63,6 +65,8 @@
             if ($scope.offerData.kind === 'first') {
                 pay(alipaying, 'alipay', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
             } else if ($scope.offerData.kind === 'second') {
+                pay(alipaying, 'alipay', '/service-proxy/payment/create-order/national-game-2015-middle/by-alipay', $('.alipay-form'));
+            } else if ($scope.offerData.kind === 'third') {
                 pay(alipaying, 'alipay', '/service-proxy/payment/create-order/national-game-2015-economy/by-alipay', $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
@@ -74,6 +78,8 @@
             if ($scope.offerData.kind === 'first') {
                 pay(wechatPaying, 'wechat', '/service-proxy/payment/create-order/national-game-2015/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
             } else if ($scope.offerData.kind === 'second') {
+                pay(wechatPaying, 'wechat', '/service-proxy/payment/create-order/national-game-2015-middle/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
+            } else if ($scope.offerData.kind === 'third') {
                 pay(wechatPaying, 'wechat', '/service-proxy/payment/create-order/national-game-2015-economy/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
@@ -181,18 +187,18 @@
 
         if ($state.current.name === 'continue-paying') {
             if ($stateParams.paymentMethod === 'wechat') {
-                $scope.offerData.kind = $stateParams.kind || 'first';
+                $scope.offerData.kind = $stateParams.kind || 'second';
                 $scope.wechatPay();
             }
         }
 
         if ($stateParams.paidBy === 'alipay' || $stateParams.paidBy === 'alipaymobile') {
-            $scope.offerData.kind = $stateParams.kind || 'first';
+            $scope.offerData.kind = $stateParams.kind || 'second';
             $scope.alipay();
         }
 
         if ($stateParams.paidBy === 'wechat') {
-            $scope.offerData.kind = $stateParams.kind || 'first';
+            $scope.offerData.kind = $stateParams.kind || 'second';
             $scope.wechatPay();
         }
 
