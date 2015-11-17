@@ -1,5 +1,7 @@
 (function (exports) {
     exports.PersonalHistoryCtrl = function ($scope, FormValidation, $timeout, service, $filter, msgBus, $q, DeviceHelper) {
+        var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.personalHis' : 'personalHis');
+
         $('.ui.checkbox.set-privacy')
             .checkbox({
                 'onChecked': function () {
@@ -16,6 +18,8 @@
 
         $scope.tryingNextStep = false;
         $scope.tryNextStep = function ($event) {
+            moduleTrack.send('finPersonalInfo.click');
+
             $event.preventDefault();
             $event.stopPropagation();
 
@@ -104,6 +108,8 @@
 
         $scope.tryingSubmit = false;
         $scope.trySubmit = function ($event) {
+            moduleTrack.send('finEducation.click');
+
             $event.preventDefault();
             $event.stopPropagation();
 

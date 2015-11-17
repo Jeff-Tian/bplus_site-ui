@@ -28,15 +28,15 @@
                 <p><%= __('MobileIndexSubHeader') %></p>
 
                 <% if (!signedIn) { %>
-                <div class="ui horizontal segments transparent">
+                <div class="ui horizontal segments transparent" id="signContainer">
                     <div class="ui segment" style="padding-left: 0;">
                         <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"
-                           onclick="window.sendTrack('m.index.login.click');"><%= __('SignIn')
-                            %></a>
+                           eventName="m.index.login.click" ><%=
+                            __('SignIn')%></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
                         <a href="<%= localeLink('/m/sign-in') %>#register" class="ui fluid large red button"
-                           onclick="window.sendTrack('m.index.register.click');"><%=
+                           eventName="m.index.register.click"><%=
                             __('SignUp')
                             %></a>
                     </div>

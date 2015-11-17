@@ -1,10 +1,10 @@
-<div class="ui large fluid inverted center aligned vertical b-profile one item menu">
+<div class="ui large fluid inverted center aligned vertical b-profile one item menu" id="topMenus">
     <a></a>
-    <a class="item" href="<%= localeLink('/m/youth') %>"><%= __('MapNational') %></a>
-    <a class="item" href="<%= localeLink('/m/national') %>"><%= __('大赛报名') %></a>
-    <a class="item" href="<%= localeLink('/m/profile') %>"><%= __('Profile') %></a>
-    <a class="item" href="<%= localeLink('/m/aboutus') %>"><%= __('FooterAboutUs') %></a>
-    <a class="item" href="<%= localeLink('/m/statement') %>"><%= __('FooterServiceStatement') %></a>
+    <a class="item" href="<%= localeLink('/m/youth') %>" eventName="m.menu.competition.click" ><%= __('MapNational') %></a>
+    <a class="item" href="<%= localeLink('/m/national') %>" eventName="m.menu.joinGame.click" ><%= __('大赛报名') %></a>
+    <a class="item" href="<%= localeLink('/m/profile') %>" eventName="m.menu.profile.click" ><%= __('Profile') %></a>
+    <a class="item" href="<%= localeLink('/m/aboutus') %>" eventName="m.menu.aboutUs.click" ><%= __('FooterAboutUs') %></a>
+    <a class="item" href="<%= localeLink('/m/statement') %>" eventName="m.menu.tc.click" ><%= __('FooterServiceStatement') %></a>
 
     <% if (signedIn && featureSwitcher.enableLogoutOnMobile) { %>
     <a class="item" ng-click="signOut()"><%= __('退出登录') %></a>
