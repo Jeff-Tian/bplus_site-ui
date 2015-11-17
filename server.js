@@ -206,6 +206,16 @@ server.use('/service-proxy', require('./serviceProxy'));
 
 //Competion Integration
 server
+    .get('/:lang/game', function (req, res, next) {
+        var lang = req.params.lang;
+        if (['zh', 'en'].indexOf(lang) < 0) {
+            return next();
+        }
+        if (!res.locals.hcd_user) {
+            return next();
+        }
+        res.redirect('/zh/cmpt');
+    })
     .get('/:lang/cmpt/:page?', function (req, res, next) {
         var lang = req.params.lang;
         if (['zh', 'en'].indexOf(lang) < 0) {
