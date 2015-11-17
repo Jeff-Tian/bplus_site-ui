@@ -47,10 +47,17 @@ module.exports = require('express').Router()
     .get('/upload/callback', uploadCallbackService)
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
+    .post('/payment/create-order/national-game-2015-middle/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
     .post('/payment/create-order/national-game-2015-economy/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
     .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
+    .post('/payment/create-order/national-game-2015-middle/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post('/payment/create-order/national-game-2015-economy/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
-    .post('/payment/create-order/national-game-2015/check-has-right', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015, commerceService.checkUserAccessForNationalGame2015Economy, function (req, res, next) {
-        res.send(req.chunks);
+    .post('/payment/create-order/national-game-2015/check-has-right', 
+        membership.ensureAuthenticated,
+        commerceService.checkUserAccessForNationalGame2015,
+        commerceService.checkUserAccessForNationalGame2015Middle,
+        commerceService.checkUserAccessForNationalGame2015Economy,
+        function (req, res, next) {
+            res.send(req.chunks);
     })
 ;
