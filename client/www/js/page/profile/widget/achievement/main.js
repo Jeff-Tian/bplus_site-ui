@@ -39,7 +39,7 @@ define([
     }
 
     return function (agModule) {
-        agModule.controller('achievement', ['$scope', '$http', "personalinfoService", function ($scope, $http, model) {
+        agModule.controller('achievement', ['$scope', '$http', "personalinfoService", "DeviceHelper", function ($scope, $http, model, DeviceHelper) {
             $scope.classNameFaceEdit = '';
             $scope.dataLoaded = false;
             $scope.data = {
@@ -49,7 +49,12 @@ define([
                 progress: 0,
                 rate: 0
             };
+
+            var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.profile' : 'profile');
+
             $scope.editface = function() {
+                moduleTrack.send('image.click');
+
                 return $("#avatarUpload .upload-file")[0].click();
             };
             $scope.avatarMouseOver = function () {

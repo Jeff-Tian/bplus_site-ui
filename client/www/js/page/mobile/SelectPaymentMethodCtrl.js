@@ -1,5 +1,6 @@
 (function (exports) {
     exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper, DeviceHelper) {
+        var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.MS2015Pay' : 'MS2015Pay');
 
         function gotoPaid(result) {
             function gotoPaidInner() {
@@ -35,6 +36,8 @@
 
         var buying = false;
         $scope.buyWithRedemptionCode = function () {
+            moduleTrack.send("finPayment.click", {hasInputCode: $scope.payData.redemptionCode});
+
             service.executePromiseAvoidDuplicate(buying, function () {
                 return service
                     .post('/service-proxy/commerce/create-order/national-game-2015/by-redemption-code', {
@@ -50,6 +53,8 @@
 
         var alipaying = false;
         $scope.alipay = function () {
+            moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
+
             if ($scope.offerData.kind === 'first') {
                 pay(alipaying, 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
             } else if ($scope.offerData.kind === 'second') {
@@ -62,6 +67,8 @@
         };
 
         $scope.pcAlipay = function () {
+            moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
+
             if ($scope.offerData.kind === 'first') {
                 pay(alipaying, 'alipay', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
             } else if ($scope.offerData.kind === 'second') {
@@ -203,6 +210,8 @@
         }
 
         $scope.showGameDetailModal = function () {
+            moduleTrack.send("learnMore.click", {hasInputCode: $scope.payData.redemptionCode});
+
             $('.b-game-detail.modal').modal('show');
         };
 

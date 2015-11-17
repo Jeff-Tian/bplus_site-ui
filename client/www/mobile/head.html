@@ -1,4 +1,4 @@
-<div class="ui fixed inverted three item menu b-mobile">
+<div class="ui fixed inverted three item menu b-mobile" id="headMenu">
     <div class="header item left aligned"
          style="position: absolute; left: 0; max-width: 50px; margin-left: 0!important;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -8,7 +8,7 @@
         </a>
     </div>
 
-    <a href="index#/home" class="header item"
+    <a href="index#/home" class="header item" eventName="m.menu.index.click"
        style="position: absolute; left: 34%; width: 34%; display: block; z-index: 999;">
         <img src="<%= cdn.normal %>img/logo.png?<%= cdn.version %>" style="width: 100px;margin-top:-10px">
     </a>
