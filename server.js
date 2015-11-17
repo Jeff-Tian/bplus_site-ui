@@ -283,15 +283,17 @@ function clientErrorHandler(err, req, res, next) {
 
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
-    //res.status(500).send('Something borke!');
+    res.status(500);
     if (!isFromMobile(req)) {
-        res.status(500).render('error', {error: err});
+        res.render('error', {error: err});
     } else {
-        res.status(500).render('mobile/error', {error: err});
+        res.render('mobile/error', {error: err});
     }
 }
 
 server.use('*', function (req, res) {
+    req.dualLogError('404 Error met for "' + (req.headers['origin'] + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
+
     res.status(404);
     if (!isFromMobile(req)) {
         res.render('404.html');
