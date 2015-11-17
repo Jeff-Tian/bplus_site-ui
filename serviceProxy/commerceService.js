@@ -230,7 +230,6 @@ module.exports = {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
-
                     return true;
                 } else {
                     injectRedemptionGeneration(res, json, req, next);
