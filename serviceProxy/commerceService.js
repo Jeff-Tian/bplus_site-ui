@@ -39,8 +39,11 @@ function injectRedemptionGeneration(res, json, req, next) {
 
                             return d;
                         },
-                        responseInterceptor: function () {
-                            // do nothing with this request and response
+                        responseInterceptor: function (res, jsonOfSaving, req) {
+                            if (!jsonOfSaving.isSuccess) {
+                                req.dualLogError('Failed to save the redemption code "' + json2.result + '" for member "' + req.body.member_id + '" in this request: "' + req.url + '" ! Data passed:\r\n' + req.body + '\r\nResponse:\r\n' + jsonOfSaving);
+                            }
+
                             return undefined;
                         }
                     })(req, res, next);
