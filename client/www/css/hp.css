@@ -1153,7 +1153,7 @@
     width: 80% !important;
   }
   .hp-mastead {
-    height: 600px;
+    height: auto;
     padding: 1em;
   }
   .hp-mastead .header-wechat {
@@ -1236,4 +1236,29 @@
   .hp-gray-space .ui.container .column {
     margin-bottom: 1em;
   }
+}
+.ui.item.menu.long-page-nav .item {
+  padding: 2em 1em 2em 1em !important;
+  display: block;
+}
+.ui.item.menu.long-page-nav .item .icon {
+  width: 100%;
+}
+.red.block {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-color: #ff3c42;
+  vertical-align: baseline;
+  margin: 0 2px 0 1em;
+}
+.right.floating {
+  float: right !important;
+}
+.grey.segment {
+  background-color: #D2D2D2;
+  border-top: none !important;
+}
+.grey.segment .content {
+  padding-top: 1em;
 }

@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>E战成名 - bridge+</title>
-    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <meta name="description" content="Bridge+">
     <%- include('header.html') -%>
     <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/hp.css?<%= cdn.version %>">
 </head>
-<body ng-app="mobile" ng-controller="AppCtrl">
+<body ng-app="mobile">
 <%- include('head.html') -%>
 
 <div class="mobile pusher" style="margin-top:30px;">
@@ -21,32 +21,79 @@
             <div class="e">
                 <img src="<%=cdn.normal%>img/hp/youth_e.png?<%=cdn.version%>">
             </div>
-            <p class="header-title table-show"><strong
-                    style="text-shadow: 2px 2px 5px black;">全国商战模拟</strong>游戏大赛</p>
 
-            <p class="header-title mobile-show">MarkSimos</br><strong
-                    style="text-shadow: 2px 2px 5px black;">全国商战模拟</strong>游戏大赛</p>
+            <p class="header-title" style="font-size: 22pt!important;">全国商战模拟游戏大赛</p>
 
-            <p class="header-content">总奖项价值超50万</p>
-
-            <p class="header-content"><strong
-                    style="text-shadow: 2px 2px 5px black;">即日起至</strong>11.15&nbsp;&nbsp;
-                每所高校限额30人
-            </p>
+            <h2 class="ui center aligned white header" style="margin-top: 0;">大赛冠军5万元奖金</h2>
 
             <p><i class="hp icon"></i></p>
-            <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
-               class="ui large red button"
-               style="box-shadow: 0 2px 3px 1px #333; padding-left: 6em; padding-right: 6em;" eventName="m.MS2015LP.join.click">点击立即报名</a>
 
+            <div class="ui horizontal divider"></div>
+            <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
+               eventName="m.MS2015LP.join.click"
+               class="ui large red shadowed button" style="padding-left: 5em; padding-right: 5em;">立即报名</a>
+
+            <div class="ui horizontal divider"></div>
         </div>
     </div>
-    <div class="hp-header-title">
-        <h1>大赛介绍</h1>
+    <div style="display: none;">
+        <div>
+            <div class="ui four item labeled icon inverted borderless menu long-page-nav"
+                 style="border-top-left-radius: 0; -webkit-border-top-right-radius: 0; border-top: solid 2px #fd3d42;">
+                <a class="item">
+                    <i class="large red file text outline icon"></i>
+                    <br/>
+
+                    <div>大赛简介</div>
+                </a>
+                <a class="item">
+                    <i class="large red angellist icon"></i>
+                    <br/>
+                    大赛奖项
+                </a>
+                <a class="item">
+                    <i class="large red line chart icon"></i>
+                    <br/>
+                    大赛系统
+                </a>
+                <a class="item">
+                    <i class="large red Users icon"></i>
+                    <br/>
+                    合作伙伴
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui padded container" style="display: none;">
+
+        <div class="ui horizontal divider"></div>
+        <div class="ui horizontal divider"></div>
+        <h1 class="ui header">
+            <div class="red block"></div>
+            大赛简介
+        </h1>
+
+    </div>
+    <div class="ui clearing grey segment" style="display: none;">
+        <div class="ui right floating">
+            <img class="ui tiny image" src="<%= cdn.normal %>img/salespage/gif/team-animate.gif?<%= cdn.version %>">
+        </div>
+        <div class="content">
+            <h3 class="ui header">
+                <i class="ui users icon"></i>
+
+                <div class="content">
+                    组队参赛:
+                </div>
+            </h3>
+            <p>5人组成一队，分任不同角色，即可开始游戏！</p>
+        </div>
     </div>
 
     <div class="hp-white-space">
         <div class="ui container">
+            <div class="ui horizontal divider"></div>
             <p class="hp-title">
                 <span>1</span> 大赛简介
             </p>
@@ -378,47 +425,34 @@
 
         </div>
     </div>
-    <div class="hp-white-space">
-        <div class="ui container">
-            <p class="hp-title">
-                <span>7</span> 学术特别合作
-            </p>
-
-            <div class="ui container hcd">
-                <div class="middle aligned row">
-                    <div class="three wide column logo">
-                        <img style="width: 100px;" src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="hp-gray-space">
-        <div class="ui container">
-            <p class="hp-title">
-                <span>8</span> 公益特别合作
-            </p>
-
-            <div class="ui container hcd">
-                <div class="middle aligned row">
-                    <div class="three wide column logo">
-                        <img class="ui small image" src="<%=cdn.normal%>img/hp/tree.png?<%=cdn.version%>">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="hp-white-space">
         <div class="ui container">
             <p class="hp-title">
-                <span>9</span> 合作机构
+                <span>7</span> 合作机构
             </p>
 
             <div class="ui container">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="http://www.hcdlearning.com" target="_blank">
+                    <img class="ui small image" style="display: inline; width: 80px;"
+                         src="<%=cdn.normal%>img/hp/hcd-logo.png?<%=cdn.version%>">
+                </a>
+                <a href="http://www.cedar2012.org" target="_blank">
+                    <img class="ui small image" style="display: inline;"
+                         src="<%=cdn.normal%>img/hp/tree.png?<%=cdn.version%>"></a>
                 <a href="http://www.shixiseng.com" target="_blank">
-                    <img class="ui small image" style="display: inline; width: 120px;"
+                    <img class="ui small image" style="display: inline; width: 100px;"
                          src="<%= cdn.normal %>img/partners/shixiseng_logo.png?<%= cdn.version %>">
+                </a>
+                <a href="http://www.heibaixiaoyuan.com" target="_blank">
+                    <img class="ui small image" style="display: inline; width: 100px;"
+                         src="<%= cdn.normal %>img/partners/black_white_school.png?<%= cdn.version %>">
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://itunes.apple.com/cn/app/xiao-jiang-you-huo-dong-fen/id929084571?mt=8" target="_blank">
+                    <img class="ui small image" style="display: inline; width: 100px;"
+                         src="<%= cdn.normal %>img/partners/xiaojiangyou.png?<%= cdn.version %>">
                 </a>
                 <!--<a href="http://www.wyzc.com" target="_blank">-->
                 <!--<img class="ui small image" src="<%= cdn.normal %>img/partners/wyzc.png?<%= cdn.version %>"-->
@@ -428,6 +462,7 @@
                 <!--src="<%= cdn.normal %>img/partners/shixiseng_qr_code.jpg?<%= cdn.version %>">-->
             </div>
 
+            <div class="ui horizontal divider"></div>
             <div class="ui center aligned centered container">
                 <a href="/#select-payment-method" class="ui large fluid red button">立即报名</a>
             </div>
