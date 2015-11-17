@@ -2,8 +2,7 @@
   "sms": {
     "host": "service.bridgeplus.cn",
     "port": "10002",
-    "code": "BP_S1",
-    "enabled": true
+    "code": "BP_S1"
   },
   "mail": {
     "host": "service.bridgeplus.cn",

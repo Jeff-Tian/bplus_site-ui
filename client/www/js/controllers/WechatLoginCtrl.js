@@ -56,7 +56,7 @@
             return;
         }
 
-        $scope.wechatQRPage = 'about:blank';
+        $scope.wechatQRPage = $sce.trustAsResourceUrl('about:blank');
         var opening = false;
         $scope.logOnViaWechat = function () {
             service.executePromiseAvoidDuplicate(opening, function () {
