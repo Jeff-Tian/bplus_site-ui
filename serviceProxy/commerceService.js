@@ -230,7 +230,6 @@ module.exports = {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
-
                     return true;
                 } else {
                     injectRedemptionGeneration(res, json, req, next);
@@ -242,12 +241,10 @@ module.exports = {
     },
 
     checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
-        var p = '/service/useraccess/check';
-
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: p,
+            path: '/service/useraccess/check',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
@@ -259,8 +256,7 @@ module.exports = {
             responseInterceptor: function (res, json) {
                 console.log('reuslt:');
                 console.log(json);
-
-                if (json.result && json.result.hasRight === false) {
+                if (json.result.hasRight === false) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
