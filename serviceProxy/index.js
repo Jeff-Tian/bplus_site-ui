@@ -11,8 +11,8 @@ var sms = require('./sms'),
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
-        req.dualLog('service-proxy is being calling from ' + req.hostname + '...');
-        req.dualLog(req.url);
+        req.dualLog('service-proxy is being calling from this host: ' + req.hostname + '...');
+        req.dualLog((req.headers['origin'] || '') + req.originalUrl);
 
         next();
     })

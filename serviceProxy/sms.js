@@ -1,18 +1,9 @@
-// 如何重用 HCD 的 sms.js? 发布成为 private node js package?
-
 var http = require('http');
 var sms = require('../config').sms;
 var proxy = require('./proxy');
 
 module.exports = {
     getVerificationCode: function (req, res, next) {
-        if (!sms.enabled) {
-            res.json({isSuccess: true});
-            next();
-
-            return;
-        }
-
         proxy(sms.host, sms.port, '/service/sms/send', function (d) {
             return {
                 phone: d.mobile,
@@ -22,12 +13,6 @@ module.exports = {
     },
 
     validate: function (req, res, next) {
-        if (!sms.enabled) {
-            next();
-
-            return;
-        }
-
         proxy({
             host: sms.host,
             port: sms.port,

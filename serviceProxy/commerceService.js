@@ -41,7 +41,7 @@ function injectRedemptionGeneration(res, json, req, next) {
                         },
                         responseInterceptor: function (res, jsonOfSaving, req) {
                             if (!jsonOfSaving.isSuccess) {
-                                req.dualLogError('Failed to save the redemption code "' + json2.result + '" for member "' + req.body.member_id + '" in this request: "' + req.url + '" ! Data passed:\r\n' + req.body + '\r\nResponse:\r\n' + jsonOfSaving);
+                                req.dualLogError('Failed to save the redemption code "' + json2.result + '" for member "' + req.body.member_id + '" in this request: "' + (req.headers['origin'] + req.originalUrl) + '" ! Data passed:\r\n' + req.body + '\r\nResponse:\r\n' + jsonOfSaving);
                             }
 
                             return undefined;
@@ -60,7 +60,7 @@ function injectRedemptionGeneration(res, json, req, next) {
         return undefined;
     } else {
         if (!json.isSuccess) {
-            req.dualLogError('Service Response Error for "' + req.url + '"! Passed Data: \r\n' + req.body + '\r\nResponse:\r\n' + json);
+            req.dualLogError('Service Response Error for "' + (req.headers['origin'] + req.originalUrl) + '"! Passed Data: \r\n' + req.body + '\r\nResponse:\r\n' + json);
         }
 
         return false;
