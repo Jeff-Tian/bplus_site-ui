@@ -21,8 +21,9 @@ function injectRedemptionGeneration(res, json, req, next) {
                 return d;
             },
             responseInterceptor: function (res, json2, req) {
-                console.log('generated redemption result;');
-                console.log(json2);
+                req.dualLog('generated redemption result;');
+                req.dualLog(json2);
+
                 if (json2.isSuccess) {
                     json.result = json.result || {};
                     json.result.generatedRedemption = json2;
@@ -43,6 +44,8 @@ function injectRedemptionGeneration(res, json, req, next) {
                             return undefined;
                         }
                     })(req, res, next);
+                } else {
+                    req.dualLogError('Failed to generate redemption code for "' + req.body.member_id + '"!\r\n Passed Data:\r\n' + req.body + '\r\nServer response: \r\n' + JSON.stringify(json2));
                 }
 
                 res.send(json);
@@ -53,6 +56,10 @@ function injectRedemptionGeneration(res, json, req, next) {
 
         return undefined;
     } else {
+        if (!json.isSuccess) {
+            req.dualLogError('Service Response Error for "' + req.url + '"! Passed Data: \r\n' + req.body + '\r\nResponse:\r\n' + json);
+        }
+
         return false;
     }
 }
@@ -152,7 +159,7 @@ module.exports = {
             responseInterceptor: function (res, json) {
                 console.log('reuslt:');
                 console.log(json);
-                if (json.result.hasRight === false) {
+                if (json.result && json.result.hasRight === false) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
@@ -168,10 +175,12 @@ module.exports = {
     },
 
     checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
+        var p = '/service/useraccess/check';
+
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: p,
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
@@ -183,7 +192,8 @@ module.exports = {
             responseInterceptor: function (res, json) {
                 console.log('reuslt:');
                 console.log(json);
-                if (json.result.hasRight === false) {
+
+                if (json.result && json.result.hasRight === false) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
