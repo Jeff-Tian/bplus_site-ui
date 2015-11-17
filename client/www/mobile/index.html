@@ -71,29 +71,23 @@
             </h3>
 
             <div class="ui divider"></div>
-            <div class="right floated middle aligned content" style="float: right; max-width: 50%;">
+            <div class="right floated middle aligned content" style="float: right; max-width: 50%; width:15em;">
 
-                <strong>包含报名费</strong>
                 <ul style="padding: 0; margin: 0; list-style-position: inside;">
-                    <li>价值千元的专家点评结果报告</li>
+                    <li>1对1专家点评</li>
+                    <li>比赛结果分析报告</li>
                     <li>纸质精美证书</li>
-                    <li>本次大赛限量纪念品</li>
-                </ul>
-
-                <p>
-                    <button class="ui yellow tiny button" style="position: relative;" ng-click="showGameDetailModal()"><%= __('了解物超所值') %>
+                    <li>报名费
+                        <button class="ui yellow tiny button" style="position: relative;" ng-click="showGameDetailModal()">详情
                         <img src="<%= cdn.normal %>img/pay/light_mobile.png?<%= cdn.version %>" class="ui tiny image"
                              style="width: 20px; position: absolute; right: -15px;">
-                    </button>
-                </p>
+                        </button>
+                    </li>
+                </ul>
             </div>
             <div class="middle aligned content">
                 <p style="padding-left: 70px;">
                     <br />
-                    <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'first'"
-                         class="ui tiny image" style="width: 20px;">
-                    <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
-                         ng-show="offerData.kind !== 'first'" class="ui tiny image" style="width: 20px;">
                 </p>
 
                 <div class="ui radio checkbox">
@@ -113,24 +107,59 @@
 
             </div>
             <div class="ui horizontal clearing divider"></div>
-            <div class="middle aligned content" style="float: left;">
+            <div class="right floated middle aligned content" style="float: right; max-width: 50%; width:15em;">
+
+                <ul style="padding: 0.5em 0 0 0; margin: 0; list-style-position: inside;">
+                    <li>小组专家点评</li>
+                    <li>纸质精美证书</li>
+                    <li>报名费</li>
+                </ul>
+            </div>
+            <div class="middle aligned content">
+                <p style="padding-left: 70px;">
+                    <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'second'"
+                         class="ui tiny image" style="width: 20px;">
+                    <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
+                         ng-show="offerData.kind !== 'second'" class="ui tiny image" style="width: 20px;">
+                </p>
+
                 <div class="ui radio checkbox">
-                    <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
-                           value="second" ng-class="{'disabled': offerData.kind !== 'second'}">
+                    <input type="radio" name="howMuch" checked="checked" tabindex="0"
+                           ng-model="offerData.kind" value="second"
+                           ng-class="{'disabled': offerData.kind !== 'second'}"
+                           class="hidden">
                     <label>
                         <button class="ui red button"
                                 ng-class="{'disabled': offerData.kind !== 'second'}"
+                                style="margin-top: -0.5em; width: 110px;">
+                            {{100 |
+                            currency: "¥ "}}
+                        </button>
+                    </label>
+                </div>
+
+            </div>
+            <div class="ui horizontal clearing divider"></div>
+            <div class="right floated middle aligned content" style="float: right; max-width: 50%; width:15em;">
+                <ul style="padding: 0; margin: 0; list-style-position: inside;">
+                    <li>报名费</li>
+                </ul>
+            </div>
+            <div class="middle aligned content">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="howMuch" checked="checked" tabindex="0"
+                           ng-model="offerData.kind" value="third"
+                           ng-class="{'disabled': offerData.kind !== 'third'}"
+                           class="hidden">
+                    <label>
+                        <button class="ui red button"
+                                ng-class="{'disabled': offerData.kind !== 'third'}"
                                 style="margin-top: -0.5em; width: 110px;">
                             {{30 |
                             currency: "¥ "}}
                         </button>
                     </label>
                 </div>
-            </div>
-            <div class="middle aligned content" style="float: left;">
-
-                <strong>&nbsp;&nbsp;报名费</strong>
-                &nbsp;
             </div>
             <div class="ui horizontal clearing divider"></div>
             <div class="ui horizontal clearing divider"></div>
