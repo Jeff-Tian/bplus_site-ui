@@ -25,7 +25,6 @@ var mobileRoutes = [
     'personal-history',
     'youth',
     'statement',
-    'game-training',
     // TODO: Requires Login
     'bind-mobile',
     'bind-mobile-by-password',
@@ -37,6 +36,9 @@ mobileRoutes.map(function (r) {
 });
 
 router.get('/profile', membership.ensureAuthenticated, function (req, res, next) {
+    res.render('mobile/profile');
+});
+router.get('/game-training', membership.ensureAuthenticated, function (req, res, next) {
     res.render('mobile/profile');
 });
 
