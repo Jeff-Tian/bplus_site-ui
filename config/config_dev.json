@@ -101,7 +101,7 @@
     "enableLogoutOnMobile": true,
     "enablePartnerSlide": true
   },
-  "version": "0.8.0",
-  "date": "20151103_0810",
+  "version": "0.8.1",
+  "date": "20151118_0736",
   "trackingUrl": "http://uat.tracking.hcd.com"
 }

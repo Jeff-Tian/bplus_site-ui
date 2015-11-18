@@ -177,6 +177,10 @@ a.red.button:hover, a.red.button:active, a.red.button:focus {
     border-radius: 10px;
 }
 
+.light.shadowed.button {
+    box-shadow: 0 5px 0 0 #BEBEBE !important;
+}
+
 .has-header {
     padding-top: 40px !important;
 }
@@ -322,6 +326,17 @@ a.red.button:hover, a.red.button:active, a.red.button:focus {
     flex-wrap: inherit;
 }
 
+.very.red, .very.red .content {
+    color: red;
+}
+
+.borderless.buttons {
+    border: none !important;
+    .button {
+        border: none !important;
+    }
+}
+
 .center.stuck {
     display: table;
     height: 100%;
@@ -382,6 +397,25 @@ a.red.button:hover, a.red.button:active, a.red.button:focus {
 
 .middle.aligned {
     vertical-align: middle;
+}
+
+.middle.line {
+    position: relative;
+
+    &:before {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background-color: red;
+        position: absolute;
+        left: 0;
+        top: 50%;
+    }
+
+    &:after {
+        content: '□';
+        color: transparent;
+    }
 }
 
 @media only screen and (max-width: 767px) {
