@@ -9,28 +9,32 @@
     <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/hp.css?<%= cdn.version %>">
 </head>
 <body ng-app="mobile">
+<%/* For wechat browser link share */%>
+<img src="<%= cdn.normal %>wechat/for_share.png?<%= cdn.version %>"
+     style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
 
-<div class="mobile pusher" style="margin-top:30px;">
+<div class="mobile pusher" style="margin-top:30px;" ng-init="singleQuoteLeft='‘'; singleQuoteRight='’'">
     <div class="hp-mastead youth">
         <div class="ui container">
             <div class="header-wechat" ng-show="showQRCode">
                 <img src="<%=cdn.normal%>img/wechat/bplus_fuwuhao.jpg?<%=cdn.version%>">
             </div>
 
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-
             <div class="e">
                 <img src="<%=cdn.normal%>img/hp/youth_e_new.png?<%=cdn.version%>">
             </div>
 
-            <p class="header-title" style="font-size: 22pt!important; white-space: nowrap;">全国商战模拟游戏大赛</p>
+            <p class="header-title" style="font-size: 1.5em;">全国商战模拟游戏大赛</p>
 
-            <h2 class="ui center aligned white header" style="margin-top: 0; margin-bottom: 0;">大赛冠军5万元奖金</h2>
+            <p class="header-title" style="font-size: 1.5em;">{{singleQuoteLeft}}一个14,019名学生的选择{{singleQuoteRight}}</p>
+
+            <div class="ui horizontal divider"></div>
+            <p class="header-title" style="font-size: 1.6em;">报名即将额满!</p>
+
+            <p class="header-title" style="font-size: 1.7em;">价值50万元的奖项</p>
+
+            <p class="header-title">全国冠军奖杯，等你挑战!</p>
 
             <div><i class="ui huge angle down icon"></i></div>
 
@@ -38,9 +42,6 @@
                eventName="m.MS2015LP.join.click"
                class="ui large red shadowed button" style="padding-left: 5em; padding-right: 5em;">立即报名</a>
 
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
-            <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
         </div>
