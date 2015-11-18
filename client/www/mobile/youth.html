@@ -10,7 +10,7 @@
 </head>
 <body ng-app="mobile">
 <%/* For wechat browser link share */%>
-<img src="<%= cdn.normal %>wechat/for_share.png?<%= cdn.version %>"
+<img src="<%= cdn.normal %>img/wechat/for_share.png?<%= cdn.version %>"
      style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
 
@@ -21,26 +21,33 @@
                 <img src="<%=cdn.normal%>img/wechat/bplus_fuwuhao.jpg?<%=cdn.version%>">
             </div>
 
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
             <div class="e">
                 <img src="<%=cdn.normal%>img/hp/youth_e_new.png?<%=cdn.version%>">
             </div>
 
-            <p class="header-title" style="font-size: 1.5em;">全国商战模拟游戏大赛</p>
+            <p class="header-title" style="font-size: 1.3em; margin-bottom: 20px;">全国商战模拟游戏大赛</p>
 
-            <p class="header-title" style="font-size: 1.5em;">{{singleQuoteLeft}}一个14,019名学生的选择{{singleQuoteRight}}</p>
+            <p class="header-title" style="font-size: 1.3em;">“相遇伪装公司大佬”</p>
+
+            <p class="header-title" style="font-size: 1.3em;">
+                {{singleQuoteLeft}}一个34,019名学生的选择{{singleQuoteRight}}</p>
 
             <div class="ui horizontal divider"></div>
             <p class="header-title" style="font-size: 1.6em;">报名即将额满!</p>
 
             <p class="header-title" style="font-size: 1.7em;">价值50万元的奖项</p>
 
-            <p class="header-title">全国冠军奖杯，等你挑战!</p>
-
-            <div><i class="ui huge angle down icon"></i></div>
-
+            <div class="ui horizontal divider"></div>
             <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
                eventName="m.MS2015LP.join.click"
                class="ui large red shadowed button" style="padding-left: 5em; padding-right: 5em;">立即报名</a>
+
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
+            <div><i class="ui huge angle down icon"></i></div>
 
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
@@ -51,7 +58,7 @@
             <div>
                 <div class="ui four item labeled icon inverted borderless menu long-page-nav"
                      style="border-top-left-radius: 0; -webkit-border-top-right-radius: 0; border-top: solid 2px #fd3d42; background-color: #2F363E;">
-                    <a class="item" href="#game-intro">
+                    <a class="item" href="#game-intro" eventName="m.MS2015LP.intro.click">
                         <div class="ui center aligned icon">
                             <i class="large red file text outline icon"
                                style="color: #FF3D42!important; font-size:1.4em; margin-top: 4px;"></i>
@@ -59,9 +66,10 @@
                         <div class="ui horizontal divider"></div>
                         <div>大赛简介</div>
                     </a>
-                    <a class="item" href="#game-award">
+                    <a class="item" href="#game-award" eventName="m.MS2015LP.prize.click">
                         <div class="ui center aligned icon">
-                            <img class="ui mini center aligned image" style="display: inline;"
+                            <img class="ui mini center aligned image"
+                                 style="display: inline;"
                                  src="<%= cdn.normal %>img/hp/dasaijiangxiang_menu.png?<%= cdn.version %>">
                         </div>
                         <div class="ui horizontal divider"></div>
@@ -69,7 +77,7 @@
                             大赛奖项
                         </div>
                     </a>
-                    <a class="item" href="#game-system">
+                    <a class="item" href="#game-system" eventName="m.MS2015LP.system.click">
                         <div class="ui center aligned icon">
                             <img class="ui mini center aligned image" style="display: inline;"
                                  src="<%= cdn.normal %>img/hp/dasaixitong_menu.png?<%= cdn.version %>">
@@ -79,7 +87,7 @@
                             大赛系统
                         </div>
                     </a>
-                    <a class="item" href="#game-partners">
+                    <a class="item" href="#game-partners" eventName="m.MS2015LP.partner.click">
                         <div class="ui center aligned icon">
                             <img class="ui mini center aligned image" style="display: inline;"
                                  src="<%= cdn.normal %>img/hp/partner_menu.png?<%= cdn.version %>">
@@ -89,12 +97,17 @@
                             合作伙伴
                         </div>
                     </a>
+
                 </div>
             </div>
         </div>
 
+        <a name="game-intro"></a>
+
+        <div class="ui horizontal divider"></div>
+        <div class="ui horizontal divider"></div>
+
         <div class="ui padded container">
-            <a name="game-intro"></a>
 
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
@@ -175,13 +188,14 @@
         </div>
         <div class="ui horizontal divider"></div>
         <div class="ui horizontal divider"></div>
+        <a name="game-award"></a>
+
         <div class="ui horizontal divider"></div>
         <div class="ui horizontal divider"></div>
 
     </div>
     <div style="background-color: white;">
         <div class="ui padded container">
-            <a name="game-award"></a>
 
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
@@ -201,7 +215,7 @@
         <div class="content ui padded container">
             <h3 class="ui header">
                 <img src="<%= cdn.normal %>img/hp/dasaijiangxiang.png?<%= cdn.version %>"
-                     class="ui image bottom aligned">
+                     class="ui image bottom aligned" style="width: 40px!important; height: 40px!important;">
 
                 冠军队伍奖金
             </h3>
@@ -219,7 +233,7 @@
         <div class="content ui padded container">
             <h3 class="ui header">
                 <img src="<%= cdn.normal %>img/hp/haiwailiuxue.png?<%= cdn.version %>"
-                     class="ui image bottom aligned">
+                     class="ui image bottom aligned" style="width: 40px!important; height: 40px!important;">
 
                 海外留学
             </h3>
@@ -232,12 +246,12 @@
     <div class="ui clearing grey segment">
         <div class="ui right floating">
             <img class="ui image" src="<%= cdn.normal %>img/hp/liuxiufenghui_right.png?<%= cdn.version %>"
-                 style="width: 100px; margin-right: 20px;">
+                 style="width: 90px; margin-right: 15px;">
         </div>
         <div class="content ui padded container">
             <h3 class="ui header">
                 <img src="<%= cdn.normal %>img/hp/liuxiufenghui.png?<%= cdn.version %>"
-                     class="ui image bottom aligned">
+                     class="ui image bottom aligned" style="width: 40px!important; height: 40px!important;">
 
                 青年领袖峰会邀请函
             </h3>
@@ -263,12 +277,14 @@
     </div>
     <div class="ui horizontal divider"></div>
     <div class="ui horizontal divider"></div>
+
+    <a name="game-system"></a>
+
     <div class="ui horizontal divider"></div>
     <div class="ui horizontal divider"></div>
 
     <div style="background-color: white;">
         <div class="ui padded container">
-            <a name="game-system"></a>
 
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
@@ -278,7 +294,7 @@
             </h1>
             <div class="ui horizontal divider"></div>
 
-            <h2 class="ui header">商战模拟游戏 MarkSimos</h2>
+            <h2 class="ui header" style="font-size: 1.5rem;">商战模拟游戏 MarkSimos</h2>
 
             <div class="ui horizontal divider"></div>
             <p>赛事采用高管培训界著名的商战模拟系统MarkSimos运行, 参赛者须组成5人战队,在线上虚拟环境接受一间快销品公 司董事会委任,协助经营企业在未来四个季度,获得最大市 场份额及累积利润。</p>
@@ -312,8 +328,8 @@
 
             <div class="ui center aligned container" style="font-size: smaller;">(你的同事、好友、家人)</div>
 
-            <h3 class="ui very red header">
-                &nbsp;&nbsp;MarkSimos已被上千间中外名企使用,欢迎你来一起体验!&nbsp;&nbsp;
+            <h3 class="ui very red header" style="font-size:1rem;">
+                MarkSimos已被上千间中外名企使用,欢迎你来一起体验!
             </h3>
 
             <div class="ui horizontal divider"></div>
@@ -329,6 +345,8 @@
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
+            <a name="game-partners"></a>
+
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
 
@@ -337,7 +355,6 @@
 
     <div style="background-color: #F0F0F0;">
         <div class="ui padded container">
-            <a name="game-partners"></a>
 
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
