@@ -21,7 +21,7 @@
 
         <div class="ui b-step-container">
             <div class="ui left aligned container subcontainer">
-                <h5>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付款项') %></h5>
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付款项:') %></h5>
 
                 <div class="ui divider"></div>
             </div>
@@ -74,14 +74,7 @@
                         </td>
                     </tr>
                      <tr style="border-bottom: none;">
-                        <td style="border-top: none;">
-                            <p style="padding-left: 75px;">
-                                <img src="<%= cdn.normal %>img/pay/hat.png?<%=cdn.version %>" ng-show="offerData.kind === 'second'"
-                                     class="ui tiny image" style="width: 20px;">
-                                <img src="<%= cdn.normal %>img/pay/hat_disable.png?<%=cdn.version %>"
-                                     ng-show="offerData.kind !== 'second'" class="ui tiny image" style="width: 20px;">
-                            </p>
-
+                        <td style="border-top: none; padding-top:30px">
                             <div class="ui radio checkbox">
                                 <input type="radio" name="howMuch" checked="checked" tabindex="0"
                                        ng-model="offerData.kind" value="second"
@@ -95,6 +88,9 @@
                                         currency: "¥ "}}
                                     </button>
                                 </label>
+                                <p class="b-payment-crown">
+                                    <img src="<%= cdn.normal %>img/pay/crown.png?<%=cdn.version %>" style="width: 20px;">
+                                </p>
                             </div>
                         </td>
                         <td style="border-top: none;">
@@ -107,7 +103,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-top: none;">
+                        <td style="border-top: none; padding-top:40px">
                             <div class="ui radio checkbox">
                                 <input type="radio" name="howMuch" tabindex="0" class="hidden" ng-model="offerData.kind"
                                        value="third" ng-class="{'disabled': offerData.kind !== 'third'}">
@@ -121,7 +117,7 @@
                                 </label>
                             </div>
                         </td>
-                        <td style="border-top: none;">
+                        <td style="border-top: none; padding-top:30px">
 
                             <ul style="padding: 0; margin: 0; list-style-position: inside;">
                                 <li>报名费</li>
@@ -134,7 +130,7 @@
                     </tbody>
                 </table>
                 <div class="ui clearing horizontal fitted divider" style="margin: 0;"></div>
-                <h5 class="ui left aligned header">&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付方式') %></h5>
+                <h5 class="ui left aligned header">&nbsp;&nbsp;&nbsp;&nbsp;<%= __('选择支付方式:') %></h5>
 
                 <div class="ui clearing divider"></div>
                 <div class="ui horizontal divider"></div>
@@ -151,17 +147,17 @@
                 </form>
                 <% } %>
                 <div class="ui horizontal divider"></div>
-                <div class="ui divider"></div>
+                <div class="ui divider" style="border-top-style:dashed"></div>
                 <div class="ui horizontal divider"></div>
                 <div class="ui horizontal divider"></div>
                 <form name="redemptionForm" novalidate class="ui form redemption-form"
                       ng-submit="buyWithRedemptionCode($event)">
                     <div class="ui error message brand"></div>
                     <div class="inline fields">
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('使用邀请码 免费参赛') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('使用邀请码参赛:') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
                         <div class="field">
-                            <input type="text" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+                            <input type="text" style="width:390px" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
                         </div>
                         <div class="field">
                             <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
