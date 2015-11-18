@@ -10,7 +10,7 @@
 </head>
 <body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
 <%/* For wechat browser link share */%>
-<img src="<%= cdn.normal %>icon/ms-icon-310x310.png?<%= cdn.version %>"
+<img src="<%= cdn.normal %>img/wechat/for_share.png?<%= cdn.version %>"
      style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
 
@@ -31,7 +31,7 @@
                 <div class="ui horizontal segments transparent">
                     <div class="ui segment" style="padding-left: 0;">
                         <a href="<%= localeLink('/m/sign-in') %>" class="ui fluid large red button"
-                           eventName="m.index.login.click" ><%=
+                           eventName="m.index.login.click"><%=
                             __('SignIn')%></a>
                     </div>
                     <div class="ui segment" style="padding-right: 0; border:none;">
@@ -78,15 +78,17 @@
                     <li>比赛结果分析报告</li>
                     <li>纸质精美证书</li>
                     <li>报名费
-                        <button class="ui b-mobile-payment-yellow-button mini button" style="position: relative;" ng-click="showGameDetailModal()">详情
-                        <img src="<%= cdn.normal %>img/pay/light_mobile.png?<%= cdn.version %>" style="width: 20px; position: absolute; right: -12px; top:14px;">
+                        <button class="ui b-mobile-payment-yellow-button mini button" style="position: relative;"
+                                ng-click="showGameDetailModal()">详情
+                            <img src="<%= cdn.normal %>img/pay/light_mobile.png?<%= cdn.version %>"
+                                 style="width: 20px; position: absolute; right: -12px; top:14px;">
                         </button>
                     </li>
                 </ul>
             </div>
             <div class="middle aligned content">
                 <p style="padding-left: 70px;">
-                    <br />
+                    <br/>
                 </p>
 
                 <div class="ui radio checkbox">
@@ -106,7 +108,8 @@
 
             </div>
             <div class="ui horizontal clearing divider"></div>
-            <div class="right floated middle aligned content" style="float: right; max-width: 50%; width:15em; margin-top:4px">
+            <div class="right floated middle aligned content"
+                 style="float: right; max-width: 50%; width:15em; margin-top:4px">
 
                 <ul style="padding: 0.5em 0 0 0; margin: 0; list-style-position: inside;">
                     <li>小组专家点评</li>
@@ -128,6 +131,7 @@
                             currency: "¥ "}}
                         </button>
                     </label>
+
                     <p class="b-mobile-payment-crown">
                         <img src="<%= cdn.normal %>img/pay/crown.png?<%=cdn.version %>" style="width:20px">
                     </p>
@@ -135,7 +139,8 @@
 
             </div>
             <div class="ui horizontal clearing divider"></div>
-            <div class="right floated middle aligned content" style="float: right; max-width: 50%; width:15em; margin-top:26px">
+            <div class="right floated middle aligned content"
+                 style="float: right; max-width: 50%; width:15em; margin-top:26px">
                 <ul style="padding: 0; margin: 0; list-style-position: inside;">
                     <li>报名费</li>
                 </ul>
@@ -164,6 +169,7 @@
             <label style="font-weight:700">
                 <%= __('选择支付方式:') %>
             </label>
+
             <div class="ui divider"></div>
             <div class="ui horizontal divider"></div>
 
@@ -195,10 +201,13 @@
                   ng-submit="buyWithRedemptionCode($event)">
                 <div class="ui error message brand"></div>
                 <div class="field">
-                    <label><%= __('使用邀请码参赛') %> </label>
+                    <label><%= __('使用邀请码参赛:') %> </label>
+
                     <div class="ui divider"></div>
-                    <input type="text" style="width:70%" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
-                    <button class="ui b-mobile-payment-red-button right floated button" ng-disabled="!redemptionForm.$valid" type="submit">
+                    <input type="text" style="width:70%" placeholder="" ng-required="true"
+                           ng-model="payData.redemptionCode">
+                    <button class="ui b-mobile-payment-red-button right floated button"
+                            ng-disabled="!redemptionForm.$valid" type="submit">
                         <%=
                         __('确定') %>
                     </button>
@@ -206,6 +215,7 @@
 
                 <div class="field" style="padding-top:20px">
                     <label>没有邀请码？</label>
+
                     <div class="ui tiny left floated grey" style="font-size: small; max-width:70%">
                         扫码关注服务号回复"邀请码"立即赢取！
                     </div>

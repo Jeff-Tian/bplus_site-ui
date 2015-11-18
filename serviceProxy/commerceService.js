@@ -59,9 +59,7 @@ function injectRedemptionGeneration(res, json, req, next) {
 
         return undefined;
     } else {
-        if (!json.isSuccess) {
-            req.dualLogError('Service Response Error for "' + (req.headers['origin'] + req.originalUrl) + '"! Passed Data: \r\n' + req.body + '\r\nResponse:\r\n' + json);
-        }
+        req.dualLogError('Service Response Error for "' + (req.headers['origin'] + req.originalUrl) + '"! Passed Data: \r\n' + JSON.stringify(req.body) + '\r\nResponse:\r\n' + JSON.stringify(json));
 
         return false;
     }
@@ -94,8 +92,8 @@ module.exports = {
                 return d;
             },
             responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
+                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
+
                 if (json.result && (json.result.hasRight === false)) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
@@ -127,8 +125,7 @@ module.exports = {
                 return d;
             },
             responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
+                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
                 if (json.result && (json.result.hasRight === false)) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
@@ -160,8 +157,7 @@ module.exports = {
                 return d;
             },
             responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
+                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
                 if (json.result && (json.result.hasRight === false)) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
