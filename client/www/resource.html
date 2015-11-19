@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= __('ResourceTitle') %></title>
+    <meta name="description" content="Bridge+">
+    <%- include('view-partial/head.html') -%>
+</head>
+
+<body ng-controller="resourceCtrl" ng-app="bplus" ng-class="{'english':language==='en'}">
+    <%- include('view-partial/header.html') -%>
+    <!-- Page Contents -->
+    <modal ng-model="show_modal" class="ui large modal">
+        <i class="close icon" ng-click="close_modal()"></i>
+
+        <div class="ui embed">
+            <video width="320" height="240" controls>
+                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4' type='video/mp4'/>
+                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.webm'
+                        type='video/webm; codecs="vp8, vorbis"'>
+                <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.ogv'
+                        type='video/ogv; codecs="theora, vorbis"'>
+                <object id="flowplayer"
+                        data="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf"
+                        type="application/x-shockwave-flash" width="320" height="240">
+                    <param name="movie"
+                           value="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf">
+                    <param name="allowfullscreen" value="false">
+                    <param name="flashvars"
+                           value="config={'clip':{'url':'http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4','autoPlay':false}}">
+                </object>
+            </video>
+        </div>
+    </modal>
+
+    <div class="pusher">
+
+        <div class="page-content">
+
+            <div class="b-resource">
+                <div class="ui container grid">
+                    <div class="four wide column">
+                        <div class="ui fluid large vertical menu">
+                            <a class="item" ng-class="{'active':css.pdf===true}" ng-click="selectItem('pdf')">
+                                <i class="b-pdf icon"></i>
+                                <%= __('ResourcePDF') %> <b ng-show="language!=='en'"><%= __('ResourceDownload') %></b>
+                            </a>
+                            <a class="item" ng-class="{'active':css.video===true}" ng-click="selectItem('video')">
+                                <i class="b-video icon"></i>
+                                <%= __('ResourceVideo') %> <b ng-show="language!=='en'"><%= __('ResourceView') %></b>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="twelve wide column">
+                        <div class="resources" ng-show="css.pdf===true">
+                            <div class="banner pdf"></div>
+                            <div class="resource-lists">
+                                <div class="resource-list" ng-repeat="pdf in resource.pdfs">
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="list-title">
+                                                <h3>{{$index+1}}.{{pdf.name | translate}}.PDF</h3>
+                                            </div>
+                                        </div>
+                                        <div class="five wide column text-right">
+                                            <a target="_self" class="ui button resource-button" href="{{pdf.path}}" download="{{pdf.name | translate}}.pdf"><%= __('ResourceClickDonwload') %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="resources" ng-show="css.video===true">
+                            <div class="banner video"></div>
+
+                            <div class="resource-lists">
+                                <div class="resource-list" ng-repeat="video in resource.videos">
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="list-title">
+                                                <h3>{{$index+1}}.{{video.name | translate}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="five wide column text-right">
+                                            <button class="ui button resource-button video-button" ng-click="open_modal()"><%= __('ResourceClickView') %></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <page-dimmer ng-model="show_dimmer" class="ui dimmer">
+                <div class="ui embed video-embed">
+                    <video width="320" height="240" controls>
+                        <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4' type='video/mp4'/>
+                        <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.webm'
+                                type='video/webm; codecs="vp8, vorbis"'>
+                        <source src='http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.ogv'
+                                type='video/ogv; codecs="theora, vorbis"'>
+                        <object id="flowplayer"
+                                data="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf"
+                                type="application/x-shockwave-flash" width="320" height="240">
+                            <param name="movie"
+                                   value="http://7xlpjd.com2.z0.glb.qiniucdn.com/flowplayer-3.2.2.swf">
+                            <param name="allowfullscreen" value="false">
+                            <param name="flashvars"
+                                   value="config={'clip':{'url':'http://7xlpjd.com2.z0.glb.qiniucdn.com/EF_HD.mp4','autoPlay':false}}">
+                        </object>
+                    </video>
+                </div>
+            </page-dimmer>
+        </div>
+
+    </div>
+
+
+</div>
+<%- include('view-partial/footer.html') -%>
+<script type="text/javascript">
+
+</script>
+<!--Page JS-->
+<script src="<%= cdn.normal %>bower/angular-semantic-ui/dist/angular-semantic-ui.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/controllers/ResourceCtrl.js?<%= cdn.version %>"></script>
+
+<script src="<%= cdn.normal %>js/page/resource/main.js?<%= cdn.version %>"></script>
+
+
+
+</body>
+
+</html>
