@@ -192,7 +192,7 @@
         $scope.startYearList = (function () {
             var res = [];
             var thisYear = new Date().getUTCFullYear();
-            for (var i = thisYear - 10; i <= thisYear; i++) {
+            for (var i = 1865; i <= thisYear; i++) {
                 res.push(i);
             }
 
@@ -208,6 +208,8 @@
 
             return res;
         })();
+        $scope.startYearList = $scope.startYearList.reverse();
+        $scope.endYearList = $scope.endYearList.reverse();
         $scope.monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         msgBus.onMsg(msgBus.events.profile.loaded, $scope, function () {
