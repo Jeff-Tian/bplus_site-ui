@@ -82,12 +82,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015'].productTypeId;
-                d.egameId = gameConfig['national-2015'].egameId;
-                d.matchId = gameConfig['national-2015'].egameId;
 
                 return d;
             },
@@ -115,12 +113,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-middle'].productTypeId;
-                d.egameId = gameConfig['national-2015-middle'].egameId;
-                d.matchId = gameConfig['national-2015-middle'].egameId;
 
                 return d;
             },
@@ -147,12 +143,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
-                d.egameId = gameConfig['national-2015-economy'].egameId;
-                d.matchId = gameConfig['national-2015-economy'].egameId;
 
                 return d;
             },
@@ -179,12 +173,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015'].productTypeId;
-                d.egameId = gameConfig['national-2015'].egameId;
-                d.matchId = gameConfig['national-2015'].egameId;
 
                 return d;
             },
@@ -210,12 +202,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-middle'].productTypeId;
-                d.egameId = gameConfig['national-2015-middle'].egameId;
-                d.matchId = gameConfig['national-2015-middle'].egameId;
 
                 return d;
             },
@@ -240,12 +230,10 @@ module.exports = {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
-            path: '/service/useraccess/check',
+            path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
                 d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
-                d.egameId = gameConfig['national-2015-economy'].egameId;
-                d.matchId = gameConfig['national-2015-economy'].egameId;
 
                 return d;
             },

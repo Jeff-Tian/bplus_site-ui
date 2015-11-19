@@ -50,11 +50,11 @@
                         </div>
                         <div class="ui divider horizontal"></div>
                         <button loading type="submit" class="ui fluid large red submit button hidden mobile-button"
-                                ng-disabled="!isLoginFormValid()">
+                                ng-disabled="!isLoginFormValid()" ng-cloak>
                             {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
                         </button>
                         <button loading type="submit" class="ui fluid large red submit button"
-                                ng-disabled="!isLoginFormValid()">
+                                ng-disabled="!isLoginFormValid()" ng-cloak>
                             {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
                         </button>
                     </div>

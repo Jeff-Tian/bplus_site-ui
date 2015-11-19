@@ -1,4 +1,4 @@
-describe('Controllers', function () {
+describe('Wechat Login Controller', function () {
     var scope;
 
     // load the controller's module

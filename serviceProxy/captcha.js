@@ -14,8 +14,10 @@ module.exports = {
                     value: d.captcha
                 };
             },
-            responseInterceptor: function (resStream, resJson) {
-                return !!(resJson.isSuccess && resJson.result);
+            responseInterceptor: function (resStream, resJson, req) {
+                req.dualLogError('captcha validation result: \r\n' + JSON.stringify(resJson) + '\r\npassed data:\r\n' + JSON.stringify(req.body));
+
+                return false;
             }
         }
     )
