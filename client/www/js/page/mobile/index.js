@@ -32,7 +32,7 @@ angular
                 controller: 'SelectPaymentMethodCtrl'
             })
             .state('continue-paying', {
-                url: '/continue-paying/:paymentMethod',
+                url: '/continue-paying/:paymentMethod/:kind',
                 templateUrl: 'select-payment-method.html',
                 controller: 'SelectPaymentMethodCtrl'
             })
