@@ -208,6 +208,8 @@
   "service-500": "Server side error",
   "service-70002": "Unexpected error",
   "service-20208": "redemption code not found",
+  "service-20209": "redemption code redeem exceed",
+  "service-20210": "redemption code not valid",
   "service-20202": "offer info not found",
   "service-20212": "payment method not found",
   "service-20215": "create payment failed",
