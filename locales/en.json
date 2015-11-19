@@ -196,7 +196,7 @@
   "service-70009": "Identity already existed",
   "service-70012": "Your email has been verified already",
   "service-70003": "Mail can' be empty or member info is not found",
-  "service-70005": "Can't find member with mail {0}",
+  "service-70005": "Can't find member with mobile or mail",
   "service-70013": "Token expired",
   "service-20100": "Graphic validation code not correct or expired",
   "service-20003": "missing sms template code",

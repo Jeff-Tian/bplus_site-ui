@@ -1,6 +1,7 @@
 var http = require('http');
 var sms = require('../config').sms;
 var proxy = require('./proxy');
+var validator = require('./requestValidator');
 
 module.exports = {
     getVerificationCode: function (req, res, next) {
@@ -36,7 +37,7 @@ module.exports = {
             responseInterceptor: function (resStream, json, req) {
                 req.dualLogError('sms validation result: \r\n' + JSON.stringify(json) + '\r\npassed data:\r\n' + JSON.stringify(req.body));
 
-                return false;
+                return validator.canContinueNextPipe(json);
             }
         })(req, res, next);
     }
