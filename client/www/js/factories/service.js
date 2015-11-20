@@ -56,7 +56,7 @@
                 }).error(function (reason) {
                     dfd.reject(reason);
 
-                    if (String(reason.code) === '401') {
+                    if (reason && reason.code && String(reason.code) === '401') {
                         window.location.href = '/sign-in?return_url=' + encodeURIComponent(window.location.href);
                     }
                 });

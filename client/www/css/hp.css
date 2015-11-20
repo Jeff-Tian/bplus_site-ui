@@ -1278,3 +1278,11 @@
 .grey.segment .content {
   padding-top: 1em;
 }
+.red.button {
+  background-color: #ff3c42 !important;
+}
+.shadowed.button {
+  box-shadow: 0 5px 0 0 #333 !important;
+  font-weight: lighter;
+  border-radius: 10px;
+}

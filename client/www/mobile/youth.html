@@ -8,20 +8,21 @@
     <%- include('header.html') -%>
     <link rel="stylesheet" type="text/css" href="<%= cdn.normal %>css/hp.css?<%= cdn.version %>">
 </head>
-<body ng-app="mobile">
+<body ng-app="mobile" ng-controller="AppCtrl">
 <%/* For wechat browser link share */%>
 <img src="<%= cdn.normal %>img/wechat/for_share.png?<%= cdn.version %>"
      style="margin-left: -100000px; margin-top: -100000px; position: absolute; left: -10000px; top: -10000px;">
 <%- include('head.html') -%>
 
-<div class="mobile pusher" style="margin-top:30px;" ng-init="singleQuoteLeft='‘'; singleQuoteRight='’'">
+<div class="mobile pusher" style="margin-top:30px;">
     <div class="hp-mastead youth">
         <div class="ui container">
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
             <div class="e">
-                <img src="<%=cdn.normal%>img/hp/youth_e_new.png?<%=cdn.version%>">
+                <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
+                   eventName="m.MS2015LP.join.click"><img src="<%=cdn.normal%>img/hp/youth_e_new.png?<%=cdn.version%>"></a>
             </div>
 
             <p class="header-title" style="font-size: 1.3em; margin-bottom: 20px;">全国商战模拟游戏大赛</p>
@@ -29,14 +30,14 @@
             <p class="header-title" style="font-size: 1.3em;">“相遇伪装公司大佬”</p>
 
             <p class="header-title" style="font-size: 1.3em;">
-                {{singleQuoteLeft}}34,019名学生的选择{{singleQuoteRight}}</p>
+                "34,019名学生的选择"
+            </p>
 
             <div class="ui horizontal divider"></div>
             <p class="header-title" style="font-size: 1.6em;">报名即将额满!</p>
 
             <p class="header-title" style="font-size: 1.7em;">价值50万元的奖项</p>
 
-            <div class="ui horizontal divider"></div>
             <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
                eventName="m.MS2015LP.join.click"
                class="ui large red shadowed button" style="padding-left: 5em; padding-right: 5em;">立即报名</a>
