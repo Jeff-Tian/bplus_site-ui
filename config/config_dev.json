@@ -97,8 +97,7 @@
   },
   "featureSwitcher": {
     "enableWechat": true,
-    "enableLogoutOnMobile": true,
-    "enablePartnerSlide": true
+    "enableLogoutOnMobile": true
   },
   "version": "0.9.0",
   "date": "20151118_1056",

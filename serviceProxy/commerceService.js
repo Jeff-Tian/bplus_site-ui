@@ -310,7 +310,7 @@ module.exports = {
                     proxy({
                         host: paymentConfig.host,
                         port: paymentConfig.port,
-                        path: '/service/payment/wechat/pay?' + qs.stringify(wechatConfig),
+                        path: '/service/payment/b_wechat/pay?' + qs.stringify(wechatConfig),
                         method: 'GET',
                         responseInterceptor: function (res, json, req) {
                             console.log('got wechat pay response:');
