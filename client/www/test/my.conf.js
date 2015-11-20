@@ -29,7 +29,7 @@ module.exports = function (config) {
             '../js/directives/*.js',
             '../js/page/register/*.js',
             '../js/page/account-setting/main.js',
-            '../js/page/personal-history/PersonalHistory.js',
+            '../js/page/personal-history/PersonalHistoryCtrl.js',
             '../js/page/personal-history/main.js',
             '../bower/angular-mocks/angular-mocks.js',
             './**/*tests.js'
