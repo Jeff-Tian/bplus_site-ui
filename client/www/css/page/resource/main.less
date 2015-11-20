@@ -119,7 +119,26 @@
     background: transparent;
     padding-bottom: 50%;
 }
-@media only screen and (min-width:768px) and (max-width:992px) {
+.english {
+    .pusher {
+        .four.wide.column {
+            width: 31.25% !important;
+        }
+        .twelve.wide.column {
+            width: 68.75% !important;
+        }
+        .b-resource {
+            .column {
+                .resources {
+                    .banner {
+                        height: 131px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
     .b-resource {
         .ui.vertical.menu {
             .item {
@@ -132,6 +151,9 @@
         }
         .column {
             .resources {
+                .banner {
+                    height: 92px;
+                }
                 .resource-lists {
                     .resource-list {
                         padding: 1em;
@@ -153,19 +175,46 @@
         background: transparent;
         padding-bottom: 50%;
     }
+    .english {
+        .pusher {
+            .b-resource {
+                .column {
+                    .resources {
+                        .banner {
+                            height: 84px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+    .b-resource {
+        .column {
+            .resources {
+                .banner {
+                    height: 118px;
+                }
+            }
+        }
+    }
+    .english {
+        .pusher {
+            .b-resource {
+                .column {
+                    .resources {
+                        .banner {
+                            height: 109px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 @media only screen and (min-width:1199px) {
     .ui.embed.video-embed {
         padding-top: 10%;
-    }
-}
-.english {
-    .pusher {
-        .four.wide.column {
-            width: 31.25% !important;
-        }
-        .twelve.wide.column {
-            width: 68.75% !important;
-        }
     }
 }
