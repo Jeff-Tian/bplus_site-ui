@@ -1,5 +1,5 @@
 .b-resource {
-    min-height: 60rem;
+    min-height: 70rem;
     position: relative;
     background-repeat: no-repeat;
     background-position: center top;
@@ -7,7 +7,7 @@
     background-color: #EFEFEF;
     padding-top: 10em;
     padding-bottom: 1rem;
-    background-image: url('/img/salespage/events_bg.png');
+    background-image: url('/img/salespage/triangle.png');
 
     .ui.vertical.menu {
         border-radius: 0;
@@ -23,17 +23,21 @@
                 margin-right: 2rem;
             }
             i.icon.b-pdf {
-                background: url('/img/icon/home-active.png') no-repeat;
-                width: 32px;
-                height: 26px;
-                margin-top: -5px;
-                margin-left: 1px;
+                background-image: url('/img/icon/download.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 31px;
+                height: 31px;
+                margin-top: -7px;
+                margin-left: 0px;
             }
             i.icon.b-video {
-                background: url('/img/icon/official-active.png') no-repeat;
-                width: 32px;
-                height: 32px;
-                margin-top: -8px;
+                background-image: url('/img/icon/play.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 31px;
+                height: 26px;
+                margin-top: -3.5px;
                 margin-left: 0px;
             }
             &:hover {
@@ -42,10 +46,10 @@
                 color: @color-white;
 
                 i.icon.b-pdf {
-                    background: url('/img/icon/home.png') no-repeat;
+                    background-image: url('/img/icon/download-active.png');
                 }
                 i.icon.b-video {
-                    background: url('/img/icon/official.png') no-repeat;
+                    background-image: url('/img/icon/play-active.png');
                 }
             }
             &.active {
@@ -54,10 +58,10 @@
                 color: @color-white;
 
                 i.icon.b-pdf {
-                    background: url('/img/icon/home.png') no-repeat;
+                    background-image: url('/img/icon/download-active.png');
                 }
                 i.icon.b-video {
-                    background: url('/img/icon/official.png') no-repeat;
+                    background-image: url('/img/icon/play-active.png');
                 }
             }
         }
@@ -65,7 +69,16 @@
     .column {
         .resources {
             .banner {
+                height: 143px;
+                margin: 0;
+                background-size: cover;
+                background-repeat: no-repeat;
+
                 &.pdf {
+                    background-image: url('/img/salespage/resource.jpg');
+                }
+                &.video {
+                    background-image: url('/img/salespage/video.jpg');
                 }
             }
             .resource-lists {
@@ -80,15 +93,14 @@
                         }
                     }
                     .ui.button.resource-button {
-                        background: @color-brand;
+                        background: #e48285;
                         color: @color-white;
-                        opacity: 0.6;
 
                         &:hover {
-                            opacity: 1;
+                            background: #ff3c42;
                         }
                         &.active {
-                            opacity: 1;
+                            background: #ff3c42;
                         }
                     }
                     &:last-child {
@@ -96,6 +108,7 @@
                     }
                 }
             }
+            box-shadow: 0 2px 0 #bebebe;
         }
     }
 }
@@ -132,6 +145,18 @@
                 }
             }
         }
+    }
+    .ui.embed.video-embed {
+        max-width: 800px;
+        width: 80%;
+        margin: 0 auto;
+        background: transparent;
+        padding-bottom: 50%;
+    }
+}
+@media only screen and (min-width:1199px) {
+    .ui.embed.video-embed {
+        padding-top: 10%;
     }
 }
 .english {
