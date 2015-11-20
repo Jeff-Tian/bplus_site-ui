@@ -90,6 +90,8 @@
                     return $scope.isSignUpFormPartiallyValid() && $scope.signUpData.verificationCode && $scope.signUpData.password;
                 };
 
+                $scope.sendingMobileCode = false;
+
                 $scope.getVerificationCode = function () {
                     if ($scope.sendCodeButtonClicked) {
                         sendModuleTracking('identifyPhoneAgain.click');
@@ -101,18 +103,21 @@
                     partiallyValidateSignUpForm();
 
                     if ($scope.isSignUpFormPartiallyValid()) {
-                        service.post('/service-proxy/sms/send', $scope.signUpData)
-                            .then(function (res) {
-                                pollUpdateButtonText(function () {
-                                    $scope.refreshCaptcha(function () {
-                                        $scope.signUpData.captcha = '';
+                        service.executePromiseAvoidDuplicate($scope.sendingMobileCode, function () {
+                            return service.post('/service-proxy/sms/send', $scope.signUpData)
+                                .then(function (res) {
+                                    pollUpdateButtonText(function () {
+                                        $scope.refreshCaptcha(function () {
+                                            $scope.signUpData.captcha = '';
+                                        });
                                     });
-                                });
-                                $scope.sendCodeButtonClicked = true;
-                            }).catch($scope.internalCtrl.handleFormError);
+                                    $scope.sendCodeButtonClicked = true;
+                                }).catch($scope.internalCtrl.handleFormError);
+                        });
                     }
                 };
 
+                $scope.submittingForm = false;
                 $scope.trySignUp = function ($event) {
                     $event.preventDefault();
                     $event.stopPropagation();
@@ -122,7 +127,16 @@
                         return;
                     }
 
-                    $scope.action();
+                    $scope.submittingForm = true;
+                    var a = $scope.action();
+
+                    if (a.finally) {
+                        a.finally(function () {
+                            $scope.submittingForm = false;
+                        });
+                    } else {
+                        $scope.submittingForm = true;
+                    }
                 };
 
                 getSignUpForm().form(angular.extend({}, FormValidation.defaultSetting, {
@@ -152,12 +166,12 @@
                 }
 
 
-                function sendModuleTracking(event, data){
-                    if(!event) {
+                function sendModuleTracking(event, data) {
+                    if (!event) {
                         return;
                     }
 
-                    if($scope.sendTracking){
+                    if ($scope.sendTracking) {
                         $scope.sendTracking(event, data);
                     }
                 }

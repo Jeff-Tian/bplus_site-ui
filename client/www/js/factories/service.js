@@ -79,12 +79,16 @@
 
         // s' own methods
         s.executePromiseAvoidDuplicate = function (flag, promise) {
+            var dfd = $q.deferred;
+
             if (flag) {
-                return;
+                dfd.reject('submitting...');
+
+                return dfd;
             }
 
             flag = true;
-            promise().finally(function () {
+            return promise().finally(function () {
                 flag = false;
             });
         };

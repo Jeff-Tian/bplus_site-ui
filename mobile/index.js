@@ -39,7 +39,7 @@ router.get('/profile', membership.ensureAuthenticated, function (req, res, next)
     res.render('mobile/profile');
 });
 router.get('/game-training', membership.ensureAuthenticated, function (req, res, next) {
-    res.render('mobile/profile');
+    res.render('mobile/game-training');
 });
 
 module.exports = router;

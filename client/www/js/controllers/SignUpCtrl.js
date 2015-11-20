@@ -2,8 +2,8 @@
     exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
         var moduleTrack = new window.ModuleTrack(
             DeviceHelper.isMobile() ? 'm.register' : 'register',
-            function(sender, args){
-                if(args.hash === 'register'){
+            function (sender, args) {
+                if (args.hash === 'register') {
                     sender.send(null);
                 }
             });
@@ -12,15 +12,15 @@
             moduleTrack.send(null);
         }
 
-        $scope.sendTracking = function(event, data){
-            if(!event){
+        $scope.sendTracking = function (event, data) {
+            if (!event) {
                 return;
             }
 
-            if(data){
+            if (data) {
                 moduleTrack.send(event, data);
             }
-            else{
+            else {
                 moduleTrack.send(event);
             }
         };
@@ -29,8 +29,9 @@
             moduleTrack.send('loginBtn.click');
         };
 
-        $scope.registerFormCtrl = { };
+        $scope.registerFormCtrl = {};
 
+        $scope.registering = false;
         $scope.signUp = function () {
             function autoSignIn() {
                 service.post('/service-proxy/logon/authentication', {
@@ -41,7 +42,7 @@
                     .then(function (json) {
                         moduleTrack.send('register.afterClick', {isRegisterSuc: true});
 
-                        window.setTimeout(function(){
+                        window.setTimeout(function () {
                             window.location.href = $scope.localeUrl('/personal-history');
                         }, 500);
                     }, $scope.registerFormCtrl.handleFormError);
@@ -49,13 +50,15 @@
 
             var signUpData = $scope.registerFormCtrl.getFormData();
 
-            service.post('/service-proxy/member/register', signUpData)
-                .then(function(){
-                    autoSignIn();
-                }, $scope.registerFormCtrl.handleFormError)
-                .catch(function(reason){
-                    moduleTrack.send('register.afterClick', {isRegisterSuc: false});
-                });
+            return service.executePromiseAvoidDuplicate($scope.registering, function () {
+                return service.post('/service-proxy/member/register', signUpData)
+                    .then(function () {
+                        autoSignIn();
+                    }, $scope.registerFormCtrl.handleFormError)
+                    .catch(function (reason) {
+                        moduleTrack.send('register.afterClick', {isRegisterSuc: false});
+                    });
+            });
         };
     };
 
