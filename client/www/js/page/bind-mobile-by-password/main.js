@@ -34,27 +34,21 @@ angular.module('bindMobileByPassword', ['pascalprecht.translate', 'ng.utils'])
             $event.preventDefault();
             $event.stopPropagation();
 
-            if (submitting) {
-                return;
-            }
-
             if (!$scope.isLoginFormValid()) {
                 return;
             }
 
-            submitting = true;
-            service
-                .post('/service-proxy/member/bind-mobile-by-password', {
-                    value: $scope.bindData.mobile,
-                    password: $scope.bindData.password
-                })
-                .then(function () {
-                    window.location.href = $scope.localeUrl('/');
-                })
-                .catch(FormValidation.delegateHandleFormError($form))
-                .finally(function () {
-                    submitting = false;
-                });
+            return service.executePromiseAvoidDuplicate(submitting, function () {
+                return service
+                    .post('/service-proxy/member/bind-mobile-by-password', {
+                        value: $scope.bindData.mobile,
+                        password: $scope.bindData.password
+                    })
+                    .then(function () {
+                        window.location.href = $scope.localeUrl('/');
+                    })
+                    .catch(FormValidation.delegateHandleFormError($form));
+            });
         };
     }])
 ;

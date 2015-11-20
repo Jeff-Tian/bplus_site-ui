@@ -22,26 +22,20 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
 
         var submitting = false;
         $scope.changeMobile = function () {
-            if (submitting) {
-                return;
-            }
+            return service.executePromiseAvoidDuplicate(submitting, function () {
+                return service
+                    .post('/service-proxy/member/change-mobile', $scope.changeMobileFormCtrl.getFormData())
+                    .then(function (res) {
+                        console.log(res);
+                        $('.ui.modal.b-modify-mobile').modal('hide');
 
-            submitting = true;
-            service
-                .post('/service-proxy/member/change-mobile', $scope.changeMobileFormCtrl.getFormData())
-                .then(function (res) {
-                    console.log(res);
-                    $('.ui.modal.b-modify-mobile').modal('hide');
+                        $scope.fetchProfile();
+                        $scope.changeMobileFormCtrl.getForm().form('clear');
 
-                    $scope.fetchProfile();
-                    $scope.changeMobileFormCtrl.getForm().form('clear');
-
-                    $scope.$parent.message = $filter('translate')('ChangeMobileSuccess');
-                })
-                .catch($scope.changeMobileFormCtrl.handleFormError)
-                .finally(function () {
-                    submitting = false;
-                });
+                        $scope.$parent.message = $filter('translate')('ChangeMobileSuccess');
+                    })
+                    .catch($scope.changeMobileFormCtrl.handleFormError);
+            });
         };
     }])
     .controller('changeWechatCtrl', ['$scope', 'service', '$filter', 'FormValidation', '$timeout', 'msgBus', '$sce', 'queryParser', function ($scope, service, $filter, FormValidation, $timeout, msgBus, $sce, queryParser) {

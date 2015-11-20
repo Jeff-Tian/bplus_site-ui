@@ -1,4 +1,5 @@
-<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp($event)">
+<form class="ui large form b-sign-up" name="signUpForm" ng-submit="trySignUp($event)"
+      ng-class="{'loading': submittingForm}">
     <div class="ui error message brand"></div>
     <div class="ui">
         <div class="field">
@@ -45,7 +46,7 @@
                 &nbsp;
                 <button type="button" class="ui red button" ng-show='sendCodeButtonClicked'
                         ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())"
-                        ng-click="getVerificationCode()">
+                        ng-click="getVerificationCode()" ng-class="{'loading' : sendingMobileCode}">
                     {{verificationCodeButtonText | translate}}
                 </button>
             </div>
@@ -61,13 +62,14 @@
         <div class="field" ng-show="sendCodeButtonClicked && isFromAndroid" ng-cloak>
             <button type="button" class="ui red fluid button" ng-show='sendCodeButtonClicked'
                     ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())"
-                    ng-click="getVerificationCode()">
+                    ng-click="getVerificationCode()" ng-class="{'loading': sendingMobileCode}">
                 {{verificationCodeButtonText | translate}}
             </button>
         </div>
         <div class="field" ng-hide="sendCodeButtonClicked">
             <button type="button" class="ui red button fluid" ng-click="getVerificationCode()"
-                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())">
+                    ng-disabled="!(allowGetCode && isSignUpFormPartiallyValid())"
+                    ng-class="{'loading': sendingMobileCode}">
                 {{verificationCodeButtonText | translate}}
             </button>
         </div>
