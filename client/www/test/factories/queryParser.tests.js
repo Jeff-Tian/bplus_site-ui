@@ -1,12 +1,10 @@
 describe('Query parser', function () {
     var queryParser;
 
-    angular.bplus = {
-        config: {
-            featureSwitcher: {
-                enableWechat: true
-            }
-        }
+    angular.bplus = angular.bplus || {};
+    angular.bplus.config = angular.bplus.config || {};
+    angular.bplus.config.featureSwitcher = {
+        enableWechat: true
     };
 
     beforeEach(module('accountSetting'));
