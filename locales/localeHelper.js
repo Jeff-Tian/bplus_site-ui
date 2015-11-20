@@ -144,9 +144,7 @@
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = helper;
     } else if (typeof angular !== 'undefined') {
-        console.error('hello');
         angular.bplus = angular.bplus || {};
         angular.bplus.localeHelper = helper;
-        console.error(angular.bplus.localeHelper);
     }
 })();

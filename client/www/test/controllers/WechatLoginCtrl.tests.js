@@ -12,7 +12,5 @@ describe('Wechat Login Controller', function () {
     // tests start here
     it('should not invert cancel button theme by default', function () {
         expect(scope.invertCancelButtonTheme).toEqual(false);
-        console.error(angular.bplus.config);
-        console.error(angular.bplus.localeHelper);
     });
 });
