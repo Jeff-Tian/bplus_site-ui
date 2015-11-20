@@ -253,9 +253,8 @@ mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
-mapRoute2Template('/profile');
-// mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
-mapRoute2Template('/game-training');
+mapRoute2Template('/profile', [membership.ensureAuthenticated]);
+mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
