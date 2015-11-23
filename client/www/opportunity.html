@@ -23,7 +23,8 @@
                     <%= __('OpportunityInfoLine2') %></h2>
 
                 <div class="column">
-                    <a class="ui opportunity-gray large button b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                    <a class="ui opportunity-gray large button b-sp"
+                       href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
                         __('OpportunityApply') %></a>
                 </div>
 
@@ -264,7 +265,8 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                    <a class="ui red large button b-sp check-more-buuton"
+                       href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
                         __('OpportunityCheckMoreJob')
                         %></a>
                 </div>
@@ -314,7 +316,8 @@
                     </div>
                 </div>
                 <div class="ui right aligned container b-opportunity-action">
-                    <a class="ui red large button b-sp check-more-buuton" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                    <a class="ui red large button b-sp check-more-buuton"
+                       href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
                         __('OpportunityCheckMoreCompany') %></a>
                 </div>
             </div>
@@ -370,8 +373,9 @@
 <%- include('view-partial/footer.html') -%>
 
 <!--Page JS-->
-<script src="js/controllers/AppCtrl.js"></script>
-<script src="js/page/opportunity/main.js"></script>
+<script src="<%= cdn.normal %>js/factories/WechatLogon.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/opportunity/main.js?<%= cdn.version %>"></script>
 </body>
 
 </html>

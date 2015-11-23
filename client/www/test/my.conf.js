@@ -18,7 +18,9 @@ module.exports = function (config) {
             '../bower/jquery/dist/jquery.js',
             '../bower/semantic-ui/dist/semantic.js',
             '../bower/angular/angular.js',
+            'mockBplus.js',
             '../bower/angular-translate/angular-translate.js',
+            '../bower/angular-ui-router/release/angular-ui-router.min.js',
             '../js/config/*.js',
             '../js/utils/utils.js',
             '../js/utils/msgbus.js',
@@ -30,6 +32,7 @@ module.exports = function (config) {
             '../js/page/account-setting/main.js',
             '../js/page/personal-history/PersonalHistoryCtrl.js',
             '../js/page/personal-history/main.js',
+            '../js/page/select-payment-method/main.js',
             '../bower/angular-mocks/angular-mocks.js',
             '../../../locales/*.js',
             './**/*tests.js'

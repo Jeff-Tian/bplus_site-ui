@@ -32,6 +32,7 @@ function unsetSensativeCookies(res) {
 
 module.exports = {
     unsetSensativeCookies: unsetSensativeCookies,
+
     setSignedInUser: function (req, res, next) {
         res.locals.applicationId = config.applicationId;
 

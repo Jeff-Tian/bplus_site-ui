@@ -45,7 +45,7 @@
                 $scope.currentUserIsMe = true;
 
                 if ($state.current.name === 'paid') {
-                    service.post($scope.serviceUrls.checkNationalGame2015OrderPayment)
+                    service.post(angular.bplus.config.serviceUrls.checkNationalGame2015OrderPayment)
                         .then(function (result) {
                             if (!/^true$/i.test(result.hasRight)) {
                                 askForPay();

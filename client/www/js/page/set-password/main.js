@@ -11,6 +11,7 @@ angular.module('setPassword', ['pascalprecht.translate', 'ng.utils'])
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('queryParser', angular.bplus.queryParser)
     .directive('loading', angular.bplus.loading)
+    .factory('WechatLogon', angular.bplus.WechatLogon)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('SetPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         var $form = $('.ui.form.set-password');

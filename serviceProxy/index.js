@@ -6,8 +6,14 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
-    uploadCallbackService = require('./uploadCallbackService')
+    uploadCallbackService = require('./uploadCallbackService'),
+    config = require('../config')
     ;
+
+var serviceUrls = {};
+for (var url in config.serviceUrls) {
+    serviceUrls[url] = config.serviceUrls[url].replace('/service-proxy', '');
+}
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
@@ -30,7 +36,7 @@ module.exports = require('express').Router()
     .post('/member/add-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.addEducation)
     .post('/member/update-education', membership.ensureAuthenticated, bplusService.dataSanitanze, bplusService.dataValidate, bplusService.updateEducation)
     .post('/logon/authentication', sso.authenticate)
-    .post('/logon/by-token', sso.setAuthToken)
+    .post(serviceUrls.logOnByToken, sso.setAuthToken)
     .post('/member/resetPassword', sms.validate, sso.resetPassword)
     .post('/member/resetPasswordByEmail', sso.resetPasswordByEmail)
     .post('/mail/send', captcha.validate, sso.getMailToken, mail.tokenCheck, mail.send)
@@ -41,7 +47,7 @@ module.exports = require('express').Router()
     .post('/member/:classification/:operation', membership.ensureAuthenticated, bplusService.updateData)
     .post('/logon/logout', sso.logout)
     .post('/logon/by-wechat', wechat.qrLogon)
-    .post('/logon/from-wechat', wechat.oAuthLogon)
+    .post(serviceUrls.logOnFromWechat, wechat.oAuthLogon)
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
@@ -52,12 +58,12 @@ module.exports = require('express').Router()
     .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post('/payment/create-order/national-game-2015-middle/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post('/payment/create-order/national-game-2015-economy/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
-    .post('/payment/create-order/national-game-2015/check-has-right', 
-        membership.ensureAuthenticated,
-        commerceService.checkUserAccessForNationalGame2015,
-        commerceService.checkUserAccessForNationalGame2015Middle,
-        commerceService.checkUserAccessForNationalGame2015Economy,
-        function (req, res, next) {
-            res.send(req.chunks);
+    .post(serviceUrls.checkNationalGame2015OrderPayment,
+    membership.ensureAuthenticated,
+    commerceService.checkUserAccessForNationalGame2015,
+    commerceService.checkUserAccessForNationalGame2015Middle,
+    commerceService.checkUserAccessForNationalGame2015Economy,
+    function (req, res, next) {
+        res.send(req.chunks);
     })
 ;

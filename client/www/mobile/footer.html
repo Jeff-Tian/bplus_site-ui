@@ -1,3 +1,15 @@
+<div class="fullscreen modal wechat-modal">
+    <div class="ui transparent segment" style="margin-top: 50px;">
+        <h3 class="ui white icon header">
+            <i class="loading spinner icon"></i>
+
+            <div class="content">
+                微信拼命登录中，请稍等片刻……
+            </div>
+        </h3>
+    </div>
+</div>
+
 <script src="<%= cdn.normal %>bower/jquery/dist/jquery.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/underscore/underscore-min.js?<%= cdn.version %>"></script>
@@ -21,6 +33,7 @@
 <!-- build:js js/cdn/m/combined2.js -->
 <script src="js/factories/DeviceHelper.js"></script>
 <script src="js/factories/queryParser.js"></script>
+<script src="js/factories/WechatLogon.js"></script>
 <script src="js/controllers/AppCtrl.js"></script>
 <!--Utils JS-->
 <script src="js/utils/utils.js"></script>

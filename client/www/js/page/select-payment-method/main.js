@@ -48,6 +48,7 @@ angular
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)
+    .factory('WechatLogon', angular.bplus.WechatLogon)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)

@@ -167,6 +167,7 @@ function filterConfig(config) {
     filtered.featureSwitcher = config.featureSwitcher;
     filtered.service_upload = config.service_upload;
     filtered.trackingUrl = config.trackingUrl;
+    filtered.serviceUrls = config.serviceUrls;
 
     return filtered;
 }
