@@ -83,8 +83,6 @@
         var partner = queryParser.get('partner');
         if (partner) {
             DeviceHelper.setCookie('partner', partner);
-        } else {
-            DeviceHelper.setCookie('partner', '');
         }
     };
 

@@ -124,9 +124,9 @@
             }
         };
 
-        if (DeviceHelper.isInWechatBrowser()) {
-            loginFromWechat();
-        }
+        //if (DeviceHelper.isInWechatBrowser()) {
+        //    loginFromWechat();
+        //}
 
         function loginFromWechat() {
             service.executePromiseAvoidDuplicate(logging, function () {
