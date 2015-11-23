@@ -52,17 +52,17 @@
 
 
         $scope.submitting = false;
-        $scope.resetPassword = function($event){
+        $scope.resetPassword = function ($event) {
             $event.preventDefault();
 
             moduleTrack.send('forgetPwd.click', {checkAutoLogin: $scope.loginData.rememberMe});
 
-            window.setTimeout(function(){
+            window.setTimeout(function () {
                 window.location.href = $($event.target).attr('href');
             }, 300);
         };
 
-        $scope.register = function(){
+        $scope.register = function () {
             moduleTrack.send('registerBtn.click', {checkAutoLogin: $scope.loginData.rememberMe});
         };
 
@@ -115,15 +115,22 @@
                 $('.ui.bottom.attached.tab').closest('[tab]').tab('change tab', 'wechat-logon');
             } else {
                 if ($scope.$parent.oAuthLink) {
-                    window.setTimeout(function(){
+                    window.setTimeout(function () {
                         window.location.href = $scope.$parent.oAuthLink;
                     }, 300);
                 } else {
                     service.executePromiseAvoidDuplicate(logging, function () {
+                        var data = {
+                            returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
+                        };
+
+                        var partner = queryParser.get('partner');
+                        if (partner) {
+                            data.partner = partner;
+                        }
+
                         return service
-                            .post('/service-proxy/logon/from-wechat', {
-                                returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
-                            })
+                            .post('/service-proxy/logon/from-wechat', data)
                             .then(function (res) {
                                 $scope.$parent.oAuthLink = res;
                                 window.location.href = $scope.$parent.oAuthLink;

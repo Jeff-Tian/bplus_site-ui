@@ -35,7 +35,7 @@ module.exports = {
         path: '/wechat/oauth/logon',
         method: 'POST',
         dataMapper: function (d) {
-            d.app_id = wechat.corp_app_id;
+            d.app_id = d.partner || wechat.corp_app_id;
 
             return d;
         }

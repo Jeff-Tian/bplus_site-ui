@@ -73,10 +73,17 @@
         var logging = false;
         $scope.logOnFromWechat = function () {
             service.executePromiseAvoidDuplicate(logging, function () {
+                var data = {
+                    returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
+                };
+
+                var partner = queryParser.get('partner');
+                if (partner) {
+                    data.partner = partner;
+                }
+
                 return service
-                    .post('/service-proxy/logon/from-wechat', {
-                        returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
-                    })
+                    .post('/service-proxy/logon/from-wechat', data)
                     .then(function (res) {
                         $scope.$parent.oAuthLink = res;
                     });
