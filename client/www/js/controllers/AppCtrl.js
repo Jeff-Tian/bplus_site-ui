@@ -80,6 +80,10 @@
         if (prefilledRedemptionCode) {
             DeviceHelper.setCookie('pre_redemption_code', prefilledRedemptionCode);
         }
+        var partner = queryParser.get('partner');
+        if (partner) {
+            DeviceHelper.setCookie('partner', partner);
+        }
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser'];

@@ -1,8 +1,10 @@
 (function () {
     var i18n = {};
+    var qs = {};
 
     if (typeof require === 'function') {
         i18n = require('i18n');
+        qs = require('querystring');
     }
 
     var supportedLocales = ['zh', 'en'];
@@ -114,11 +116,15 @@
                     return res.locals.localeLink(notSignedInPath);
                 }
             };
-            res.locals.linkSwitch = function (signedInPath, notSignedInPath) {
+            res.locals.linkSwitch = function (signedInPath, notSignedInPath, returnAfterSignedIn) {
                 if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
                     return signedInPath;
                 } else {
-                    return notSignedInPath;
+                    if (returnAfterSignedIn) {
+                        return notSignedInPath + '' + encodeURIComponent('?' + qs.stringify(req.query));
+                    } else {
+                        return notSignedInPath;
+                    }
                 }
             };
 

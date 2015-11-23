@@ -37,7 +37,8 @@
     "host": "service.bridgeplus.cn",
     "port": "10101",
     "app_id": "bridgeplus_web",
-    "corp_app_id": "bridgeplus_corp"
+    "corp_app_id": "bridgeplus_corp",
+    "pytui": "PYTUI"
   },
   "commerce": {
     "inner": {
