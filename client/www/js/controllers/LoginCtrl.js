@@ -119,26 +119,34 @@
                         window.location.href = $scope.$parent.oAuthLink;
                     }, 300);
                 } else {
-                    service.executePromiseAvoidDuplicate(logging, function () {
-                        var data = {
-                            returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
-                        };
-
-                        var partner = queryParser.get('partner');
-                        if (partner) {
-                            data.partner = partner;
-                        }
-
-                        return service
-                            .post('/service-proxy/logon/from-wechat', data)
-                            .then(function (res) {
-                                $scope.$parent.oAuthLink = res;
-                                window.location.href = $scope.$parent.oAuthLink;
-                            });
-                    });
+                    loginFromWechat();
                 }
             }
         };
+
+        if (DeviceHelper.isInWechatBrowser()) {
+            loginFromWechat();
+        }
+
+        function loginFromWechat() {
+            service.executePromiseAvoidDuplicate(logging, function () {
+                var data = {
+                    returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
+                };
+
+                var partner = queryParser.get('partner') || DeviceHelper.getCookie('partner');
+                if (partner) {
+                    data.partner = partner.toString().toLowerCase();
+                }
+
+                return service
+                    .post('/service-proxy/logon/from-wechat', data)
+                    .then(function (res) {
+                        $scope.$parent.oAuthLink = res;
+                        window.location.href = $scope.$parent.oAuthLink;
+                    });
+            });
+        }
     };
 
     exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus'];

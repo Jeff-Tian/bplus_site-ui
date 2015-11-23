@@ -84,7 +84,12 @@ function advancedProxy(req, res, next, settings) {
                 }
             });
 
-            response.on('error', next);
+            response.on('error', function (err) {
+                req.dualLogError('Server response error in this request: ' + JSON.stringify(options));
+                req.dualLogError('The detail error info is ' + JSON.stringify(err));
+
+                next(err);
+            });
         } else {
             response.pipe(res);
         }
@@ -108,7 +113,10 @@ function advancedProxy(req, res, next, settings) {
             }
 
             if (data) {
+                req.dualLog('proxying data: ' + JSON.stringify(data));
                 request.write(JSON.stringify(data));
+            } else {
+                rq.dualLog('proxying with no data.');
             }
         }
     }

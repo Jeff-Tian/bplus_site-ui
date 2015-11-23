@@ -77,9 +77,9 @@
                     returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
                 };
 
-                var partner = queryParser.get('partner');
+                var partner = queryParser.get('partner') || DeviceHelper.getCookie('partner');
                 if (partner) {
-                    data.partner = partner;
+                    data.partner = partner.toString().toLowerCase();
                 }
 
                 return service
