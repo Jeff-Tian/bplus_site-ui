@@ -214,13 +214,16 @@
                 </div>
 
                 <div class="field" style="padding-top:20px">
-                    <label>没有邀请码？</label>
+                    <label ng-hide="partner">没有邀请码？</label>
 
-                    <div class="ui tiny left floated grey" style="font-size: small; max-width:70%">
+                    <div class="ui tiny left floated grey" style="font-size: small; max-width:70%" ng-hide="partner">
                         扫码关注服务号回复"邀请码"立即赢取！
                     </div>
+                    <div class="ui tiny left floated grey" style="max-width: 70%" ng-show="partner">
+                        扫码或长按关注 {{partnerName}}
+                    </div>
                     <div style="position:absolute;right:-6px;top:100px">
-                        <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>" style="width:100px">
+                        <img ng-src="{{wechatQRImageUrl}}" style="width:100px">
                     </div>
                 </div>
             </form>
@@ -359,7 +362,7 @@
 
             <p ng-show="generatedCode"><%= __('即可免费参赛! (限额邀请三人)') %></p>
 
-            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态请关注Bridge+服务号') %></p>
+            <p ng-hide="partner"><%= __('了解组队方法、获取培训资料、掌握赛事动态请关注Bridge+服务号') %></p>
         </div>
         <div class="ui center aligned container" ng-show="!currentUserIsMe">
             <div class="ui horizontal divider"></div>
@@ -386,7 +389,7 @@
                 <div class="ui transparent card">
                     <div class="ui image">
                         <img class="ui small image"
-                             src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+                             ng-src="{{wechatQRImageUrl}}">
                     </div>
                 </div>
             </div>
@@ -438,10 +441,14 @@
 </script>
 
 <script type="text/javascript">
-    setTimeout(function(){var a=document.createElement("script");
-        var b=document.getElementsByTagName("script")[0];
-        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0035/5758.js?"+Math.floor(new Date().getTime()/3600000);
-        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    setTimeout(function () {
+        var a = document.createElement("script");
+        var b = document.getElementsByTagName("script")[0];
+        a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0035/5758.js?" + Math.floor(new Date().getTime() / 3600000);
+        a.async = true;
+        a.type = "text/javascript";
+        b.parentNode.insertBefore(a, b)
+    }, 1);
 </script>
 </body>
 
