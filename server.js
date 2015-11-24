@@ -275,8 +275,8 @@ server.use('/healthcheck', function (req, res, next) {
 });
 
 var qs = require('querystring');
-server.get('/test', function (req, res) {
-    res.send(req.headers['referer'] + '?' + qs.stringify(req.query));
+server.get('/m/test', function (req, res) {
+    throw new Error('asdfl');
 });
 
 server.get('/locale', function (req, res, next) {

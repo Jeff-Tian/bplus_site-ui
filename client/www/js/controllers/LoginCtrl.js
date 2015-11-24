@@ -82,7 +82,7 @@
 
             $scope.submitting = true;
             msgBus.showLoading();
-            service.post('/service-proxy/logon/authentication', {
+            service.post(angular.bplus.config.serviceUrls.logOnAuthenticate, {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe,
