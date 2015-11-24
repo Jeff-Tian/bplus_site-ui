@@ -100,7 +100,13 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "0.9.0",
-  "date": "20151118_1056",
-  "trackingUrl": "http://uat.tracking.hcd.com"
+  "version": "1.0.0",
+  "date": "20151123_0737",
+  "trackingUrl": "http://uat.tracking.hcd.com",
+  "serviceUrls": {
+    "logOnFromWechat": "/service-proxy/logon/from-wechat",
+    "logOnByToken": "/service-proxy/logon/by-token",
+    "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
+    "logOnAuthenticate": "/service-proxy/logon/authentication"
+  }
 }

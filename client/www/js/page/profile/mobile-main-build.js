@@ -86,6 +86,7 @@ require([
             .factory('service', angular.bplus.service)
             .factory('MessageStore', angular.bplus.MessageStore)
             .factory('queryParser', angular.bplus.queryParser)
+            .factory('WechatLogon', angular.bplus.WechatLogon)
         ;
     (function (agModule) {
         banner(agModule);

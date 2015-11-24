@@ -116,12 +116,12 @@
                     return res.locals.localeLink(notSignedInPath);
                 }
             };
-            res.locals.linkSwitch = function (signedInPath, notSignedInPath, returnAfterSignedIn) {
+            res.locals.linkSwitch = function (signedInPath, notSignedInPath, returnUrlAfterSignedIn) {
                 if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
                     return signedInPath;
                 } else {
-                    if (returnAfterSignedIn) {
-                        return notSignedInPath + '' + encodeURIComponent('?' + qs.stringify(req.query));
+                    if (returnUrlAfterSignedIn) {
+                        return notSignedInPath + '?return_url=' + encodeURIComponent(returnUrlAfterSignedIn);
                     } else {
                         return notSignedInPath;
                     }

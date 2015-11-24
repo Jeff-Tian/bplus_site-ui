@@ -16,7 +16,7 @@
          style="margin-top: 2em;">
         <div class="b-signin-wide padded" tab=".b-signin-wide">
             <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
-                <h2 class="ui centered header" ng-show="!!loginData.wechatToken"><%= __('绑定手机') %></h2>
+                <h2 class="ui centered header" ng-show="!!loginData.wechatToken" ng-cloak><%= __('绑定手机') %></h2>
 
                 <form class="ui large fluid form login" ng-class="{'loading': submitting}" ng-submit="tryLogin($event)"
                       name="loginForm">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="fields">
                             <div class="eight wide field">
-                                <div class="ui checkbox remember-me" ng-hide="!!loginData.wechatToken">
+                                <div class="ui checkbox remember-me" ng-hide="!!loginData.wechatToken" ng-cloak>
                                     <input type="checkbox" ng-model="loginData.rememberMe" id="remember-me-check-box">
                                     <label for="remember-me-check-box"><%= __('RememberMe') %></label>
                                 </div>
@@ -62,16 +62,14 @@
                 <a class="ui fluid large red basic button" href="#register" ng-click="register()">
                     <%= __('NoAccount') %> <%= __('SignUpNow') %>
                 </a>
-                <% if (featureSwitcher.enableWechat === true && (!device.isFromMobile || device.isFromWechatBrowser)) {
-                %>
-                <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
-                <div class="ui" ng-hide="!!loginData.wechatToken">
+
+                <div class="ui divider" ng-hide="!!loginData.wechatToken" ng-cloak></div>
+                <div class="ui" ng-hide="!!loginData.wechatToken" ng-cloak>
                     <a class="wechat link" ng-click="logOnViaWechat()">
                         <%= __('SignInWithOtherWays') %>
                         <i class="big wechat icon"></i>
                     </a>
                 </div>
-                <% } %>
             </div>
             <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
                 <h2 class="ui center aligned header grey color"><%= __('SignUp') %></h2>
@@ -102,6 +100,7 @@
 <script src="js/directives/registerForm.js"></script>
 <script src="js/directives/tab.js"></script>
 <script src="js/directives/dropdown.js"></script>
+<script src="js/factories/WechatLogon.js"></script>
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/factories/queryParser.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
@@ -111,10 +110,14 @@
 <!-- endbuild -->
 
 <script type="text/javascript">
-    setTimeout(function(){var a=document.createElement("script");
-        var b=document.getElementsByTagName("script")[0];
-        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0035/5758.js?"+Math.floor(new Date().getTime()/3600000);
-        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    setTimeout(function () {
+        var a = document.createElement("script");
+        var b = document.getElementsByTagName("script")[0];
+        a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0035/5758.js?" + Math.floor(new Date().getTime() / 3600000);
+        a.async = true;
+        a.type = "text/javascript";
+        b.parentNode.insertBefore(a, b)
+    }, 1);
 </script>
 </body>
 

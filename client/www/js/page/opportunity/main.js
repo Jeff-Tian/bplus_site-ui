@@ -16,6 +16,7 @@ angular.module('bplus', [
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('queryParser', angular.bplus.queryParser)
+    .factory('WechatLogon', angular.bplus.WechatLogon)
     .controller('AppCtrl', angular.bplus.AppCtrl)
 ;
 (function() {

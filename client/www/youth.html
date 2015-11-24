@@ -47,7 +47,7 @@
             </div>
 
             <div class="e">
-                <a href="<%= linkSwitch('index#/select-payment-method', 'sign-in?return_url=/m/national') %>"
+                <a href="select-payment-method"
                    eventName="MS2015LP.join.click"><img
                         src="<%=cdn.normal%>img/hp/youth_e_new.png?<%=cdn.version%>"></a>
             </div>
@@ -642,6 +642,7 @@
 
 </div>
 <%- include('view-partial/footer.html') -%>
+<script src="<%= cdn.normal %>js/factories/WechatLogon.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/hp/main.js?<%= cdn.version %>"></script>
 <script>

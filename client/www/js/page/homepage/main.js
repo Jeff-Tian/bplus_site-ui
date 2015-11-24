@@ -14,6 +14,7 @@ angular.module('bplus', [
     .factory('MessageStore', angular.bplus.MessageStore)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('queryParser', angular.bplus.queryParser)
+    .factory('WechatLogon', angular.bplus.WechatLogon)
     .directive('loading', angular.bplus.loading)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)

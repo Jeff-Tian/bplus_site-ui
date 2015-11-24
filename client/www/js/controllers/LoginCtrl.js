@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser, msgBus) {
+    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser, msgBus, WechatLogon) {
 
         $('.ui.checkbox.remember-me').checkbox({
             'onChecked': function () {
@@ -82,7 +82,7 @@
 
             $scope.submitting = true;
             msgBus.showLoading();
-            service.post('/service-proxy/logon/authentication', {
+            service.post(angular.bplus.config.serviceUrls.logOnAuthenticate, {
                 value: $scope.loginData.mobile,
                 password: $scope.loginData.password,
                 remember: $scope.loginData.rememberMe,
@@ -129,25 +129,13 @@
         //}
 
         function loginFromWechat() {
-            service.executePromiseAvoidDuplicate(logging, function () {
-                var data = {
-                    returnUrl: DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
-                };
-
-                var partner = queryParser.get('partner') || DeviceHelper.getCookie('partner');
-                if (partner) {
-                    data.partner = partner.toString().toLowerCase();
-                }
-
-                return service
-                    .post('/service-proxy/logon/from-wechat', data)
-                    .then(function (res) {
-                        $scope.$parent.oAuthLink = res;
-                        window.location.href = $scope.$parent.oAuthLink;
-                    });
-            });
+            WechatLogon.sendRequest(logging)
+                .then(function (res) {
+                    $scope.$parent.oAuthLink = res;
+                    window.location.href = $scope.$parent.oAuthLink;
+                });
         }
     };
 
-    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus'];
+    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus', 'WechatLogon'];
 })(angular.bplus = angular.bplus || {});
