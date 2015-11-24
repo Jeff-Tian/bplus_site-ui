@@ -7,10 +7,6 @@
         function tryHandleWechatLogonCallback() {
             $scope.wechatSigningIn = true;
 
-            function forceFillMobileNumber() {
-                window.location.href = $scope.localeUrl('/sign-up-from', $scope.language);
-            }
-
             function bindRegisteredMobileByWechatToken(token, serverResponse) {
                 window.location.href = $scope.localeUrl('/sign-in?wechat_token=' + token + '&server_response=' + window.btoa(serverResponse));
             }
@@ -18,19 +14,6 @@
             WechatLogon.tryHandleCallback(bindRegisteredMobileByWechatToken, function () {
                 window.location.href = window.location.origin + window.location.pathname + window.location.hash;
                 $scope.wechatSigningIn = false;
-                
-                //$scope.fetchProfile()
-                //    .then(function (profile) {
-                //        if (profile.member_id && !profile.mobile) {
-                //            forceFillMobileNumber();
-                //        }
-                //
-                //        //window.alert(JSON.stringify(profile) + '    ' + window.location.href);
-                //    })
-                //    .finally(function () {
-                //        $scope.wechatSigningIn = false;
-                //    })
-                //;
             }, function (errcode) {
                 $scope.wechatSigningIn = false;
 
@@ -127,6 +110,10 @@
         if (partner) {
             DeviceHelper.setCookie('partner', partner);
         }
+
+        $scope.wechatQRImageUrl = WechatLogon.getQRImageUrl();
+        $scope.partner = WechatLogon.getPartner();
+        $scope.partnerName = WechatLogon.getPartnerName();
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser', 'WechatLogon', '$filter'];

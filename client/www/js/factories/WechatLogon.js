@@ -1,13 +1,23 @@
 (function (exports) {
     exports.WechatLogon = function (service, queryParser, DeviceHelper) {
+        function getPartner() {
+            return queryParser.get('partner') || DeviceHelper.getCookie('partner');
+        }
+
         return {
+            getPartner: getPartner,
+            getPartnerName: function () {
+                return {
+                    "pytui": "朋友推"
+                }[getPartner()];
+            },
             sendRequest: function (logging) {
                 return service.executePromiseAvoidDuplicate(logging, function () {
                     var data = {
                         returnUrl: (window.location.protocol + '//' + window.location.host + decodeURIComponent(queryParser.get('return_url'))) || DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
                     };
 
-                    var partner = queryParser.get('partner') || DeviceHelper.getCookie('partner');
+                    var partner = getPartner();
                     if (partner) {
                         data.partner = partner.toString().toLowerCase();
                     }
@@ -44,6 +54,16 @@
                         }
                     }
                 }
+            },
+
+            getQRImageUrl: function () {
+                var partner = getPartner();
+
+                if (partner) {
+                    return angular.bplus.config.cdn.normal + 'img/wechat/' + partner + '.jpg?' + angular.bplus.config.cdn.version;
+                }
+
+                return angular.bplus.config.cdn.normal + 'img/wechat/bplus_fuwuhao.jpg?' + angular.bplus.config.cdn.version;
             }
         };
     };
