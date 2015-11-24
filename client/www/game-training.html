@@ -200,6 +200,9 @@
             .factory('MessageStore', angular.bplus.MessageStore)
             .factory('queryParser', angular.bplus.queryParser);
     $(".menu .item").tab();
+    if (location.hash.indexOf("watch") > -1) {
+        $(".b-game-training-container-item-watch").click();
+    }
 </script>
 </body>
 </html>

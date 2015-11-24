@@ -237,7 +237,6 @@ server
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
-mapRoute2Template('/study');
 mapRoute2Template('/contractus');
 mapRoute2Template('/aboutus');
 mapRoute2Template('/school');
@@ -257,6 +256,13 @@ mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
+server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('game-training');
+    } else {
+        res.redirect('/m/game-training');
+    }
+});
 server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('select-payment-method');
