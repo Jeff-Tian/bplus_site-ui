@@ -103,7 +103,7 @@
                     partiallyValidateSignUpForm();
 
                     if ($scope.isSignUpFormPartiallyValid()) {
-                        service.executePromiseAvoidDuplicate($scope.sendingMobileCode, function () {
+                        service.executePromiseAvoidDuplicate($scope, 'sendingMobileCode', function () {
                             return service.post('/service-proxy/sms/send', $scope.signUpData)
                                 .then(function (res) {
                                     pollUpdateButtonText(function () {
@@ -114,6 +114,8 @@
                                     $scope.sendCodeButtonClicked = true;
                                 }).catch($scope.internalCtrl.handleFormError);
                         });
+
+                        console.log('$scope.sendingMobileCode = ' + $scope.sendingMobileCode);
                     }
                 };
 

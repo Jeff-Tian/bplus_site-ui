@@ -21,9 +21,9 @@ angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
     .controller('changeMobileCtrl', ['$scope', 'service', '$filter', function ($scope, service, $filter) {
         $scope.changeMobileFormCtrl = {};
 
-        var submitting = false;
+        $scope.submitting = false;
         $scope.changeMobile = function () {
-            return service.executePromiseAvoidDuplicate(submitting, function () {
+            return service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
                 return service
                     .post('/service-proxy/member/change-mobile', $scope.changeMobileFormCtrl.getFormData())
                     .then(function (res) {

@@ -2,9 +2,9 @@
     exports.ResetPasswordCtrl = function ($scope, $element, service) {
         $scope.formCtrl = {};
 
-        var submitting = false;
+        $scope.submitting = false;
         $scope.resetPassword = function () {
-            return service.executePromiseAvoidDuplicate(submitting, function () {
+            return service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
                 return service.post('/service-proxy/member/resetPassword', $scope.formCtrl.getFormData())
                     .then(function () {
                         $('.reset.shape').shape('flip over').find('.active.side').removeClass('hidden');

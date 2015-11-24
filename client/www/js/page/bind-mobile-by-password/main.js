@@ -29,7 +29,7 @@ angular.module('bindMobileByPassword', ['pascalprecht.translate', 'ng.utils'])
             return $form.form('is valid');
         };
 
-        var submitting = false;
+        $scope.submitting = false;
 
         $scope.bindMobile = function ($event) {
             $event.preventDefault();
@@ -39,7 +39,7 @@ angular.module('bindMobileByPassword', ['pascalprecht.translate', 'ng.utils'])
                 return;
             }
 
-            return service.executePromiseAvoidDuplicate(submitting, function () {
+            return service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
                 return service
                     .post('/service-proxy/member/bind-mobile-by-password', {
                         value: $scope.bindData.mobile,

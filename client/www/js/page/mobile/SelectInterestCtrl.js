@@ -22,9 +22,9 @@
             other: ''
         };
 
-        var saving = false;
+        $scope.saving = false;
         $scope.saveInterests = function () {
-            service.executePromiseAvoidDuplicate(saving, function () {
+            service.executePromiseAvoidDuplicate($scope, 'saving', function () {
                 return service
                     .post('/service-proxy/member/save-interests', {
                         data: [

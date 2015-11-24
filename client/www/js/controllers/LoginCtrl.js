@@ -107,7 +107,7 @@
             });
         };
 
-        var logging = false;
+        $scope.logging = false;
         $scope.logOnViaWechat = function () {
             moduleTrack.send('loginWechat.click', {checkAutoLogin: $scope.loginData.rememberMe});
 
@@ -129,7 +129,7 @@
         //}
 
         function loginFromWechat() {
-            WechatLogon.sendRequest(logging)
+            WechatLogon.sendRequest($scope, 'logging')
                 .then(function (res) {
                     $scope.$parent.oAuthLink = res;
                     window.location.href = $scope.$parent.oAuthLink;

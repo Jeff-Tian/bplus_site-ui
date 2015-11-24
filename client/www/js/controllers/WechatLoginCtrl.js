@@ -3,9 +3,9 @@
         var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.login' : 'login');
 
         $scope.wechatQRPage = $sce.trustAsResourceUrl('about:blank');
-        var opening = false;
+        $scope.opening = false;
         $scope.logOnViaWechat = function () {
-            service.executePromiseAvoidDuplicate(opening, function () {
+            service.executePromiseAvoidDuplicate($scope, 'opening', function () {
                 return service
                     .post('/service-proxy/logon/by-wechat', {
                         returnUrl: (window.location.protocol + '//' + window.location.host + decodeURIComponent(queryParser.get('return_url'))) || DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
@@ -16,9 +16,9 @@
             });
         };
 
-        var logging = false;
+        $scope.logging = false;
         $scope.logOnFromWechat = function () {
-            WechatLogon.sendRequest(logging)
+            WechatLogon.sendRequest($scope, 'logging')
                 .then(function (res) {
                     $scope.$parent.oAuthLink = res;
                 });

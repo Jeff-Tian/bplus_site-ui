@@ -50,7 +50,7 @@
 
             var signUpData = $scope.registerFormCtrl.getFormData();
 
-            return service.executePromiseAvoidDuplicate($scope.registering, function () {
+            return service.executePromiseAvoidDuplicate($scope, 'registering', function () {
                 return service.post('/service-proxy/member/register', signUpData)
                     .then(function () {
                         autoSignIn();
