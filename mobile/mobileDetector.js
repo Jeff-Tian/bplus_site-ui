@@ -8,6 +8,10 @@ module.exports = {
     },
 
     isFromAndroid: function (ua) {
-        return /android/i.test(ua)
+        return /android/i.test(ua);
+    },
+
+    isFromPad: function (ua) {
+        return /nexus/i.test(ua);
     }
 };

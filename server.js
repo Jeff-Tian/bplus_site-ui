@@ -140,7 +140,8 @@ function mapRoute2Template(url, template, pipes) {
 }
 
 function isFromMobile(req) {
-    return mobileDetector.isFromMobile(req.headers['user-agent']);
+    var ua = req.headers['user-agent'];
+    return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
 }
 
 server.get('/', renderIndex);
@@ -278,6 +279,11 @@ server.use('/healthcheck', function (req, res, next) {
         everything: 'is ok',
         time: new Date()
     });
+});
+
+server.get('/test', function (req, res, next) {
+    var ua = req.headers['user-agent'];
+    res.send(ua);
 });
 
 var qs = require('querystring');
