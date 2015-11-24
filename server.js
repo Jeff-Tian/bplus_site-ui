@@ -236,7 +236,6 @@ server
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
-// mapRoute2Template('/study');
 mapRoute2Template('/contractus');
 mapRoute2Template('/aboutus');
 mapRoute2Template('/school');
