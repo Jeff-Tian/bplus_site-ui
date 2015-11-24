@@ -16,7 +16,9 @@
             }
 
             WechatLogon.tryHandleCallback(bindRegisteredMobileByWechatToken, function () {
-                window.location.href = window.location.origin + window.location.pathname;
+                window.location.href = window.location.origin + window.location.pathname + window.location.hash;
+                $scope.wechatSigningIn = false;
+                
                 //$scope.fetchProfile()
                 //    .then(function (profile) {
                 //        if (profile.member_id && !profile.mobile) {
