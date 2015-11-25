@@ -66,44 +66,41 @@
             moduleTrack.send('registerBtn.click', {checkAutoLogin: $scope.loginData.rememberMe});
         };
 
-
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
-
-            if ($scope.submitting) {
-                return;
-            }
 
             moduleTrack.send('login.beforeclick', {checkAutoLogin: $scope.loginData.rememberMe});
             if (!$scope.isLoginFormValid()) {
                 return;
             }
 
-            $scope.submitting = true;
-            msgBus.showLoading();
-            service.post(angular.bplus.config.serviceUrls.logOnAuthenticate, {
-                value: $scope.loginData.mobile,
-                password: $scope.loginData.password,
-                remember: $scope.loginData.rememberMe,
-                wechat_token: $scope.loginData.wechatToken,
-                return_url: queryParser.get('return_url')
-            }).then(function (res) {
-                moduleTrack.send('login.afterClick', {isLoginSuc: true, checkAutoLogin: $scope.loginData.rememberMe});
+            service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
+                return service.post(angular.bplus.config.serviceUrls.logOnAuthenticate, {
+                    value: $scope.loginData.mobile,
+                    password: $scope.loginData.password,
+                    remember: $scope.loginData.rememberMe,
+                    wechat_token: $scope.loginData.wechatToken,
+                    return_url: queryParser.get('return_url')
+                }).then(function (res) {
+                    moduleTrack.send('login.afterClick', {
+                        isLoginSuc: true,
+                        checkAutoLogin: $scope.loginData.rememberMe
+                    });
 
-                MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
+                    MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
-                setTimeout(function () {
-                    window.location.href = '/' + angular.bplus.localeHelper.getLocale(window.location.pathname);
+                    setTimeout(function () {
+                        window.location.href = '/zh/cmpt';
+                    }, 500);
+                }).catch(function (reason) {
+                    FormValidation.delegateHandleFormError($loginForm)(reason);
 
-                }, 500);
-            }).catch(function (reason) {
-                FormValidation.delegateHandleFormError($loginForm)(reason);
-
-                moduleTrack.send('login.afterClick', {isLoginSuc: false, checkAutoLogin: $scope.loginData.rememberMe});
-
-                msgBus.hideLoading();
-                $scope.submitting = false;
+                    moduleTrack.send('login.afterClick', {
+                        isLoginSuc: false,
+                        checkAutoLogin: $scope.loginData.rememberMe
+                    });
+                });
             });
         };
 
