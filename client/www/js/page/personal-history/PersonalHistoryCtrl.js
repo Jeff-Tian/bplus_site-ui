@@ -166,8 +166,8 @@
         var prefilledDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
         $scope.getBirthDayList = function () {
-            var year = $scope.personalInfo.yearOfBirth;
-            var month = $scope.personalInfo.monthOfBirth;
+            var year = Number($scope.personalInfo.yearOfBirth);
+            var month = Number($scope.personalInfo.monthOfBirth);
             var days = [];
 
             if (!year || !month) {
@@ -175,9 +175,9 @@
             } else {
                 var date = new Date(Date.UTC(year, month - 1, 1));
 
-                while (date.getMonth() === month - 1) {
-                    days.push(date.getDate());
-                    date.setDate(date.getDate() + 1);
+                while (date.getUTCMonth() === month - 1) {
+                    days.push(date.getUTCDate());
+                    date.setUTCDate(date.getUTCDate() + 1);
                 }
             }
 
