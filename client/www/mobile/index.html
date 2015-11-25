@@ -380,9 +380,15 @@
 
             <p ng-show="generatedCode"><%= __('即可免费参赛！（限额三人）') %></p>
 
-            <h3 class="ui header">
+            <h3 class="ui header" ng-hide="partner">
                 <a class="ui red button" href="/m/national"><%= __('立即报名') %></a>
             </h3>
+
+            <h4 class="ui header" ng-show="partner">
+                关注以下二维码报名
+            </h4>
+
+            <div class="ui horizontal divider"></div>
         </div>
         <div class="ui centered container" ng-show="showQRCode">
             <div class="ui six doubling centered cards">
