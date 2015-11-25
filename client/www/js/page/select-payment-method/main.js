@@ -41,6 +41,7 @@ angular
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
     .directive('loading', angular.bplus.loading)
+    .directive('countDown', angular.bplus.countDown)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)

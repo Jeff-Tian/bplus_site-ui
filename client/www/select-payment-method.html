@@ -9,7 +9,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-app="selectPaymentMethod" ng-controller="AppCtrl">
+<body ng-app="selectPaymentMethod" ng-controller="AppCtrl" class="b-background">
 <%- include('view-partial/header.html') -%>
 <div class="ui b-signin-wrapper" style="width: 800px;">
 
@@ -73,7 +73,7 @@
                             </button>
                         </td>
                     </tr>
-                     <tr style="border-bottom: none;">
+                    <tr style="border-bottom: none;">
                         <td style="border-top: none; padding-top:30px">
                             <div class="ui radio checkbox">
                                 <input type="radio" name="howMuch" checked="checked" tabindex="0"
@@ -88,8 +88,10 @@
                                         currency: "¥ "}}
                                     </button>
                                 </label>
+
                                 <p class="b-payment-crown">
-                                    <img src="<%= cdn.normal %>img/pay/crown.png?<%=cdn.version %>" style="width: 20px;">
+                                    <img src="<%= cdn.normal %>img/pay/crown.png?<%=cdn.version %>"
+                                         style="width: 20px;">
                                 </p>
                             </div>
                         </td>
@@ -157,7 +159,8 @@
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('使用邀请码参赛:') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
                         <div class="field">
-                            <input type="text" style="width:390px" placeholder="" ng-required="true" ng-model="payData.redemptionCode">
+                            <input type="text" style="width:390px" placeholder="" ng-required="true"
+                                   ng-model="payData.redemptionCode">
                         </div>
                         <div class="field">
                             <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
@@ -320,6 +323,10 @@
             </h5>
             <div class="ui horizontal divider"></div>
             <div class="ui horizontal divider"></div>
+            <p><span count-down href="/zh/cmpt">5</span> 秒后自动进入游戏页面，如果页面没有自动跳转，<a href="/zh/cmpt">请点击这里立即参赛！</a></p>
+
+            <div class="ui horizontal divider"></div>
+            <div class="ui horizontal divider"></div>
             <p><%= __('了解组队方法、获取培训资料、掌握赛事动态') %></p>
 
             <p><%= __('请关注Bridge+服务号') %></p>
@@ -342,6 +349,7 @@
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
 <script src="js/directives/loading.js"></script>
+<script src="js/directives/countDown.js"></script>
 <script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
@@ -367,10 +375,14 @@
     })();
 </script>
 <script type="text/javascript">
-    setTimeout(function(){var a=document.createElement("script");
-        var b=document.getElementsByTagName("script")[0];
-        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0035/5758.js?"+Math.floor(new Date().getTime()/3600000);
-        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    setTimeout(function () {
+        var a = document.createElement("script");
+        var b = document.getElementsByTagName("script")[0];
+        a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0035/5758.js?" + Math.floor(new Date().getTime() / 3600000);
+        a.async = true;
+        a.type = "text/javascript";
+        b.parentNode.insertBefore(a, b)
+    }, 1);
 </script>
 </body>
 

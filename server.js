@@ -140,7 +140,8 @@ function mapRoute2Template(url, template, pipes) {
 }
 
 function isFromMobile(req) {
-    return mobileDetector.isFromMobile(req.headers['user-agent']);
+    var ua = req.headers['user-agent'];
+    return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
 }
 
 server.get('/', renderIndex);
@@ -237,7 +238,6 @@ server
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
-mapRoute2Template('/study');
 mapRoute2Template('/contractus');
 mapRoute2Template('/aboutus');
 mapRoute2Template('/school');
@@ -257,6 +257,13 @@ mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
+server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('game-training');
+    } else {
+        res.redirect('/m/game-training');
+    }
+});
 server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('select-payment-method');
@@ -272,6 +279,11 @@ server.use('/healthcheck', function (req, res, next) {
         everything: 'is ok',
         time: new Date()
     });
+});
+
+server.get('/test', function (req, res, next) {
+    var ua = req.headers['user-agent'];
+    res.send(ua);
 });
 
 var qs = require('querystring');

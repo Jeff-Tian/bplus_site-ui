@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bridge+</title>
-    <meta name="description" content="Bridge+">
+    <meta name="description" content="Bridge+全国商战模拟大赛热烈启动！万元奖金等你来挑战。玩家以团队形式在虚拟市场共同管理公司，在市场数据和竞争模式下，真实识别商业实战力">
     <%- include('view-partial/head.html') -%>
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css"
@@ -68,6 +68,8 @@
             <a class="b-slider-item fourth-item" href="http://www.shixiseng.com/invite/Qmi6" target="_blank"
                style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/shixiseng_bg.png?<%= cdn.version %>');">
             </a>
+            <a class="b-slider-item fifth-item" href="http://www.xiaodao360.com" target="_blank"
+               style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/xiaodao.jpg?<%= cdn.version %>');"></a>
         </div>
     </div>
     <div class="page-content">
@@ -282,7 +284,7 @@
                 </div>
                 <div class="ui right aligned container b-jobs-action">
                     <a class="ui red large button check-more-buuton b-sp"
-                       href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                       href="<%= localeLinkSwitch('/profile', '/sign-in#/register') %>"><%=
                         __('IndexCheckMoreJobs') %></a>
                 </div>
             </div>
@@ -450,10 +452,14 @@
 <!-- endbuild -->
 
 <script type="text/javascript">
-    setTimeout(function(){var a=document.createElement("script");
-        var b=document.getElementsByTagName("script")[0];
-        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0035/5758.js?"+Math.floor(new Date().getTime()/3600000);
-        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    setTimeout(function () {
+        var a = document.createElement("script");
+        var b = document.getElementsByTagName("script")[0];
+        a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0035/5758.js?" + Math.floor(new Date().getTime() / 3600000);
+        a.async = true;
+        a.type = "text/javascript";
+        b.parentNode.insertBefore(a, b)
+    }, 1);
 </script>
 </body>
 

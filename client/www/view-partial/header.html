@@ -26,7 +26,7 @@
 
                     <div class="ui inverted vertical center aligned b-profile menu">
                         <img
-                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png' : '<%= cdn.normal %>img/female_default.png')}}"
+                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png<%= cdn.version %>')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
                         <a class="center aligned item" href="<%= localeLink('account-setting') %>"><%=
@@ -83,7 +83,7 @@
 
                     <div class="ui inverted vertical center aligned b-profile menu">
                         <img
-                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? 'img/male_default.png' : 'img/female_default.png')}}"
+                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
                         <a class="center aligned item" href="<%= localeLink('account-setting') %>"><%=

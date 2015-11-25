@@ -11,8 +11,8 @@
                     "pytui": "朋友推"
                 }[getPartner()];
             },
-            sendRequest: function (logging) {
-                return service.executePromiseAvoidDuplicate(logging, function () {
+            sendRequest: function (scope, logging) {
+                return service.executePromiseAvoidDuplicate(scope, logging, function () {
                     var data = {
                         returnUrl: (window.location.protocol + '//' + window.location.host + decodeURIComponent(queryParser.get('return_url'))) || DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
                     };
