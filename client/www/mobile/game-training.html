@@ -20,46 +20,51 @@
         </div>
         <div class="ui container b-mobile-game-training-detail-container">
             <div class="ui active tab" data-tab="download">
-                <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining1.pdf"
-                   class="ui grid b-mobile-game-training-detail-item">
-                    <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
-                        学员手册
-                    </div>
-                </a>
+                <div style="display:none" id="download-content">
+                    <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining1.pdf"
+                       class="ui grid b-mobile-game-training-detail-item">
+                        <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
+                            学员手册
+                        </div>
+                    </a>
 
-                <div class="ui inverted divider b-mobile-game-training-divider"></div>
-                <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining2.pdf"
-                   class="ui grid b-mobile-game-training-detail-item">
-                    <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
-                        比赛形式及界面介绍
-                    </div>
-                </a>
+                    <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                    <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining2.pdf"
+                       class="ui grid b-mobile-game-training-detail-item">
+                        <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
+                            比赛形式及界面介绍
+                        </div>
+                    </a>
 
-                <div class="ui inverted divider b-mobile-game-training-divider"></div>
-                <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining3.pdf"
-                   class="ui grid b-mobile-game-training-detail-item">
-                    <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
-                        赛前阅读材料
-                    </div>
-                </a>
+                    <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                    <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining3.pdf"
+                       class="ui grid b-mobile-game-training-detail-item">
+                        <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
+                            赛前阅读材料
+                        </div>
+                    </a>
 
-                <div class="ui inverted divider b-mobile-game-training-divider"></div>
-                <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining4.pdf"
-                   class="ui grid b-mobile-game-training-detail-item">
-                    <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
-                        快消品行业常用术语
-                    </div>
-                </a>
+                    <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                    <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining4.pdf"
+                       class="ui grid b-mobile-game-training-detail-item">
+                        <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
+                            快消品行业常用术语
+                        </div>
+                    </a>
 
-                <div class="ui inverted divider b-mobile-game-training-divider"></div>
-                <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining5.pdf"
-                   class="ui grid b-mobile-game-training-detail-item">
-                    <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
-                        常见问题
-                    </div>
-                </a>
+                    <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                    <a href="http://7xlpjd.com2.z0.glb.qiniucdn.com/gameTraining5.pdf"
+                       class="ui grid b-mobile-game-training-detail-item">
+                        <div class="column b-mobile-game-training-detail-text b-mobile-game-training-detail-icon-download">
+                            常见问题
+                        </div>
+                    </a>
 
-                <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                    <div class="ui inverted divider b-mobile-game-training-divider"></div>
+                </div>
+                <div style="display:none" class="b-mobile-android-warning" id="download-warning">
+                    为了保证您的体验，安卓用户请用电脑登陆bridgeplus.cn进入游戏板块下载培训资料。
+                </div>
             </div>
             <div class="ui tab" data-tab="video">
                 <a href="http://v.youku.com/v_show/id_XOTM1MDgxMTY4.html"
@@ -150,6 +155,11 @@
             .factory('MessageStore', angular.bplus.MessageStore)
             .factory('queryParser', angular.bplus.queryParser);
     $(".menu .item").tab();
+    if (navigator.userAgent.indexOf('Android') > -1) {
+        $("#download-warning").show();
+    } else {
+        $("#download-content").show();
+    }
 </script>
 </body>
 </html>
