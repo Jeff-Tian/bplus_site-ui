@@ -156,7 +156,7 @@
         $scope.birthYearList = (function () {
             var res = [];
             var thisYear = new Date().getUTCFullYear();
-            for (var i = 1960; i < thisYear - 15; i++) {
+            for (var i = 1960; i < thisYear - 1; i++) {
                 res.push(i.toString());
             }
 
@@ -183,7 +183,7 @@
 
             if ($scope.personalInfo.dayOfBirth && days.indexOf(Number($scope.personalInfo.dayOfBirth)) < 0) {
                 $scope.personalInfo.dayOfBirth = days[days.length - 1];
-                $('.ui.dropdown.dayOfBirth').dropdown('set text', $scope.personalInfo.dayOfBirth);
+                $('.ui.dropdown.dayOfBirth:not(.no-semantic)').dropdown('set text', $scope.personalInfo.dayOfBirth);
             }
 
             return days;
@@ -420,19 +420,19 @@
                             $scope.schoolInfo.endMonth = endDate ? (endDate.getUTCMonth() + 1).toString() : null;
 
                             if ($scope.schoolInfo.startYear) {
-                                $('select[name=schoolStartYear]').dropdown('set text', $scope.schoolInfo.startYear);
+                                $('select[name=schoolStartYear].dropdown.defer').dropdown('set text', $scope.schoolInfo.startYear);
                             }
 
                             if ($scope.schoolInfo.startMonth) {
-                                $('select[name=schoolStartMonth]').dropdown('set text', $scope.schoolInfo.startMonth);
+                                $('select[name=schoolStartMonth].dropdown.defer').dropdown('set text', $scope.schoolInfo.startMonth);
                             }
 
                             if ($scope.schoolInfo.endYear) {
-                                $('select[name=schoolEndYear]').dropdown('set text', $scope.schoolInfo.endYear);
+                                $('select[name=schoolEndYear].dropdown.defer').dropdown('set text', $scope.schoolInfo.endYear);
                             }
 
                             if ($scope.schoolInfo.endMonth) {
-                                $('select[name=schoolEndMonth]').dropdown('set text', $scope.schoolInfo.endMonth);
+                                $('select[name=schoolEndMonth].dropdown.defer').dropdown('set text', $scope.schoolInfo.endMonth);
                             }
                         }, 1000);
                     }
@@ -443,9 +443,9 @@
          * Workaround for unknown angular and semantic issues
          */
         function setSomeForm1Value() {
-            $('select[name=yearOfBirth]').dropdown('set text', $scope.personalInfo.yearOfBirth);
-            $('select[name=monthOfBirth]').dropdown('set text', $scope.personalInfo.monthOfBirth);
-            $('select[name=dayOfBirth]').dropdown('set text', $scope.personalInfo.dayOfBirth);
+            $('select[name=yearOfBirth].dropdown.defer').dropdown('set text', $scope.personalInfo.yearOfBirth);
+            $('select[name=monthOfBirth].dropdown.defer').dropdown('set text', $scope.personalInfo.monthOfBirth);
+            $('select[name=dayOfBirth].dropdown.defer').dropdown('set text', $scope.personalInfo.dayOfBirth);
         }
 
         $scope.$watch('personalInfo.yearOfBirth', updateMemberInfoBirthday);

@@ -54,7 +54,7 @@
 
                                 <div class="inline fields">
                                     <div class="no-padded field">
-                                        <select class="ui fluid search dropdown defer" name="yearOfBirth"
+                                        <select class="ui fluid search" name="yearOfBirth"
                                                 ng-model="personalInfo.yearOfBirth">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{y}}" ng-repeat="y in birthYearList">{{y}}
@@ -65,7 +65,7 @@
                                         <%= __('Year') %>
                                     </div>
                                     <div class="no-paddedfield">
-                                        <select class="ui fluid search dropdown defer" name="monthOfBirth"
+                                        <select class="ui fluid search" name="monthOfBirth"
                                                 ng-model="personalInfo.monthOfBirth">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{m}}" ng-repeat="m in monthList">{{m}}
@@ -76,7 +76,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;<%= __('Month') %>
                                     </div>
                                     <div class="no-padded field">
-                                        <select class="ui fluid search dropdown defer dayOfBirth"
+                                        <select class="ui fluid search dayOfBirth no-semantic"
                                                 name="dayOfBirth"
                                                 ng-model="personalInfo.dayOfBirth">
                                             <option value=""><%= __('Select') %></option>
@@ -132,7 +132,7 @@
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Qualification')
                                     %></label>
-                                <select class="ui fluid search dropdown defer"
+                                <select class="ui fluid search"
                                         ng-model="schoolInfo.educationBackground"
                                         name="schoolEducationBackground">
                                     <option value=""><%= __('PleaseSelect') %></option>
@@ -145,7 +145,7 @@
 
                                 <div class="inline fields">
                                     <div class="field">
-                                        <select class="ui fluid search dropdown defer" name="schoolStartYear"
+                                        <select class="ui fluid search" name="schoolStartYear"
                                                 ng-model="schoolInfo.startYear">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{y}}" ng-repeat="y in startYearList">{{y}}
@@ -156,7 +156,7 @@
                                         <%= __('Year') %>
                                     </div>
                                     <div class="field">
-                                        <select class="ui fluid search dropdown defer" name="schoolStartMonth"
+                                        <select class="ui fluid search" name="schoolStartMonth"
                                                 ng-model="schoolInfo.startMonth">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{m}}" ng-repeat="m in monthList">{{m}}</option>
@@ -173,7 +173,7 @@
 
                                 <div class="inline fields">
                                     <div class="field">
-                                        <select class="ui fluid search dropdown defer" name="schoolEndYear"
+                                        <select class="ui fluid search" name="schoolEndYear"
                                                 ng-model="schoolInfo.endYear">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{y}}" ng-repeat="y in endYearList">{{y}}
@@ -184,7 +184,7 @@
                                         <%= __('Year') %>
                                     </div>
                                     <div class="field">
-                                        <select class="ui fluid search dropdown defer" name="schoolEndMonth"
+                                        <select class="ui fluid search" name="schoolEndMonth"
                                                 ng-model="schoolInfo.endMonth">
                                             <option value=""><%= __('Select') %></option>
                                             <option value="{{m}}" ng-repeat="m in monthList">{{m}}</option>
