@@ -52,12 +52,8 @@ module.exports = require('express').Router()
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
-    .post('/payment/create-order/national-game-2015/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
-    .post('/payment/create-order/national-game-2015-middle/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
-    .post('/payment/create-order/national-game-2015-economy/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
-    .post('/payment/create-order/national-game-2015/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
-    .post('/payment/create-order/national-game-2015-middle/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
-    .post('/payment/create-order/national-game-2015-economy/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
+    .post('/payment/create-order/national-game-:option/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
+    .post('/payment/create-order/national-game-:option/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
     .post(serviceUrls.checkNationalGame2015OrderPayment,
     membership.ensureAuthenticated,
     commerceService.checkUserAccessForNationalGame2015,
