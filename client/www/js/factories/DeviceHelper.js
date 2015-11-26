@@ -13,6 +13,10 @@
                 return /mobile/i.test(getUserAgent());
             },
 
+            isPad: function () {
+                return /nexus/i.test(getUserAgent());
+            },
+
             getCurrentUrlWithoutQueryStringNorHash: function () {
                 return window.location.protocol + '//' + window.location.host + window.location.pathname;
             },

@@ -213,6 +213,8 @@
             moduleTrack.send("learnMore.click", {hasInputCode: $scope.payData.redemptionCode});
 
             $('.b-game-detail.modal').modal('show');
+            // Workaround for unknown semantic modal issue
+            $('.wechat-modal').css('display', 'none');
         };
 
         function updateNgModel(element) {
