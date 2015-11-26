@@ -295,7 +295,7 @@ module.exports = {
                     if (ip && ip.indexOf(',') >= 0) {
                         ip = ip.split(',')[0];
                     }
-                    
+
                     if (!ip) {
                         ip = req.ip || req._remoteAddress ||
                             (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
