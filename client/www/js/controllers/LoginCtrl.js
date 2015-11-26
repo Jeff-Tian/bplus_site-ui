@@ -91,7 +91,11 @@
                     MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
 
                     setTimeout(function () {
-                        window.location.href = '/zh/cmpt';
+                        if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
+                            window.location.href = '/zh/cmpt';
+                        } else {
+                            window.location.href = '/m/youth';
+                        }
                     }, 500);
                 }).catch(function (reason) {
                     FormValidation.delegateHandleFormError($loginForm)(reason);
