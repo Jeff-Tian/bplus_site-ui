@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.WechatLogon = function (service, queryParser, DeviceHelper) {
+    exports.WechatLogon = function (service, queryParser, DeviceHelper, msgBus) {
         function getPartner() {
             return queryParser.get('partner') || DeviceHelper.getCookie('partner');
         }
@@ -39,18 +39,24 @@
                                 token: token,
                                 return_url: queryParser.get('return_url')
                             })
-                            .finally(signedInCallback);
+                            .finally(function () {
+                                signedInCallback();
+                                msgBus.notifyWechatLogonCallbackHandled();
+                            });
                     } else {
                         callbackForNewWechatUser(token, queryParser.getQueryString());
+                        msgBus.notifyWechatLogonCallbackHandled();
                     }
                 } else {
                     var errcode = queryParser.get('errcode');
 
                     if (errcode) {
                         errorCallback(errcode);
+                        msgBus.notifyWechatLogonCallbackHandled();
                     } else {
                         if (typeof notWechatCallback === 'function') {
                             notWechatCallback();
+                            msgBus.notifyWechatLogonCallbackHandled();
                         }
                     }
                 }
@@ -68,5 +74,5 @@
         };
     };
 
-    exports.WechatLogon.$inject = ['service', 'queryParser', 'DeviceHelper'];
+    exports.WechatLogon.$inject = ['service', 'queryParser', 'DeviceHelper', 'msgBus'];
 })(angular.bplus = angular.bplus || {});

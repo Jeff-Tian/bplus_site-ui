@@ -129,6 +129,8 @@
         //    loginFromWechat();
         //}
 
+        //loginFromWechat();
+
         function loginFromWechat() {
             WechatLogon.sendRequest($scope, 'logging')
                 .then(function (res) {

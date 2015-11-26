@@ -4,6 +4,17 @@
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
         $scope.wechatSigningIn = false;
+
+        $scope.localeUrl = function (url, locale) {
+            locale = locale || $scope.language;
+
+            if (locale) {
+                url = '/' + locale + url;
+            }
+
+            return url;
+        };
+
         function tryHandleWechatLogonCallback() {
             $scope.wechatSigningIn = true;
 
@@ -62,16 +73,6 @@
                 }, 3000);
             }
         });
-
-        $scope.localeUrl = function (url, locale) {
-            locale = locale || $scope.language;
-
-            if (locale) {
-                url = '/' + locale + url;
-            }
-
-            return url;
-        };
 
         $scope.fetchProfile();
 
