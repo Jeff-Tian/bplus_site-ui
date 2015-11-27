@@ -19,8 +19,48 @@
     <script src="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.js?<%= cdn.version %>"></script>
     <script src="<%= cdn.normal %>bower/angular/angular.min.js?<%= cdn.version %>"></script>
     <script src="<%= cdn.normal %>bower/angular-translate/angular-translate.min.js?<%= cdn.version %>"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="/cmpt/config.js"></script>
     <script src="<%= cdn.normal %>cmpt/dist/main.js?<%= cdn.version %>"></script>
+    <script src="/cmpt/js_signature?app_id=bridgeplus_corp"></script>
+    <script>
+    wx.config({
+        debug: false,
+        appId: jsapi_config.appId,
+        timestamp: jsapi_config.timestamp,
+        nonceStr: jsapi_config.nonceStr,
+        signature: jsapi_config.signature,
+        jsApiList: [
+            'onMenuShareAppMessage'
+        ]
+    });
+    wx.ready(function() {
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareAppMessage'],
+            success: function(res) {
+                wx.onMenuShareAppMessage({
+                    title: '全国大赛队伍分享 Bridge+',
+                    desc: '全国大赛队伍分享 Bridge+',
+                    link: location.href,
+                    imgUrl: '<%= cdn.normal %>img/wechat/for_share.png?<%= cdn.version %>',
+                    trigger: function(res) {
+                        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        //alert('用户点击发送给朋友');
+                    },
+                    success: function(res) {
+                        //alert('已分享');
+                    },
+                    cancel: function(res) {
+                        //alert('已取消');
+                    },
+                    fail: function(res) {
+                        //alert(JSON.stringify(res));
+                    }
+                });
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

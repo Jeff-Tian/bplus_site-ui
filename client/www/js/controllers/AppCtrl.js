@@ -19,7 +19,20 @@
             $scope.wechatSigningIn = true;
 
             function bindRegisteredMobileByWechatToken(token, serverResponse) {
-                window.location.href = $scope.localeUrl('/sign-in?wechat_token=' + token + '&server_response=' + window.btoa(serverResponse));
+                var jumpUrl = $scope.localeUrl('/sign-in?wechat_token=' + token + '&server_response=' + window.btoa(serverResponse));
+                var hash = window.location.hash;
+                var index = hash.indexOf('?');
+
+                if (index >= 0) {
+                    hash = hash.substr(0, index);
+                }
+
+                var returnUrl = window.location.pathname + hash;
+
+                if (returnUrl.indexOf('bind-mobile') < 0) {
+                    jumpUrl += '&return_url=' + encodeURIComponent(returnUrl);
+                }
+                window.location.href = jumpUrl;
             }
 
             WechatLogon.tryHandleCallback(bindRegisteredMobileByWechatToken, function () {
