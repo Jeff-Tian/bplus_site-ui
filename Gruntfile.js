@@ -255,6 +255,12 @@ module.exports = function (grunt) {
         },
         mochacli: {
             src: ['test/**/*.js']
+        },
+        cucumberjs: {
+            src: __dirname + '/client/www/test/features',
+            options: {
+                steps: __dirname + "/client/www/test/step_definitions"
+            }
         }
     });
 
