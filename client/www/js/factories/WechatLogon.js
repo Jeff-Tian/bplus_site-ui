@@ -44,7 +44,7 @@
                                 msgBus.notifyWechatLogonCallbackHandled();
                             });
                     } else {
-                        callbackForNewWechatUser(token, queryParser.getQueryString());
+                        callbackForNewWechatUser(token);
                         msgBus.notifyWechatLogonCallbackHandled();
                     }
                 } else {
