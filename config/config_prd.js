@@ -10,4 +10,8 @@ if (process.env.DATACENTER) {
 config.bplusServiceParams = require("./config_bplusService");
 config.cdn.version = config.version + "_" + config.date;
 
+if (process.env.IS_QA && /^true$/i.test(process.env.IS_QA.toString())) {
+    config.cdn.normal = config.cdn.normal.replace('//cdn', '//qa-cdn');
+}
+
 module.exports = config;
