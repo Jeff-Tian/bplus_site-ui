@@ -9,6 +9,7 @@
             "paymentInfo": "upsell-certification-chinese",
             "offerId": "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
             "certification": 1,
+            "certificationType": "1",
             "report": 0,
             "comment": 0,
             "price": "50.00"
@@ -18,6 +19,7 @@
             "paymentInfo": "upsell-certification-english",
             "offerId": "17fd9576-c9f6-47dc-809e-6ce04114ba40",
             "certification": 1,
+            "certificationType": "2",
             "report": 0,
             "comment": 0,
             "price": "200.00"
@@ -27,6 +29,7 @@
             "paymentInfo": "upsell-report",
             "offerId": "074df389-5d30-4829-824b-34ce227547a0",
             "certification": 1,
+            "certificationType": "1",
             "report": 1,
             "comment": 0,
             "price": "80.00"
@@ -36,6 +39,7 @@
             "paymentInfo": "upsell-comments",
             "offerId": "469b300a-c5de-4be1-b1c3-59cd2a5219c6",
             "certification": 1,
+            "certificationType": "1",
             "report": 1,
             "comment": 1,
             "price": "150.00"
@@ -64,12 +68,21 @@
         $scope.itemC = {
             price: OPTIONS["upsellC"].price
         }
-        $scope.itemAOption = "2";
+        $scope.itemAOption = "1";
+        $scope.displayDetail = false;
+        $scope.itemASelect = function(option) {
+            $scope.itemAOption = option;
+            $scope.itemA.price = OPTIONS["upsellA" + option].price
+        }
+        $scope.mouseleave = function() {
+            $(".b-upsell-detail").css('visibility','hidden');
+        }
         $scope.select = function(option) {
             if (option === "upsellA") {
                 option += $scope.itemAOption;
                 // option = $scope.itemAOptionOne ? "upsellA1" : "upsellA2" ;
             }
+            $(".b-upsell-detail").css('visibility','visible');
             paymentTarget = OPTIONS[option];
             $scope.detail = paymentTarget;
         }
