@@ -103,10 +103,10 @@
                     .then(function (result) {
                         window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + 
                                                '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + 
-                                               '&returnUrl=' + encodeURIComponent(location.protocol + "\\\\" + location.host + "\\paymentResult?isSuccess=true");
+                                               '&returnUrl=' + encodeURIComponent(location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=true");
                     })
                     .catch(function() {
-                        window.location.href = location.protocol + "\\\\" + location.host + "\\paymentResult?isSuccess=false";
+                        window.location.href = location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=false";
                     });
             }
         }
