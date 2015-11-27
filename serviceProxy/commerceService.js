@@ -189,8 +189,18 @@ module.exports = {
             },
             responseInterceptor: function (res, json, req) {
                 if (json.isSuccess) {
-                    var ip = req.headers['x-forwarded-for'] || req.ip || req._remoteAddress ||
-                        (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
+                    var ip = req.headers['x-forwarded-for'];
+
+                    if (ip && ip.indexOf(',') >= 0) {
+                        ip = ip.split(',')[0];
+                    }
+
+                    if (!ip) {
+                        ip = req.ip || req._remoteAddress ||
+                            (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
+                    }
+
+                    req.dualLogError('creating order from ip: ' + ip);
 
                     console.log('original url config: ');
                     console.log(req.originalUrl);
