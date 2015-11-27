@@ -183,13 +183,15 @@
         }
 
         if ($state.current.name === 'select-payment-method') {
-            service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
-                .then(function (result) {
-                    if (/^true$/i.test(result.hasRight)) {
-                        // Don't generate redemption code
-                        gotoPaid();
-                    }
-                });
+            msgBus.onWechatLogonCallbackHandled($scope, function () {
+                service.post('/service-proxy/payment/create-order/national-game-2015/check-has-right')
+                    .then(function (result) {
+                        if (/^true$/i.test(result.hasRight)) {
+                            // Don't generate redemption code
+                            gotoPaid();
+                        }
+                    });
+            });
         }
 
         if ($state.current.name === 'continue-paying') {

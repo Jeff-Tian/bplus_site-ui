@@ -26,6 +26,9 @@ angular.module('ng.utils')
                 show: 'loading:show',
                 hide: 'loading:hide',
                 ready: 'loading:ready'
+            },
+            wechatLogonCallback: {
+                handled: 'wechatLogonCallback:handled'
             }
         };
 
@@ -50,6 +53,12 @@ angular.module('ng.utils')
             } else {
                 msgBus.onMsg(msgBus.events.profile.loaded, $scope, callback);
             }
+        };
+        msgBus.notifyWechatLogonCallbackHandled = function () {
+            msgBus.emitMsg(msgBus.events.wechatLogonCallback.handled);
+        };
+        msgBus.onWechatLogonCallbackHandled = function ($scope, callback) {
+            msgBus.onMsg(msgBus.events.wechatLogonCallback.handled, $scope, callback);
         };
 
         return msgBus;

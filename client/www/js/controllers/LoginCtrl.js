@@ -125,9 +125,10 @@
             }
         };
 
-        //if (DeviceHelper.isInWechatBrowser()) {
-        //    loginFromWechat();
-        //}
+        if (DeviceHelper.isInWechatBrowser() && (!queryParser.get('wechat_token'))) {
+            // If the wechat_token is not present, then auto login to get the wechat token.
+            loginFromWechat();
+        }
 
         function loginFromWechat() {
             WechatLogon.sendRequest($scope, 'logging')
