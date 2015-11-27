@@ -30,12 +30,18 @@
 <!-- Page Contents -->
 <div ng-controller="UpsellCtrl" class="b-upsell-body" ng-init="paymentMethod='alipay'">
     <div class="b-upsell-items-container">
-        <div class="ui three column grid">
-            <div class="ui buttons b-upsell-optionA-choose">
-              <button class="ui b-upsell-white button" ng-click="itemASelect('1')">中文</button>
-              <div class="or" data-text="or"></div>
-              <button class="ui b-upsell-darkred button" ng-click="itemASelect('2')">EN</button>
+        <div class="b-upsell-optionA-choose">
+            <div class="ui three column grid">
+                <div class="column" style="text-align:center">
+                    <div class="ui buttons">
+                      <button class="ui b-upsell-white button" ng-click="itemASelect('1')">中文</button>
+                      <div class="or" data-text="or"></div>
+                      <button class="ui b-upsell-darkred button" ng-click="itemASelect('2')">EN</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="ui three column grid">
             <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellA')" ng-click="pay()">
                 <div class="b-upsell-items-header-container">
                     <div class="b-upsell-items-header">PLAN A</div>
