@@ -65,6 +65,39 @@ function injectRedemptionGeneration(res, json, req, next) {
     }
 }
 
+function checkUserAccessForNationalGame2015withOptions(req, res, next) {
+    return function(option) {
+        proxy({
+            host: commerceConfig.host,
+            port: commerceConfig.port,
+            path: '/service/useraccess/hasApply',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.productTypeId = gameConfig[option].productTypeId;
+
+                return d;
+            },
+            responseInterceptor: function (res, json) {
+                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
+
+                if (json.result && (json.result.hasRight === false)) {
+                    req.body.offerId = json.result.productType.offerId;
+                    req.body.productId = json.result.productType.productId;
+                    req.body.productTypeId = json.result.productType.productTypeId;
+
+                    return true;
+                } else {
+                    return false;
+                    //req.body.offerId = 'd00b2d92-1995-4a22-a86c-3115518bd635';
+                    //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
+                    //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
+                    //return true;
+                }
+            }
+        })(req, res, next);
+    }
+}
+
 module.exports = {
     createOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
@@ -78,95 +111,18 @@ module.exports = {
         responseInterceptor: injectRedemptionGeneration
     }),
 
+
+
     checkUserAccessForNationalGame2015: function (req, res, next) {
-        proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
-            path: '/service/useraccess/hasApply',
-            dataMapper: function (d) {
-                d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015'].productTypeId;
-
-                return d;
-            },
-            responseInterceptor: function (res, json) {
-                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
-
-                if (json.result && (json.result.hasRight === false)) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
-
-                    return true;
-                } else {
-                    return false;
-                    //req.body.offerId = 'd00b2d92-1995-4a22-a86c-3115518bd635';
-                    //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
-                    //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
-                    //return true;
-                }
-            }
-        })(req, res, next);
+        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015');
     },
 
     checkUserAccessForNationalGame2015Middle: function (req, res, next) {
-        proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
-            path: '/service/useraccess/hasApply',
-            dataMapper: function (d) {
-                d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015-middle'].productTypeId;
-
-                return d;
-            },
-            responseInterceptor: function (res, json) {
-                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
-                if (json.result && (json.result.hasRight === false)) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
-
-                    return true;
-                } else {
-                    return false;
-                    //req.body.offerId = 'd00b2d92-1995-4a22-a86c-3115518bd635';
-                    //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
-                    //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
-                    //return true;
-                }
-            }
-        })(req, res, next);
+        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015-middle');
     },
 
     checkUserAccessForNationalGame2015Economy: function (req, res, next) {
-        proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
-            path: '/service/useraccess/hasApply',
-            dataMapper: function (d) {
-                d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
-
-                return d;
-            },
-            responseInterceptor: function (res, json) {
-                req.dualLogError('check has right reuslt:\r\n' + JSON.stringify(json) + '\r\nPassed Data: \r\n ' + JSON.stringify(req.body));
-                if (json.result && (json.result.hasRight === false)) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
-
-                    return true;
-                } else {
-                    return false;
-                    //req.body.offerId = 'd00b2d92-1995-4a22-a86c-3115518bd635';
-                    //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
-                    //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
-                    //return true;
-                }
-            }
-        })(req, res, next);
+        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015-economy');
     },
 
     checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
@@ -176,7 +132,7 @@ module.exports = {
             path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015'].productTypeId;
+                d.productTypeId = gameConfig['national-' + req.params.option].productTypeId;
 
                 return d;
             },
@@ -184,63 +140,6 @@ module.exports = {
                 console.log('reuslt:');
                 console.log(json);
                 if (json.result && json.result.hasRight === false) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
-
-                    return true;
-                } else {
-                    injectRedemptionGeneration(res, json, req, next);
-
-                    return undefined;
-                }
-            }
-        })(req, res, next);
-    },
-
-    checkUserAccessForNationalGame2015MiddleAndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
-        proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
-            path: '/service/useraccess/hasApply',
-            dataMapper: function (d) {
-                d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015-middle'].productTypeId;
-
-                return d;
-            },
-            responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
-                if (json.result.hasRight === false) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
-                    return true;
-                } else {
-                    injectRedemptionGeneration(res, json, req, next);
-
-                    return undefined;
-                }
-            }
-        })(req, res, next);
-    },
-
-    checkUserAccessForNationalGame2015EconomyAndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
-        proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
-            path: '/service/useraccess/hasApply',
-            dataMapper: function (d) {
-                d.userId = d.member_id;
-                d.productTypeId = gameConfig['national-2015-economy'].productTypeId;
-
-                return d;
-            },
-            responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
-                if (json.result.hasRight === false) {
                     req.body.offerId = json.result.productType.offerId;
                     req.body.productId = json.result.productType.productId;
                     req.body.productTypeId = json.result.productType.productTypeId;
