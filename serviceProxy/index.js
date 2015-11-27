@@ -54,6 +54,7 @@ module.exports = require('express').Router()
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .post('/payment/create-order/national-game-:option/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post('/payment/create-order/national-game-:option/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
+    .post('/payment/create-order/national-upsell-:option/by-alipay', membership.ensureAuthenticated, commerceService.createOrder)
     .post(serviceUrls.checkNationalGame2015OrderPayment,
     membership.ensureAuthenticated,
     commerceService.checkUserAccessForNationalGame2015,

@@ -1,9 +1,8 @@
 'use strict';
 angular
-    .module('mobile', [
+    .module('bplusUpsell', [
         'ng.utils',
-        'pascalprecht.translate',
-        'ui.router'
+        'pascalprecht.translate'
     ])
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
@@ -13,4 +12,5 @@ angular
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('service', angular.bplus.service)
     .factory('MessageStore', angular.bplus.MessageStore)
+    .factory('WechatLogon', angular.bplus.WechatLogon)
     .factory('queryParser', angular.bplus.queryParser);
