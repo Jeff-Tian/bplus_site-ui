@@ -59,10 +59,18 @@
 <!-- Footer Begin -->
 <%- include('view-partial/footer.html') -%>
 <!-- Footer End -->
+<!-- Page visit tracking-->
+<script type="text/javascript">
+    window.t_PageName = "paymentresult";
+</script>
+<!-- Page visit End -->
 <script>
+    var moduleTrack = new window.ModuleTrack('paymentresult');
     if (location.search.indexOf("isSuccess=true") > -1) {
+        moduleTrack.send("paymentresult.status", {isSuccess: true});
         $(".b-paymentresult-success").show();
     } else {
+        moduleTrack.send("paymentresult.status", {isSuccess: false});
         $(".b-paymentresult-failure").show();
     }
 </script>
