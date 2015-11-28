@@ -56,6 +56,7 @@
     } else {
         sid = 0;
     }
+    var moduleTrack = new window.ModuleTrack('upsell');
     exports.UpsellCtrl = function($scope, service) {
         var paymentTarget = OPTIONS["upsellA1"];
         $scope.detail = paymentTarget;
@@ -71,6 +72,7 @@
         $scope.itemAOption = "1";
         $scope.displayDetail = false;
         $scope.itemASelect = function(option) {
+            moduleTrack.send("upsellAChoose.click", {option: option});
             $scope.itemAOption = option;
             $scope.itemA.price = OPTIONS["upsellA" + option].price
         }
@@ -91,6 +93,7 @@
 
             if ($scope.paymentMethod) {
                 paymentMethod  = PAYMENT_OPTIONS[$scope.paymentMethod];
+                moduleTrack.send("upsellPay.click", {option: $scope.paymentMethod});
             }
             if (paymentTarget) {
                 return service
