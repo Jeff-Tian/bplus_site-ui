@@ -45,25 +45,27 @@
             moduleTrack.send(eventName);
         }
 
+        function injectTrack(eventName) {
+            return function ($event) {
+                $event.preventDefault();
+
+                logAndSendTrack(eventName);
+
+                window.setTimeout(function () {
+                    window.location.href = $($event.target).attr('href');
+                }, 300);
+            }
+        }
+
         $(document)
-                .on('click mousedown', 'a[ng-href^="/cmpt/marksimos?team_id="]', function () {
-                    logAndSendTrack('epic.startGame.click');
+                .on('click', 'a[ng-href^="/cmpt/marksimos?team_id="]', injectTrack('startGame.click'))
+                .on('click', 'button.metting-btn.create-meeting-btn', function () {
+                    logAndSendTrack('createClassroom.click');
                 })
-                .on('click mousedown', 'button.metting-btn.create-meeting-btn', function () {
-                    logAndSendTrack('epic.createClassroom.click');
-                })
-                .on('click mousedown', 'a.metting-btn', function () {
-                    logAndSendTrack('epic.enterClassroom.click');
-                })
-                .on('click mousedown', 'a.b-competion-gametraining-online-classroom', function () {
-                    logAndSendTrack('epic.classroom.click');
-                })
-                .on('click mousedown', 'a.b-competion-gametraining-download', function () {
-                    logAndSendTrack('epic.material.click');
-                })
-                .on('click mousedown', 'a.b-competion-gametraining-watch', function () {
-                    logAndSendTrack('epic.video.click');
-                })
+                .on('click', 'a.metting-btn', injectTrack('enterClassroom.click'))
+                .on('click', 'a.b-competion-gametraining-online-classroom', injectTrack('classroom.click'))
+                .on('click', 'a.b-competion-gametraining-download', injectTrack('material.click'))
+                .on('click', 'a.b-competion-gametraining-watch', injectTrack('video.click'))
         ;
     });
 </script>
