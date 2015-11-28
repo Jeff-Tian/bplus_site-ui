@@ -72,7 +72,7 @@
         $scope.itemAOption = "1";
         $scope.displayDetail = false;
         $scope.itemASelect = function(option) {
-            moduleTrack.send("upsellAChoose.click", {option: option});
+            moduleTrack.send("upsell.optionA" + option + ".click");
             $scope.itemAOption = option;
             $scope.itemA.price = OPTIONS["upsellA" + option].price;
         };
@@ -93,7 +93,7 @@
 
             if ($scope.paymentMethod) {
                 paymentMethod  = PAYMENT_OPTIONS[$scope.paymentMethod];
-                moduleTrack.send("upsellPay.click", {option: $scope.paymentMethod});
+                moduleTrack.send("upsell.pay.click", {option: $scope.paymentMethod});
             }
             if (paymentTarget) {
                 return service
