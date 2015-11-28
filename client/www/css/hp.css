@@ -34,7 +34,7 @@
   display: none;
 }
 .b-header .menu .item .ui.button {
-  color: #ffffff;
+  color: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", SimHei;
   margin: 0;
   background: none;
@@ -153,7 +153,7 @@
   padding-left: 0.25em;
   line-height: 80px;
   font-size: 1em;
-  color: #ffffff !important;
+  color: #fff !important;
 }
 .footer .footer-list .item .content a.header:hover,
 .footer .footer-list .item .content a.header:active {
@@ -524,7 +524,7 @@
 .hp-white-space .national-grid .column .pk-column .hp-header.national,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.national,
 .hp-gray-space .national-grid .column .pk-column .hp-header.national {
-  background-color: #df160c;
+  background-color: #DF160C;
 }
 .hp-white-space .national-grid .column .pk-column .hp-header.national h1,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.national h1,
@@ -583,22 +583,22 @@
 .hp-white-space .national-grid .column .pk-column .hp-header.personal,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.personal,
 .hp-gray-space .national-grid .column .pk-column .hp-header.personal {
-  background-color: #1c6599;
+  background-color: #1C6599;
 }
 .hp-white-space .national-grid .column .pk-column .hp-header.youth,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.youth,
 .hp-gray-space .national-grid .column .pk-column .hp-header.youth {
-  background-color: #f58e22;
+  background-color: #F58E22;
 }
 .hp-white-space .national-grid .column .pk-column .hp-header.company,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.company,
 .hp-gray-space .national-grid .column .pk-column .hp-header.company {
-  background-color: #8c5b8c;
+  background-color: #8C5B8C;
 }
 .hp-white-space .national-grid .column .pk-column .hp-header.student,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-header.student,
 .hp-gray-space .national-grid .column .pk-column .hp-header.student {
-  background-color: #cc353d;
+  background-color: #CC353D;
 }
 .hp-white-space .national-grid .column .pk-column .hp-footer,
 .hp-gray-dark-space .national-grid .column .pk-column .hp-footer,

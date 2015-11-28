@@ -46,7 +46,7 @@
         }
     };
     var PAYMENT_BASIC_URL = "service-proxy/payment/create-order/national-upsell-2015-";
-    var getOrderUrl = function(option, paymentMethod) {
+    var getOrderUrl = function (option, paymentMethod) {
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
 
@@ -56,41 +56,41 @@
     } else {
         sid = 0;
     }
-    exports.UpsellCtrl = function($scope, service) {
+    exports.UpsellCtrl = function ($scope, service) {
         var paymentTarget = OPTIONS["upsellA1"];
         $scope.detail = paymentTarget;
         $scope.itemA = {
             price: OPTIONS["upsellA1"].price
-        }
+        };
         $scope.itemB = {
             price: OPTIONS["upsellB"].price
-        }
+        };
         $scope.itemC = {
             price: OPTIONS["upsellC"].price
-        }
+        };
         $scope.itemAOption = "1";
         $scope.displayDetail = false;
-        $scope.itemASelect = function(option) {
+        $scope.itemASelect = function (option) {
             $scope.itemAOption = option;
-            $scope.itemA.price = OPTIONS["upsellA" + option].price
-        }
-        $scope.mouseleave = function() {
-            $(".b-upsell-detail").css('visibility','hidden');
-        }
-        $scope.select = function(option) {
+            $scope.itemA.price = OPTIONS["upsellA" + option].price;
+        };
+        $scope.mouseleave = function () {
+            $(".b-upsell-detail").css('visibility', 'hidden');
+        };
+        $scope.select = function (option) {
             if (option === "upsellA") {
                 option += $scope.itemAOption;
                 // option = $scope.itemAOptionOne ? "upsellA1" : "upsellA2" ;
             }
-            $(".b-upsell-detail").css('visibility','visible');
+            $(".b-upsell-detail").css('visibility', 'visible');
             paymentTarget = OPTIONS[option];
             $scope.detail = paymentTarget;
-        }
-        $scope.pay = function() {
+        };
+        $scope.pay = function () {
             var paymentMethod = "alipay";
 
             if ($scope.paymentMethod) {
-                paymentMethod  = PAYMENT_OPTIONS[$scope.paymentMethod];
+                paymentMethod = PAYMENT_OPTIONS[$scope.paymentMethod];
             }
             if (paymentTarget) {
                 return service
@@ -101,15 +101,15 @@
                         requestFrom: encodeURIComponent(window.location.href)
                     })
                     .then(function (result) {
-                        window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port + 
-                                               '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId + 
-                                               '&returnUrl=' + encodeURIComponent(location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=true");
+                        window.location.href = '//' + angular.bplus.config.payment.host + ':' + angular.bplus.config.payment.port +
+                            '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId +
+                            '&returnUrl=' + encodeURIComponent(location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=true");
                     })
-                    .catch(function() {
+                    .catch(function () {
                         window.location.href = location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=false";
                     });
             }
-        }
-    }
+        };
+    };
     exports.UpsellCtrl.$inject = ['$scope', 'service'];
 })(angular.bplus = angular.bplus || {});
