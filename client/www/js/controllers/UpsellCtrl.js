@@ -49,13 +49,12 @@
     var getOrderUrl = function (option, paymentMethod) {
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
-
-    var sid = /sid=([\d+])/.exec(location.search);
-    if (sid) {
-        sid = sid[1];
-    } else {
-        sid = 0;
-    }
+    // var sid = /sid=([\d+])/.exec(location.search);
+    // if (sid) {
+    //     sid = sid[1];
+    // } else {
+    //     sid = 0;
+    // }
     var moduleTrack = new window.ModuleTrack('upsell');
 
     exports.UpsellCtrl = function ($scope, service) {
@@ -83,7 +82,6 @@
         $scope.select = function (option) {
             if (option === "upsellA") {
                 option += $scope.itemAOption;
-                // option = $scope.itemAOptionOne ? "upsellA1" : "upsellA2" ;
             }
             $(".b-upsell-detail").css('visibility', 'visible');
             paymentTarget = OPTIONS[option];
@@ -101,7 +99,7 @@
                     .post(getOrderUrl(paymentTarget.paymentInfo, paymentMethod), {
                         payment: paymentMethod,
                         offerId: paymentTarget.offerId,
-                        extInfo: "sid=" + sid,
+                        extInfo: location.search.substr(1),
                         requestFrom: encodeURIComponent(window.location.href)
                     })
                     .then(function (result) {
