@@ -56,27 +56,29 @@
     } else {
         sid = 0;
     }
+    var moduleTrack = new window.ModuleTrack('upsell');
     exports.UpsellCtrl = function($scope, service) {
         var paymentTarget = OPTIONS["upsellA1"];
         $scope.detail = paymentTarget;
         $scope.itemA = {
             price: OPTIONS["upsellA1"].price
-        }
+        };
         $scope.itemB = {
             price: OPTIONS["upsellB"].price
-        }
+        };
         $scope.itemC = {
             price: OPTIONS["upsellC"].price
-        }
+        };
         $scope.itemAOption = "1";
         $scope.displayDetail = false;
         $scope.itemASelect = function(option) {
+            moduleTrack.send("upsellAChoose.click", {option: option});
             $scope.itemAOption = option;
-            $scope.itemA.price = OPTIONS["upsellA" + option].price
-        }
+            $scope.itemA.price = OPTIONS["upsellA" + option].price;
+        };
         $scope.mouseleave = function() {
             $(".b-upsell-detail").css('visibility','hidden');
-        }
+        };
         $scope.select = function(option) {
             if (option === "upsellA") {
                 option += $scope.itemAOption;
@@ -85,12 +87,13 @@
             $(".b-upsell-detail").css('visibility','visible');
             paymentTarget = OPTIONS[option];
             $scope.detail = paymentTarget;
-        }
+        };
         $scope.pay = function() {
             var paymentMethod = "alipay";
 
             if ($scope.paymentMethod) {
                 paymentMethod  = PAYMENT_OPTIONS[$scope.paymentMethod];
+                moduleTrack.send("upsellPay.click", {option: $scope.paymentMethod});
             }
             if (paymentTarget) {
                 return service
@@ -109,7 +112,7 @@
                         window.location.href = location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=false";
                     });
             }
-        }
-    }
+        };
+    };
     exports.UpsellCtrl.$inject = ['$scope', 'service'];
 })(angular.bplus = angular.bplus || {});
