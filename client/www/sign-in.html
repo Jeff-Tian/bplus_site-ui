@@ -20,19 +20,20 @@
 <%- include('view-partial/footer.html') -%>
 <!--Page JS-->
 
-<!-- build:js js/cdn/sign-in.js -->
+<% if (dev_mode) { %>
 <script src="js/directives/captcha.js"></script>
 <script src="js/directives/ngEnter.js"></script>
 <script src="js/directives/registerForm.js"></script>
 <script src="js/directives/tab.js"></script>
 <script src="js/directives/dropdown.js"></script>
-<script src="js/factories/WechatLogon.js"></script>
 <script src="js/controllers/LoginCtrl.js"></script>
-<script src="js/factories/DeviceHelper.js"></script>
 <script src="js/controllers/WechatLoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
 <script src="js/page/register/main.js"></script>
-<!-- endbuild -->
+
+<% } else { %>
+<script src="<%= config.normal %>js/cdn/sign-in.js?<%= cdn.version %>"></script>
+<% } %>
 
 <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
