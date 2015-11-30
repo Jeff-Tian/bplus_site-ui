@@ -113,8 +113,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "1.0.0",
-  "date": "20151123_0737",
+  "version": "1.0.1",
+  "date": "20151130_0633",
   "trackingUrl": "http://tracking.bridgeplus.cn",
   "serviceUrls": {
     "logOnFromWechat": "/service-proxy/logon/from-wechat",

@@ -31,6 +31,26 @@
             }
         };
 
+        q.parse = function (query) {
+            query = query || q.getQueryString();
+            query = query.substr(1);
+
+            var pairs = query.split('&');
+            var result = {};
+
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i];
+
+                if (pair) {
+                    var parts = pair.split('=');
+
+                    result[parts[0]] = decodeURIComponent(parts[1]);
+                }
+            }
+
+            return result;
+        };
+
         return q;
     };
 

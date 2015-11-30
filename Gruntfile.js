@@ -64,16 +64,9 @@ module.exports = function (grunt) {
         },
         "useref": {
             html: [
-                '<%= config.dist %>account-setting.html',
-                '<%= config.dist %>bind-mobile.html',
-                '<%= config.dist %>index.html',
-                '<%= config.dist %>reset-password.html',
-                '<%= config.dist %>select-payment-method.html',
                 '<%= config.dist %>sign-in.html',
-                '<%= config.dist %>view-partial/js.html',
                 '<%= config.dist %>mobile/aboutus.html',
                 '<%= config.dist %>mobile/bind-mobile.html',
-                '<%= config.dist %>mobile/footer.html',
                 '<%= config.dist %>mobile/index.html',
                 '<%= config.dist %>mobile/national.html',
                 '<%= config.dist %>mobile/sign-in.html',
@@ -145,7 +138,17 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/page/homepage/main.js': ['<%= config.dist %>js/page/homepage/main.js', '<%= ngtemplates.bplus.dest %>'],
                     '<%= config.dist %>js/page/account-setting/main.js': ['<%= config.dist %>js/page/account-setting/main.js', '<%= ngtemplates.accountSetting.dest %>'],
                     '<%= config.dist %>js/page/register/main.js': ['<%= config.dist %>js/page/register/main.js', '<%= ngtemplates.signIn.dest %>'],
-                    '<%= config.dist %>js/page/reset-password/main.js': ['<%= config.dist %>js/page/reset-password/main.js', '<%= ngtemplates.resetPassword.dest %>']
+                    '<%= config.dist %>js/page/reset-password/main.js': ['<%= config.dist %>js/page/reset-password/main.js', '<%= ngtemplates.resetPassword.dest %>'],
+
+                    '<%= config.dist %>js/cdn/com1.js': ['<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/config/translate.js', '<%= config.dist %>js/config/xhr.js', '<%= config.dist %>js/factories/translationLoader.js', '<%= config.dist %>js/directives/loading.js'],
+                    '<%= config.dist %>js/cdn/com2.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/page/bplusModule.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js'],
+                    '<%= config.dist %>js/cdn/m/com1.js': ['<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/config/translate.js', '<%= config.dist %>js/config/xhr.js', '<%= config.dist %>js/factories/translationLoader.js', '<%= config.dist %>js/directives/loading.js'],
+                    '<%= config.dist %>js/cdn/m/com2.js': ['<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js'],
+                    '<%= config.dist %>js/cdn/account-settings.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/account-setting/main.js'],
+                    '<%= config.dist %>js/cdn/bind-mobile.js': ['<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/page/register/main.js'],
+                    '<%= config.dist %>js/cdn/index.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/page/homepage/main.js'],
+                    '<%= config.dist %>js/cdn/reset-password.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/page/reset-password/ResetPasswordCtrl.js', '<%= config.dist %>js/page/reset-password/main.js'],
+                    '<%= config.dist %>js/cdn/pc-select-payment-method.js': ['<%= config.dist %>bower/angular-ui-router/release/angular-ui-router.min.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/directives/countDown.js', '<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/select-payment-method/main.js']
                 }
             }
         },
@@ -178,37 +181,7 @@ module.exports = function (grunt) {
                         }
                     }
                 },
-                files: [{}, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'view-partial/js.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'account-setting.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'bind-mobile.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'index.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'reset-password.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'select-payment-method.html',
-                    dest: '<%= config.dist %>'
-                }, {
+                files: [{
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'sign-in.html',
@@ -294,7 +267,7 @@ module.exports = function (grunt) {
                     patterns: [{
                         match: /https:\/\/fonts.googleapis.com\/css/g,
                         replacement: function () {
-                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar" 
+                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar"
                         }
                     }]
                 },

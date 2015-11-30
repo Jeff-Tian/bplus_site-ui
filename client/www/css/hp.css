@@ -151,7 +151,6 @@
 .footer .footer-list .item .content a.header {
   font-weight: normal;
   padding-left: 0.25em;
-  line-height: 80px;
   font-size: 1em;
   color: #fff !important;
 }
@@ -174,7 +173,7 @@
   color: rgba(255, 255, 255, 0.498039);
   font-size: 0.9em;
   line-height: 1.6em;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 .text-center {
   text-align: center;

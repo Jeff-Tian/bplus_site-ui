@@ -57,7 +57,9 @@
     // }
     var moduleTrack = new window.ModuleTrack('upsell');
 
-    exports.UpsellCtrl = function ($scope, service) {
+    exports.UpsellCtrl = function ($scope, service, queryParser) {
+        var extraInfo = queryParser.parse(window.location.search);
+
         var paymentTarget = OPTIONS["upsellA1"];
         $scope.detail = paymentTarget;
         $scope.itemA = {
@@ -99,7 +101,7 @@
                     .post(getOrderUrl(paymentTarget.paymentInfo, paymentMethod), {
                         payment: paymentMethod,
                         offerId: paymentTarget.offerId,
-                        extInfo: location.search.substr(1),
+                        extraInfo: extraInfo,
                         requestFrom: encodeURIComponent(window.location.href)
                     })
                     .then(function (result) {
@@ -113,5 +115,5 @@
             }
         };
     };
-    exports.UpsellCtrl.$inject = ['$scope', 'service'];
+    exports.UpsellCtrl.$inject = ['$scope', 'service', 'queryParser'];
 })(angular.bplus = angular.bplus || {});

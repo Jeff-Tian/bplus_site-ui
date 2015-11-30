@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +8,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplus" ng-class="{'chinese':language==='zh','english':language==='en'}">
+<body ng-controller="AppCtrl" ng-app="bplusModule" ng-class="{'chinese':language==='zh','english':language==='en'}">
 <%- include('view-partial/header.html') -%>
 <!-- Page Contents -->
 <div class="pusher">
@@ -32,12 +31,6 @@
 
 </div>
 <%- include('view-partial/footer.html') -%>
-<!--JS-->
-<script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js?<%= cdn.version %>"></script>
-<!--Page JS-->
-<script src="<%= cdn.normal %>js/factories/WechatLogon.js<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/controllers/AppCtrl.js<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/page/footer/main.js<%= cdn.version %>"></script>
 </body>
 
 </html>
