@@ -214,6 +214,7 @@ supportedLocales.map(function (l) {
 server.use('/service-proxy', require('./serviceProxy'));
 
 //Competion Integration
+
 server
     .get('/:lang/game', function (req, res, next) {
         var lang = req.params.lang;
@@ -240,8 +241,6 @@ server
         });
     })
     .use('/cmpt', require('competion-api')(express));
-
-// Page route define
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
