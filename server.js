@@ -305,6 +305,10 @@ server.get('/mode', function (req, res, next) {
     res.send(res.locals.dev_mode);
 });
 
+server.get('/is_qa', function (req, res) {
+    res.send('is_qa = ' + process.env.IS_QA);
+});
+
 server.get('/locale', function (req, res, next) {
     res.send(req.getLocale());
 });
