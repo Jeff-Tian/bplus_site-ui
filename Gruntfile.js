@@ -64,7 +64,6 @@ module.exports = function (grunt) {
         },
         "useref": {
             html: [
-                '<%= config.dist %>mobile/sign-in.html',
                 '<%= config.dist %>mobile/statement.html',
                 '<%= config.dist %>mobile/youth.html'
             ],
@@ -148,7 +147,8 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/cdn/m/aboutus.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
                     '<%= config.dist %>js/cdn/m/bind-mobile.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/page/register/main.js'],
                     '<%= config.dist %>js/cdn/m/index.js': ['<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
-                    '<%= config.dist %>js/cdn/m/national.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js']
+                    '<%= config.dist %>js/cdn/m/national.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
+                    '<%= config.dist %>js/cdn/m/sign-in.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/register/main.js']
                 }
             }
         },
@@ -182,11 +182,6 @@ module.exports = function (grunt) {
                     }
                 },
                 files: [{
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/sign-in.html',
-                    dest: '<%= config.dist %>'
-                }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'mobile/statement.html',
