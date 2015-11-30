@@ -49,6 +49,13 @@
     var getOrderUrl = function (option, paymentMethod) {
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
+    // var sid = /sid=([\d+])/.exec(location.search);
+    // if (sid) {
+    //     sid = sid[1];
+    // } else {
+    //     sid = 0;
+    // }
+    var moduleTrack = new window.ModuleTrack('upsell');
 
     exports.UpsellCtrl = function ($scope, service, queryParser) {
         var extraInfo = queryParser.parse(window.location.search);
@@ -67,6 +74,7 @@
         $scope.itemAOption = "1";
         $scope.displayDetail = false;
         $scope.itemASelect = function (option) {
+            moduleTrack.send("optionA" + option + ".click");
             $scope.itemAOption = option;
             $scope.itemA.price = OPTIONS["upsellA" + option].price;
         };
@@ -76,7 +84,6 @@
         $scope.select = function (option) {
             if (option === "upsellA") {
                 option += $scope.itemAOption;
-                // option = $scope.itemAOptionOne ? "upsellA1" : "upsellA2" ;
             }
             $(".b-upsell-detail").css('visibility', 'visible');
             paymentTarget = OPTIONS[option];
@@ -87,6 +94,7 @@
 
             if ($scope.paymentMethod) {
                 paymentMethod = PAYMENT_OPTIONS[$scope.paymentMethod];
+                moduleTrack.send("pay.click", {option: $scope.paymentMethod});
             }
             if (paymentTarget) {
                 return service
