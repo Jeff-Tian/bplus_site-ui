@@ -154,18 +154,6 @@ module.exports = function (grunt) {
                         grunt.log.writeln(url);
                         if (url.indexOf('data:') === 0) {
                             return url; // leave data URIs untouched
-                        } else if (url.indexOf('js/cdn') >= 0) {
-                            if (url[0] === '/') {
-                                url = url.substr(1);
-                            }
-
-                            var pack = grunt.file.readJSON('package.json');
-
-                            if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
-                                return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
-                            } else {
-                                return '/' + url + '?cdnified';
-                            }
                         } else if (url.indexOf('profile/main-build.js') > -1 || url.indexOf('profile/mobile-main-build.js') > -1) {
                             // For requirejs
                             url = url.replace('main-build.js', 'main.js');
