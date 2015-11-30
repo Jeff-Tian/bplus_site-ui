@@ -27,7 +27,7 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 
-<!-- build:js js/cdn/sign-up-from.js -->
+<% if (dev_mode) { %>
 <script src="js/factories/MessageStore.js"></script>
 <script src="js/factories/service.js"></script>
 <script src="js/factories/WechatLogon.js"></script>
@@ -38,7 +38,10 @@
 <script src="js/directives/dropdown.js"></script>
 <script src="js/directives/registerForm.js"></script>
 <script src="js/page/register/main.js"></script>
-<!-- endbuild -->
+
+<% } else { %>
+<script src="<%= config.normal %>js/cdn/bind-mobile.js?<%= cdn.version %>"></script>
+<% } %>
 </body>
 
 </html>
