@@ -50,13 +50,9 @@
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
 
-    var sid = /sid=([\d+])/.exec(location.search);
-    if (sid) {
-        sid = sid[1];
-    } else {
-        sid = 0;
-    }
-    exports.UpsellCtrl = function ($scope, service) {
+    exports.UpsellCtrl = function ($scope, service, queryParser) {
+        var extraInfo = queryParser.parse(window.location.search);
+
         var paymentTarget = OPTIONS["upsellA1"];
         $scope.detail = paymentTarget;
         $scope.itemA = {
@@ -97,7 +93,7 @@
                     .post(getOrderUrl(paymentTarget.paymentInfo, paymentMethod), {
                         payment: paymentMethod,
                         offerId: paymentTarget.offerId,
-                        extInfo: "sid=" + sid,
+                        extraInfo: extraInfo,
                         requestFrom: encodeURIComponent(window.location.href)
                     })
                     .then(function (result) {
@@ -111,5 +107,5 @@
             }
         };
     };
-    exports.UpsellCtrl.$inject = ['$scope', 'service'];
+    exports.UpsellCtrl.$inject = ['$scope', 'service', 'queryParser'];
 })(angular.bplus = angular.bplus || {});

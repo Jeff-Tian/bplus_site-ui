@@ -30,4 +30,9 @@ describe('Query parser', function () {
         spyOn(queryParser, 'getQueryString').and.returnValue('?redemption_code=ms2015pytui&trk_tag=pytui&partner=pytui');
         expect(queryParser.get('partner')).toBe('pytui');
     });
+
+    it('can parse query string', function () {
+        spyOn(queryParser, 'getQueryString').and.returnValue('?a=a&b=b');
+        expect(queryParser.parse()).toEqual({"a": "a", "b": "b"});
+    });
 });
