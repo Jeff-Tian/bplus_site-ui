@@ -64,7 +64,6 @@ module.exports = function (grunt) {
         },
         "useref": {
             html: [
-                '<%= config.dist %>account-setting.html',
                 '<%= config.dist %>bind-mobile.html',
                 '<%= config.dist %>index.html',
                 '<%= config.dist %>reset-password.html',
@@ -148,7 +147,8 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/cdn/com1.js': ['<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/config/translate.js', '<%= config.dist %>js/config/xhr.js', '<%= config.dist %>js/factories/translationLoader.js', '<%= config.dist %>js/directives/loading.js'],
                     '<%= config.dist %>js/cdn/com2.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/page/bplusModule.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js'],
                     '<%= config.dist %>js/cdn/m/com1.js': ['<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/config/translate.js', '<%= config.dist %>js/config/xhr.js', '<%= config.dist %>js/factories/translationLoader.js', '<%= config.dist %>js/directives/loading.js'],
-                    '<%= config.dist %>js/cdn/m/com2.js': ['<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js']
+                    '<%= config.dist %>js/cdn/m/com2.js': ['<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js'],
+                    '<%= config.dist %>js/cdn/account-settings.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/account-setting/main.js']
                 }
             }
         },
@@ -182,11 +182,6 @@ module.exports = function (grunt) {
                     }
                 },
                 files: [{
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'account-setting.html',
-                    dest: '<%= config.dist %>'
-                }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'bind-mobile.html',
