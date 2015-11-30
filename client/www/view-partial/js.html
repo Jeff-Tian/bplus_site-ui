@@ -6,6 +6,7 @@
 <script src="<%= cdn.normal %>bower/angular/angular.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/angular-translate/angular-translate.min.js?<%= cdn.version %>"></script>
 
+<% if (dev_mode) { %>
 <!-- build:js js/cdn/combined1.js -->
 <script src="/js/factories/service.js"></script>
 <script src="/js/factories/MessageStore.js"></script>
@@ -14,9 +15,14 @@
 <script src="/js/factories/translationLoader.js"></script>
 <script src="/js/directives/loading.js"></script>
 <!-- endbuild -->
+<% } else { %>
+<script src="<%= cdn.normal %>js/cdn/com1.js?<%= cdn.version %>"></script>
+<% } %>
 <script src="<%= cdn.normal %>translation/localeHelper.js?<%= cdn.version %>"></script>
 <%/* Never cdnify config.js! */%>
 <script src="/config.js?<%= cdn.version %>"></script>
+
+<% if (dev_mode) { %>
 <!-- build:js js/cdn/combined2.js -->
 <script src="/js/factories/FormValidation.js"></script>
 <script src="/js/factories/DeviceHelper.js"></script>
@@ -29,6 +35,9 @@
 <script src="/js/utils/msgbus.js"></script>
 <script src="/js/utils/underscore.js"></script>
 <!-- endbuild -->
+<% } else { %>
+<script src="<%= cdn.normal %>js/cdn/com2.js?<%= cdn.version %>"></script>
+<% } %>
 
 <script type="text/javascript">
     $('.footer-wechat-share').popup({

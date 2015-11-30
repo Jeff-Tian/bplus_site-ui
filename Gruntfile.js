@@ -70,7 +70,6 @@ module.exports = function (grunt) {
                 '<%= config.dist %>reset-password.html',
                 '<%= config.dist %>select-payment-method.html',
                 '<%= config.dist %>sign-in.html',
-                '<%= config.dist %>view-partial/js.html',
                 '<%= config.dist %>mobile/aboutus.html',
                 '<%= config.dist %>mobile/bind-mobile.html',
                 '<%= config.dist %>mobile/footer.html',
@@ -145,7 +144,10 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/page/homepage/main.js': ['<%= config.dist %>js/page/homepage/main.js', '<%= ngtemplates.bplus.dest %>'],
                     '<%= config.dist %>js/page/account-setting/main.js': ['<%= config.dist %>js/page/account-setting/main.js', '<%= ngtemplates.accountSetting.dest %>'],
                     '<%= config.dist %>js/page/register/main.js': ['<%= config.dist %>js/page/register/main.js', '<%= ngtemplates.signIn.dest %>'],
-                    '<%= config.dist %>js/page/reset-password/main.js': ['<%= config.dist %>js/page/reset-password/main.js', '<%= ngtemplates.resetPassword.dest %>']
+                    '<%= config.dist %>js/page/reset-password/main.js': ['<%= config.dist %>js/page/reset-password/main.js', '<%= ngtemplates.resetPassword.dest %>'],
+
+                    '<%= config.dist %>js/cdn/com1.js': ['<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/config/translate.js', '<%= config.dist %>js/config/xhr.js', '<%= config.dist %>js/factories/translationLoader.js', '<%= config.dist %>js/directives/loading.js'],
+                    '<%= config.dist %>js/cdn/com2.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/factories/queryParser.js', '<%= config.dist %>js/js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/page/bplusModule.js', '<%= config.dist %>js/utils/utils.js', '<%= config.dist %>js/utils/msgbus.js', '<%= config.dist %>js/utils/underscore.js']
                 }
             }
         },
@@ -178,12 +180,7 @@ module.exports = function (grunt) {
                         }
                     }
                 },
-                files: [{}, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'view-partial/js.html',
-                    dest: '<%= config.dist %>'
-                }, {
+                files: [{
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'account-setting.html',
@@ -294,7 +291,7 @@ module.exports = function (grunt) {
                     patterns: [{
                         match: /https:\/\/fonts.googleapis.com\/css/g,
                         replacement: function () {
-                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar" 
+                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar"
                         }
                     }]
                 },

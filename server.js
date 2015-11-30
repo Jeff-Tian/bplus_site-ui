@@ -69,6 +69,12 @@ function setDeviceHelper(req, res, next) {
     next();
 }
 
+function setMode(req, res, next) {
+    res.locals.dev_mode = (process.env.NODE_ENV || 'dev') === 'dev';
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
@@ -76,6 +82,7 @@ server
     .use(setFeatureSwitcher)
     .use(setConfig)
     .use(setDeviceHelper)
+    .use(setMode)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -288,9 +295,8 @@ server.get('/test', function (req, res, next) {
     res.send(ua);
 });
 
-var qs = require('querystring');
-server.get('/m/test', function (req, res) {
-    throw new Error('asdfl');
+server.get('/mode', function (req, res, next) {
+    res.send(res.locals.dev_mode);
 });
 
 server.get('/locale', function (req, res, next) {
