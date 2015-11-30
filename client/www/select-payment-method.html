@@ -343,19 +343,20 @@
 </div>
 
 <%- include('view-partial/footer.html') -%>
-<!--Page JS-->
 
-<!-- build:js js/cdn/pc-select-payment-method.js -->
+<% if (dev_mode) { %>
 <script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="js/factories/DeviceHelper.js"></script>
-<script src="js/directives/loading.js"></script>
 <script src="js/directives/countDown.js"></script>
 <script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/select-payment-method/main.js"></script>
-<!-- endbuild -->
+
+<% } else { %>
+<script src="<%= config.normal %>js/cdn/pc-select-payment-method.js?<%= cdn.version %>"></script>
+<% } %>
 <script>
     (function () {
         function sendPageTrack(sender, hash) {
