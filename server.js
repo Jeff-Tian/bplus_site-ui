@@ -265,6 +265,14 @@ mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
+server.get(localeHelper.regexPath('/opportunity-detail'), membership.ensureAuthenticated, function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('opportunity-detail');
+    } else {
+        console.log("mobile")
+        res.render('mobile/opportunity-detail');
+    }
+});
 server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('game-training');

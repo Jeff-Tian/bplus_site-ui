@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns:wb="http://open.weibo.com/wb"> <!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Bridge+</title>
+
+    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" /> -->
+    <!-- <link href="favicon.ico" rel="icon" type="image/x-icon" /> -->
+    <!-- <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
+
+    <%- include('view-partial/head.html') -%>
+
+    <!-- <link href="bower/semantic-ui/dist/semantic.css" rel="stylesheet" type="text/css" /> -->
+
+    <script type="text/javascript">document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1' + 'js' + '$2');</script>
+</head>
+<body ng-controller="AppCtrl" ng-app="bplusModule">
+<!-- Header Begin -->
+<%- include('view-partial/header.html') -%>
+<!-- Header End -->
+
+<!-- Page Contents -->
+<div style="margin-top:100px; font-size:50px">hello</div>
+<!-- Page Contents End -->
+
+<!-- Footer Begin -->
+<%- include('view-partial/footer.html') -%>
+<!-- Footer End -->
+<script>
+    angular
+            .module('mobile', [
+                'ng.utils',
+                'pascalprecht.translate',
+                'ui.router'
+            ])
+            .config(angular.bplus.translate)
+            .controller('AppCtrl', angular.bplus.AppCtrl)
+            .factory('translationLoader', angular.bplus.translationLoader)
+            .factory('FormValidation', angular.bplus.FormValidation)
+            .factory('DeviceHelper', angular.bplus.DeviceHelper)
+            .factory('service', angular.bplus.service)
+            .factory('MessageStore', angular.bplus.MessageStore)
+            .factory('queryParser', angular.bplus.queryParser);
+</script>
+</body>
+</html>

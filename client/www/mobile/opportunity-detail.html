@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bridge+</title>
+    <meta name="description" content="<%= __('SEODesc_SignIn') %>">
+    <%- include('header.html') -%>
+</head>
+<body class="b-background" ng-app="mobile" ng-controller="AppCtrl">
+<%- include('head.html') -%>
+<!-- Page Contents -->
+<div style="margin-top:100px; font-size:50px">hello</div>
+<!-- Page Contents End-->
+<%- include('footer.html') -%>
+<!--JS-->
+<!--Page JS-->
+<script>
+    angular
+            .module('mobile', [
+                'ng.utils',
+                'pascalprecht.translate',
+                'ui.router'
+            ])
+            .config(angular.bplus.translate)
+            .controller('AppCtrl', angular.bplus.AppCtrl)
+            .factory('translationLoader', angular.bplus.translationLoader)
+            .factory('FormValidation', angular.bplus.FormValidation)
+            .factory('DeviceHelper', angular.bplus.DeviceHelper)
+            .factory('service', angular.bplus.service)
+            .factory('MessageStore', angular.bplus.MessageStore)
+            .factory('WechatLogon', angular.bplus.WechatLogon)
+            .factory('queryParser', angular.bplus.queryParser);
+</script>
+</body>
+</html>
