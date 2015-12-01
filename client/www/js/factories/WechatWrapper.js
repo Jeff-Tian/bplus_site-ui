@@ -9,7 +9,8 @@
                 ready: nonce,
                 checkJsApi: nonce,
                 chooseWXPay: nonce,
-                onMenuShareAppMessage: nonce
+                onMenuShareAppMessage: nonce,
+                onMenuShareTimeline: nonce
             };
         }
 
