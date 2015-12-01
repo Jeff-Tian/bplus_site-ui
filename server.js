@@ -269,7 +269,6 @@ server.get(localeHelper.regexPath('/opportunity-detail'), membership.ensureAuthe
     if (!isFromMobile(req)) {
         res.render('opportunity-detail');
     } else {
-        console.log("mobile")
         res.render('mobile/opportunity-detail');
     }
 });
