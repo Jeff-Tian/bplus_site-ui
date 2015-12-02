@@ -176,6 +176,7 @@ function filterConfig(config) {
     filtered.service_upload = config.service_upload;
     filtered.trackingUrl = config.trackingUrl;
     filtered.serviceUrls = config.serviceUrls;
+    filtered.competitions = config.competitions;
 
     return filtered;
 }

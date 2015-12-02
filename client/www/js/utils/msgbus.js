@@ -56,9 +56,14 @@ angular.module('ng.utils')
         };
         msgBus.notifyWechatLogonCallbackHandled = function () {
             msgBus.emitMsg(msgBus.events.wechatLogonCallback.handled);
+            msgBus.wechatLogonCallbackHandled = true;
         };
         msgBus.onWechatLogonCallbackHandled = function ($scope, callback) {
-            msgBus.onMsg(msgBus.events.wechatLogonCallback.handled, $scope, callback);
+            if (msgBus.wechatLogonCallbackHandled) {
+                callback();
+            } else {
+                msgBus.onMsg(msgBus.events.wechatLogonCallback.handled, $scope, callback);
+            }
         };
 
         return msgBus;

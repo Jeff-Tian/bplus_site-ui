@@ -52,13 +52,13 @@
 
                     if (errcode) {
                         errorCallback(errcode);
-                        msgBus.notifyWechatLogonCallbackHandled();
                     } else {
                         if (typeof notWechatCallback === 'function') {
                             notWechatCallback();
-                            msgBus.notifyWechatLogonCallbackHandled();
                         }
                     }
+
+                    msgBus.notifyWechatLogonCallbackHandled();
                 }
             },
 
