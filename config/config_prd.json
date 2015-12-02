@@ -127,6 +127,6 @@
     "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
     "logOnAuthenticate": "/service-proxy/logon/authentication",
     "wechatJsApiConfig": "/service-proxy/wechat/js-api-config",
-    "loadSeries": "/cmpt/game/series/load/:seriesId"
+    "loadGameSeries": "/cmpt/game/series/load/:seriesId"
   }
 }
