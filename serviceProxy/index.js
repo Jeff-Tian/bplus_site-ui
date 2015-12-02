@@ -63,4 +63,5 @@ module.exports = require('express').Router()
     function (req, res, next) {
         res.send(req.chunks);
     })
+    .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig);
 ;

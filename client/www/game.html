@@ -197,46 +197,20 @@
             </div>
         </div>
         <div class="b-events">
-            <div class="ui container" ng-cloak>
+            <div class="ui container" ng-controller="GameListCtrl">
                 <h3 class="ui header b-sp"><%= __('GameList') %></h3>
-                <table class="ui very basic table unstackable events-table">
+                <table class="ui very basic table unstackable events-table" ng-cloak>
                     <tbody>
-                    <tr>
-                        <td style="width:50%">
+                    <tr ng-repeat="epic in top10Epics">
+                        <td style="width:40%">
                             <i class="big trophy icon"></i>
-                            <%= __('GameList1') %>
+                            {{epic.title}}
                         </td>
-                        <td style="width:15%"><%= __('GameList1Place') %></td>
-                        <td style="width:15%"><%= __('GameList1Date') %></td>
+                        <td style="width:25%">已有 {{epic.memberCount || '0'}} 人参赛</td>
+                        <td style="width:15%">{{epic.game_from | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td style="width:20%" class="text-right">
-                            <a class="ui red button b-normal" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
-                                __('GameListStart') %></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="big trophy icon"></i><%= __('GameList2') %></td>
-                        <td><%= __('GameList2Place') %></td>
-                        <td><%= __('GameList2Date') %></td>
-                        <td class="text-right">
-                            <a class="ui red button b-normal" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
-                                __('GameListStart') %></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="big trophy icon"></i><%= __('GameList3') %></td>
-                        <td><%= __('GameList3Place') %></td>
-                        <td><%= __('GameList3Date') %></td>
-                        <td class="text-right">
-                            <a class="ui red button b-normal" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
-                                __('GameListStart') %></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="big trophy icon"></i><%= __('GameList4') %></td>
-                        <td><%= __('GameList4Place') %></td>
-                        <td><%= __('GameList4Date') %></td>
-                        <td class="text-right">
-                            <a class="ui red button b-normal" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                            <a class="ui red button b-normal"
+                               href="<%= localeLinkSwitch('/zh/cmpt', '/sign-in#/register') %>"><%=
                                 __('GameListStart') %></a>
                         </td>
                     </tr>
@@ -247,7 +221,8 @@
         <div class="b-trial">
             <div class="ui center aligned container grid">
                 <div class="column">
-                    <a class="ui red large button b-sp" href="<%= localeLinkSwitch('/profile', '/signin#/register') %>"><%=
+                    <a class="ui red large button b-sp"
+                       href="<%= localeLinkSwitch('/zh/cmpt', '/sign-in#/register') %>"><%=
                         __('GameListStart') %></a>
                 </div>
             </div>
@@ -257,9 +232,7 @@
 </div>
 <%- include('view-partial/footer.html') -%>
 
-<!--Page JS-->
-<script src="<%= cdn.normal %>js/factories/WechatLogon.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/controllers/AppCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/game/GameListCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/game/main.js?<%= cdn.version %>"></script>
 </body>
 

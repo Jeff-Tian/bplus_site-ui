@@ -82,6 +82,11 @@
       "productTypeId": "88dade23-dd95-4894-9be0-123fb28de780"
     }
   },
+  "competitions": {
+    "national-2015": {
+      "seriesId": "9f65c807-b725-4788-96f3-3871652d74b5"
+    }
+  },
   "logger": {
     "levels": {
       "[all]": "ERROR"
@@ -120,6 +125,8 @@
     "logOnFromWechat": "/service-proxy/logon/from-wechat",
     "logOnByToken": "/service-proxy/logon/by-token",
     "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
-    "logOnAuthenticate": "/service-proxy/logon/authentication"
+    "logOnAuthenticate": "/service-proxy/logon/authentication",
+    "wechatJsApiConfig": "/service-proxy/wechat/js-api-config",
+    "loadSeries": "/cmpt/game/series/load/:seriesId"
   }
 }

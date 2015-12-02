@@ -15,8 +15,10 @@
 
 <body class="bplus" ng-init="page='<%=page%>';lang='<%=lang%>';site='bplus'" ng-app="bplus" ng-controller="AppCtrl">
 <%- include('../view-partial/header.html') -%>
-<!-- Page Contents -->
+
 <div class="game-ui cloak" ng-controller="epicBaseCtrl">
+    <%- include('../view-partial/durable-message.html') -%>
+
     <div class="ui container">
         <div class="ui grid">
             <div class="four wide column">

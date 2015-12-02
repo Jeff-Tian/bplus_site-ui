@@ -62,19 +62,6 @@ module.exports = function (grunt) {
                 logConcurrentOutput: true
             }
         },
-        "useref": {
-            html: [
-                '<%= config.dist %>sign-in.html',
-                '<%= config.dist %>mobile/aboutus.html',
-                '<%= config.dist %>mobile/bind-mobile.html',
-                '<%= config.dist %>mobile/index.html',
-                '<%= config.dist %>mobile/national.html',
-                '<%= config.dist %>mobile/sign-in.html',
-                '<%= config.dist %>mobile/statement.html',
-                '<%= config.dist %>mobile/youth.html'
-            ],
-            temp: '<%= config.dist %>'
-        },
         htmlmin: {                                     // Task
             dist: {                                      // Target
                 options: {                                 // Target options
@@ -148,7 +135,14 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/cdn/bind-mobile.js': ['<%= config.dist %>js/factories/MessageStore.js', '<%= config.dist %>js/factories/service.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/AppCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/page/register/main.js'],
                     '<%= config.dist %>js/cdn/index.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/factories/WechatLogon.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/page/homepage/main.js'],
                     '<%= config.dist %>js/cdn/reset-password.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/page/reset-password/ResetPasswordCtrl.js', '<%= config.dist %>js/page/reset-password/main.js'],
-                    '<%= config.dist %>js/cdn/pc-select-payment-method.js': ['<%= config.dist %>bower/angular-ui-router/release/angular-ui-router.min.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/directives/countDown.js', '<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/select-payment-method/main.js']
+                    '<%= config.dist %>js/cdn/pc-select-payment-method.js': ['<%= config.dist %>bower/angular-ui-router/release/angular-ui-router.min.js', '<%= config.dist %>js/factories/DeviceHelper.js', '<%= config.dist %>js/directives/countDown.js', '<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/select-payment-method/main.js'],
+                    '<%= config.dist %>js/cdn/sign-in.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/register/main.js'],
+                    '<%= config.dist %>js/cdn/m/aboutus.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
+                    '<%= config.dist %>js/cdn/m/bind-mobile.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/page/register/main.js'],
+                    '<%= config.dist %>js/cdn/m/index.js': ['<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
+                    '<%= config.dist %>js/cdn/m/national.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
+                    '<%= config.dist %>js/cdn/m/sign-in.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/register/main.js'],
+                    '<%= config.dist %>js/cdn/m/youth.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js']
                 }
             }
         },
@@ -160,18 +154,6 @@ module.exports = function (grunt) {
                         grunt.log.writeln(url);
                         if (url.indexOf('data:') === 0) {
                             return url; // leave data URIs untouched
-                        } else if (url.indexOf('js/cdn') >= 0) {
-                            if (url[0] === '/') {
-                                url = url.substr(1);
-                            }
-
-                            var pack = grunt.file.readJSON('package.json');
-
-                            if (process.env.NODE_ENV === 'prd' || process.env.NODE_ENV === 'qa') {
-                                return '<%= cdn.normal %>' + url + '?' + '<%= cdn.version %>';
-                            } else {
-                                return '/' + url + '?cdnified';
-                            }
                         } else if (url.indexOf('profile/main-build.js') > -1 || url.indexOf('profile/mobile-main-build.js') > -1) {
                             // For requirejs
                             url = url.replace('main-build.js', 'main.js');
@@ -182,46 +164,6 @@ module.exports = function (grunt) {
                     }
                 },
                 files: [{
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'sign-in.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/aboutus.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/bind-mobile.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/index.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/national.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/sign-in.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/statement.html',
-                    dest: '<%= config.dist %>'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.dist %>',
-                    src: 'mobile/youth.html',
-                    dest: '<%= config.dist %>'
-                }, {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'profile.html',
@@ -325,7 +267,7 @@ module.exports = function (grunt) {
         process.env.RUN_FROM = 'local';
     });
 
-    grunt.registerTask('build', ['mochacli', 'karma', 'clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'useref', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['mochacli', 'karma', 'clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     grunt.registerTask('inlineTranslation', 'Inline Translation', function () {
         var fs = require('fs');

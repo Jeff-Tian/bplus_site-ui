@@ -87,6 +87,39 @@ body.pushable {
     }
 }
 
+.ui.durable-message-wrapper {
+    width: 100%;
+
+    .ui.message {
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5) !important;
+        font-size: larger;
+        padding: 10px 20px 10px 20px;
+        box-shadow: 0 0 0 0;
+        border: none;
+
+        a {
+            color: white;
+        }
+
+        .more {
+            color: white;
+            font-size: 70%;
+            cursor: pointer;
+        }
+
+        .remove.icon, .circle.icon {
+            cursor: pointer;
+            margin-left: 20px;
+            margin-right: 0;
+            letter-spacing: 2em;
+        }
+    }
+}
+
 .avatar-minor {
     background-color: @color-grey-light;
     border-radius: 50%;

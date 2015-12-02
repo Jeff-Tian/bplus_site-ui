@@ -79,5 +79,23 @@ module.exports = {
 
             return false;
         }
+    }),
+
+    getJsApiConfig: proxyWechat({
+        path: '/wechat/js_signature',
+        method: 'POST',
+        dataMapper: function (d) {
+            d.app_id = wechat.corp_app_id;
+
+            return d;
+        },
+        responseInterceptor: function (res, json, req) {
+            res.json({
+                isSuccess: true,
+                result: json
+            });
+
+            return undefined;
+        }
     })
 };

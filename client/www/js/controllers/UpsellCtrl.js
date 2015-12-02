@@ -101,7 +101,7 @@
                     .post(getOrderUrl(paymentTarget.paymentInfo, paymentMethod), {
                         payment: paymentMethod,
                         offerId: paymentTarget.offerId,
-                        extInfo: extraInfo,
+                        extraInfo: JSON.stringify(extraInfo),
                         requestFrom: encodeURIComponent(window.location.href)
                     })
                     .then(function (result) {

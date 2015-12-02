@@ -410,8 +410,7 @@
 <%- include('footer.html') -%>
 
 <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<!-- build:js js/cdn/m/index.js -->
-<script src="js/factories/queryParser.js"></script>
+<% if (dev_mode) { %>
 <script src="js/factories/WechatWrapper.js"></script>
 <script src="js/page/mobile/MobileMenuCtrl.js"></script>
 <script src="js/page/mobile/MobileHeadCtrl.js"></script>
@@ -423,7 +422,10 @@
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>
-<!-- endbuild -->
+
+<% } else { %>
+<script src="<%= config.normal %>js/cdn/m/index.js?<%= cdn.version %>"></script>
+<% } %>
 <script>
     (function () {
 
