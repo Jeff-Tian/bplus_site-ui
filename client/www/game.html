@@ -199,7 +199,9 @@
         <div class="b-events">
             <div class="ui container" ng-controller="GameListCtrl">
                 <h3 class="ui header b-sp"><%= __('GameList') %></h3>
-                <table class="ui very basic table unstackable events-table" ng-cloak>
+
+                <div class="ui loading segment" ng-show="!top10Epics"></div>
+                <table class="ui very basic table unstackable events-table" ng-cloak ng-hide="!top10Epics">
                     <tbody>
                     <tr ng-repeat="epic in top10Epics">
                         <td style="width:40%">
