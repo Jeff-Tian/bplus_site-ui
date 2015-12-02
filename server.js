@@ -265,7 +265,7 @@ mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
-server.get(localeHelper.regexPath('/opportunity-detail'), membership.ensureAuthenticated, function (req, res, next) {
+server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('opportunity-detail');
     } else {
