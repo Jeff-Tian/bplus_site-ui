@@ -1264,7 +1264,8 @@
   width: 0;
   height: 0;
 }
-.right.floating {
+.right.floating,
+.right.floated {
   float: right !important;
 }
 .grey.segment {
