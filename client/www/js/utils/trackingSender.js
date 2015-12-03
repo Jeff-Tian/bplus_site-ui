@@ -167,9 +167,11 @@
         window.sendTrack(window.t_PageName, null, true);
 
         $("body").on("click", "a[eventName]", function(e){
-            e.preventDefault();
-
             var $currentTarget = $(e.currentTarget);
+            if($currentTarget.attr("target") !== '_blank'){
+                e.preventDefault();
+            }
+
             var name = $currentTarget.attr("eventName");
             var url = $currentTarget.attr("href");
 

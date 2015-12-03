@@ -39,6 +39,25 @@
 <script src="<%= cdn.normal %>js/page/competion/main.js?<%= cdn.version %>"></script>
 <script>
     window.t_PageName = "nationalGame";
+
+    $(document).ready(function(){
+        var trackNames = {
+            '40061': 'nationalGame.xibei.click',
+            '40062': 'nationalGame.huabei.click',
+            '40063': 'nationalGame.dongbei.click',
+            '40064': 'nationalGame.xinan.click',
+            '40065': 'nationalGame.huazhong.click',
+            '40066': 'nationalGame.huadong.click',
+            '40067': 'nationalGame.huannan.click',
+            '40068': 'nationalGame.gangaotai.click'
+        };
+        $(document).on("mapClick", function(e, code){
+            var trackName = trackNames[code + ''];
+            if(trackName) {
+                sendTrack(trackName);
+            }
+        });
+    });
 </script>
 </body>
 
