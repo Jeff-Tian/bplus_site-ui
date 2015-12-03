@@ -38,6 +38,8 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-cucumber": "^0.3.0",
+    "grunt-cucumberjs": "^0.8.4",
+    "grunt-exec": "^0.4.6",
     "grunt-html2js": "^0.3.3",
     "grunt-karma": "^0.12.1",
     "grunt-mocha": "^0.4.13",
@@ -57,8 +59,7 @@
     "npm-watch": "0.0.1",
     "phantomjs": "^1.9.18",
     "protractor": "^2.1.0",
-    "require-dot-file": "^0.4.0",
-    "shelljs": "^0.2.6"
+    "require-dot-file": "^0.4.0"
   },
   "scripts": {
     "start": "node server.js"

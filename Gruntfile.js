@@ -259,7 +259,13 @@ module.exports = function (grunt) {
         cucumberjs: {
             src: __dirname + '/client/www/test/features',
             options: {
-                steps: __dirname + "/client/www/test/step_definitions"
+                steps: __dirname + "/client/www/test/features/step_definitions"
+            }
+        },
+        exec: {
+            test: {
+                cwd: __dirname + '/client/www/test',
+                cmd: 'cucumber.js'
             }
         }
     });
