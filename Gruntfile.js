@@ -255,6 +255,21 @@ module.exports = function (grunt) {
         },
         mochacli: {
             src: ['test/**/*.js']
+        },
+
+        protractor: {
+            e2e: {
+                options: {
+                    keepAlive: true,
+                    configFile: __dirname + '/client/www/test/conf.js'
+                }
+            }
+        },
+
+        exec: {
+            e2e: {
+                cmd: 'webdriver-manager start'
+            }
         }
     });
 
@@ -316,5 +331,12 @@ module.exports = function (grunt) {
 
         //console.log(translateFileContent);
         fs.writeFileSync(__dirname + translateFile, translateFileContent, 'utf-8');
+    });
+
+    grunt.registerTask('e2e', 'run e2e tests', function () {
+        grunt.task.run([
+            //'exec:e2e',
+            'protractor:e2e'
+        ]);
     });
 };
