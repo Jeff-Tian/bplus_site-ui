@@ -117,8 +117,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "1.0.1",
-  "date": "20151130_0633",
+  "version": "1.1.0",
+  "date": "20151203_0306",
   "trackingUrl": "http://uat.tracking.hcd.com",
   "serviceUrls": {
     "logOnFromWechat": "/service-proxy/logon/from-wechat",
