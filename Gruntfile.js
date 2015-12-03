@@ -160,7 +160,6 @@ module.exports = function (grunt) {
                             return url;
                         } else if (url.indexOf('/img/') === 0) {
                             url = '<%= cdn.normal %>' + url.substr(1) + '?<%= cdn.version %>';
-
                             return url;
                         } else {
                             return url; // add query string to all other URLs
@@ -181,6 +180,26 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'css/main.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/mobile.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/pc-mobile.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/hp.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/qa.css',
                     dest: '<%= config.dist %>'
                 }]
             }
