@@ -97,6 +97,12 @@
                         }
                     });
                 })
+                .on('click', "button[ng-click='sendApply(team)']", function(){
+                    logAndSendTrack('applyTeam.click');
+                })
+                .on('click', "button[ng-click='sendInvite(person)']", function(){
+                    logAndSendTrack('inviteMember.click');
+                })
         ;
     });
 </script>
