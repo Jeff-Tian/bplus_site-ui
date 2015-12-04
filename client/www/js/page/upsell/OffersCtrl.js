@@ -111,7 +111,7 @@
                     .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
                     ;
             });
-        }
+        };
     };
     exports.OffersCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper', 'FormValidation'];
 })(angular.bplus = angular.bplus || {});

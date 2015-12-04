@@ -1,5 +1,10 @@
 (function (exports) {
     exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper, DeviceHelper) {
+        // Ugly workaround for live issue. TODO: investigate and fix it
+        if (queryParser.get('openid').indexOf('%20') === 0) {
+            $state.go('select-payment-method');
+        }
+
         var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.MS2015Pay' : 'MS2015Pay');
 
         function gotoPaid(result) {
