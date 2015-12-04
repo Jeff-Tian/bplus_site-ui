@@ -32,6 +32,7 @@
                 if (returnUrl.indexOf('bind-mobile') < 0) {
                     jumpUrl += '&return_url=' + encodeURIComponent(returnUrl);
                 }
+
                 window.location.href = jumpUrl;
             }
 

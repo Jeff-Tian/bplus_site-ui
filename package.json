@@ -1,8 +1,8 @@
 {
   "name": "BridgePlus",
   "private": true,
-  "version": "1.0.1",
-  "date": "20151130_0633",
+  "version": "1.1.0",
+  "date": "20151203_0306",
   "description": "",
   "repository": "",
   "license": "",
@@ -10,7 +10,6 @@
   "author": {},
   "dependencies": {
     "body-parser": "^1.13.3",
-    "circular-json": "^0.1.6",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "extend": "^3.0.0",
@@ -37,11 +36,13 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
     "grunt-html2js": "^0.3.3",
     "grunt-karma": "^0.12.1",
     "grunt-mocha": "^0.4.13",
     "grunt-mocha-cli": "^2.0.0",
     "grunt-nodemon": "^0.4.0",
+    "grunt-protractor-runner": "^2.1.0",
     "grunt-replace": "^0.11.0",
     "grunt-string-replace": "*",
     "gulp-rename": "^1.2.2",
@@ -57,10 +58,10 @@
     "phantomjs": "^1.9.18",
     "protractor": "^2.1.0",
     "require-dot-file": "^0.4.0",
-    "shelljs": "^0.2.6",
-    "yamljs": "^0.2.3"
+    "shelljs": "^0.2.6"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "node node_modules/protractor/bin/webdriver-manager update"
   }
 }

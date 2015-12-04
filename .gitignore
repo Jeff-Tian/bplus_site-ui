@@ -21,3 +21,5 @@ client/www/bower
 client/www/css/main.css
 client/www/css/mobile.css
 client/www/css/pc-mobile.css
+client/www/css/hp.css
+client/www/css/qa.css

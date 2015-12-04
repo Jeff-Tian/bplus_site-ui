@@ -55,6 +55,7 @@ module.exports = {
         path: '/wechat/oauth/openid',
         method: 'POST',
         dataMapper: function (d, req) {
+            req.dualLogError('partner = ' + d.partner + ' when getting openid');
             d.app_id = wechat.corp_app_id;
             d.returnUrl = req.query.returnUrl || req.body.returnUrl || req.headers['referer'] || (req.headers['origin'] + req.originalUrl);
             delete d.href;

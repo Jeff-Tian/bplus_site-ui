@@ -7,6 +7,7 @@ angular
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('UpsellCtrl', angular.bplus.UpsellCtrl)
+    .controller('OffersCtrl', angular.bplus.OffersCtrl)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
