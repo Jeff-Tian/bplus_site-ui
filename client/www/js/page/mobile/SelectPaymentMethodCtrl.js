@@ -69,12 +69,16 @@
         $scope.pcAlipay = function () {
             moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
 
-            if ($scope.offerData.kind === 'first') {
-                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015'), $('.alipay-form'));
-            } else if ($scope.offerData.kind === 'second') {
-                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015-middle'), $('.alipay-form'));
-            } else if ($scope.offerData.kind === 'third') {
-                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015-economy'), $('.alipay-form'));
+            var kindOptionMap = {
+                first: 'repechages-2015',
+                second: 'repechages-2015-middle',
+                third: 'repechages-2015-economy'
+            };
+
+            var option = kindOptionMap[$scope.offerData.kind];
+
+            if (option) {
+                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', option), $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
             }
