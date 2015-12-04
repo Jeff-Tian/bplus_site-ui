@@ -10,9 +10,11 @@
         .b-upsell-item-A1 {
             background-image: url('<%= cdn.normal %>img/upsell/offer1.png?<%= cdn.version %>');
         }
+
         .b-upsell-item-B1 {
             background-image: url('<%= cdn.normal %>img/upsell/offer2.png?<%= cdn.version %>');
         }
+
         .b-upsell-item-C1 {
             background-image: url('<%= cdn.normal %>img/upsell/offer3.png?<%= cdn.version %>');
         }
@@ -100,6 +102,52 @@
     <div class="b-upsell-refund-container">
         <div class="b-upsell-refund-text">
             <img src="<%= cdn.normal %>img/upsell/icon-refund.png?<%= cdn.version %>" class="ui right spaced image">14天无理由退款
+        </div>
+    </div>
+    <div class="b-upsell-items-container" style="background-color: #E5E5E5; padding: 20px; margin-top: 50px;">
+        <div class="ui horizontal clearing divider"></div>
+        <div class="ui horizontal clearing divider"></div>
+        <div class="ui horizontal clearing divider"></div>
+        <div class="ui container">
+            <form name="redemptionForm" novalidate class="ui form redemption-form"
+                  ng-submit="buyWithRedemptionCode($event)">
+                <div class="ui error message brand"></div>
+                <div class="inline fields">
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;<%= __('使用邀请码参赛:') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                    <div class="field">
+                        <input type="text" style="width:390px" placeholder="" ng-required="true"
+                               ng-model="payData.redemptionCode">
+                    </div>
+                    <div class="field">
+                        <button class="ui red right floated button" ng-disabled="!redemptionForm.$valid"
+                                type="submit"
+                                style="padding-left: 2em; padding-right: 2em;">
+                            <%=
+                            __('确定') %>
+                        </button>
+                    </div>
+                </div>
+                <div class="ui horizontal divider"></div>
+                <div class="ui horizontal divider"></div>
+                <div class="ui segment" style="width: 350px; margin: 0 auto;">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="ui tiny image" style="width: 0;"></div>
+                            <div class="middle aligned content" style="padding-left: 0;">
+                                <h5 class="ui left aligned header">没有邀请码？
+                                    <div class="sub header">
+                                        扫码关注服务号回复"邀请码"立即赢取！
+                                    </div>
+                                </h5>
+                            </div>
+                            <div class="ui middle aligned tiny image">
+                                <img src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
