@@ -62,7 +62,7 @@ Open a terminal
 webdriver-manager start
 ```
 
-Open another terminal and 
+Then open another terminal and 
 ```
 grunt e2e
 ```

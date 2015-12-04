@@ -70,11 +70,11 @@
             moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
 
             if ($scope.offerData.kind === 'first') {
-                pay($scope, 'alipaying', 'alipay', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
+                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015'), $('.alipay-form'));
             } else if ($scope.offerData.kind === 'second') {
-                pay($scope, 'alipaying', 'alipay', '/service-proxy/payment/create-order/national-game-2015-middle/by-alipay', $('.alipay-form'));
+                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015-middle'), $('.alipay-form'));
             } else if ($scope.offerData.kind === 'third') {
-                pay($scope, 'alipaying', 'alipay', '/service-proxy/payment/create-order/national-game-2015-economy/by-alipay', $('.alipay-form'));
+                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', 'repechages-2015-economy'), $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
             }
@@ -175,7 +175,10 @@
                                 }
                             }
                         })
-                        .catch(FormValidation.delegateHandleFormError($form))
+                        .catch(function (reason) {
+                            FormValidation.handleFormError($form, reason);
+                            msgBus.hideLoading();
+                        })
                         ;
                 }
             )
