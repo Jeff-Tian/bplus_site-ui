@@ -159,7 +159,8 @@ module.exports = function (grunt) {
                             url = url.replace('main-build.js', 'main.js');
                             return url;
                         } else if (url.indexOf('/img/') === 0) {
-                            url = '<%= cdn.normal %>' + url.substr(1) + '?<%= cdn.version %>';
+                            var config = require('./config');
+                            url = config.cdn.normal + url.substr(1) + '?' + config.cdn.version;
                             return url;
                         } else {
                             return url; // add query string to all other URLs
