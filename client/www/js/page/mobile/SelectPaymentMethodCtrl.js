@@ -52,14 +52,15 @@
         };
 
         $scope.alipaying = false;
+
+        var kindOptionMap = {
+            first: 'repechages-2015',
+            second: 'repechages-2015-middle',
+            third: 'repechages-2015-economy'
+        };
+
         $scope.alipay = function (payFromDevice) {
             moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
-
-            var kindOptionMap = {
-                first: 'repechages-2015',
-                second: 'repechages-2015-middle',
-                third: 'repechages-2015-economy'
-            };
 
             var option = kindOptionMap[$scope.offerData.kind];
 
@@ -76,12 +77,12 @@
 
         $scope.wechatPaying = false;
         $scope.wechatPay = function () {
-            if ($scope.offerData.kind === 'first') {
-                pay($scope, 'wechatPaying', 'wechat', '/service-proxy/payment/create-order/national-game-2015/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
-            } else if ($scope.offerData.kind === 'second') {
-                pay($scope, 'wechatPaying', 'wechat', '/service-proxy/payment/create-order/national-game-2015-middle/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
-            } else if ($scope.offerData.kind === 'third') {
-                pay($scope, 'wechatPaying', 'wechat', '/service-proxy/payment/create-order/national-game-2015-economy/by-wechat?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
+            moduleTrack.send("wechatPay.click", {hasInputCode: $scope.payData.redemptionCode});
+
+            var option = kindOptionMap[$scope.offerData.kind];
+
+            if (option) {
+                pay($scope, 'wechatPaying', 'wechat', angular.bplus.config.serviceUrls.createOrderAndPayByWechat.replace(':option', option) + '?openid=' + queryParser.get('openid') + '&returnUrl=' + encodeURIComponent(window.location.protocol + '//' + window.location.host + '/m/' + '?continue=continue-paying&payment_method=wechat&kind=' + $scope.offerData.kind), $('.wechat-pay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
             }
