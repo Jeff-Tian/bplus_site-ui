@@ -42,7 +42,7 @@
 
     var moduleTrack = new window.ModuleTrack('upsell2');
 
-    exports.OffersCtrl = function ($scope, service, queryParser) {
+    exports.OffersCtrl = function ($scope, service, queryParser, DeviceHelper, FormValidation) {
         var extraInfo = queryParser.parse(window.location.search);
 
         var paymentTarget = OPTIONS["upsellA"];
@@ -91,6 +91,27 @@
                     });
             }
         };
+
+        $scope.payData = {
+            redemptionCode: DeviceHelper.getCookie('redemption_code') || DeviceHelper.getCookie('pre_redemption_code') || ''
+        };
+
+        $scope.buying = false;
+        $scope.buyWithRedemptionCode = function () {
+            moduleTrack.send("finPayment.click", {hasInputCode: $scope.payData.redemptionCode});
+
+            service.executePromiseAvoidDuplicate($scope, 'buying', function () {
+                return service
+                    .post('/service-proxy/payment/create-upsell-order/by-redemption-code', {
+                        redemptionCode: $scope.payData.redemptionCode
+                    })
+                    .then(function (result) {
+                        window.location.href = '/paymentresult?isSuccess=true';
+                    })
+                    .catch(FormValidation.delegateHandleFormError($('.redemption-form')))
+                    ;
+            });
+        }
     };
-    exports.OffersCtrl.$inject = ['$scope', 'service', 'queryParser'];
+    exports.OffersCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper', 'FormValidation'];
 })(angular.bplus = angular.bplus || {});

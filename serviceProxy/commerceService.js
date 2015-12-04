@@ -126,6 +126,17 @@ module.exports = {
         responseInterceptor: injectRedemptionGeneration
     }),
 
+    createUpSellOrderByRedemptionCode: proxy({
+        host: commerceConfig.host,
+        port: commerceConfig.port,
+        path: '/service/redemption/redeem',
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+            d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            return d;
+        },
+        responseInterceptor: injectRedemptionGeneration
+    }),
 
     checkUserAccessForNationalGame2015: function (req, res, next) {
         checkUserAccessFor(req, res, next)('national-2015');

@@ -62,6 +62,8 @@ module.exports = require('express').Router()
 
     .post('/payment/create-upsell-order/by-alipay', membership.ensureAuthenticated, commerceService.createOrder)
 
+    .post('/payment/create-upsell-order/by-redemption-code', membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
+
     .post(serviceUrls.checkNationalGame2015OrderPayment,
     membership.ensureAuthenticated,
     commerceService.checkUserAccessForNationalGame2015,
