@@ -77,7 +77,7 @@
                     <li>1对1专家点评</li>
                     <li>比赛结果分析报告</li>
                     <li>纸质精美证书</li>
-                    <li>报名费
+                    <li>复活赛门票
                         <button class="ui b-mobile-payment-yellow-button mini button" style="position: relative;"
                                 ng-click="showGameDetailModal()">详情
                             <img src="<%= cdn.normal %>img/pay/light_mobile.png?<%= cdn.version %>"
@@ -100,7 +100,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'first'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{300 |
+                            {{350 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -114,7 +114,7 @@
                 <ul style="padding: 0.5em 0 0 0; margin: 0; list-style-position: inside;">
                     <li>小组专家点评</li>
                     <li>纸质精美证书</li>
-                    <li>报名费</li>
+                    <li>复活赛门票</li>
                 </ul>
             </div>
             <div class="middle aligned content" style="margin-top:42px">
@@ -127,7 +127,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'second'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{100 |
+                            {{180 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -142,7 +142,7 @@
             <div class="right floated middle aligned content"
                  style="float: right; max-width: 50%; width:15em; margin-top:26px">
                 <ul style="padding: 0; margin: 0; list-style-position: inside;">
-                    <li>报名费</li>
+                    <li>复活赛门票</li>
                 </ul>
             </div>
             <div class="middle aligned content" style="margin-top:42px">
@@ -155,7 +155,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'third'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{30 |
+                            {{50 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -185,7 +185,7 @@
             <% } %>
 
             <% if (!device.isFromWechatBrowser) { %>
-            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay($event)">
+            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay()">
                 <div class="ui error message brand"></div>
 
                 <button loading type="submit" class="ui fluid basic button">

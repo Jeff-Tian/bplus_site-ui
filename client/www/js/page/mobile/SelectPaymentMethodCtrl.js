@@ -52,21 +52,7 @@
         };
 
         $scope.alipaying = false;
-        $scope.alipay = function () {
-            moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
-
-            if ($scope.offerData.kind === 'first') {
-                pay($scope, 'alipaying', 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015/by-alipay', $('.alipay-form'));
-            } else if ($scope.offerData.kind === 'second') {
-                pay($scope, 'alipaying', 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015-middle/by-alipay', $('.alipay-form'));
-            } else if ($scope.offerData.kind === 'third') {
-                pay($scope, 'alipaying', 'alipaymobile', '/service-proxy/payment/create-order/national-game-2015-economy/by-alipay', $('.alipay-form'));
-            } else {
-                window.alert('不支持的 offer :' + $scope.offerData.kind);
-            }
-        };
-
-        $scope.pcAlipay = function () {
+        $scope.alipay = function (payFromDevice) {
             moduleTrack.send("alipay.click", {hasInputCode: $scope.payData.redemptionCode});
 
             var kindOptionMap = {
@@ -78,10 +64,14 @@
             var option = kindOptionMap[$scope.offerData.kind];
 
             if (option) {
-                pay($scope, 'alipaying', 'alipay', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', option), $('.alipay-form'));
+                pay($scope, 'alipaying', payFromDevice || 'alipaymobile', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', option), $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
             }
+        };
+
+        $scope.pcAlipay = function () {
+            $scope.alipay('alipay');
         };
 
         $scope.wechatPaying = false;
