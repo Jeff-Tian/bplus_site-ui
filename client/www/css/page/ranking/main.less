@@ -1,0 +1,98 @@
+.b-ranking-body {
+    position: relative;
+    padding-top: 120px;
+    overflow: hidden;
+    padding-bottom: 100px;
+}
+.b-ranking-content-title {
+    text-align: center;
+    color: #969a9e;
+}
+
+.b-ranking-bg1 {
+    top: -300px;
+    background-color: #df363d;
+
+}
+.b-ranking-bg2 {
+    top: -120px;
+    left: -40px;
+    bottom: -40px;
+    background-color: #ff3b42;
+}
+.b-ranking-bg1,
+.b-ranking-bg2 {
+    height: 600px;
+    width: 120px;
+    position: absolute;
+    transform: rotate(30deg);
+}
+.ui.center.aligned.padded.b-ranking-content-container {
+    width: 700px;
+    margin: auto!important
+}
+.row.b-ranking-row {
+    padding: 0px!important;
+}
+.b-ranking-cell {
+    height: 47px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border: solid 1px #dbdcdc;
+}
+.b-ranking-options {
+    background-color: #2e363d;
+    color: white;
+    cursor: pointer;
+}
+.b-ranking-options.b-ranking-active {
+    background-color: #ff3c42!important;
+}
+.b-ranking-options:hover {
+    background-color: #cc181e;
+}
+.b-ranking-rank {
+    background-color: #ff3c42;
+    color: white;
+}
+.b-ranking-name,
+.b-ranking-score {
+    color: #2e363d;
+    background-color: white;
+}
+.b-ranking-name {
+    text-align: left!important;
+    padding-left: 10em!important;
+}
+.b-ranking-detail:nth-child(2) .b-ranking-name {
+    text-align: center!important;
+    padding-left: 1em!important;
+}
+.b-ranking-detail:nth-child(2) .b-ranking-name,
+.b-ranking-detail:nth-child(2) .b-ranking-score {
+    color: white;
+    background-color: #2e363d;
+}
+.b-ranking-detail:nth-child(5) .b-ranking-name,
+.b-ranking-detail:nth-child(4) .b-ranking-name,
+.b-ranking-detail:nth-child(3) .b-ranking-name {
+    padding-left: 7em!important;
+}
+.b-ranking-detail:nth-child(5) .b-ranking-name:before,
+.b-ranking-detail:nth-child(4) .b-ranking-name:before,
+.b-ranking-detail:nth-child(3) .b-ranking-name:before {
+    content: "\00a0\00a0\00a0\00a0";
+    background-repeat: no-repeat;
+    font-size: 23px;
+    vertical-align: middle;
+    padding-right: 1em;
+}
+.b-ranking-detail:nth-child(3) .b-ranking-name:before {
+    background-image: url("/img/ranking/r1.png");
+}
+.b-ranking-detail:nth-child(4) .b-ranking-name:before {
+    background-image: url("/img/ranking/r2.png");
+}
+.b-ranking-detail:nth-child(5) .b-ranking-name:before {
+    background-image: url("/img/ranking/r3.png");
+}
