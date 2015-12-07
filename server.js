@@ -270,7 +270,7 @@ server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('ranking');
     } else {
-        res.render('/mobile/ranking');
+        res.render('mobile/ranking');
     }
 });
 server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {

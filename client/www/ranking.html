@@ -27,13 +27,13 @@
     </h2>
     <div class="ui equal width center aligned padded grid b-ranking-content-container">
         <div class="row b-ranking-row">
-            <div class="column b-ranking-options b-ranking-cell b-ranking-active" ng-click="rankChange(0)">
+            <div ng-class="{'b-ranking-active':option===0}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(0)">
                 平均名次排行榜
             </div>
-            <div class="column b-ranking-options b-ranking-cell" ng-click="rankChange(1)">
+            <div ng-class="{'b-ranking-active':option===1}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(1)">
                 平均得分排行榜
             </div>
-            <div class="column b-ranking-options b-ranking-cell" ng-click="rankChange(2)">
+            <div ng-class="{'b-ranking-active':option===2}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(2)">
                 晋级队伍数排行榜
             </div>
         </div>

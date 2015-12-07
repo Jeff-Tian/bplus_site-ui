@@ -52,20 +52,74 @@
         return retArray;
     };
 
-    exports.RankingCtrl = function ($scope, service, queryParser) {
+    exports.RankingCtrl = function ($scope, service, queryParser, WechatWrapper) {
         $scope.option = OPTION_INIT;
         $scope.details = refreshDetails($scope.option);
-        // [{rank:"名次", name:"学校", score:"342"},
-        // {rank:"helo", name:"2", score:"342"},
-        // {rank:"helo", name:"2", score:"342"},
-        // {rank:"helo", name:"2", score:"342"}];
-
         $scope.rankChange = function(option) {
             $scope.option = option;
-            $(".b-ranking-active").removeClass("b-ranking-active");
-            $($(".b-ranking-options")[option]).addClass("b-ranking-active");
             $scope.details = refreshDetails(option);
         };
+
+        $('.rank-wechat-share').popup({
+            on: 'hover',
+        });
+        service.post(angular.bplus.config.serviceUrls.wechatJsApiConfig, {
+            url: window.location.origin + window.location.pathname
+        }).then(function (result) {
+            var jsApiList = [
+                'onMenuShareAppMessage',
+                'onMenuShareTimeline'
+            ];
+
+            WechatWrapper.config({
+                debug: false,
+                appId: result.appId,
+                timestamp: String(result.timestamp),
+                nonceStr: String(result.noncestr),
+                signature: result.signature,
+                jsApiList: jsApiList
+            });
+
+            WechatWrapper.ready(function () {
+                WechatWrapper.checkJsApi({
+                    jsApiList: jsApiList,
+                    success: function (res) {
+                        var imageUrl = angular.bplus.config.cdn.normal + 'img/wechat/for_share.png?' + angular.bplus.config.cdn.version;
+                        if (imageUrl.indexOf('//') === 0) {
+                            imageUrl = 'http:' + imageUrl;
+                        } else {
+                            imageUrl = location.origin + imageUrl;
+                        }
+
+                        WechatWrapper.onMenuShareAppMessage({
+                            title: $rootScope.pageTitle,
+                            desc: $rootScope.pageDescription,
+                            link: location.href,
+                            imgUrl: imageUrl,
+                            trigger: function (res) {
+                                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                                //alert('用户点击发送给朋友');
+                            },
+                            success: function (res) {
+                                //alert('已分享');
+                            },
+                            cancel: function (res) {
+                                //alert('已取消');
+                            },
+                            fail: function (res) {
+                                //alert(JSON.stringify(res));
+                            }
+                        });
+
+                        WechatWrapper.onMenuShareTimeline({
+                            title: $rootScope.pageTitle,
+                            link: location.href,
+                            imageUrl: imageUrl
+                        });
+                    }
+                });
+            });
+        });
     };
-    exports.RankingCtrl.$inject = ['$scope', 'service', 'queryParser'];
+    exports.RankingCtrl.$inject = ['$scope', 'service', 'queryParser', 'WechatWrapper'];
 })(angular.bplus = angular.bplus || {});
