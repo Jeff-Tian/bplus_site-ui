@@ -49,16 +49,17 @@
 
         function injectTrack(eventName) {
             return function ($event) {
-                var $target = $($event.target);
-                if($target.attr('target') !== '_blank') {
-                    $event.preventDefault();
-                }
 
                 logAndSendTrack(eventName);
 
-                window.setTimeout(function () {
-                    window.location.href = $($event.target).attr('href');
-                }, 300);
+                var $target = $($event.target);
+                if($target.attr('target') !== '_blank') {
+                    $event.preventDefault();
+                    
+                    window.setTimeout(function () {
+                        window.location.href = $($event.target).attr('href');
+                    }, 300);
+                }
             }
         }
 
