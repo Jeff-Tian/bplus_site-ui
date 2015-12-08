@@ -11,7 +11,7 @@
             ];
 
             WechatWrapper.config({
-                debug: true,
+                debug: false,
                 appId: result.appId,
                 timestamp: String(result.timestamp),
                 nonceStr: String(result.noncestr),
