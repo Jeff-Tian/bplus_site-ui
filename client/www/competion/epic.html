@@ -87,13 +87,13 @@
                     $buttons.each(function(i, button){
                         if($(button).is($this)){
                             if(i === 0){
-                                logAndSendTrack('teamList.click');
+                                logAndSendTrack('teamList.tab');
                             }
                             else if(i === 1){
-                                logAndSendTrack('inviteSent.click');
+                                logAndSendTrack('inviteSent.tab');
                             }
                             else if(i === 2){
-                                logAndSendTrack('teamInvite.click');
+                                logAndSendTrack('teamInvite.tab');
                             }
                         }
                     });
