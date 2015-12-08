@@ -102,7 +102,7 @@
 
             service.executePromiseAvoidDuplicate($scope, 'buying', function () {
                 return service
-                    .post('/service-proxy/payment/create-upsell-order/by-redemption-code', {
+                    .post(angular.bplus.config.serviceUrls.createOrderAndPayByRedemptionCode, {
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
