@@ -45,20 +45,15 @@
         </div>
         <div class="b-mobile-ranking-seperator"></div>
     </div>
-    <div class="b-mobile-ranking-wechatshare-container">
-        <div class="ui basic button wechat-button rank-wechat-share"
-             ng-show="showQRCode"
-             data-html="<img src='<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>' class='ui large image'>"
-             data-position="bottom center">
-            <i class="wechat icon"></i>微信分享排行榜
-        </div>
-    </div>
+    <div ng-controller="RankingWechatCtrl"></div>
 </div>
 <!-- Page Contents -->
 <%- include('footer.html') -%>
 <!--JS-->
 <!--Page JS-->
-<script src="js/factories/WechatWrapper.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="<%= cdn.normal %>js/factories/WechatWrapper.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/page/ranking/RankingWechatCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/controllers/RankingCtrl.js?<%= cdn.version %>"></script>
 <script>
 angular
@@ -70,6 +65,7 @@ angular
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('RankingCtrl', angular.bplus.RankingCtrl)
+    .controller('RankingWechatCtrl', angular.bplus.RankingWechatCtrl)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
