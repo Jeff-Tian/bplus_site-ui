@@ -6,7 +6,7 @@ angular
     ])
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    .controller('RankingCtrl', angular.bplus.RankingCtrl)
+    .controller('RankingCtrl', angular.cmpt.rankingCtrl)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
