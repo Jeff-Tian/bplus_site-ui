@@ -7,5 +7,5 @@ angular.module('opdModule').directive('bopdhomepage', function() {
             templateUrl: '/view-partial/opd/detail-homepage.html',
             link: function($scope, element, attrs) {
             }
-        }
-    })
+        };
+    });

@@ -7,5 +7,5 @@ angular.module('opdModule').directive('bopddelivered', function() {
             templateUrl: '/view-partial/opd/detail-delivered.html',
             link: function($scope, element, attrs) {
             }
-        }
-    })
+        };
+    });

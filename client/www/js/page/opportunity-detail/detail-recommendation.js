@@ -7,5 +7,5 @@ angular.module('opdModule').directive('bopdrecommendation', function() {
             templateUrl: '/view-partial/opd/detail-recommendation.html',
             link: function($scope, element, attrs) {
             }
-        }
-    })
+        };
+    });

@@ -7,5 +7,5 @@ angular.module('opdModule').directive('bopdjob', function() {
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function($scope, element, attrs) {
             }
-        }
-    })
+        };
+    });
