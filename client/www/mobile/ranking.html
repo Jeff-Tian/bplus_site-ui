@@ -54,7 +54,7 @@
 <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="<%= cdn.normal %>js/factories/WechatWrapper.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/ranking/RankingWechatCtrl.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/controllers/RankingCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/competion-ui/public/js/rankingCtrl.js?<%= cdn.version %>"></script>
 <script>
 angular
     .module('mobile', [
@@ -64,7 +64,7 @@ angular
     ])
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    .controller('RankingCtrl', angular.bplus.RankingCtrl)
+    .controller('RankingCtrl', angular.cmpt.rankingCtrl)
     .controller('RankingWechatCtrl', angular.bplus.RankingWechatCtrl)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)

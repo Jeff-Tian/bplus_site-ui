@@ -268,7 +268,11 @@ mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
     if (!isFromMobile(req)) {
-        res.render('ranking');
+        if (res.locals.hcd_user) {
+            res.redirect('/zh/cmpt/ranking');
+        } else {
+            res.render('ranking');
+        }
     } else {
         res.render('mobile/ranking');
     }
