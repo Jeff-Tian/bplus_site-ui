@@ -8,7 +8,7 @@
     <%- include('view-partial/head.html') -%>
 </head>
 
-<body ng-controller="AppCtrl" ng-app="bplusRanking">
+<body ng-controller="AppCtrl" ng-app="bplusRanking" ng-init="current_page='ranking'">
 <%- include('view-partial/header.html') -%>
 <!-- Page Contents -->
 <div class="b-ranking-body" ng-controller="RankingCtrl">
@@ -25,29 +25,24 @@
             排行榜
         </span>
     </h2>
-    <div class="ui center aligned padded grid b-ranking-content-container">
+    <div class="ui equal width center aligned padded grid b-ranking-content-container">
         <div class="row b-ranking-row">
-            <div class="four wide column b-ranking-options b-ranking-cell b-ranking-active" ng-click="rankChange(0)">
+            <div ng-class="{'b-ranking-active':option===0}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(0)">
                 平均名次排行榜
             </div>
-            <div class="four wide column b-ranking-options b-ranking-cell" ng-click="rankChange(1)">
+            <div ng-class="{'b-ranking-active':option===1}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(1)">
                 平均得分排行榜
             </div>
-            <div class="four wide column b-ranking-options b-ranking-cell" ng-click="rankChange(2)">
+            <div ng-class="{'b-ranking-active':option===2}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(2)">
                 晋级队伍数排行榜
-            </div>
-            <div class="four wide column b-ranking-options b-ranking-cell" ng-click="rankChange(3)">
-                总分排行榜
             </div>
         </div>
         <div class="row b-ranking-row b-ranking-detail" ng-repeat="detail in details">
             <div class="two wide column b-ranking-rank b-ranking-cell" ng-bind-template="{{detail.rank}}">
             </div>
             <div class="nine wide column b-ranking-name b-ranking-cell" ng-bind-template="{{detail.name}}">
-               学校 
             </div>
             <div class="five wide column b-ranking-score b-ranking-cell" ng-bind-template="{{detail.score}}">
-               平均名次 
             </div>
         </div>
     </div>
@@ -61,7 +56,7 @@
     window.t_PageName = "ranking";
 </script>
 <!-- Page visit End -->
-<script src="<%= cdn.normal %>js/controllers/RankingCtrl.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/competion-ui/public/js/rankingCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/ranking/main.js?<%= cdn.version %>"></script>
 </body>
 </html>
