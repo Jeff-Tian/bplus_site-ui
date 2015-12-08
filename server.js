@@ -241,7 +241,7 @@ server
             lang: lang
         });
     })
-    .use('/cmpt', require('competion-api')(express));
+    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express));
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
@@ -309,6 +309,10 @@ server.get('/mode', function (req, res, next) {
 
 server.get('/is_qa', function (req, res) {
     res.send('is_qa = ' + process.env.IS_QA);
+});
+
+server.get('/run_from', function (req, res) {
+    res.send('run_form = ' + process.env.RUN_FROM);
 });
 
 server.get('/locale', function (req, res, next) {
