@@ -114,18 +114,6 @@ function handleUserAccessCheckResult(res, json, req, next) {
 }
 
 module.exports = {
-    createOrderByRedemptionCode: proxy({
-        host: commerceConfig.host,
-        port: commerceConfig.port,
-        path: '/service/redemption/redeem',
-        dataMapper: function (d) {
-            d.userId = d.member_id;
-            d.productTypeId = gameConfig['national-2015'].productTypeId;
-            return d;
-        },
-        responseInterceptor: injectRedemptionGeneration
-    }),
-
     createUpSellOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
         port: commerceConfig.port,

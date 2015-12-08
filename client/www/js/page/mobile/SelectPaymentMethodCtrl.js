@@ -46,7 +46,7 @@
 
             service.executePromiseAvoidDuplicate($scope, 'buying', function () {
                 return service
-                    .post('/service-proxy/commerce/create-order/national-game-2015/by-redemption-code', {
+                    .post(angular.bplus.config.serviceUrls.createOrderAndPayByRedemptionCode, {
                         redemptionCode: $scope.payData.redemptionCode
                     })
                     .then(function (result) {
