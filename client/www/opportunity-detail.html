@@ -27,7 +27,7 @@
 <%- include('view-partial/header.html') -%>
 <!-- Header End -->
 <!-- Page Contents -->
-<div class="b-opd-body" ng-controller="OpdCtrl">
+<div class="b-opd-body b-background" ng-controller="OpdCtrl">
     <div class="ui grid container  b-opd-content-container">
         <div class="four wide column">
             <div class="b-opd-content-menu-container">
@@ -37,6 +37,27 @@
         <div class="one wide column">
         </div>
         <div class="eleven wide column">
+            <div ui-view class="b-opd-content-detail-container"></div>
+            <script type="text/ng-template" id="home.html">
+                Home
+            </script>
+            <script type="text/ng-template" id="work.html">
+                Home
+            </script>
+            <script type="text/ng-template" id="favorite.html">
+                Home
+            </script>
+            <script type="text/ng-template" id="recommended-positions.html">
+                Home
+            </script>
+            <script type="text/ng-template" id="applied-positions.html">
+                Home
+            </script>
+            <script type="text/ng-template" id="training.html">
+                Home
+            </script>
+
+
             <div class="b-opd-content-detail-container">
                 <bopdhomepage/>
             </div>
@@ -61,15 +82,23 @@
 <!-- Page Contents End-->
 <%- include('view-partial/footer.html') -%>
 <!--Page JS-->
+<script src="<%= cdn.normal %>bower/angular-ui-router/release/angular-ui-router.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/controllers/OpdCtrl.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/controllers/OpdMenuCtrl.js?<%= cdn.version %>" type="text/javascript"></script>
 <script src="<%= cdn.normal %>js/page/opportunity-detail/main.js?<%= cdn.version %>" type="text/javascript"></script>
 <script src="<%= cdn.normal %>js/page/opportunity-detail/menu.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-homepage.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-job.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-favourite.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-recommendation.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-delivered.js?<%= cdn.version %>" type="text/javascript"></script>
-<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-training.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-homepage.js?<%= cdn.version %>"
+        type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-job.js?<%= cdn.version %>"
+        type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-favourite.js?<%= cdn.version %>"
+        type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-recommendation.js?<%= cdn.version %>"
+        type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-delivered.js?<%= cdn.version %>"
+        type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/detail-training.js?<%= cdn.version %>"
+        type="text/javascript"></script>
 <script>
     window.t_PageName = "opportunityDetail";
 </script>

@@ -1,28 +1,60 @@
-<div class="ui fluid large vertical menu cloak opt-menu">
-    <a ng-href="#home" class="item" ng-class="{'active':true}">
+<div class="ui fluid large vertical menu cloak opt-menu" ng-controller="OpdMenuCtrl">
+    <a ng-href="#/home" class="item" ng-class="{'active': currentState === 'home'}">
         <i class="ui white large home icon"></i>
         机会首页
     </a>
-    <a ng-href="#work" class="item" ng-class="{'active': false}">
+    <a ng-href="#/work" class="item" ng-class="{'active': currentState ==='work'}">
         工作实习
     </a>
-    <a ng-href="#favorite" class="item" ng-class="{'active': false}">
+    <a ng-href="#/favorite" class="item" ng-class="{'active': currentState === 'favorite'}">
         收藏夹
     </a>
-    <a ng-href="#recommended-positions" class="item" ng-class="{'active': false}">
+    <a ng-href="#/recommended-positions" class="item" ng-class="{'active': currentState === 'recommended-positions'}">
         推荐职位
     </a>
-    <a ng-href="#applied-positions" class="item" ng-class="{'active': false}">
+    <a ng-href="#/applied-positions" class="item" ng-class="{'active': currentState === 'applied-positions'}">
         已投递的职位
     </a>
-    <a ng-href="#training" class="item" ng-class="{'active': false}">
+    <a ng-href="#/training" class="item" ng-class="{'active': currentState === 'training'}">
         培训机会
     </a>
 </div>
 <style type="text/css">
     .opt-menu .item .icon {
         float: none !important;
-        margin: 0 0.5em 0 0 !important;
+        margin: -5px 0.5em 0 0 !important;
         vertical-align: middle;
+        color: #F53C43 !important;
+        font-size: 180% !important;
+    }
+
+    .opt-menu {
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .opt-menu .item {
+        background-color: white !important;
+        border-bottom: solid 4px #BEBEBE !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-left: none !important;
+        color: #787878 !important;
+        border-radius: 0 !important;
+    }
+
+    .opt-menu .item:active,
+    .opt-menu .item:hover {
+        background-color: #ddd !important;
+    }
+
+    .opt-menu .item.active {
+        background-color: #5F5F63 !important;
+        color: white !important;
+    }
+
+    .opt-menu .item.active .icon {
+        color: white !important;
     }
 </style>
