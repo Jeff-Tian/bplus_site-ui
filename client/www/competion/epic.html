@@ -49,16 +49,17 @@
 
         function injectTrack(eventName) {
             return function ($event) {
-                var $target = $($event.target);
-                if($target.attr('target') !== '_blank') {
-                    $event.preventDefault();
-                }
 
                 logAndSendTrack(eventName);
 
-                window.setTimeout(function () {
-                    window.location.href = $($event.target).attr('href');
-                }, 300);
+                var $target = $($event.target);
+                if($target.attr('target') !== '_blank') {
+                    $event.preventDefault();
+                    
+                    window.setTimeout(function () {
+                        window.location.href = $($event.target).attr('href');
+                    }, 300);
+                }
             }
         }
 
@@ -86,13 +87,13 @@
                     $buttons.each(function(i, button){
                         if($(button).is($this)){
                             if(i === 0){
-                                logAndSendTrack('teamList.click');
+                                logAndSendTrack('teamList.tab');
                             }
                             else if(i === 1){
-                                logAndSendTrack('inviteSent.click');
+                                logAndSendTrack('inviteSent.tab');
                             }
                             else if(i === 2){
-                                logAndSendTrack('teamInvite.click');
+                                logAndSendTrack('teamInvite.tab');
                             }
                         }
                     });

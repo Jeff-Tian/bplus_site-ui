@@ -141,6 +141,7 @@
     "wechatJsApiConfig": "/service-proxy/wechat/js-api-config",
     "loadGameSeries": "/cmpt/game/series/load/:seriesId",
     "createOrderAndPayByWechat": "/service-proxy/payment/create-order/:option/by-wechat",
-    "createOrderAndPayByAlipay": "/service-proxy/payment/create-order/:option/by-alipay"
+    "createOrderAndPayByAlipay": "/service-proxy/payment/create-order/:option/by-alipay",
+    "createOrderAndPayByRedemptionCode": "/service-proxy/payment/create-upsell-order/by-redemption-code"
   }
 }

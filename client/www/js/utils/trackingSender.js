@@ -168,9 +168,6 @@
 
         $("body").on("click", "a[eventName]", function(e){
             var $currentTarget = $(e.currentTarget);
-            if($currentTarget.attr("target") !== '_blank'){
-                e.preventDefault();
-            }
 
             var name = $currentTarget.attr("eventName");
             var url = $currentTarget.attr("href");
@@ -178,10 +175,14 @@
             if(name){
                 window.sendTrack(name);
 
-                if(url) {
-                    window.setTimeout(function () {
-                        window.location.href = url;
-                    }, 300);
+                if($currentTarget.attr("target") !== '_blank'){
+                    e.preventDefault();
+
+                    if(url) {
+                        window.setTimeout(function () {
+                            window.location.href = url;
+                        }, 300);
+                    }
                 }
             }
         });

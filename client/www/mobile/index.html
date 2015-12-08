@@ -200,11 +200,13 @@
             <div class="ui horizontal divider"></div>
             <form name="redemptionForm" novalidate class="ui form redemption-form"
                   ng-submit="buyWithRedemptionCode($event)">
-                <div class="ui error message brand"></div>
                 <div class="field">
                     <label><%= __('使用邀请码参赛:') %> </label>
 
                     <div class="ui divider"></div>
+
+                    <div class="ui error message brand"></div>
+
                     <input type="text" style="width:70%" placeholder="" ng-required="true"
                            ng-model="payData.redemptionCode">
                     <button class="ui b-mobile-payment-red-button right floated button"
@@ -213,8 +215,9 @@
                         __('确定') %>
                     </button>
                 </div>
+                <div class="ui horizontal clearing divider"></div>
 
-                <div class="field" style="padding-top:20px">
+                <div class="field" style="padding-top:20px; position: relative;">
                     <label ng-hide="partner">没有邀请码？</label>
 
                     <div class="ui tiny left floated grey" style="font-size: small; max-width:70%" ng-hide="partner">
@@ -223,7 +226,7 @@
                     <div class="ui tiny left floated grey" style="max-width: 70%" ng-show="partner">
                         扫码或长按关注 {{partnerName}}
                     </div>
-                    <div style="position:absolute;right:-6px;top:100px">
+                    <div style="position:absolute;right:-6px;top:-20px;">
                         <img ng-src="{{wechatQRImageUrl}}" style="width:100px">
                     </div>
                 </div>
@@ -424,7 +427,7 @@
 <script src="js/page/mobile/index.js"></script>
 
 <% } else { %>
-<script src="<%= config.normal %>js/cdn/m/index.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/cdn/m/index.js?<%= cdn.version %>"></script>
 <% } %>
 <script>
     (function () {
