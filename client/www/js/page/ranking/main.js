@@ -1,13 +1,12 @@
 'use strict';
 angular
-    .module('bplusUpsell', [
+    .module('bplusRanking', [
         'ng.utils',
         'pascalprecht.translate'
     ])
     .config(angular.bplus.translate)
     .controller('AppCtrl', angular.bplus.AppCtrl)
-    .controller('UpsellCtrl', angular.bplus.UpsellCtrl)
-    .controller('OffersCtrl', angular.bplus.OffersCtrl)
+    .controller('RankingCtrl', angular.bplus.RankingCtrl)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)

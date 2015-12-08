@@ -100,7 +100,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'first'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{300 |
+                            {{350 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -127,7 +127,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'second'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{100 |
+                            {{180 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -155,7 +155,7 @@
                         <button class="ui b-mobile-payment-red-button button"
                                 ng-class="{'disabled': offerData.kind !== 'third'}"
                                 style="margin-top: -0.5em; width: 115px;">
-                            {{30 |
+                            {{50 |
                             currency: "¥ "}}
                         </button>
                     </label>
@@ -185,7 +185,7 @@
             <% } %>
 
             <% if (!device.isFromWechatBrowser) { %>
-            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay($event)">
+            <form name="alipayForm" novalidate class="ui form alipay-form" ng-submit="alipay()">
                 <div class="ui error message brand"></div>
 
                 <button loading type="submit" class="ui fluid basic button">
@@ -424,7 +424,7 @@
 <script src="js/page/mobile/index.js"></script>
 
 <% } else { %>
-<script src="<%= config.normal %>js/cdn/m/index.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>js/cdn/m/index.js?<%= cdn.version %>"></script>
 <% } %>
 <script>
     (function () {

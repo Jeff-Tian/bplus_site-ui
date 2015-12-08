@@ -241,7 +241,7 @@ server
             lang: lang
         });
     })
-    .use('/cmpt', require('competion-api')(express));
+    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express));
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
@@ -264,6 +264,7 @@ mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
+mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, next) {
@@ -273,6 +274,15 @@ server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, ne
         res.render('mobile/opportunity-detail');
     }
 });
+
+server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('ranking');
+    } else {
+        res.render('/mobile/ranking');
+    }
+});
+
 server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('game-training');
@@ -308,6 +318,10 @@ server.get('/mode', function (req, res, next) {
 
 server.get('/is_qa', function (req, res) {
     res.send('is_qa = ' + process.env.IS_QA);
+});
+
+server.get('/run_from', function (req, res) {
+    res.send('run_form = ' + process.env.RUN_FROM);
 });
 
 server.get('/locale', function (req, res, next) {

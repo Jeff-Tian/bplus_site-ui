@@ -167,19 +167,22 @@
         window.sendTrack(window.t_PageName, null, true);
 
         $("body").on("click", "a[eventName]", function(e){
-            e.preventDefault();
-
             var $currentTarget = $(e.currentTarget);
+
             var name = $currentTarget.attr("eventName");
             var url = $currentTarget.attr("href");
 
             if(name){
                 window.sendTrack(name);
 
-                if(url) {
-                    window.setTimeout(function () {
-                        window.location.href = url;
-                    }, 300);
+                if($currentTarget.attr("target") !== '_blank'){
+                    e.preventDefault();
+
+                    if(url) {
+                        window.setTimeout(function () {
+                            window.location.href = url;
+                        }, 300);
+                    }
                 }
             }
         });

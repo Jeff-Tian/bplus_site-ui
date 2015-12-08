@@ -36,11 +36,13 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
     "grunt-html2js": "^0.3.3",
     "grunt-karma": "^0.12.1",
     "grunt-mocha": "^0.4.13",
     "grunt-mocha-cli": "^2.0.0",
     "grunt-nodemon": "^0.4.0",
+    "grunt-protractor-runner": "^2.1.0",
     "grunt-replace": "^0.11.0",
     "grunt-string-replace": "*",
     "gulp-rename": "^1.2.2",
@@ -59,6 +61,7 @@
     "shelljs": "^0.2.6"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "node node_modules/protractor/bin/webdriver-manager update"
   }
 }
