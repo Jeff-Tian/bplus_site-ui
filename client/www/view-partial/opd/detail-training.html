@@ -21,7 +21,71 @@
             <span class="loose tag">运营</span>
             <span class="loose tag">市场推广</span>
         </div>
+
+        <div class="ui clearing segment" style="border-radius: 0;">
+            <strong>
+                排序方式：
+            </strong>
+            <span class="ui light red label">默认</span>
+            <span class="ui transparent label">最新</span>
+            <span class="ui transparent label">推荐星级</span>
+            <span class="ui transparent label">热门</span>
+            <span class="ui transparent label">&nbsp;</span>
+            <strong>
+                机构专长：
+            </strong>
+            <span class="ui light red label">不限</span>
+            <span class="ui transparent label">语言</span>
+            <span class="ui transparent label">IT</span>
+            <span class="ui transparent label">留学</span>
+        </div>
     </form>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Header</th>
+            <th>Header</th>
+            <th>Header</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="ui ribbon label">First</div>
+            </td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="3" class="ui center aligned">
+                <div class="ui loose pagination menu">
+                    <a class="icon item">
+                        <i class="left chevron icon"></i>
+                    </a>
+                    <a class="item">1</a>
+                    <a class="item">2</a>
+                    <a class="item">3</a>
+                    <a class="item">4</a>
+                    <a class="icon item">
+                        <i class="right chevron icon"></i>
+                    </a>
+                </div>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
 </div>
 <style type="text/css">
     .marginal-input {
@@ -34,5 +98,26 @@
 
     .loose.tag {
         margin: 1em;
+    }
+
+    .transparent.label {
+        background: transparent;
+    }
+
+    .light.red.label {
+        background-color: #F76E73 !important;
+    }
+
+    .loose.pagination.menu {
+        border: none;
+    }
+
+    .loose.pagination.menu .item {
+        margin-left: 5px;
+        margin-right: 5px;
+        border: solid 1px #C8C8C8;
+        border-radius: 3px;
+        padding: 3px !important;
+        text-align: center !important;
     }
 </style>
