@@ -14,25 +14,11 @@
 <div class="main body b-mobile has-header b-mobile-ranking-body" ng-controller="RankingCtrl">
     <div class="ui equal width center aligned padded grid b-mobile-ranking-option-container">
         <div class="three column row b-mobile-ranking-row">
-            <div ng-class="{'b-ranking-active':option===0}" class="b-mobile-column-patch column b-mobile-ranking-options b-mobile-column-patch" ng-click="rankChange(0)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/1a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/1b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>平均名次</strong></div>
-                <div>排行榜</div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
-            </div>
-            <div ng-class="{'b-ranking-active':option===1}" class="b-mobile-column-patch column b-mobile-ranking-options" ng-click="rankChange(1)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/2a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/2b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>平均得分</strong></div>
-                <div>排行榜</div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
-            </div>
-            <div ng-class="{'b-ranking-active':option===2}" class="b-mobile-column-patch column b-mobile-ranking-options" ng-click="rankChange(2)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/4a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/4b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>个人总得分</strong></div>
-                <div>排行榜</div>
+            <div ng-class="{'b-ranking-active':option===$index}" class="b-mobile-column-patch column b-mobile-ranking-options b-mobile-column-patch" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions">
+                <img class="b-mobile-ranking-status-active" ng-src="<%= cdn.normal %>img/ranking/{{$index}}a.png?<%= cdn.version %>">
+                <img class="b-mobile-ranking-status-deactive" ng-src="<%= cdn.normal %>img/ranking/{{$index}}b.png?<%= cdn.version %>">
+                <div class="b-mobile-ranking-title1"><strong ng-bind-template="{{titleOption[0]}}"></strong></div>
+                <div ng-bind-template="{{titleOption[1]}}"></div>
                 <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
             </div>
         </div>
