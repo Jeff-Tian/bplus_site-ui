@@ -27,9 +27,12 @@
     </h2>
     <div class="ui equal width center aligned padded grid b-ranking-content-container">
         <div class="row b-ranking-row">
-            <div ng-class="{'b-ranking-active':option===$index}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions" ng-bind-template="{{titleOption[0]+titleOption[1]}}"> </div>
+            <div ng-class="{'b-ranking-active':option===$index}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions" ng-bind-template="{{titleOption[0]+titleOption[1]}}"></div>
         </div>
-        <div class="row b-ranking-row b-ranking-detail" ng-repeat="detail in details">
+        <div class="row b-ranking-row">
+            <div ng-class="{'b-ranking-active':subOption===$index}" class="column b-ranking-options b-ranking-cell" ng-click="subTileChange($index)" ng-repeat="subTitleOption in subTitleOptions" ng-bind-template="{{subTitleOption}}"></div>
+        </div>
+        <div ng-class="'b-ranking-detail'+$index" class="row b-ranking-row" ng-repeat="detail in details">
             <div class="two wide column b-ranking-rank b-ranking-cell" ng-bind-template="{{detail.rank}}">
             </div>
             <div class="nine wide column b-ranking-name b-ranking-cell" ng-bind-template="{{detail.name}}">
