@@ -41,30 +41,54 @@
         </div>
     </form>
     <table class="ui celled table">
-        <thead>
-        <tr>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
-        </tr>
-        </thead>
         <tbody>
         <tr>
-            <td>
-                <div class="ui ribbon label">First</div>
+            <td style="background-color: #F9F9F9; padding: 1.5em;">
+                <div class="ui items">
+                    <div class="ui training item">
+                        <a class="ui tiny image">
+                            <img src="/img/opd/training.jpg">
+                        </a>
+
+                        <div class="content">
+                            <a class="ui red header" href="">诵苑艺术培训中心</a>
+
+                            <div class="description">
+                                全清华北大名师
+                            </div>
+                            <div class="description">
+                                推荐星级
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="empty star icon"></i>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <i class="unhide grey icon">&nbsp;192</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="color: grey;">适合想进入创意与设计领域的你</p>
+
+                <p>职场竞争力提升指标：
+
+                    <span class="ui label">创意</span>
+                    <span class="ui label">思维</span>
+                    <span class="ui label">人文</span>
+                    <span class="ui label">创作</span>
+                </p>
             </td>
-            <td>Cell</td>
-            <td>Cell</td>
-        </tr>
-        <tr>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-        </tr>
-        <tr>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
+            <td style="text-align: center; position: relative; padding-left: 3em; padding-right: 5em;">
+                <div class="ribbon teal right corner label">广告</div>
+                <div class="ui image">
+                    <i class="ui left arrow angle big left icon"></i>
+                    <img src="/img/opd/ad.jpg" style="border: solid 1px #F0F0F0;">
+                    <i class="ui right arrow angle big right icon"></i>
+                </div>
+
+                <p style="margin-top: 10px;">商业海报设计基础班 / 免费</p>
+            </td>
         </tr>
         </tbody>
         <tfoot>
@@ -148,5 +172,71 @@
 
     .transparent {
         background: transparent;
+    }
+
+    .training.item .star.icon {
+        color: #F88700;
+        font-size: larger;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .ribbon.right.corner.label {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 5px 10px;
+        color: white;
+        z-index: 4;
+    }
+
+    .ribbon.teal.right.corner.label::before {
+        display: block;
+        width: 0;
+        content: ' ';
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: -15px;
+        border-left: solid 15px transparent;
+        border-top: solid 15px #2990B6;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    .ribbon.teal.right.corner.label::after {
+        display: block;
+        width: 0;
+        content: ' ';
+        height: 0;
+        position: absolute;
+        bottom: 0;
+        left: -15px;
+        border-left: solid 15px transparent;
+        border-bottom: solid 15px #2990B6;
+        border-right: none;
+        border-top: none;
+    }
+
+    .ribbon.teal {
+        background-color: #2990B6;
+    }
+
+    .arrow {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        padding-top: 25%;
+        height: 100%;
+    }
+
+    .left.arrow {
+        top: 0;
+        right: 100%;
+    }
+
+    .right.arrow {
+        top: 0;
+        left: 100%;
     }
 </style>
