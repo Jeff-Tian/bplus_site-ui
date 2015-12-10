@@ -55,8 +55,8 @@
     position: relative;
 
     .ring {
-        border: solid 8px #319B67;
         border-radius: 50%;
+        background-color: #319B67;
         width: 100%;
         height: 100%;
 
@@ -84,15 +84,36 @@
         .generate-progresses(@n, (@i + 1));
     }
 
+    .generate-progresses-2(@n, @i:51) when (@i =< @n) {
+        .progress.progress-@{i} {
+            background-image: linear-gradient((90deg + (@i * 3.6)), #319B67 50%, transparent 50%),
+            linear-gradient(90deg, white 50%, #319B67 50%);
+            left: 1px;
+            right: 1px;
+            top: 1px;
+            bottom: 1px;
+
+            &:before {
+                content: '@{i}%';
+            }
+        }
+
+        .generate-progresses-2(@n, (@i + 1));
+    }
+
     .generate-progresses(50);
+    .generate-progresses-2(100);
 
     .progress::before {
         position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
-        margin-top: -0.5rem;
+        left: 5px;
+        right: 5px;
+        top: 5px;
+        bottom: 5px;
         font-weight: bold;
+        border-radius: 50%;
+        padding-top: 25%;
         text-align: center;
+        background-color: white;
     }
 }
