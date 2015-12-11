@@ -71,14 +71,14 @@
             var option = kindOptionMap[$scope.offerData.kind];
 
             if (option) {
-                pay($scope, 'alipaying', payFromDevice || 'alipaymobile', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', option), $('.alipay-form'));
+                pay($scope, 'alipaying', payFromDevice || 'b_alipaymobile', angular.bplus.config.serviceUrls.createOrderAndPayByAlipay.replace(':option', option), $('.alipay-form'));
             } else {
                 window.alert('不支持的 offer :' + $scope.offerData.kind);
             }
         };
 
         $scope.pcAlipay = function () {
-            $scope.alipay('alipay');
+            $scope.alipay('b_alipay');
         };
 
         $scope.wechatPaying = false;

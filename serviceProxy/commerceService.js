@@ -191,6 +191,12 @@ module.exports = {
         dataMapper: function (d) {
             d.userId = d.member_id;
 
+            if (d.payment === 'alipay') {
+                d.payment = 'b_alipay';
+            } else if (d.payment === 'alipaymobile') {
+                d.payment = 'b_alipaymobile';
+            }
+
             return d;
         }
     }),
