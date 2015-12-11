@@ -191,6 +191,11 @@ module.exports = {
         dataMapper: function (d) {
             d.userId = d.member_id;
 
+            // TODO: Delete it
+            if (d.payment === 'b_alipaymobile') {
+                d.payment = 'alipaymobile';
+            }
+
             return d;
         }
     }),

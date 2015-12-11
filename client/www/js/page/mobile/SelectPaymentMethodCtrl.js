@@ -78,7 +78,7 @@
         };
 
         $scope.pcAlipay = function () {
-            $scope.alipay('alipay');
+            $scope.alipay('b_alipay');
         };
 
         $scope.wechatPaying = false;

@@ -51,15 +51,13 @@ module.exports = require('express').Router()
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
-    .post('/payment/create-order/national-game-:option/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
-    .post('/payment/create-order/national-game-:option/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
 
-    .post('/payment/create-order/national-upsell-:option/by-alipay', membership.ensureAuthenticated, commerceService.createOrder)
+    .post('/payment/create-order/national-upsell-:option/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)
 
     .post(serviceUrls.createOrderAndPayByWechat, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post(serviceUrls.createOrderAndPayByAlipay, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
 
-    .post('/payment/create-upsell-order/by-alipay', membership.ensureAuthenticated, commerceService.createOrder)
+    .post('/payment/create-upsell-order/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)
 
     .post(serviceUrls.createOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
 
@@ -74,5 +72,5 @@ module.exports = require('express').Router()
     function (req, res, next) {
         res.send(req.chunks);
     })
-    .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig);
+    .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
 ;

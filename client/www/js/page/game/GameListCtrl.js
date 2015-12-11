@@ -6,6 +6,12 @@
                     return (new Date(epic2.game_from)) - (new Date(epic1.game_from));
                 }).slice(0, 10);
             });
+
+        $scope.hasGameEnd = function (epic) {
+            var now = new Date();
+
+            return new Date(epic.game_end) < now;
+        };
     };
 
     exports.GameListCtrl.$inject = ['$scope', 'service'];
