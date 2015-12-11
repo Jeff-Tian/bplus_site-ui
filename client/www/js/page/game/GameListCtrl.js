@@ -12,6 +12,15 @@
 
             return new Date(epic.game_end) < now;
         };
+
+        $scope.getShortDescription = function (desc) {
+            var index = desc.indexOf('<br');
+            if (index >= 0) {
+                return desc.substr(0, index);
+            } else {
+                return desc;
+            }
+        };
     };
 
     exports.GameListCtrl.$inject = ['$scope', 'service'];
