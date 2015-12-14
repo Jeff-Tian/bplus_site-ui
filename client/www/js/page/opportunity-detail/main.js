@@ -23,6 +23,7 @@ angular
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('OpdCtrl', angular.bplus.OpdCtrl)
+    .factory('PipeCacheService', angular.bplus.PipeCacheService)
     .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
