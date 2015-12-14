@@ -2,7 +2,7 @@
     exports.SelectPaymentMethodCtrl = function ($scope, service, FormValidation, $stateParams, $state, queryParser, msgBus, WechatWrapper, DeviceHelper) {
         // Ugly workaround for live issue. TODO: investigate and fix it
         if (queryParser.get('openid').indexOf('%20') === 0) {
-            location.href = '/m/index#/select-payment-method';
+            location.href = '/m/#select-payment-method';
             return;
         }
 
@@ -78,7 +78,7 @@
         };
 
         $scope.pcAlipay = function () {
-            $scope.alipay('alipay');
+            $scope.alipay('b_alipay');
         };
 
         $scope.wechatPaying = false;
