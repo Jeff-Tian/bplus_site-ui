@@ -45,7 +45,7 @@
             "price": "150.00"
         }
     };
-    var PAYMENT_BASIC_URL = "service-proxy/payment/create-order/national-upsell-2015-";
+    var PAYMENT_BASIC_URL = "/service-proxy/payment/create-order/national-upsell-2015-";
     var getOrderUrl = function (option, paymentMethod) {
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
