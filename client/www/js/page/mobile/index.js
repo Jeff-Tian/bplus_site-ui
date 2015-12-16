@@ -51,7 +51,22 @@ angular
                 templateUrl: 'paid.html',
                 controller: 'PaidCtrl'
             })
+            .state('weekly-competition', {
+                url: '/weekly-competition',
+                templateUrl: 'weekly-competition.html',
+                controller: 'WeeklyCompetitionCtrl',
+                data: {
+                    requiresLogin: true
+                }
+            })
         ;
+    }])
+    .run(['$rootScope', 'DeviceHelper', function ($rootScope, DeviceHelper) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (toState.data && toState.data.requiresLogin && !DeviceHelper.getCookie('mid')) {
+                window.location.href = '/m/sign-in?return_url=' + encodeURIComponent(location.pathname + location.hash);
+            }
+        });
     }])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
@@ -73,4 +88,5 @@ angular
     .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)
     .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
+    .controller('WeeklyCompetitionCtrl', angular.bplus.WeeklyCompetitionCtrl)
 ;

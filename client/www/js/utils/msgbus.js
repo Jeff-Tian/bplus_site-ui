@@ -17,7 +17,7 @@ angular.module('ng.utils')
                 updated: 'profile:updated'
             },
             translation: {
-                loaded: 'translation:loaed'
+                loaded: 'translation:loaded'
             },
             viewContent: {
                 loaded: '$viewContentLoaded'
