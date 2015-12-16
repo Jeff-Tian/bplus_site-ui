@@ -16,6 +16,7 @@ obj/
 temp/
 dist/
 bower/
+artifacts/
 
 client/www/bower
 client/www/css/main.css
