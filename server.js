@@ -69,8 +69,12 @@ function setDeviceHelper(req, res, next) {
     next();
 }
 
+function getMode() {
+    return process.env.NODE_ENV || 'dev';
+}
+
 function setMode(req, res, next) {
-    res.locals.dev_mode = (process.env.NODE_ENV || 'dev') === 'dev';
+    res.locals.dev_mode = (getMode() === 'dev');
 
     next();
 }
@@ -156,7 +160,7 @@ supportedLocales.map(function (l) {
     server.get('/' + l, renderIndex);
 });
 
-var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
+var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
 var staticSetting = {
     etag: true,
     lastModified: true,
@@ -177,6 +181,7 @@ function filterConfig(config) {
     filtered.trackingUrl = config.trackingUrl;
     filtered.serviceUrls = config.serviceUrls;
     filtered.competitions = config.competitions;
+    filtered.mode = getMode();
 
     return filtered;
 }
@@ -186,7 +191,7 @@ server.use('/config.js', function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
+if (getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
 } else {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
