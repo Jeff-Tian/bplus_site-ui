@@ -68,6 +68,12 @@ angular
                 //window.location.href = '/m/sign-in?return_url=' + encodeURIComponent(location.pathname + location.hash);
             }
         });
+
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            if (toState.data && toState.data.requiresLogin && !DeviceHelper.getCookie('mid')) {
+                //window.location.href = '/m/sign-in?return_url=' + encodeURIComponent(location.pathname + location.hash);
+            }
+        });
     }])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
