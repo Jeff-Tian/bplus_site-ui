@@ -411,7 +411,8 @@
 </script>
 
 <script type="text/ng-template" id="weekly-competition.html">
-    <div class="white background b-mobile stretch has-header">
+    <div class="ui loading segment b-mobile stretch has-header" ng-show="!memberLoaded || !loggedOn"></div>
+    <div class="white background b-mobile stretch has-header" ng-show="memberLoaded && loggedOn">
         <div class="ui center aligned container">
 
             <i class="ui green massive checkmark icon"></i>

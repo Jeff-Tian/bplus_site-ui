@@ -61,10 +61,11 @@ angular
             })
         ;
     }])
-    .run(['$rootScope', 'DeviceHelper', function ($rootScope, DeviceHelper) {
+    .run(['$rootScope', 'DeviceHelper', 'msgBus', function ($rootScope, DeviceHelper, msgBus) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            // TODO: Use mid to detect log on has issues inside wechat browser, try other approaches
             if (toState.data && toState.data.requiresLogin && !DeviceHelper.getCookie('mid')) {
-                window.location.href = '/m/sign-in?return_url=' + encodeURIComponent(location.pathname + location.hash);
+                //window.location.href = '/m/sign-in?return_url=' + encodeURIComponent(location.pathname + location.hash);
             }
         });
     }])
