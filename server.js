@@ -161,6 +161,8 @@ supportedLocales.map(function (l) {
 });
 
 var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var viewFolder = __dirname + '/client/views';
+
 var staticSetting = {
     etag: true,
     lastModified: true,
@@ -210,10 +212,21 @@ server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
-server.use(localeHelper.regexPath('/store', false), !(process.env.RUN_FROM === 'jeff') ? require('online-store') : require('../online-store'));
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
+
+server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/semantic'));
+server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/bower_components'));
+server.use(localeHelper.regexPath('/images', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/images'));
+server.use(localeHelper.regexPath('/stylesheets', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/stylesheets'));
+
+server.use(localeHelper.regexPath('/store', false), require('./store'));
 
 // Customize client file path
-server.set('views', staticFolder);
+server.set('views', [staticFolder, viewFolder]);
 server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
     server.use('/' + l, express.static(staticFolder, staticSetting));
