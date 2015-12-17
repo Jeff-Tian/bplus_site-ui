@@ -210,6 +210,8 @@ server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
+server.use(localeHelper.regexPath('/store', false), !(process.env.RUN_FROM === 'jeff') ? require('online-store') : require('../online-store'));
+
 // Customize client file path
 server.set('views', staticFolder);
 server.use(express.static(staticFolder, staticSetting));
