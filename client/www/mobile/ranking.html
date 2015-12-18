@@ -15,20 +15,21 @@
     <div class="ui equal width center aligned padded grid b-mobile-ranking-option-container">
         <div class="three column row b-mobile-ranking-row">
             <div ng-class="{'b-ranking-active':option===$index}" class="b-mobile-column-patch column b-mobile-ranking-options b-mobile-column-patch" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions">
-                <img class="b-mobile-ranking-status-active" ng-src="<%= cdn.normal %>img/ranking/{{$index}}a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" ng-src="<%= cdn.normal %>img/ranking/{{$index}}b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong ng-bind-template="{{titleOption[0]}}"></strong></div>
-                <div ng-bind-template="{{titleOption[1]}}"></div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
+                <div class="b-mobile-ranking-title1" ng-bind-template="{{titleOption[0]}}{{titleOption[1]}}"></div>
             </div>
         </div>
     </div>
     <div class="b-mobile-ranking-detail-count" ng-repeat="detail in details">
         <div class="b-mobile-ranking-detail-container ui equal width center aligned padded grid">
-            <div class="three wide column b-mobile-column-patch b-mobile-ranking-detail-rank" ng-bind-template="{{detail.rank}}"></div>
-            <div class="one wide column b-mobile-column-patch b-mobile-ranking-detail-honor"></div>
-            <div class="six wide column b-mobile-column-patch b-mobile-ranking-detail-name" ng-bind-template="{{detail.name}}"></div>
-            <div class="five wide column b-mobile-column-patch b-mobile-ranking-detail-score" ng-bind-template="{{detail.score}}"></div>
+            <div class="three wide column b-mobile-column-patch b-mobile-ranking-detail-rank b-mobile-ranking-detail-honor" ng-bind-template="{{detail.rank}}"></div>
+            <div class="seven wide column b-mobile-column-patch b-mobile-ranking-detail-name" ng-bind-template="{{detail.name}}"></div>
+            <div class="six wide column b-mobile-column-patch b-mobile-ranking-detail-score">
+                <i style="margin-right:0px" class="angle down icon" ng-show="$index===0" ng-click="displaySuboption=!displaySuboption"></i>
+                {{$index===0?subTitleOptions[subOption[option]]:detail.score}}
+                <div ng-show="displaySuboption" class="b-mobile-ranking-subtitle-container">
+                    <div ng-class="{'b-mobile-ranking-suboption-active':subOption[option]===$index}" class="b-mobile-ranking-subtitle-item" ng-click="subTileChange($index)" ng-repeat="subTitleOption in subTitleOptions" ng-bind-template="{{subTitleOption}}"></div>
+                </div>
+            </div>
         </div>
         <div class="b-mobile-ranking-seperator"></div>
     </div>
