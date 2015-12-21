@@ -10,25 +10,27 @@ router.use(function (req, res, next) {
 });
 
 router.get('/my', function (req, res, next) {
-    res.locals.test = 'test;';
-
-    res.render(res.locals.onlineStoreTemplate + 'mylayout.jade', {});
+    renderMixin(res, 'my.jade', 'mylayout.jade');
 });
 
-router.get('/you', function (req, res, next) {
+function renderMixin(res, jadeTemplate, jadeLayout) {
     var o = {
         basedir: '/',
-        filename: path.join(__dirname, '/../client/views/you.jade')
+        filename: path.join(__dirname, '/../client/views/', jadeTemplate)
     };
 
-    var contents = fs.readFileSync(__dirname + '/../client/views/you.jade', 'utf-8');
-    contents = 'extends ' + res.locals.onlineStoreTemplate + 'mylayout.jade' + '\n' + contents;
+    var contents = fs.readFileSync(__dirname + '/../client/views/' + jadeTemplate, 'utf-8');
+    contents = 'extends ' + res.locals.onlineStoreTemplate + jadeLayout + '\n' + contents;
 
     var compiled = jade.compile(contents, o);
     compiled = compiled(res.locals);
 
     o.filename = path.join(__dirname, '/../client/www/view-partial/store-index.html');
     res.send(ejs.render(compiled, res.locals, o));
+}
+
+router.get('/you', function (req, res, next) {
+    renderMixin(res, 'you.jade', 'mylayout.jade');
 });
 
 router.get('/ok', function (req, res, next) {

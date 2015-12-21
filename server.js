@@ -248,7 +248,7 @@ setupOnlineStoreStaticResources('images');
 setupOnlineStoreStaticResources('stylesheets');
 setupOnlineStoreStaticResources('scripts');
 
-server.use(localeHelper.regexPath('/store', false), require('./store'));
+server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);

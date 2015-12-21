@@ -1,5 +1,6 @@
 (function (exports) {
     exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper, queryParser, WechatLogon, $filter) {
+        console.log('app ctrl');
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 

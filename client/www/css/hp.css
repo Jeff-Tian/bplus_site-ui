@@ -45,7 +45,7 @@
   color: #FF3C42;
 }
 .b-header .menu .center.aligned.item {
-  text-align: center;
+  text-align: center !important;
 }
 .b-header .menu.b-header-account {
   background-color: #ff3c42;
