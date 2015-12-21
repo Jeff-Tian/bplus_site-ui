@@ -79,6 +79,19 @@ function setMode(req, res, next) {
     next();
 }
 
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+function setOnlineStoreTemplate(req, res, next) {
+    res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
+            '/node_modules/',
+            '/../') +
+        'online-store/views/';
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
@@ -87,6 +100,7 @@ server
     .use(setConfig)
     .use(setDeviceHelper)
     .use(setMode)
+    .use(setOnlineStoreTemplate)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -212,16 +226,27 @@ server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
-function onlineOfflinePathSwitch(onlinePath, offlinePath) {
-    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
-}
-
 server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
 
-server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/semantic'));
-server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/bower_components'));
-server.use(localeHelper.regexPath('/images', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/images'));
-server.use(localeHelper.regexPath('/stylesheets', false), express.static(__dirname + onlineOfflinePathSwitch('/node_modules/online-store', '/../online-store') + '/public/stylesheets'));
+function setupOnlineStoreStaticResources(staticFolder) {
+    server.use(
+        localeHelper.regexPath('/' + staticFolder, false),
+        express.static(
+            __dirname +
+            onlineOfflinePathSwitch(
+                '/node_modules/',
+                '/../') +
+            'online-store/public/' +
+            staticFolder
+        )
+    );
+}
+
+setupOnlineStoreStaticResources('semantic');
+setupOnlineStoreStaticResources('bower_components');
+setupOnlineStoreStaticResources('images');
+setupOnlineStoreStaticResources('stylesheets');
+setupOnlineStoreStaticResources('scripts');
 
 server.use(localeHelper.regexPath('/store', false), require('./store'));
 
