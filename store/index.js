@@ -13,6 +13,10 @@ router.get('/my', function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade');
 });
 
+router.get('/offers', function (req, res, next) {
+    renderMixin(res, 'offers.jade', 'offers-layout.jade');
+});
+
 function renderMixin(res, jadeTemplate, jadeLayout) {
     var o = {
         basedir: '/',
@@ -28,60 +32,5 @@ function renderMixin(res, jadeTemplate, jadeLayout) {
     o.filename = path.join(__dirname, '/../client/www/view-partial/store-index.html');
     res.send(ejs.render(compiled, res.locals, o));
 }
-
-router.get('/you', function (req, res, next) {
-    renderMixin(res, 'you.jade', 'mylayout.jade');
-});
-
-router.get('/ok', function (req, res, next) {
-    console.log(res.locals);
-
-    res.writeHead(200, {'Content-Type': 'text/html'});
-
-    var ret = fs.readFileSync(__dirname + '/../client/views/layout.jade', 'utf-8');
-    var fn = jade.compile(ret);
-    var o = res.locals;
-    var jadeResult = fn(o);
-
-    function test(a) {
-        return a;
-    }
-
-    var ejsIncludes = {};
-    var i = 0;
-    var regex = /<!--\s*<%-\s*include\("([^"]+)"\)\s*-%>-->/g;
-    jadeResult = jadeResult.replace(regex, function (match, p1, offset, source) {
-        ejsIncludes[p1] = '';
-        i++;
-
-        return match;
-    });
-
-    for (var fileName in ejsIncludes) {
-        ejs.renderFile(__dirname + fileName, o, {}, function (err, result) {
-            i--;
-
-            if (err) {
-                next(err);
-            }
-
-            ejsIncludes[fileName] = result;
-            console.log(ejsIncludes);
-
-            if (i <= 0) {
-                jadeResult = jadeResult.replace(regex, function (match, p1, offset, source) {
-                    return ejsIncludes[p1];
-                });
-
-                res.write(jadeResult);
-                res.end();
-            }
-        });
-    }
-
-    //res.write('' + i);
-    //
-    //res.end();
-});
 
 module.exports = router;

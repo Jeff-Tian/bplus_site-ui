@@ -9,6 +9,9 @@ block customizedFooter
         script(type="text/javascript")
             | angular.element(document).ready(function () {
             |   angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
+            | angular.element(document).ready(function () {
+            |   angular.bootstrap(document.getElementById('online-store-body'), ['onlineStore']);
+            | });
             |   angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
             | });
         include ../www/view-partial/external-js.html
