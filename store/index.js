@@ -13,11 +13,35 @@ router.get('/my', function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade');
 });
 
+function cdnify(url, cdn) {
+    return cdn.normal + url + '?' + cdn.version;
+}
+
 router.get('/offers', function (req, res, next) {
-    renderMixin(res, 'offers.jade', 'offers-layout.jade');
+    renderMixin(res, 'offers.jade', 'offers-layout.jade', {
+        horizontalMenus: [{
+            text: '优惠组合',
+            image: cdnify('img/online-store/icon_discount_red_30x30.png', res.locals.cdn),
+            activeImage: cdnify('img/online-store/icon_discount_white_30x30.png', res.locals.cdn),
+            state: 'offer-a',
+            target: '#/offer-a'
+        }, {
+            text: '复活赛－服务',
+            image: cdnify('img/online-store/icon_resurgence_red_35x35.png', res.locals.cdn),
+            activeImage: cdnify('img/online-store/icon_resurgence_white_35x35.png', res.locals.cdn),
+            state: 'offer-b',
+            target: '#/offer-b'
+        }, {
+            text: '激活码兑换',
+            image: cdnify('img/online-store/icon_barcode_red_35x30.png', res.locals.cdn),
+            activeImage: cdnify('img/online-store/icon_barcode_white_35x30.png', res.locals.cdn),
+            state: 'offer-c',
+            target: '#/offer-c'
+        }]
+    });
 });
 
-function renderMixin(res, jadeTemplate, jadeLayout) {
+function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {
         basedir: '/',
         filename: path.join(__dirname, '/../client/views/', jadeTemplate)
@@ -27,7 +51,7 @@ function renderMixin(res, jadeTemplate, jadeLayout) {
     contents = 'extends ' + res.locals.onlineStoreTemplate + jadeLayout + '\n' + contents;
 
     var compiled = jade.compile(contents, o);
-    compiled = compiled(res.locals);
+    compiled = compiled(data || {});
 
     o.filename = path.join(__dirname, '/../client/www/view-partial/store-index.html');
     res.send(ejs.render(compiled, res.locals, o));
