@@ -73,4 +73,6 @@ module.exports = require('express').Router()
         res.send(req.chunks);
     })
     .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
+
+    .get(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
 ;

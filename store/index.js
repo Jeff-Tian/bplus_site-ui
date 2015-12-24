@@ -3,10 +3,24 @@ var fs = require('fs');
 var jade = require('jade');
 var path = require('path');
 var ejs = require('ejs');
+var config = require('../config');
+
+function filterConfig(config) {
+    var filtered = {};
+
+    filtered.serviceUrls = config.serviceUrls;
+
+    return filtered;
+}
 
 router.use(function (req, res, next) {
     //res.send('ok');
     next();
+});
+
+router.get('/config.js', function (req, res, next) {
+    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
+    res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
 router.get('/my', function (req, res, next) {

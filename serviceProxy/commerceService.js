@@ -113,6 +113,19 @@ function handleUserAccessCheckResult(res, json, req, next) {
     }
 }
 
+function proxyCommerce(config) {
+    return proxy({
+        host: commerceConfig.host,
+        port: commerceConfig.port,
+        path: config.path,
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+
+            return d;
+        }
+    });
+}
+
 module.exports = {
     createUpSellOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
@@ -269,6 +282,12 @@ module.exports = {
                     return false;
                 }
             }
+        })(req, res, next);
+    },
+
+    getMyOrderList: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/orderList/' + res.locals.hcd_user.member_id
         })(req, res, next);
     }
 };
