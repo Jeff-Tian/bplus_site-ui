@@ -8,5 +8,6 @@ module.exports = {
     "createOrderAndPayByWechat": "/service-proxy/payment/create-order/:option/by-wechat",
     "createOrderAndPayByAlipay": "/service-proxy/payment/create-order/:option/by-alipay",
     "createOrderAndPayByRedemptionCode": "/service-proxy/payment/create-upsell-order/by-redemption-code",
-    "getMyOrderList": "/service-proxy/commerce/get-my-order-list"
+    "getMyOrderList": "/service-proxy/commerce/get-my-order-list",
+    getOrderDetail: '/service-proxy/commerce/get-order-detail/:orderId'
 };
