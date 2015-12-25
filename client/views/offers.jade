@@ -6,7 +6,10 @@ block customizedHeader
 block customizedFooter
     div#my-footer
         include ../www/view-partial/footer.html
+        script(type="text/javascript", src="/js/controllers/online-store/onlineStoreParentCtrl.js")
         script(type="text/javascript").
+            angular.module('offer-module').controller('onlineStoreParentCtrl', angular.onlineStore.onlineStoreParentCtrl);
+
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
                 angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
