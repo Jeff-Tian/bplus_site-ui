@@ -8,6 +8,8 @@ var Logger = require('logger');
 var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
+// To keep it from deleting by "npm prune --production"
+//require('log4js-cassandra');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
@@ -242,7 +244,8 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
-setupOnlineStoreStaticResources('semantic');
+//setupOnlineStoreStaticResources('semantic');
+server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'))
 setupOnlineStoreStaticResources('bower_components');
 setupOnlineStoreStaticResources('images');
 setupOnlineStoreStaticResources('stylesheets');
