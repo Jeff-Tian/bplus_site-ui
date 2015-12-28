@@ -46,3 +46,7 @@ gulp.task('ab', function (done) {
 gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
 });
+
+var buildOnlineStore = require('./node_modules/online-store/gulpfile.js');
+
+gulp.task('release', buildOnlineStore);
