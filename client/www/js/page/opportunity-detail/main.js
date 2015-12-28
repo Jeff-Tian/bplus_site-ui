@@ -5,7 +5,7 @@ angular
         'ui.router'
     ])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var states = ['home', 'work', 'favorite', 'recommended-positions', 'applied-positions', 'training'];
+        var states = ['home', 'job', 'favorite', 'recommended-positions', 'applied-positions', 'training'];
 
         $urlRouterProvider.otherwise('/' + states[0]);
 
