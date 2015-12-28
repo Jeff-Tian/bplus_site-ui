@@ -54,6 +54,7 @@ gulp.task('release', function (done) {
     var filePath = path.join(__dirname, './node_modules/online-store/public/semantic/tasks/config/project/install.js');
     var fileContent = fs.readFileSync(filePath, 'utf-8');
     fileContent = fileContent.replace("return requireDotFile('semantic.json');", "return requireDotFile('semantic.json', process.cwd());");
+    fs.writeFileSync(filePath, fileContent);
 
     process.chdir('./node_modules/online-store');
     sh.exec('gulp build', done);
