@@ -49,13 +49,7 @@ gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
 });
 
+var buildOnlineStore = require('./node_modules/online-store/gulpfile.js');
 gulp.task('release', function (done) {
-    // TODO: Delete the hack after merged https://github.com/Semantic-Org/Semantic-UI/pull/3515
-    var filePath = path.join(__dirname, './node_modules/online-store/public/semantic/tasks/config/project/install.js');
-    var fileContent = fs.readFileSync(filePath, 'utf-8');
-    fileContent = fileContent.replace("return requireDotFile('semantic.json');", "return requireDotFile('semantic.json', process.cwd());");
-    fs.writeFileSync(filePath, fileContent);
-
-    process.chdir('./node_modules/online-store');
-    sh.exec('gulp build', done);
+    buildOnlineStore(done);
 });
