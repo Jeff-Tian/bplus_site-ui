@@ -6,6 +6,7 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
+    productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
     config = require('../config')
     ;
@@ -76,4 +77,7 @@ module.exports = require('express').Router()
 
     .get(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
     .get(serviceUrls.getOrderDetail, membership.ensureAuthenticated, commerceService.getOrderDetail)
+    .post(serviceUrls.getMyProductList, membership.ensureAuthenticated, productService.getMyProductList)
+    .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
+    .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
 ;

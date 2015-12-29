@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "product": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "10333"
+    }
+  },
   "payment": {
     "public": {
       "host": "uat.service.hcd.com",

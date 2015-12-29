@@ -9,5 +9,8 @@ module.exports = {
     "createOrderAndPayByAlipay": "/service-proxy/payment/create-order/:option/by-alipay",
     "createOrderAndPayByRedemptionCode": "/service-proxy/payment/create-upsell-order/by-redemption-code",
     "getMyOrderList": "/service-proxy/commerce/get-my-order-list",
-    getOrderDetail: '/service-proxy/commerce/get-order-detail/:orderId'
+    getOrderDetail: '/service-proxy/commerce/get-order-detail/:orderId',
+    getMyProductList: '/service-proxy/member/get-my-product-list',
+    getUnusedProducts: '/service-proxy/member/get-my-unused-products',
+    getUsedProducts: '/service-proxy/member/get-my-used-products'
 };

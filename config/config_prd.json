@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "product": {
+    "inner": {
+      "host": "service.bridgeplus.com",
+      "port": "10333"
+    }
+  },
   "payment": {
     "public": {
       "host": "payment.service.bridgeplus.cn",
