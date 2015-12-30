@@ -9,6 +9,7 @@ function filterConfig(config) {
     var filtered = {};
 
     filtered.serviceUrls = config.serviceUrls;
+    filtered.path = '/bower/SHARED-UI/';
 
     return filtered;
 }

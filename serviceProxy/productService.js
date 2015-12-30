@@ -2,7 +2,6 @@ var http = require('http');
 var config = require('../config');
 var productConfig = config.product.inner;
 var proxy = require('./proxy');
-var bplusService = config.bplusService;
 
 function proxyProduct(config) {
     return proxy({
