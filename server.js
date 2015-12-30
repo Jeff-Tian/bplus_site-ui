@@ -244,8 +244,8 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
-//setupOnlineStoreStaticResources('semantic');
-server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
+setupOnlineStoreStaticResources('semantic');
+//server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
 //setupOnlineStoreStaticResources('bower_components');
 server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'));
 setupOnlineStoreStaticResources('images');

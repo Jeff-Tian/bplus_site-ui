@@ -10,6 +10,7 @@ function filterConfig(config) {
 
     filtered.serviceUrls = config.serviceUrls;
     filtered.path = '/bower/SHARED-UI/';
+    filtered.cdn = config.cdn;
 
     return filtered;
 }

@@ -69,8 +69,7 @@ module.exports = require('express').Router()
     commerceService.checkUserAccessForNationalGame2015Economy,
     commerceService.checkUserAccessForRepechages2015,
     commerceService.checkUserAccessForRepechages2015Middle,
-    commerceService.checkUserAccessForRepechages2015Economy,
-    function (req, res, next) {
+    commerceService.checkUserAccessForRepechages2015Economy, function (req, res, next) {
         res.send(req.chunks);
     })
     .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
