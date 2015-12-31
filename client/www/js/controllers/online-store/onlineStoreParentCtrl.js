@@ -88,10 +88,16 @@
     };
     var paymentList = [paymentDataStructure, paymentDataStructure1, paymentDataStructure2];
 
-    exports.onlineStoreParentCtrl = function ($scope) {
+    exports.onlineStoreParentCtrl = function ($scope, $state) {
         $scope.paymentList = paymentList;
+
+        $scope.gotoConfirm = function (paymentDetails) {
+            $state.go('confirm', {
+                offerId: paymentDetails.offerId
+            });
+        };
     };
 
-    exports.onlineStoreParentCtrl.$inject = ['$scope'];
+    exports.onlineStoreParentCtrl.$inject = ['$scope', '$state'];
 
 })(angular.onlineStore = angular.onlineStore || {});

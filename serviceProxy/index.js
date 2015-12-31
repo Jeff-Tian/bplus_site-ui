@@ -58,7 +58,7 @@ module.exports = require('express').Router()
     .post(serviceUrls.createOrderAndPayByWechat, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post(serviceUrls.createOrderAndPayByAlipay, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
 
-    .post('/payment/create-upsell-order/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)
+    .post(serviceUrls.createUpsellOrderByAlipay, membership.ensureAuthenticated, commerceService.createOrder)
 
     .post(serviceUrls.createOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
 
