@@ -296,7 +296,13 @@ module.exports = {
 
     getOrderDetail: function (req, res, next) {
         proxyCommerce({
-            path: '/service/orderDetail/' + req.params.orderId
+            path: '/service/orderDetail/' + res.locals.hcd_user.member_id + '/' + req.params.orderId
+        })(req, res, next);
+    },
+
+    getOfferInfo: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/offer/getOffer/'
         })(req, res, next);
     }
 };

@@ -79,4 +79,6 @@ module.exports = require('express').Router()
     .post(serviceUrls.getMyProductList, membership.ensureAuthenticated, productService.getMyProductList)
     .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
     .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
+
+    .post(serviceUrls.getOfferInfo, commerceService.getOfferInfo)
 ;

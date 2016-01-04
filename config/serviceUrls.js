@@ -13,5 +13,6 @@ module.exports = {
     getOrderDetail: '/service-proxy/commerce/get-order-detail/:orderId',
     getMyProductList: '/service-proxy/member/get-my-product-list',
     getUnusedProducts: '/service-proxy/member/get-my-unused-products',
-    getUsedProducts: '/service-proxy/member/get-my-used-products'
+    getUsedProducts: '/service-proxy/member/get-my-used-products',
+    getOfferInfo: '/service-proxy/commerce/get-offer-info'
 };
