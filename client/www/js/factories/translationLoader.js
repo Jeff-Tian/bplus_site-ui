@@ -14,7 +14,7 @@
 
             $http({
                 method: 'GET',
-                url: '/translation?lang=' + options.key + '&timestamp=' + new Date().getTime()
+                url: '/translation?lang=' + options.key
             })
                 .success(dfd.resolve)
                 .error(dfd.reject);

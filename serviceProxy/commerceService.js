@@ -133,7 +133,10 @@ module.exports = {
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
-            d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            if (!d.productTypeId) {
+                d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            }
+
             return d;
         },
         responseInterceptor: injectRedemptionGeneration
