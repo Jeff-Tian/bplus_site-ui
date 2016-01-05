@@ -3,35 +3,35 @@
     var dataObject= {};
     var todoIndex = 0;
     var doingPromise = {};
-    var MACHINE_STATUS = {
-        STOPPED: "stop",
-        WORKING: "working",
-        IDLE: "idle"
-    };
     var PROMISE_STATUS = {
         PENDING: "pending",
         WORKING: "working",
         DONE: "done",
         INVALID: "invalid"
     };
-    var machine_status = MACHINE_STATUS.STOPPED;
     var KeyStructure = {
         url: "",
         params: ""
-    }
-    var status = null;
-    exports.PipeCacheService = function (service, $http) {
+    };
+    var INTERVAL_GAP = 500;
+    exports.PipeCacheService = function (service, $http, $q) {
         var createPromise = function(paramWithURL) {
-            return service.handleHttpPromise($http({
+            return $http({
                 url: paramWithURL.url,
                 params: paramWithURL.params,
-                method: "GET"
-            }));
-        }
+                method: 'GET'
+            });
+        };
         var findNext = function() {
-            if (dataArray[todoIndex]) {
-                return dataArray[todoIndex++];
-            }
+            var next = dataArray[todoIndex++];
+            var nextObject = dataObject[JSON.stringify(next)];
+            if (next) {
+                if (nextObject && nextObject.status === PROMISE_STATUS.PENDING) {
+                   return next; 
+                } else {
+                    return findNext();
+                }
+            } 
         };
         var run = function() {
             setInterval(function() {
@@ -41,7 +41,7 @@
                         getData(next);
                     }
                 }
-            }, 500);
+            }, INTERVAL_GAP);
         };
         var addKeyWithStatus = function(paramWithURL, status) {
             dataObject[JSON.stringify(paramWithURL)] = {
@@ -79,6 +79,7 @@
                 }
             },
             get: function(paramWithURL) {
+                var deferred = $q.defer();
                 var data = dataObject[JSON.stringify(paramWithURL)]; 
                 doingPromise[JSON.stringify(paramWithURL)] = true;
                 var index;
@@ -86,15 +87,16 @@
                     if (data.status === PROMISE_STATUS.DONE) {
                         data.status = PROMISE_STATUS.INVALID;
                         delete doingPromise[JSON.stringify(paramWithURL)];
-                        return data.data;
+                        deferred.resolve(data.data);
                     } else if(data.status === PROMISE_STATUS.WORKING) {
-                        return data.promise;
+                        deferred.resolve(data.promise);
                     } else {
-                        return getData(paramWithURL);
+                        deferred.resolve(getData(paramWithURL));
                     }
                 } else {
-                    return getData(paramWithURL);
+                    deferred.resolve(getData(paramWithURL));
                 }
+                return deferred.promise;
             }
         }
         //Start service
@@ -102,5 +104,5 @@
 
         return pipeCacheService;
     }
-    exports.PipeCacheService.$inject = ['service', '$http'];
+    exports.PipeCacheService.$inject = ['service', '$http', '$q'];
 })(angular.bplus = angular.bplus || {});
