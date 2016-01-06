@@ -244,6 +244,12 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+}
+
 setupOnlineStoreStaticResources('semantic');
 //server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
 //setupOnlineStoreStaticResources('bower_components');

@@ -9,7 +9,7 @@ function filterConfig(config) {
     var filtered = {};
 
     filtered.serviceUrls = config.serviceUrls;
-    filtered.path = '/bower/SHARED-UI/';
+    filtered.sharedUIPath = '/bower/SHARED-UI/';
     filtered.cdn = config.cdn;
     filtered.payment = config.payment.public;
 
