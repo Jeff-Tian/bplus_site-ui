@@ -69,6 +69,8 @@
 
                             o.title = data.name;
                             o.price = data.price;
+                            o.details = [];
+                            
                             for (var i = 0; i < data.packages.length; i++) {
                                 for (var j = 0; j < data.packages[i].products.length; j++) {
                                     var p = data.packages[i].products[j];
