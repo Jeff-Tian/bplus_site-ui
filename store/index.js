@@ -27,7 +27,9 @@ router.get('/config.js', function (req, res, next) {
 });
 
 router.get('/my', function (req, res, next) {
-    renderMixin(res, 'my.jade', 'mylayout.jade');
+    renderMixin(res, 'my.jade', 'mylayout.jade', {
+        cdn: config.cdn
+    });
 });
 
 function cdnify(url, cdn) {
@@ -36,6 +38,7 @@ function cdnify(url, cdn) {
 
 router.get('/offers', function (req, res, next) {
     renderMixin(res, 'offers.jade', 'offers-layout.jade', {
+        cdn: config.cdn,
         horizontalMenus: [{
             text: '优惠组合',
             image: cdnify('img/online-store/icon_discount_red_30x30.png', res.locals.cdn),

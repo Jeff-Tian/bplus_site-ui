@@ -74,7 +74,7 @@ module.exports = require('express').Router()
     })
     .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
 
-    .get(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
+    .post(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
     .get(serviceUrls.getOrderDetail, membership.ensureAuthenticated, commerceService.getOrderDetail)
     .post(serviceUrls.getMyProductList, membership.ensureAuthenticated, productService.getMyProductList)
     .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
