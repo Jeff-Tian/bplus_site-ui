@@ -239,7 +239,8 @@ function setupOnlineStoreStaticResources(staticFolder) {
                 '/node_modules/',
                 '/../') +
             'online-store/public/' +
-            staticFolder
+            staticFolder,
+            staticSetting
         )
     );
 }
