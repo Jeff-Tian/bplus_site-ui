@@ -39,6 +39,9 @@ function cdnify(url, cdn) {
 router.get('/offers', function (req, res, next) {
     renderMixin(res, 'offers.jade', 'offers-layout.jade', {
         cdn: config.cdn,
+        paymentMethods: {
+            pcAlipay: 'b_alipay'
+        },
         horizontalMenus: [{
             text: '优惠组合',
             image: cdnify('img/online-store/icon_discount_red_30x30.png', res.locals.cdn),

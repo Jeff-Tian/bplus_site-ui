@@ -10,35 +10,35 @@
     var paymentList = [{
         offerId: "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
         forcusDetail: {
-            detailUrl: "javascript: void(0);",
+            detailUrl: "javascript: void(0);", // jshint ignore : line
             description: ["复活赛门票"]
         },
         specialSign: cdnify("/bower_components/SHARED-UI/assistFiles/onlineStore/img/hot.png")
     }, {
         offerId: "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
         forcusDetail: {
-            detailUrl: "javascript: void(0);",
+            detailUrl: "javascript: void(0);", // jshint ignore : line
             description: ["复活赛门票", "１对５小组点评"]
         },
         specialSign: ""
     }, {
         offerId: "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
         forcusDetail: {
-            detailUrl: "javascript: void(0);",
+            detailUrl: "javascript: void(0);", // jshint ignore : line
             description: ["复活赛门票", "１对１专家点评"]
         },
         specialSign: ""
     }, {
         offerId: "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
         forcusDetail: {
-            detailUrl: "javascript: void(0);",
+            detailUrl: "javascript: void(0);", // jshint ignore : line
             description: ["复活赛门票", "１对１专家点评"]
         },
         specialSign: ""
     }, {
         offerId: "dcb33391-baad-4dd0-9c05-aa2e4f05c940",
         forcusDetail: {
-            detailUrl: "javascript: void(0);",
+            detailUrl: "javascript: void(0);", // jshint ignore : line
             description: ["复活赛门票", "１对１专家点评"]
         },
         specialSign: ""
@@ -70,7 +70,7 @@
                                 }
                             }
                         }
-                    })
+                    });
             });
         });
 
