@@ -1,8 +1,8 @@
 {
   "name": "BridgePlus",
   "private": true,
-  "version": "1.0.1",
-  "date": "20151130_0633",
+  "version": "1.1.0",
+  "date": "20151203_0306",
   "description": "",
   "repository": "",
   "license": "",
@@ -10,13 +10,14 @@
   "author": {},
   "dependencies": {
     "body-parser": "^1.13.3",
-    "circular-json": "^0.1.6",
+    "competion-api": "git@bitbucket.org:hcdlearning/cmpt2015-api.git#develop",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "extend": "^3.0.0",
     "i18n": "^0.5.0",
+    "jade": "^1.11.0",
     "logger": "git://github.com/HCDLearning/logger.git#v1.0.0",
-    "competion-api": "git@bitbucket.org:hcdlearning/cmpt2015-api.git#develop",
+    "online-store": "git+ssh://git@bitbucket.org/hcdlearning/online-store.git#develop",
     "q": "^1.4.1"
   },
   "devDependencies": {
@@ -37,13 +38,16 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
     "grunt-html2js": "^0.3.3",
     "grunt-karma": "^0.12.1",
     "grunt-mocha": "^0.4.13",
     "grunt-mocha-cli": "^2.0.0",
     "grunt-nodemon": "^0.4.0",
+    "grunt-protractor-runner": "^2.1.0",
     "grunt-replace": "^0.11.0",
     "grunt-string-replace": "*",
+    "gulp": "^3.9.0",
     "gulp-rename": "^1.2.2",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
@@ -57,10 +61,11 @@
     "phantomjs": "^1.9.18",
     "protractor": "^2.1.0",
     "require-dot-file": "^0.4.0",
-    "shelljs": "^0.2.6",
-    "yamljs": "^0.2.3"
+    "run-sequence": "^1.1.5",
+    "shelljs": "^0.5.3"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "node node_modules/protractor/bin/webdriver-manager update"
   }
 }

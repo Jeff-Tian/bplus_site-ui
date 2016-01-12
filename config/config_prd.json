@@ -52,6 +52,12 @@
       "port": "10666"
     }
   },
+  "product": {
+    "inner": {
+      "host": "service.bridgeplus.com",
+      "port": "10333"
+    }
+  },
   "payment": {
     "public": {
       "host": "payment.service.bridgeplus.cn",
@@ -74,6 +80,18 @@
     "national-2015-economy": {
       "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
       "productTypeId": "88dade23-dd95-4894-9be0-123fb28de780"
+    },
+    "repechages-2015": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "5ba52711-7fad-435f-b4fc-1ffe67cca18b"
+    },
+    "repechages-2015-middle": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "21722ee1-af6a-4996-ae93-8cef9cf64c27"
+    },
+    "repechages-2015-economy": {
+      "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
+      "productTypeId": "d093b44b-3aa2-433d-bd32-bd7540500030"
     },
     "national-2015-upsell-basic": {
       "egameId": "d00b2d92-1995-4a22-a86c-3115518bd635",
@@ -124,15 +142,7 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "1.0.1",
-  "date": "20151130_0633",
-  "trackingUrl": "http://tracking.bridgeplus.cn",
-  "serviceUrls": {
-    "logOnFromWechat": "/service-proxy/logon/from-wechat",
-    "logOnByToken": "/service-proxy/logon/by-token",
-    "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
-    "logOnAuthenticate": "/service-proxy/logon/authentication",
-    "wechatJsApiConfig": "/service-proxy/wechat/js-api-config",
-    "loadGameSeries": "/cmpt/game/series/load/:seriesId"
-  }
+  "version": "1.1.0",
+  "date": "20151203_0306",
+  "trackingUrl": "http://tracking.bridgeplus.cn"
 }

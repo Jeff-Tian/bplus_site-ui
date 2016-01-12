@@ -203,15 +203,15 @@
                 <div class="ui loading segment" ng-show="!top10Epics"></div>
                 <table class="ui very basic table unstackable events-table" ng-cloak ng-hide="!top10Epics">
                     <tbody>
-                    <tr ng-repeat="epic in top10Epics">
-                        <td style="width:40%">
-                            <i class="big trophy icon"></i>
-                            {{epic.title}}
+                    <tr ng-repeat="epic in top10Epics" ng-class="{'disabled': hasGameEnd(epic)}">
+                        <td style="width:45%">
+                            <i class="big trophy icon" ng-class="{'disabled': hasGameEnd(epic)}"></i>
+                            {{getShortDescription(epic.description)}}
                         </td>
-                        <td style="width:25%">已有 {{epic.memberCount || '0'}} 人参赛</td>
+                        <td style="width:20%">已有 {{epic.memberCount || '0'}} 人参赛</td>
                         <td style="width:15%">{{epic.game_from | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td style="width:20%" class="text-right">
-                            <a class="ui red button b-normal"
+                            <a class="ui red button b-normal" ng-class="{'disabled': hasGameEnd(epic)}"
                                href="<%= localeLinkSwitch('/zh/cmpt', '/sign-in#/register') %>"><%=
                                 __('GameListStart') %></a>
                         </td>
@@ -236,6 +236,8 @@
 
 <script src="<%= cdn.normal %>js/page/game/GameListCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/game/main.js?<%= cdn.version %>"></script>
+
+<%- include('view-partial/external-js.html') -%>
 </body>
 
 </html>

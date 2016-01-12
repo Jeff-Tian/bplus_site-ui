@@ -28,7 +28,7 @@
                 });
             },
 
-            tryHandleCallback: function (callbackForNewWechatUser, signedInCallback, errorCallback, notWechatCallback) {
+            tryHandleAsyncCallback: function (callbackForNewWechatUser, signedInCallback, errorCallback, notWechatCallback) {
                 var token = queryParser.get('token');
                 var registered = queryParser.get('is_registed');
 
@@ -45,7 +45,11 @@
                             });
                     } else {
                         callbackForNewWechatUser(token);
-                        msgBus.notifyWechatLogonCallbackHandled();
+                        // Don't notify because for new wechat user we should jump to bind mobile page, while you can
+                        // only notify after the jump has already done. But the jump is in another round of javascript
+                        // loop, so the following statement will execute before the jump. Which is not expected. So
+                        // Just don't notify.
+                        //msgBus.notifyWechatLogonCallbackHandled();
                     }
                 } else {
                     var errcode = queryParser.get('errcode');

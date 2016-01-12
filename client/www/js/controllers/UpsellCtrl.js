@@ -1,7 +1,7 @@
 (function (exports) {
     var PAYMENT_OPTIONS = {
         "wechat": "wechat",
-        "alipay": "alipay"
+        "b_alipay": "b_alipay"
     };
     var OPTIONS = {
         "upsellA1": {
@@ -45,7 +45,7 @@
             "price": "150.00"
         }
     };
-    var PAYMENT_BASIC_URL = "service-proxy/payment/create-order/national-upsell-2015-";
+    var PAYMENT_BASIC_URL = "/service-proxy/payment/create-order/national-upsell-2015-";
     var getOrderUrl = function (option, paymentMethod) {
         return PAYMENT_BASIC_URL + option + "/by-" + paymentMethod;
     };
@@ -90,7 +90,7 @@
             $scope.detail = paymentTarget;
         };
         $scope.pay = function () {
-            var paymentMethod = "alipay";
+            var paymentMethod = "b_alipay";
 
             if ($scope.paymentMethod) {
                 paymentMethod = PAYMENT_OPTIONS[$scope.paymentMethod];
@@ -109,8 +109,13 @@
                             '/service/payment/' + paymentMethod + '/pay?orderId=' + result.orderId +
                             '&returnUrl=' + encodeURIComponent(location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=true");
                     })
-                    .catch(function () {
-                        window.location.href = location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=false";
+                    .catch(function (reason) {
+                        if (reason) {
+                            console.error(reason);
+                            window.alert('创建订单失败!');
+                        } else {
+                            window.location.href = location.protocol + "\\\\" + location.host + "\\paymentresult?isSuccess=false";
+                        }
                     });
             }
         };

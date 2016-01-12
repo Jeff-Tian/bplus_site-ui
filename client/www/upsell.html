@@ -28,17 +28,18 @@
 <!-- Header End -->
 
 <!-- Page Contents -->
-<div ng-controller="UpsellCtrl" class="b-upsell-body" ng-init="paymentMethod='alipay'">
+<div ng-controller="UpsellCtrl" class="b-upsell-body" ng-init="paymentMethod='b_alipay'">
     <div class="b-upsell-items-container">
         <div class="b-upsell-optionA-choose">
             <div class="ui tiny buttons">
-              <button class="ui b-upsell-white button" ng-click="itemASelect('1')">中文</button>
-              <div class="or" data-text="or"></div>
-              <button class="ui b-upsell-darkred button" ng-click="itemASelect('2')">EN</button>
+                <button class="ui b-upsell-white button" ng-click="itemASelect('1')">中文</button>
+                <div class="or" data-text="or"></div>
+                <button class="ui b-upsell-darkred button" ng-click="itemASelect('2')">EN</button>
             </div>
         </div>
         <div class="ui three column grid">
-            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellA')" ng-click="pay()">
+            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellA')"
+                 ng-click="pay()">
                 <div class="b-upsell-items-header-container">
                     <div class="b-upsell-items-header">证书</div>
                 </div>
@@ -50,8 +51,9 @@
                 </div>
                 <img class="b-upsell-item-arrow" src="<%= cdn.normal %>img/upsell/arrow.png?<%= cdn.version %>">
             </div>
-            
-            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellB')" ng-click="pay()">
+
+            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellB')"
+                 ng-click="pay()">
                 <div class="b-upsell-items-header-container">
                     <div class="b-upsell-items-header">报告</div>
                 </div>
@@ -61,7 +63,8 @@
                 </div>
                 <img class="b-upsell-item-arrow" src="<%= cdn.normal %>img/upsell/arrow.png?<%= cdn.version %>">
             </div>
-            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellC')" ng-click="pay()">
+            <div class="column b-upsell-hotarea" ng-mouseleave="mouseleave()" ng-mouseover="select('upsellC')"
+                 ng-click="pay()">
                 <div class="b-upsell-items-header-container">
                     <div class="b-upsell-items-header">导师</div>
                 </div>
@@ -71,33 +74,37 @@
                 </div>
                 <img class="b-upsell-item-arrow" src="<%= cdn.normal %>img/upsell/arrow.png?<%= cdn.version %>">
             </div>
-            
+
         </div>
         <div class="b-upsell-detail">
-                <div class="ui four column grid">
-                    <div class="column">
-                        <img class="ui spaced image b-upsell-detail-picture" ng-src="<%= cdn.normal %>img/upsell/icon-a{{detail.certificationType}}.png?<%= cdn.version %>">
-                        <span class="b-upsell-detail-number" ng-bind-template="X{{detail.certification}}"></span>
-                        <div style="display:inline-block;vertical-align:middle">
-                            <div ng-show="detail.certificationType==='2'" class="b-upsell-detail-text">大赛英文证书</div>
-                            <div class="b-upsell-detail-text">大赛中文证书</div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <img class="ui spaced image b-upsell-detail-picture" src="<%= cdn.normal %>img/upsell/icon-b.png?<%= cdn.version %>">
-                        <span class="b-upsell-detail-number" ng-bind-template="X{{detail.report}}"></span>
-                        <span class="b-upsell-detail-text">大赛详细报告</span>
-                    </div>
-                    <div class="column">
-                        <img class="ui spaced image b-upsell-detail-picture" src="<%= cdn.normal %>img/upsell/icon-c.png?<%= cdn.version %>">
-                        <span class="b-upsell-detail-number" ng-bind-template="X{{detail.comment}}"></span>
-                        <span class="b-upsell-detail-text">大赛专业分析点评</span>
-                    </div>
-                    <div class="column b-upsell-detail-totalNumber" ng-bind-template="￥{{detail.price}}元">
+            <div class="ui four column grid">
+                <div class="column">
+                    <img class="ui spaced image b-upsell-detail-picture"
+                         ng-src="<%= cdn.normal %>img/upsell/icon-a{{detail.certificationType}}.png?<%= cdn.version %>">
+                    <span class="b-upsell-detail-number" ng-bind-template="X{{detail.certification}}"></span>
+
+                    <div style="display:inline-block;vertical-align:middle">
+                        <div ng-show="detail.certificationType==='2'" class="b-upsell-detail-text">大赛英文证书</div>
+                        <div class="b-upsell-detail-text">大赛中文证书</div>
                     </div>
                 </div>
+                <div class="column">
+                    <img class="ui spaced image b-upsell-detail-picture"
+                         src="<%= cdn.normal %>img/upsell/icon-b.png?<%= cdn.version %>">
+                    <span class="b-upsell-detail-number" ng-bind-template="X{{detail.report}}"></span>
+                    <span class="b-upsell-detail-text">大赛详细报告</span>
+                </div>
+                <div class="column">
+                    <img class="ui spaced image b-upsell-detail-picture"
+                         src="<%= cdn.normal %>img/upsell/icon-c.png?<%= cdn.version %>">
+                    <span class="b-upsell-detail-number" ng-bind-template="X{{detail.comment}}"></span>
+                    <span class="b-upsell-detail-text">大赛专业分析点评</span>
+                </div>
+                <div class="column b-upsell-detail-totalNumber" ng-bind-template="￥{{detail.price}}元">
+                </div>
             </div>
-            <div class="b-upsell-hidden-banner"></div>
+        </div>
+        <div class="b-upsell-hidden-banner"></div>
     </div>
     <div class="b-upsell-refund-container">
         <div class="b-upsell-refund-text">
@@ -113,7 +120,7 @@
     window.t_PageName = "upsell";
 </script>
 <!-- Page visit End -->
-<script src="<%= cdn.normal %>js/controllers/UpsellCtrl.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/page/upsell/main.js?<%= cdn.version %>"></script>
+<%- include('view-partial/upsell-js.html') -%>
+<%- include('view-partial/external-js.html') -%>
 </body>
 </html>

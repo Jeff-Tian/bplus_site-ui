@@ -59,7 +59,7 @@
                         <div class="b-profile-face-img" ng-mouseover="classNameFaceEdit='editHover'"
                              ng-mouseleave="classNameFaceEdit=''" ng-click="editface()">
                             <img ng-src="{{data.face}}"/>
-                            <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png"
+                            <img src="<%= cdn.normal %>img/profile/icon_profile_picture_edit.png?<%= cdn.version %>"
                                  class="edit {{classNameFaceEdit}}"/>
                         </div>
                         <div id="avatarUpload" class="hidden" upload handle="handle">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="b-profile-area">
                         <div class="ui medium header">
-                            <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_achievement.png">
+                            <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_achievement.png?<%= cdn.version %>">
                             <div class="content"><%= __('Achievement') %></div>
                         </div>
                         <!--<div class="b-profile-achievement">
@@ -102,7 +102,7 @@
                 <div class="b-profile-left-section" ng-controller="growing">
                     <div class="b-profile-area">
                         <div class="ui medium header">
-                            <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_growing.png">
+                            <img class="ui image" src="<%= cdn.normal %>img/profile/icon_profile_growing.png?<%= cdn.version %>">
                             <div class="content"><%= __('GrowthRootprints') %></div>
                         </div>
                         <!--<div class="b-profile-growing">
@@ -200,5 +200,7 @@
 </script>
 <!--Page JS-->
 <script src="<%= cdn.normal %>js/page/profile/main-build.js?<%= cdn.version %>" type="text/javascript"></script>
+
+<%- include('view-partial/external-js.html') -%>
 </body>
 </html>

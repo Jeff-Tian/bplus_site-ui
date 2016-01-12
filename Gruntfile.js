@@ -139,7 +139,7 @@ module.exports = function (grunt) {
                     '<%= config.dist %>js/cdn/sign-in.js': ['<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/register/main.js'],
                     '<%= config.dist %>js/cdn/m/aboutus.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
                     '<%= config.dist %>js/cdn/m/bind-mobile.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/page/register/main.js'],
-                    '<%= config.dist %>js/cdn/m/index.js': ['<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
+                    '<%= config.dist %>js/cdn/m/index.js': ['<%= config.dist %>js/factories/WechatWrapper.js', '<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/SelectInterestCtrl.js', '<%= config.dist %>js/page/mobile/SelectPaymentMethodCtrl.js', '<%= config.dist %>js/page/mobile/WeeklyCompetitionCtrl.js', '<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/page/mobile/MobilePaidCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
                     '<%= config.dist %>js/cdn/m/national.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileAboutusCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js'],
                     '<%= config.dist %>js/cdn/m/sign-in.js': ['<%= config.dist %>js/factories/FormValidation.js', '<%= config.dist %>js/directives/captcha.js', '<%= config.dist %>js/directives/ngEnter.js', '<%= config.dist %>js/directives/registerForm.js', '<%= config.dist %>js/directives/tab.js', '<%= config.dist %>js/directives/dropdown.js', '<%= config.dist %>js/controllers/LoginCtrl.js', '<%= config.dist %>js/controllers/WechatLoginCtrl.js', '<%= config.dist %>js/controllers/SignUpCtrl.js', '<%= config.dist %>js/page/register/main.js'],
                     '<%= config.dist %>js/cdn/m/youth.js': ['<%= config.dist %>js/page/mobile/MobileMenuCtrl.js', '<%= config.dist %>js/page/mobile/MobileHeadCtrl.js', '<%= config.dist %>js/page/mobile/MobileNationalCtrl.js', '<%= config.dist %>js/page/mobile/MobileIndexCtrl.js', '<%= config.dist %>js/page/mobile/index.js']
@@ -158,6 +158,10 @@ module.exports = function (grunt) {
                             // For requirejs
                             url = url.replace('main-build.js', 'main.js');
                             return url;
+                        } else if (url.indexOf('/img/') === 0) {
+                            var config = require('./config');
+                            url = config.cdn.normal + url.substr(1) + '?' + config.cdn.version;
+                            return url;
                         } else {
                             return url; // add query string to all other URLs
                         }
@@ -172,6 +176,31 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.dist %>',
                     src: 'mobile/profile.html',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/main.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/mobile.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/pc-mobile.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/hp.css',
+                    dest: '<%= config.dist %>'
+                }, {
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: 'css/qa.css',
                     dest: '<%= config.dist %>'
                 }]
             }
@@ -227,6 +256,21 @@ module.exports = function (grunt) {
         },
         mochacli: {
             src: ['test/**/*.js']
+        },
+
+        protractor: {
+            e2e: {
+                options: {
+                    keepAlive: true,
+                    configFile: __dirname + '/client/www/test/conf.js'
+                }
+            }
+        },
+
+        exec: {
+            e2e: {
+                cmd: 'webdriver-manager start'
+            }
         }
     });
 
@@ -288,5 +332,12 @@ module.exports = function (grunt) {
 
         //console.log(translateFileContent);
         fs.writeFileSync(__dirname + translateFile, translateFileContent, 'utf-8');
+    });
+
+    grunt.registerTask('e2e', 'run e2e tests', function () {
+        grunt.task.run([
+            //'exec:e2e',
+            'protractor:e2e'
+        ]);
     });
 };

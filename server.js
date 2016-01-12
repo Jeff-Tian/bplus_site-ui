@@ -8,6 +8,8 @@ var Logger = require('logger');
 var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
+// To keep it from deleting by "npm prune --production"
+//require('log4js-cassandra');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
@@ -69,8 +71,25 @@ function setDeviceHelper(req, res, next) {
     next();
 }
 
+function getMode() {
+    return process.env.NODE_ENV || 'dev';
+}
+
 function setMode(req, res, next) {
-    res.locals.dev_mode = (process.env.NODE_ENV || 'dev') === 'dev';
+    res.locals.dev_mode = (getMode() === 'dev');
+
+    next();
+}
+
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+function setOnlineStoreTemplate(req, res, next) {
+    res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
+            '/node_modules/',
+            '/../') +
+        'online-store/views/';
 
     next();
 }
@@ -83,6 +102,7 @@ server
     .use(setConfig)
     .use(setDeviceHelper)
     .use(setMode)
+    .use(setOnlineStoreTemplate)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -156,7 +176,9 @@ supportedLocales.map(function (l) {
     server.get('/' + l, renderIndex);
 });
 
-var staticFolder = __dirname + ((process.env.NODE_ENV || 'dev') === 'dev' ? '/client/www' : '/client/dist');
+var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var viewFolder = __dirname + '/client/views';
+
 var staticSetting = {
     etag: true,
     lastModified: true,
@@ -177,6 +199,7 @@ function filterConfig(config) {
     filtered.trackingUrl = config.trackingUrl;
     filtered.serviceUrls = config.serviceUrls;
     filtered.competitions = config.competitions;
+    filtered.mode = getMode();
 
     return filtered;
 }
@@ -186,7 +209,7 @@ server.use('/config.js', function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-if ((process.env.NODE_ENV || 'dev' ) === 'dev') {
+if (getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
 } else {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
@@ -205,8 +228,41 @@ server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
+server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
+
+function setupOnlineStoreStaticResources(staticFolder) {
+    server.use(
+        localeHelper.regexPath('/' + staticFolder, false),
+        express.static(
+            __dirname +
+            onlineOfflinePathSwitch(
+                '/node_modules/',
+                '/../') +
+            'online-store/public/' +
+            staticFolder,
+            staticSetting
+        )
+    );
+}
+
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+}
+
+setupOnlineStoreStaticResources('semantic');
+//server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
+//setupOnlineStoreStaticResources('bower_components');
+server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'));
+setupOnlineStoreStaticResources('images');
+setupOnlineStoreStaticResources('stylesheets');
+setupOnlineStoreStaticResources('scripts');
+
+server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
+
 // Customize client file path
-server.set('views', staticFolder);
+server.set('views', [staticFolder, viewFolder]);
 server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
     server.use('/' + l, express.static(staticFolder, staticSetting));
@@ -241,7 +297,7 @@ server
             lang: lang
         });
     })
-    .use('/cmpt', require('competion-api')(express));
+    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express));
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
@@ -264,6 +320,7 @@ mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
+mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
@@ -312,6 +369,10 @@ server.get('/mode', function (req, res, next) {
 
 server.get('/is_qa', function (req, res) {
     res.send('is_qa = ' + process.env.IS_QA);
+});
+
+server.get('/run_from', function (req, res) {
+    res.send('run_form = ' + process.env.RUN_FROM);
 });
 
 server.get('/locale', function (req, res, next) {

@@ -65,8 +65,8 @@ function injectRedemptionGeneration(res, json, req, next) {
     }
 }
 
-function checkUserAccessForNationalGame2015withOptions(req, res, next) {
-    return function(option) {
+function checkUserAccessFor(req, res, next) {
+    return function (option) {
         proxy({
             host: commerceConfig.host,
             port: commerceConfig.port,
@@ -88,41 +88,82 @@ function checkUserAccessForNationalGame2015withOptions(req, res, next) {
                     return true;
                 } else {
                     return false;
-                    //req.body.offerId = 'd00b2d92-1995-4a22-a86c-3115518bd635';
-                    //req.body.productId = '1ab5f727-5af5-4468-8fbd-530e28579903';
-                    //req.body.productTypeId = '96567f8c-9ab0-4f89-8197-163e9dc73bf1';
-                    //return true;
                 }
             }
         })(req, res, next);
     }
 }
 
+function handleUserAccessCheckResult(res, json, req, next) {
+    if (!json.isSuccess) {
+        req.dualLogError('check user access failed: \r\n' + JSON.stringify(json));
+        res.send(json);
+
+        return undefined;
+    }
+
+    if (json.result && json.result.hasRight === false) {
+        req.body.offerId = json.result.productType.offerId;
+        req.body.productId = json.result.productType.productId;
+        req.body.productTypeId = json.result.productType.productTypeId;
+
+        return true;
+    } else {
+        return injectRedemptionGeneration(res, json, req, next);
+    }
+}
+
+function proxyCommerce(config) {
+    return proxy({
+        host: commerceConfig.host,
+        port: commerceConfig.port,
+        path: config.path,
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+
+            return d;
+        }
+    });
+}
+
 module.exports = {
-    createOrderByRedemptionCode: proxy({
+    createUpSellOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
         port: commerceConfig.port,
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
-            d.productTypeId = gameConfig['national-2015'].productTypeId;
+            if (!d.productTypeId) {
+                d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            }
+
             return d;
         },
         responseInterceptor: injectRedemptionGeneration
     }),
 
-
-
     checkUserAccessForNationalGame2015: function (req, res, next) {
-        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015');
+        checkUserAccessFor(req, res, next)('national-2015');
     },
 
     checkUserAccessForNationalGame2015Middle: function (req, res, next) {
-        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015-middle');
+        checkUserAccessFor(req, res, next)('national-2015-middle');
     },
 
     checkUserAccessForNationalGame2015Economy: function (req, res, next) {
-        checkUserAccessForNationalGame2015withOptions(req, res, next)('national-2015-economy');
+        checkUserAccessFor(req, res, next)('national-2015-economy');
+    },
+
+    checkUserAccessForRepechages2015: function (req, res, next) {
+        checkUserAccessFor(req, res, next)('repechages-2015');
+    },
+
+    checkUserAccessForRepechages2015Middle: function (req, res, next) {
+        checkUserAccessFor(req, res, next)('repechages-2015-middle');
+    },
+
+    checkUserAccessForRepechages2015Economy: function (req, res, next) {
+        checkUserAccessFor(req, res, next)('repechages-2015-economy');
     },
 
     checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
@@ -136,21 +177,26 @@ module.exports = {
 
                 return d;
             },
-            responseInterceptor: function (res, json) {
-                console.log('reuslt:');
-                console.log(json);
-                if (json.result && json.result.hasRight === false) {
-                    req.body.offerId = json.result.productType.offerId;
-                    req.body.productId = json.result.productType.productId;
-                    req.body.productTypeId = json.result.productType.productTypeId;
+            responseInterceptor: handleUserAccessCheckResult
+        })(req, res, next);
+    },
 
-                    return true;
-                } else {
-                    injectRedemptionGeneration(res, json, req, next);
+    checkUserAccessAndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
+        var option = req.params.option.toString().toLowerCase();
 
-                    return undefined;
-                }
-            }
+        req.dualLogError('check user access with option is ' + option);
+
+        proxy({
+            host: commerceConfig.host,
+            port: commerceConfig.port,
+            path: '/service/useraccess/hasApply',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.productTypeId = gameConfig[option].productTypeId;
+
+                return d;
+            },
+            responseInterceptor: handleUserAccessCheckResult
         })(req, res, next);
     },
 
@@ -160,6 +206,11 @@ module.exports = {
         path: '/service/order/create',
         dataMapper: function (d) {
             d.userId = d.member_id;
+
+            // TODO: Delete it
+            if (d.payment === 'b_alipaymobile') {
+                d.payment = 'alipaymobile';
+            }
 
             return d;
         }
@@ -234,6 +285,24 @@ module.exports = {
                     return false;
                 }
             }
+        })(req, res, next);
+    },
+
+    getMyOrderList: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/orderList/' + res.locals.hcd_user.member_id
+        })(req, res, next);
+    },
+
+    getOrderDetail: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/orderDetail/' + res.locals.hcd_user.member_id + '/' + req.params.orderId
+        })(req, res, next);
+    },
+
+    getOfferInfo: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/offer/getOffer/'
         })(req, res, next);
     }
 };

@@ -55,4 +55,14 @@ Or
 ```
 karma start client/www/test/my.conf.js
 ```
-Ideally integrate the test task into Grunt task, but currently I can't get it work.
+
+### Run e2e test
+Open a terminal
+```
+webdriver-manager start
+```
+
+Then open another terminal and 
+```
+grunt e2e
+```

@@ -132,17 +132,26 @@
         },
 
         serveTranslations: function (req, res, next) {
+            function errorHandler(err) {
+                req.dualLogError(err);
+                res.status(404).send();
+            }
+
             if (!req.query.lang) {
                 res.status(500).send();
                 return;
             }
 
             try {
-                var lang = require('../locales/' + req.query.lang);
-                res.send(lang);
+                var options = {
+                    root: __dirname,
+                    maxAge: 1000 * 3600 * 24 * 30,
+                    lastModified: true
+                };
+
+                res.sendFile(req.query.lang + '.json', options, errorHandler);
             } catch (err) {
-                req.dualLogError(err);
-                res.status(404).send();
+                errorHandler(err);
             }
         }
     };

@@ -27,7 +27,9 @@
         if (!DeviceHelper.isInWechatBrowser()) {
             $scope.logOnViaWechat();
         } else {
-            $scope.logOnFromWechat();
+            if (angular.bplus.config.mode !== 'dev') {
+                $scope.logOnFromWechat();
+            }
         }
 
         $scope.cancelWechatLogin = function () {

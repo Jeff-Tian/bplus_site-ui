@@ -29,7 +29,7 @@ function basicProxy(req, res, next, host, port, requestPath, map) {
  *          {
  *              // Note: the upstream response stream is not used, the first argument is the original
  *              // response object, i.e., the res
- *              responseInterceptor: function (originalResponse, upstreamJson) {}
+ *              responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {}
  *          }
  */
 function advancedProxy(req, res, next, settings) {

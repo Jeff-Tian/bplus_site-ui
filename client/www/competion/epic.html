@@ -49,13 +49,17 @@
 
         function injectTrack(eventName) {
             return function ($event) {
-                $event.preventDefault();
 
                 logAndSendTrack(eventName);
 
-                window.setTimeout(function () {
-                    window.location.href = $($event.target).attr('href');
-                }, 300);
+                var $target = $($event.target);
+                if($target.attr('target') !== '_blank') {
+                    $event.preventDefault();
+                    
+                    window.setTimeout(function () {
+                        window.location.href = $($event.target).attr('href');
+                    }, 300);
+                }
             }
         }
 
@@ -68,9 +72,42 @@
                 .on('click', 'a.b-competion-gametraining-online-classroom', injectTrack('classroom.click'))
                 .on('click', 'a.b-competion-gametraining-download', injectTrack('material.click'))
                 .on('click', 'a.b-competion-gametraining-watch', injectTrack('video.click'))
+                .on('click', 'button[ng-click="toggle(tab)"]', function(){
+                    var $parent = $(this).parent();
+                    if($parent.hasClass('join')){
+                        logAndSendTrack('joinTeam.click');
+                    }
+                    else if($parent.hasClass('create')){
+                        logAndSendTrack('createTeam.click');
+                    }
+                })
+                .on('click', "div[class='join'] div[class*='tab-header'] button[class*='btn ng-binding']", function(e){
+                    var $this = $(e.target), $buttons = $this.parent().parent().find('button');
+
+                    $buttons.each(function(i, button){
+                        if($(button).is($this)){
+                            if(i === 0){
+                                logAndSendTrack('teamList.tab');
+                            }
+                            else if(i === 1){
+                                logAndSendTrack('inviteSent.tab');
+                            }
+                            else if(i === 2){
+                                logAndSendTrack('teamInvite.tab');
+                            }
+                        }
+                    });
+                })
+                .on('click', "button[ng-click='sendApply(team)']", function(){
+                    logAndSendTrack('applyTeam.click');
+                })
+                .on('click', "button[ng-click='sendInvite(person)']", function(){
+                    logAndSendTrack('inviteMember.click');
+                })
         ;
     });
 </script>
+<%- include('view-partial/external-js.html') -%>
 </body>
 
 </html>
