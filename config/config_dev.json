@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "info": {
+    "ranking": {
+      "host": "uat.service.hcd.com",
+      "port": "10666"
+    }
+  },
   "product": {
     "inner": {
       "host": "uat.service.hcd.com",
