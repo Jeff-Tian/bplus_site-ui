@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "info": {
+    "ranking": {
+      "host": "10.20.32.182",
+      "port": "10666"
+    }
+  },
   "payment": {
     "public": {
       "host": "uat.service.hcd.com",

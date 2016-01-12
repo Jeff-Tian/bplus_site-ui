@@ -7,6 +7,7 @@ var sms = require('./sms'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
     uploadCallbackService = require('./uploadCallbackService'),
+    infomationService = require('./informationService'),
     config = require('../config')
     ;
 
@@ -51,6 +52,7 @@ module.exports = require('express').Router()
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
+    .get('/info/ranking/:type/:target/:count', infomationService)
     .post('/commerce/create-order/national-game-2015/by-redemption-code', membership.ensureAuthenticated, commerceService.createOrderByRedemptionCode)
     .post('/payment/create-order/national-game-:option/by-wechat', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post('/payment/create-order/national-game-:option/by-alipay', membership.ensureAuthenticated, commerceService.checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
