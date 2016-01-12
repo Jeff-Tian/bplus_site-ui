@@ -8,6 +8,8 @@ var Logger = require('logger');
 var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
+// To keep it from deleting by "npm prune --production"
+//require('log4js-cassandra');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
@@ -79,6 +81,19 @@ function setMode(req, res, next) {
     next();
 }
 
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+function setOnlineStoreTemplate(req, res, next) {
+    res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
+            '/node_modules/',
+            '/../') +
+        'online-store/views/';
+
+    next();
+}
+
 server
     .use(Logger.express("auto"))
     .use(setLogger)
@@ -87,6 +102,7 @@ server
     .use(setConfig)
     .use(setDeviceHelper)
     .use(setMode)
+    .use(setOnlineStoreTemplate)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -161,6 +177,8 @@ supportedLocales.map(function (l) {
 });
 
 var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var viewFolder = __dirname + '/client/views';
+
 var staticSetting = {
     etag: true,
     lastModified: true,
@@ -210,8 +228,41 @@ server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
 server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
+server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
+
+function setupOnlineStoreStaticResources(staticFolder) {
+    server.use(
+        localeHelper.regexPath('/' + staticFolder, false),
+        express.static(
+            __dirname +
+            onlineOfflinePathSwitch(
+                '/node_modules/',
+                '/../') +
+            'online-store/public/' +
+            staticFolder,
+            staticSetting
+        )
+    );
+}
+
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+}
+
+setupOnlineStoreStaticResources('semantic');
+//server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
+//setupOnlineStoreStaticResources('bower_components');
+server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'));
+setupOnlineStoreStaticResources('images');
+setupOnlineStoreStaticResources('stylesheets');
+setupOnlineStoreStaticResources('scripts');
+
+server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
+
 // Customize client file path
-server.set('views', staticFolder);
+server.set('views', [staticFolder, viewFolder]);
 server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
     server.use('/' + l, express.static(staticFolder, staticSetting));

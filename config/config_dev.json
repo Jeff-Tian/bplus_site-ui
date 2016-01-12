@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "product": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "10333"
+    }
+  },
   "payment": {
     "public": {
       "host": "uat.service.hcd.com",
@@ -131,16 +137,5 @@
   },
   "version": "1.1.0",
   "date": "20151203_0306",
-  "trackingUrl": "http://uat.tracking.hcd.com",
-  "serviceUrls": {
-    "logOnFromWechat": "/service-proxy/logon/from-wechat",
-    "logOnByToken": "/service-proxy/logon/by-token",
-    "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
-    "logOnAuthenticate": "/service-proxy/logon/authentication",
-    "wechatJsApiConfig": "/service-proxy/wechat/js-api-config",
-    "loadGameSeries": "/cmpt/game/series/load/:seriesId",
-    "createOrderAndPayByWechat": "/service-proxy/payment/create-order/:option/by-wechat",
-    "createOrderAndPayByAlipay": "/service-proxy/payment/create-order/:option/by-alipay",
-    "createOrderAndPayByRedemptionCode": "/service-proxy/payment/create-upsell-order/by-redemption-code"
-  }
+  "trackingUrl": "http://uat.tracking.hcd.com"
 }
