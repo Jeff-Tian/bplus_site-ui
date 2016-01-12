@@ -46,6 +46,12 @@
       "port": "10222"
     }
   },
+  "info": {
+    "ranking": {
+      "host": "service.bridgeplus.cn",
+      "port": "10666"
+    }
+  },
   "payment": {
     "public": {
       "host": "payment.service.bridgeplus.cn",
