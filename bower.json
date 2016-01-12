@@ -20,7 +20,8 @@
     "owl.carousel": "~2.0.0-beta.3",
     "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git",
     "competion-ui": "git@bitbucket.org:hcdlearning/cmpt2015-ui.git#develop-ui",
-    "devbridge-autocomplete": "~1.2.24"
+    "devbridge-autocomplete": "~1.2.24",
+    "SHARED-UI": "git@bitbucket.org:hcdlearning/shared-ui.git#develop"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6",

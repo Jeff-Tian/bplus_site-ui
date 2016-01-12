@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var sh = require('shelljs');
 var runSequence = require('run-sequence');
+var fs = require('fs');
+var path = require('path');
 
 gulp.task('default', function (done) {
     console.log('hello');
@@ -45,4 +47,9 @@ gulp.task('ab', function (done) {
 
 gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
+});
+
+var buildOnlineStore = require('./node_modules/online-store/gulpfile.js');
+gulp.task('release', function (done) {
+    buildOnlineStore(done);
 });
