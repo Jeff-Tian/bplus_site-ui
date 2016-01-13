@@ -12,6 +12,7 @@ function filterConfig(config) {
     filtered.sharedUIPath = '/bower/SHARED-UI/';
     filtered.cdn = config.cdn;
     filtered.payment = config.payment.public;
+    filtered.offerListUrl = config.onlineStoreOfferListUrl;
 
     return filtered;
 }
@@ -61,6 +62,14 @@ router.get('/offers', function (req, res, next) {
             state: 'offer-c',
             target: '#/offer-c'
         }]
+    });
+});
+
+var fs = require('fs');
+router.get('/offer-list', function (req, res, next) {
+    res.json({
+        isSuccess: true,
+        result: JSON.parse(fs.readFileSync(__dirname + '/offer-list.json', 'utf-8'))
     });
 });
 
