@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>全国大赛 Bridge+</title>
+    <title>填写邮寄地址 Bridge+</title>
     <meta name="description" content="Bridge+">
     <link type="text/css" rel="stylesheet"
           href="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.css?<%= cdn.version %>" media="all"/>
@@ -15,18 +15,16 @@
 
 <body class="bplus" ng-init="page='<%=page%>';lang='<%=lang%>';site='bplus'" ng-app="bplus" ng-controller="AppCtrl">
 <%- include('../view-partial/header.html') -%>
-<!-- Page Contents -->
+
 <div class="game-ui cloak" ng-controller="epicBaseCtrl">
-
-    <%- include('../view-partial/durable-message.html') -%>
-
     <div class="ui container">
         <div class="ui grid">
-            <div class="four wide column">
-                <game-menu></game-menu>
+            <div class="three wide column">
             </div>
             <div class="twelve wide column">
-                <national-list></national-list>
+                <game-certificate-address></game-certificate-address>
+            </div>
+            <div class="one wide column">
             </div>
         </div>
     </div>
@@ -34,32 +32,12 @@
 
 <%- include('../view-partial/footer.html') -%>
 <script src="/cmpt/config.js"></script>
-<script src="<%= cdn.normal %>cmpt/libs/echarts/build/dist/echarts.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>cmpt/libs/jquery-qrcode/jquery.qrcode.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>cmpt/dist/main.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/competion/main.js?<%= cdn.version %>"></script>
 <script>
-    window.t_PageName = "nationalGame";
-
-    $(document).ready(function(){
-        var trackNames = {
-            '40106': 'nationalGame.xibei.click',
-            '40101': 'nationalGame.huabei.click',
-            '40100': 'nationalGame.dongbei.click',
-            '40105': 'nationalGame.xinan.click',
-            '40104': 'nationalGame.huazhong.click',
-            '40102': 'nationalGame.huadong.click',
-            '40103': 'nationalGame.huannan.click',
-            '40107': 'nationalGame.gangaotai.click'
-        };
-        $(document).on("mapClick", function(e, args, code){
-            var trackName = trackNames[code + ''];
-            if(trackName) {
-                sendTrack(trackName);
-            }
-        });
-    });
+    window.t_PageName = "certification_report";
 </script>
-<%- include('../view-partial/external-js.html') -%>
 </body>
 
 </html>
