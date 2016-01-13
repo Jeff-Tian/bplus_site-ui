@@ -252,9 +252,9 @@ if (process.env.RUN_FROM === 'jeff') {
 }
 
 //setupOnlineStoreStaticResources('semantic');
-server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
+server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'), staticSetting);
 //setupOnlineStoreStaticResources('bower_components');
-server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'));
+server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'), staticSetting);
 setupOnlineStoreStaticResources('images');
 setupOnlineStoreStaticResources('stylesheets');
 setupOnlineStoreStaticResources('scripts');
