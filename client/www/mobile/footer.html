@@ -36,7 +36,7 @@
 <% if (dev_mode) { %>
 <script src="/js/factories/DeviceHelper.js"></script>
 <script src="/js/factories/queryParser.js"></script>
-<script src="/js/factories/WechatLogon.js?abcde=testsss"></script>
+<script src="/js/factories/WechatLogon.js"></script>
 <script src="/js/controllers/AppCtrl.js"></script>
 <!--Utils JS-->
 <script src="/js/utils/utils.js"></script>
@@ -45,3 +45,5 @@
 <% } else { %>
 <script src="<%= cdn.normal %>js/cdn/m/com2.js?<%= cdn.version %>"></script>
 <% } %>
+
+<script src="<%= cdn.normal %>js/utils/trackingSender.js?<%= cdn.version %>"></script>
