@@ -67,10 +67,7 @@ router.get('/offers', function (req, res, next) {
 
 var fs = require('fs');
 router.get('/offer-list', function (req, res, next) {
-    res.json({
-        isSuccess: true,
-        result: JSON.parse(fs.readFileSync(__dirname + '/offer-list.json', 'utf-8'))
-    });
+    res.json(JSON.parse(fs.readFileSync(__dirname + '/offer-list.json', 'utf-8')));
 });
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
