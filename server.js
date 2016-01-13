@@ -251,8 +251,8 @@ if (process.env.RUN_FROM === 'jeff') {
     server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
 }
 
-setupOnlineStoreStaticResources('semantic');
-//server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
+//setupOnlineStoreStaticResources('semantic');
+server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic'));
 //setupOnlineStoreStaticResources('bower_components');
 server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower'));
 setupOnlineStoreStaticResources('images');
