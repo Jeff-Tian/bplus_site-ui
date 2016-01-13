@@ -14,35 +14,22 @@
 <div class="main body b-mobile has-header b-mobile-ranking-body" ng-controller="RankingCtrl">
     <div class="ui equal width center aligned padded grid b-mobile-ranking-option-container">
         <div class="three column row b-mobile-ranking-row">
-            <div ng-class="{'b-ranking-active':option===0}" class="b-mobile-column-patch column b-mobile-ranking-options b-mobile-column-patch" ng-click="rankChange(0)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/1a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/1b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>平均名次</strong></div>
-                <div>排行榜</div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
-            </div>
-            <div ng-class="{'b-ranking-active':option===1}" class="b-mobile-column-patch column b-mobile-ranking-options" ng-click="rankChange(1)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/2a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/2b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>平均得分</strong></div>
-                <div>排行榜</div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
-            </div>
-            <div ng-class="{'b-ranking-active':option===2}" class="b-mobile-column-patch column b-mobile-ranking-options" ng-click="rankChange(2)">
-                <img class="b-mobile-ranking-status-active" src="<%= cdn.normal %>img/ranking/4a.png?<%= cdn.version %>">
-                <img class="b-mobile-ranking-status-deactive" src="<%= cdn.normal %>img/ranking/4b.png?<%= cdn.version %>">
-                <div class="b-mobile-ranking-title1"><strong>个人总得分</strong></div>
-                <div>排行榜</div>
-                <img class="b-mobile-ranking-arrow" src="<%= cdn.normal %>img/ranking/arrow.png?<%= cdn.version %>">
+            <div ng-class="{'b-ranking-active':option===$index}" class="b-mobile-column-patch column b-mobile-ranking-options b-mobile-column-patch" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions">
+                <div class="b-mobile-ranking-title1" ng-bind-template="{{titleOption[0]}}{{titleOption[1]}}"></div>
             </div>
         </div>
     </div>
     <div class="b-mobile-ranking-detail-count" ng-repeat="detail in details">
         <div class="b-mobile-ranking-detail-container ui equal width center aligned padded grid">
-            <div class="three wide column b-mobile-column-patch b-mobile-ranking-detail-rank" ng-bind-template="{{detail.rank}}"></div>
-            <div class="one wide column b-mobile-column-patch b-mobile-ranking-detail-honor"></div>
-            <div class="six wide column b-mobile-column-patch b-mobile-ranking-detail-name" ng-bind-template="{{detail.name}}"></div>
-            <div class="five wide column b-mobile-column-patch b-mobile-ranking-detail-score" ng-bind-template="{{detail.score}}"></div>
+            <div class="three wide column b-mobile-column-patch b-mobile-ranking-detail-rank b-mobile-ranking-detail-honor" ng-bind-template="{{detail.rank}}"></div>
+            <div class="seven wide column b-mobile-column-patch b-mobile-ranking-detail-name" ng-bind-template="{{detail.name}}"></div>
+            <div class="six wide column b-mobile-column-patch b-mobile-ranking-detail-score">
+                <i style="margin-right:0px" class="angle down icon" ng-show="$index===0" ng-click="displaySuboption=!displaySuboption"></i>
+                {{$index===0?subTitleOptions[subOption[option]]:detail.score}}
+                <div ng-show="displaySuboption" class="b-mobile-ranking-subtitle-container">
+                    <div ng-class="{'b-mobile-ranking-suboption-active':subOption[option]===$index}" class="b-mobile-ranking-subtitle-item" ng-click="subTileChange($index)" ng-repeat="subTitleOption in subTitleOptions" ng-bind-template="{{subTitleOption}}"></div>
+                </div>
+            </div>
         </div>
         <div class="b-mobile-ranking-seperator"></div>
     </div>
