@@ -12,6 +12,7 @@ function filterConfig(config) {
     filtered.sharedUIPath = '/bower/SHARED-UI/';
     filtered.cdn = config.cdn;
     filtered.payment = config.payment.public;
+    filtered.offerListUrl = config.onlineStoreOfferListUrl;
 
     return filtered;
 }
@@ -48,12 +49,12 @@ router.get('/offers', function (req, res, next) {
             activeImage: cdnify('img/online-store/icon_discount_white_30x30.png', res.locals.cdn),
             state: 'offer-a',
             target: '#/offer-a'
-        }, {
-            text: '复活赛－服务',
-            image: cdnify('img/online-store/icon_resurgence_red_35x35.png', res.locals.cdn),
-            activeImage: cdnify('img/online-store/icon_resurgence_white_35x35.png', res.locals.cdn),
-            state: 'offer-b',
-            target: '#/offer-b'
+            //}, {
+            //    text: '复活赛－服务',
+            //    image: cdnify('img/online-store/icon_resurgence_red_35x35.png', res.locals.cdn),
+            //    activeImage: cdnify('img/online-store/icon_resurgence_white_35x35.png', res.locals.cdn),
+            //    state: 'offer-b',
+            //    target: '#/offer-b'
         }, {
             text: '激活码兑换',
             image: cdnify('img/online-store/icon_barcode_red_35x30.png', res.locals.cdn),
@@ -62,6 +63,11 @@ router.get('/offers', function (req, res, next) {
             target: '#/offer-c'
         }]
     });
+});
+
+var fs = require('fs');
+router.get('/offer-list', function (req, res, next) {
+    res.json(JSON.parse(fs.readFileSync(__dirname + '/offer-list.json', 'utf-8')));
 });
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {

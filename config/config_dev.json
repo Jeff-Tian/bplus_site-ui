@@ -143,5 +143,7 @@
   },
   "version": "1.1.0",
   "date": "20151203_0306",
-  "trackingUrl": "http://uat.tracking.hcd.com"
+  "trackingUrl": "http://uat.tracking.hcd.com",
+  "onlineStoreOfferListUrl": "/store/offer-list",
+  "durableMessageSource": "/messages"
 }

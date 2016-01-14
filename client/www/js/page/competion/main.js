@@ -12,4 +12,12 @@ angular
     .factory('DeviceHelper', angular.bplus.DeviceHelper)
     .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatLogon', angular.bplus.WechatLogon)
-    .controller('AppCtrl', angular.bplus.AppCtrl);
+    .controller('AppCtrl', angular.bplus.AppCtrl)
+    .controller('DurableMessageCtrl', ['$http', '$scope', function ($http, $scope) {
+        $http.get(angular.bplus.config.durableMessageSource)
+            .then(function (result) {
+                $scope.durableMessages = result.data;
+            })
+        ;
+    }])
+;
