@@ -49,12 +49,12 @@ router.get('/offers', function (req, res, next) {
             activeImage: cdnify('img/online-store/icon_discount_white_30x30.png', res.locals.cdn),
             state: 'offer-a',
             target: '#/offer-a'
-        }, {
-            text: '复活赛－服务',
-            image: cdnify('img/online-store/icon_resurgence_red_35x35.png', res.locals.cdn),
-            activeImage: cdnify('img/online-store/icon_resurgence_white_35x35.png', res.locals.cdn),
-            state: 'offer-b',
-            target: '#/offer-b'
+            //}, {
+            //    text: '复活赛－服务',
+            //    image: cdnify('img/online-store/icon_resurgence_red_35x35.png', res.locals.cdn),
+            //    activeImage: cdnify('img/online-store/icon_resurgence_white_35x35.png', res.locals.cdn),
+            //    state: 'offer-b',
+            //    target: '#/offer-b'
         }, {
             text: '激活码兑换',
             image: cdnify('img/online-store/icon_barcode_red_35x30.png', res.locals.cdn),

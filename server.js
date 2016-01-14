@@ -200,6 +200,7 @@ function filterConfig(config) {
     filtered.serviceUrls = config.serviceUrls;
     filtered.competitions = config.competitions;
     filtered.mode = getMode();
+    filtered.durableMessageSource = config.durableMessageSource;
 
     return filtered;
 }
@@ -350,6 +351,10 @@ server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAu
 });
 server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
 server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
+
+server.get('/messages', function (req, res, next) {
+    res.json(JSON.parse(fs.readFileSync('messages.json')));
+});
 
 server.use('/healthcheck', function (req, res, next) {
     res.json({

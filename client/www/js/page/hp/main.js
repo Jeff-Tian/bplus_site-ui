@@ -20,16 +20,16 @@ angular.module('bplus', [
     .controller('AppCtrl', angular.bplus.AppCtrl)
 ;
 // TODO: integrated into JS framework
-(function() {
+(function () {
     //$(document)
     //  .ready(function() {
     // fix header when passed
     $('.hp-mastead').visibility({
         once: false,
-        onBottomPassed: function() {
+        onBottomPassed: function () {
             $('[data-action=fixedHeader]').transition('fade in');
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
