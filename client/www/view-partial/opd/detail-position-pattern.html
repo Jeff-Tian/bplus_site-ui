@@ -1,12 +1,39 @@
 <table class="ui celled table positions">
     <colgroup>
-        <col style="background-color: #F9F9F9; width: 120px; text-align: center;">
-        <col style="width: 120px; text-align: center;">
+        <col style="background-color: #F9F9F9; width: 100px; text-align: center;">
+        <col style="width: 100px; text-align: center;">
         <col style="background-color: #F9F9F9;">
+        <col style="width: 220px;">
     </colgroup>
-    <tr ng-repeat="data in positions">
+    <thead>
+    <tr>
+        <th>
+            <h4 class="ui white header">
+                职位匹配度
+                <i class="help circle icon"></i>
+            </h4>
+        </th>
+        <th>
+            <h4 class="ui white header">
+                你的竞争力
+                <i class="help circle icon"></i>
+            </h4>
+        </th>
+        <th>
+            <h4 class="ui white header">
+                职位
+            </h4>
+        </th>
+        <th ng-show="positions.showPosition">
+            <h4 class="ui white header">
+                公司
+            </h4>
+        </th>
+    </tr>
+    </thead>
+    <tr ng-repeat="data in positions.data">
         <td style="padding: 1.5em;">
-            <img ng-src="<%= cdn.normal %>img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
+            <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
         </td>
         <td>
             <div class="progress-radial">
@@ -18,6 +45,9 @@
         <td class="desc">
             <h3 class="ui header">
                 <a class="title" href="" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
+                <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'">已有 3 家公司对你感兴趣!</span>
+                <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
+                <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
             </h3>
 
             <div class="grey color">
@@ -27,8 +57,12 @@
                 <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
             </div>
         </td>
+        <td class="description" ng-show="positions.showPosition">
+            <div class="ribbon yellow right corner label">广告</div>
+            <!-- <a class="ui orange right ribbon label company-label">Specs</a> -->
+            <img src="img/opd/match_e.png" class="left-floated-image">
+            <div class="company">阿里巴巴</div>
+            <div class="field grey color">移动互联网/中企</div>
+        </td>
     </tr>
 </table>
-    <script>
- 
-    </script>
