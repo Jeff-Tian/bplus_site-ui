@@ -239,7 +239,7 @@ function setupOnlineStoreStaticResources(staticFolder) {
             onlineOfflinePathSwitch(
                 '/node_modules/',
                 '/../') +
-            'online-store/public/' +
+            (getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
             staticFolder,
             staticSetting
         )
