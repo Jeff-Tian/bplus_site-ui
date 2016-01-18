@@ -86,6 +86,7 @@
                                 ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
+                        <a class="center aligned item" href="<%= localeLink('store/my') %>"><%= __('我的订单') %></a>
                         <a class="center aligned item" href="<%= localeLink('account-setting') %>"><%=
                             __('AccountSetting') %></a>
                         <a class="center aligned item" ng-click="signOut()"><%= __('SignOut') %></a>

@@ -42,6 +42,7 @@
                         dfd.resolve(res.result);
                     } else {
                         console.error(res);
+                        console.error(httpPromise.value);
 
                         if (typeof res.code !== 'undefined') {
                             dfd.reject(res);

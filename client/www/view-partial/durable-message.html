@@ -1,4 +1,5 @@
-<div class="ui container" ng-show="!hideDurableMessage" ng-init="hideDurableMessage = false" ng-cloak
+<div class="ui container" ng-show="durableMessages && durableMessages.length && !hideDurableMessage"
+     ng-init="hideDurableMessage = false" ng-cloak
      ng-controller="DurableMessageCtrl">
     <div class="ui left aligned brand durable-message-wrapper">
         <div class="ui black message">
