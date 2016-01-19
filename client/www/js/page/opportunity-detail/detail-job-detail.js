@@ -12,6 +12,25 @@ angular
             }
         };
     })
+    .directive('shapeFlip', function () {
+        return {
+            link: function (scope, element, arrts) {
+                var $element = angular.element(element),
+                    $shape = $element.find('.shape'),
+                    $btnPreview = $element.find('.btn-preview'),
+                    $btnNext = $element.find('.btn-next');
+                if ($shape.length && $shape.shape) {
+                    $shape.shape();
+                    $btnPreview.on('click', function () {
+                        $shape.shape('flip left');
+                    });
+                    $btnNext.on('click', function () {
+                        $shape.shape('flip right');
+                    });
+                }
+            }
+        }
+    })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('job/detail', {
             url: '/job/:jobid',
