@@ -145,6 +145,6 @@
   "version": "1.1.0",
   "date": "20151203_0306",
   "trackingUrl": "http://tracking.bridgeplus.cn",
-  "onlineStoreOfferListUrl": "//source.bridgeplus.cn/json/offer-list.json",
+  "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",
   "durableMessageSource": "//source.bridgeplus.cn/json/messages.json"
 }

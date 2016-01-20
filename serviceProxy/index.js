@@ -59,6 +59,7 @@ module.exports = require('express').Router()
     .post(serviceUrls.createOrderAndPayByAlipay, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
     .post(serviceUrls.createUpsellOrderByAlipay, membership.ensureAuthenticated, commerceService.createOrder)
     .post(serviceUrls.createOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
+    .post(serviceUrls.createStoreOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createStoreOrderAndPayByRedemptionCode)
     .post(serviceUrls.checkNationalGame2015OrderPayment,
     membership.ensureAuthenticated,
     commerceService.checkUserAccessForNationalGame2015,

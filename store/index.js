@@ -12,7 +12,7 @@ function filterConfig(config) {
     filtered.sharedUIPath = '/bower/SHARED-UI/';
     filtered.cdn = config.cdn;
     filtered.payment = config.payment.public;
-    filtered.offerListUrl = config.onlineStoreOfferListUrl;
+    filtered.onlineStoreMenuSource = config.onlineStoreMenuSource;
 
     return filtered;
 }
@@ -40,6 +40,7 @@ function cdnify(url, cdn) {
 router.get('/offers', function (req, res, next) {
     renderMixin(res, 'offers.jade', 'offers-layout.jade', {
         cdn: config.cdn,
+        title: '商城',
         paymentMethods: {
             pcAlipay: 'b_alipay'
         },
@@ -66,9 +67,6 @@ router.get('/offers', function (req, res, next) {
 });
 
 var fs = require('fs');
-router.get('/offer-list', function (req, res, next) {
-    res.json(JSON.parse(fs.readFileSync(__dirname + '/offer-list.json', 'utf-8')));
-});
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {

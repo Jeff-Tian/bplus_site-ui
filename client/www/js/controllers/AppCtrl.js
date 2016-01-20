@@ -136,6 +136,8 @@
         $scope.wechatQRImageUrl = WechatLogon.getQRImageUrl();
         $scope.partner = WechatLogon.getPartner();
         $scope.partnerName = WechatLogon.getPartnerName();
+
+        console.log($scope.current_page);
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser', 'WechatLogon', '$filter'];
