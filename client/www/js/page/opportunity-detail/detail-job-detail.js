@@ -18,14 +18,20 @@ angular
                 var $element = angular.element(element),
                     $shape = $element.find('.shape'),
                     $btnPreview = $element.find('.btn-preview'),
-                    $btnNext = $element.find('.btn-next');
+                    isPreview = $btnPreview.find('i').hasClass('grey'),
+                    $btnNext = $element.find('.btn-next'),
+                    isNext = $btnNext.find('i').hasClass('grey');
                 if ($shape.length && $shape.shape) {
                     $shape.shape();
                     $btnPreview.on('click', function () {
-                        $shape.shape('flip left');
+                        if (isPreview) {
+                            $shape.shape('flip left');
+                        }
                     });
                     $btnNext.on('click', function () {
-                        $shape.shape('flip right');
+                        if (isNext) {
+                            $shape.shape('flip right');
+                        }
                     });
                 }
             }
