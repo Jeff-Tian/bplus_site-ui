@@ -342,11 +342,11 @@
 </script>
 
 <script type="text/ng-template" id="paid.html">
-    <div class="grey background b-mobile stretch" ng-show="!showPaid">
+    <div class="grey background b-mobile stretch has-header" ng-show="!showPaid">
         <div class="ui horizontal divider"></div>
         <div class="ui very padded vertical loading segment"></div>
     </div>
-    <div class="white background b-mobile stretch" ng-show="showPaid" ng-cloak>
+    <div class="white background b-mobile stretch has-header" ng-show="showPaid" ng-cloak>
         <div class="ui center aligned container" ng-show="currentUserIsMe">
 
             <i class="ui green massive checkmark icon"></i>
@@ -410,6 +410,37 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="weekly-competition.html">
+    <div class="ui loading segment b-mobile stretch has-header" ng-show="!memberLoaded || !loggedOn"></div>
+    <div class="white background b-mobile stretch has-header" ng-show="memberLoaded && loggedOn">
+        <div class="ui center aligned container">
+
+            <i class="ui green massive checkmark icon"></i>
+
+            <h3 class="ui header">
+                你已注册成功，请在周赛开始前，至 PC 端"游戏"页面，完成组队。
+                <div class="ui horizontal divider"></div>
+            </h3>
+
+            <p><%= __('了解组队方法、获取培训资料、掌握赛事动态请关注Bridge+服务号') %>，或者 &nbsp;&nbsp; <a class="ui red button"
+                                                                                 target="_blank"
+                                                                                 href="http://mp.weixin.qq.com/s?__biz=MzA4MzE3NTk1NQ==&mid=402535163&idx=1&sn=238e7254c8f83d32d4613ddc73b02ed9&scene=1&srcid=1125jWDrkSG5CNndASoK137X&key=ff7411024a07f3eb84eca53833dc82a8f1342214aa07245e47d58671f9da6a4bca6921d69d76cbfbccac40ba0be8e4a8&ascene=0&uin=MzcxNTQ0NDAw&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.1+build(15B42)&version=11020201&pass_ticket=PHfFN5vLpC7xSlbvJ%2Fca88tUOrZYCL53gpncJXgGEd0aabkpbmUpD6fsoyE2nmHt">查看教程</a>
+            </p>
+        </div>
+        <div class="ui horizontal divider"></div>
+        <div class="ui centered container" ng-show="showQRCode">
+            <div class="ui six doubling centered cards">
+                <div class="ui transparent card">
+                    <div class="ui image">
+                        <img class="ui small image"
+                             src="<%= cdn.normal %>img/wechat/bplus_fuwuhao.jpg?<%= cdn.version %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
 <%- include('footer.html') -%>
 
 <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -422,6 +453,7 @@
 <script src="js/page/mobile/MobileIndexCtrl.js"></script>
 <script src="js/page/mobile/SelectInterestCtrl.js"></script>
 <script src="js/page/mobile/SelectPaymentMethodCtrl.js"></script>
+<script src="js/page/mobile/WeeklyCompetitionCtrl.js"></script>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/page/mobile/MobilePaidCtrl.js"></script>
 <script src="js/page/mobile/index.js"></script>

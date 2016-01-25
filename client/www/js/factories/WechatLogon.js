@@ -28,7 +28,7 @@
                 });
             },
 
-            tryHandleCallback: function (callbackForNewWechatUser, signedInCallback, errorCallback, notWechatCallback) {
+            tryHandleAsyncCallback: function (callbackForNewWechatUser, signedInCallback, errorCallback, notWechatCallback) {
                 var token = queryParser.get('token');
                 var registered = queryParser.get('is_registed');
 

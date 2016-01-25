@@ -32,7 +32,10 @@
         };
 
         q.parse = function (query) {
-            query = query || q.getQueryString();
+            if (arguments.length === 0) {
+                query = query || q.getQueryString();
+            }
+
             query = query.substr(1);
 
             var pairs = query.split('&');

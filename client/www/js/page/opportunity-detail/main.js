@@ -20,6 +20,9 @@ angular
         }
     }])
     .config(angular.bplus.translate)
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.cdn = angular.bplus.config.cdn;
+    }])
     .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('OpdCtrl', angular.bplus.OpdCtrl)

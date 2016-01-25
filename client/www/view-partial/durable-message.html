@@ -1,30 +1,17 @@
-<div class="ui container" ng-show="!hideDurableMessage" ng-init="hideDurableMessage = false" ng-cloak>
+<div class="ui container" ng-show="durableMessages && durableMessages.length && !hideDurableMessage"
+     ng-init="hideDurableMessage = false" ng-cloak
+     ng-controller="DurableMessageCtrl">
     <div class="ui left aligned brand durable-message-wrapper">
         <div class="ui black message">
             <i class="right floated large remove circle icon" ng-click="hideDurableMessage = true"></i>
             <a class="ui tiny right floated more" target="_blank" ng-hide="true">更多 >>&nbsp;&nbsp;</a>
 
-            <div style="font-size: smaller;">
-                <a href="http://app.askform.cn/2735140001.aspx"
-                   class="" target="_blank">
-                    <i class=" icon"></i>&nbsp;
-                    填反馈问卷赢免费导师辅导机会！
+            <div style="font-size: smaller;" ng-repeat="m in durableMessages">
+                <a ng-href="{{m.link}}"
+                   class="" target="{{m.target}}">
+                    {{m.text}}
                 </a>
             </div>
-            <div style="font-size: smaller;">
-                <a href="http://mp.weixin.qq.com/s?__biz=MzA4MzE3NTk1NQ==&mid=403294996&idx=1&sn=38ad39e0e96ea13f49d05dd7348ef882&scene=18#rd"
-                   class="" target="_blank">
-                    <i class=" icon"></i>&nbsp;
-                    赛前通知 | 告诉你如何正确打开大赛
-                </a>
-            </div>
-            <div style="font-weight: bold;">
-                <a href="/offers" class="">
-                    <i class="star icon"></i>
-                    限时开启 | 全国大赛复活赛报名通道
-                </a>
-            </div>
-
         </div>
     </div>
     <div class="ui horizontal divider"></div>

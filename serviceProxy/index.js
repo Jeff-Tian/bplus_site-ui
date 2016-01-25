@@ -6,7 +6,9 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
+    productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
+    infomationService = require('./informationService'),
     config = require('../config')
     ;
 
@@ -51,16 +53,13 @@ module.exports = require('express').Router()
     .post('/bind-wechat', wechat.bind)
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/upload/callback', uploadCallbackService)
-
+    .get('/info/ranking/:type/:target/:count', infomationService)
     .post('/payment/create-order/national-upsell-:option/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)
-
     .post(serviceUrls.createOrderAndPayByWechat, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrderByWechat)
     .post(serviceUrls.createOrderAndPayByAlipay, membership.ensureAuthenticated, commerceService.checkUserAccessAndGenerateRedemptionCodeIfHasRight, commerceService.createOrder)
-
-    .post('/payment/create-upsell-order/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)
-
+    .post(serviceUrls.createUpsellOrderByAlipay, membership.ensureAuthenticated, commerceService.createOrder)
     .post(serviceUrls.createOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
-
+    .post(serviceUrls.createStoreOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createStoreOrderAndPayByRedemptionCode)
     .post(serviceUrls.checkNationalGame2015OrderPayment,
     membership.ensureAuthenticated,
     commerceService.checkUserAccessForNationalGame2015,
@@ -68,9 +67,16 @@ module.exports = require('express').Router()
     commerceService.checkUserAccessForNationalGame2015Economy,
     commerceService.checkUserAccessForRepechages2015,
     commerceService.checkUserAccessForRepechages2015Middle,
-    commerceService.checkUserAccessForRepechages2015Economy,
-    function (req, res, next) {
+    commerceService.checkUserAccessForRepechages2015Economy, function (req, res, next) {
         res.send(req.chunks);
     })
     .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
+
+    .post(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
+    .get(serviceUrls.getOrderDetail, membership.ensureAuthenticated, commerceService.getOrderDetail)
+    .post(serviceUrls.getMyProductList, membership.ensureAuthenticated, productService.getMyProductList)
+    .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
+    .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
+
+    .post(serviceUrls.getOfferInfo, commerceService.getOfferInfo)
 ;

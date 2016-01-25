@@ -26,21 +26,17 @@
         </span>
     </h2>
     <div class="ui equal width center aligned padded grid b-ranking-content-container">
-        <div class="row b-ranking-row">
-            <div ng-class="{'b-ranking-active':option===0}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(0)">
-                平均名次排行榜
-            </div>
-            <div ng-class="{'b-ranking-active':option===1}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(1)">
-                平均得分排行榜
-            </div>
-            <div ng-class="{'b-ranking-active':option===2}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange(2)">
-                晋级队伍数排行榜
+        <div class="row b-ranking-row b-ranking-title-container">
+            <div ng-class="{'b-ranking-active':option===$index}" class="column b-ranking-options b-ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions">{{titleOption[0]}} - {{subTitleOptions[subOption[$index]]}}
+                <div ng-show="option===$index" class="b-ranking-subtitle-container">
+                    <div ng-class="{'b-ranking-suboption-active':subOption[option]===$index}" class="b-ranking-subtitle-item" ng-click="subTileChange($index)" ng-repeat="subTitleOption in subTitleOptions" ng-bind-template="{{subTitleOption}}"></div>
+                </div>
             </div>
         </div>
-        <div class="row b-ranking-row b-ranking-detail" ng-repeat="detail in details">
-            <div class="two wide column b-ranking-rank b-ranking-cell" ng-bind-template="{{detail.rank}}">
+        <div ng-class="'b-ranking-detail'+$index" class="row b-ranking-row" ng-repeat="detail in details">
+            <div class="four wide column b-ranking-rank b-ranking-cell" ng-bind-template="{{detail.rank}}">
             </div>
-            <div class="nine wide column b-ranking-name b-ranking-cell" ng-bind-template="{{detail.name}}">
+            <div class="seven wide column b-ranking-name b-ranking-cell" ng-bind-template="{{detail.name}}">
             </div>
             <div class="five wide column b-ranking-score b-ranking-cell" ng-bind-template="{{detail.score}}">
             </div>
@@ -58,5 +54,7 @@
 <!-- Page visit End -->
 <script src="<%= cdn.normal %>bower/competion-ui/public/js/rankingCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/ranking/main.js?<%= cdn.version %>"></script>
+
+<%- include('view-partial/external-js.html') -%>
 </body>
 </html>
