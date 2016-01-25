@@ -1,6 +1,6 @@
 (function (exports) {
     var dataArray = [];
-    var dataObject= {};
+    var dataObject = {};
     var todoIndex = 0;
     var doingPromise = {};
     var PROMISE_STATUS = {
@@ -15,26 +15,26 @@
     };
     var INTERVAL_GAP = 500;
     exports.PipeCacheService = function (service, $http, $q) {
-        var createPromise = function(paramWithURL) {
+        var createPromise = function (paramWithURL) {
             return $http({
                 url: paramWithURL.url,
                 params: paramWithURL.params,
                 method: 'GET'
             });
         };
-        var findNext = function() {
+        var findNext = function () {
             var next = dataArray[todoIndex++];
             var nextObject = dataObject[JSON.stringify(next)];
             if (next) {
                 if (nextObject && nextObject.status === PROMISE_STATUS.PENDING) {
-                   return next; 
+                    return next;
                 } else {
                     return findNext();
                 }
-            } 
+            }
         };
-        var run = function() {
-            setInterval(function() {
+        var run = function () {
+            setInterval(function () {
                 if (Object.keys(doingPromise).length === 0) {
                     var next = findNext();
                     if (next) {
@@ -43,18 +43,18 @@
                 }
             }, INTERVAL_GAP);
         };
-        var addKeyWithStatus = function(paramWithURL, status) {
+        var addKeyWithStatus = function (paramWithURL, status) {
             dataObject[JSON.stringify(paramWithURL)] = {
                 data: {},
-                index: dataArray.push(paramWithURL) - 1, 
+                index: dataArray.push(paramWithURL) - 1,
                 status: status,
                 promise: null
             };
         };
-        var getData = function(paramWithURL) {
-            var data =dataObject[JSON.stringify(paramWithURL)];
+        var getData = function (paramWithURL) {
+            var data = dataObject[JSON.stringify(paramWithURL)];
             doingPromise[JSON.stringify(paramWithURL)] = true;
-            var promise = createPromise(paramWithURL).then(function(retData) {
+            var promise = createPromise(paramWithURL).then(function (retData) {
                 if (data) {
                     data.status = (data.status === PROMISE_STATUS.INVALID) ? PROMISE_STATUS.INVALID : PROMISE_STATUS.DONE;
                     data.promise = null;
@@ -72,15 +72,15 @@
             return promise;
         };
         var pipeCacheService = {
-            add: function(paramWithURL) {
-                var data =dataObject[JSON.stringify(paramWithURL)]; 
+            add: function (paramWithURL) {
+                var data = dataObject[JSON.stringify(paramWithURL)];
                 if (!data) {
                     addKeyWithStatus(paramWithURL, PROMISE_STATUS.PENDING);
                 }
             },
-            get: function(paramWithURL) {
+            get: function (paramWithURL) {
                 var deferred = $q.defer();
-                var data = dataObject[JSON.stringify(paramWithURL)]; 
+                var data = dataObject[JSON.stringify(paramWithURL)];
                 doingPromise[JSON.stringify(paramWithURL)] = true;
                 var index;
                 if (data) {
@@ -88,7 +88,7 @@
                         data.status = PROMISE_STATUS.INVALID;
                         delete doingPromise[JSON.stringify(paramWithURL)];
                         deferred.resolve(data.data);
-                    } else if(data.status === PROMISE_STATUS.WORKING) {
+                    } else if (data.status === PROMISE_STATUS.WORKING) {
                         deferred.resolve(data.promise);
                     } else {
                         deferred.resolve(getData(paramWithURL));
@@ -98,11 +98,11 @@
                 }
                 return deferred.promise;
             }
-        }
+        };
         //Start service
         run();
 
         return pipeCacheService;
-    }
+    };
     exports.PipeCacheService.$inject = ['service', '$http', '$q'];
 })(angular.bplus = angular.bplus || {});

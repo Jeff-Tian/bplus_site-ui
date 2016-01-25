@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     return {
         scripts: ['<%= config.src %>/widgets/**/*.js'],
         options: {
@@ -30,11 +30,12 @@ module.exports = function() {
                 "document": false,
                 "Image": false,
                 "location": false
-            }
+            },
+            reporter: 'jslint'
         },
         //具体任务配置
         files: {
-            src: ['client/www/js/**/*.js', 'client/www/api/*.js','!client/www/js/utils/html5shiv.js','!client/www/js/utils/respond.min.js']
+            src: ['client/www/js/**/*.js', 'client/www/api/*.js', '!client/www/js/utils/html5shiv.js', '!client/www/js/utils/respond.min.js']
         }
     }
 };

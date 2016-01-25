@@ -35,7 +35,7 @@ angular
                     });
                 }
             }
-        }
+        };
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('job/detail', {
