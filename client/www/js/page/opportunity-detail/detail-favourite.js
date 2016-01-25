@@ -47,6 +47,10 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                     }
                 }]
             };
+            var originObject = $scope.data.positions.data[0];
+            for (var i = 0; i < 50; i++) {
+                $scope.data.positions.data.push($.extend(true, {}, originObject));
+            };
         }
     };  
 });
