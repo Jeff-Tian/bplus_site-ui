@@ -7,7 +7,7 @@
             </div>
             <div class="two wide center aligned column">
                 你的竞争力<br />
-                <div class="test" bopd-competitiveness="80"></div>
+                <div bopd-competitiveness="{{competitiveness}}"></div>
             </div>
             <div class="eleven wide column content">
                 <div class="department-updatedatetime">
@@ -127,48 +127,7 @@
                 <div class="ui header">相似职位</div>
             </div>
         </div>
-        <div class="ui bottom attached active tab segment">
-            <div class="ui top attached grid">
-                <div class="two wide center aligned column">
-                    <div class="ui tiny header">职位匹配度</div>
-                </div>
-                <div class="two wide center aligned column">
-                    <div class="ui tiny header">你的竞争力</div>
-                </div>
-                <div class="seven wide center aligned column">
-                    <div class="ui tiny header">职位</div>
-                </div>
-                <div class="five wide center aligned column">
-                    <div class="ui tiny header">公司</div>
-                </div>
-            </div>
-            <div class="ui grid">
-
-                <div class="row">
-                    <div class="two wide center aligned column matching">
-                        <img src="/img/opd/match_a.png" />
-                    </div>
-                    <div class="two wide center aligned column competitiveness">
-                        <div bopd-competitiveness="{{competitiveness[3]}}"></div>
-                    </div>
-                    <div class="seven wide column txt">
-                        <a href="javascript:void(0);">互联网用户体验设计师 [上海]</a>
-                        <div>
-                            <span class="smooth">全职</span>
-                            <span>9k-16k</span> <span>学历不限</span>
-                            <span>一天前发布</span>
-                        </div>
-                    </div>
-                    <div class="five wide column corporation">
-                        <img src="" />
-                        <div class="ui header">阿里巴巴集团</div>
-                        <div>移动互联网/中企</div>
-                    </div>
-                    <span class="recommend-label"><span></span>推荐<i class="star icon"></i></span>
-                </div>
-
-            </div>
-        </div>
+        <bopd-joblist></bopd-joblist>
     </div>
     <div class="training-opportunity">
         <div class="ui top attached tabular menu">
@@ -176,59 +135,6 @@
                 <div class="ui header">相关培训机会</div>
             </div>
         </div>
-        <div class="ui bottom attached active tab segment">
-            <div class="ui grid">
-                <div class="row">
-                    <div class="eight wide column">
-                        <div class="ui items">
-                            <div class="item">
-                                <div class="image">
-                                    <img src="">
-                                </div>
-                                <div class="content">
-                                    <div class="ui tiny header">永苑艺术培训中心</div>
-                                    <div>全清华北大名师</div>
-                                    <div>
-                                        推荐星级
-                                        <i class="star orange icon"></i>
-                                        <i class="star orange icon"></i>
-                                        <i class="star orange icon"></i>
-                                        <i class="star orange icon"></i>
-                                        <i class="star orange empty icon"></i>
-                                        <span><i class="unhide icon"></i>192</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>适合想进入创意与设计领域的你</div>
-                        <div>
-                            职场竞争力提升指标：
-                            <span class="ui label">创意</span>
-                            <span class="ui label">思维</span>
-                            <span class="ui label">人文</span>
-                            <span class="ui label">创作</span>
-                        </div>
-                    </div>
-                    <div class="eight wide column shape-flip" shape-flip>
-                        <div>
-                            <div class="ui cube shape">
-                                <div class="sides">
-                                    <div class="active side">
-                                        <img ng-src="/img/opd/ad.jpg" />
-                                    </div>
-                                    <div class="side">
-                                        <img ng-src="/img/opd/ad.jpg" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="btn-preview" href="javascript:void(0)"><i class="angle left big grey icon"></i></a>
-                        <a class="btn-next" href="javascript:void(0)"><i class="angle right big grey icon"></i></a>
-                        <div>商业海报设计基础班 / 免费</div>
-                    </div>
-                    <span class="recommend-label"><span></span>推荐<i class="star icon"></i></span>
-                </div>
-            </div>
-        </div>
+        <bopd-traininglist></bopd-traininglist>
     </div>
 </div>
