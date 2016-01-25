@@ -16,9 +16,11 @@ obj/
 temp/
 dist/
 bower/
+artifacts/
 
 client/www/bower
 client/www/css/main.css
+client/www/css/slim.css
 client/www/css/mobile.css
 client/www/css/pc-mobile.css
 client/www/css/hp.css

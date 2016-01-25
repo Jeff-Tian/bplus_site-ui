@@ -1,5 +1,6 @@
 (function (exports) {
     exports.AppCtrl = function ($scope, service, MessageStore, msgBus, $translate, $timeout, DeviceHelper, queryParser, WechatLogon, $filter) {
+        console.log('app ctrl');
         $('.checkbox').checkbox();
         $('.ui.menu.b-header-account .ui.dropdown').dropdown();
 
@@ -36,8 +37,12 @@
                 window.location.href = jumpUrl;
             }
 
-            WechatLogon.tryHandleCallback(bindRegisteredMobileByWechatToken, function () {
+            function refreshCurrentView() {
                 window.location.href = window.location.origin + window.location.pathname + window.location.hash;
+            }
+
+            WechatLogon.tryHandleAsyncCallback(bindRegisteredMobileByWechatToken, function () {
+                refreshCurrentView();
                 $scope.wechatSigningIn = false;
             }, function (errcode) {
                 $scope.wechatSigningIn = false;
@@ -63,21 +68,23 @@
         $scope.memberInfo = {};
 
         $scope.fetchProfile = function () {
-            return service.get('/service-proxy/member/profile/')
-                .then(function (res) {
-                    $scope.memberInfo = res;
-                    $scope.memberLoaded = true;
+            msgBus.onWechatLogonCallbackHandled($scope, function () {
+                return service.get('/service-proxy/member/profile/')
+                    .then(function (res) {
+                        $scope.memberInfo = res;
+                        $scope.memberLoaded = true;
 
-                    $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile || res.wechat;
+                        $scope.memberInfo.displayName = res.nick_name || res.name || res.real_name || res.mobile || res.wechat;
 
-                    msgBus.emitMsg(msgBus.events.profile.loaded);
+                        msgBus.emitMsg(msgBus.events.profile.loaded);
 
-                    if ($scope.message) {
-                        $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
-                    }
+                        if ($scope.message) {
+                            $scope.message = $scope.message.replace('{user.name}', $scope.memberInfo.displayName);
+                        }
 
-                    return $scope.memberInfo;
-                });
+                        return $scope.memberInfo;
+                    });
+            });
         };
 
         $scope.$watch('message', function (newValue, oldValue) {
@@ -129,6 +136,8 @@
         $scope.wechatQRImageUrl = WechatLogon.getQRImageUrl();
         $scope.partner = WechatLogon.getPartner();
         $scope.partnerName = WechatLogon.getPartnerName();
+
+        console.log($scope.current_page);
     };
 
     exports.AppCtrl.$inject = ['$scope', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser', 'WechatLogon', '$filter'];

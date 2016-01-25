@@ -1,6 +1,9 @@
 describe('PersonalHistoryCtrl', function () {
     var scope;
 
+    var baseTime = new Date(2015, 1, 1);
+    jasmine.clock().mockDate(baseTime);
+
     // load the controller's module
     beforeEach(module('personalHistory'));
 

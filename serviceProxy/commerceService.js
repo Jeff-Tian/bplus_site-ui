@@ -113,6 +113,19 @@ function handleUserAccessCheckResult(res, json, req, next) {
     }
 }
 
+function proxyCommerce(config) {
+    return proxy({
+        host: commerceConfig.host,
+        port: commerceConfig.port,
+        path: config.path,
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+
+            return d;
+        }
+    });
+}
+
 module.exports = {
     createUpSellOrderByRedemptionCode: proxy({
         host: commerceConfig.host,
@@ -120,7 +133,23 @@ module.exports = {
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
-            d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            if (!d.productTypeId) {
+                d.productTypeId = gameConfig['repechages-2015-economy'].productTypeId;
+            }
+
+            return d;
+        },
+        responseInterceptor: injectRedemptionGeneration
+    }),
+
+    createStoreOrderAndPayByRedemptionCode: proxy({
+        host: commerceConfig.host,
+        port: commerceConfig.port,
+        path: '/service/redemption/redeem',
+        dataMapper: function (d) {
+            d.userId = d.member_id;
+            delete d.member_id;
+
             return d;
         },
         responseInterceptor: injectRedemptionGeneration
@@ -269,6 +298,24 @@ module.exports = {
                     return false;
                 }
             }
+        })(req, res, next);
+    },
+
+    getMyOrderList: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/orderList/' + res.locals.hcd_user.member_id
+        })(req, res, next);
+    },
+
+    getOrderDetail: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/orderDetail/' + res.locals.hcd_user.member_id + '/' + req.params.orderId
+        })(req, res, next);
+    },
+
+    getOfferInfo: function (req, res, next) {
+        proxyCommerce({
+            path: '/service/offer/getOffer/'
         })(req, res, next);
     }
 };
