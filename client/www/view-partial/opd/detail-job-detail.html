@@ -27,6 +27,7 @@
         <div class="ui grid">
             <div class="five wide center aligned column competence">
                 <div class="title">职场能力需求</div>
+                <div bopd-chart-pentagon="{{chartPentagon}}"></div>
             </div>
             <div class="eleven wide center aligned column career">
                 <div class="title">职业生涯</div>
@@ -127,7 +128,7 @@
                 <div class="ui header">相似职位</div>
             </div>
         </div>
-        <bopd-joblist></bopd-joblist>
+        <bopd-joblist list="similarJobList"></bopd-joblist>
     </div>
     <div class="training-opportunity">
         <div class="ui top attached tabular menu">
@@ -135,6 +136,6 @@
                 <div class="ui header">相关培训机会</div>
             </div>
         </div>
-        <bopd-traininglist></bopd-traininglist>
+        <bopd-traininglist list="trainingOpportunityList"></bopd-traininglist>
     </div>
 </div>
