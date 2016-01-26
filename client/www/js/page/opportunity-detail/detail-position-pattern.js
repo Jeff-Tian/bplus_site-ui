@@ -1,35 +1,42 @@
 angular.module('opdModule').directive('bopdpositionpattern', function() {
-        var DISPLAY_ITEMS_LENGTH = 10;
-        var FIRST_ITEM = "head";
-        var MIDDLE_ITEM1 = "middle1";
-        var MIDDLE_ITEM = "middle";
-        var MIDDLE_ITEM3 = "middle3";
-        var LAST_ITEM = "tail";
-        var pageDisplayFunction = function(paginationMenu) {
+        var NUMBER_PER_PAGE = 10;
+        var FIRST_PAGE = 1;
+
+        var displayPage = function($scope, data) {
+            //Common params
+            var paginationMenu = $scope.paginationMenu;
+            var currentPage = paginationMenu.currentPage;
+            var totalPages = paginationMenu.totalPages;
+            //Refresh displaydata
+            $scope.displayData.data = data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE);
+            //Refresh paginationMenu
+            paginationMenu.showPreEllipsis = currentPage >= (FIRST_PAGE + 3);
+            paginationMenu.showPostEllipsis = currentPage <= (totalPages - 3);
+            paginationMenu.leftArrowDisabled = currentPage === FIRST_PAGE;
+            paginationMenu.rightArrowDisabled = currentPage === totalPages;
             switch (currentPage) {
                 case 1:
-
+                    paginationMenu.activeItem = paginationMenu.FIRST_ITEM;
                     break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
-                case 1:
-                break;
+                case totalPages:
+                    paginationMenu.activeItem = paginationMenu.LAST_ITEM;
+                    break;
+                case 2:
+                    paginationMenu.activeItem = paginationMenu.MIDDLE_ITEM1;
+                    break;
+                case (totalPages - 1):
+                    paginationMenu.activeItem = paginationMenu.MIDDLE_ITEM3;
+                    break;
+                default:
+                    paginationMenu.activeItem = paginationMenu.MIDDLE_ITEM;
+                    break;
+            }
+            if (currentPage < (FIRST_PAGE + 2)) {
+                paginationMenu.middleNumber = FIRST_PAGE + 2;
+            } else if (currentPage > totalPages - 2) {
+                paginationMenu.middleNumber = totalPages - 2;
+            } else {
+                paginationMenu.middleNumber = currentPage;
             }
         };
         return {
@@ -41,57 +48,57 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
             link: function($scope, element, attrs) {
                 var data = $scope.positions.data;
                 var length = data.length;
-                var pages = Math.ceil(length / DISPLAY_ITEMS_LENGTH);
+                var pages = Math.ceil(length / NUMBER_PER_PAGE);
                 $scope.displayData = {
-                    showPosition: $scope.positions.showPosition
+                    showPosition: $scope.positions.showPosition,
+                    data: data.slice(0, NUMBER_PER_PAGE)
                 };
-                pages = 1;
+                var head = "head";
                 $scope.paginationMenu = {
-                    showMutiPages: $scope.positions.showPageMenu && length > DISPLAY_ITEMS_LENGTH,
-                    totalPages: pages,
-                    currentPage: 1,
-                    leftArrowDisabled: true,
-                    rightArrowDisabled: false,
-                    pageMenuClick: function() {
-                         console.log("function");
-                    },
-                    FIRST_ITEM : "head",
+                    //Static values
+                    FIRST_ITEM : head,
                     MIDDLE_ITEM1 : "middle1",
                     MIDDLE_ITEM : "middle",
                     MIDDLE_ITEM3 : "middle3",
-                    LAST_ITEM : "tail"
+                    LAST_ITEM : "tail",
+                    PREVIOUS: "previous",
+                    NEXT: "next",
+                    showMutiPages: $scope.positions.showPageMenu && length > NUMBER_PER_PAGE,
+                    totalPages: pages,
+                    //Run time values
+                    currentPage: FIRST_PAGE,
+                    leftArrowDisabled: true,
+                    rightArrowDisabled: false,
+                    middleNumber: 1,
+                    activeItem: head,
+                    showPreEllipsis: false,
+                    showPostEllipsis: false,
+                    //Action
+                    pageMenuClick: function(item) {
+                         switch (item) {
+                            case $scope.paginationMenu.PREVIOUS:
+                                if ($scope.paginationMenu.currentPage !== FIRST_PAGE) {
+                                    $scope.paginationMenu.currentPage--;
+                                    displayPage($scope, data);
+                                }
+                                break;
+                            case $scope.paginationMenu.NEXT:
+                                if ($scope.paginationMenu.currentPage !== $scope.paginationMenu.totalPages) {
+                                    $scope.paginationMenu.currentPage++;
+                                    displayPage($scope, data);
+                                }
+                                break;
+                            default:
+                                if ($scope.paginationMenu.currentPage !== item) {
+                                    $scope.paginationMenu.currentPage = item;
+                                    displayPage($scope, data);
+                                }
+                                break;
+                         }
+                    },
                 };
-                //Page menu config
-                pages = 1;
-                $scope.paginationMenu.activeItem = $scope.paginationMenu.FIRST_ITEM;
-                if (pages === 1) {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                } else if (pages === 2) {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                } else if(pages === 3) {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                } else if (pages === 4) {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                } else if (pages === 5) {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                } else {
-                    $scope.paginationMenu.showPreEllipsis = false;
-                    $scope.paginationMenu.showPostEllipsis = false;
-                }
-                $scope.$watch($scope.paginationMenu.currentPage, function(value) {
-                    if (value === 1) {
-                        $scope.leftArrowDisabled = true;
-                    }
-                    if (value === pages) {
-                        $scope.rightArrowDisabled = true;
-                    }
-                });
-                ///////////
+                displayPage($scope, data);
+                //Semantic UI
                 $('.menu .item')
                   .tab()
                 ;
