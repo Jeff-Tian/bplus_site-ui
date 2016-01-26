@@ -9,6 +9,8 @@ angular.module('opdModule').directive('bopdfavourite', function() {
             $scope.data = {};
             $scope.data.positions = {
                 showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
                 data: [{
                     matchLevel: "a",
                     progressRate: "50",
@@ -46,6 +48,10 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                         flag: ""
                     }
                 }]
+            };
+            var originObject = $scope.data.positions.data[0];
+            for (var i = 0; i < 103; i++) {
+                $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             };
         }
     };  

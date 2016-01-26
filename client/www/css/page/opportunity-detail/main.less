@@ -2,7 +2,7 @@
 @import "../../../js/page/opportunity-detail/widget/chartpentagon/main.less";
 @import "../../../js/page/opportunity-detail/widget/joblist/main.less";
 @import "../../../js/page/opportunity-detail/widget/traininglist/main.less";
-
+@import "./widget/competitiveness/main.less";
 @import "./job/detail/main.less";
 @import "./job/favorite/main.less";
 @import "./job/pattern.less";
@@ -36,19 +36,19 @@
     width: 36px !important;
     height: 36px !important;
     line-height: 36px !important;
-    display: inline !important;
+    display: inline;
     padding: 0 !important;
     border-radius: 3px !important;
 }
 
 .loose.pagination.menu .disabled.item {
-    border: none !important;
-    color: black !important;
-    line-height: 26px !important;
-    font-weight: bold !important;
-    font-size: 200% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    // border: none !important;
+    // color: black !important;
+    // line-height: 26px !important;
+    // font-weight: bold !important;
+    // font-size: 200% !important;
+    // margin-left: 0 !important;
+    // margin-right: 0 !important;
 }
 
 .loose.pagination.menu .item::before {
@@ -136,4 +136,22 @@
         text-align: center;
         background-color: white;
     }
+}
+
+.loose.tag {
+    margin: 1em;
+}
+
+.transparent.label {
+    background: transparent;
+    cursor: pointer;
+}
+
+.light.red.label {
+    background-color: #F76E73 !important;
+    cursor: pointer;
+}
+
+.transparent {
+    background: transparent;
 }
