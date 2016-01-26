@@ -40,7 +40,6 @@
         gotRedemptionCode();
 
         msgBus.onMemberLoaded($scope, function () {
-            console.log('member loaded');
             if ($scope.paidUser.member_id === $scope.memberInfo.member_id) {
                 $scope.currentUserIsMe = true;
 

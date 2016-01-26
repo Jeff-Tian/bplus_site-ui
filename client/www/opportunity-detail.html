@@ -21,7 +21,7 @@
 <%- include('view-partial/header.html') -%>
 <!-- Header End -->
 <!-- Page Contents -->
-<div class="b-opd-body b-background" ng-controller="OpdCtrl">
+<div class="b-opd-body b-background" ng-controller="OpdCtrl" style="padding-top: 5em;">
     <div class="ui grid container  b-opd-content-container">
         <div class="four wide column">
             <div class="b-opd-content-menu-container">
@@ -63,6 +63,11 @@
 <script src="<%= cdn.normal %>js/factories/PipeCacheService.js?<%= cdn.version %>" type="text/javascript"></script>
 <script src="<%= cdn.normal %>js/page/opportunity-detail/main.js?<%= cdn.version %>" type="text/javascript"></script>
 <script src="<%= cdn.normal %>js/page/opportunity-detail/menu.js?<%= cdn.version %>" type="text/javascript"></script>
+
+<script src="<%= cdn.normal %>js/page/opportunity-detail/widget/competitiveness/main.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/widget/joblist/main.js?<%= cdn.version %>" type="text/javascript"></script>
+<script src="<%= cdn.normal %>js/page/opportunity-detail/widget/traininglist/main.js?<%= cdn.version %>" type="text/javascript"></script>
+
 <script src="<%= cdn.normal %>js/page/opportunity-detail/detail-position-pattern.js?<%= cdn.version %>"
         type="text/javascript"></script>
 <script src="<%= cdn.normal %>js/page/opportunity-detail/detail-homepage.js?<%= cdn.version %>"

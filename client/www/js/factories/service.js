@@ -42,6 +42,7 @@
                         dfd.resolve(res.result);
                     } else {
                         console.error(res);
+                        console.error(httpPromise.value);
 
                         if (typeof res.code !== 'undefined') {
                             dfd.reject(res);
@@ -69,7 +70,7 @@
         // Inherits $http to s
         for (var method in $http) {
             if ($http.hasOwnProperty(method) && typeof $http[method] === 'function') {
-                s[method] = (function (m) {
+                s[method] = (function (m) {// jshint ignore:line
                     return function () {
                         return handleHttpPromise($http[m].apply(this, Array.prototype.slice.call(arguments)));
                     };

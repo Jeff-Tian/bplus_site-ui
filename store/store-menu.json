@@ -1,0 +1,34 @@
+{
+  "offer-a": {
+    "text": "优惠组合",
+    "image": "img/online-store/icon_discount_red_30x30.png",
+    "activeImage": "img/online-store/icon_discount_white_30x30.png",
+    "state": "offer-a",
+    "target": "#/offer-a",
+    "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
+  },
+  "offer-b": {
+    "text": "复活赛－服务",
+    "image": "img/online-store/icon_resurgence_red_35x35.png",
+    "activeImage": "img/online-store/icon_resurgence_white_35x35.png",
+    "state": "offer-b",
+    "target": "#/offer-b",
+    "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
+  },
+  "offer-d": {
+    "text": "待定",
+    "image": "",
+    "activeImage": "",
+    "state": "offer-d",
+    "target": "#/offer-d",
+    "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
+  },
+  "offer-c": {
+    "text": "激活码兑换",
+    "image": "img/online-store/icon_barcode_red_35x30.png",
+    "activeImage": "img/online-store/icon_barcode_white_35x30.png",
+    "state": "offer-c",
+    "target": "#/offer-c",
+    "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
+  }
+}
