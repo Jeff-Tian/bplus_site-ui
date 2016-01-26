@@ -5,6 +5,33 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
         var MIDDLE_ITEM = "middle";
         var MIDDLE_ITEM3 = "middle3";
         var LAST_ITEM = "tail";
+        var pageDisplayFunction = function(paginationMenu) {
+            switch (currentPage) {
+                case 1:
+
+                    break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+                case 1:
+                break;
+            }
+        };
         return {
             restrict: "E",
             scope: {
@@ -20,32 +47,41 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
                 };
                 pages = 1;
                 $scope.paginationMenu = {
-                    showMutiPages: length > DISPLAY_ITEMS_LENGTH,
+                    showMutiPages: $scope.positions.showPageMenu && length > DISPLAY_ITEMS_LENGTH,
                     totalPages: pages,
                     currentPage: 1,
-                    leftArrowDisabled: $scope.paginationMenu.currentPage===1,
+                    leftArrowDisabled: true,
                     rightArrowDisabled: false,
+                    pageMenuClick: function() {
+                         console.log("function");
+                    },
                     FIRST_ITEM : "head",
                     MIDDLE_ITEM1 : "middle1",
                     MIDDLE_ITEM : "middle",
                     MIDDLE_ITEM3 : "middle3",
                     LAST_ITEM : "tail"
                 };
+                //Page menu config
                 pages = 1;
+                $scope.paginationMenu.activeItem = $scope.paginationMenu.FIRST_ITEM;
                 if (pages === 1) {
-                    $scope.paginationMenu.activeItem = $scope.paginationMenu.FIRST_ITEM;
                     $scope.paginationMenu.showPreEllipsis = false;
                     $scope.paginationMenu.showPostEllipsis = false;
                 } else if (pages === 2) {
-
+                    $scope.paginationMenu.showPreEllipsis = false;
+                    $scope.paginationMenu.showPostEllipsis = false;
                 } else if(pages === 3) {
-
+                    $scope.paginationMenu.showPreEllipsis = false;
+                    $scope.paginationMenu.showPostEllipsis = false;
                 } else if (pages === 4) {
-
+                    $scope.paginationMenu.showPreEllipsis = false;
+                    $scope.paginationMenu.showPostEllipsis = false;
                 } else if (pages === 5) {
-
+                    $scope.paginationMenu.showPreEllipsis = false;
+                    $scope.paginationMenu.showPostEllipsis = false;
                 } else {
-
+                    $scope.paginationMenu.showPreEllipsis = false;
+                    $scope.paginationMenu.showPostEllipsis = false;
                 }
                 $scope.$watch($scope.paginationMenu.currentPage, function(value) {
                     if (value === 1) {
@@ -55,7 +91,7 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
                         $scope.rightArrowDisabled = true;
                     }
                 });
-                //TODO
+                ///////////
                 $('.menu .item')
                   .tab()
                 ;

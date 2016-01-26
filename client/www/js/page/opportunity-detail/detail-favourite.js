@@ -9,6 +9,8 @@ angular.module('opdModule').directive('bopdfavourite', function() {
             $scope.data = {};
             $scope.data.positions = {
                 showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
                 data: [{
                     matchLevel: "a",
                     progressRate: "50",
