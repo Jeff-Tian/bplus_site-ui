@@ -47,27 +47,32 @@
                     <div class="overlay"></div>
                 </div>
             </td>
-            <td class="desc">
+            <td class="desc" ng-click="displayData.onClick(data)">
                 <h3 class="ui header">
                     <a class="title" href="" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
                     <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'">已有 3 家公司对你感兴趣!</span>
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
                 </h3>
-
                 <div class="grey color">
                     <span class="ui smooth label" ng-bind="data.position.type"></span>
                     <span class="grey color loose" ng-bind="data.position.salary"></span>
                     <span class="grey color loose" ng-bind="data.position.certification"></span>
                     <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
                 </div>
+                <div class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status===''">
+                    <div class="ui red right corner label">
+                        <i class="remove icon"></i>
+                    </div>
+                </div>
             </td>
-            <td class="description" ng-show="displayData.showPosition">
-                <div class="ribbon yellow right corner label">广告</div>
-                <!-- <a class="ui orange right ribbon label company-label">Specs</a> -->
-                <img src="img/opd/match_e.png" class="left-floated-image">
-                <div class="company">阿里巴巴</div>
-                <div class="field grey color">移动互联网/中企</div>
+            <td class="description" ng-show="displayData.showPosition" >
+                <div ng-show="data.companyinfo.flag==='recommendation'" class="ribbon yellow right corner label">推荐</div>
+                <div ng-show="data.companyinfo.flag==='latest'" class="ribbon yellow right corner label">最新</div>
+                <div ng-show="data.companyinfo.flag==='ad'" class="ribbon teal right corner label">广告</div>
+                <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
+                <div class="company" ng-bind="data.companyinfo.name"></div>
+                <div class="field grey color" ng-bind="data.companyinfo.field"></div>
             </td>
         </tr>
     </tbody>

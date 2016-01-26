@@ -17,11 +17,25 @@
         td {
             padding: 1.5em;
             &.desc {
+                position: relative;
+                cursor: pointer;
                 .title {
 
                 }
                 .company {
                     color: black;
+                }
+                .removeIcon {
+                    visibility: hidden;
+                }
+                &:hover {
+                    background-color: #e6e6e6;
+                    .removeIcon {
+                        visibility: visible;
+                        .icon {
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
         }

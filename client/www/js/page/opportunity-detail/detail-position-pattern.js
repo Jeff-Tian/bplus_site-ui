@@ -51,7 +51,14 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
                 var pages = Math.ceil(length / NUMBER_PER_PAGE);
                 $scope.displayData = {
                     showPosition: $scope.positions.showPosition,
-                    data: data.slice(0, NUMBER_PER_PAGE)
+                    data: data.slice(0, NUMBER_PER_PAGE),
+                    onClick: function(target) {
+                        //TODO
+                    },
+                    onDelete: function(target, $event) {
+                        $event.stopPropagation();
+                        //TODO
+                    }
                 };
                 var head = "head";
                 $scope.paginationMenu = {

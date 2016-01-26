@@ -22,12 +22,12 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                     },
                     issueTime: "2015-12-12",
                     company: "ksjksdf",
-                    status: "finisheda",
+                    status: "finished",     //finished, delivered
                     companyinfo: {
-                        logo: "",
-                        name: "",
-                        field: "",
-                        flag: ""
+                        logo: "img/opd/match_e.png",
+                        name: "阿里巴巴",
+                        field: "移动互联网/中企",
+                        flag: "ad"   //ad, recommendation, latest
                     }
                 },{
                     matchLevel: "d",
@@ -38,14 +38,14 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                         salary: "111122",
                         certification: "d",
                     },
-                    status: "delivered",
+                    status: "",
                     issueTime: "2015-12-20",
                     company: "ksj ksdf",
                     companyinfo: {
-                        logo: "",
-                        name: "",
-                        field: "",
-                        flag: ""
+                        logo: "img/opd/match_e.png",
+                        name: "阿里巴巴",
+                        field: "移动互联网/中企",
+                        flag: "recommendation"
                     }
                 }]
             };
