@@ -23,21 +23,10 @@
         </div>
 
         <div class="ui clearing segment" style="border-radius: 0;">
-            <strong>
-                排序方式：
+            <strong ng-repeat-start="s in settings" ng-bind="s.key">
             </strong>
-            <span class="ui light red label">默认</span>
-            <span class="ui transparent label">最新</span>
-            <span class="ui transparent label">推荐星级</span>
-            <span class="ui transparent label">热门</span>
-            <span class="ui transparent label">&nbsp;</span>
-            <strong>
-                机构专长：
-            </strong>
-            <span class="ui light red label">不限</span>
-            <span class="ui transparent label">语言</span>
-            <span class="ui transparent label">IT</span>
-            <span class="ui transparent label">留学</span>
+            <span class="ui light label" ng-repeat="l in s.list" ng-class="{'red': settingData[s.name] === l.id, 'transparent': settingData[s.name] !== l.id}" ng-click="settingData[s.name] = l.id">{{l.text}}</span>
+            <span class="ui transparent label" ng-repeat-end="" style="cursor: default;">&nbsp;</span>
         </div>
     </form>
     <table class="ui celled table training">
