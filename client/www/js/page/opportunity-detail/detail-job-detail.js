@@ -16,9 +16,12 @@ angular
         };
     })
     .controller('detailJobDetail', ['$scope', function ($scope) {
+
         $scope.competitiveness = 80;
 
-        $scope.joblist = [{
+        $scope.chartPentagon = '4-2-3-2-2';
+
+        $scope.similarJobList = [{
             competitiveness: 20
         }, {
             competitiveness: 40
@@ -30,9 +33,10 @@ angular
             competitiveness: 100
         }];
 
-        $scope.traininglist = [{
+        $scope.trainingOpportunityList = [{
             read: 190
         }, {
             read: 192
         }];
+
     }]);

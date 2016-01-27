@@ -28,6 +28,9 @@
     .directive('bopdTraininglist', function () {
         return {
             templateUrl: 'js/page/opportunity-detail/widget/traininglist/main.html',
+            scope: {
+                traininglist: '=list'
+            },
             link: function (scope, element, attrs) {
                 ;
             }
