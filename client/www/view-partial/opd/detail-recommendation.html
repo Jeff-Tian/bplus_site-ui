@@ -69,7 +69,22 @@
                     <div class="inline fields">
                         <strong ng-bind="'职\u2001\u2001位：'"></strong>
                         <span class="thirteen wide field">
-                            <input type="text" placeholder="请输入想订阅的职位">
+                            <div class="ui fluid selection search multiple dropdown positions">
+                                <input type="hidden" name="positions">
+
+                                <div class="default text">请输入想订阅的职位</div>
+
+                            </div>
+                            <script type="text/javascript">
+                                $('.multiple.dropdown.positions')
+                                        .dropdown({
+                                            allowAdditions: true,
+                                            apiSettings: {
+                                                url: '//api.semantic-ui.com/tags/{query}'
+                                            }
+                                        })
+                                ;
+                            </script>
                         </span>
                     </div>
 
