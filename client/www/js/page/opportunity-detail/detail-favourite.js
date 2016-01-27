@@ -56,6 +56,10 @@ angular.module('opdModule').directive('bopdfavourite', function() {
             for (var i = 0; i < 103; i++) {
                 $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             };
+            //Semantic UI
+            $('.b-opd-favorite .menu .item')
+              .tab()
+            ;
         }
     };  
 });

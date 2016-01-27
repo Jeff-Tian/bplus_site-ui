@@ -1,4 +1,4 @@
-angular.module('opdModule').directive('bopdpositionpattern', function() {
+angular.module('opdModule').directive('bopdtrainingpattern', function() {
         var NUMBER_PER_PAGE = 10;
         var FIRST_PAGE = 1;
 
@@ -44,7 +44,7 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
             scope: {
                 positions: '='
             },
-            templateUrl: '/view-partial/opd/detail-position-pattern.html',
+            templateUrl: '/view-partial/opd/detail-training-pattern.html',
             link: function($scope, element, attrs) {
                 NUMBER_PER_PAGE =  $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
                 var data = $scope.positions.data;
