@@ -37,11 +37,7 @@
                 <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
             </td>
             <td>
-                <div class="progress-radial">
-                    <div class="ring"></div>
-                    <div class="progress" ng-class="'progress-' + data.progressRate"></div>
-                    <div class="overlay"></div>
-                </div>
+                <div bopd-competitiveness="{{data.progressRate}}"></div>
             </td>
             <td class="desc" ng-click="displayData.onClick(data)">
                 <h3 class="ui header">
