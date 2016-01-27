@@ -1,11 +1,11 @@
-angular.module('opdModule').directive('bopdfavourite', function() {
+angular.module('opdModule').directive('bopdfavourite', function () {
     return {
         restrict: "E",
         scope: {
             src: '='
         },
         templateUrl: '/view-partial/opd/detail-favourite.html',
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             $scope.data = {};
             $scope.data.positions = {
                 NUMBER_PER_PAGE: 10,
@@ -31,7 +31,7 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                         field: "移动互联网/中企",
                         flag: "ad"   //ad, recommendation
                     }
-                },{
+                }, {
                     matchLevel: "d",
                     progressRate: "70",
                     position: {
@@ -55,7 +55,7 @@ angular.module('opdModule').directive('bopdfavourite', function() {
             var originObject = $scope.data.positions.data[0];
             for (var i = 0; i < 103; i++) {
                 $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
-            };
+            }
         }
-    };  
+    };
 });
