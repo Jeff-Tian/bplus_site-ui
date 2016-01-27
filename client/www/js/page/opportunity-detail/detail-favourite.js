@@ -53,7 +53,7 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                 }]
             };
             var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 103; i++) {
+            for (var i = 0; i < 3; i++) {
                 $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             };
         }
