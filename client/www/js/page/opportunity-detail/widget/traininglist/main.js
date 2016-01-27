@@ -23,7 +23,7 @@
                     });
                 }
             }
-        }
+        };
     })
     .directive('bopdTraininglist', function () {
         return {
@@ -32,7 +32,6 @@
                 traininglist: '=list'
             },
             link: function (scope, element, attrs) {
-                ;
             }
         };
     });

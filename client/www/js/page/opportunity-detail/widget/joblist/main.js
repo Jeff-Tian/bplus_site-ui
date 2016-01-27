@@ -7,7 +7,6 @@
                 joblist: '=list'
             },
             link: function (scope, element, attrs) {
-                ;
             }
         };
     });
