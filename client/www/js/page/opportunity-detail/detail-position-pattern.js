@@ -46,6 +46,7 @@ angular.module('opdModule').directive('bopdpositionpattern', function() {
             },
             templateUrl: '/view-partial/opd/detail-position-pattern.html',
             link: function($scope, element, attrs) {
+                NUMBER_PER_PAGE =  $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
                 var data = $scope.positions.data;
                 var length = data.length;
                 var pages = Math.ceil(length / NUMBER_PER_PAGE);

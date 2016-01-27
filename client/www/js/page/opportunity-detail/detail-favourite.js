@@ -8,6 +8,7 @@ angular.module('opdModule').directive('bopdfavourite', function() {
         link: function($scope, element, attrs) {
             $scope.data = {};
             $scope.data.positions = {
+                NUMBER_PER_PAGE: 10,
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
@@ -23,11 +24,12 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                     issueTime: "2015-12-12",
                     company: "ksjksdf",
                     status: "finished",     //finished, delivered
+                    statusText: "已有3家公司对你感兴趣!",
                     companyinfo: {
                         logo: "img/opd/match_e.png",
                         name: "阿里巴巴",
                         field: "移动互联网/中企",
-                        flag: "ad"   //ad, recommendation, latest
+                        flag: "ad"   //ad, recommendation
                     }
                 },{
                     matchLevel: "d",
@@ -39,6 +41,7 @@ angular.module('opdModule').directive('bopdfavourite', function() {
                         certification: "d",
                     },
                     status: "",
+                    statusText: "已有3家公司对你感兴趣!",
                     issueTime: "2015-12-20",
                     company: "ksj ksdf",
                     companyinfo: {

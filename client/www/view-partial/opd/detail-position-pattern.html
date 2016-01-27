@@ -37,10 +37,6 @@
                 <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
             </td>
             <td>
-<!--            <div>
-                    <div bopd-competitiveness={{data.progressRate}}>
-                    </div>
-                </div> -->
                 <div class="progress-radial">
                     <div class="ring"></div>
                     <div class="progress" ng-class="'progress-' + data.progressRate"></div>
@@ -50,7 +46,7 @@
             <td class="desc" ng-click="displayData.onClick(data)">
                 <h3 class="ui header">
                     <a class="title" href="" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
-                    <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'">已有 3 家公司对你感兴趣!</span>
+                    <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span>
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
                 </h3>
