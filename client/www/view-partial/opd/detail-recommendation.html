@@ -5,6 +5,9 @@
         <a class="item" data-tab="competency">我有竞争力的</a>
         <a class="item" data-tab="relevant">他人在看</a>
     </div>
+    <div class="ui bottom attached tab segment" data-tab="recommendation">
+        <bopdpositionpattern positions="data.positions"/>
+    </div>
     <div class="ui bottom attached active tab segment" data-tab="subscribe">
         <form name="filterForm" class="ui form">
             <div class="ui bk-color-coral-red inverted vertical padded segment">
@@ -101,6 +104,11 @@
                     <p>尚无职位信息。</p>
                 </div>
             </div>
+            <bopdpositionpattern positions="data.positions"/>
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.b-opd-favorite .tabular.menu .item').tab();
+</script>
