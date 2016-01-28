@@ -73,10 +73,20 @@ angular
         }
         /////
 
-        $scope.trainingOpportunityList = [{
-            read: 190
-        }, {
-            read: 192
-        }];
+        $scope.trainingOpportunityList = {
+            NUMBER_PER_PAGE: 4,
+            data: [{
+
+            }, {
+
+            }]
+        }
+
+        // [{
+        //     read: 190
+        // }, {
+        //     read: 192
+        // }]
+        // ;
 
     }]);
