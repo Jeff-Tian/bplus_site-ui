@@ -15,6 +15,13 @@
             }
         };
     })
+    .directive('introJobs', function () {
+        return {
+            link: function (scope, element, arrts) {
+                angular.element(element).find('.menu .item').tab();
+            }
+        };
+    })
     .controller('detailJobCorporation', ['$scope', function ($scope) {
 
         $scope.chartPentagon = '4-2-3-2-2';

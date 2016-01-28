@@ -104,7 +104,7 @@
             }
         }
     }
-    > .instro-jobs {
+    > .intro-jobs {
         padding-top: 4rem;
         background-color: #fff;
         > .tabular.menu {
@@ -113,6 +113,7 @@
                 margin-left: 1px;
                 border-radius: .28571429rem .28571429rem 0 0 !important;
                 background-color: #2e363d;
+                cursor: pointer;
                 > .ui.header {
                     color: #fff;
                 }
@@ -125,12 +126,21 @@
                 background-color: #ff3c42;
             }
         }
+        > .tab.segment {
+            border: 0;
+        }
         > .desc {
-            padding: 3em 2em 1em 2em;
+            padding: 3em 2em 3em 2em;
+        }
+        > .hr {
+            margin-top: 0;
         }
         > .operation {
             padding: 2em 2em 0 2em;
             text-align: right;
+        }
+        > .hr:last-child {
+            margin-top: 3em;
         }
     }
     > .more-corporation {
@@ -147,15 +157,38 @@
         }
         > .ui.grid {
             margin: 0;
-            > .column {
+            > column,
+            > a.column,
+            > a.column:visited,
+            > a.column:hover {
+                padding: 1.42857143em;
                 background-color: #fff;
+                color: #323232;
+                text-decoration: none;
                 cursor: pointer;
+                > .ui.items > .item {
+                    > .image {
+                        width: 80px;
+                    }
+                    > .content div,
+                    > .content div:visited,
+                    > .content div:hover {
+                        line-height: 40px;
+                        color: #323232;
+                        text-decoration: none;
+                    }
+                }
             }
             > .column:first-child,
-            > .column:last-child {
+            > a.column:first-child,
+            > a.column:first-child:visited,
+            > .column:last-child,
+            > a.column:last-child,
+            > a.column:last-child:visited {
                 background-color: #f9f9f9;
             }
-            > .column:hover {
+            > .column:hover,
+            > a.column:hover {
                 background-color: #e5e5e5;
             }
         }
