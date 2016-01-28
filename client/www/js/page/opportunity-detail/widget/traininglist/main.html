@@ -31,8 +31,8 @@
             <div class="eight wide column shape-flip" shape-flip>
                 <div>
                     <div class="ui cube shape">
-                        <div class="sides" ng-repeat="detail in details">
-                            <div class="side">
+                        <div class="sides">
+                            <div ng-repeat="detail in data.details" class="side" ng-class="{'active':$index===0}">
                                 <img ng-src="{{detail.pic}}" />
                                 <div ng-bind="detail.title"></div>
                             </div>
