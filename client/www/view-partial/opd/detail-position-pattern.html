@@ -59,8 +59,10 @@
                 </div>
             </td>
             <td class="description" ng-show="displayData.showPosition" >
-                <div ng-show="data.companyinfo.flag==='recommendation'" class="ribbon yellow right corner label">推荐</div>
-                <div ng-show="data.companyinfo.flag==='latest'" class="ribbon yellow right corner label">最新</div>
+                <div ng-show="data.companyinfo.flag==='recommendation'" class="ribbon yellow right corner label">推荐
+                <i class="star icon"></i>
+                </div>
+                <div ng-show="data.companyinfo.flag==='latest'" class="ribbon red right corner label">最新</div>
                 <div ng-show="data.companyinfo.flag==='ad'" class="ribbon teal right corner label">广告</div>
                 <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
                 <div class="company" ng-bind="data.companyinfo.name"></div>

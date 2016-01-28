@@ -76,9 +76,47 @@ angular
         $scope.trainingOpportunityList = {
             NUMBER_PER_PAGE: 4,
             data: [{
-
+                name: "永苑艺术培训中心",
+                description: "全清华北大名师",
+                rate: 3,
+                read: 190,
+                field: "创意与设计领域",
+                labels: [
+                    "创意",
+                    "思维",
+                    "人文",
+                    "创作"
+                ],
+                details: [{
+                    pic: "/img/opd/ad.jpg",
+                    title: "商业海报设计基础班 / 免费"
+                }, {
+                    pic: "/img/opd/ad.jpg",
+                    title: "商业海报设计基础班 / $99.99"
+                }],
+                isRecommended: true,
+                isAD: false,
             }, {
-
+                name: "永苑艺术培训中心",
+                description: "全清华北大名师",
+                rate: 3,
+                read: 190,
+                field: "创意与设计领域",
+                labels: [
+                    "创意",
+                    "思维",
+                    "人文",
+                    "创作"
+                ],
+                details: [{
+                    pic: "/img/opd/ad.jpg",
+                    title: "商业海报设计基础班 / 免费"
+                }, {
+                    pic: "/img/opd/ad.jpg",
+                    title: "商业海报设计基础班 / $99.99"
+                }],
+                isRecommended: false,
+                isAD: true,
             }]
         }
 

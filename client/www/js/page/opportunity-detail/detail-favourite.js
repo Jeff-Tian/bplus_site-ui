@@ -29,7 +29,7 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                         logo: "img/opd/match_e.png",
                         name: "阿里巴巴",
                         field: "移动互联网/中企",
-                        flag: "ad"   //ad, recommendation
+                        flag: "latest"   //ad, recommendation, latest
                     }
                 }, {
                     matchLevel: "d",

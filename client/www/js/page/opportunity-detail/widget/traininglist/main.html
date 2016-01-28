@@ -1,6 +1,6 @@
 ﻿<div class="ui bottom attached active tab segment">
     <div class="ui grid">
-        <div class="row" ng-repeat="i in traininglist track by $index">
+        <div class="row" ng-repeat="data in datalist.data">
             <div class="eight wide column">
                 <div class="ui items">
                     <div class="item">
@@ -8,47 +8,44 @@
                             <img src="">
                         </div>
                         <div class="content">
-                            <div class="ui tiny header">永苑艺术培训中心</div>
-                            <div>全清华北大名师</div>
+                            <div class="ui tiny header" ng-bind="data.name"></div>
+                            <div ng-bind="data.description"></div>
                             <div>
                                 推荐星级
-                                <i class="star orange icon"></i>
-                                <i class="star orange icon"></i>
-                                <i class="star orange icon"></i>
-                                <i class="star orange icon"></i>
-                                <i class="star orange empty icon"></i>
-                                <span><i class="unhide icon"></i>{{i.read}}</span>
+                                <i class="star orange icon" ng-class="{'empty':data.rate<1}"></i>
+                                <i class="star orange icon" ng-class="{'empty':data.rate<2}"></i>
+                                <i class="star orange icon" ng-class="{'empty':data.rate<3}"></i>
+                                <i class="star orange icon" ng-class="{'empty':data.rate<4}"></i>
+                                <i class="star orange icon" ng-class="{'empty':data.rate<5}"></i>
+                                <span><i class="unhide icon" ng-bind="data.read"></i></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div>适合想进入创意与设计领域的你</div>
+                <div ng-bind-template="适合想进入{{data.field}}的你"></div>
                 <div>
                     职场竞争力提升指标：
-                    <span class="ui label">创意</span>
-                    <span class="ui label">思维</span>
-                    <span class="ui label">人文</span>
-                    <span class="ui label">创作</span>
+                    <span ng-repeat="label in data.labels" class="ui label" ng-bind="label"></span>
                 </div>
             </div>
             <div class="eight wide column shape-flip" shape-flip>
                 <div>
                     <div class="ui cube shape">
-                        <div class="sides">
-                            <div class="active side">
-                                <img ng-src="/img/opd/ad.jpg" />
-                            </div>
+                        <div class="sides" ng-repeat="detail in details">
                             <div class="side">
-                                <img ng-src="/img/opd/ad.jpg" />
+                                <img ng-src="{{detail.pic}}" />
+                                <div ng-bind="detail.title"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <a class="btn-preview" href="javascript:void(0)"><i class="angle left big grey icon"></i></a>
                 <a class="btn-next" href="javascript:void(0)"><i class="angle right big grey icon"></i></a>
-                <div>商业海报设计基础班 / 免费</div>
             </div>
-            <span class="recommend-label"><span></span>推荐<i class="star icon"></i></span>
+            <div ng-show="data.isRecommended" class="ribbon yellow right corner label">推荐
+                <i class="star icon"></i>
+            </div>
+            <div ng-show="data.isAD" class="ribbon teal right corner label">广告</div>
         </div>
     </div>
 </div>
