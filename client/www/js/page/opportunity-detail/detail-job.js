@@ -314,6 +314,7 @@ angular.module('opdModule')
                 }, {
                     key: 'functionality',
                     label: '职\u2001\u2001能：',
+                    thumbLabel: '职能：',
                     list: [{
                         id: 0,
                         text: '不限'
@@ -354,11 +355,45 @@ angular.module('opdModule')
 
                 $scope.filterSetting = {
                     showThumb: true,
+                    showDetail: true,
+                    hasThumbView: true,
                     workPlace: f.workPlace.list[0],
                     diplomas: f.diplomas.list[4],
                     industry: f.industry.list[3],
                     companyType: f.companyType.list[1],
                     functionality: f.functionality.list[9]
+                };
+
+                $scope.sortingAndFilter = {};
+                $scope.sortingAndFilter.detail = [{
+                    key: 'sorting',
+                    label: '排序方式：',
+                    list: [{
+                        id: 0,
+                        text: '默认'
+                    }, {
+                        id: 1,
+                        text: '匹配度'
+                    }, {
+                        id: 2,
+                        text: '竞争力'
+                    }, {
+                        id: 3,
+                        text: '热门'
+                    }, {
+                        id: 4,
+                        text: '最新'
+                    }]
+                }];
+
+                $scope.sortingAndFilterSetting = {
+                    showThumb: false,
+                    showDetail: true,
+                    hasThumbView: false,
+                    sorting: {
+                        id: 0,
+                        text: '默认'
+                    }
                 };
             }
         };

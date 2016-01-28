@@ -1,8 +1,8 @@
-<form class="ui segments form">
+<form class="ui segments form" style="margin-bottom: 20px;">
     <div class="ui segment thumb" ng-show="filterSetting.showThumb">
         <i class="ui right floated angle large down icon" style="cursor: pointer;"
-           ng-click="filterSetting.showThumb = false"></i>
-        <strong ng-repeat-start="f in filters.detail">{{f.label}}</strong>
+           ng-click="filterSetting.showThumb = false" ng-if="filterSetting.showDetail"></i>
+        <strong ng-repeat-start="f in filters.detail">{{f.thumbLabel || f.label}}</strong>
         <span class="ui light red label" style="cursor: pointer;">{{filterSetting[f.key].text}}</span>
         <span ng-repeat-end>&nbsp;&nbsp;</span>
     </div>
@@ -10,12 +10,14 @@
          ng-hide="filterSetting.showThumb" style="border-top: none; border-bottom: none;">
 
         <i class="ui right floated angle large up icon" style="cursor: pointer;"
-           ng-click="filterSetting.showThumb = true" ng-if="$index === 0"></i>
+           ng-click="filterSetting.showThumb = true" ng-if="$index === 0 && filterSetting.hasThumbView"></i>
 
         <strong>{{f.label}}</strong>
             <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
                   ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
-                  ng-click="filterSetting[f.key] = l">{{l.text}}</span>
+                  ng-click="filterSetting[f.key] = l">
+                {{l.text}}
+            </span>
 
         <span>&nbsp;&nbsp;</span>
 
