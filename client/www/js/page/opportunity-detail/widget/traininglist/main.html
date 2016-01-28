@@ -1,6 +1,6 @@
 ﻿<div class="ui bottom attached active tab segment">
     <div class="ui grid">
-        <div class="row" ng-repeat="data in datalist.data">
+        <div class="row" ng-repeat="data in displayData.data">
             <div class="eight wide column">
                 <div class="ui items">
                     <div class="item">
@@ -46,6 +46,11 @@
                 <i class="star icon"></i>
             </div>
             <div ng-show="data.isAD" class="ribbon teal right corner label">广告</div>
+        </div>
+    </div>
+    <div class="ui equal width center aligned padded grid">
+        <div class="pagination row">
+            <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
         </div>
     </div>
 </div>

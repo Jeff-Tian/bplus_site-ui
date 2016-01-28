@@ -114,17 +114,16 @@ angular
                 }, {
                     pic: "/img/opd/ad.jpg",
                     title: "商业海报设计基础班 / $99.99"
+                }, {
+                    pic: "/img/opd/ad.jpg",
+                    title: "设计基础班 / $39.99"
                 }],
                 isRecommended: false,
                 isAD: true,
             }]
         }
-
-        // [{
-        //     read: 190
-        // }, {
-        //     read: 192
-        // }]
-        // ;
-
+        var originObject1 = $scope.trainingOpportunityList.data[0];
+        for (var i = 0; i < 13; i++) {
+            $scope.trainingOpportunityList.data.push($.extend(true, {}, originObject1));
+        }
     }]);
