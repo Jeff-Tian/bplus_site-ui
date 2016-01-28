@@ -70,7 +70,7 @@ angular
         var originObject = $scope.similarJobList.data[0];
         for (var i = 0; i < 13; i++) {
             $scope.similarJobList.data.push($.extend(true, {}, originObject, {progressRate: i}));
-        };
+        }
         /////
 
         $scope.trainingOpportunityList = [{
