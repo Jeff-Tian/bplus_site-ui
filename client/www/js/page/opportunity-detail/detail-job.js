@@ -14,10 +14,10 @@ angular.module('opdModule')
                     key: 'huabei',
                     label: '华北地区：',
                     list: [{
-                        id:1,
+                        id: 1,
                         text: '北京'
                     }, {
-                        id:17,
+                        id: 17,
                         text: '天津'
                     }, {
                         id: 18,
@@ -33,7 +33,7 @@ angular.module('opdModule')
                     key: 'dongbei',
                     label: '东北地区：',
                     list: [{
-                        id:21 ,
+                        id: 21,
                         text: '辽宁'
                     }, {
                         id: 22,
@@ -58,7 +58,7 @@ angular.module('opdModule')
                         id: 27,
                         text: '浙江'
                     }, {
-                        id:28,
+                        id: 28,
                         text: '安徽'
                     }, {
                         id: 29,
@@ -93,7 +93,7 @@ angular.module('opdModule')
                         text: '湖南'
                     }, {
                         id: 38,
-                        text:'广东'
+                        text: '广东'
                     }, {
                         id: 39,
                         text: '广西'
@@ -142,6 +142,56 @@ angular.module('opdModule')
                         id: 51,
                         text: '新疆'
                     }]
+                }];
+
+                var moreIndustries = [{
+                    id: 888,
+                    text: '制造'
+                }, {
+                    id: 889,
+                    text: '营造'
+                }, {
+                    id: 890,
+                    text: '批发'
+                }, {
+                    id: 891,
+                    text: '零售'
+                }, {
+                    id: 892,
+                    text: '运输'
+                }, {
+                    id: 893,
+                    text: '仓储'
+                }, {
+                    id: 894,
+                    text: '餐饮'
+                }, {
+                    id: 895,
+                    text: '通信传播'
+                }, {
+                    id: 896,
+                    text: '保险业'
+                }, {
+                    id: 897,
+                    text: '不动产'
+                }, {
+                    id: 898,
+                    text: '科学'
+                }, {
+                    id: 899,
+                    text: '技术服务'
+                }, {
+                    id: 900,
+                    text: '公共行政'
+                }, {
+                    id: 901,
+                    text: '医疗保健'
+                }, {
+                    id: 902,
+                    text: '社会工作'
+                }, {
+                    id: 903,
+                    text: '艺术'
                 }];
 
                 $scope.filters.detail = [{
@@ -219,6 +269,7 @@ angular.module('opdModule')
                 }, {
                     key: 'industry',
                     label: '行业领域：',
+                    more: moreIndustries,
                     list: [{
                         id: 0,
                         text: '不限'
