@@ -4,6 +4,16 @@
         <a class="item" data-tab="company">公司</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="position">
+        <bopdpositionpattern ng-show="data.positions.page==='data'" positions="data.positions"/>
+        <div ng-show="data.positions.page==='logout'" class="hidedata">
+            <a href="/signin#/login?return_url=opportunity-detail%23%2Ffavorite">登录</a>
+            查看已收藏的职位。
+        </div>
+        <div ng-show="data.positions.page==='empty'" class="hidedata">
+            你目前没有任何收藏的职位。
+        </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="company">
         <bopdpositionpattern positions="data.positions"/>
     </div>
 </div>

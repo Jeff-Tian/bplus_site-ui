@@ -1,0 +1,80 @@
+<table class="ui celled table positions">
+    <colgroup>
+        <col style="background-color: #F9F9F9; width: 100px; text-align: center;">
+        <col style="width: 100px; text-align: center;">
+        <col style="background-color: #F9F9F9;">
+        <col style="width: 220px;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>
+                <h4 class="ui white header">
+                    职位匹配度
+                    <i class="help circle icon"></i>
+                </h4>
+            </th>
+            <th>
+                <h4 class="ui white header">
+                    你的竞争力
+                    <i class="help circle icon"></i>
+                </h4>
+            </th>
+            <th>
+                <h4 class="ui white header">
+                    职位
+                </h4>
+            </th>
+            <th ng-show="positions.showPosition">
+                <h4 class="ui white header">
+                    公司
+                </h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="data in displayData.data">
+            <td style="padding: 1.5em;">
+                <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
+            </td>
+            <td>
+                <div bopd-competitiveness="{{data.progressRate}}"></div>
+            </td>
+            <td class="desc" ng-click="displayData.onClick(data)">
+                <h3 class="ui header">
+                    <a class="title" href="" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
+                    <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span>
+                    <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
+                    <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
+                </h3>
+                <div class="grey color">
+                    <span class="ui smooth label" ng-bind="data.position.type"></span>
+                    <span class="grey color loose" ng-bind="data.position.salary"></span>
+                    <span class="grey color loose" ng-bind="data.position.certification"></span>
+                    <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
+                </div>
+                <div class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status===''">
+                    <div class="ui red right corner label">
+                        <i class="remove icon"></i>
+                    </div>
+                </div>
+            </td>
+            <td class="description" ng-show="displayData.showPosition" >
+                <div ng-show="data.companyinfo.flag==='recommendation'" class="ribbon yellow right corner label">推荐
+                <i class="star icon"></i>
+                </div>
+                <div ng-show="data.companyinfo.flag==='latest'" class="ribbon red right corner label">最新</div>
+                <div ng-show="data.companyinfo.flag==='ad'" class="ribbon teal right corner label">广告</div>
+                <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
+                <div class="company" ng-bind="data.companyinfo.name"></div>
+                <div class="field grey color" ng-bind="data.companyinfo.field"></div>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot ng-show="displayData.showPageMenu">
+        <tr class="transparent">
+            <th colspan="10" class="ui center aligned">
+                <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
+            </th>
+        </tr>
+        </tfoot>
+</table>

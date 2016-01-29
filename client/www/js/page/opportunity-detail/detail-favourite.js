@@ -12,6 +12,7 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
+                page: "empty",//data, logout, empty
                 data: [{
                     matchLevel: "a",
                     progressRate: "50",
@@ -52,10 +53,14 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                     }
                 }]
             };
+            var login = true;
+            $scope.data.positions.page = login ? ($scope.data.positions.data.length > 0 ? "data" : "empty") : "logout";
+            // $scope.data.positions.page = "empty";
             var originObject = $scope.data.positions.data[0];
             for (var i = 0; i < 3; i++) {
                 $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             }
+            $(".b-opd-favorite .menu .item").tab();
         }
     };
 });
