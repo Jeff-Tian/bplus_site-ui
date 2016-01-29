@@ -15,6 +15,41 @@ angular
             }
         };
     })
+    .directive('favoriteJob', function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $element = angular.element(element);
+                var id = attrs.favoriteJob;
+                $element.on('click', function () {
+                    if (!$element.hasClass('disabled')) {
+                        window.alert('Favorite Job!');
+                        $element.addClass('disabled');
+                    }
+                });
+            }
+        };
+    })
+    .directive('sendResume', function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $element = angular.element(element),
+                    id = attrs.sendResume;
+                $element.on('click', function () {
+                    if (!$element.hasClass('disabled')) {
+                        if (!scope.modalSendResume) {
+                            scope.modalSendResume = $element.parents('html').find('.ui.modal.modal-send-resume');
+                        }
+                        scope.modalSendResume.modal({
+                            onApprove : function() {
+                                window.alert('Send Resume!');
+                                $element.addClass('disabled');
+                            }
+                        }).modal('show');
+                    }
+                });
+            }
+        };
+    })
     .controller('detailJobDetail', ['$scope', function ($scope) {
 
         $scope.competitiveness = 80;

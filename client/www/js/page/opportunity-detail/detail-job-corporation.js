@@ -22,6 +22,20 @@
             }
         };
     })
+    .directive('favoriteCorporation', function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $element = angular.element(element);
+                var id = attrs.favoriteCorporation;
+                $element.on('click', function () {
+                    if (!$element.hasClass('disabled')) {
+                        window.alert('Favorite Corporation!');
+                        $element.addClass('disabled');
+                    }
+                });
+            }
+        };
+    })
     .controller('detailJobCorporation', ['$scope', function ($scope) {
 
         $scope.chartPentagon = '4-2-3-2-2';

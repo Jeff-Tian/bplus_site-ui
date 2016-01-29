@@ -7,7 +7,6 @@
             </div>
             <div class="two wide center aligned column">
                 你的竞争力<br/>
-
                 <div bopd-competitiveness="{{competitiveness}}"></div>
             </div>
             <div class="eleven wide column content">
@@ -23,8 +22,7 @@
                 </div>
             </div>
             <div class="one wide column">
-                <!--<a href="javascript:void(0)"><img ng-src="" /></a>-->
-                test
+                <a href="javascript:void(0)" class="wechat-qrcode"><span style="background-image:url(/img/b-wechat.jpg);"><span></span></span></a>
             </div>
         </div>
     </div>
@@ -111,8 +109,8 @@
                 </div>
             </div>
             <div class="six wide right aligned column">
-                <a class="ui large red button" href="javascript:void(0);"><i class="favorite icon"></i>收藏职位</a>
-                <a class="ui large red button" href="javascript:void(0);"><i class="mail icon"></i>投个简历</a>
+                <a class="ui large red button" favorite-job="123456" href="javascript:void(0);"><i class="favorite icon"></i>收藏职位</a>
+                <a class="ui large red button" send-resume="123456" href="javascript:void(0);"><i class="mail icon"></i>投个简历</a>
             </div>
         </div>
     </div>
@@ -152,4 +150,18 @@
         </div>
         <bopd-traininglist datalist="trainingOpportunityList"></bopd-traininglist>
     </div>
-</div>\
+</div>
+
+<div class="ui modal modal-send-resume">
+    <i class="close icon"></i>
+    <div class="header">投个简历</div>
+    <div class="content">
+        <p>确定投递：</p>
+        <p>币币科技- 产品部的</p>
+        <p>[ 实习] 互联网用户体验设计师 [上海] 职位？</p>
+    </div>
+    <div class="actions">
+        <div class="ui large red approve button">投个简历</div>
+        <div class="ui large basic cancel button">取消</div>
+    </div>
+</div>

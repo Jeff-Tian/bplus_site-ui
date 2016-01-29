@@ -69,10 +69,51 @@
         padding-bottom: 1rem;
         color: #fff;
         background-color: #464a54;
-        > .grid {
+        > .ui.grid {
             margin: 0 -0.5rem;
             > .column {
                 padding: 0 0.5rem;
+                > a.wechat-qrcode,
+                > a.wechat-qrcode:visited,
+                > a.wechat-qrcode:hover {
+                    position: relative;
+                    display: inline-block;
+                    width: 2em;
+                    height: 2em;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: contain;
+                    background-image: url(/img/icon/btn_wechat_signin_n.png);
+                    > span {
+                        position: absolute;
+                        display: none;
+                        top: -3em;
+                        left: -8.54em;
+                        width: 8em;
+                        height: 8em;
+                        background-color: #22272b;
+                        background-repeat: no-repeat;
+                        background-position: 1em 1em;
+                        background-size: 6em 6em;
+                        background-image: url(/img/b-wechat.jpg);
+                        > span {
+                            position: absolute;
+                            top: 50%;
+                            right: -0.3em;
+                            margin-top: -0.5em;
+                            width: 1em;
+                            height: 1em;
+                            background-color: #22272b;
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+                > a.wechat-qrcode:hover {
+                    background-image: url(/img/icon/btn_wechat_home_p.png);
+                    > span {
+                        display: block;
+                    }
+                }
             }
             > .column:first-child,
             > .column:nth-child(1) {
@@ -292,5 +333,23 @@
                 }
             }
         }
+    }
+}
+.modal-send-resume {
+    width: 500px !important;
+    > .close {
+        top: 1em !important;
+        right: 1em !important;
+        padding-top: 0.4em !important;
+        border-radius: 50%;
+        background-color: #969696;
+    }
+    > .header {
+        background-color: #e5e5e5 !important;
+    }
+    > .actions {
+        border-top: 0 !important;
+        text-align: center !important;
+        background-color: transparent !important;
     }
 }
