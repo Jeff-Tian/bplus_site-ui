@@ -2,7 +2,8 @@ angular
     .module('opdModule', [
         'ng.utils',
         'pascalprecht.translate',
-        'ui.router'
+        'ui.router',
+        'chart.js'
     ])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var states = ['home', 'job', 'favorite', 'recommended-positions', 'applied-positions', 'training'];
