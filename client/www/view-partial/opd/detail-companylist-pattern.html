@@ -62,29 +62,33 @@
         </tr>
     </tfoot>
 </table>
-<div class="ui modal matchLevelDescription">
+<div class="ui modal b-opd-matchLevelDescription">
     <div class="header">
         你与企业匹配度说明
-        <i class="close icon"></i>
+        <i class="close grey icon inverted circular"></i>
     </div>
-    <div class="description">
-        <div>
+    <div class="body">
+        <div class="description">
             <p>我们将你的简历和游戏成绩,与企业文化进行匹配,得到 ABCDE 五个等级的企业匹配度。</p>
             <p>等级越高,代表你与企业越匹配!</p>
         </div>
         <div class="ui grid">
-            <div class="four wide column" ng-class="{'match': data.matchLevel==='a'||data.matchLevel==='b'}">
-                <div>你与企业匹配度A、B</div>
-                <img src="img/opd/match_ab.png?<%= cdn.version %>">
-                <img src="img/opd/match_bb.png?<%= cdn.version %>">
-                <div>代表你很适合这家企业,快去投简历吧!</div>
+            <div class="six wide column" >
+                <div class="detail" ng-class="{'match': data.matchLevel==='a'||data.matchLevel==='b'}">
+                    <div class="detail-title">你与企业匹配度A、B</div>
+                    <img class="detail-image" src="img/opd/match_ab.png?<%= cdn.version %>">
+                    <img class="detail-image" src="img/opd/match_bb.png?<%= cdn.version %>">
+                    <div class="detail-content">代表你很适合这家企业,快去投简历吧!</div>
+                </div>
             </div>
-            <div class="eight wide column" ng-class="{'match': data.matchLevel!=='a'&&data.matchLevel!=='b'}">
-                <div>你与企业匹配度C、D、E</div>
-                <img src="img/opd/match_cb.png?<%= cdn.version %>">
-                <img src="img/opd/match_db.png?<%= cdn.version %>">
-                <img src="img/opd/match_eb.png?<%= cdn.version %>">
-                <div>如果你与企业匹配度在C以下,有可能你与企业并不匹配,或者是简历尚未完善,游戏成绩不高。你可以完善线上简历或进行游戏来提高与企业匹配的程度。</div>
+            <div class="ten wide column">
+                <div class="detail" ng-class="{'match': data.matchLevel!=='a'&&data.matchLevel!=='b'}">
+                    <div class="detail-title">你与企业匹配度C、D、E</div>
+                    <img class="detail-image" src="img/opd/match_cb.png?<%= cdn.version %>">
+                    <img class="detail-image" src="img/opd/match_db.png?<%= cdn.version %>">
+                    <img class="detail-image" src="img/opd/match_eb.png?<%= cdn.version %>">
+                    <div class="detail-content">如果你与企业匹配度在C以下,有可能你与企业并不匹配,或者是简历尚未完善,游戏成绩不高。你可以完善线上简历或进行游戏来提高与企业匹配的程度。</div>
+                </div>
             </div>
         </div>
     </div>
