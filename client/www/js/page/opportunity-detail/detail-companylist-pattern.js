@@ -1,4 +1,4 @@
-angular.module('opdModule').directive('bopdcompanylistpattern', function() {
+angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', function($timeout) {
     var NUMBER_PER_PAGE = 10;
 
     return {
@@ -12,7 +12,6 @@ angular.module('opdModule').directive('bopdcompanylistpattern', function() {
             $scope.rawData = data;
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
-                showPageMenu: $scope.positions.showPageMenu,
                 data: data.slice(0, NUMBER_PER_PAGE),
                 onCompanyClick: function(target) {
                     //TODO
@@ -28,8 +27,28 @@ angular.module('opdModule').directive('bopdcompanylistpattern', function() {
                     $event.stopPropagation();
                     //TODO
                     console.log("onDelete");
+                },
+                onMatchlevelClick: function(matchlevel) {
+                    console.log("onMatchlevelClick", matchlevel);
+                    $('.matchlevel').popup("hide");
+                    $('.ui.modal')
+                      .modal("show")
+                    ;
                 }
             };
+            $timeout(function() {
+                $('.matchlevel')
+                    .popup({
+                        inline   : true,
+                        hoverable: true,
+                        position : 'top left',
+                        delay: {
+                          show: 300,
+                          hide: 100
+                        }
+                      })
+                    ;
+            })
         }
     }
-});
+}]);

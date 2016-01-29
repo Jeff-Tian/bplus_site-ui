@@ -60,6 +60,46 @@ angular.module('opdModule').directive('bopdfavourite', function () {
             for (var i = 0; i < 3; i++) {
                 $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             }
+
+
+
+            $scope.data.companies = {
+                NUMBER_PER_PAGE: 10,
+                data: [{
+                    matchLevel: "a",
+                    companyinfo: {
+                        logo: "img/opd/match_e.png",
+                        name: "阿里巴巴",
+                        field: "移动互联网/中企",
+                        flag: "latest"   //ad, recommendation, latest
+                    },
+                    positioninfo: {
+                        onboard: 100,
+                        newposition: 2,
+                        issueTime: "2015-12-20",
+                    }
+                }, {
+                    matchLevel: "d",
+                    companyinfo: {
+                        logo: "img/opd/match_e.png",
+                        name: "阿里巴巴",
+                        field: "移动互联网/中企",
+                        flag: "recommendation"
+                    },
+                    positioninfo: {
+                        onboard: 14,
+                        newposition: 0,
+                        issueTime: "2015-12-22",
+                    }
+                }]
+            };
+            var login = true;
+            // $scope.data.positions.page = "empty";
+            var originObject = $scope.data.companies.data[0];
+            for (var i = 0; i < 3; i++) {
+                $scope.data.companies.data.push($.extend(true, {}, originObject));
+            }
+            ///////////////////////////////////////
             $(".b-opd-favorite .menu .item").tab();
         }
     };
