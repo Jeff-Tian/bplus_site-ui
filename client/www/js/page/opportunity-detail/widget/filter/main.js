@@ -8,9 +8,47 @@ angular
                 filterSetting: '='
             },
             link: function (scope, element, arrts) {
-                scope.equals = function (o1, o2) {
-                    return angular.equals(o1, o2);
-                };
+                scope.equals = angular.equals;
+            }
+        };
+    })
+    .directive('opdFilterThumb', function () {
+        return {
+            templateUrl: 'js/page/opportunity-detail/widget/filter/filter-thumb.html',
+            replace: true,
+            scope: {
+                filters: '=',
+                filterSetting: '='
+            },
+            link: function (scope, element, attrs) {
+                scope.equals = angular.equals;
+            }
+        };
+    })
+    .directive('opdFilterItem', function () {
+        return {
+            templateUrl: 'js/page/opportunity-detail/widget/filter/filter-item.html',
+            replace: true,
+            scope: {
+                f: '=',
+                filterSetting: '=',
+                addShowThumbButton: '='
+            },
+            link: function (scope, element, attrs) {
+                scope.equals = angular.equals;
+            }
+        };
+    })
+    .directive('opdSubFilterItem', function () {
+        return {
+            templateUrl: 'js/page/opportunity-detail/widget/filter/sub-filter-item.html',
+            replace: true,
+            scope: {
+                f: '=',
+                filterSetting: '='
+            },
+            link: function (scope, element, attrs) {
+                scope.equals = angular.equals;
             }
         };
     })
@@ -22,9 +60,7 @@ angular
                 filterSetting: '='
             },
             link: function (scope, element, attrs) {
-                scope.equals = function (o1, o2) {
-                    return angular.equals(o1, o2);
-                };
+                scope.equals = angular.equals;
             }
         };
     })

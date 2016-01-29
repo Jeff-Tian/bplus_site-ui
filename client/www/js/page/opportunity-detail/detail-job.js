@@ -7,9 +7,6 @@ angular.module('opdModule')
             },
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function ($scope, element, attrs) {
-
-                $scope.filters = {};
-
                 var morePlaces = [{
                     key: 'huabei',
                     label: '华北地区：',
@@ -194,7 +191,7 @@ angular.module('opdModule')
                     text: '艺术'
                 }];
 
-                $scope.filters.detail = [{
+                $scope.filters = [{
                     key: 'workPlace',
                     label: '工作地点：',
                     more: morePlaces,
@@ -349,8 +346,8 @@ angular.module('opdModule')
                 }];
 
                 var f = {};
-                for (var i = 0; i < $scope.filters.detail.length; i++) {
-                    f[$scope.filters.detail[i].key] = $scope.filters.detail[i];
+                for (var i = 0; i < $scope.filters.length; i++) {
+                    f[$scope.filters[i].key] = $scope.filters[i];
                 }
 
                 $scope.filterSetting = {
@@ -364,8 +361,7 @@ angular.module('opdModule')
                     functionality: f.functionality.list[9]
                 };
 
-                $scope.sortingAndFilter = {};
-                $scope.sortingAndFilter.detail = [{
+                $scope.sortingAndFilter = [{
                     key: 'sorting',
                     label: '排序方式：',
                     list: [{

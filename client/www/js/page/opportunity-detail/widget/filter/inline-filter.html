@@ -1,5 +1,5 @@
-<form class="ui segment form">
-    <strong ng-repeat-start="f in filters.detail">{{f.label}}</strong>
+<div class="ui segment">
+    <strong ng-repeat-start="f in filters">{{f.label}}</strong>
     <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
           ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
           ng-click="filterSetting[f.key] = l" ng-if="f.type !== 'dropdown'">
@@ -12,4 +12,4 @@
     </select>
 
     <span ng-repeat-end>&nbsp;&nbsp;</span>
-</form>
+</div>

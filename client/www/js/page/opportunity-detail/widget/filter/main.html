@@ -1,41 +1,5 @@
-<form class="ui segments form" style="margin-bottom: 20px;">
-    <div class="ui segment thumb" ng-show="filterSetting.showThumb">
-        <i class="ui right floated angle large down icon" style="cursor: pointer;"
-           ng-click="filterSetting.showThumb = false" ng-if="filterSetting.showDetail"></i>
-        <strong ng-repeat-start="f in filters.detail">{{f.thumbLabel || f.label}}</strong>
-        <span class="ui light red label" style="cursor: pointer;">{{filterSetting[f.key].text}}</span>
-        <span ng-repeat-end>&nbsp;&nbsp;</span>
-    </div>
-    <div class="ui segment detail" ng-repeat-start="f in filters.detail"
-         ng-hide="filterSetting.showThumb" style="border-top: none; border-bottom: none;">
-
-        <i class="ui right floated angle large up icon" style="cursor: pointer;"
-           ng-click="filterSetting.showThumb = true" ng-if="$index === 0 && filterSetting.hasThumbView"></i>
-
-        <strong>{{f.label}}</strong>
-            <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
-                  ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
-                  ng-click="filterSetting[f.key] = l">
-                {{l.text}}
-            </span>
-
-        <span>&nbsp;&nbsp;</span>
-
-        <button class="ui basic mini button" ng-show="f.more" ng-click="showMore[$index] = !showMore[$index]">
-            更多…
-        </button>
-    </div>
-    <div ng-repeat-end class="ui secondary segment" ng-hide="filterSetting.showThumb || !showMore[$index]"
-         style="border-top: none; border-bottom: 1px solid rgba(34,36,38,.15);">
-        <p ng-repeat="m in f.more" ng-if="m.label">
-            <strong style="color: black;">{{m.label}}</strong>
-            <span class="ui light label" ng-repeat="ml in m.list"
-                  ng-class="{'red': equals(filterSetting[f.key], ml), 'transparent': !equals(filterSetting[f.key], ml)}"
-                  ng-click="filterSetting[f.key] = ml">{{ml.text}}</span>
-        </p>
-
-        <span class="ui light label" ng-repeat="ml in f.more"
-              ng-class="{'red': equals(filterSetting[f.key], ml), 'transparent': !equals(filterSetting[f.key], ml)}"
-              ng-click="filterSetting[f.key] = ml" ng-if="!m.label">{{ml.text}}</span>
-    </div>
-</form>
+<div class="ui segments" style="margin-bottom: 20px;">
+    <opd-filter-thumb filters="filters" filter-setting="filterSetting"></opd-filter-thumb>
+    <opd-filter-item f="f" filter-setting="filterSetting" ng-repeat-start="f in filters" add-show-thumb-button="filterSetting.hasThumbView && $index === 0"></opd-filter-item>
+    <opd-sub-filter-item f="f" filter-setting="filterSetting" ng-repeat-end=""></opd-sub-filter-item>
+</div>

@@ -1,0 +1,19 @@
+<div class="ui segment detail"
+     ng-hide="filterSetting.showThumb" style="border-top: none; border-bottom: none;">
+
+    <i class="ui right floated angle large up icon" style="cursor: pointer;"
+       ng-click="filterSetting.showThumb = true" ng-if="addShowThumbButton"></i>
+
+    <strong>{{f.label}}</strong>
+            <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
+                  ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
+                  ng-click="filterSetting[f.key] = l">
+                {{l.text}}
+            </span>
+
+    <span>&nbsp;&nbsp;</span>
+
+    <button class="ui basic mini button" ng-show="f.more" ng-click="f.showMore = !f.showMore">
+        更多…
+    </button>
+</div>
