@@ -384,15 +384,54 @@ angular.module('opdModule')
                         id: 4,
                         text: '最新'
                     }]
+                }, {
+                    key: 'monthlySalary',
+                    label: '月薪：',
+                    type: 'dropdown',
+                    list: [{
+                        id: '0',
+                        text: '不限'
+                    }, {
+                        id: '1',
+                        text: '20k-25k'
+                    }, {
+                        id: '2',
+                        text: '25k-50k'
+                    }]
+                }, {
+                    key: 'jobCategory',
+                    label: '工作性质：',
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }, {
+                        id: 1,
+                        text: '实习'
+                    }, {
+                        id: 2,
+                        text: '兼职'
+                    }, {
+                        id: 3,
+                        text: '全职'
+                    }]
                 }];
 
                 $scope.sortingAndFilterSetting = {
                     showThumb: false,
                     showDetail: true,
                     hasThumbView: false,
+                    inline: true,
                     sorting: {
                         id: 0,
                         text: '默认'
+                    },
+                    monthlySalary: {
+                        id: '2',
+                        text: '25k-50k'
+                    },
+                    jobCategory: {
+                        id: 0,
+                        text: '不限'
                     }
                 };
             }
