@@ -36,41 +36,33 @@
                         订阅条件
                     </h4>
                 </div>
+                <div class="ui fitted divider" style="margin: 0;"></div>
 
-                <div class="ui segment" ng-hide="hideFilters">
-                    <div class="field" ng-repeat-start="f in filterables">
-                        <strong ng-bind="f.label"> </strong>
-                    <span class="ui light label" ng-repeat="p in f.less"
-                          ng-class="{'red': filters[f.key] === p.id, 'transparent': filters[f.key] !== p.id}"
-                          ng-click="filters[f.key] = p.id">{{p.text}}</span>
-                        <button class="ui basic mini button" ng-click="f.less = f.list"
-                                ng-hide="f.less === f.list">更多…
-                        </button>
-                    </div>
+                <opd-filter-item ng-repeat-start="f in subscribeFilters" f="f" filter-setting="subscribeFiltersSetting"
+                                 ng-if="!hideFilters"></opd-filter-item>
+                <opd-sub-filter-item ng-repeat-end f="f" filter-setting="subscribeFiltersSetting"
+                                     ng-if="!hideFilters"></opd-sub-filter-item>
 
-                    <div class="ui horizontal divider" ng-repeat-end></div>
+                <div class="ui segment" style="border-top: none; border-bottom: none;" ng-hide="hideFilters">
+                    <strong ng-bind="'月\u2001\u2001薪：'"></strong>
+                    <span class="ui light label"
+                          ng-class="{'red': filters['monthlySalaryLowerBound'] === null && filters['monthlySalaryUpperBound'] === null, 'transparent': filters['monthlySalaryLowerBound'] != null || filters['monthlySalaryUpperBound'] != null}">
+                        不限
+                    </span>
 
-                    <div>
-                        <strong ng-bind="'月\u2001\u2001薪：'"></strong>
-                        <span class="ui light label"
-                              ng-class="{'red': filters['monthlySalaryLowerBound'] === null && filters['monthlySalaryUpperBound'] === null, 'transparent': filters['monthlySalaryLowerBound'] != null || filters['monthlySalaryUpperBound'] != null}">
-                            不限
-                        </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="inline field">
+                        <input type="text">
+                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;人民币</span>
+                    </span>
+                </div>
 
-                        <span class="inline field">
-                            <input type="text">
-                            <span>-&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <input type="text">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;人民币</span>
-                        </span>
-                    </div>
-
-                    <div class="ui horizontal divider"></div>
-
-                    <div class="inline fields">
-                        <strong ng-bind="'职\u2001\u2001位：'"></strong>
+                <div class="ui segment inline fields" style="border-top: none; border-bottom: none;"
+                     ng-hide="hideFilters">
+                    <strong ng-bind="'职\u2001\u2001位：'"></strong>
                         <span class="thirteen wide field">
                             <div class="ui fluid selection search multiple dropdown positions">
                                 <input type="hidden" name="positions">
@@ -89,17 +81,14 @@
                                 ;
                             </script>
                         </span>
-                    </div>
-
-                    <div class="ui horizontal divider"></div>
-
-                    <div class="ui right floated large field">
-                        <button type="submit" class="ui red large button">开始订阅</button>
-                        <button type="reset" class="ui basic large button">取消</button>
-                    </div>
-
-                    <div class="ui horizontal clearing divider"></div>
                 </div>
+
+                <div class="ui right floated field vertical horizontal padded segment" style="border-top: none;" ng-hide="hideFilters">
+                    <button type="submit" class="ui red large button">开始订阅</button>
+                    <button type="reset" class="ui basic large button">取消</button>
+                </div>
+
+                <div class="ui clearing horizontal divider"></div>
                 <div class="ui bk-color-coral-red inverted vertical padded segment">
                     <p>尚无职位信息。</p>
                 </div>
