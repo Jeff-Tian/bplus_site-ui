@@ -59,6 +59,7 @@ angular
                 filters: '=',
                 filterSetting: '='
             },
+            replace: true,
             link: function (scope, element, attrs) {
                 scope.equals = angular.equals;
             }

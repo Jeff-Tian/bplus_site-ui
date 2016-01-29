@@ -15,13 +15,19 @@ angular.module('opdModule').directive('bopdtraining', function () {
             });
 
             $scope.settingData = {
-                sorting: 0,
-                filter: 0
+                sorting: {
+                    id: 0,
+                    text: '默认'
+                },
+                filter: {
+                    id: 0,
+                    text: '不限'
+                }
             };
 
             $scope.settings = [{
-                name: 'sorting',
-                key: '排序方式：',
+                key: 'sorting',
+                label: '排序方式：',
                 list: [{
                     id: 0,
                     text: '默认'
@@ -36,8 +42,8 @@ angular.module('opdModule').directive('bopdtraining', function () {
                     text: '热门'
                 }]
             }, {
-                name: 'filter',
-                key: '机构专长：',
+                key: 'filter',
+                label: '机构专长：',
                 list: [{
                     id: 0,
                     text: '不限'
@@ -52,7 +58,6 @@ angular.module('opdModule').directive('bopdtraining', function () {
                     text: '留学'
                 }]
             }];
-
 
             $scope.trainingOpportunityList = {
                 NUMBER_PER_PAGE: 4,
@@ -102,7 +107,8 @@ angular.module('opdModule').directive('bopdtraining', function () {
                     isRecommended: false,
                     isAD: true,
                 }]
-            }
+            };
+
             var originObject1 = $scope.trainingOpportunityList.data[0];
             for (var i = 0; i < 13; i++) {
                 $scope.trainingOpportunityList.data.push($.extend(true, {}, originObject1));
