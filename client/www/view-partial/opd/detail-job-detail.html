@@ -28,14 +28,14 @@
     </div>
     <div class="chart section">
         <div class="ui grid">
-            <div class="seven wide center aligned column competence" ng-controller="RadarCtrl">
+            <div class="six wide center aligned column competence" ng-controller="RadarCtrl">
                 <div class="title">职场能力需求</div>
                 <canvas id="radar" class="chart chart-radar"
                         chart-data="data" chart-labels="labels" style="height: 300px; width: 300px;" chart-colours="colors" chart-options="options">
                     {{data}}
                 </canvas>
             </div>
-            <div class="nine wide center aligned column career" ng-controller="LineCtrl">
+            <div class="nine wide right floated center aligned column career" ng-controller="LineCtrl">
                 <div class="title">职业生涯</div>
                 <canvas id="line" class="chart chart-line" chart-data="data"
                         chart-labels="labels" chart-legend="true" chart-series="series"

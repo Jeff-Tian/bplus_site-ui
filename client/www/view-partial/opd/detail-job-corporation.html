@@ -22,11 +22,14 @@
     </div>
     <div class="chart section">
         <div class="ui grid">
-            <div class="five wide center aligned column feature-chart">
+            <div class="six wide center aligned column feature-chart" ng-controller="RadarCtrlCorporation">
                 <div class="title">公司特点</div>
-                <div bopd-chart-pentagon="{{chartPentagon}}"></div>
+                <canvas id="radar" class="chart chart-radar"
+                        chart-data="data" chart-labels="labels" style="height: 300px; width: 300px;" chart-colours="colors" chart-options="options">
+                    {{data}}
+                </canvas>
             </div>
-            <div class="eleven wide center aligned column feature">
+            <div class="nine wide right floated center aligned column feature">
                 <div class="title">一句招募这个职称的宣传特色标语</div>
                 <div class="tags">
                     <span class="ui label">月薪2k-4k</span>
@@ -60,7 +63,11 @@
             阿里巴巴股份有限公司成立于2014年4月，专注于第三方支付和移动支付，致力于为行业客户和个人用户提供快速、安全、专业的支付与清算服务。为客户提供多元化的互联网支付与互联网金融解决方案。本公司资本1亿元，其股东实力雄厚，在国有垄断行业、互联网行业及金融行业等拥有丰富的社会资源。
         </div>
         <div class="ui bottom attached tab segment recruit" data-tab="second">
-            Recruit
+            <div class="count-container">
+                近两月共有200个在招职位
+            </div>
+            <opd-inline-filter filters="recruitFilter" filter-setting="recruitFilterSetting"></opd-inline-filter>
+            <bopdpositionpattern positions="recruitList"/>
         </div>
         <div class="hr"></div>
         <div class="operation">
