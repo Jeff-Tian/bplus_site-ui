@@ -155,3 +155,24 @@
 .transparent {
     background: transparent;
 }
+
+.search-list {
+    margin-top: 2em;
+    > div:first-child {
+        margin-bottom: 0.5em;
+    }
+    > * > table.positions {
+        border: 0;
+        border-bottom: solid 1px rgba(34, 36, 38, 0.1);
+        border-radius: 0;
+        > thead > tr:first-child {
+            > th:first-child,
+            > th:last-child {
+                border-radius: 0;
+            }
+        }
+        > tfoot > tr > th {
+            background-color: #fff;
+        }
+    }
+}

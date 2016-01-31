@@ -32,16 +32,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="data in displayData.data">
+        <tr ng-repeat="data in displayData.data track by $index">
             <td style="padding: 1.5em;">
                 <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>"/>
             </td>
             <td>
                 <div bopd-competitiveness="{{data.progressRate}}"></div>
             </td>
-            <td class="desc" ng-click="displayData.onClick(data)">
+            <td class="desc" ng-click="displayData.onClick(data, $index)">
                 <h3 class="ui header">
-                    <a class="title" href="" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
+                    <a class="title" href="#/job/{{data.position.id}}" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
                     <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span>
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>

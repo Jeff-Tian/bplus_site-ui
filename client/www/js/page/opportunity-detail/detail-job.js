@@ -430,6 +430,55 @@ angular.module('opdModule')
                         text: '不限'
                     }
                 };
+
+                $scope.searchList = {
+                    NUMBER_PER_PAGE: 10,
+                    showPosition: true,
+                    showPageMenu: true,
+                    showPageMore: false,
+                    page: "empty",//data, logout, empty
+                    data: [{
+                        matchLevel: "a",
+                        progressRate: "50",
+                        position: {
+                            id: "abcdefg",
+                            name: "a",
+                            type: "b",
+                            salary: "1111",
+                            certification: "c",
+                        },
+                        issueTime: "2015-12-12",
+                        company: "ksjksdf",
+                        status: "finished",     //finished, delivered
+                        statusText: "已有3家公司对你感兴趣!",
+                        companyinfo: {
+                            logo: "img/opd/match_e.png",
+                            name: "阿里巴巴",
+                            field: "移动互联网/中企",
+                            flag: "latest"   //ad, recommendation, latest
+                        }
+                    }, {
+                        matchLevel: "d",
+                        progressRate: "70",
+                        position: {
+                            id: "higklmn",
+                            name: "c",
+                            type: "d",
+                            salary: "111122",
+                            certification: "d",
+                        },
+                        status: "",
+                        statusText: "已有3家公司对你感兴趣!",
+                        issueTime: "2015-12-20",
+                        company: "ksj ksdf",
+                        companyinfo: {
+                            logo: "img/opd/match_e.png",
+                            name: "阿里巴巴",
+                            field: "移动互联网/中企",
+                            flag: "recommendation"
+                        }
+                    }]
+                };
             }
         };
     }])
