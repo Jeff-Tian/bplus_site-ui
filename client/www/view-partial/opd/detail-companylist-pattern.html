@@ -29,12 +29,12 @@
             <td style="padding: 1.5em;">
                 <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.matchLevel)" data-content="你与企业的匹配等级 {{data.matchLevel}}!" data-variation="inverted" ng-src="img/opd/match_{{data.matchLevel}}b.png?<%= cdn.version %>"/>
             </td>
-            <td class="description clickable" ng-click="displayData.onPositionClick(data)">
+            <td class="description clickable" ng-click="displayData.onCompanyClick(data)">
                 <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
                 <div class="company" ng-bind="data.companyinfo.name"></div>
                 <div class="field grey color" ng-bind="data.companyinfo.field"></div>
             </td>
-            <td class="desc" ng-click="displayData.onCompanyClick(data)">
+            <td class="desc" ng-click="displayData.onPositionClick(data)">
                 <h3 class="ui header">
                     <div class="red title" href="" ng-bind-template="{{data.positioninfo.onboard}}个在招职位"></div> 
                 </h3>
@@ -62,7 +62,7 @@
         </tr>
     </tfoot>
 </table>
-<div class="ui modal b-opd-matchLevelDescription">
+<div class="ui modal b-opd-matchLevelDescription b-opd-matchLevelDescription-{{sid}}">
     <div class="header">
         你与企业匹配度说明
         <i class="close grey icon inverted circular"></i>

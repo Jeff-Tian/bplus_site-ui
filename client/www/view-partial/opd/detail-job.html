@@ -1,10 +1,10 @@
 <div>
-    <opd-search></opd-search>
+    <opd-search options="searchOptions"></opd-search>
     <opd-filter filters="filters" filter-setting="filterSetting"></opd-filter>
     <opd-inline-filter filters="sortingAndFilter" filter-setting="sortingAndFilterSetting"></opd-inline-filter>
 
     <div class="search-list">
-        <div>职位 (591)</div>
+        <div ng-bind-template="职位 ({{searchList.data.length}})">职位</div>
         <bopdpositionpattern positions="searchList"></bopdpositionpattern>
     </div>
 </div>

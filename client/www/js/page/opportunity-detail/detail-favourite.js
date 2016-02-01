@@ -57,8 +57,8 @@ angular.module('opdModule').directive('bopdfavourite', function () {
             $scope.data.positions.page = login ? ($scope.data.positions.data.length > 0 ? "data" : "empty") : "logout";
             // $scope.data.positions.page = "empty";
             var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 3; i++) {
-                $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
+            for (var i = 0; i < 300; i++) {
+                $scope.data.positions.data.push($.extend(true, {}, originObject, {company:"a"+i, progressRate: i}));
             }
 
 

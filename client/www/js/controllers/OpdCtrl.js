@@ -3,7 +3,7 @@
         //Page router related
         $scope.overallParams = {
             //for homepage
-            searchKeyWord: "ddd",
+            searchKeyWord: "",
             //
         };
 

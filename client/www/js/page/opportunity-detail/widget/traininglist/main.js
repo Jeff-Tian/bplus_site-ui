@@ -55,6 +55,10 @@
                         //TODO
                         console.log("traininglist.onClick", target);
                     },
+                    onItemClick: function(target) {
+                        //TODO
+                        console.log("traininglist.onItemClick", target);
+                    },
                     onMoreClick: function() {
                         location.hash = $scope.datalist.pageMoreHash;
                     }

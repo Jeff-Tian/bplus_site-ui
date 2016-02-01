@@ -9,9 +9,12 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
         templateUrl: '/view-partial/opd/detail-companylist-pattern.html',
         link: function($scope, element, attrs) {
             var data = $scope.positions.data;
+            var loginin = $scope.positions.page !== "logout";
             $scope.rawData = data;
+            $scope.sid = $scope.$id; 
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
+                loginin: loginin,
                 data: data.slice(0, NUMBER_PER_PAGE),
                 onCompanyClick: function(target) {
                     //TODO
@@ -31,7 +34,7 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
                 onMatchlevelClick: function(matchlevel) {
                     console.log("onMatchlevelClick", matchlevel);
                     $('.matchlevel').popup("hide");
-                    $('.ui.modal')
+                    $('.b-opd-matchLevelDescription-' + $scope.sid)
                       .modal("show")
                     ;
                 }

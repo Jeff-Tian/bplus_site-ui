@@ -1,11 +1,11 @@
 ﻿<div class="ui bottom attached active tab segment">
     <div class="ui grid">
         <div class="row" ng-repeat="data in displayData.data">
-            <div class="eight wide column">
+            <div class="eight wide column clickable hovergrey" ng-click="displayData.onClick(data)">
                 <div class="ui items">
                     <div class="item">
                         <div class="image">
-                            <img src="">
+                            <img ng-src="{{data.pic}}">
                         </div>
                         <div class="content">
                             <div class="ui tiny header" ng-bind="data.name"></div>
@@ -29,10 +29,10 @@
                 </div>
             </div>
             <div class="eight wide column shape-flip" shape-flip>
-                <div>
+                <div class="clickable" >
                     <div class="ui cube shape">
                         <div class="sides">
-                            <div ng-repeat="detail in data.details" class="side" ng-class="{'active':$index===0}">
+                            <div ng-repeat="detail in data.details" class="side" ng-class="{'active':$index===0}" ng-click="displayData.onItemClick(detail)">
                                 <img ng-src="{{detail.pic}}" />
                                 <div ng-bind="detail.title"></div>
                             </div>

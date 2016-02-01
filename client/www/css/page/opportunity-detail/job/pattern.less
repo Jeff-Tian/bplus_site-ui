@@ -78,8 +78,9 @@
     }
     .clickable {
         cursor: pointer;
+        &.hovergrey:hover,
         &.description:hover {
-            background-color: #e6e6e6;
+            background-color: #e6e6e6!important;
         }
     }
     .status-text {
@@ -203,6 +204,14 @@
         padding-left: 4em;
         padding-right: 4em;
     }
+    .popup-margin {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .b-opd-position-matchlevel-container,
+    .b-opd-position-progressrate {
+        cursor: pointer;
+    }
 }
 .b-opd-matchLevelDescription {
     .header,
@@ -235,6 +244,10 @@
             margin-top: 1em;
         }
         .detail-image {
+            margin: 1em;
+        }
+        .detail-image-like {
+            display: inline-block;
             margin: 1em;
         }
         &.match {

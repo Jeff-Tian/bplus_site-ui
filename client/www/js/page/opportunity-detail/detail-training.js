@@ -60,12 +60,16 @@ angular.module('opdModule').directive('bopdtraining', function () {
             }];
 
             $scope.trainingOpportunityList = {
-                NUMBER_PER_PAGE: 4,
+                NUMBER_PER_PAGE: 5,
+                showPageMenu: true,
+                showPageMore: false,
+                pageMoreHash: "",
                 data: [{
                     name: "永苑艺术培训中心",
+                    pic: "/img/opd/ad.jpg",
                     description: "全清华北大名师",
                     rate: 3,
-                    read: 190,
+                    read: 180,
                     field: "创意与设计领域",
                     labels: [
                         "创意",
@@ -84,6 +88,7 @@ angular.module('opdModule').directive('bopdtraining', function () {
                     isAD: false,
                 }, {
                     name: "永苑艺术培训中心",
+                    pic: "/img/opd/ad.jpg",
                     description: "全清华北大名师",
                     rate: 3,
                     read: 190,
