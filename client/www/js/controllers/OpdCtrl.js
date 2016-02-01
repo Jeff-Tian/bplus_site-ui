@@ -1,6 +1,13 @@
 (function (exports) {
     exports.OpdCtrl = function ($scope, PipeCacheService)  {
+        //Page router related
+        $scope.overallParams = {
+            //for homepage
+            searchKeyWord: "ddd",
+            //
+        };
 
+        //Service related
         // var getCallFormat = {
         //     url: 'whatever',
         //     params: param

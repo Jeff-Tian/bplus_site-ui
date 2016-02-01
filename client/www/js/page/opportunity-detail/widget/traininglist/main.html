@@ -48,9 +48,14 @@
             <div ng-show="data.isAD" class="ribbon teal right corner label">广告</div>
         </div>
     </div>
-    <div class="ui equal width center aligned padded grid">
+    <div class="ui equal width center aligned padded grid" ng-show="displayData.showPageMenu">
         <div class="pagination row">
             <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
+        </div>
+    </div>
+    <div class="ui right aligned grid" ng-show="displayData.showPageMore">
+        <div class="sixteen wide column">
+            <div class="ui red button button-more" ng-click="displayData.onMoreClick()">更多</div>
         </div>
     </div>
 </div>

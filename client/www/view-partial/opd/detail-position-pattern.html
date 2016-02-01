@@ -76,5 +76,12 @@
                 <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
             </th>
         </tr>
-        </tfoot>
+    </tfoot>
+    <tfoot ng-show="displayData.showPageMore">
+        <tr class="transparent">
+            <th colspan="10" class="ui right aligned">
+                <div class="ui red button button-more" ng-click="displayData.onMoreClick()">更多</div>
+            </th>
+        </tr>
+    </tfoot>
 </table>

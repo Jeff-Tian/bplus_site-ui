@@ -16,6 +16,8 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', functio
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
                 showPageMenu: $scope.positions.showPageMenu,
                 showPosition: $scope.positions.showPosition,
+                showPageMore: $scope.positions.showPageMore,
+                pageMoreHash: $scope.positions.pageMoreHash,
                 data: data.slice(0, NUMBER_PER_PAGE),
                 onClick: function(target, $index) {
                     var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
@@ -28,6 +30,9 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', functio
                     $event.stopPropagation();
                     //TODO
                     console.log("onDelete");
+                },
+                onMoreClick: function(){
+                    location.hash = $scope.positions.pageMoreHash;
                 }
             };
         }

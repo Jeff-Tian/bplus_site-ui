@@ -2,11 +2,36 @@ angular.module('opdModule')
     .directive('bopdjob', ['$rootScope', function ($rootScope) {
         return {
             restrict: "E",
-            scope: {
-                src: '='
-            },
+            scope: true,
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function ($scope, element, attrs) {
+                //Init the page
+                //Search bar
+                $scope.searchOptions = {
+                    placeholder: "请输入职位名称或公司名称",
+                    candidate: {
+                        title: "热门搜索",
+                        keywords: [
+                            "PHP",
+                            "新媒体",
+                            "运营",
+                            "市场推广",
+                            ".Net",
+                            "Android",
+                            "Python",
+                            "BD",
+                            "活动策划",
+                        ]
+                    },
+                    searchContent: $scope.overallParams.searchKeyword,
+                    search: function(keyword) {
+                        console.log("detail-job, search", keyword);
+                        //Do search
+                        //Show result
+                    }
+                };
+
+                //
                 var morePlaces = [{
                     key: 'huabei',
                     label: '华北地区：',

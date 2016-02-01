@@ -48,9 +48,15 @@
                 $scope.displayData = {
                     NUMBER_PER_PAGE: $scope.datalist.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
                     showPageMenu: $scope.datalist.showPageMenu,
+                    showPageMore: $scope.datalist.showPageMore,
+                    pageMoreHash: $scope.datalist.pageMoreHash,
                     data: data.slice(0, NUMBER_PER_PAGE),
                     onClick: function(target) {
                         //TODO
+                        console.log("traininglist.onClick", target);
+                    },
+                    onMoreClick: function() {
+                        location.hash = $scope.datalist.pageMoreHash;
                     }
                 };
             }
