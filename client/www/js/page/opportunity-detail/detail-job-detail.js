@@ -21,9 +21,10 @@ angular
                 var $element = angular.element(element);
                 var id = attrs.favoriteJob;
                 $element.on('click', function () {
-                    if (!$element.hasClass('disabled')) {
+                    if (!scope.hasFavorited) {
+                        scope.hasFavorited = true;
+                        scope.$apply();
                         window.alert('Favorite Job!');
-                        $element.addClass('disabled');
                     }
                 });
             }
@@ -33,18 +34,23 @@ angular
         return {
             link: function (scope, element, attrs) {
                 var $element = angular.element(element),
-                    id = attrs.sendResume;
+                    id = attrs.sendResume,
+                    $modal = undefined;
                 $element.on('click', function () {
                     if (!$element.hasClass('disabled')) {
-                        if (!scope.modalSendResume) {
-                            scope.modalSendResume = $element.parents('html').find('.ui.modal.modal-send-resume');
-                        }
-                        scope.modalSendResume.modal({
-                            onApprove : function() {
-                                window.alert('Send Resume!');
-                                $element.addClass('disabled');
+                        if (!scope.hasSent) {
+                            if (!$modal) {
+                                $modal = $element.parents('html').find('.ui.modal.modal-send-resume').clone();
+                                $modal.modal({
+                                    onApprove : function() {
+                                        scope.hasSent = true;
+                                        scope.$apply();
+                                        window.alert('Send Resume!');
+                                    }
+                                });
                             }
-                        }).modal('show');
+                            $modal.modal('show');
+                        }
                     }
                 });
             }
@@ -52,9 +58,14 @@ angular
     })
     .controller('detailJobDetail', ['$scope', function ($scope) {
 
-        $scope.competitiveness = 80;
+        $scope.competitiveness = {
+            progressRate: 80
+        };
 
         $scope.chartPentagon = '4-2-3-2-2';
+
+        $scope.hasFavorited = true;
+        $scope.hasSent = false;
 
         /////
         $scope.similarJobList = {

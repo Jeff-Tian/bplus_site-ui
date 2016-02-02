@@ -7,7 +7,7 @@
             </div>
             <div class="two wide center aligned column">
                 你的竞争力<br/>
-                <div bopd-competitiveness="{{competitiveness}}"></div>
+                <bopdcompetitiveness data="competitiveness"></bopdcompetitiveness>
             </div>
             <div class="eleven wide column content">
                 <div class="department-updatedatetime">
@@ -109,8 +109,8 @@
                 </div>
             </div>
             <div class="six wide right aligned column">
-                <a class="ui large red button" favorite-job="123456" href="javascript:void(0);"><i class="favorite icon"></i>收藏职位</a>
-                <a class="ui large red button" send-resume="123456" href="javascript:void(0);"><i class="mail icon"></i>投个简历</a>
+                <a class="ui large red button{{hasFavorited ? ' disabled' : ''}}" favorite-job="123456" href="javascript:void(0);"><i class="favorite icon"></i>收藏职位</a>
+                <a class="ui large red button{{hasSent ? ' disabled' : ''}}" send-resume="123456" href="javascript:void(0);"><i class="mail icon"></i>投个简历</a>
             </div>
         </div>
     </div>

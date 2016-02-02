@@ -36,9 +36,9 @@
                 var $element = angular.element(element);
                 var id = attrs.favoriteCorporation;
                 $element.on('click', function () {
-                    if (!$element.hasClass('disabled')) {
+                    if (!scope.hasFavorited) {
+                        scope.hasFavorited = true;
                         window.alert('Favorite Corporation!');
-                        $element.addClass('disabled');
                     }
                 });
             }
@@ -49,6 +49,8 @@
         $scope.chartPentagon = '4-2-3-2-2';
 
         $scope.isRecruit = /-recruit$/.test($window.location.hash);
+
+        $scope.hasFavorited = false;
 
         $scope.recruitFilter = [{
             key: 'recruitKey',
