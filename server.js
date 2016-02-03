@@ -10,7 +10,13 @@ var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
-var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+//var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+var logger = {
+    info: function () {
+    },
+    error: function () {
+    }
+};
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
 var fs = require('fs');
@@ -324,6 +330,14 @@ mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
 mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
+server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, next) {
+    if (!isFromMobile(req)) {
+        res.render('opportunity-detail');
+    } else {
+        res.render('mobile/opportunity-detail');
+    }
+});
+
 server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
     if (!isFromMobile(req)) {
         if (res.locals.hcd_user) {
@@ -335,6 +349,7 @@ server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
         res.render('mobile/ranking');
     }
 });
+
 server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('game-training');

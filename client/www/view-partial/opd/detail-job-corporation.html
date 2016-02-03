@@ -1,0 +1,127 @@
+﻿<div class="b-opd-content-detail-job-corporation-container">
+    <div class="corporation section">
+        <div class="ui large header">阿里巴巴集团</div>
+        <div class="ui items">
+            <div class="item">
+                <div class="image">
+                    <img src="">
+                </div>
+                <div class="content">
+                    <div class="ui header">一句招募这个职称的宣传特色标语，24 个字为限。</div>
+                    <div class="ui grid">
+                        <div class="eight wide column"><span class="ui tiny header">领域：</span>移动互联网、教育</div>
+                        <div class="eight wide column"><span class="ui tiny header">规模：</span>500-2000人</div>
+                        <div class="eight wide column"><span class="ui tiny header">性质：</span>外企</div>
+                        <div class="eight wide column"><span class="ui tiny header">主页：</span><a href="http://51talk.com" target="_blank">http://51talk.com</a></div>
+                        <div class="eight wide column"><span class="ui tiny header">地址：</span><a href="javascript:void(0);" target="_blank">渝中区-上清寺</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="wechat-qrcode"><span style="background-image:url(/img/b-wechat.jpg);"><span></span></span></a>
+    </div>
+    <div class="chart section">
+        <div class="ui grid">
+            <div class="six wide center aligned column feature-chart" ng-controller="RadarCtrlCorporation">
+                <div class="title">公司特点</div>
+                <canvas id="radar" class="chart chart-radar"
+                        chart-data="data" chart-labels="labels" style="height: 300px; width: 300px;" chart-colours="colors" chart-options="options">
+                    {{data}}
+                </canvas>
+            </div>
+            <div class="nine wide right floated center aligned column feature">
+                <div class="title">一句招募这个职称的宣传特色标语</div>
+                <div class="tags">
+                    <span class="ui label">月薪2k-4k</span>
+                    <span class="ui label">五险一金</span>
+                    <span class="ui label">双休</span>
+                    <span class="ui label">带薪年假</span>
+                    <span class="ui label">年底双薪</span>
+                    <span class="ui label">效绩奖金</span>
+                    <span class="ui label">节日礼金</span>
+                    <span class="ui label">定期体检</span>
+                </div>
+                <div class="desc">
+                    <img ng-src="/img/opd/match_a.png" />
+                    企业文化契合度高，<a href="javascript:void(0);">看看最新职缺</a>！
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="intro-jobs" intro-jobs>
+        <div class="ui top attached tabular menu">
+            <div class="active item" data-tab="first">
+                <div class="ui header">公司介绍</div>
+            </div>
+            <div class="item" data-tab="second">
+                <div class="ui header">公司在招职位（200）</div>
+            </div>
+        </div>
+        <div class="ui bottom attached tab segment active desc" data-tab="first">
+            阿里巴巴股份有限公司成立于2014年4月，专注于第三方支付和移动支付，致力于为行业客户和个人用户提供快速、安全、专业的支付与清算服务。为客户提供多元化的互联网支付与互联网金融解决方案。本公司资本1亿元，其股东实力雄厚，在国有垄断行业、互联网行业及金融行业等拥有丰富的社会资源。<br />
+            <br />
+            阿里巴巴股份有限公司成立于2014年4月，专注于第三方支付和移动支付，致力于为行业客户和个人用户提供快速、安全、专业的支付与清算服务。为客户提供多元化的互联网支付与互联网金融解决方案。本公司资本1亿元，其股东实力雄厚，在国有垄断行业、互联网行业及金融行业等拥有丰富的社会资源。
+        </div>
+        <div class="ui bottom attached tab segment recruit" data-tab="second">
+            <div class="count-container">
+                近两月共有200个在招职位
+            </div>
+            <opd-inline-filter filters="recruitFilter" filter-setting="recruitFilterSetting"></opd-inline-filter>
+            <bopdpositionpattern positions="recruitList"/>
+        </div>
+        <div class="hr"></div>
+        <div class="operation">
+            <a class="ui large red button{{hasFavorited ? ' disabled', ''}}" favorite-corporation="123456" href="javascript:void(0);"><i class="favorite icon"></i>收藏公司</a>
+        </div>
+        <div class="hr"></div>
+    </div>
+    <div class="more-corporation">
+        <div class="ui top attached tabular menu">
+            <div class="active item">
+                <div class="ui header">看了该公司的人还看过</div>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <a href="#/job/corporation/111111" class="column">
+                <div class="ui items">
+                    <div class="item">
+                        <div class="image">
+                            <img src="">
+                        </div>
+                        <div class="content">
+                            <div class="ui header">苹果公司</div>
+                            <div>电脑设备/外企</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#/job/corporation/222222" class="column">
+                <div class="ui items">
+                    <div class="item">
+                        <div class="image">
+                            <img src="">
+                        </div>
+                        <div class="content">
+                            <div class="ui header">大众汽车</div>
+                            <div>汽车零售/外企</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#/job/corporation/333333" class="column">
+                <div class="ui items">
+                    <div class="item">
+                        <div class="image">
+                            <img src="">
+                        </div>
+                        <div class="content">
+                            <div class="ui header">华为科技</div>
+                            <div>移动互联网/中企</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="hr"></div>
+    </div>
+</div>
