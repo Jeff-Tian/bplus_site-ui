@@ -6,6 +6,29 @@
             searchKeyWord: "",
             //
         };
+        //Service need to be cached
+        var serviceList = [{
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }, {
+            url: "",
+            params: ""
+        }]
 
         //Service related
         // var getCallFormat = {
