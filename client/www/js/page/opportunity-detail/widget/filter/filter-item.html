@@ -5,14 +5,17 @@
        ng-click="filterSetting.showThumb = true" ng-if="addShowThumbButton"></i>
 
     <strong>{{f.label}}</strong>
-            <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
-                  ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
-                  ng-click="filterSetting[f.key] = l">
-                {{l.text}}
-            </span>
+    <span class="ui light label" ng-repeat="l in f.list" style="cursor: pointer;"
+          ng-class="{'red': equals(filterSetting[f.key], l), 'transparent': !equals(filterSetting[f.key], l)}"
+          ng-click="filterSetting[f.key] = l">
+        {{l.text}}
+    </span>
 
-    <span>&nbsp;&nbsp;</span>
-
+    <span class="ui light label red" ng-show="!findKey(f.key)" ng-bind="f.key"></span>
+    <div ng-show="f.autoComplete" >
+      <input type="text" name="filter-item-autocomplete" autocomplete datasource-bplus-autocomplete="f.autoComplete" ng-model="f.type"/>
+      <button class="ui basic mini button" ng-click="f.autoCompleteConfirm(f, f.type)">确定</button>
+    </div>
     <button class="ui basic mini button" ng-show="f.more" ng-click="f.showMore = !f.showMore">
         更多…
     </button>

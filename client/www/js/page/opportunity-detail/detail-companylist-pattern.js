@@ -12,6 +12,7 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
             var loginin = $scope.positions.page !== "logout";
             $scope.rawData = data;
             $scope.sid = $scope.$id; 
+            $scope.choisenLevel = "";
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
                 loginin: loginin,
@@ -32,7 +33,7 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
                     console.log("onDelete");
                 },
                 onMatchlevelClick: function(matchlevel) {
-                    console.log("onMatchlevelClick", matchlevel);
+                    $scope.choisenLevel = matchlevel;
                     $('.matchlevel').popup("hide");
                     $('.b-opd-matchLevelDescription-' + $scope.sid)
                       .modal("show")

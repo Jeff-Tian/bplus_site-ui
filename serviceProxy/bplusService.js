@@ -272,9 +272,9 @@ module.exports = {
         var locationID = req.params.locationID;
         var path = "";
         if (locationID) {
-            path = '/resource/location/';
+            path = '/resource/childregion/' + locationID;
         } else {
-            path = '/resource/childlocation/' + locationID;
+            path = '/resource/region/';
         }
         proxyBPlus({
             path: path

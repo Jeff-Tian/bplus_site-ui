@@ -212,51 +212,83 @@ angular.module('opdModule')
 
                 var moreIndustries = [{
                     id: 888,
+                    value: '营造',
+                    data: '营造',
                     text: '制造'
                 }, {
                     id: 889,
+                    value: '制造',
+                    data: '营造',
                     text: '营造'
                 }, {
                     id: 890,
+                    value: '制造',
+                    data: '营造',
                     text: '批发'
                 }, {
                     id: 891,
+                    value: '制造',
+                    data: '营造',
                     text: '零售'
                 }, {
                     id: 892,
+                    value: '制造',
+                    data: '营造',
                     text: '运输'
                 }, {
                     id: 893,
+                    value: '制造',
+                    data: '制造',
                     text: '仓储'
                 }, {
                     id: 894,
+                    value: '制造',
+                    data: '制造',
                     text: '餐饮'
                 }, {
                     id: 895,
+                    value: '制造',
+                    data: '制造',
                     text: '通信传播'
                 }, {
                     id: 896,
+                    value: '制造',
+                    data: '制造',
                     text: '保险业'
                 }, {
                     id: 897,
+                    value: '制造',
+                    data: '制造',
                     text: '不动产'
                 }, {
                     id: 898,
+                    value: '制造',
+                    data: '制造',
                     text: '科学'
                 }, {
                     id: 899,
+                    value: '制造',
+                    data: '制造',
                     text: '技术服务'
                 }, {
                     id: 900,
+                    value: '制造',
+                    data: '制造',
                     text: '公共行政'
                 }, {
                     id: 901,
+                    value: '制造',
+                    data: '制造',
                     text: '医疗保健'
                 }, {
                     id: 902,
+                    value: '制造',
+                    data: '制造',
                     text: '社会工作'
                 }, {
                     id: 903,
+                    value: '制造',
+                    data: '制造',
                     text: '艺术'
                 }];
 
@@ -335,6 +367,21 @@ angular.module('opdModule')
                 }, {
                     key: 'industry',
                     label: '行业领域：',
+                    extraLabel: '',
+                    autoComplete: moreIndustries,
+                    findKey: function(target) {
+                        return scope.list.find(function(value){
+                            return  (target === value.text);
+                        }
+                    },
+                    autoCompleteConfirm: function(scope, target) {
+                        scope.key = target;
+                        if (!scope.list.find(function(value){
+                            return  (target === value.text);
+                        })){ 
+                            scope.extraLabel = target;
+                        }
+                    },
                     more: moreIndustries,
                     list: [{
                         id: 0,
