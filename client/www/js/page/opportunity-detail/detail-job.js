@@ -1,12 +1,25 @@
 angular.module('opdModule')
-    .directive('bopdjob', ['$rootScope', function ($rootScope) {
+    .directive('bopdjob', ['$rootScope', '$q', function ($rootScope, $q) {
         return {
             restrict: "E",
             scope: true,
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function ($scope, element, attrs) {
                 //Init the page
-                $scope.getResource($scope.STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
+                var data = {
+                };
+                var dataPromises = Object.keys($scope.STATIC_PARAMS.RESOURCE_TYPE).map(function(key) {
+                    var value = $scope.STATIC_PARAMS.RESOURCE_TYPE[key];
+                    if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION) {
+                        return $scope.getResource(value).then(function(ret) {
+                            data[value] = ret;
+                        });
+                    } else {
+                        data[value] = [];
+                        return true;
+                    }
+                });
+                $q.all(dataPromises).then(function() {
                     debugger;
                 });
                 //Search bar
@@ -20,7 +33,7 @@ angular.module('opdModule')
                         //Show result
                     }
                 };
-                //search(keyWordFromHomePage);
+                //TODO search(keyWordFromHomePage);
                 $scope.overallParams.searchKeyWord = "";
                 //Search content
                 $scope.searchList = {

@@ -8,11 +8,11 @@
         RESOURCE_TYPE: {
             REGION: "region",
             CHILD_REGION: "child_region",
-            INDUSTRY: "industry",
-            qualifications: "qualifications",
-            job: "job",//TO MANY..
-            worktype: "worktype",
-            industry: "industry"
+            QUALIFICATIONS: "qualifications",
+            JOB: "job",//TO MANY..
+            WORKTYPE: "worktype",
+            NATIRE_OF_FIRM: "natureoffirm",
+            INDUSTRY: "industry"
         }
     };
     exports.OpdCtrl = function ($scope, $q, PipeCacheService)  {
@@ -32,6 +32,15 @@
             }
             return {url: url, params: {}};
         };
+        var preloadResource = function(type, id) {
+            var param = getResourceParam(type, id);
+            return PipeCacheService.add(param);
+        };
+        $scope.getResource = function(type, id) {
+            var param = getResourceParam(type, id);
+            return PipeCacheService.get(param);
+        };
+
         //Page router related
         $scope.overallParams = {
             //for homepage
@@ -41,46 +50,6 @@
         $scope.search = function() {
 
         };
-        $scope.search = function() {
-
-        };
-        $scope.preloadResource = function(type, id) {
-            var param = getResourceParam(type, id);
-            return PipeCacheService.add(param);
-        };
-        $scope.getResource = function(type, id) {
-            var param = getResourceParam(type, id);
-            return PipeCacheService.get(param).then(function(result) {
-                if (result.status === 200 && result.statusText === "OK") {
-                    return 
-                }
-            });
-        };
-        var url = "service-proxy/bplus-resource-location";
-        //Service need to be cached
-        var serviceList = [{
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }, {
-            url: "",
-            params: ""
-        }]
-
         //Service related
         // var getCallFormat = {
         //     url: 'whatever',
@@ -113,6 +82,19 @@
         //     issueTime: "2015",
         //     company: "ksjksdf"
         // }]
+
+
+        //Preload data
+        Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(value) {
+            if (value !== 'CHILD_REGION') {
+                 preloadResource(STATIC_PARAMS.RESOURCE_TYPE[value]);
+            }
+        })
+        $scope.getResource(STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
+            value.forEach(function(value) {
+                return preloadResource(STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION, value.code);
+            });
+        });
     };
 
     exports.OpdCtrl.$inject = ['$scope', '$q', 'PipeCacheService', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser', 'WechatLogon', '$filter'];
