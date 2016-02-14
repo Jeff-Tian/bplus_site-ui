@@ -404,7 +404,7 @@ angular.module('opdModule').directive('bopdrecommendation', function () {
             }];
 
             var f = {};
-            for (var i = 0; i < $scope.subscribeFilters.length; i++) {
+            for (i = 0; i < $scope.subscribeFilters.length; i++) {
                 f[$scope.subscribeFilters[i].key] = $scope.subscribeFilters[i];
             }
 

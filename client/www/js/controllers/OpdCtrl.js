@@ -15,6 +15,7 @@
             industry: "industry"
         }
     };
+<<<<<<< 41518d579a5e51b005e0276ebd36fb64f9d7065f
     exports.OpdCtrl = function ($scope, $q, PipeCacheService)  {
         var getResourceParam = function(type, id) {
             var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
@@ -32,16 +33,19 @@
             }
             return {url: url, params: {}};
         };
+=======
+    exports.OpdCtrl = function ($scope, $q, PipeCacheService) {
+>>>>>>> Fix jshint errors.
         //Page router related
         $scope.overallParams = {
             //for homepage
             searchKeyWord: "",
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
-        $scope.search = function() {
+        $scope.search = function () {
 
         };
-        $scope.search = function() {
+        $scope.search = function () {
 
         };
         $scope.preloadResource = function(type, id) {
@@ -52,7 +56,7 @@
             var param = getResourceParam(type, id);
             return PipeCacheService.get(param).then(function(result) {
                 if (result.status === 200 && result.statusText === "OK") {
-                    return 
+                    return ;
                 }
             });
         };
@@ -79,7 +83,7 @@
         }, {
             url: "",
             params: ""
-        }]
+        }];
 
         //Service related
         // var getCallFormat = {

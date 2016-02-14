@@ -48,7 +48,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                     }
                     $target += $scope.sid;
                     $('.ui.popup').popup("hide");
-                    $($target).modal("show")
+                    $($target).modal("show");
                     // $($element).find($target)
                     //   .modal("show")
                     // ;
@@ -59,7 +59,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             $scope.staticCompetitiveDataArray = [];
             for (var i = 5; i >= 0; i--) {
                 $scope.staticCompetitiveDataArray.push({progressRate: (i * 20)});
-            };
+            }
 
             $timeout(function() {
                 $('.b-opd-position-matchlevel')
@@ -96,7 +96,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                     position: 'bottom left',
                   })
                  ;
-            })
+            });
         }
-    }
+    };
 }]);

@@ -52,7 +52,7 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
                         }
                       })
                     ;
-            })
+            });
         }
-    }
+    };
 }]);
