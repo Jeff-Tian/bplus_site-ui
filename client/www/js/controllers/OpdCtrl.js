@@ -15,7 +15,6 @@
             industry: "industry"
         }
     };
-<<<<<<< 41518d579a5e51b005e0276ebd36fb64f9d7065f
     exports.OpdCtrl = function ($scope, $q, PipeCacheService)  {
         var getResourceParam = function(type, id) {
             var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
@@ -33,9 +32,6 @@
             }
             return {url: url, params: {}};
         };
-=======
-    exports.OpdCtrl = function ($scope, $q, PipeCacheService) {
->>>>>>> Fix jshint errors.
         //Page router related
         $scope.overallParams = {
             //for homepage

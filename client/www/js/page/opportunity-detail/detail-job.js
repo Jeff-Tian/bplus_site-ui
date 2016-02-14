@@ -7,7 +7,6 @@ angular.module('opdModule')
             link: function ($scope, element, attrs) {
                 //Init the page
                 $scope.getResource($scope.STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
-                    debugger;
                 });
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
