@@ -74,7 +74,7 @@
         </div>
         <div class="ui grid">
             <div class="six wide column" >
-                <div class="detail" ng-class="{'match': data.matchLevel==='a'||data.matchLevel==='b'}">
+                <div class="detail" ng-class="{'match':choisenLevel==='a'||choisenLevel==='b'}">
                     <div class="detail-title">你与企业匹配度A、B</div>
                     <img class="detail-image" src="img/opd/match_ab.png?<%= cdn.version %>">
                     <img class="detail-image" src="img/opd/match_bb.png?<%= cdn.version %>">
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="ten wide column">
-                <div class="detail" ng-class="{'match': data.matchLevel!=='a'&&data.matchLevel!=='b'}">
+                <div class="detail" ng-class="{'match': choisenLevel!=='a'&&choisenLevel!=='b'}">
                     <div class="detail-title">你与企业匹配度C、D、E</div>
                     <img class="detail-image" src="img/opd/match_cb.png?<%= cdn.version %>">
                     <img class="detail-image" src="img/opd/match_db.png?<%= cdn.version %>">

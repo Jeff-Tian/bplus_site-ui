@@ -35,7 +35,7 @@ angular
             link: function (scope, element, attrs) {
                 var $element = angular.element(element),
                     id = attrs.sendResume,
-                    $modal = undefined;
+                    $modal;
                 $element.on('click', function () {
                     if (!$element.hasClass('disabled')) {
                         if (!scope.hasSent) {
@@ -170,7 +170,7 @@ angular
         };
 
         var originObject1 = $scope.trainingOpportunityList.data[0];
-        for (var i = 0; i < 13; i++) {
+        for (i = 0; i < 13; i++) {
             $scope.trainingOpportunityList.data.push($.extend(true, {}, originObject1));
         }
     }])

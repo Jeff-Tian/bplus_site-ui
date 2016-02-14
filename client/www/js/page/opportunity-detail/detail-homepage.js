@@ -134,11 +134,11 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                     }
                 }]
             };
-            var login = true;
+            login = true;
             $scope.hot.positions.page = login ? ($scope.hot.positions.data.length > 0 ? "data" : "empty") : "logout";
             // $scope.data.positions.page = "empty";
-            var originObject = $scope.hot.positions.data[0];
-            for (var i = 0; i < 3; i++) {
+            originObject = $scope.hot.positions.data[0];
+            for (i = 0; i < 3; i++) {
                 $scope.hot.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
             }
             //Training
@@ -198,7 +198,7 @@ angular.module('opdModule').directive('bopdhomepage', function() {
             };
 
             var originObject1 = $scope.trainingOpportunityList.data[0];
-            for (var i = 0; i < 13; i++) {
+            for (i = 0; i < 13; i++) {
                 $scope.trainingOpportunityList.data.push($.extend(true, {}, originObject1));
             }
             // $scope.trainingOpportunityList.data = [];

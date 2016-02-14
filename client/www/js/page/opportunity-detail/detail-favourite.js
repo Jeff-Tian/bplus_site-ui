@@ -93,10 +93,11 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                     }
                 }]
             };
-            var login = true;
+
             // $scope.data.positions.page = "empty";
-            var originObject = $scope.data.companies.data[0];
-            for (var i = 0; i < 3; i++) {
+            originObject = $scope.data.companies.data[0];
+
+            for (i = 0; i < 3; i++) {
                 $scope.data.companies.data.push($.extend(true, {}, originObject));
             }
             ///////////////////////////////////////

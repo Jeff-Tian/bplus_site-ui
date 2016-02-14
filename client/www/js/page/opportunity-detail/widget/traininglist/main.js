@@ -12,7 +12,8 @@
                         isNext = $btnNext.find('i').hasClass('grey');
                     var findShape = function() {
                         return angular.element(element).find('.shape');
-                    }
+                    };
+
                     if ($shape.length && $shape.shape) {
                         $shape.shape();
                         $btnPreview.on('click', function () {
@@ -64,5 +65,5 @@
                     }
                 };
             }
-        }
+        };
     });

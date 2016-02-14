@@ -20,6 +20,10 @@
                 url: paramWithURL.url,
                 params: paramWithURL.params,
                 method: 'GET'
+            }).then(function(ret) {
+                if (ret.data && ret.data.isSuccess) {
+                    return ret.data.result;
+                }
             });
         };
         var findNext = function () {
@@ -85,7 +89,7 @@
                 var index;
                 if (data) {
                     if (data.status === PROMISE_STATUS.DONE) {
-                        data.status = PROMISE_STATUS.INVALID;
+                        // data.status = PROMISE_STATUS.INVALID;
                         delete doingPromise[JSON.stringify(paramWithURL)];
                         deferred.resolve(data.data);
                     } else if (data.status === PROMISE_STATUS.WORKING) {

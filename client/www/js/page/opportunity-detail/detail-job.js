@@ -6,12 +6,14 @@ angular.module('opdModule')
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function ($scope, element, attrs) {
                 //Init the page
+                $scope.getResource($scope.STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
+                });
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
                 $scope.searchOptions = {
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
-                    search: function(keyword) {
+                    search: function (keyword) {
                         console.log("detail-job, search", keyword);
                         //Do search
                         //Show result
@@ -212,51 +214,83 @@ angular.module('opdModule')
 
                 var moreIndustries = [{
                     id: 888,
+                    value: '制造',
+                    data: '制造',
                     text: '制造'
                 }, {
                     id: 889,
+                    value: '营造',
+                    data: '营造',
                     text: '营造'
                 }, {
                     id: 890,
+                    value: '批发',
+                    data: '批发',
                     text: '批发'
                 }, {
                     id: 891,
+                    value: '零售',
+                    data: '零售',
                     text: '零售'
                 }, {
                     id: 892,
+                    value: '运输',
+                    data: '运输',
                     text: '运输'
                 }, {
                     id: 893,
+                    value: '仓储',
+                    data: '仓储',
                     text: '仓储'
                 }, {
                     id: 894,
+                    value: '餐饮',
+                    data: '餐饮',
                     text: '餐饮'
                 }, {
                     id: 895,
+                    value: '通信传播',
+                    data: '通信传播',
                     text: '通信传播'
                 }, {
                     id: 896,
+                    value: '保险业',
+                    data: '保险业',
                     text: '保险业'
                 }, {
                     id: 897,
+                    value: '不动产',
+                    data: '不动产',
                     text: '不动产'
                 }, {
                     id: 898,
+                    value: '科学',
+                    data: '科学',
                     text: '科学'
                 }, {
                     id: 899,
+                    value: '技术服务',
+                    data: '技术服务',
                     text: '技术服务'
                 }, {
                     id: 900,
+                    value: '公共行政',
+                    data: '公共行政',
                     text: '公共行政'
                 }, {
                     id: 901,
+                    value: '医疗保健',
+                    data: '医疗保健',
                     text: '医疗保健'
                 }, {
                     id: 902,
+                    value: '社会工作',
+                    data: '社会工作',
                     text: '社会工作'
                 }, {
                     id: 903,
+                    value: '艺术',
+                    data: '艺术',
                     text: '艺术'
                 }];
 
@@ -335,7 +369,8 @@ angular.module('opdModule')
                 }, {
                     key: 'industry',
                     label: '行业领域：',
-                    more: moreIndustries,
+                    extraListValue: '',
+                    autoComplete: moreIndustries,
                     list: [{
                         id: 0,
                         text: '不限'
@@ -415,11 +450,23 @@ angular.module('opdModule')
                 }];
 
                 var f = {};
-                for (var i = 0; i < $scope.filters.length; i++) {
+                for (i = 0; i < $scope.filters.length; i++) {
                     f[$scope.filters[i].key] = $scope.filters[i];
                 }
 
                 $scope.filterSetting = {
+                    findKey: function(scope, target) {
+                        var result = scope.list.find(function(value){
+                            return  (target === value.text);
+                        });
+                        return result;
+                    },
+                    autoCompleteConfirm: function(filterSetting, scope, target) {
+                        if (target && target !== "") {
+                            filterSetting[scope.key] = target;
+                            scope.type = "";
+                        }
+                    },
                     showThumb: true,
                     showDetail: true,
                     hasThumbView: true,
@@ -500,7 +547,7 @@ angular.module('opdModule')
                     }
                 };
 
-                
+
             }
         };
     }])

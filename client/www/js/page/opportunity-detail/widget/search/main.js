@@ -9,7 +9,7 @@ angular
             link: function (scope, element, arrts) {
                 scope.onKeyWordClick = function(keyword) {
                     scope.options.searchContent = keyword;
-                }
+                };
             }
         };
     })
