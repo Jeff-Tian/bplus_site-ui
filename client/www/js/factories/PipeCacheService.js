@@ -20,6 +20,10 @@
                 url: paramWithURL.url,
                 params: paramWithURL.params,
                 method: 'GET'
+            }).then(function(ret) {
+                if (ret.data && ret.data.isSuccess) {
+                    return ret.data.result;
+                }
             });
         };
         var findNext = function () {

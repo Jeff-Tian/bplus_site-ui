@@ -16,6 +16,22 @@
         }
     };
     exports.OpdCtrl = function ($scope, $q, PipeCacheService)  {
+        var getResourceParam = function(type, id) {
+            var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
+            var url = "/service-proxy";
+            switch (type) {
+                case STATIC_PARAMS.RESOURCE_TYPE.REGION:
+                    url += "/bplus-resource-location"; 
+                    break;
+                case STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION:
+                    url += "/bplus-resource-location/" + id; 
+                    break;
+                default:
+                    url += "/bplus-resource/" + type + "/" + lng;
+                    break;
+            }
+            return {url: url, params: {}};
+        };
         //Page router related
         $scope.overallParams = {
             //for homepage
@@ -28,23 +44,17 @@
         $scope.search = function() {
 
         };
+        $scope.preloadResource = function(type, id) {
+            var param = getResourceParam(type, id);
+            return PipeCacheService.add(param);
+        };
         $scope.getResource = function(type, id) {
-            var deferred = $q.defer();
-            var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
-            var url = "";
-            switch (type) {
-                case STATIC_PARAMS.RESOURCE_TYPE.REGION:
-                    url = "/bplus-resource-location"; 
-                    break;
-                case STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION:
-                    url = "/bplus-resource-location/" + id; 
-                    break;
-                default:
-                    url = "/bplus-resource/" + type + "/" + lng;
-                    break;
-            }
-            return {url: url, params: {}};
-            return deferred.promise;
+            var param = getResourceParam(type, id);
+            return PipeCacheService.get(param).then(function(result) {
+                if (result.status === 200 && result.statusText === "OK") {
+                    return 
+                }
+            });
         };
         var url = "service-proxy/bplus-resource-location";
         //Service need to be cached

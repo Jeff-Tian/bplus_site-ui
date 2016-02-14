@@ -11,10 +11,10 @@
         {{l.text}}
     </span>
 
-    <span class="ui light label red" ng-show="!findKey(f.key)" ng-bind="f.key"></span>
-    <div ng-show="f.autoComplete" >
-      <input type="text" name="filter-item-autocomplete" autocomplete datasource-bplus-autocomplete="f.autoComplete" ng-model="f.type"/>
-      <button class="ui basic mini button" ng-click="f.autoCompleteConfirm(f, f.type)">确定</button>
+    <span class="ui light label red" ng-show="!filterSetting.findKey(f, filterSetting[f.key].text)" ng-bind="filterSetting[f.key].text || filterSetting[f.key]"></span>
+    <div ng-show="f.autoComplete" class="input-autocomplete-container">
+      <input class="input-autocomplete-input" type="text" name="filter-item-autocomplete" autocomplete datasource-bplus-autocomplete="f.autoComplete" ng-model="f.type"/>
+      <button class="ui basic mini button" ng-click="filterSetting.autoCompleteConfirm(filterSetting, f, f.type)">确定</button>
     </div>
     <button class="ui basic mini button" ng-show="f.more" ng-click="f.showMore = !f.showMore">
         更多…
