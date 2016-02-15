@@ -11,15 +11,14 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 candidate: {
                     title: "热门搜索",
                     keywords: [
-                        "PHP",
-                        "新媒体",
+                        "管理培训生",
+                        "产品经理",
                         "运营",
-                        "市场推广",
-                        ".Net",
-                        "Android",
-                        "Python",
-                        "BD",
-                        "活动策划",
+                        "前端工程师",
+                        "销售",
+                        "行政",
+                        "市场",
+                        "财务"
                     ]
                 },
                 searchContent: "",

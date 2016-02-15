@@ -10,32 +10,38 @@ angular.module('opdModule')
                 };
                 var dataPromises = Object.keys($scope.STATIC_PARAMS.RESOURCE_TYPE).map(function(key) {
                     var value = $scope.STATIC_PARAMS.RESOURCE_TYPE[key];
-                    if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION) {
-                        return $scope.getResource(value).then(function(ret) {
-                            data[value] = ret;
-                            return ret;
-                        });
+                    var promise;
+                    if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.REGION) {
+                        promise = $scope.getResource(value);
                     } else {
-                        data[value] = [];
-                        return [];
+                        promise = $scope.getRegionResource();
                     }
+                    return promise.then(function(ret) {
+                        data[value] = ret;
+                        return ret;
+                    });
                 });
                 $q.all(dataPromises).then(function() {
+                    debugger;
                 });
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
                 $scope.searchOptions = {
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
-                    search: function (keyword) {
-                        console.log("detail-job, search", keyword);
-                        //Do search
-                        //Show result
+                    search: function(keyword){
+                        //TODO
+                        var tags = {};
+                        $scope.search(keyword, tags);
                     }
                 };
-                //TODO search(keyWordFromHomePage);
-                $scope.overallParams.searchKeyWord = "";
-                //Search content
+                //TODO check login status(cookie, mid);
+                //TODO search(keyWordFromHomePage).then(function(data) {
+                    $scope.overallParams.searchKeyWord = "";
+                    //Search content
+
+                // });
+                //Search config and search results
                 $scope.searchList = {
                     NUMBER_PER_PAGE: 10,
                     showPosition: true,
@@ -91,140 +97,151 @@ angular.module('opdModule')
                 for (var i = 0; i < 302; i++) {
                     $scope.searchList.data.push($.extend(true, {}, originObject, {progressRate: i.toString()}));
                 }
-                //////
+                //Search conditions
                 var morePlaces = [{
-                    key: 'huabei',
-                    label: '华北地区：',
-                    list: [{
-                        id: 1,
-                        text: '北京'
-                    }, {
-                        id: 17,
-                        text: '天津'
-                    }, {
-                        id: 18,
-                        text: '河北'
-                    }, {
-                        id: 19,
-                        text: '山西'
-                    }, {
-                        id: 20,
-                        text: '内蒙古'
-                    }]
+                    id: 888,
+                    value: '制造',
+                    data: '制造',
+                    text: '制造'
                 }, {
-                    key: 'dongbei',
-                    label: '东北地区：',
-                    list: [{
-                        id: 21,
-                        text: '辽宁'
-                    }, {
-                        id: 22,
-                        text: '吉林'
-                    }, {
-                        id: 23,
-                        text: '黑龙江'
-                    }, {
-                        id: 24,
-                        text: '大连'
-                    }]
-                }, {
-                    key: 'huadong',
-                    label: '华东地区：',
-                    list: [{
-                        id: 2,
-                        text: '上海'
-                    }, {
-                        id: 26,
-                        text: '江苏'
-                    }, {
-                        id: 27,
-                        text: '浙江'
-                    }, {
-                        id: 28,
-                        text: '安徽'
-                    }, {
-                        id: 29,
-                        text: '福建'
-                    }, {
-                        id: 30,
-                        text: '江西'
-                    }, {
-                        id: 31,
-                        text: '山东'
-                    }, {
-                        id: 32,
-                        text: '宁波'
-                    }, {
-                        id: 33,
-                        text: '厦门'
-                    }, {
-                        id: 34,
-                        text: '青岛'
-                    }]
-                }, {
-                    key: 'zhongnan',
-                    label: '中南地区：',
-                    list: [{
-                        id: 35,
-                        text: '河南'
-                    }, {
-                        id: 36,
-                        text: '湖北'
-                    }, {
-                        id: 37,
-                        text: '湖南'
-                    }, {
-                        id: 38,
-                        text: '广东'
-                    }, {
-                        id: 39,
-                        text: '广西'
-                    }, {
-                        id: 40,
-                        text: '海南'
-                    }, {
-                        id: 3,
-                        text: '深圳'
-                    }]
-                }, {
-                    key: 'xinan',
-                    label: '西南地区：',
-                    list: [{
-                        id: 42,
-                        text: '重庆'
-                    }, {
-                        id: 43,
-                        text: '四川'
-                    }, {
-                        id: 44,
-                        text: '贵州'
-                    }, {
-                        id: 45,
-                        text: '云南'
-                    }, {
-                        id: 46,
-                        text: '西藏'
-                    }]
-                }, {
-                    key: 'xibei',
-                    label: '西北地区：',
-                    list: [{
-                        id: 47,
-                        text: '陕西'
-                    }, {
-                        id: 48,
-                        text: '甘肃'
-                    }, {
-                        id: 49,
-                        text: '青海'
-                    }, {
-                        id: 50,
-                        text: '宁夏'
-                    }, {
-                        id: 51,
-                        text: '新疆'
-                    }]
-                }];
+                    id: 888,
+                    value: '制造',
+                    data: '制造',
+                    text: '制造'
+                }]
+                // var morePlaces = [{
+                //     key: 'huabei',
+                //     label: '华北地区：',
+                //     list: [{
+                //         id: 1,
+                //         text: '北京'
+                //     }, {
+                //         id: 17,
+                //         text: '天津'
+                //     }, {
+                //         id: 18,
+                //         text: '河北'
+                //     }, {
+                //         id: 19,
+                //         text: '山西'
+                //     }, {
+                //         id: 20,
+                //         text: '内蒙古'
+                //     }]
+                // }, {
+                //     key: 'dongbei',
+                //     label: '东北地区：',
+                //     list: [{
+                //         id: 21,
+                //         text: '辽宁'
+                //     }, {
+                //         id: 22,
+                //         text: '吉林'
+                //     }, {
+                //         id: 23,
+                //         text: '黑龙江'
+                //     }, {
+                //         id: 24,
+                //         text: '大连'
+                //     }]
+                // }, {
+                //     key: 'huadong',
+                //     label: '华东地区：',
+                //     list: [{
+                //         id: 2,
+                //         text: '上海'
+                //     }, {
+                //         id: 26,
+                //         text: '江苏'
+                //     }, {
+                //         id: 27,
+                //         text: '浙江'
+                //     }, {
+                //         id: 28,
+                //         text: '安徽'
+                //     }, {
+                //         id: 29,
+                //         text: '福建'
+                //     }, {
+                //         id: 30,
+                //         text: '江西'
+                //     }, {
+                //         id: 31,
+                //         text: '山东'
+                //     }, {
+                //         id: 32,
+                //         text: '宁波'
+                //     }, {
+                //         id: 33,
+                //         text: '厦门'
+                //     }, {
+                //         id: 34,
+                //         text: '青岛'
+                //     }]
+                // }, {
+                //     key: 'zhongnan',
+                //     label: '中南地区：',
+                //     list: [{
+                //         id: 35,
+                //         text: '河南'
+                //     }, {
+                //         id: 36,
+                //         text: '湖北'
+                //     }, {
+                //         id: 37,
+                //         text: '湖南'
+                //     }, {
+                //         id: 38,
+                //         text: '广东'
+                //     }, {
+                //         id: 39,
+                //         text: '广西'
+                //     }, {
+                //         id: 40,
+                //         text: '海南'
+                //     }, {
+                //         id: 3,
+                //         text: '深圳'
+                //     }]
+                // }, {
+                //     key: 'xinan',
+                //     label: '西南地区：',
+                //     list: [{
+                //         id: 42,
+                //         text: '重庆'
+                //     }, {
+                //         id: 43,
+                //         text: '四川'
+                //     }, {
+                //         id: 44,
+                //         text: '贵州'
+                //     }, {
+                //         id: 45,
+                //         text: '云南'
+                //     }, {
+                //         id: 46,
+                //         text: '西藏'
+                //     }]
+                // }, {
+                //     key: 'xibei',
+                //     label: '西北地区：',
+                //     list: [{
+                //         id: 47,
+                //         text: '陕西'
+                //     }, {
+                //         id: 48,
+                //         text: '甘肃'
+                //     }, {
+                //         id: 49,
+                //         text: '青海'
+                //     }, {
+                //         id: 50,
+                //         text: '宁夏'
+                //     }, {
+                //         id: 51,
+                //         text: '新疆'
+                //     }]
+                // }];
 
                 var moreIndustries = [{
                     id: 888,
