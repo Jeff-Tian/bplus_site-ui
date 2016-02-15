@@ -3,11 +3,11 @@
         return {
             templateUrl: '/view-partial/register-form.html',
             scope: {
-                action: '=',
-                sendTracking: '=',
-                control: '=',
-                passwordPlaceholder: '=',
-                footerTip: '='
+                action: '=?',
+                sendTracking: '=?',
+                control: '=?',
+                passwordPlaceholder: '=?',
+                footerTip: '=?'
             },
             link: function ($scope, element) {
                 $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
