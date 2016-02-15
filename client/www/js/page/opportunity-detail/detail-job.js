@@ -13,21 +13,21 @@ angular.module('opdModule')
                     if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION) {
                         return $scope.getResource(value).then(function(ret) {
                             data[value] = ret;
+                            return ret;
                         });
                     } else {
                         data[value] = [];
-                        return true;
+                        return [];
                     }
                 });
                 $q.all(dataPromises).then(function() {
-                    debugger;
                 });
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
                 $scope.searchOptions = {
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
-                    search: function(keyword) {
+                    search: function (keyword) {
                         console.log("detail-job, search", keyword);
                         //Do search
                         //Show result
@@ -464,7 +464,7 @@ angular.module('opdModule')
                 }];
 
                 var f = {};
-                for (var i = 0; i < $scope.filters.length; i++) {
+                for (i = 0; i < $scope.filters.length; i++) {
                     f[$scope.filters[i].key] = $scope.filters[i];
                 }
 
@@ -561,7 +561,7 @@ angular.module('opdModule')
                     }
                 };
 
-                
+
             }
         };
     }])

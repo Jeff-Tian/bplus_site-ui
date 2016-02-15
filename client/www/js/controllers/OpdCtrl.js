@@ -47,8 +47,19 @@
             searchKeyWord: "",
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
-        $scope.search = function() {
+        $scope.search = function () {
 
+        };
+        $scope.search = function () {
+
+        };
+        $scope.preloadResource = function(type, id) {
+            var param = getResourceParam(type, id);
+            return PipeCacheService.add(param);
+        };
+        $scope.getResource = function(type, id) {
+            var param = getResourceParam(type, id);
+            return PipeCacheService.get(param);
         };
         //Service related
         // var getCallFormat = {
