@@ -37,63 +37,26 @@
                     </h4>
                 </div>
                 <div class="ui fitted divider" style="margin: 0;"></div>
-
-                <opd-filter-item ng-repeat-start="f in subscribeFilters" f="f" filter-setting="subscribeFiltersSetting"
-                                 ng-if="!hideFilters"></opd-filter-item>
-                <opd-sub-filter-item ng-repeat-end f="f" filter-setting="subscribeFiltersSetting"
-                                     ng-if="!hideFilters"></opd-sub-filter-item>
-
-                <div class="ui segment" style="border-top: none; border-bottom: none;" ng-hide="hideFilters">
-                    <strong ng-bind="'月\u2001\u2001薪：'"></strong>
-                    <span class="ui light label"
-                          ng-class="{'red': filters['monthlySalaryLowerBound'] === null && filters['monthlySalaryUpperBound'] === null, 'transparent': filters['monthlySalaryLowerBound'] != null || filters['monthlySalaryUpperBound'] != null}">
-                        不限
-                    </span>
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <span class="inline field">
-                        <input type="text">
-                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input type="text">
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;人民币</span>
-                    </span>
-                </div>
-
+                <opd-filter-item ng-repeat-start="f in filters" f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filters}}</opd-filter-item>
+                <opd-sub-filter-item ng-repeat-end f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filterSetting}}</opd-sub-filter-item>
                 <div class="ui segment inline fields" style="border-top: none; border-bottom: none;"
                      ng-hide="hideFilters">
-                    <strong ng-bind="'职\u2001\u2001位：'"></strong>
-                        <span class="thirteen wide field">
-                            <div class="ui fluid selection search multiple dropdown positions">
-                                <input type="hidden" name="positions">
-
-                                <div class="default text">请输入想订阅的职位</div>
-
-                            </div>
-                            <script type="text/javascript">
-                                $('.multiple.dropdown.positions')
-                                        .dropdown({
-                                            allowAdditions: true,
-                                            apiSettings: {
-                                                url: '//api.semantic-ui.com/tags/{query}'
-                                            }
-                                        })
-                                ;
-                            </script>
-                        </span>
+                    <strong ng-bind="'职\u2001\u2001位：&nbsp&nbsp&nbsp'"></strong>
+                        <input style="width:80%" class="marginal-input opd-search-input" type="text" placeholder="请输入想订阅的职位" ng-model="position">
                 </div>
 
                 <div class="ui right floated field vertical horizontal padded segment" style="border-top: none;" ng-hide="hideFilters">
-                    <button type="submit" class="ui red large button">开始订阅</button>
+                    <button type="submit" class="ui red large button" ng-click="">开始订阅</button>
+                    <button type="submit" class="ui red large button" ng-click="">修改订阅</button>
                     <button type="reset" class="ui basic large button">取消</button>
                 </div>
 
                 <div class="ui clearing horizontal divider"></div>
-                <div class="ui bk-color-coral-red inverted vertical padded segment">
-                    <p>尚无职位信息。</p>
-                </div>
             </div>
-            <bopdpositionpattern positions="data.positions"/>
+            <div class="ui bk-color-coral-red inverted vertical padded segment" ng-show="data.positions.data.length===0">
+                <p>尚无职位信息。</p>
+            </div>
+            <bopdpositionpattern positions="data.positions" ng-show="data.positions.data.length>=0"/>
         </form>
     </div>
 </div>
