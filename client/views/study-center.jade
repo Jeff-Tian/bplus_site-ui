@@ -1,20 +1,28 @@
 block customizedHead
     include ../www/view-partial/slim-head.html
 block customizedHeader
-    div#my-header(ng-controller="AppCtrl")
+    div#my-header(ng-controller="AppCtrl", style="margin-bottom: 80px;")
         include ../www/view-partial/header.html
 block customizedFooter
     div#my-footer
         include ../www/view-partial/footer.html
+        script(type="text/javascript", src="#{cdn.normal}bower/angular-ui-router/release/angular-ui-router.min.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/menuDirective.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/controllers/OpdMenuCtrl.js?#{cdn.version}")
         script(type="text/javascript").
+            angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
+                    .directive('bopdmenu', angular.bplus.leftColumnMenu)
+                    .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
+            ;
+
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
-                angular.element(document).ready(function () {
-                    angular.bootstrap(document.getElementById('online-store-body'), ['onlineStore']);
-                });
                 angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
             });
         include ../www/view-partial/external-js.html
 
 block content
-    h1 hello
+    div(class="ui grid container", ng-app="studyCenterModule")
+        div(class="four wide column")
+            bopdmenu
+        div(class="twelve wide column")
