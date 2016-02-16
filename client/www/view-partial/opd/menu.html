@@ -1,43 +1,10 @@
 <div class="ui fluid large vertical menu cloak opt-menu" ng-controller="OpdMenuCtrl">
-    <a ng-href="#/home" class="item" ng-class="{'active': currentState === 'home'}">
-        <i class="ui white large home icon"></i>
-        机会首页
-    </a>
-    <a ng-href="#/job" class="item" ng-class="{'active': currentState === 'job' || currentState === 'job/detail' }">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/work.png?{{cdn.version}}"
-             ng-show="currentState !== 'job'">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/work_white.png?{{cdn.version}}"
-             ng-show="currentState === 'job'">
-        工作实习
-    </a>
-    <a ng-href="#/favorite" class="item" ng-class="{'active': currentState === 'favorite'}">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/fav.png?{{cdn.version}}"
-             ng-show="currentState !== 'favorite'">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/fav_white.png?{{cdn.version}}"
-             ng-show="currentState === 'favorite'">
-        收藏夹
-    </a>
-    <a ng-href="#/recommended-positions" class="item" ng-class="{'active': currentState === 'recommended-positions'}">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/recommendation.png?{{cdn.version}}"
-             ng-show="currentState !== 'recommended-positions'">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/recommendation_white.png?{{cdn.version}}"
-             ng-show="currentState === 'recommended-positions'">
-        推荐职位
-        <span class="ui red circular label">3</span>
-    </a>
-    <a ng-href="#/applied-positions" class="item" ng-class="{'active': currentState === 'applied-positions'}">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/delivered.png?{{cdn.version}}"
-             ng-show="currentState !== 'applied-positions'">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/delivered_white.png?{{cdn.version}}"
-             ng-show="currentState === 'applied-positions'">
-        已投递的职位
-    </a>
-    <a ng-href="#/training" class="item" ng-class="{'active': currentState === 'training'}">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/opp.png?{{cdn.version}}"
-             ng-show="currentState !== 'training'">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}icon/opd/opp_white.png?{{cdn.version}}"
-             ng-show="currentState === 'training'">
-        培训机会
+    <a class="item" ng-href="{{m.href}}" ng-repeat="m in menus" ng-class="{'active': m.states.indexOf(currentState) >= 0}">
+        <i class="ui white large icon" ng-class="m.icon" ng-show="m.icon"></i>
+        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.image}}?{{cdn.version}}" ng-show="m.image && m.states.indexOf(currentState) < 0">
+        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.activeImage}}?{{cdn.version}}" ng-show="m.activeImage && m.states.indexOf(currentState) >= 0">
+        {{m.text}}
+        <span class="ui red circular label" ng-show="m.badge">{{m.badge}}</span>
     </a>
 </div>
 <style type="text/css">

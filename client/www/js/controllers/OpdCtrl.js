@@ -113,6 +113,47 @@
         //     issueTime: "2015",
         //     company: "ksjksdf"
         // }]
+
+        $scope.menus = [{
+            text: '机会首页',
+            href: '#/home',
+            icon: 'home',
+            states: ['home']
+        }, {
+            text: '工作实习',
+            href: '#/job',
+            icon: 'suitcase',
+            states: ['job', 'job/detail']
+        }, {
+            text: '收藏夹',
+            href: '#/favorite',
+            icon: '',
+            states: ['favorite'],
+            image: 'icon/opd/fav.png',
+            activeImage: 'icon/opd/fav_white.png'
+        }, {
+            text: '推荐职位',
+            href: '#/recommended-positions',
+            icon: '',
+            states: ['recommended-positions'],
+            image: 'icon/opd/recommendation.png',
+            activeImage: 'icon/opd/recommendation_white.png',
+            badge: '3'
+        }, {
+            text: '已投递的职位',
+            href: '#/applied-positions',
+            icon: '',
+            states: ['applied-positions'],
+            image: 'icon/opd/delivered.png',
+            activeImage: 'icon/opd/delivered_white.png'
+        }, {
+            text: '培训机会',
+            href: '#/training',
+            icon: '',
+            states: ['training'],
+            image: 'icon/opd/opp.png',
+            activeImage: 'icon/opd/opp_white.png'
+        }];
     };
 
     exports.OpdCtrl.$inject = ['$scope', '$q', 'PipeCacheService', 'service', 'MessageStore', 'msgBus', '$translate', '$timeout', 'DeviceHelper', 'queryParser', 'WechatLogon', '$filter'];

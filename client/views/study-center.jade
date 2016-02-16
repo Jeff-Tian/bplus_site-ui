@@ -13,6 +13,24 @@ block customizedFooter
             angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
                     .directive('bopdmenu', angular.bplus.leftColumnMenu)
                     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
+                    .controller('StudyCtrl', ['$scope', function ($scope) {
+                        $scope.menus = [{
+                            text: '我的学习计划',
+                            href: '#/study-plan',
+                            icon: 'file text outline',
+                            states: ['home']
+                        }, {
+                            text: '我的收藏',
+                            href: '#/fav',
+                            icon: 'bookmark',
+                            states: ['job', 'job/detail']
+                        }, {
+                            text: '我的课程',
+                            href: '#/favorite',
+                            icon: 'book',
+                            states: ['course']
+                        }];
+                    }])
             ;
 
             angular.element(document).ready(function () {
@@ -23,6 +41,6 @@ block customizedFooter
 
 block content
     div(class="ui grid container", ng-app="studyCenterModule")
-        div(class="four wide column")
+        div(class="four wide column", ng-controller="StudyCtrl")
             bopdmenu
         div(class="twelve wide column")
