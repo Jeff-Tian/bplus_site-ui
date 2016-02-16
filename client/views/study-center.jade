@@ -10,6 +10,7 @@ block customizedFooter
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/menuDirective.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/controllers/OpdMenuCtrl.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/widget/competitiveness/competitiveDirective.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/page/study-center/controllers.js?#{cdn.version}")
         script(type="text/javascript").
             angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
                     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -48,6 +49,7 @@ block customizedFooter
                             states: ['course']
                         }];
                     }])
+                    .controller('UnfinishedCoursesCtrl', angular.bplus.UnfinishedCoursesCtrl)
             ;
 
             angular.element(document).ready(function () {
@@ -56,6 +58,12 @@ block customizedFooter
 
                 $('.tabular.menu .item')
                         .tab()
+                ;
+
+                $('.dimmable')
+                        .dimmer({
+                            opacity: 0.5
+                        })
                 ;
             });
         include ../www/view-partial/external-js.html
@@ -71,7 +79,7 @@ block content
                     div(class="ui top attached tabular menu")
                         a(class="active item", data-tab="unfinished-courses") 未完成的课程
                         a(class="item", data-tab="finished-courses")  已完成的课程
-                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;")
+                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
                         table(class="ui basic table positions hoverable", style="border: none; background-color: white;")
                             colgroup
                                 col
@@ -89,21 +97,26 @@ block content
                                     th
                                         h4(class="ui white header left aligned") 操作
                             tbody
-                                tr(ng-mouseenter="hovering=true", ng-mouseleave="hovering=false")
+                                tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat="c in courses track by $index")
                                     td
-                                        h4(class="ui header") 咨询公司求职,如何修改简历?
-                                            div(class="sub header") Julia合得国际创始人,HBS Alumni
+                                        h4(class="ui header") {{c.name}}
+                                            div(class="sub header")  {{c.description}}
                                     td
-                                        p 2016年1月26日(周四)
-                                        p 20:00~21:00
-                                    td(style="position: relative")
-                                        a(class="ui transparent right corner label")
+                                        p {{c.startDate}}
+                                        p {{c.startTime}}~{{c.endTime}}
+                                    td(style="position: relative", class="dimmable", ng-mouseleave="hideDimmer($event)")
+                                        div(class="ui dimmer")
+                                            div.content
+                                                div.center
+                                                    i(class="big long arrow right icon")
+                                                    div 火速邀请小伙伴
+                                        a(class="ui transparent right corner label", ng-mouseenter="showDimmer($event)", ng-mouseover="showDimmer($event)")
                                             i(class="share alternate icon")
-                                        bopdcompetitiveness(data="{progressRate: 30}")
+                                        bopdcompetitiveness(data="{progressRate: c.status}")
                                     td
                                         p(class="red hover") 距离课程开始还有2天
                                         p
-                                            button(class="ui button", ng-class="{'black': hovering, 'grey': !hovering}") 进入视频课
+                                            button(class="ui button", ng-class="{'black': hovering[$index], 'grey': !hovering[$index]}") 进入视频课
                             tfoot
                                 tr
                                     th(colspan="4")
