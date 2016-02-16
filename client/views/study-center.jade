@@ -9,24 +9,41 @@ block customizedFooter
         script(type="text/javascript", src="#{cdn.normal}bower/angular-ui-router/release/angular-ui-router.min.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/menuDirective.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/controllers/OpdMenuCtrl.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/widget/competitiveness/competitiveDirective.js?#{cdn.version}")
         script(type="text/javascript").
             angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
+                    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+                        var states = ['study-plan', 'fav', 'course'];
+
+                        $urlRouterProvider.otherwise('/' + states[0]);
+
+                        for (var i = 0; i < states.length; i++) {
+                            var state = states[i];
+
+                            $stateProvider
+                                    .state(state, {
+                                        url: '/' + state,
+                                        templateUrl: state + '.html'
+                                    });
+                        }
+                    }])
                     .directive('bopdmenu', angular.bplus.leftColumnMenu)
+                    .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)
                     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
                     .controller('StudyCtrl', ['$scope', function ($scope) {
                         $scope.menus = [{
                             text: '我的学习计划',
                             href: '#/study-plan',
                             icon: 'file text outline',
-                            states: ['home']
+                            states: ['study-plan']
                         }, {
                             text: '我的收藏',
                             href: '#/fav',
                             icon: 'bookmark',
-                            states: ['job', 'job/detail']
+                            states: ['fav']
                         }, {
                             text: '我的课程',
-                            href: '#/favorite',
+                            href: '#/course',
                             icon: 'book',
                             states: ['course']
                         }];
@@ -36,6 +53,10 @@ block customizedFooter
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
                 angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
+
+                $('.tabular.menu .item')
+                        .tab()
+                ;
             });
         include ../www/view-partial/external-js.html
 
@@ -44,3 +65,48 @@ block content
         div(class="four wide column", ng-controller="StudyCtrl")
             bopdmenu
         div(class="twelve wide column")
+            div(ui-view="")
+            script(type="text/ng-template", id="course.html")
+                div.b-opd-favorite
+                    div(class="ui top attached tabular menu")
+                        a(class="active item", data-tab="unfinished-courses") 未完成的课程
+                        a(class="item", data-tab="finished-courses")  已完成的课程
+                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;")
+                        table(class="ui basic table positions hoverable", style="border: none; background-color: white;")
+                            colgroup
+                                col
+                                col(style="background-color: #f0f0f0;")
+                                col
+                                col(style="background-color: #f0f0f0;")
+                            thead
+                                tr
+                                    th
+                                        h4(class="ui white header left aligned") 课程名称
+                                    th
+                                        h4(class="ui white header left aligned") 开课时间
+                                    th
+                                        h4(class="ui white header left aligned") 开课状态
+                                    th
+                                        h4(class="ui white header left aligned") 操作
+                            tbody
+                                tr(ng-mouseenter="hovering=true", ng-mouseleave="hovering=false")
+                                    td
+                                        h4(class="ui header") 咨询公司求职,如何修改简历?
+                                            div(class="sub header") Julia合得国际创始人,HBS Alumni
+                                    td
+                                        p 2016年1月26日(周四)
+                                        p 20:00~21:00
+                                    td(style="position: relative")
+                                        a(class="ui transparent right corner label")
+                                            i(class="share alternate icon")
+                                        bopdcompetitiveness(data="{progressRate: 30}")
+                                    td
+                                        p(class="red hover") 距离课程开始还有2天
+                                        p
+                                            button(class="ui button", ng-class="{'black': hovering, 'grey': !hovering}") 进入视频课
+                            tfoot
+                                tr
+                                    th(colspan="4")
+                                        h4(class="ui white header center aligned") 查看更多
+                        div(class="ui horizontal divider")
+                    div(class="ui bottom attached tab segment", data-tab="finished-courses")
