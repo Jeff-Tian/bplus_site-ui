@@ -17,7 +17,14 @@ angular.module('opdModule')
                         promise = $scope.getRegionResource();
                     }
                     return promise.then(function(ret) {
-                        data[value] = ret;
+                        data[value] = ret.map(function(rawData, index) {
+                            return {
+                                id: rawData.id || index + 1,
+                                value: rawData.text || "",
+                                data: rawData.text || "",
+                                text: rawData.text || ""
+                            }
+                        });
                         return ret;
                     });
                 });
