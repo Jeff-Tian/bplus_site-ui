@@ -291,5 +291,11 @@ module.exports = {
         proxyBPlus({
             path: '/my/' + req.params.operation + '/save'
         })(req, res, next);
+    },
+
+    searchJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/advanced'
+        })(req, res, next);
     }
 };
