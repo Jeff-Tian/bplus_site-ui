@@ -39,16 +39,16 @@
                 <div class="ui fitted divider" style="margin: 0;"></div>
                 <opd-filter-item ng-repeat-start="f in filters" f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filters}}</opd-filter-item>
                 <opd-sub-filter-item ng-repeat-end f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filterSetting}}</opd-sub-filter-item>
-                <div class="ui segment inline fields" style="border-top: none; border-bottom: none;"
+<!--                 <div class="ui segment inline fields" style="border-top: none; border-bottom: none;"
                      ng-hide="hideFilters">
                     <strong ng-bind="'职\u2001\u2001位：&nbsp&nbsp&nbsp'"></strong>
                         <input style="width:80%" class="marginal-input opd-search-input" type="text" placeholder="请输入想订阅的职位" ng-model="position">
                 </div>
-
+ -->
                 <div class="ui right floated field vertical horizontal padded segment" style="border-top: none;" ng-hide="hideFilters">
-                    <button type="submit" class="ui red large button" ng-click="">开始订阅</button>
-                    <button type="submit" class="ui red large button" ng-click="">修改订阅</button>
-                    <button type="reset" class="ui basic large button">取消</button>
+                    <button type="submit" class="ui red large button" ng-click="subscribe()" ng-show="!hasSubscribed">开始订阅</button>
+                    <button type="submit" class="ui red large button" ng-click="subscribe()" ng-show="hasSubscribed">修改订阅</button>
+                    <button type="reset" class="ui basic large button" ng-click="subscribeCancel()">取消</button>
                 </div>
 
                 <div class="ui clearing horizontal divider"></div>

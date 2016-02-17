@@ -279,5 +279,17 @@ module.exports = {
         proxyBPlus({
             path: path
         })(req, res, next);
+    },
+
+    getOpdOperation: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/' + req.params.operation + '/load/' + req.params.member_id
+        })(req, res, next);
+    },
+
+    updateOpdOperation: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/' + req.params.operation + '/save'
+        })(req, res, next);
     }
 };

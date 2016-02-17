@@ -13,6 +13,9 @@
             WORKTYPE: "worktype",
             NATIRE_OF_FIRM: "natureoffirm",
             INDUSTRY: "industry"
+        },
+        MY_TYPE: {
+            SUBSCRIPTION: "subscription",
         }
     };
     var REGION = [
@@ -40,7 +43,10 @@
         {text: "哈尔滨"},
         {text: "长春"}
     ];
-    exports.OpdCtrl = function ($scope, $q, PipeCacheService)  {
+    
+    exports.OpdCtrl = function ($scope, $q, PipeCacheService, service)  {
+        var hasMemberID = /mid=([^;]+)/.exec(document.cookie);
+        var member_id = hasMemberID ? hasMemberID[1] : "";
         var getResourceParam = function(type, id) {
             var lng = angular.bplus.localeHelper.getLocale(window.location.pathname);
             var url = "/service-proxy";
@@ -57,6 +63,13 @@
             }
             return {url: url, params: {}};
         };
+        var getMyParam = function(type) {
+            var param = {
+                url: "/service-proxy/bplus-opd/load/" + type + "/" + member_id,
+                param: {}
+            };
+            return param;
+        };
         var preloadResource = function(type, id) {
             var param = getResourceParam(type, id);
             return PipeCacheService.add(param);
@@ -69,6 +82,24 @@
             var deferred = $q.defer();
             deferred.resolve(REGION.slice(0));
             return deferred.promise;
+        };
+        $scope.getMy = function(type) {
+            var param = getMyParam(type);
+            return PipeCacheService.get(param);
+        };
+        // $scope.saveMy = function(type) {
+        //     var param = getMyParam(type);
+        //     return PipeCacheService.get(param);
+        // };
+        $scope.hasLoggedin = function() {
+            return hasMemberID;
+        };
+        $scope.saveSubscription = function(paramStr) {
+            return service
+                .post('/service-proxy/bplus-opd/update/subscription', {
+                    member_id: member_id,
+                    criteria: paramStr
+                });
         };
 
         //Page router related
@@ -112,12 +143,19 @@
         //     issueTime: "2015",
         //     company: "ksjksdf"
         // }]
+
         //Preload data
-        Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(value) {
-            if (value !== 'CHILD_REGION') {
-                 preloadResource(STATIC_PARAMS.RESOURCE_TYPE[value]);
+        Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(key) {
+            if (key !== 'CHILD_REGION') {
+                 preloadResource(STATIC_PARAMS.RESOURCE_TYPE[key]);
             }
-        })
+        });
+        if ($scope.hasLoggedin()) {
+            // Object.keys(STATIC_PARAMS.MY_TYPE).forEach(function(key) {
+            //     var value = STATIC_PARAMS.MY_TYPE[key];
+            //     return PipeCacheService.add(getMyParam(value));
+            // });
+        }
         // Use static region now
         // $scope.getResource(STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
         //     value.forEach(function(value) {

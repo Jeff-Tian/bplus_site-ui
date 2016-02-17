@@ -4,6 +4,10 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
         scope: true,
         templateUrl: '/view-partial/opd/detail-recommendation.html',
         link: function ($scope, element, attrs) {
+            if (!$scope.hasLoggedin()) {
+                // location.href = "/signin#/login?return_url=opportunity-detail%23%2Frecommended-positions";
+                // return;
+            }
             //Init the page
             var data = {
             };
@@ -32,6 +36,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                 //Search conditions
                 var placesRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.REGION];
                 var industriesRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.INDUSTRY];
+                var jobsRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.JOB];
                 $scope.filters = [{
                     key: 'workPlace',
                     label: '工作地点：',
@@ -54,6 +59,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                     label: '行业领域：',
                     extraListValue: '',
                     autoComplete: industriesRaw,
+                    autoCompletePlaceHolder: "",
                     list: [{
                         id: 0,
                         text: '不限'
@@ -100,7 +106,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                   }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
                 }, {
                     key: 'monthlySalary',
-                    label: '月薪：',
+                    label: '月\u2001\u2001薪：',
                     rangeLabel: '人民币',
                     type: 'range',
                     list: [{
@@ -129,7 +135,16 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                             }
                         }
                     }
-                }]
+                }, {
+                    key: 'position',
+                    label: '职\u2001\u2001位：',
+                    autoComplete: jobsRaw,
+                    autoCompletePlaceHolder: "请输入想订阅的职位",
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }]
+                }];
                 var f = {};
                 for (i = 0; i < $scope.filters.length; i++) {
                     f[$scope.filters[i].key] = $scope.filters[i];
@@ -151,15 +166,58 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                     showThumb: false,
                     showDetail: true,
                     hasThumbView: false,
+                    // workPlace: f.workPlace.list[0],
+                    // diplomas: f.diplomas.list[0],
+                    // industry: f.industry.list[3],
+                    // companyType: f.companyType.list[0],
+                    // jobCategory: f.jobCategory.list[0],
+                    // monthlySalary: f.monthlySalary.list[0],
+                    // position: f.position.list[0]
+                };
+                var rawSubscription = {
+                };
+                var staticSubscription  = {
                     workPlace: f.workPlace.list[0],
                     diplomas: f.diplomas.list[0],
                     industry: f.industry.list[0],
                     companyType: f.companyType.list[0],
                     jobCategory: f.jobCategory.list[0],
-                    monthlySalary: f.monthlySalary.list[0]
+                    monthlySalary: f.monthlySalary.list[0],
+                    position: f.position.list[0]
+                };
+                $scope.hasSubscribed = false;
+                $scope.getMy($scope.STATIC_PARAMS.MY_TYPE.SUBSCRIPTION).then(function(value) {
+                    if (value.length > 0) {
+                        $scope.hasSubscribed = true;
+                        try {
+                            rawSubscription = JSON.parse(value[0].value);
+                        } catch(e) {
+                            $scope.hasSubscribed = false;
+                            rawSubscription = staticSubscription;
+                        }
+                    } else {
+                        rawSubscription = staticSubscription;
+                    }
+                    Object.keys(staticSubscription).forEach(function(key) {
+                        $scope.filterSetting[key] = rawSubscription[key];
+                    });
+                });
+
+                $scope.subscribe = function() {
+                    var paramToSave = {};
+                    Object.keys(staticSubscription).forEach(function(key) {
+                        paramToSave[key] = $scope.filterSetting[key];
+                    });
+                    $scope.saveSubscription(JSON.stringify(paramToSave));
+;                };
+                $scope.subscribeCancel = function() {
+                    Object.keys(staticSubscription).forEach(function(key) {
+                        $scope.filterSetting[key] = rawSubscription[key];
+                    });
                 };
             });
-            
+
+
             //Data for positions
             //Other names can also be used
             $scope.data = {};
