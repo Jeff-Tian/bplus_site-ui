@@ -57,3 +57,8 @@ mixin unfinishedCourseTable(courses)
 mixin finishedCourseTable(courses)
     + courseTable(courses)
         + finishedCourseBlocks('c')
+
+mixin sticky
+    div(class="right ui rail", style="margin: 0; padding: 0;")
+        div(class="ui sticky")
+            div(style="background-color: rgba(0, 0, 0, 0.8); color: white; padding: 5px; width: 2em; text-orientation: upright;") 今日课程

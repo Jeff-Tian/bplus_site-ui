@@ -77,9 +77,11 @@ block content
                     div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
                         + unfinishedCourseTable('courses')
                         div(class="ui horizontal divider")
+                        + sticky
                     div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
                         + finishedCourseTable('courses')
                         div(class="ui horizontal divider")
+                        + sticky
                 script(type="text/javascript").
                     angular.element(document).ready(function () {
                         $('.tabular.menu .item')
@@ -91,5 +93,11 @@ block content
                                     opacity: 0.5
                                 })
                                 .dimmer('set opacity', 0.5)
+                        ;
+
+                        $('.ui.sticky')
+                                .sticky({
+                                    context: '.tab'
+                                })
                         ;
                     });
