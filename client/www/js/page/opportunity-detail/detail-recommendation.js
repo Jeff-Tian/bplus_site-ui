@@ -26,7 +26,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                             value: rawData.text || "",
                             data: rawData.text || "",
                             text: rawData.text || ""
-                        }
+                        };
                     });
                     return ret;
                 });

@@ -23,7 +23,7 @@ angular.module('opdModule')
                                 value: rawData.text || "",
                                 data: rawData.text || "",
                                 text: rawData.text || ""
-                            }
+                            };
                         });
                         return ret;
                     });
@@ -130,7 +130,7 @@ angular.module('opdModule')
                                 }
                             }
                         }
-                    }]
+                    }];
                     var f = {};
                     for (i = 0; i < $scope.filters.length; i++) {
                         f[$scope.filters[i].key] = $scope.filters[i];
@@ -188,7 +188,7 @@ angular.module('opdModule')
                     sortingClick: function(key, l) {
                         if ($scope.sortingAndFilterSetting[key].id !== l.id) {
                             $scope.sortingAndFilterSetting[key] = l;
-                            console.log("search", l.text)
+                            console.log("search", l.text);
                             //search();
                         }
                     }
