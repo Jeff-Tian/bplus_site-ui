@@ -22,7 +22,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                             value: rawData.text || "",
                             data: rawData.text || "",
                             text: rawData.text || ""
-                        }
+                        };
                     });
                     return ret;
                 });
@@ -129,7 +129,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                             }
                         }
                     }
-                }]
+                }];
                 var f = {};
                 for (i = 0; i < $scope.filters.length; i++) {
                     f[$scope.filters[i].key] = $scope.filters[i];

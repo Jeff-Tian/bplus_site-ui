@@ -117,7 +117,7 @@
             if (value !== 'CHILD_REGION') {
                  preloadResource(STATIC_PARAMS.RESOURCE_TYPE[value]);
             }
-        })
+        });
         // Use static region now
         // $scope.getResource(STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
         //     value.forEach(function(value) {
