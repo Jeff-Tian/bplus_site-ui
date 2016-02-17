@@ -55,16 +55,6 @@ block customizedFooter
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
                 angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
-
-                $('.tabular.menu .item')
-                        .tab()
-                ;
-
-                $('.dimmable')
-                        .dimmer({
-                            opacity: 0.5
-                        })
-                ;
             });
         include ../www/view-partial/external-js.html
 
@@ -73,53 +63,33 @@ block content
         div(class="four wide column", ng-controller="StudyCtrl")
             bopdmenu
         div(class="twelve wide column")
+            include course-table
             div(ui-view="")
+            script(type="text/ng-template", id="study-plan.html")
+                div Study Plan
+            script(type="text/ng-template", id="fav.html")
+                div Fav
             script(type="text/ng-template", id="course.html")
                 div.b-opd-favorite
                     div(class="ui top attached tabular menu")
                         a(class="active item", data-tab="unfinished-courses") 未完成的课程
                         a(class="item", data-tab="finished-courses")  已完成的课程
                     div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
-                        table(class="ui basic table positions hoverable", style="border: none; background-color: white;")
-                            colgroup
-                                col
-                                col(style="background-color: #f0f0f0;")
-                                col
-                                col(style="background-color: #f0f0f0;")
-                            thead
-                                tr
-                                    th
-                                        h4(class="ui white header left aligned") 课程名称
-                                    th
-                                        h4(class="ui white header left aligned") 开课时间
-                                    th
-                                        h4(class="ui white header left aligned") 开课状态
-                                    th
-                                        h4(class="ui white header left aligned") 操作
-                            tbody
-                                tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat="c in courses track by $index")
-                                    td
-                                        h4(class="ui header") {{c.name}}
-                                            div(class="sub header")  {{c.description}}
-                                    td
-                                        p {{c.startDate}}
-                                        p {{c.startTime}}~{{c.endTime}}
-                                    td(style="position: relative", class="dimmable", ng-mouseleave="hideDimmer($event)")
-                                        div(class="ui dimmer")
-                                            div.content
-                                                div.center
-                                                    i(class="big long arrow right icon")
-                                                    div 火速邀请小伙伴
-                                        a(class="ui transparent right corner label", ng-mouseenter="showDimmer($event)", ng-mouseover="showDimmer($event)")
-                                            i(class="share alternate icon")
-                                        bopdcompetitiveness(data="{progressRate: c.status}")
-                                    td
-                                        p(class="red hover") 距离课程开始还有2天
-                                        p
-                                            button(class="ui button", ng-class="{'black': hovering[$index], 'grey': !hovering[$index]}") 进入视频课
-                            tfoot
-                                tr
-                                    th(colspan="4")
-                                        h4(class="ui white header center aligned") 查看更多
+                        + unfinishedCourseTable('courses')
                         div(class="ui horizontal divider")
-                    div(class="ui bottom attached tab segment", data-tab="finished-courses")
+                    div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
+                        + finishedCourseTable('courses')
+                        div(class="ui horizontal divider")
+                script(type="text/javascript").
+                    angular.element(document).ready(function () {
+                        $('.tabular.menu .item')
+                                .tab()
+                        ;
+
+                        $('.dimmable')
+                                .dimmer({
+                                    opacity: 0.5
+                                })
+                                .dimmer('set opacity', 0.5)
+                        ;
+                    });

@@ -1,0 +1,59 @@
+mixin unfinishedCourseBlocks(c)
+    td(style="position: relative", class="dimmable", ng-mouseleave="hideDimmer($event)")
+        div(class="ui dimmer")
+            div.content
+                div.center
+                    i(class="big long arrow right icon")
+                    div 火速邀请小伙伴
+        a(class="ui transparent right corner label", ng-mouseenter="showDimmer($event)", ng-mouseover="showDimmer($event)")
+            i(class="share alternate icon")
+        bopdcompetitiveness(data="{progressRate: #{c}.status}")
+    td
+        p(class="red hover") 距离课程开始还有2天
+        p
+            button(class="ui button", ng-class="{'black': hovering[$index], 'grey': !hovering[$index]}") 进入视频课
+
+mixin finishedCourseBlocks(c)
+    td 尚未评价
+    td
+        button(class="ui black button") 立刻评价
+
+mixin courseTable(courses)
+    table(class="ui basic table positions hoverable", style="border: none; background-color: white;")
+        colgroup
+            col
+            col(style="background-color: #f6f6f6;")
+            col
+            col(style="background-color: #f6f6f6;")
+        thead
+            tr
+                th
+                    h4(class="ui white header left aligned") 课程名称
+                th
+                    h4(class="ui white header left aligned") 开课时间
+                th
+                    h4(class="ui white header left aligned") 开课状态
+                th
+                    h4(class="ui white header left aligned") 操作
+        tbody
+            tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat="c in #{courses} track by $index")
+                td
+                    h4(class="ui header") {{c.name}}
+                        div(class="sub header")  {{c.teacher}}
+                td
+                    p {{c.startDate}}
+                    p {{c.startTime}}~{{c.endTime}}
+                block
+        tfoot
+            tr
+                th(colspan="4")
+                    h4(class="ui white header center aligned") 查看更多
+
+
+mixin unfinishedCourseTable(courses)
+    + courseTable(courses)
+        + unfinishedCourseBlocks('c')
+
+mixin finishedCourseTable(courses)
+    + courseTable(courses)
+        + finishedCourseBlocks('c')
