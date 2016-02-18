@@ -297,5 +297,17 @@ module.exports = {
         proxyBPlus({
             path: '/job/advanced'
         })(req, res, next);
+    },
+
+    hotJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/hot'
+        })(req, res, next);
+    },
+
+    recommentJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/recommend'
+        })(req, res, next);
     }
 };

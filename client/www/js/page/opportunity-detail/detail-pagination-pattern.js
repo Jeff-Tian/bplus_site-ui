@@ -81,22 +81,22 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                         case $scope.paginationMenu.PREVIOUS:
                             if ($scope.paginationMenu.currentPage !== FIRST_PAGE) {
                                 $scope.paginationMenu.currentPage--;
-                                displayPage($scope, data);
                             }
                             break;
                         case $scope.paginationMenu.NEXT:
                             if ($scope.paginationMenu.currentPage !== $scope.paginationMenu.totalPages) {
                                 $scope.paginationMenu.currentPage++;
-                                displayPage($scope, data);
                             }
                             break;
                         default:
                             if ($scope.paginationMenu.currentPage !== item) {
                                 $scope.paginationMenu.currentPage = item;
-                                displayPage($scope, data);
                             }
                             break;
                      }
+                     $scope.getData($scope.paginationMenu.currentPage).then(function() {
+                         displayPage($scope, data);
+                     });
                 },
             };
             displayPage($scope, data);

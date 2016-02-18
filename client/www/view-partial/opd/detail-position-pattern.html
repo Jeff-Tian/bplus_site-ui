@@ -40,7 +40,8 @@
             </td>
             <td>
                 <div class="b-opd-position-progressrate" data-content="{{displayData.loginin?'你赢过'+data.progressRate+'%的竞争对手!':'登陆查看你在竞争对手中的竞争力!'}}" data-variation="inverted" ng-click="displayData.onMatchlevelClick('competitiveness', data.progressRate)">
-                    <bopdcompetitiveness data="data"></bopdcompetitiveness>
+                    <bopdcompetitiveness data="data" ng-if="data.progressRate!==''"></bopdcompetitiveness>
+                    <img ng-if="data.progressRate===''" ng-src="img/opd/rate_.png?<%= cdn.version %>"/>
                 </div>
             </td>
             <td class="desc" ng-click="displayData.onClick(data, $index)">
@@ -51,7 +52,7 @@
                     <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
                 </h3>
                 <div class="grey color">
-                    <span class="ui smooth label" ng-bind="data.position.type"></span>
+                    <span class="ui smooth label" ng-bind="data.position.type" ng-hide="data.position.type===''"></span>
                     <span class="grey color loose" ng-bind="data.position.salary"></span>
                     <span class="grey color loose" ng-bind="data.position.certification"></span>
                     <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
@@ -74,14 +75,14 @@
             </td>
         </tr>
     </tbody>
-    <tfoot ng-show="displayData.showPageMenu">
+    <tfoot ng-if="displayData.showPageMenu">
         <tr class="transparent">
             <th colspan="10" class="ui center aligned">
                 <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
             </th>
         </tr>
     </tfoot>
-    <tfoot ng-show="displayData.showPageMore">
+    <tfoot ng-if="displayData.showPageMore">
         <tr class="transparent">
             <th colspan="10" class="ui right aligned">
                 <div class="ui red button button-more" ng-click="displayData.onMoreClick()">更多</div>

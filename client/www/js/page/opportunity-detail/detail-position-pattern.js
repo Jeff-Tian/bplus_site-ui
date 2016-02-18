@@ -14,6 +14,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             $scope.rawData = data;
             $scope.sid = $scope.$id;
             var loginin = $scope.positions.page !== "logout";
+            NUMBER_PER_PAGE = $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
                 loginin: loginin,
@@ -22,6 +23,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 showPageMore: $scope.positions.showPageMore,
                 pageMoreHash: $scope.positions.pageMoreHash,
                 data: data.slice(0, NUMBER_PER_PAGE),
+                getData: $scope.positions.getData,
                 onClick: function(target, $index) {
                     var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
                     if (!/\#\/job\/$/.test(url)) {

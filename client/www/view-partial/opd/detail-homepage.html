@@ -6,10 +6,10 @@
             <a class="item" data-tab="hot">热门</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="recommendation">
-            <bopdpositionpattern positions="recommendation.positions"/>
+            <bopdpositionpattern positions="recommendation.positions" ng-if="recommendation.positions.data.length>0"/>
         </div>
         <div class="ui bottom attached tab segment" data-tab="hot">
-            <bopdpositionpattern positions="hot.positions"/>
+            <bopdpositionpattern positions="hot.positions" ng-if="hot.positions.data.length>0"/>
         </div>
     </div>
 <!--     <div class="b-opd-homepage-training" ng-show="trainingOpportunityList.data.length>0">
