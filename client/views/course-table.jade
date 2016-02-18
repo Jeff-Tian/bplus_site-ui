@@ -19,7 +19,8 @@ mixin finishedUnratedCourseBlocks(c)
         button(class="ui black button") 立刻评价
 
 mixin finishedRatedCourseBlocks(c)
-    td 五星
+    td
+        div(class="ui star rating", data-max-rating="5", data-rating="4")
     td
         button(class="ui black button") 评价详情
 
@@ -89,6 +90,7 @@ mixin finishedUnratedCourseTable(courses)
 mixin finishedRatedCourseTable(courses)
     + finishedCourseTable(courses, '已评价')
         + finishedRatedCourseBlocks('c')
+
 
 mixin sticky
     div(class="right ui rail", style="margin: 0; padding: 0;")
