@@ -40,8 +40,8 @@ block content
                         div(class="ui horizontal divider")
                         + sticky
                     div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="FinishedCoursesCtrl")
-                        + finishedCourseTable('courses', '待评价')
-                        + finishedCourseTable('courses', '已评价')
+                        + finishedUnratedCourseTable('courses')
+                        + finishedRatedCourseTable('courses', '已评价')
                         div(class="ui horizontal divider")
                         + sticky
                 script(type="text/javascript").

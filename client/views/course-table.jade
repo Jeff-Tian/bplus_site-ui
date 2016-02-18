@@ -13,10 +13,15 @@ mixin unfinishedCourseBlocks(c)
         p
             button(class="ui button", ng-class="{'black': hovering[$index], 'grey': !hovering[$index]}") 进入视频课
 
-mixin finishedCourseBlocks(c)
+mixin finishedUnratedCourseBlocks(c)
     td 尚未评价
     td
         button(class="ui black button") 立刻评价
+
+mixin finishedRatedCourseBlocks(c)
+    td 五星
+    td
+        button(class="ui black button") 评价详情
 
 mixin courseTable()
     table(class="ui basic table positions hoverable", style="border: none; background-color: white;")
@@ -75,7 +80,15 @@ mixin finishedCourseTable(courses, header)
             th(colspan="4")
                 h4(class="ui white header left aligned") #{header}
         + courseTableBody(courses)
-            + finishedCourseBlocks('c')
+            block
+
+mixin finishedUnratedCourseTable(courses)
+    + finishedCourseTable(courses, '待评价')
+        + finishedUnratedCourseBlocks('c')
+
+mixin finishedRatedCourseTable(courses)
+    + finishedCourseTable(courses, '已评价')
+        + finishedRatedCourseBlocks('c')
 
 mixin sticky
     div(class="right ui rail", style="margin: 0; padding: 0;")
