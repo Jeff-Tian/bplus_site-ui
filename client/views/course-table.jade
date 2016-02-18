@@ -16,7 +16,7 @@ mixin unfinishedCourseBlocks(c)
 mixin finishedUnratedCourseBlocks(c)
     td 尚未评价
     td
-        button(class="ui black button") 立刻评价
+        button(class="ui black button", ng-click="showRating=true", ng-disabled="showRating") 立刻评价
 
 mixin finishedRatedCourseBlocks(c)
     td
@@ -47,7 +47,7 @@ mixin courseTableHeader
 
 mixin courseTableBody(courses)
     tbody
-        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat="c in #{courses} track by $index")
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses} track by $index")
             td
                 h4(class="ui header") {{c.name}}
                     div(class="sub header")  {{c.teacher}}
@@ -55,6 +55,33 @@ mixin courseTableBody(courses)
                 p {{c.startDate}}
                 p {{c.startTime}}~{{c.endTime}}
             block
+        tr.rating(ng-repeat-end, ng-show="showRating")
+            td(colspan="4", style="padding: 0;")
+                form(class="ui form")
+                    div(style="padding: 20px;")
+                        div(class="field")
+                            label 发表评论
+                            textarea(rows="2")
+                    div(class="inline field", style="background-color: #f9f9f9; padding: 5px 20px;")
+                        label 总体评分
+                        div(class="ui mini star rating", data-max-rating="5", data-rating="5")
+                    div(style="padding: 20px;")
+                        div(class="inline field")
+                            label(ng-bind="'准时\u2001\u2001'")
+                            div(class="ui mini star rating", data-max-rating="5", data-rating="4")
+                        div(class="inline field")
+                            label(ng-bind="'专业度\u2001'")
+                            div(class="ui mini star rating", data-max-rating="5", data-rating="5")
+                        div(class="inline field")
+                            label 通话质量
+                            div(class="ui mini star rating", data-max-rating="5", data-rating="4")
+                        div(class="inline field")
+                            label(ng-bind="'态度\u2001\u2001'")
+                            div(class="ui mini star rating", data-max-rating="5", data-rating="4")
+                            div(class="right floated")
+                                button(class="ui mini black button", type="reset") 取消
+                                button(class="ui mini red button", type="submit") 完成
+
     tfoot
         tr
             th(colspan="4")
