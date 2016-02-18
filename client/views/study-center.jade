@@ -10,48 +10,9 @@ block customizedFooter
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/menuDirective.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/controllers/OpdMenuCtrl.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/widget/competitiveness/competitiveDirective.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/page/study-center/app.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/study-center/controllers.js?#{cdn.version}")
         script(type="text/javascript").
-            angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
-                    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-                        var states = ['study-plan', 'fav', 'course'];
-
-                        $urlRouterProvider.otherwise('/' + states[0]);
-
-                        for (var i = 0; i < states.length; i++) {
-                            var state = states[i];
-
-                            $stateProvider
-                                    .state(state, {
-                                        url: '/' + state,
-                                        templateUrl: state + '.html'
-                                    });
-                        }
-                    }])
-                    .directive('bopdmenu', angular.bplus.leftColumnMenu)
-                    .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)
-                    .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
-                    .controller('StudyCtrl', ['$scope', function ($scope) {
-                        $scope.menus = [{
-                            text: '我的学习计划',
-                            href: '#/study-plan',
-                            icon: 'file text outline',
-                            states: ['study-plan']
-                        }, {
-                            text: '我的收藏',
-                            href: '#/fav',
-                            icon: 'bookmark',
-                            states: ['fav']
-                        }, {
-                            text: '我的课程',
-                            href: '#/course',
-                            icon: 'book',
-                            states: ['course']
-                        }];
-                    }])
-                    .controller('UnfinishedCoursesCtrl', angular.bplus.UnfinishedCoursesCtrl)
-            ;
-
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
                 angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
@@ -78,8 +39,9 @@ block content
                         + unfinishedCourseTable('courses')
                         div(class="ui horizontal divider")
                         + sticky
-                    div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
-                        + finishedCourseTable('courses')
+                    div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="FinishedCoursesCtrl")
+                        + finishedCourseTable('courses', '待评价')
+                        + finishedCourseTable('courses', '已评价')
                         div(class="ui horizontal divider")
                         + sticky
                 script(type="text/javascript").
