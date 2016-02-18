@@ -305,7 +305,7 @@ module.exports = {
         })(req, res, next);
     },
 
-    recommentJobs: function (req, res, next) {
+    recommendJobs: function (req, res, next) {
         proxyBPlus({
             path: '/job/recommend'
         })(req, res, next);

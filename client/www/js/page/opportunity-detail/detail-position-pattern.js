@@ -18,6 +18,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,
                 loginin: loginin,
+                deleteable: $scope.positions.deleteable !== "false",
                 showPageMenu: $scope.positions.showPageMenu,
                 showPosition: $scope.positions.showPosition,
                 showPageMore: $scope.positions.showPageMore,

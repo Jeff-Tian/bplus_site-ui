@@ -37,6 +37,7 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 showPageMore: true,
                 pageMoreHash: "/job",
                 page: "empty",//data, logout, empty
+                deleteable: "false",
                 data: []
             };
             $scope.getPositions("", 
@@ -65,49 +66,25 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 showPageMore: false,
                 pageMoreHash: "",
                 page: "empty",//data, logout, empty
+                deleteable: "false",
                 data: []
-                // data: [{
-                //     matchLevel: "a",
-                //     progressRate: "70",
-                //     position: {
-                //         name: "a",
-                //         type: "b",
-                //         salary: "1111",
-                //         certification: "c",
-                //     },
-                //     issueTime: "2015-12-12",
-                //     company: "ksjksdf",
-                //     status: "finished",     //finished, delivered
-                //     statusText: "已有3家公司对你感兴趣!",
-                //     companyinfo: {
-                //         logo: "img/opd/match_e.png",
-                //         name: "阿里巴巴",
-                //         field: "移动互联网/中企",
-                //         flag: "latest"   //ad, recommendation, latest
-                //     }
-                // }, {
-                //     matchLevel: "d",
-                //     progressRate: "50",
-                //     position: {
-                //         name: "c",
-                //         type: "d",
-                //         salary: "111122",
-                //         certification: "d",
-                //     },
-                //     status: "",
-                //     statusText: "已有3家公司对你感兴趣!",
-                //     issueTime: "2015-12-20",
-                //     company: "ksj ksdf",
-                //     companyinfo: {
-                //         logo: "img/opd/match_e.png",
-                //         name: "阿里巴巴",
-                //         field: "移动互联网/中企",
-                //         flag: "recommendation"
-                //     }
-                // }]
             };
-            login = true;
-            $scope.hot.positions.page = login ? ($scope.hot.positions.data.length > 0 ? "data" : "empty") : "logout";
+            $scope.getPositions("", 
+                {}, 
+                $scope.hot.positions.NUMBER_PER_PAGE, 
+                1,
+                $scope.STATIC_PARAMS.POSITION_SOURCE.HOT).then(function(ret){
+                    if (!$scope.hot.positions.data) {
+                        $scope.hot.positions.data = new Array(ret.total);
+                        for (var i = 0; i < ret.total; i++) {
+                            $scope.hot.positions.data[i] = {};
+                        }
+                    }
+                    ret.jobs.forEach(function(value, index){
+                        $scope.hot.positions.data[(ret.page - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
+                    });
+                    $scope.hot.positions.page = $scope.hasLoggedin() ? ($scope.hot.positions.data.length > 0 ? "data" : "empty") : "logout";
+            });
             // $scope.data.positions.page = "empty";
             // originObject = $scope.hot.positions.data[0];
             // for (i = 0; i < 3; i++) {

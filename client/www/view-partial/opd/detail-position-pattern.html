@@ -57,7 +57,7 @@
                     <span class="grey color loose" ng-bind="data.position.certification"></span>
                     <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
                 </div>
-                <div class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status===''">
+                <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status===''">
                     <div class="ui red right corner label">
                         <i class="remove icon"></i>
                     </div>

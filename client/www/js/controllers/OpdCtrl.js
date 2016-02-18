@@ -180,11 +180,17 @@
                     url ='/service-proxy/bplus-opd/hotjob';
                     break;
                 case STATIC_PARAMS.POSITION_SOURCE.RECOMMEND:
-                    url ='/service-proxy/bplus-opd/recommentjob';
+                    url ='/service-proxy/bplus-opd/recommendjob';
                     break;
             }
             return service.post(url, searchParam).then(function(data) {
                 var convertedJobData = data.jobs;
+                //TO DELETE
+                if (!convertedJobData) {
+                    convertedJobData = data.jobs = data;
+                    data.totalPage = 1;
+                }
+                ////
                 if (data.jobs) {
                     convertedJobData = data.jobs.map(function(value){
                         return {
