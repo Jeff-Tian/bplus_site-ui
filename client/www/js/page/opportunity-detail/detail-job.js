@@ -10,7 +10,7 @@ angular.module('opdModule')
                 var search = function(currentPage) {
                     $scope.isSearching = true;
                     return $scope.getPositions(
-                            $scope.searchOptions.searchContent,
+                            $scope.searchOptions.searchKeyWord,
                             {}, 
                             $scope.searchList.NUMBER_PER_PAGE, 
                             currentPage ? currentPage : FIRST_PAGE,
@@ -220,8 +220,9 @@ angular.module('opdModule')
                 $scope.searchOptions = {
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
+                    searchKeyWord: keyWordFromHomePage,
                     search: function(keyword){
-                        $scope.searchOptions.searchContent = keyword;
+                        $scope.searchOptions.searchKeyWord = keyword;
                         search(FIRST_PAGE);
                     }
                 };

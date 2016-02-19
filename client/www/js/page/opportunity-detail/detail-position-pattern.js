@@ -28,11 +28,6 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 currentPage: currentPage,
                 data: data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE),
                 getData: $scope.positions.getData,
-                // getData: function(currentPage) {
-                //     return $scope.positions.getData(currentPage).then(function() {
-                //         $scope.displayData.rawData = $scope.positions.data;
-                //     });
-                // },
                 onClick: function(target, $index) {
                     var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
                     if (!/\#\/job\/$/.test(url)) {

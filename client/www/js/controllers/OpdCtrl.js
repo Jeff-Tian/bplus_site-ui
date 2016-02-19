@@ -193,7 +193,7 @@
                         return {
                             jobID: value.id,
                             matchLevel: (value.jobMatch.match ? levelMapping(value.jobMatch.match) : ""),
-                            progressRate: (value.jobMatch.competitiveness ? value.competitiveness : ""),
+                            progressRate: (value.jobMatch.competitiveness ? value.jobMatch.competitiveness : ""),
                             position: {
                                 name: value.title || "",
                                 type: value.job_type || "",

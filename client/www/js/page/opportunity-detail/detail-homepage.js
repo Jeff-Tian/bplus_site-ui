@@ -4,6 +4,7 @@ angular.module('opdModule').directive('bopdhomepage', function() {
         scope: true,
         templateUrl: '/view-partial/opd/detail-homepage.html',
         link: function($scope, element, attrs) {
+            var FIRST_PAGE = 1;
             //Search bar
             $scope.overallParams.searchKeyWord = "";
             $scope.searchOptions = {
@@ -29,6 +30,25 @@ angular.module('opdModule').directive('bopdhomepage', function() {
             };
             //Position
             //Position-Recommendation
+            var searchRecommendation = function(){
+                $scope.getPositions("", 
+                    {}, 
+                    $scope.recommendation.positions.NUMBER_PER_PAGE, 
+                    1,
+                    $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH).then(function(ret){
+                        if (!$scope.recommendation.positions.data) {
+                            $scope.recommendation.positions.data = new Array(ret.total);
+                            for (var i = 0; i < ret.total; i++) {
+                                $scope.recommendation.positions.data[i] = {};
+                            }
+                        }
+                        ret.jobs.forEach(function(value, index){
+                            $scope.recommendation.positions.data[(ret.currentPage - 1)*$scope.recommendation.positions.NUMBER_PER_PAGE+index] = value;
+                        });
+                        $scope.recommendation.positions.totalPage = ret.total;
+                        $scope.recommendation.positions.page = $scope.hasLoggedin() ? ($scope.recommendation.positions.data.length > 0 ? "data" : "empty") : "logout";
+                });
+            };
             $scope.recommendation = {};
             $scope.recommendation.positions = {
                 NUMBER_PER_PAGE: 5,
@@ -36,29 +56,36 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 showPageMenu: false,
                 showPageMore: true,
                 pageMoreHash: "/job",
+                getData: searchRecommendation,
                 page: "empty",//data, logout, empty
                 deleteable: "false",
+                currentPage: FIRST_PAGE,
+                totalPage: 0,
                 data: []
             };
-            $scope.getPositions("", 
-                {}, 
-                $scope.recommendation.positions.NUMBER_PER_PAGE, 
-                1,
-                $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH).then(function(ret){
-                    if (!$scope.recommendation.positions.data) {
-                        $scope.recommendation.positions.data = new Array(ret.total);
-                        for (var i = 0; i < ret.total; i++) {
-                            $scope.recommendation.positions.data[i] = {};
-                        }
-                    }
-                    ret.jobs.forEach(function(value, index){
-                        $scope.recommendation.positions.data[(ret.currentPage - 1)*$scope.recommendation.positions.NUMBER_PER_PAGE+index] = value;
-                    });
-                    $scope.recommendation.positions.totalPage = ret.total;
-                    $scope.recommendation.positions.page = $scope.hasLoggedin() ? ($scope.recommendation.positions.data.length > 0 ? "data" : "empty") : "logout";
-            });
-
+            searchRecommendation();
             //Position-Hot
+            var searchHot = function() {
+                $scope.getPositions("", 
+                        {}, 
+                        $scope.hot.positions.NUMBER_PER_PAGE, 
+                        1,
+                        $scope.STATIC_PARAMS.POSITION_SOURCE.HOT,
+                        $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                    ).then(function(ret){
+                        if (!$scope.hot.positions.data) {
+                            $scope.hot.positions.data = new Array(ret.total);
+                            for (var i = 0; i < ret.total; i++) {
+                                $scope.hot.positions.data[i] = {};
+                            }
+                        }
+                        ret.jobs.forEach(function(value, index){
+                            $scope.hot.positions.data[(ret.currentPage - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
+                        });
+                        $scope.hot.positions.totalPage = ret.total;
+                        $scope.hot.positions.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
+                });
+            };
             $scope.hot = {};
             $scope.hot.positions = {
                 NUMBER_PER_PAGE: 100,
@@ -66,30 +93,14 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 showPageMenu: false,
                 showPageMore: false,
                 pageMoreHash: "",
+                getData: searchHot,
                 page: "empty",//data, logout, empty
                 deleteable: "false",
+                currentPage: FIRST_PAGE,
                 totalPage: 0,
                 data: []
             };
-            $scope.getPositions("", 
-                    {}, 
-                    $scope.hot.positions.NUMBER_PER_PAGE, 
-                    1,
-                    $scope.STATIC_PARAMS.POSITION_SOURCE.HOT,
-                    $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
-                ).then(function(ret){
-                    if (!$scope.hot.positions.data) {
-                        $scope.hot.positions.data = new Array(ret.total);
-                        for (var i = 0; i < ret.total; i++) {
-                            $scope.hot.positions.data[i] = {};
-                        }
-                    }
-                    ret.jobs.forEach(function(value, index){
-                        $scope.hot.positions.data[(ret.currentPage - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
-                    });
-                    $scope.hot.positions.totalPage = ret.total;
-                    $scope.hot.positions.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
-            });
+            searchHot();
             //Training
             // $scope.trainingOpportunityList = {
             //     NUMBER_PER_PAGE: 3,
