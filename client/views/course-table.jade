@@ -62,7 +62,7 @@ mixin courseTableBody(courses, rating, rated)
                         div(style="padding: 20px;")
                             div(class="field")
                                 label 发表评论
-                                textarea(rows="2")
+                                textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~")
                         div(class="inline field", style="background-color: #f9f9f9; padding: 5px 20px;")
                             label 总体评分
                             div(class="ui mini star rating", data-max-rating="5", data-rating="5")
@@ -83,11 +83,11 @@ mixin courseTableBody(courses, rating, rated)
                                     button(class="ui mini black button", type="reset") 取消
                                     button(class="ui mini red button", type="submit") 完成
                 else if rated
-                    form(class="ui form", style="background-color: #f9f9f9; margin-bottom: 0;")
+                    form(class="ui form", style="background-color: #f9f9f9; margin-bottom: 0; height: 100%;")
                         div(class="inline field", style="padding: 20px 20px 5px 20px;")
                             label 总体评分
                             div(class="ui mini star rating", data-max-rating="5", data-rating="5")
-                        div(style="padding: 20px;")
+                        div(style="padding: 10px 20px 20px 20px;")
                             div(class="", style="border: solid 2px white; border-radius: 3px; padding: 10px;")
                                 div(class="ui grid")
                                     div(class="four wide column")
@@ -104,11 +104,20 @@ mixin courseTableBody(courses, rating, rated)
                                         div(class="ui mini star rating", data-max-rating="5", data-rating="4")
                         div(class="ui fitted clearing horizontal divider")
                         div(style="padding: 0 20px;")
+                            p 我的反馈评价
                             div(style="border: solid 2px white; border-radius: 3px; padding: 10px;")
                                 | asdfjklasdfjladjsfkljasdfljadjsf
                         div(class="right floated", style="padding: 20px;")
                             button(class="ui mini red button", type="submit") 追加评论
-                        div(class="ui clearing horizontal divider")
+                        div(class="ui fitted clearing horizontal divider")
+                        div(style="padding: 0 20px;")
+                            p 追加评论
+                            textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~")
+                        div(class="right floated field", style="padding: 20px;")
+                            button(class="ui mini black button", type="reset") 取消
+                            button(class="ui mini red button", type="submit") 完成
+                        div(class="ui fitted clearing horizontal divider")
+
     tfoot
         tr
             th(colspan="4")
