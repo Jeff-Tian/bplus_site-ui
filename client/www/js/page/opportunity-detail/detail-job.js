@@ -11,7 +11,7 @@ angular.module('opdModule')
                     $scope.isSearching = true;
                     return $scope.getPositions(
                             $scope.searchOptions.searchKeyWord,
-                            {}, 
+                            $scope.searchOptions.conditions,
                             $scope.searchList.NUMBER_PER_PAGE, 
                             currentPage ? currentPage : FIRST_PAGE,
                             $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
@@ -114,8 +114,8 @@ angular.module('opdModule')
                         list: [{
                             id: 0,
                             value: '不限',
-                            data: '全国',
-                            text: '全国'
+                            data: '不限',
+                            text: '不限'
                         }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.NATIRE_OF_FIRM])
                     }, {
                       key: 'jobCategory',
@@ -130,7 +130,7 @@ angular.module('opdModule')
                         rangeLabel: '人民币',
                         type: 'range',
                         list: [{
-                            id: '0',
+                            id: 0,
                             text: '不限'
                         }],
                         range: {
@@ -149,9 +149,9 @@ angular.module('opdModule')
                                         valueA = valueB;
                                         valueB = tmpValue;
                                     }
-                                    $scope.filterSetting.monthlySalary = valueA + " ~ " + valueB;
+                                    $scope.filterSetting.monthlySalary = valueA + " - " + valueB;
                                 } else {
-                                    $scope.filterSetting.monthlySalary = fromValue + " ~ " + toValue;
+                                    $scope.filterSetting.monthlySalary = fromValue + " - " + toValue;
                                 }
                             }
                         }
@@ -182,6 +182,7 @@ angular.module('opdModule')
                         industry: f.industry.list[0],
                         companyType: f.companyType.list[0],
                         jobCategory: f.jobCategory.list[0],
+                        //In fact it is annual salary
                         monthlySalary: f.monthlySalary.list[0]
                     };
 
@@ -217,12 +218,38 @@ angular.module('opdModule')
                 };
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
+                var findConditionValue = function(key) {
+                    var ret = $scope.filterSetting[key];
+                    if (ret.hasOwnProperty('id')) {
+                        if (ret.id === 0) { 
+                            ret = "";
+                            if (key === "monthlySalary") {
+                                ret = ["", ""];
+                            }
+                        } else {
+                            ret = ret.text;
+                        }
+                    } else if (key === "monthlySalary") {
+                        ret = ret.split("-");
+                    }
+                    return ret;
+                };
                 $scope.searchOptions = {
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
                     searchKeyWord: keyWordFromHomePage,
+                    conditions: "",
                     search: function(keyword){
                         $scope.searchOptions.searchKeyWord = keyword;
+                        $scope.searchOptions.conditions = {
+                            education: findConditionValue("diplomas"),
+                            industry: findConditionValue("industry"),
+                            jobType: findConditionValue("jobCategory"),
+                            natureOfFirms: findConditionValue("companyType"),
+                            salaryFrom: findConditionValue("monthlySalary")[0].trim(),
+                            salaryTo: findConditionValue("monthlySalary")[1].trim(),
+                            workLocation: findConditionValue("workPlace")
+                        };
                         search(FIRST_PAGE);
                     }
                 };
