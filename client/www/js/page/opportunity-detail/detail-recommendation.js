@@ -106,7 +106,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                   }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
                 }, {
                     key: 'monthlySalary',
-                    label: '月\u2001\u2001薪：',
+                    label: '年\u2001\u2001薪：',
                     rangeLabel: '人民币',
                     type: 'range',
                     list: [{

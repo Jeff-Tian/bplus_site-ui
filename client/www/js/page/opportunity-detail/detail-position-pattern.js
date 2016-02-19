@@ -9,9 +9,10 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
         templateUrl: '/view-partial/opd/detail-position-pattern.html',
         link: function($scope, element, attrs) {
             var data = $scope.positions.data,
+                currentPage = $scope.positions.currentPage,
                 $element = angular.element(element),
                 $tbody = $element.find('> table > tbody');
-            $scope.rawData = data;
+            // $scope.rawData = data;
             $scope.sid = $scope.$id;
             var loginin = $scope.positions.page !== "logout";
             NUMBER_PER_PAGE = $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
@@ -23,8 +24,15 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 showPosition: $scope.positions.showPosition,
                 showPageMore: $scope.positions.showPageMore,
                 pageMoreHash: $scope.positions.pageMoreHash,
-                data: data.slice(0, NUMBER_PER_PAGE),
+                rawData: $scope.positions.data,
+                currentPage: currentPage,
+                data: data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE),
                 getData: $scope.positions.getData,
+                // getData: function(currentPage) {
+                //     return $scope.positions.getData(currentPage).then(function() {
+                //         $scope.displayData.rawData = $scope.positions.data;
+                //     });
+                // },
                 onClick: function(target, $index) {
                     var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
                     if (!/\#\/job\/$/.test(url)) {

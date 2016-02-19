@@ -27,12 +27,14 @@
             NATUREOFFIRMS: "natureOfFirms",
             // jobFunction: "jobFunction"   //职能
         },
-        FILER_KEYS: {
-
+        SORT_KEYS: {
+            DEFAULT: "match",
+            MATCH: "match",
+            COMPETIVE: "competive"
         },
         POSITION_SOURCE: {
             SEARCH: "search",
-            HOT: "recommend",
+            HOT: "hot",
             RECOMMEND: "recommend"
         }
     };
@@ -156,7 +158,7 @@
             searchKeyWord: "",
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
-        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag) {
+        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField) {
             var searchParam = {};
             tags = tags || {};
             keyword = keyword || "";
@@ -171,6 +173,7 @@
             searchParam.member_id = member_id;
             searchParam.pageSize = pageSize;
             searchParam.page = page;
+            searchParam.sortField = sortField || "";
             var url = "";
             switch (searchTag) {
                 case STATIC_PARAMS.POSITION_SOURCE.SEARCH:
@@ -185,12 +188,6 @@
             }
             return service.post(url, searchParam).then(function(data) {
                 var convertedJobData = data.jobs;
-                //TO DELETE
-                if (!convertedJobData) {
-                    convertedJobData = data.jobs = data;
-                    data.totalPage = 1;
-                }
-                ////
                 if (data.jobs) {
                     convertedJobData = data.jobs.map(function(value){
                         return {
@@ -217,9 +214,6 @@
                     });
                     data.jobs = convertedJobData;
                 }
-                //TODO
-                //TO DELETE
-                data.page = 1;
                 return data;
             });
         };

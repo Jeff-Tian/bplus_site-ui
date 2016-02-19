@@ -52,8 +52,9 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                         }
                     }
                     ret.jobs.forEach(function(value, index){
-                        $scope.recommendation.positions.data[(ret.page - 1)*$scope.recommendation.positions.NUMBER_PER_PAGE+index] = value;
+                        $scope.recommendation.positions.data[(ret.currentPage - 1)*$scope.recommendation.positions.NUMBER_PER_PAGE+index] = value;
                     });
+                    $scope.recommendation.positions.totalPage = ret.total;
                     $scope.recommendation.positions.page = $scope.hasLoggedin() ? ($scope.recommendation.positions.data.length > 0 ? "data" : "empty") : "logout";
             });
 
@@ -67,13 +68,16 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 pageMoreHash: "",
                 page: "empty",//data, logout, empty
                 deleteable: "false",
+                totalPage: 0,
                 data: []
             };
             $scope.getPositions("", 
-                {}, 
-                $scope.hot.positions.NUMBER_PER_PAGE, 
-                1,
-                $scope.STATIC_PARAMS.POSITION_SOURCE.HOT).then(function(ret){
+                    {}, 
+                    $scope.hot.positions.NUMBER_PER_PAGE, 
+                    1,
+                    $scope.STATIC_PARAMS.POSITION_SOURCE.HOT,
+                    $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                ).then(function(ret){
                     if (!$scope.hot.positions.data) {
                         $scope.hot.positions.data = new Array(ret.total);
                         for (var i = 0; i < ret.total; i++) {
@@ -81,15 +85,11 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                         }
                     }
                     ret.jobs.forEach(function(value, index){
-                        $scope.hot.positions.data[(ret.page - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
+                        $scope.hot.positions.data[(ret.currentPage - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
                     });
-                    $scope.hot.positions.page = $scope.hasLoggedin() ? ($scope.hot.positions.data.length > 0 ? "data" : "empty") : "logout";
+                    $scope.hot.positions.totalPage = ret.total;
+                    $scope.hot.positions.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
             });
-            // $scope.data.positions.page = "empty";
-            // originObject = $scope.hot.positions.data[0];
-            // for (i = 0; i < 3; i++) {
-            //     $scope.hot.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
-            // }
             //Training
             // $scope.trainingOpportunityList = {
             //     NUMBER_PER_PAGE: 3,

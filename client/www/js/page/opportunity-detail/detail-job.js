@@ -5,6 +5,31 @@ angular.module('opdModule')
             scope: true,
             templateUrl: '/view-partial/opd/detail-job.html',
             link: function ($scope, element, attrs) {
+                var FIRST_PAGE = 1;
+                $scope.isSearching = true;
+                var search = function(currentPage) {
+                    $scope.isSearching = true;
+                    return $scope.getPositions(
+                            $scope.searchOptions.searchContent,
+                            {}, 
+                            $scope.searchList.NUMBER_PER_PAGE, 
+                            currentPage ? currentPage : FIRST_PAGE,
+                            $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                            $scope.sortingAndFilterSetting.sorting.value
+                        ).then(function(ret){
+                            $scope.searchList.currentPage = currentPage;
+                            $scope.searchList.data = new Array(ret.total);
+                            for (var i = 0; i < ret.total; i++) {
+                                $scope.searchList.data[i] = {};
+                            }
+                            ret.jobs.forEach(function(value, index){
+                                $scope.searchList.data[(ret.currentPage - 1)*$scope.searchList.NUMBER_PER_PAGE+index] = value;
+                            });
+                            $scope.searchList.totalPage = ret.total;
+                            $scope.searchList.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
+                            $scope.isSearching = false;
+                    });
+                };
                 //Init the page
                 var data = {
                 };
@@ -101,7 +126,7 @@ angular.module('opdModule')
                       }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
                     }, {
                         key: 'monthlySalary',
-                        label: '月薪：',
+                        label: '年\u2001\u2001薪：',
                         rangeLabel: '人民币',
                         type: 'range',
                         list: [{
@@ -159,6 +184,8 @@ angular.module('opdModule')
                         jobCategory: f.jobCategory.list[0],
                         monthlySalary: f.monthlySalary.list[0]
                     };
+
+                    search(FIRST_PAGE);
                 });
                 //Search filter
                 $scope.sortingAndFilter = [{
@@ -166,13 +193,12 @@ angular.module('opdModule')
                     label: '排序方式：',
                     list: [{
                         id: 1,
+                        value: $scope.STATIC_PARAMS.SORT_KEYS.MATCH,
                         text: '匹配度'
                     }, {
                         id: 2,
+                        value: $scope.STATIC_PARAMS.SORT_KEYS.COMPETIVE,
                         text: '竞争力'
-                    }, {
-                        id: 3,
-                        text: '最新'
                     }]
                 }];
 
@@ -181,16 +207,12 @@ angular.module('opdModule')
                     showDetail: true,
                     hasThumbView: false,
                     inline: true,
-                    sorting: {
-                        id: 1,
-                        text: '匹配度'
-                    },
+                    sorting: $scope.sortingAndFilter[0].list[0],
                     sortingClick: function(key, l) {
                         if ($scope.sortingAndFilterSetting[key].id !== l.id) {
                             $scope.sortingAndFilterSetting[key] = l;
-                            console.log("search", l.text);
-                            //search();
                         }
+                        search(FIRST_PAGE);
                     }
                 };
                 //Search bar
@@ -199,77 +221,25 @@ angular.module('opdModule')
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
                     search: function(keyword){
-                        //TODO
-                        var tags = {};
-                        $scope.search(keyword, tags);
+                        $scope.searchOptions.searchContent = keyword;
+                        search(FIRST_PAGE);
                     }
                 };
-
-                //TODO search(keyWordFromHomePage).then(function(data) {
-                    $scope.overallParams.searchKeyWord = "";
-                    //Search content
-
-                // });
+                $scope.overallParams.searchKeyWord = "";
                 //Search config and search results
                 $scope.searchList = {
                     NUMBER_PER_PAGE: 10,
                     showPosition: true,
                     showPageMenu: true,
                     showPageMore: false,
+                    deleteable: "false",
+                    getData: search,
                     page: "empty",//data, logout, empty
+                    totalPage: 0,
+                    currentPage: FIRST_PAGE,
                     data: [{
-                        matchLevel: "a",
-                        progressRate: "50",
-                        position: {
-                            id: "abcdefg",
-                            name: "a",
-                            type: "b",
-                            salary: "1111",
-                            certification: "c",
-                        },
-                        issueTime: "2015-12-12",
-                        company: "ksjksdf",
-                        status: "finished",     //finished, delivered
-                        statusText: "已有3家公司对你感兴趣!",
-                        companyinfo: {
-                            logo: "img/opd/match_e.png",
-                            name: "阿里巴巴",
-                            field: "移动互联网/中企",
-                            flag: "latest"   //ad, recommendation, latest
-                        }
-                    }, {
-                        matchLevel: "d",
-                        progressRate: "70",
-                        position: {
-                            id: "higklmn",
-                            name: "c",
-                            type: "d",
-                            salary: "111122",
-                            certification: "d",
-                        },
-                        status: "",
-                        statusText: "已有3家公司对你感兴趣!",
-                        issueTime: "2015-12-20",
-                        company: "ksj ksdf",
-                        companyinfo: {
-                            logo: "img/opd/match_e.png",
-                            name: "阿里巴巴",
-                            field: "移动互联网/中企",
-                            flag: "recommendation"
-                        }
                     }]
                 };
-                //TODO check login status(cookie, mid);
-                var login = true;
-                $scope.searchList.page = login ? ($scope.searchList.data.length > 0 ? "data" : "empty") : "logout";
-                // $scope.data.positions.page = "empty";
-                var originObject = $scope.searchList.data[0];
-                for (var i = 0; i < 302; i++) {
-                    $scope.searchList.data.push($.extend(true, {}, originObject, {progressRate: i.toString()}));
-                }
-                //////////////////////////
-                
-
             }
         };
     }])

@@ -48,12 +48,11 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
     return {
         restrict: "E",
         scope: {
-            displaydata: '=',
-            rawdata: "="
+            displaydata: '='
         },
         templateUrl: '/view-partial/opd/detail-pagination-pattern.html',
         link: function($scope, element, attrs) {
-            var data = $scope.rawdata;
+            var data = $scope.displaydata.rawData;
             var length = data.length;
             var pages = Math.ceil(length / $scope.displaydata.NUMBER_PER_PAGE);
             var head = "head";
@@ -67,8 +66,7 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                 PREVIOUS: "previous",
                 NEXT: "next",
                 totalPages: pages,
-                //Run time values
-                currentPage: FIRST_PAGE,
+                currentPage: $scope.displaydata.currentPage,
                 leftArrowDisabled: true,
                 rightArrowDisabled: false,
                 middleNumber: 1,
@@ -94,8 +92,9 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                             }
                             break;
                      }
-                     $scope.getData($scope.paginationMenu.currentPage).then(function() {
-                         displayPage($scope, data);
+                     $scope.displaydata.getData($scope.paginationMenu.currentPage).then(function() {
+                        data = $scope.displaydata.rawData;
+                        displayPage($scope, data);
                      });
                 },
             };
