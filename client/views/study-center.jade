@@ -35,7 +35,7 @@ block content
                     div(class="ui bottom attached active tab segment b-opd-body", data-tab="teacher", style="background: transparent;", ng-controller="FavTeachersCtrl")
                         div(class="ui segments", style="border: none;")
                             div(class="ui red inverted clearing segment")
-                                    | 导师名称
+                                | 导师名称
                             div(class="ui tertiary inverted segment", style="padding-bottom: 5px; padding-top: 5px;", ng-repeat-start="t in teachers")
                                 h4(class="ui right floated header", style="margin-bottom: 0;") {{t.title}}
                                 h4(class="ui left floated white header", style="margin-bottom: 0;")
@@ -56,15 +56,39 @@ block content
                                         div(class="ui middle aligned link list", style="width: 50%;")
                                             div.item(ng-repeat="topic in t.topics")
                                                 div(class="right floated content")
-                                                    |(
+                                                    | (
                                                     a(ng-href="topic.link", target="topic.target") more
-                                                    |)
+                                                    | )
                                                 div.content(style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;", ng-bind="topic.title + '.........................................................................................'")
                                         div.description
                                         div.extra
                                             button(class="ui right floated black mini button") 小纸条记录
                                             button(class="ui right floated black mini button") 取消收藏
                             div(class="ui black secondary inverted segment") 小纸条记录
+                            div(class="ui segment", style="max-height: 600px; background-color: #f0f0f0; color: gray;")
+                                p(class="", style="text-align: center;") 尚有 5 则新留言
+                                p(class="", style="text-align: center") Sep 30 2015 23:09
+                                div(class="ui items")
+                                    div(class="right floated container")
+                                        div(class="ui image", style="text-align: center; float: right;")
+                                            img(src="/img/feedback/about-team-1.jpg", class="ui mini avatar bordered image", style="border: solid 3px #cc0000;")
+                                            div CEO
+                                        div.content
+                                            h5(class="ui right floated header", style="clear: left; margin-bottom: 5px;")
+                                                a.user YIYI CHEN / 台湾交通大学 / 设计师
+                                            div(class="right floated description", style="max-width: 400px; background-color: white; padding: 10px 20px; border-radius: 5px; margin-right: 10px;")
+                                                p 钱老师您好,我很喜欢您提到创业的梦想与现实 这一个部分,我现在也面临了是否要考研还是就 业的选择,不知道老师有没有什麽想法?
+
+                                    div.item
+                                        div(class="ui mini avatar image", style="text-align: center;")
+                                            img(src="/img/feedback/about-team-1.jpg", class="ui bordered image", style="border: solid 3px #000099;")
+                                            span 导师
+                                        div.content
+                                            h5(class="ui header")
+                                                a.user 钱申 / 合得国际CTO
+                                            div(class="description", style="max-width: 400px; background-color: white; padding: 10px 20px; border-radius: 5px;")
+                                                p 聊聊你现在对于创业的想法吧!
+
                             div(class="ui segment", ng-repeat-end)
                                 form(class="ui form")
                                     div.field
@@ -76,7 +100,7 @@ block content
                                             | 上传照片
                                     div(class="ui clearing fitted horizontal divider")
 
-                            div(class="ui tertiary inverted segment centered ") 查看更多
+                            div(class="ui tertiary inverted segment center aligned") 查看更多
                         p &nbsp;
             script(type="text/ng-template", id="course.html")
                 div.b-opd-favorite
