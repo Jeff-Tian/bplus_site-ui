@@ -56,4 +56,61 @@ angular.module('studyCenterModule')
             status: '100'
         }];
     }])
+    .controller('FavTeachersCtrl', ['$scope', function ($scope) {
+        $scope.teachers = [{
+            name: '钱申',
+            description: '10年再线教育经验,港大MBA,复旦计算机硕士',
+            title: '合得国际CTO',
+            image: 'img/feedback/about-team-1.jpg',
+            topics: [{
+                title: '投行面试辅导',
+                link: 'http://www.baidu.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.bing.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.google.com',
+                target: '_blank'
+            }]
+        }, {
+            name: '钱申',
+            description: '10年再线教育经验,港大MBA,复旦计算机硕士',
+            title: '合得国际CTO',
+            image: 'img/feedback/about-team-1.jpg',
+            topics: [{
+                title: '投行面试辅导投行面试辅导投行面试辅导投行面试辅导投行面试辅导投行面试辅导投行面试辅导',
+                link: 'http://www.baidu.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.bing.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.google.com',
+                target: '_blank'
+            }]
+        }, {
+            name: '钱申',
+            description: '10年再线教育经验,港大MBA,复旦计算机硕士',
+            title: '合得国际CTO',
+            image: 'img/feedback/about-team-1.jpg',
+            topics: [{
+                title: '投行面试辅导',
+                link: 'http://www.baidu.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.bing.com',
+                target: '_blank'
+            }, {
+                title: '如何做好电话销售',
+                link: 'http://www.google.com',
+                target: '_blank'
+            }]
+        }];
+    }])
 ;

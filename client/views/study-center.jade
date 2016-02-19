@@ -29,7 +29,41 @@ block content
             script(type="text/ng-template", id="study-plan.html")
                 div Study Plan
             script(type="text/ng-template", id="fav.html")
-                div Fav
+                div.b-opd-favorite
+                    div(class="ui top attached tabular menu")
+                        a(class="active item", data-tab="teacher") 我的收藏
+                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="teacher", style="background: transparent;", ng-controller="FavTeachersCtrl")
+                        div(class="ui segments", style="border: none;")
+                            div(class="ui red inverted clearing segment")
+                                    | 导师名称
+                            div(class="ui tertiary inverted segment", style="padding-bottom: 5px; padding-top: 5px;", ng-repeat-start="t in teachers")
+                                h4(class="ui right floated header", style="margin-bottom: 0;") {{t.title}}
+                                h4(class="ui left floated white header", style="margin-bottom: 0;")
+                                    i(class="large user icon")
+                                    div.content
+                                        | {{t.name}}
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                                        span(class="", style="font-size: x-small; font-weight: normal;") {{t.description}}
+                                div(class="ui horizontal fitted clearing divider")
+                            div(class="ui segment items", ng-repeat-end)
+                                div.item
+                                    div(class="ui small image")
+                                        img(ng-src="/{{t.image}}")
+                                    div.content
+                                        h5(class="ui header")
+                                            i(class="ui red book icon")
+                                            | 最新话题
+                                        div(class="ui middle aligned link list", style="width: 50%;")
+                                            div.item(ng-repeat="topic in t.topics")
+                                                div(class="right floated content")
+                                                    |(
+                                                    a(ng-href="topic.link", target="topic.target") more
+                                                    |)
+                                                div.content(style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;", ng-bind="topic.title + '.........................................................................................'")
+                                        div.description
+                                        div.extra
+                                            button(class="ui right floated black mini button") 小纸条记录
+                                            button(class="ui right floated black mini button") 取消收藏
             script(type="text/ng-template", id="course.html")
                 div.b-opd-favorite
                     div(class="ui top attached tabular menu")
@@ -62,7 +96,7 @@ block content
                                     context: '.tab'
                                 })
                         ;
-                        
+
                         $(function () {
                             $('td .rating')
                                     .rating({})
