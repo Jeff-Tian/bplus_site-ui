@@ -211,8 +211,8 @@ angular.module('opdModule')
                     sortingClick: function(key, l) {
                         if ($scope.sortingAndFilterSetting[key].id !== l.id) {
                             $scope.sortingAndFilterSetting[key] = l;
+                            search(FIRST_PAGE);
                         }
-                        search(FIRST_PAGE);
                     }
                 };
                 //Search bar
