@@ -45,7 +45,7 @@ block content
                                         | &nbsp;&nbsp;&nbsp;&nbsp;
                                         span(class="", style="font-size: x-small; font-weight: normal;") {{t.description}}
                                 div(class="ui horizontal fitted clearing divider")
-                            div(class="ui segment items", ng-repeat-end)
+                            div(class="ui segment items")
                                 div.item
                                     div(class="ui small image")
                                         img(ng-src="/{{t.image}}")
@@ -64,6 +64,20 @@ block content
                                         div.extra
                                             button(class="ui right floated black mini button") 小纸条记录
                                             button(class="ui right floated black mini button") 取消收藏
+                            div(class="ui black secondary inverted segment") 小纸条记录
+                            div(class="ui segment", ng-repeat-end)
+                                form(class="ui form")
+                                    div.field
+                                        textarea(rows="5", placeholder="聊聊你对于导师的想法吧 !")
+                                    div.field
+                                        button(class="ui tiny red button right floated") 确定送出
+                                        button(class="ui tiny red button right floated")
+                                            i(class="ui photo icon")
+                                            | 上传照片
+                                    div(class="ui clearing fitted horizontal divider")
+
+                            div(class="ui tertiary inverted segment centered ") 查看更多
+                        p &nbsp;
             script(type="text/ng-template", id="course.html")
                 div.b-opd-favorite
                     div(class="ui top attached tabular menu")
