@@ -12,6 +12,7 @@ block customizedFooter
         script(type="text/javascript", src="#{cdn.normal}js/page/opportunity-detail/widget/competitiveness/competitiveDirective.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/study-center/app.js?#{cdn.version}")
         script(type="text/javascript", src="#{cdn.normal}js/page/study-center/controllers.js?#{cdn.version}")
+        script(type="text/javascript", src="#{cdn.normal}js/page/study-center/services.js?#{cdn.version}")
         script(type="text/javascript").
             angular.element(document).ready(function () {
                 angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
@@ -62,10 +63,10 @@ block content
                                                 div.content(style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;", ng-bind="topic.title + '.........................................................................................'")
                                         div.description
                                         div.extra
-                                            button(class="ui right floated black mini button") 小纸条记录
+                                            button(class="ui right floated black mini button", ng-click="showMessage = true", ng-disabled="showMessage") 小纸条记录
                                             button(class="ui right floated black mini button") 取消收藏
-                            div(class="ui black secondary inverted segment") 小纸条记录
-                            div(class="ui segment", style="max-height: 600px; background-color: #f0f0f0; color: gray; overflow: auto;")
+                            div(class="ui black secondary inverted segment", ng-if="showMessage") 小纸条记录
+                            div(class="ui segment", style="max-height: 600px; background-color: #f0f0f0; color: gray; overflow: auto;", ng-if="showMessage")
                                 p(class="", style="text-align: center;") 尚有 5 则新留言
                                 p(class="", style="text-align: center") Sep 30 2015 23:09
                                 div(class="ui items")
@@ -93,14 +94,20 @@ block content
                                                 div(style="max-width: 400px; background-color: white; padding: 10px 20px; border-radius: 5px; width: auto; display: inline-block;")
                                                     p {{m.text}}
                                     div(class="ui horizontal clearing divider")
-                            div(class="ui segment", ng-repeat-end, style="clear: both;")
+                            div(class="ui segment", ng-repeat-end, style="clear: both;", ng-if="showMessage")
                                 form(class="ui form")
                                     div.field
-                                        textarea(rows="5", placeholder="聊聊你对于导师的想法吧 !")
+                                        textarea(rows="5", placeholder="聊聊你对于导师的想法吧 !", ng-model="replyData.text")
+                                    div.field
+                                        div(class="ui tiny images")
+                                            div(class="ui image", ng-repeat="p in replyData.pictures", style="position: relative;")
+                                                i(class="ui red link large remove circle icon", style="position: absolute; right: -15px; top: -5px; cursor: pointer;", ng-click="removePicture($index)")
+                                                img(ng-src="{{p.picture}}")
                                     div.field
                                         button(class="ui tiny red button right floated") 确定送出
-                                        button(class="ui tiny red button right floated")
+                                        button(class="ui tiny red button right floated", style="position: relative; overflow: hidden;")
                                             i(class="ui photo icon")
+                                            input(type="file", accept="image/*", onchange="angular.element(this).scope().picturesAdded(this)", multiple="multiple", style="position: absolute; left: 0; right: 0; bottom: 0; top: 0; padding-left: 10000px; cursor: pointer;")
                                             | 上传照片
                                     div(class="ui clearing fitted horizontal divider")
 

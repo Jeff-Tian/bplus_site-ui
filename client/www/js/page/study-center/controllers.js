@@ -56,7 +56,7 @@ angular.module('studyCenterModule')
             status: '100'
         }];
     }])
-    .controller('FavTeachersCtrl', ['$scope', function ($scope) {
+    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', function ($scope, FileReaderService) {
         $scope.teachers = [{
             name: '钱申',
             description: '10年再线教育经验,港大MBA,复旦计算机硕士',
@@ -129,5 +129,41 @@ angular.module('studyCenterModule')
                 target: '_blank'
             }]
         }];
+
+        $scope.replyData = {
+            text: '',
+            pictures: []
+        };
+
+        $scope.picturesAdded = function (element) {
+            function successCallback(i) {
+                return function (result) {
+                    $scope.replyData.pictures.push({
+                        index: i,
+                        picture: result
+                    });
+                };
+            }
+
+            function errorCallback(i) {
+                return function (error) {
+                    $scope.replyData.pictures.push({
+                        index: i,
+                        picture: null,
+                        error: error
+                    });
+                }
+            }
+
+            for (var i = 0; i < element.files.length; i++) {
+                FileReaderService.readAsDataUri(element.files[i], $scope)
+                    .then(successCallback(i), errorCallback(i))
+                ;
+            }
+        };
+
+        $scope.removePicture = function (index) {
+            $scope.replyData.pictures.splice(index, 1);
+        };
     }])
 ;
