@@ -30,9 +30,9 @@
                 <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.matchLevel)" data-content="你与企业的匹配等级 {{data.matchLevel}}!" data-variation="inverted" ng-src="img/opd/match_{{data.matchLevel}}b.png?<%= cdn.version %>"/>
             </td>
             <td class="description clickable" ng-click="displayData.onCompanyClick(data)">
-                <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
-                <div class="company" ng-bind="data.companyinfo.name"></div>
-                <div class="field grey color" ng-bind="data.companyinfo.field"></div>
+                <img ng-src="{{data.logo}}" class="left-floated-image">
+                <div class="company" ng-bind="data.name"></div>
+                <div class="field grey color" ng-bind-template="{{data.industry}}\{{data.nature_of_firms}}"></div>
             </td>
             <td class="desc" ng-click="displayData.onPositionClick(data)">
                 <h3 class="ui header">
@@ -57,7 +57,7 @@
     <tfoot>
         <tr class="transparent">
             <th colspan="10" class="ui center aligned">
-                <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
+                <bopdpaginationpattern displayData="displayData" >
             </th>
         </tr>
     </tfoot>

@@ -51,6 +51,11 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                 NUMBER_PER_PAGE: 10,
                 totalPage: 1,
                 currentPage: FIRST_PAGE,
+                delete: function(target) {
+                    return $scope.removeFavoritePosition(target.id, false).then(function() {
+                        return search();
+                    });
+                },
                 getData: function (currentPage) {
                     $scope.companies.data = [];
                     companyData.forEach(function(value) {
@@ -89,14 +94,6 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                     }
                 }]
             };
-
-            // $scope.data.positions.page = "empty";
-            originObject = $scope.companies.data[0];
-
-            for (i = 0; i < 3; i++) {
-                $scope.companies.data.push($.extend(true, {}, originObject));
-            }
-            ///////////////////////////////////////
             search();
             $(".b-opd-favorite .menu .item").tab();
         }

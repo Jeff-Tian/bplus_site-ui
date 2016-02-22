@@ -16,7 +16,18 @@
             </div>
         </div>
     </div>
-<!--     <div class="ui bottom attached tab segment" data-tab="company">
-        <bopdcompanylistpattern positions="companies"/>
-    </div> -->
+    <div class="ui bottom attached tab segment" data-tab="company">
+        <div class="ui segment" ng-if="isSearching">搜索中。。。</div>
+            <div ng-if="!isSearching">
+                <bopdcompanylistpattern ng-if="companies.totalPage!==0" positions="companies"/>
+                <div ng-if="!hasLoggedin()" class="hidedata">
+                    <a href="/signin#/login?return_url=opportunity-detail%23%2Ffavorite">登录</a>
+                    查看已收藏的公司。
+                </div>
+                <div ng-if="hasLoggedin() && companies.totalPage===0" class="hidedata">
+                    你目前没有任何收藏的公司。
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
