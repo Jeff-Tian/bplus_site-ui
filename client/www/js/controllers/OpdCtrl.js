@@ -158,6 +158,33 @@
             searchKeyWord: "",
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
+        var positionRetMapping = function (source) {
+            var ret = {};
+            ret = source.map(function(value){
+                return {
+                    jobID: value.id,
+                    matchLevel: (value.jobMatch.match ? levelMapping(value.jobMatch.match) : ""),
+                    progressRate: (value.jobMatch.competitiveness ? value.jobMatch.competitiveness : ""),
+                    position: {
+                        name: value.title || "",
+                        type: value.job_type || "",
+                        salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
+                        certification: ""
+                    },
+                    issueTime: value.publish_at || "",
+                    company: value.company.name,
+                    status: "",
+                    statusText: "",
+                    companyinfo: {
+                        logo: value.company.logo || "",
+                        name: value.company.name,
+                        field: value.company.industry,
+                        flag: ""
+                    }
+                }
+            });
+            return ret;
+        };
         $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField) {
             var searchParam = {};
             tags = tags || {};
@@ -189,43 +216,45 @@
             return service.post(url, searchParam).then(function(data) {
                 var convertedJobData = data.jobs;
                 if (data.jobs) {
-                    convertedJobData = data.jobs.map(function(value){
-                        return {
-                            jobID: value.id,
-                            matchLevel: (value.jobMatch.match ? levelMapping(value.jobMatch.match) : ""),
-                            progressRate: (value.jobMatch.competitiveness ? value.jobMatch.competitiveness : ""),
-                            position: {
-                                name: value.title || "",
-                                type: value.job_type || "",
-                                salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
-                                certification: ""
-                            },
-                            issueTime: value.publish_at || "",
-                            company: value.company.name,
-                            status: "",
-                            statusText: "",
-                            companyinfo: {
-                                logo: value.company.logo || "",
-                                name: value.company.name,
-                                field: value.company.industry,
-                                flag: ""
-                            }
-                        }
-                    });
+                    convertedJobData = positionRetMapping(data.jobs);
                     data.jobs = convertedJobData;
                 }
                 return data;
             });
         };
         $scope.getFavoritePositions = function(){
-            var url = ""
-            return service.post(url, searchParam)
+            var url = "/service-proxy/bplus-opd/favoritejob/load";
+            var param = {
+                member_id: member_id
+            };
+            return service.post(url, param).then(function(data) {
+                var convertedJobData = data.jobs;
+                if (data.jobs) {
+                    convertedJobData = positionRetMapping(data.jobs);
+                    data.jobs = convertedJobData;
+                }
+                //TODO COMPANY MAPPING
+                return data;
+            });
         };
-        $scope.removeFavoritePosition = function(){
-
+        $scope.removeFavoritePosition = function(jobid, isJob){
+            var url = "/service-proxy/bplus-opd/favoritejob/remove";
+            var param = {
+                member_id: member_id,
+                item_id: jobid,
+                category: isJob ? "job" : "company"
+            }
+            return service.post(url, param);
         };
         $scope.getDeliveredPositions = function(){
-
+            var url = "/service-proxy/bplus-opd/favoritejob";
+            var param = {
+                member_id: member_id
+            }
+            return service.post(url, param).then(function(data) {
+                //TODO
+                return data;
+            });
         };
         //Service related
         // var getCallFormat = {

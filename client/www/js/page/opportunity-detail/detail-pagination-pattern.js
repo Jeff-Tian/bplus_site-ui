@@ -75,27 +75,33 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                 showPostEllipsis: false,
                 //Action
                 pageMenuClick: function(item) {
+                    var itemChanged = false;
                      switch (item) {
                         case $scope.paginationMenu.PREVIOUS:
                             if ($scope.paginationMenu.currentPage !== FIRST_PAGE) {
+                                itemChanged = true;
                                 $scope.paginationMenu.currentPage--;
                             }
                             break;
                         case $scope.paginationMenu.NEXT:
                             if ($scope.paginationMenu.currentPage !== $scope.paginationMenu.totalPages) {
+                                itemChanged = true;
                                 $scope.paginationMenu.currentPage++;
                             }
                             break;
                         default:
                             if ($scope.paginationMenu.currentPage !== item) {
+                                itemChanged = true;
                                 $scope.paginationMenu.currentPage = item;
                             }
                             break;
                      }
-                     $scope.displaydata.getData($scope.paginationMenu.currentPage).then(function() {
-                        data = $scope.displaydata.rawData;
-                        displayPage($scope, data);
-                     });
+                     if (itemChanged) {
+                         $scope.displaydata.getData($scope.paginationMenu.currentPage).then(function() {
+                            data = $scope.displaydata.rawData;
+                            displayPage($scope, data);
+                         });
+                     }
                 },
             };
             displayPage($scope, data);

@@ -4,16 +4,19 @@
         <a class="item" data-tab="company">公司</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="position">
-        <bopdpositionpattern ng-if="data.positions.totalPage!==0" positions="data.positions"/>
-        <div ng-if="!hasLoggedin()" class="hidedata">
-            <a href="/signin#/login?return_url=opportunity-detail%23%2Ffavorite">登录</a>
-            查看已收藏的职位。
-        </div>
-        <div ng-if="hasLoggedin() && data.positions.totalPage===0" class="hidedata">
-            你目前没有任何收藏的职位。
+        <div class="ui segment" ng-if="isSearching">搜索中。。。</div>
+        <div ng-if="!isSearching">
+            <bopdpositionpattern ng-if="positions.totalPage!==0" positions="positions"/>
+            <div ng-if="!hasLoggedin()" class="hidedata">
+                <a href="/signin#/login?return_url=opportunity-detail%23%2Ffavorite">登录</a>
+                查看已收藏的职位。
+            </div>
+            <div ng-if="hasLoggedin() && positions.totalPage===0" class="hidedata">
+                你目前没有任何收藏的职位。
+            </div>
         </div>
     </div>
 <!--     <div class="ui bottom attached tab segment" data-tab="company">
-        <bopdcompanylistpattern positions="data.companies"/>
+        <bopdcompanylistpattern positions="companies"/>
     </div> -->
 </div>

@@ -57,7 +57,6 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                 showPageMore: true,
                 pageMoreHash: "/job",
                 getData: searchRecommendation,
-                page: "empty",//data, logout, empty
                 deleteable: "false",
                 currentPage: FIRST_PAGE,
                 totalPage: 0,

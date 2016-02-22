@@ -311,15 +311,15 @@ module.exports = {
         })(req, res, next);
     },
 
-    deliveredjob: function (req, res, next) {
+    favoriteJobs: function (req, res, next) {
         proxyBPlus({
-            path: '/my/favorite'
+            path: '/my/favorite/' + req.params.operation
         })(req, res, next);
     },
 
-    favoritejob: function (req, res, next) {
+    deliveredJobs: function (req, res, next) {
         proxyBPlus({
-            path: '/job/recommend'
+            path: '/my/apply/' + req.params.operation
         })(req, res, next);
     }
 };

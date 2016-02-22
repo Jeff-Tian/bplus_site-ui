@@ -40,8 +40,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 },
                 onDelete: function(target, $event) {
                     $event.stopPropagation();
-                    //TODO
-                    console.log("onDelete");
+                    $scope.positions.delete(target);
                 },
                 onMoreClick: function(){
                     location.hash = $scope.positions.pageMoreHash;
@@ -62,11 +61,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 }
             };
             $scope.choisenLevel = "";
-            $scope.staticCompetitiveDataArray = [];
-            for (var i = 5; i >= 0; i--) {
-                $scope.staticCompetitiveDataArray.push({progressRate: (i * 20)});
-            }
-
+            
             $timeout(function() {
                 $('.b-opd-position-matchlevel')
                     .popup({
