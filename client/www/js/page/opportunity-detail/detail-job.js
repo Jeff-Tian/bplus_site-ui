@@ -26,7 +26,6 @@ angular.module('opdModule')
                                 $scope.searchList.data[(ret.currentPage - 1)*$scope.searchList.NUMBER_PER_PAGE+index] = value;
                             });
                             $scope.searchList.totalPage = ret.total;
-                            $scope.searchList.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
                             $scope.isSearching = false;
                     });
                 };
@@ -262,7 +261,6 @@ angular.module('opdModule')
                     showPageMore: false,
                     deleteable: "false",
                     getData: search,
-                    page: "empty",//data, logout, empty
                     totalPage: 0,
                     currentPage: FIRST_PAGE,
                     data: [{

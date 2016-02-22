@@ -309,5 +309,17 @@ module.exports = {
         proxyBPlus({
             path: '/job/recommend'
         })(req, res, next);
+    },
+
+    deliveredjob: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/favorite'
+        })(req, res, next);
+    },
+
+    favoritejob: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/recommend'
+        })(req, res, next);
     }
 };

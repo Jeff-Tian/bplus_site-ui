@@ -6,7 +6,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
         link: function ($scope, element, attrs) {
             if (!$scope.hasLoggedin()) {
                 // location.href = "/signin#/login?return_url=opportunity-detail%23%2Frecommended-positions";
-                // return;
+                return;
             }
             //Init the page
             var data = {

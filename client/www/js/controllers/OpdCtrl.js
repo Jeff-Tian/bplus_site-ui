@@ -217,6 +217,16 @@
                 return data;
             });
         };
+        $scope.getFavoritePositions = function(){
+            var url = ""
+            return service.post(url, searchParam)
+        };
+        $scope.removeFavoritePosition = function(){
+
+        };
+        $scope.getDeliveredPositions = function(){
+
+        };
         //Service related
         // var getCallFormat = {
         //     url: 'whatever',

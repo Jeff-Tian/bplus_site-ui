@@ -1,18 +1,43 @@
 angular.module('opdModule').directive('bopdfavourite', function () {
     return {
         restrict: "E",
-        scope: {
-            src: '='
-        },
+        scope: true,
         templateUrl: '/view-partial/opd/detail-favourite.html',
         link: function ($scope, element, attrs) {
+            var FIRST_PAGE = 1;
+            var search = function(currentPage) {
+                $scope.isSearching = true;
+                return $scope.getPositions(
+                        $scope.searchOptions.searchKeyWord,
+                        $scope.searchOptions.conditions,
+                        $scope.searchList.NUMBER_PER_PAGE, 
+                        currentPage ? currentPage : FIRST_PAGE,
+                        $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                        $scope.sortingAndFilterSetting.sorting.value
+                    ).then(function(ret){
+                        $scope.searchList.currentPage = currentPage;
+                        $scope.searchList.data = new Array(ret.total);
+                        for (var i = 0; i < ret.total; i++) {
+                            $scope.searchList.data[i] = {};
+                        }
+                        ret.jobs.forEach(function(value, index){
+                            $scope.searchList.data[(ret.currentPage - 1)*$scope.searchList.NUMBER_PER_PAGE+index] = value;
+                        });
+                        $scope.searchList.totalPage = ret.total;
+                        $scope.searchList.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
+                        $scope.isSearching = false;
+                });
+            };
             $scope.data = {};
             $scope.data.positions = {
                 NUMBER_PER_PAGE: 10,
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
-                page: "empty",//data, logout, empty
+                deleteable: "false",
+                getData: search,
+                totalPage: 1,
+                currentPage: FIRST_PAGE,
                 data: [{
                     matchLevel: "a",
                     progressRate: "50",
@@ -53,15 +78,6 @@ angular.module('opdModule').directive('bopdfavourite', function () {
                     }
                 }]
             };
-            var login = true;
-            $scope.data.positions.page = login ? ($scope.data.positions.data.length > 0 ? "data" : "empty") : "logout";
-            // $scope.data.positions.page = "empty";
-            var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 300; i++) {
-                $scope.data.positions.data.push($.extend(true, {}, originObject, {company:"a"+i, progressRate: i}));
-            }
-
-
 
             $scope.data.companies = {
                 NUMBER_PER_PAGE: 10,
