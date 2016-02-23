@@ -13,10 +13,16 @@
                 <!-- <a class="item" data-tab="relevant">他人在看</a> -->
             </div>
             <div class="ui bottom attached active tab segment" data-tab="recommendation">
-                <bopdpositionpattern positions="data.positions"/>
+                <div class="ui segment" ng-if="isRecommendPositionSearching">搜索中。。。</div>
+                <div ng-if="!isRecommendPositionSearching">
+                    <bopdpositionpattern positions="data.recommendPositions"/>
+                </div>
             </div>
             <div class="ui bottom attached tab segment" data-tab="competency">
-                <bopdpositionpattern positions="data.positions"/>
+                <div class="ui segment" ng-if="isCompetivePositionSearching">搜索中。。。</div>
+                <div ng-if="!isCompetivePositionSearching">
+                    <bopdpositionpattern positions="data.competivePositions"/>
+                </div>
             </div>
             <div class="ui bottom attached tab segment" data-tab="subscribe">
                 <form name="filterForm" class="ui form">
@@ -63,10 +69,13 @@
 
                         <div class="ui clearing horizontal divider"></div>
                     </div>
-                    <div class="ui bk-color-coral-red inverted vertical padded segment" ng-show="data.positions.data.length===0">
-                        <p>尚无职位信息。</p>
+                    <div class="ui segment" ng-if="isSubscriptionSearching">搜索中。。。</div>
+                    <div ng-if="!isSubscriptionSearching">
+                        <div class="ui bk-color-coral-red inverted vertical padded segment" ng-show="data.subscribePositions.data.length===0">
+                            <p>尚无职位信息。</p>
+                        </div>
+                        <bopdpositionpattern positions="data.subscribePositions" ng-show="data.subscribePositions.data.length>0"/>
                     </div>
-                    <bopdpositionpattern positions="data.positions" ng-show="data.positions.data.length>=0"/>
                 </form>
             </div>
         </div>

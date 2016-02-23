@@ -220,7 +220,7 @@ angular.module('opdModule')
                 var findConditionValue = function(key) {
                     var ret = $scope.filterSetting[key];
                     if (ret.hasOwnProperty('id')) {
-                        if (ret.id === 0) { 
+                        if (ret.id === 0 || ret.id === "0") { 
                             ret = "";
                             if (key === "monthlySalary") {
                                 ret = ["", ""];

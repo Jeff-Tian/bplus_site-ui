@@ -8,6 +8,56 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 // location.href = "/signin#/login?return_url=opportunity-detail%23%2Frecommended-positions";
                 return;
             }
+            var FIRST_PAGE = 1;
+            var search = function(currentPage, target, options) {
+                var findConditionValue = function(key) {
+                    var ret = options.condition[key];
+                    if (ret.hasOwnProperty('id')) {
+                        if (ret.id === 0 || ret.id === "0") { 
+                            ret = "";
+                            if (key === "monthlySalary") {
+                                ret = ["", ""];
+                            }
+                        } else {
+                            ret = ret.text;
+                        }
+                    } else if (key === "monthlySalary") {
+                        ret = ret.split("-");
+                    }
+                    return ret;
+                };
+                var conditions = {
+                };
+                if (options.condition && Object.keys(options.condition).length > 0){
+                    conditions = {
+                        education: findConditionValue("diplomas"),
+                        industry: findConditionValue("industry"),
+                        jobType: findConditionValue("jobCategory"),
+                        natureOfFirms: findConditionValue("companyType"),
+                        salaryFrom: findConditionValue("monthlySalary")[0].trim(),
+                        salaryTo: findConditionValue("monthlySalary")[1].trim(),
+                        workLocation: findConditionValue("workPlace")
+                    };
+                }
+                return $scope.getPositions(
+                        options.searchKeyWord,
+                        conditions,
+                        target.NUMBER_PER_PAGE, 
+                        currentPage ? currentPage : FIRST_PAGE,
+                        $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                        options.sorting
+                    ).then(function(ret){
+                        target.currentPage = currentPage;
+                        target.data = new Array(ret.total);
+                        for (var i = 0; i < ret.total; i++) {
+                            target.data[i] = {};
+                        }
+                        ret.jobs.forEach(function(value, index){
+                            target.data[(ret.currentPage - 1)*target.NUMBER_PER_PAGE+index] = value;
+                        });
+                        target.totalPage = ret.total;
+                });
+            };
             $scope.isSearching = true;
             //Init the page
             var data = {
@@ -111,7 +161,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     rangeLabel: '人民币',
                     type: 'range',
                     list: [{
-                        id: '0',
+                        id: 0,
                         text: '不限'
                     }],
                     range: {
@@ -130,9 +180,9 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                                     valueA = valueB;
                                     valueB = tmpValue;
                                 }
-                                $scope.filterSetting.monthlySalary = valueA + " ~ " + valueB;
+                                $scope.filterSetting.monthlySalary = valueA + " - " + valueB;
                             } else {
-                                $scope.filterSetting.monthlySalary = fromValue + " ~ " + toValue;
+                                $scope.filterSetting.monthlySalary = fromValue + " - " + toValue;
                             }
                         }
                     }
@@ -202,6 +252,23 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     Object.keys(staticSubscription).forEach(function(key) {
                         $scope.filterSetting[key] = rawSubscription[key];
                     });
+
+                    $scope.data.subscriptionOpiton = {
+                        searchKeyWord: "",
+                        condition: rawSubscription,
+                        sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                    };
+                    var searchPromises = [
+                        search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton),
+                        search(FIRST_PAGE, $scope.data.recommendPositions, recommendOption),
+                        search(FIRST_PAGE, $scope.data.competivePositions, competiveOption)
+                    ];
+                    $q.all(searchPromises).then(function(){
+                        $scope.isSearching = false;
+                        $timeout(function(){
+                            $('.b-opd-favorite .tabular.menu .item').tab();
+                        });
+                    });
                 });
 
                 $scope.subscribe = function() {
@@ -210,6 +277,15 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                         paramToSave[key] = $scope.filterSetting[key];
                     });
                     $scope.saveSubscription(JSON.stringify(paramToSave));
+                    $scope.data.subscriptionOpiton = {
+                        searchKeyWord: "",
+                        condition: paramToSave,
+                        sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                    };
+                    $scope.isSubscriptionSearching = true;
+                    search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function(){
+                        $scope.isSubscriptionSearching = false;
+                    });
                 };
                 $scope.subscribeCancel = function() {
                     Object.keys(staticSubscription).forEach(function(key) {
@@ -217,56 +293,81 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     });
                 };
 
-
-                $scope.isSearching = false;
-                $timeout(function(){
-                    $('.b-opd-favorite .tabular.menu .item').tab();
-                });
             });
 
-
+            var subscriptionOpiton = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+            };
+            var recommendOption = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+            };
+            var competiveOption = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.COMPETIVE
+            };
             //Data for positions
             //Other names can also be used
             $scope.data = {};
-            $scope.data.positions = {
-                NUMBER_PER_PAGE: 3,
-                showPosition: false,
+            $scope.data.subscriptionOpiton = {};
+            $scope.data.subscribePositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
+                deleteable: "false",
+                getData: function(currentPage){
+                    $scope.isSubscriptionSearching = true;
+                    return search(currentPage, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function(){
+                        $scope.isSubscriptionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
                 data: [{
-                    matchLevel: "a",
-                    progressRate: "50",
-                    position: {
-                        name: "产品经理",
-                        type: "兼职",
-                        salary: "9k-16k",
-                        certification: "学历不限",
-                    },
-                    issueTime: "2015-12-12",
-                    company: "苹果",
-                    status: "finished",     //finished, delivered
-                    statusText: "",
-                    companyinfo: {}
-                }, {
-                    matchLevel: "d",
-                    progressRate: "70",
-                    position: {
-                        name: "c",
-                        type: "d",
-                        salary: "111122",
-                        certification: "d",
-                    },
-                    status: "",
-                    statusText: "已有7家公司对你感兴趣!",
-                    issueTime: "2015-12-20",
-                    company: "ksj ksdf",
-                    companyinfo: {}
                 }]
             };
-            var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 3; i++) {
-                $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
-            }
+            $scope.isSubscriptionSearching = false;
+            $scope.data.recommendPositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
+                deleteable: "false",
+                getData: function(currentPage){
+                    $scope.isRecommendPositionSearching = true;
+                    return search(currentPage, $scope.data.recommendPositions, recommendOption).then(function(){
+                        $scope.isRecommendPositionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
+                data: [{
+                }]
+            };
+            $scope.isRecommendPositionSearching = false;
+            $scope.data.competivePositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
+                deleteable: "false",
+                getData: function(currentPage){
+                    $scope.isCompetivePositionSearching = true;
+                    return search(currentPage, $scope.data.competivePositions, competiveOption).then(function(){
+                        $scope.isCompetivePositionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
+                data: [{
+                }]
+            };
+            $scope.isCompetivePositionSearching = false;
         }
     };
 }]);
