@@ -19,12 +19,12 @@ angular.module('opdModule').directive('bopddelivered', function() {
                 };
                 $scope.positions = {
                     NUMBER_PER_PAGE: 10,
-                    showPosition: true,
+                    showPosition: false,
                     showPageMenu: true,
                     showPageMore: false,
-                    deleteable: "false",
+                    deleteable: "true",
                     delete: function(target) {
-                        console.log("TODO: delete")
+                        //TODO
                         // return $scope.removeFavoritePosition(target.jobID, true).then(function() {
                         //     return search();
                         // });

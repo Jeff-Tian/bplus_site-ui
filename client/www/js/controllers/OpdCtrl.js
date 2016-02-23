@@ -164,9 +164,19 @@
             searchKeyWord: "",
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
+        var dataDisplayMapping = function(dateString) {
+            var targetDate = new Date(dateString);
+            var ret = targetDate.getFullYear() + "年" + 
+                    (targetDate.getMonth()+1) + "月" + 
+                    targetDate.getDay()+"日"
+            return ret;
+        };
         var positionRetMapping = function (source) {
             var ret = {};
             ret = source.map(function(value){
+                value.company = value.company || {};
+                value.jobMatch = value.jobMatch || {};
+                value.apply = value.apply || {};
                 return {
                     jobID: value.id,
                     matchLevel: (value.jobMatch.match ? levelMapping(value.jobMatch.match) : ""),
@@ -175,16 +185,18 @@
                         name: value.title || "",
                         type: value.job_type || "",
                         salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
-                        certification: ""
+                        certification: value.education || "学历不限"
                     },
                     issueTime: value.publish_at || "",
+                    appiedTime: value.apply.apply_date ? dataDisplayMapping(value.apply.apply_date) + "投递" : "",
                     company: value.company.name,
-                    status: "",
+                    status: value.apply.status || "",
                     statusText: "",
                     companyinfo: {
+                        id: value.company.id || "",
                         logo: value.company.logo || "",
                         name: value.company.name,
-                        field: value.company.industry,
+                        field: value.company.industry || "",
                         flag: ""
                     }
                 }
@@ -244,12 +256,20 @@
                         value.match = (value.match ? levelMapping(value.match) : "");
                     });
                 }
-                //TODO COMPANY MAPPING
                 return data;
             });
         };
         $scope.removeFavoritePosition = function(jobid, isJob){
             var url = "/service-proxy/bplus-opd/favoritejob/remove";
+            var param = {
+                member_id: member_id,
+                item_id: jobid,
+                category: isJob ? "job" : "company"
+            }
+            return service.post(url, param);
+        };
+        $scope.saveFavoritePosition = function(jobid, isJob){
+            var url = "/service-proxy/bplus-opd/favoritejob/save";
             var param = {
                 member_id: member_id,
                 item_id: jobid,
@@ -263,73 +283,35 @@
                 member_id: member_id
             }
             return service.post(url, param).then(function(data) {
-                //TODO
+                var convertedJobData = data;
+                if (data) {
+                    convertedJobData = positionRetMapping(data);
+                    data = convertedJobData;
+                }
                 return data;
             });
         };
-        //Service related
-        // var getCallFormat = {
-        //     url: 'whatever',
-        //     params: param
-        // };
-        // PipeCacheService.add(getCallFormat);
-        // PipeCacheService.get(getCallFormat).then(function() {
-
-        // });
-            // matchLevel: "a",
-            // progressRate: "50",
-            // position: {
-            //     name: "a",
-            //     type: "b",
-            //     salary: "1111",
-            //     certification: "c",
-            // },
-            // issueTime: "2015-12-12",
-            // company: "ksjksdf",
-            // status: "finished",     //finished, delivered
-            // statusText: "已有3家公司对你感兴趣!",
-            // companyinfo: {
-            //     logo: "img/opd/match_e.png",
-            //     name: "阿里巴巴",
-            //     field: "移动互联网/中企",
-            //     flag: "latest"   //ad, recommendation, latest
-            // }
-        // $scope.positions = [{
-        //     matchLevel: "a",
-        //     progressRate: "50",
-        //     postion: {
-        //         name: "a",
-        //         type: "b",
-        //         salary: "1111",
-        //         certification: "c",
-        //     },
-        //     issueTime: "2015",
-        //     company: "ksjksdf"
-        // },{
-        //     matchLevel: "a",
-        //     progressRate: "50",
-        //     postion: {
-        //         name: "a",
-        //         type: "b",
-        //         salary: "1111",
-        //         certification: "c",
-        //     },
-        //     issueTime: "2015",
-        //     company: "ksjksdf"
-        // }]
-
+        $scope.removeDeliveredPosition = function(jobid) {
+            var url = "/service-proxy/bplus-opd/deliveredjob/remove";
+            var param = {
+                member_id: member_id,
+                item_id: jobid,
+                category: "company"
+            }
+            return service.post(url, param);
+        };
         //Preload data
         Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(key) {
             if (key !== 'CHILD_REGION') {
                  preloadResource(STATIC_PARAMS.RESOURCE_TYPE[key]);
             }
         });
-        if ($scope.hasLoggedin()) {
+        // if ($scope.hasLoggedin()) {
             // Object.keys(STATIC_PARAMS.MY_TYPE).forEach(function(key) {
             //     var value = STATIC_PARAMS.MY_TYPE[key];
             //     return PipeCacheService.add(getMyParam(value));
             // });
-        }
+        // }
         // Use static region now
         // $scope.getResource(STATIC_PARAMS.RESOURCE_TYPE.REGION).then(function(value) {
         //     value.forEach(function(value) {

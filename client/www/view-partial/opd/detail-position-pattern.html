@@ -47,17 +47,18 @@
             <td class="desc" ng-click="displayData.onClick(data, $index)">
                 <h3 class="ui header">
                     <a class="title" href="#/job/{{data.position.id}}" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
-                    <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span>
+                    <!-- <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span> -->
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
-                    <button class="ui grey small button right floated" ng-show="data.status==='delivered'">已投递</button>
+                    <button class="ui grey small button right floated" ng-show="data.status==='apply'">已投递</button>
                 </h3>
                 <div class="grey color">
                     <span class="ui smooth label" ng-bind="data.position.type" ng-hide="data.position.type===''"></span>
                     <span class="grey color loose" ng-bind="data.position.salary"></span>
                     <span class="grey color loose" ng-bind="data.position.certification"></span>
                     <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
+                    <span class="ui right floated grey color status-text" ng-bind="data.appiedTime"></span>
                 </div>
-                <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status===''">
+                <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status==='apply'">
                     <div class="ui red right corner label">
                         <i class="remove icon"></i>
                     </div>
