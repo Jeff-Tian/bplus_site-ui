@@ -1,4 +1,4 @@
-angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q) {
+angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', function ($q, $timeout) {
     return {
         restrict: "E",
         scope: true,
@@ -8,6 +8,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                 // location.href = "/signin#/login?return_url=opportunity-detail%23%2Frecommended-positions";
                 return;
             }
+            $scope.isSearching = true;
             //Init the page
             var data = {
             };
@@ -209,12 +210,18 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                         paramToSave[key] = $scope.filterSetting[key];
                     });
                     $scope.saveSubscription(JSON.stringify(paramToSave));
-;                };
+                };
                 $scope.subscribeCancel = function() {
                     Object.keys(staticSubscription).forEach(function(key) {
                         $scope.filterSetting[key] = rawSubscription[key];
                     });
                 };
+
+
+                $scope.isSearching = false;
+                $timeout(function(){
+                    $('.b-opd-favorite .tabular.menu .item').tab();
+                });
             });
 
 

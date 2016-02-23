@@ -152,7 +152,7 @@
         };
         $scope.saveSubscription = function(paramStr) {
             return service
-                .post('/service-proxy/bplus-opd/subscription/update', {
+                .post('/service-proxy/bplus-opd/subscription/save', {
                     member_id: member_id,
                     criteria: paramStr
                 });
