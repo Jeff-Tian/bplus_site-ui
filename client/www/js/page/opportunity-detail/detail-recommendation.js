@@ -186,7 +186,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', function ($q)
                     position: f.position.list[0]
                 };
                 $scope.hasSubscribed = false;
-                $scope.getMy($scope.STATIC_PARAMS.MY_TYPE.SUBSCRIPTION).then(function(value) {
+                $scope.loadSubscription().then(function(value) {
                     if (value.length > 0) {
                         $scope.hasSubscribed = true;
                         try {

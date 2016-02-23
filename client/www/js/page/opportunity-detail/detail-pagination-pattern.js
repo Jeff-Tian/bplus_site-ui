@@ -2,13 +2,13 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
     var FIRST_PAGE = 1;
 
     var displayPage = function($scope, data) {
-        var NUMBER_PER_PAGE =  $scope.displaydata.NUMBER_PER_PAGE;
+        var NUMBER_PER_PAGE =  $scope.paginationdata.NUMBER_PER_PAGE;
         //Common params
         var paginationMenu = $scope.paginationMenu;
         var currentPage = paginationMenu.currentPage; 
         var totalPages = paginationMenu.totalPages;
-        //Refresh displaydata
-        $scope.displaydata.data = data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE);
+        //Refresh paginationdata
+        $scope.paginationdata.data = data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE);
         //Refresh paginationMenu
         switch (currentPage) {
             case 1:
@@ -48,13 +48,13 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
     return {
         restrict: "E",
         scope: {
-            displaydata: '='
+            paginationdata: '='
         },
         templateUrl: '/view-partial/opd/detail-pagination-pattern.html',
         link: function($scope, element, attrs) {
-            var data = $scope.displaydata.rawData;
+            var data = $scope.paginationdata.rawData;
             var length = data.length;
-            var pages = Math.ceil(length / $scope.displaydata.NUMBER_PER_PAGE);
+            var pages = Math.ceil(length / $scope.paginationdata.NUMBER_PER_PAGE);
             var head = "head";
             $scope.paginationMenu = {
                 //Static values
@@ -66,7 +66,7 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                 PREVIOUS: "previous",
                 NEXT: "next",
                 totalPages: pages,
-                currentPage: $scope.displaydata.currentPage,
+                currentPage: $scope.paginationdata.currentPage,
                 leftArrowDisabled: true,
                 rightArrowDisabled: false,
                 middleNumber: 1,
@@ -97,8 +97,8 @@ angular.module('opdModule').directive('bopdpaginationpattern', function () {
                             break;
                      }
                      if (itemChanged) {
-                         $scope.displaydata.getData($scope.paginationMenu.currentPage).then(function() {
-                            data = $scope.displaydata.rawData;
+                         $scope.paginationdata.getData($scope.paginationMenu.currentPage).then(function() {
+                            data = $scope.paginationdata.rawData;
                             displayPage($scope, data);
                          });
                      }

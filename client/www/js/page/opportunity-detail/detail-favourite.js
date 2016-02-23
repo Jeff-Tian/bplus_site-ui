@@ -14,14 +14,15 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                     ).then(function(ret){
                         positionData = ret.jobs;
                         companyData = ret.company;
-                        $scope.positions.totalPage = positionData.length;
-                        $scope.companies.totalPage = companyData.length;
-                        $scope.positions.data = positionData;
-                        $scope.companies.data = companyData;
+                        $scope.data.positions.totalPage = positionData.length;
+                        $scope.data.companies.totalPage = companyData.length;
+                        $scope.data.positions.data = positionData;
+                        $scope.data.companies.data = companyData;
                         $scope.isSearching = false;
                 });
             };
-            $scope.positions = {
+            $scope.data = {};
+            $scope.data.positions = {
                 NUMBER_PER_PAGE: 10,
                 showPosition: true,
                 showPageMenu: true,
@@ -33,13 +34,13 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                     });
                 },
                 getData: function (currentPage) {
-                    $scope.positions.data = [];
+                    $scope.data.positions.data = [];
                     positionData.forEach(function(value) {
-                        $scope.positions.data.push(value);
+                        $scope.data.positions.data.push(value);
                     });
-                    $scope.positions.currentPage = currentPage;
+                    $scope.data.positions.currentPage = currentPage;
                     var deferred = $q.defer();
-                    deferred.resolve($scope.positions.data);
+                    deferred.resolve($scope.data.positions.data);
                     return deferred.promise;
                 },
                 totalPage: 1,
@@ -47,7 +48,7 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                 data: []
             };
 
-            $scope.companies = {
+            $scope.data.companies = {
                 NUMBER_PER_PAGE: 10,
                 totalPage: 1,
                 currentPage: FIRST_PAGE,
@@ -57,44 +58,20 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                     });
                 },
                 getData: function (currentPage) {
-                    $scope.companies.data = [];
+                    $scope.data.companies.data = [];
                     companyData.forEach(function(value) {
-                        $scope.companies.data.push(value);
+                        $scope.data.companies.data.push(value);
                     });
-                    $scope.companies.currentPage = currentPage;
+                    $scope.data.companies.currentPage = currentPage;
                     var deferred = $q.defer();
-                    deferred.resolve($scope.companies);
+                    deferred.resolve($scope.data.companies);
                     return deferred.promise;
                 },
-                data: [{
-                    matchLevel: "a",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "latest"   //ad, recommendation, latest
-                    },
-                    positioninfo: {
-                        onboard: 100,
-                        newposition: 2,
-                        issueTime: "2015-12-20",
-                    }
-                }, {
-                    matchLevel: "d",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "recommendation"
-                    },
-                    positioninfo: {
-                        onboard: 14,
-                        newposition: 0,
-                        issueTime: "2015-12-22",
-                    }
-                }]
+                data: []
             };
-            search();
+            if ($scope.hasLoggedin()) {
+                search();
+            }
             $(".b-opd-favorite .menu .item").tab();
         }
     };

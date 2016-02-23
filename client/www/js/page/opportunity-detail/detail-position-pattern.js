@@ -8,6 +8,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
         },
         templateUrl: '/view-partial/opd/detail-position-pattern.html',
         link: function($scope, element, attrs) {
+            $scope.isRending = true;
             var data = $scope.positions.data,
                 currentPage = $scope.positions.currentPage,
                 $element = angular.element(element),
@@ -63,6 +64,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             $scope.choisenLevel = "";
             
             $timeout(function() {
+                $scope.isRending = false;
                 $('.b-opd-position-matchlevel')
                     .popup({
                         inline   : true,

@@ -144,9 +144,15 @@
         $scope.hasLoggedin = function() {
             return hasMemberID;
         };
+        $scope.loadSubscription = function() {
+            return service
+                .post('/service-proxy/bplus-opd/subscription/load', {
+                    member_id: member_id,
+                });
+        };
         $scope.saveSubscription = function(paramStr) {
             return service
-                .post('/service-proxy/bplus-opd/update/subscription', {
+                .post('/service-proxy/bplus-opd/subscription/update', {
                     member_id: member_id,
                     criteria: paramStr
                 });
@@ -233,6 +239,11 @@
                     convertedJobData = positionRetMapping(data.jobs);
                     data.jobs = convertedJobData;
                 }
+                if (data.company) {
+                    data.company.forEach(function(value){
+                        value.match = (value.match ? levelMapping(value.match) : "");
+                    });
+                }
                 //TODO COMPANY MAPPING
                 return data;
             });
@@ -247,7 +258,7 @@
             return service.post(url, param);
         };
         $scope.getDeliveredPositions = function(){
-            var url = "/service-proxy/bplus-opd/favoritejob";
+            var url = "/service-proxy/bplus-opd/deliveredjob/load";
             var param = {
                 member_id: member_id
             }

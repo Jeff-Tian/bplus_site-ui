@@ -35,7 +35,7 @@
         <tr ng-repeat="data in displayData.data track by $index">
             <td style="padding: 1.5em;">
                 <div class="b-opd-position-matchlevel-container" ng-click="displayData.onMatchlevelClick('position', data.matchLevel)">
-                    <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel" data-content="{{displayData.loginin?'你与职位的匹配等级'+data.matchLevel+'!':'登陆查看你的职业匹配度!'}}" data-variation="inverted"/>
+                    <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel" data-content="{{displayData.loginin?'你与职位的匹配等级'+data.matchLevel.toUpperCase()+'!':'登陆查看你的职业匹配度!'}}" data-variation="inverted"/>
                 </div>
             </td>
             <td>
@@ -78,7 +78,7 @@
     <tfoot ng-if="displayData.showPageMenu">
         <tr class="transparent">
             <th colspan="10" class="ui center aligned">
-                <bopdpaginationpattern displayData="displayData"/>
+                <bopdpaginationpattern  paginationData="displayData" ng-if="!isRending"/>
             </th>
         </tr>
     </tfoot>
@@ -181,7 +181,7 @@
         </div>
         <div class="ui grid">
             <div class="six wide column" >
-                <div class="detail" ng-class="{'match': chosenLevel>=60}">
+                <div class="detail" ng-class="{'match':isNaN(chosenLevel) && chosenLevel>=60}">
                     <div class="detail-title">你应征竞争力 80%、60%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level80.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level60.png?<%= cdn.version %>">
@@ -189,7 +189,7 @@
                 </div>
             </div>
             <div class="ten wide column">
-                <div class="detail" ng-class="{'match': chosenLevel<60}">
+                <div class="detail" ng-class="{'match': isNaN(chosenLevel) && chosenLevel<60}">
                     <div class="detail-title">你应征竞争力 40%、20%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level40.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level20.png?<%= cdn.version %>">
