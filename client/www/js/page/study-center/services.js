@@ -3,7 +3,7 @@ angular.module('studyCenterModule')
         function readAsDataUri(file, scope) {
             var deferred = $q.defer();
 
-            var reader = new FileReader();
+            var reader = new window.FileReader();
             reader.onload = function () {
                 scope.$apply(function () {
                     deferred.resolve(reader.result);

@@ -30,6 +30,12 @@ angular.module('studyCenterModule')
         $scope.hideDimmer = function ($event) {
             $($event.currentTarget).dimmer('hide');
         };
+
+        $scope.showSharingQRCode = function ($event) {
+            $('.ui.modal.qrcode')
+                .modal('show')
+            ;
+        };
     }])
     .controller('FinishedCoursesCtrl', ['$scope', function ($scope) {
 
@@ -82,11 +88,7 @@ angular.module('studyCenterModule')
                 text: '聊聊你现在对于创业的想法吧!',
                 from: 'teacher'
             }, {
-                text: '人一生中要扮演很多角色,如何积累其中的专业性呢?在商业\
-                性很强的职业上,我们有很多机会去培训练习和积累,也会有\
-                    同事的指导和帮助。很多都是一次性的角色,经历过了会有很\
-        多好的经验和感受,但时间过去了就浪费了,而新演员又要重\
-        新摸索一次。如何有一个工具可以改善一次性角色的专业性?',
+                text: '人一生中要扮演很多角色,如何积累其中的专业性呢?在商业性很强的职业上,我们有很多机会去培训练习和积累,也会有同事的指导和帮助。很多都是一次性的角色,经历过了会有很多好的经验和感受,但时间过去了就浪费了,而新演员又要重新摸索一次。如何有一个工具可以改善一次性角色的专业性?',
                 from: 'me'
             }, {
                 text: '建议你听听看Julia导师开的课 : )',
@@ -152,7 +154,7 @@ angular.module('studyCenterModule')
                         picture: null,
                         error: error
                     });
-                }
+                };
             }
 
             for (var i = 0; i < element.files.length; i++) {
