@@ -11,8 +11,8 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             $scope.isRending = true;
             var data = $scope.positions.data,
                 currentPage = $scope.positions.currentPage,
-                $element = angular.element(element),
-                $tbody = $element.find('> table > tbody');
+                $element = angular.element(element);
+                // $tbody = $element.find('> table > tbody');
             // $scope.rawData = data;
             $scope.sid = $scope.$id;
             var loginin = $scope.positions.page !== "logout";
@@ -29,14 +29,14 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 currentPage: currentPage,
                 data: data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE),
                 getData: $scope.positions.getData,
-                onClick: function(target, $index) {
-                    var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
-                    if (!/\#\/job\/$/.test(url)) {
-                        $window.location.href = url;
-                    }
-                    console.log("onClick");
+                onClick: function(target) {
+                    // var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
+                    // if (!/\#\/job\/$/.test(url)) {
+                    //     $window.location.href = url;
+                    // }
+                    console.log("onClick", target);
                 },
-                onCompanyClick: function(target, $index) {
+                onCompanyClick: function(target) {
                     console.log("onCompanyClick");
                 },
                 onDelete: function(target, $event) {

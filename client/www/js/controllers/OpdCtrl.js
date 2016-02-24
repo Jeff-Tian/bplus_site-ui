@@ -183,7 +183,7 @@
                     progressRate: (value.jobMatch.competitiveness ? value.jobMatch.competitiveness : ""),
                     position: {
                         name: value.title || "",
-                        type: value.job_type || "",
+                        type: value.job_type || "不限",
                         salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
                         certification: value.education || "学历不限"
                     },

@@ -46,7 +46,7 @@
             </td>
             <td class="desc" ng-click="displayData.onClick(data, $index)">
                 <h3 class="ui header">
-                    <a class="title" href="#/job/{{data.position.id}}" ng-bind="data.position.name"></a> / <a class="company" ng-bind="data.company"> </a>
+                    <span class="position-title" ng-bind="data.position.name"></span> / <a class="company" ng-bind="data.company"> </a>
                     <!-- <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span> -->
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='apply'">已投递</button>

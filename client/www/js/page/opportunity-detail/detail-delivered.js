@@ -22,13 +22,8 @@ angular.module('opdModule').directive('bopddelivered', function() {
                     showPosition: false,
                     showPageMenu: true,
                     showPageMore: false,
-                    deleteable: "true",
-                    delete: function(target) {
-                        //TODO
-                        // return $scope.removeFavoritePosition(target.jobID, true).then(function() {
-                        //     return search();
-                        // });
-                    },
+                    deleteable: "false",
+                    delete: function(target) {},
                     getData: function (currentPage) {
                         $scope.positions.data = [];
                         positionData.forEach(function(value) {
