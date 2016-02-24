@@ -327,5 +327,11 @@ module.exports = {
         proxyBPlus({
             path: '/my/subscription/' + req.params.operation
         })(req, res, next);
+    },
+
+    jobDetail: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/load'
+        })(req, res, next);
     }
 };

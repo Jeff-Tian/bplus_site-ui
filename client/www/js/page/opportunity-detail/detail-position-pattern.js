@@ -12,8 +12,6 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
             var data = $scope.positions.data,
                 currentPage = $scope.positions.currentPage,
                 $element = angular.element(element);
-                // $tbody = $element.find('> table > tbody');
-            // $scope.rawData = data;
             $scope.sid = $scope.$id;
             var loginin = $scope.positions.page !== "logout";
             NUMBER_PER_PAGE = $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
@@ -30,11 +28,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 data: data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE),
                 getData: $scope.positions.getData,
                 onClick: function(target) {
-                    // var url = $tbody.find('> tr').eq($index).find('> td.desc > h3 > a').eq(0).prop('href');
-                    // if (!/\#\/job\/$/.test(url)) {
-                    //     $window.location.href = url;
-                    // }
-                    console.log("onClick", target);
+                    location.hash = "/job/" + target.jobID;
                 },
                 onCompanyClick: function(target) {
                     console.log("onCompanyClick");
@@ -55,10 +49,6 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                     $target += $scope.sid;
                     $('.ui.popup').popup("hide");
                     $($target).modal("show");
-                    // $($element).find($target)
-                    //   .modal("show")
-                    // ;
-                    
                 }
             };
             $scope.choisenLevel = "";

@@ -203,7 +203,7 @@
             });
             return ret;
         };
-        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField) {
+        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField, companyid) {
             var searchParam = {};
             tags = tags || {};
             keyword = keyword || "";
@@ -220,6 +220,9 @@
             searchParam.page = page;
             searchParam.sortField = sortField || "";
             var url = "";
+            if (companyid) {
+                searchParam.company_id = companyid;
+            }
             switch (searchTag) {
                 case STATIC_PARAMS.POSITION_SOURCE.SEARCH:
                     url ='/service-proxy/bplus-opd/jobsearch';
@@ -297,6 +300,14 @@
                 member_id: member_id,
                 item_id: jobid,
                 category: "company"
+            }
+            return service.post(url, param);
+        };
+        $scope.getJobDetail = function(jobid) {
+            var url = "/service-proxy/bplus-opd/jobdetail";
+            var param = {
+                member_id: member_id,
+                job_id: jobid
             }
             return service.post(url, param);
         };
