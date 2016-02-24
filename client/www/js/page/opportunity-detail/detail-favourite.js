@@ -1,107 +1,78 @@
-angular.module('opdModule').directive('bopdfavourite', function () {
+angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
     return {
         restrict: "E",
-        scope: {
-            src: '='
-        },
+        scope: true,
         templateUrl: '/view-partial/opd/detail-favourite.html',
         link: function ($scope, element, attrs) {
+            var FIRST_PAGE = 1;
+            var positionData = [];
+            var companyData = [];
+            $scope.isSearching = true;
+            var search = function() {
+                $scope.isSearching = true;
+                return $scope.getFavoritePositions(
+                    ).then(function(ret){
+                        positionData = ret.jobs;
+                        companyData = ret.company;
+                        $scope.data.positions.totalPage = positionData.length;
+                        $scope.data.companies.totalPage = companyData.length;
+                        $scope.data.positions.data = positionData;
+                        $scope.data.companies.data = companyData;
+                        $scope.isSearching = false;
+                });
+            };
             $scope.data = {};
             $scope.data.positions = {
                 NUMBER_PER_PAGE: 10,
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
-                page: "empty",//data, logout, empty
-                data: [{
-                    matchLevel: "a",
-                    progressRate: "50",
-                    position: {
-                        name: "a",
-                        type: "b",
-                        salary: "1111",
-                        certification: "c",
-                    },
-                    issueTime: "2015-12-12",
-                    company: "ksjksdf",
-                    status: "finished",     //finished, delivered
-                    statusText: "已有3家公司对你感兴趣!",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "latest"   //ad, recommendation, latest
-                    }
-                }, {
-                    matchLevel: "d",
-                    progressRate: "70",
-                    position: {
-                        name: "c",
-                        type: "d",
-                        salary: "111122",
-                        certification: "d",
-                    },
-                    status: "",
-                    statusText: "已有3家公司对你感兴趣!",
-                    issueTime: "2015-12-20",
-                    company: "ksj ksdf",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "recommendation"
-                    }
-                }]
+                deleteable: "true",
+                delete: function(target) {
+                    return $scope.removeFavoritePosition(target.jobID, true).then(function() {
+                        return search();
+                    });
+                },
+                getData: function (currentPage) {
+                    $scope.data.positions.data = [];
+                    positionData.forEach(function(value) {
+                        $scope.data.positions.data.push(value);
+                    });
+                    $scope.data.positions.currentPage = currentPage;
+                    var deferred = $q.defer();
+                    deferred.resolve($scope.data.positions.data);
+                    return deferred.promise;
+                },
+                totalPage: 1,
+                currentPage: FIRST_PAGE,
+                data: []
             };
-            var login = true;
-            $scope.data.positions.page = login ? ($scope.data.positions.data.length > 0 ? "data" : "empty") : "logout";
-            // $scope.data.positions.page = "empty";
-            var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 300; i++) {
-                $scope.data.positions.data.push($.extend(true, {}, originObject, {company:"a"+i, progressRate: i}));
-            }
-
-
 
             $scope.data.companies = {
                 NUMBER_PER_PAGE: 10,
-                data: [{
-                    matchLevel: "a",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "latest"   //ad, recommendation, latest
-                    },
-                    positioninfo: {
-                        onboard: 100,
-                        newposition: 2,
-                        issueTime: "2015-12-20",
-                    }
-                }, {
-                    matchLevel: "d",
-                    companyinfo: {
-                        logo: "img/opd/match_e.png",
-                        name: "阿里巴巴",
-                        field: "移动互联网/中企",
-                        flag: "recommendation"
-                    },
-                    positioninfo: {
-                        onboard: 14,
-                        newposition: 0,
-                        issueTime: "2015-12-22",
-                    }
-                }]
+                totalPage: 1,
+                currentPage: FIRST_PAGE,
+                delete: function(target) {
+                    return $scope.removeFavoritePosition(target.id, false).then(function() {
+                        return search();
+                    });
+                },
+                getData: function (currentPage) {
+                    $scope.data.companies.data = [];
+                    companyData.forEach(function(value) {
+                        $scope.data.companies.data.push(value);
+                    });
+                    $scope.data.companies.currentPage = currentPage;
+                    var deferred = $q.defer();
+                    deferred.resolve($scope.data.companies);
+                    return deferred.promise;
+                },
+                data: []
             };
-
-            // $scope.data.positions.page = "empty";
-            originObject = $scope.data.companies.data[0];
-
-            for (i = 0; i < 3; i++) {
-                $scope.data.companies.data.push($.extend(true, {}, originObject));
+            if ($scope.hasLoggedin()) {
+                search();
             }
-            ///////////////////////////////////////
             $(".b-opd-favorite .menu .item").tab();
         }
     };
-});
+}]);

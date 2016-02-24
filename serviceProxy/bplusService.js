@@ -279,5 +279,59 @@ module.exports = {
         proxyBPlus({
             path: path
         })(req, res, next);
+    },
+
+    getOpdOperation: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/' + req.params.operation + '/load/' + req.params.member_id
+        })(req, res, next);
+    },
+
+    updateOpdOperation: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/' + req.params.operation + '/save'
+        })(req, res, next);
+    },
+
+    searchJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/advanced'
+        })(req, res, next);
+    },
+
+    hotJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/hot'
+        })(req, res, next);
+    },
+
+    recommendJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/recommend'
+        })(req, res, next);
+    },
+
+    favoriteJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/favorite/' + req.params.operation
+        })(req, res, next);
+    },
+
+    deliveredJobs: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/apply/' + req.params.operation
+        })(req, res, next);
+    },
+
+    subscription: function (req, res, next) {
+        proxyBPlus({
+            path: '/my/subscription/' + req.params.operation
+        })(req, res, next);
+    },
+
+    jobDetail: function (req, res, next) {
+        proxyBPlus({
+            path: '/job/load'
+        })(req, res, next);
     }
 };

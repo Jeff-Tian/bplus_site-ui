@@ -6,18 +6,18 @@
             <a class="item" data-tab="hot">热门</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="recommendation">
-            <bopdpositionpattern positions="recommendation.positions"/>
+            <bopdpositionpattern positions="recommendation.positions" ng-if="recommendation.positions.data.length>0"/>
         </div>
         <div class="ui bottom attached tab segment" data-tab="hot">
-            <bopdpositionpattern positions="hot.positions"/>
+            <bopdpositionpattern positions="hot.positions" ng-if="hot.positions.data.length>0"/>
         </div>
     </div>
-    <div class="b-opd-homepage-training" ng-show="trainingOpportunityList.data.length>0">
+<!--     <div class="b-opd-homepage-training" ng-show="trainingOpportunityList.data.length>0">
         <div class="ui top attached tabular menu">
             <a class="active item" data-tab="training">培训机会</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="training">
             <bopd-traininglist datalist="trainingOpportunityList"></bopd-trainingOpportunityList>
         </div>
-    </div>
+    </div> -->
 </div>

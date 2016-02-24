@@ -1,8 +1,11 @@
 <div class="ui fluid large vertical menu cloak opt-menu" ng-controller="OpdMenuCtrl">
-    <a class="item" ng-href="{{m.href}}" ng-repeat="m in menus" ng-class="{'active': m.states.indexOf(currentState) >= 0}">
+    <a class="item" ng-href="{{m.href}}" ng-repeat="m in menus"
+       ng-class="{'active': m.states.indexOf(currentState) >= 0}">
         <i class="ui white large icon" ng-class="m.icon" ng-show="m.icon"></i>
-        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.image}}?{{cdn.version}}" ng-show="m.image && m.states.indexOf(currentState) < 0">
-        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.activeImage}}?{{cdn.version}}" ng-show="m.activeImage && m.states.indexOf(currentState) >= 0">
+        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.image}}?{{cdn.version}}"
+             ng-show="m.image && m.states.indexOf(currentState) < 0">
+        <img class="ui white large icon" ng-src="{{cdn.normal}}{{m.activeImage}}?{{cdn.version}}"
+             ng-show="m.activeImage && m.states.indexOf(currentState) >= 0">
         {{m.text}}
         <span class="ui red circular label" ng-show="m.badge">{{m.badge}}</span>
     </a>
