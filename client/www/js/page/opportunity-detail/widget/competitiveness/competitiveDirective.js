@@ -3,7 +3,8 @@
         return {
             restrict: "E",
             scope: {
-                data: "="
+                data: "=",
+                classes: '='
             },
             templateUrl: '/js/page/opportunity-detail/widget/competitiveness/main.html',
             link: function ($scope, element, attrs) {

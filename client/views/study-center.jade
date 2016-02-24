@@ -121,12 +121,12 @@ block content
                     div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
                         + unfinishedCourseTable('courses')
                         div(class="ui horizontal divider")
-                        + sticky
+                        //+ sticky
                     div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="FinishedCoursesCtrl")
                         + finishedUnratedCourseTable('courses')
                         + finishedRatedCourseTable('courses', '已评价')
                         div(class="ui horizontal divider")
-                        + sticky
+                        //+ sticky
                 script(type="text/javascript").
                     angular.element(document).ready(function () {
                         $('.tabular.menu .item')

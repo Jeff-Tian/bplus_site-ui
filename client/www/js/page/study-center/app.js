@@ -19,20 +19,20 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('StudyCtrl', ['$scope', function ($scope) {
         $scope.menus = [{
-            text: '我的学习计划',
+            text: '导师课程',
             href: '#/study-plan',
-            icon: 'file text outline',
+            icon: 'user',
             states: ['study-plan']
-        }, {
-            text: '我的收藏',
-            href: '#/fav',
-            icon: 'bookmark',
-            states: ['fav']
         }, {
             text: '我的课程',
             href: '#/course',
             icon: 'book',
             states: ['course']
+        }, {
+            text: '我的收藏',
+            href: '#/fav',
+            icon: 'bookmark',
+            states: ['fav']
         }];
     }])
 ;

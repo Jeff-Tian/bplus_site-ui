@@ -1,30 +1,41 @@
 angular.module('studyCenterModule')
-    .controller('UnfinishedCoursesCtrl', ['$scope', function ($scope) {
+    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
         $scope.courses = [{
             name: '咨询公司求职,如何修改简历?',
             teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '30'
+            status: (18 / 20) * 100,
+            statusText: ['18/20', '已开课'],
+            startAt: new Date(2016, 1, 24, 21, 0, 0),
+            endAt: new Date(2016, 10, 21, 21, 0, 0)
         }, {
             name: '咨询公司求职,如何修改简历?',
             teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '40'
+            status: (18 / 20) * 100,
+            statusText: ['18/20', '已开课'],
+            startAt: new Date(2016, 10, 21, 20, 0, 0),
+            endAt: new Date(2016, 10, 21, 21, 0, 0)
         }, {
             name: '咨询公司求职,如何修改简历?',
             teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '100'
+            startAt: new Date(2016, 11, 23, 10),
+            endAt: new Date(2016, 11, 23, 11),
+            status: -1,
+            statusText: ['开课失败', '人数不足']
+        }, {
+            name: '咨询公司求职,如何修改简历?',
+            teacher: 'Julia合得国际创始人,HBS Alumni',
+            status: '100',
+            startAt: new Date(2016, 10, 21, 20),
+            endAt: new Date(2016, 10, 21, 21),
+            statusText: ['01/01', '已开课']
         }];
 
+        angular.forEach($scope.courses, function (value, key) {
+            value.countdown = new CountDown(new Date(value.startAt) - new Date());
+        });
+
         $scope.showDimmer = function ($event) {
-            $($event.target).closest('.dimmable').dimmer('show');
+            //$($event.target).closest('.dimmable').dimmer('show');
         };
 
         $scope.hideDimmer = function ($event) {
@@ -36,6 +47,23 @@ angular.module('studyCenterModule')
                 .modal('show')
             ;
         };
+
+        function CountDown(init) {
+            this.value = init;
+
+            var self = this;
+            this.start = function () {
+                function countdown() {
+                    self.value -= 1000;
+
+                    $timeout(countdown, 1000);
+                }
+
+                countdown();
+            };
+
+            this.start();
+        }
     }])
     .controller('FinishedCoursesCtrl', ['$scope', function ($scope) {
 
