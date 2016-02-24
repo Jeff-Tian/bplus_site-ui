@@ -6,10 +6,22 @@
             <a class="item" data-tab="hot">热门</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="recommendation">
-            <bopdpositionpattern positions="recommendation.positions" ng-if="recommendation.positions.data.length>0"/>
+            <div class="ui segment" ng-if="isSearchingRecommendation">搜索中。。。</div>
+            <div ng-if="!isSearchingRecommendation">
+                <div ng-if="recommendation.positions.data.length>0">
+                    <bopdpositionpattern positions="recommendation.positions"/>
+                </div>
+                <div class="ui segment" ng-if="recommendation.positions.data.length===0">尚无推荐职位信息。</div>
+            </div>
         </div>
         <div class="ui bottom attached tab segment" data-tab="hot">
-            <bopdpositionpattern positions="hot.positions" ng-if="hot.positions.data.length>0"/>
+            <div class="ui segment" ng-if="isSearchingHot">搜索中。。。</div>
+            <div ng-if="!isSearchingHot">
+                <div ng-if="hot.positions.data.length>0">
+                    <bopdpositionpattern positions="hot.positions"/>
+                </div>
+                <div class="ui segment" ng-if="hot.positions.data.length===0">尚无热门职位信息。</div>
+            </div>
         </div>
     </div>
 <!--     <div class="b-opd-homepage-training" ng-show="trainingOpportunityList.data.length>0">

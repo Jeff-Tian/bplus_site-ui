@@ -305,6 +305,7 @@
         };
         $scope.getJobDetail = function(jobid) {
             var url = "/service-proxy/bplus-opd/jobdetail";
+            debugger;
             var param = {
                 member_id: member_id,
                 job_id: jobid

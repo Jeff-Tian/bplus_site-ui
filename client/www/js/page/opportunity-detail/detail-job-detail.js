@@ -60,16 +60,51 @@ angular
             }
         };
     })
-    .controller('detailJobDetail', ['$scope', '$stateParams', function ($scope, $stateParams) {
+    .controller('detailJobDetail', ['$scope', '$stateParams', '$templateCache', function ($scope, $stateParams, $templateCache) {
         var jobID = $stateParams.jobid;
-        var hasLoggedIn = $scope.hasLoggedin();
+        var hasLoggedin = false;
+        $scope.hasLoggedin = hasLoggedIn = $scope.hasLoggedin();
         $scope.isSearching = true;
+        var jobDescriptionTemplate = '<div class="responsibilities">'+
+            '<span class="title">工作职责：</span>'+
+            '<ul class="ui ordered list">'+
+            '    <li class="item">不断地从用户的角度来进行网站产品的创新，提升网站整体可用性。</li>'+
+            '    <li class="item">负责网站产品用户体验评估工作，参与网站产品交互界面设计，分析影响网站产品用户体验的因素。</li>'+
+            '    <li class="item">定期开展网站用户测试，观察用户使用网站产品的情况，评估可用性水平，并协调相关合作团队及时提升网站产品体验。</li>'+
+            '    <li class="item">收集和采集客户对于网站产品使用的反馈，借助适当的技术提升客户体验。</li>'+
+            '</ul>'+
+        '</div>'+
+        '<div class="qualifications">'+
+        '    <div class="title">任职资格：</div>'+
+        '    <div class="tags">'+
+        '        <div class="ui label">硕士</div>'+
+        '        <div class="ui label">1-2年工作经验</div>'+
+        '        <div class="ui label">英文</div>'+
+        '        <div class="ui label">女</div>'+
+        '        <div class="ui label">25 岁以上</div>'+
+        '    </div>'+
+        '    <ul class="ui ordered list">'+
+        '        <li class="item">人机交互、心理学、社会学等相关专业毕业优先。</li>'+
+        '        <li class="item">有互联网从业经验，从事2年以上的用户体验研究与设计工作经验。</li>'+
+        '        <li class="item">熟练掌握和运用用户体验研究的相关工具和方法，对用研相关的上下游岗位有较深刻的理解。</li>'+
+        '        <li class="item">设计用户行为及产品的信息构架，保证产品的可用性。</li>'+
+        '        <li class="item">参与互联网产品的规划构思，归纳用户目标、用户任务。</li>'+
+        '        <li class="item">参与用户研究，根据用户研究的结果对设计方案进行优化。</li>'+
+        '        <li class="item">对现有产品的可用性测试和评估提出改进方案，持续优化产品的用户体验。</li>'+
+        '        <li class="item">对互联网行业及移动互联网产品有强烈兴趣和系统的用户研究实践。</li>'+
+        '        <li class="item">良好的沟通、表达能力（包括口头和书面）、分析能力，优秀的洞察力及推进事情的能力，积极乐观，严谨治学，具备跨团队的协作能力。</li>'+
+        '    </ul>'+
+        '</div>';
+        $templateCache.put('jobDescription.html', jobDescriptionTemplate)
         var initPromises = [
 
-        ]
+    ]
 
-        var jobDetailPromise = $scope.getJobDetail(jobID).then(function(){
-            // debugger;
+        var jobDetailPromise = $scope.getJobDetail(jobID).then(function(data){
+            $scope.jodData = {
+                // levelMatching: data.
+            };
+            $scope.isSearching = false;
         });
         // var collectionPromise = 
         $scope.competitiveness = {
