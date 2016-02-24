@@ -52,7 +52,14 @@
                                 订阅条件
                             </h4>
                         </div>
-                        <div class="ui fitted divider" style="margin: 0;"></div>
+                        <div ng-if="hideFilters" class="ui segment doublelineheight">
+                            <span ng-repeat="item in filters">
+                                <strong>{{item.label}}</strong>
+                                <span class="ui light red label">{{filterSetting[item.key].text || filterSetting[item.key]}}</span>
+                                <span>&nbsp;&nbsp;</span>
+                            </span>
+                        </div>
+                        <div  ng-if="!hideFilters" class="ui fitted divider" style="margin: 0;"></div>
                         <opd-filter-item ng-repeat-start="f in filters" f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filters}}</opd-filter-item>
                         <opd-sub-filter-item ng-repeat-end f="f" filter-setting="filterSetting" ng-if="!hideFilters">{{filterSetting}}</opd-sub-filter-item>
         <!--                 <div class="ui segment inline fields" style="border-top: none; border-bottom: none;"

@@ -284,6 +284,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     };
                     $scope.isSubscriptionSearching = true;
                     search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function(){
+                        rawSubscription = paramToSave;
                         $scope.isSubscriptionSearching = false;
                     });
                 };
