@@ -63,7 +63,7 @@
         {text: "哈尔滨"},
         {text: "长春"}
     ];
-    
+
     exports.OpdCtrl = function ($scope, $q, PipeCacheService, service)  {
         var hasMemberID = /mid=([^;]+)/.exec(document.cookie);
         var member_id = hasMemberID ? hasMemberID[1] : "";
@@ -72,10 +72,10 @@
             var url = "/service-proxy";
             switch (type) {
                 case STATIC_PARAMS.RESOURCE_TYPE.REGION:
-                    url += "/bplus-resource-location"; 
+                    url += "/bplus-resource-location";
                     break;
                 case STATIC_PARAMS.RESOURCE_TYPE.CHILD_REGION:
-                    url += "/bplus-resource-location/" + id; 
+                    url += "/bplus-resource-location/" + id;
                     break;
                 default:
                     url += "/bplus-resource/" + type + "/" + lng;
@@ -166,9 +166,10 @@
         $scope.STATIC_PARAMS = STATIC_PARAMS;
         var dataDisplayMapping = function(dateString) {
             var targetDate = new Date(dateString);
-            var ret = targetDate.getFullYear() + "年" + 
-                    (targetDate.getMonth()+1) + "月" + 
-                    targetDate.getDay()+"日"
+            var ret = targetDate.getFullYear() + "年" +
+                    (targetDate.getMonth()+1) + "月" +
+                    targetDate.getDay()+"日";
+
             return ret;
         };
         var positionRetMapping = function (source) {
@@ -199,7 +200,7 @@
                         field: value.company.industry || "",
                         flag: ""
                     }
-                }
+                };
             });
             return ret;
         };
@@ -268,7 +269,8 @@
                 member_id: member_id,
                 item_id: jobid,
                 category: isJob ? "job" : "company"
-            }
+            };
+
             return service.post(url, param);
         };
         $scope.saveFavoritePosition = function(jobid, isJob){
@@ -277,14 +279,16 @@
                 member_id: member_id,
                 item_id: jobid,
                 category: isJob ? "job" : "company"
-            }
+            };
+
             return service.post(url, param);
         };
         $scope.getDeliveredPositions = function(){
             var url = "/service-proxy/bplus-opd/deliveredjob/load";
             var param = {
                 member_id: member_id
-            }
+            };
+
             return service.post(url, param).then(function(data) {
                 var convertedJobData = data;
                 if (data) {
@@ -300,7 +304,8 @@
                 member_id: member_id,
                 item_id: jobid,
                 category: "company"
-            }
+            };
+
             return service.post(url, param);
         };
         $scope.getJobDetail = function(jobid) {
@@ -308,7 +313,7 @@
             var param = {
                 member_id: member_id,
                 job_id: jobid
-            }
+            };
             return service.post(url, param);
         };
         //Preload data

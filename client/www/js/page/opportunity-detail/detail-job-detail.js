@@ -66,7 +66,7 @@ angular
         $scope.isSearching = true;
         var initPromises = [
 
-        ]
+        ];
 
         var jobDetailPromise = $scope.getJobDetail(jobID).then(function(){
             // debugger;
@@ -184,7 +184,7 @@ angular
         };
 
         var originObject1 = $scope.trainingOpportunityList.data[0];
-        for (i = 0; i < 13; i++) {
+        for (var i = 0; i < 13; i++) {
             $scope.trainingOpportunityList.data.push($.extend(true, {}, originObject1));
         }
     }])

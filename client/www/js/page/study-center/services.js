@@ -41,4 +41,5 @@ angular.module('studyCenterModule')
             readAsDataUri: readAsDataUri
         };
     }])
+    .directive('pagination', angular.bplus.paginationDirective)
 ;

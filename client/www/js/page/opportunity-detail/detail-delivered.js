@@ -1,4 +1,4 @@
-angular.module('opdModule').directive('bopddelivered', function() {
+angular.module('opdModule').directive('bopddelivered', ['$q', function($q) {
         return {
             restrict: "E",
             scope: true,
@@ -43,4 +43,4 @@ angular.module('opdModule').directive('bopddelivered', function() {
                 }
             }
         };
-    });
+    }]);

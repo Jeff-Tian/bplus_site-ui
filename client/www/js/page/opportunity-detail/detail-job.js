@@ -156,7 +156,7 @@ angular.module('opdModule')
                         }
                     }];
                     var f = {};
-                    for (i = 0; i < $scope.filters.length; i++) {
+                    for (var i = 0; i < $scope.filters.length; i++) {
                         f[$scope.filters[i].key] = $scope.filters[i];
                     }
 

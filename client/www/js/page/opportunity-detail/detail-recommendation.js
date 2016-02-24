@@ -9,11 +9,11 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 return;
             }
             var FIRST_PAGE = 1;
-            var search = function(currentPage, target, options) {
-                var findConditionValue = function(key) {
+            var search = function (currentPage, target, options) {
+                var findConditionValue = function (key) {
                     var ret = options.condition[key];
                     if (ret.hasOwnProperty('id')) {
-                        if (ret.id === 0 || ret.id === "0") { 
+                        if (ret.id === 0 || ret.id === "0") {
                             ret = "";
                             if (key === "monthlySalary") {
                                 ret = ["", ""];
@@ -26,9 +26,8 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     }
                     return ret;
                 };
-                var conditions = {
-                };
-                if (options.condition && Object.keys(options.condition).length > 0){
+                var conditions = {};
+                if (options.condition && Object.keys(options.condition).length > 0) {
                     conditions = {
                         education: findConditionValue("diplomas"),
                         industry: findConditionValue("industry"),
@@ -40,29 +39,28 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     };
                 }
                 return $scope.getPositions(
-                        options.searchKeyWord,
-                        conditions,
-                        target.NUMBER_PER_PAGE, 
-                        currentPage ? currentPage : FIRST_PAGE,
-                        $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
-                        options.sorting
-                    ).then(function(ret){
+                    options.searchKeyWord,
+                    conditions,
+                    target.NUMBER_PER_PAGE,
+                    currentPage ? currentPage : FIRST_PAGE,
+                    $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                    options.sorting
+                ).then(function (ret) {
                         target.currentPage = currentPage;
                         target.data = new Array(ret.total);
                         for (var i = 0; i < ret.total; i++) {
                             target.data[i] = {};
                         }
-                        ret.jobs.forEach(function(value, index){
-                            target.data[(ret.currentPage - 1)*target.NUMBER_PER_PAGE+index] = value;
+                        ret.jobs.forEach(function (value, index) {
+                            target.data[(ret.currentPage - 1) * target.NUMBER_PER_PAGE + index] = value;
                         });
                         target.totalPage = ret.total;
-                });
+                    });
             };
             $scope.isSearching = true;
             //Init the page
-            var data = {
-            };
-            var dataPromises = Object.keys($scope.STATIC_PARAMS.RESOURCE_TYPE).map(function(key) {
+            var data = {};
+            var dataPromises = Object.keys($scope.STATIC_PARAMS.RESOURCE_TYPE).map(function (key) {
                 var value = $scope.STATIC_PARAMS.RESOURCE_TYPE[key];
                 var promise;
                 if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.REGION) {
@@ -70,8 +68,8 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 } else {
                     promise = $scope.getRegionResource();
                 }
-                return promise.then(function(ret) {
-                    data[value] = ret.map(function(rawData, index) {
+                return promise.then(function (ret) {
+                    data[value] = ret.map(function (rawData, index) {
                         return {
                             id: rawData.id || index + 1,
                             value: rawData.text || "",
@@ -82,7 +80,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     return ret;
                 });
             });
-            $q.all(dataPromises).then(function() {
+            $q.all(dataPromises).then(function () {
                 var DISPLAY_COUNT = 7;
                 //Search conditions
                 var placesRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.REGION];
@@ -149,12 +147,12 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                         text: '全国'
                     }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.NATIRE_OF_FIRM])
                 }, {
-                  key: 'jobCategory',
-                  label: '工作性质：',
-                  list: [{
-                    id: 0,
-                    text: '不限'
-                  }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
+                    key: 'jobCategory',
+                    label: '工作性质：',
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
                 }, {
                     key: 'monthlySalary',
                     label: '年\u2001\u2001薪：',
@@ -167,12 +165,12 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     range: {
                         from: "",
                         to: "",
-                        change: function(thisscope) {
+                        change: function (thisscope) {
                             var fromValue = thisscope.range.from === undefined ? "" : thisscope.range.from;
                             var toValue = thisscope.range.to === undefined ? "" : thisscope.range.to;
                             if (fromValue === "" && toValue === "") {
                                 $scope.filterSetting.monthlySalary = thisscope.list[0];
-                            } else if (fromValue !=="" && toValue !== "") {
+                            } else if (fromValue !== "" && toValue !== "") {
                                 var valueA = parseInt(fromValue);
                                 var valueB = parseInt(toValue);
                                 if (valueA > valueB) {
@@ -197,18 +195,18 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     }]
                 }];
                 var f = {};
-                for (i = 0; i < $scope.filters.length; i++) {
+                for (var i = 0; i < $scope.filters.length; i++) {
                     f[$scope.filters[i].key] = $scope.filters[i];
                 }
 
                 $scope.filterSetting = {
-                    findKey: function(scope, target) {
-                        var result = scope.list.find(function(value){
-                            return  (target === value.text);
+                    findKey: function (scope, target) {
+                        var result = scope.list.find(function (value) {
+                            return (target === value.text);
                         });
                         return result;
                     },
-                    autoCompleteConfirm: function(filterSetting, scope, target) {
+                    autoCompleteConfirm: function (filterSetting, scope, target) {
                         if (target && target !== "") {
                             filterSetting[scope.key] = target;
                             scope.type = "";
@@ -225,9 +223,8 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     // monthlySalary: f.monthlySalary.list[0],
                     // position: f.position.list[0]
                 };
-                var rawSubscription = {
-                };
-                var staticSubscription  = {
+                var rawSubscription = {};
+                var staticSubscription = {
                     workPlace: f.workPlace.list[0],
                     diplomas: f.diplomas.list[0],
                     industry: f.industry.list[0],
@@ -237,19 +234,19 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                     position: f.position.list[0]
                 };
                 $scope.hasSubscribed = false;
-                $scope.loadSubscription().then(function(value) {
+                $scope.loadSubscription().then(function (value) {
                     if (value.length > 0) {
                         $scope.hasSubscribed = true;
                         try {
                             rawSubscription = JSON.parse(value[0].value);
-                        } catch(e) {
+                        } catch (e) {
                             $scope.hasSubscribed = false;
                             rawSubscription = staticSubscription;
                         }
                     } else {
                         rawSubscription = staticSubscription;
                     }
-                    Object.keys(staticSubscription).forEach(function(key) {
+                    Object.keys(staticSubscription).forEach(function (key) {
                         $scope.filterSetting[key] = rawSubscription[key];
                     });
 
@@ -263,17 +260,17 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                         search(FIRST_PAGE, $scope.data.recommendPositions, recommendOption),
                         search(FIRST_PAGE, $scope.data.competivePositions, competiveOption)
                     ];
-                    $q.all(searchPromises).then(function(){
+                    $q.all(searchPromises).then(function () {
                         $scope.isSearching = false;
-                        $timeout(function(){
+                        $timeout(function () {
                             $('.b-opd-favorite .tabular.menu .item').tab();
                         });
                     });
                 });
 
-                $scope.subscribe = function() {
+                $scope.subscribe = function () {
                     var paramToSave = {};
-                    Object.keys(staticSubscription).forEach(function(key) {
+                    Object.keys(staticSubscription).forEach(function (key) {
                         paramToSave[key] = $scope.filterSetting[key];
                     });
                     $scope.saveSubscription(JSON.stringify(paramToSave));
@@ -283,13 +280,13 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                         sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
                     };
                     $scope.isSubscriptionSearching = true;
-                    search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function(){
+                    search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function () {
                         rawSubscription = paramToSave;
                         $scope.isSubscriptionSearching = false;
                     });
                 };
-                $scope.subscribeCancel = function() {
-                    Object.keys(staticSubscription).forEach(function(key) {
+                $scope.subscribeCancel = function () {
+                    Object.keys(staticSubscription).forEach(function (key) {
                         $scope.filterSetting[key] = rawSubscription[key];
                     });
                 };
@@ -321,16 +318,15 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 showPageMenu: true,
                 showPageMore: false,
                 deleteable: "false",
-                getData: function(currentPage){
+                getData: function (currentPage) {
                     $scope.isSubscriptionSearching = true;
-                    return search(currentPage, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function(){
+                    return search(currentPage, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function () {
                         $scope.isSubscriptionSearching = false;
                     });
                 },
                 totalPage: 0,
                 currentPage: FIRST_PAGE,
-                data: [{
-                }]
+                data: [{}]
             };
             $scope.isSubscriptionSearching = false;
             $scope.data.recommendPositions = {
@@ -339,16 +335,15 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 showPageMenu: true,
                 showPageMore: false,
                 deleteable: "false",
-                getData: function(currentPage){
+                getData: function (currentPage) {
                     $scope.isRecommendPositionSearching = true;
-                    return search(currentPage, $scope.data.recommendPositions, recommendOption).then(function(){
+                    return search(currentPage, $scope.data.recommendPositions, recommendOption).then(function () {
                         $scope.isRecommendPositionSearching = false;
                     });
                 },
                 totalPage: 0,
                 currentPage: FIRST_PAGE,
-                data: [{
-                }]
+                data: [{}]
             };
             $scope.isRecommendPositionSearching = false;
             $scope.data.competivePositions = {
@@ -357,16 +352,15 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 showPageMenu: true,
                 showPageMore: false,
                 deleteable: "false",
-                getData: function(currentPage){
+                getData: function (currentPage) {
                     $scope.isCompetivePositionSearching = true;
-                    return search(currentPage, $scope.data.competivePositions, competiveOption).then(function(){
+                    return search(currentPage, $scope.data.competivePositions, competiveOption).then(function () {
                         $scope.isCompetivePositionSearching = false;
                     });
                 },
                 totalPage: 0,
                 currentPage: FIRST_PAGE,
-                data: [{
-                }]
+                data: [{}]
             };
             $scope.isCompetivePositionSearching = false;
         }
