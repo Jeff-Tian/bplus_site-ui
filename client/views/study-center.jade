@@ -119,7 +119,7 @@ block content
                     div(class="ui top attached tabular menu")
                         a(class="active item", data-tab="unfinished-courses") 未完成的课程
                         a(class="item", data-tab="finished-courses")  已完成的课程
-                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl")
+                    div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="UnfinishedCoursesCtrl", ng-class="{'loading': loading}")
                         + unfinishedCourseTable('courses')
                         div(class="ui horizontal divider")
                         //+ sticky

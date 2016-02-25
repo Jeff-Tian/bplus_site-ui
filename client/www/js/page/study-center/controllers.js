@@ -1,12 +1,17 @@
 angular.module('studyCenterModule')
-    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', '$q', function ($scope, $timeout, $q) {
         $scope.courses = [{
             name: '咨询公司求职,如何修改简历?',
             teacher: 'Julia合得国际创始人,HBS Alumni',
             status: (18 / 20) * 100,
             statusText: ['18/20', '已开课'],
             startAt: new Date(2016, 1, 24, 21, 0, 0),
-            endAt: new Date(2016, 10, 21, 21, 0, 0)
+            endAt: new Date(2016, 10, 21, 21, 0, 0),
+            tags: [
+                {text: '职业规划', special: false},
+                {text: '面试辅导', special: false},
+                {text: '一对一', special: true}
+            ]
         }, {
             name: '咨询公司求职,如何修改简历?',
             teacher: 'Julia合得国际创始人,HBS Alumni',
@@ -33,6 +38,22 @@ angular.module('studyCenterModule')
         angular.forEach($scope.courses, function (value, key) {
             value.countdown = new CountDown(new Date(value.startAt));
         });
+
+        $scope.loading = false;
+        $scope.courses.getData = function () {
+            var deferred = $q.defer();
+
+            $scope.loading = true;
+            $timeout(function () {
+                $scope.loading = false;
+                deferred.resolve('hello');
+            }, 1000);
+
+            return deferred.promise;
+        };
+
+        $scope.courses.NUMBER_PER_PAGE = 2;
+        $scope.totalPages = 4;
 
         $scope.showDimmer = function ($event) {
             //$($event.target).closest('.dimmable').dimmer('show');

@@ -53,7 +53,7 @@
             },
             templateUrl: '/view-partial/opd/detail-pagination-pattern.html',
             link: function ($scope, element, attrs) {
-                var data = $scope.paginationdata.rawData;
+                var data = $scope.paginationdata.rawData || $scope.paginationdata;
                 var length = data.length;
                 var pages = Math.ceil(length / $scope.paginationdata.NUMBER_PER_PAGE);
                 var head = "head";
@@ -99,11 +99,11 @@
                         }
                         if (itemChanged) {
                             $scope.paginationdata.getData($scope.paginationMenu.currentPage).then(function () {
-                                data = $scope.paginationdata.rawData;
+                                data = $scope.paginationdata.rawData || $scope.paginationdata;
                                 displayPage($scope, data);
                             });
                         }
-                    },
+                    }
                 };
                 displayPage($scope, data);
             }

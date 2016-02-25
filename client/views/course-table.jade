@@ -60,7 +60,9 @@ mixin courseTableBody(courses, rating, rated)
         tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses} track by $index")
             td
                 h4(class="ui grey header") {{c.name}}
-                    div(class="sub header")  {{c.teacher}}
+                    div(class="sub header") {{c.teacher}}
+                    div(class="sub header", style="margin-top: 10px;")
+                        span(class="ui mini red label", ng-repeat="t in c.tags", ng-style="($index === 0) && {'margin-left': 0}", ng-class="{'light': !t.special}") {{t.text}}
             td
                 div(class="ui tiny grey header") {{c.startAt | date : 'yyyy.MM.dd'}}
                     div(class="sub header", style="white-space: nowrap;") ({{c.startAt | date : 'EEE' }}) {{c.startAt | date : 'HH:mm' }}~{{c.endAt | date : 'HH:mm' }}
@@ -131,7 +133,7 @@ mixin courseTableBody(courses, rating, rated)
     tfoot
         tr
             th(colspan="4", style="text-align: right;")
-                pagination
+                pagination(paginationdata="#{courses}")
 
 
 mixin unfinishedCourseTable(courses)
