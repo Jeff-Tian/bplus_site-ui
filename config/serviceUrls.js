@@ -19,7 +19,8 @@ module.exports = {
 
     studyCenter: {
         classBooking: {
-            coming: '/service-proxy/study-center/class-booking/coming'
+            coming: '/service-proxy/study-center/class-booking/coming',
+            finished: '/service-proxy/study-center/class-booking/finished'
         }
     }
 };

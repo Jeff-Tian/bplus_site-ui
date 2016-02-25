@@ -82,30 +82,32 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', function ($scope) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', function ($scope, service) {
 
-        $scope.courses = [{
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '30'
-        }, {
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '40'
-        }, {
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            startDate: '2016年1月26日(周四)',
-            startTime: '20:00',
-            endTime: '21:00',
-            status: '100'
-        }];
+        $scope.fetching = false;
+        $scope.courses = {rawData: []};
+        service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
+            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.finished)
+                .then(function (data) {
+                    $scope.courses.rawData = data.bookings.map(function (d) {
+                        return {
+                            name: d.title,
+                            teacher: d.description,
+                            startAt: new Date(d.start_time),
+                            endAt: new Date(d.end_time)
+                        };
+                    });
+
+                    $scope.courses.getData = function () {
+                        var deferred = $q.defer();
+
+                        return deferred.promise;
+                    };
+
+                    $scope.courses.NUMBER_PER_PAGE = 10;
+                    $scope.totalPages = data.total;
+                });
+        });
     }])
     .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', function ($scope, FileReaderService) {
         $scope.teachers = [{
