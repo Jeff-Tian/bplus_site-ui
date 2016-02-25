@@ -1,59 +1,55 @@
 angular.module('studyCenterModule')
-    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', '$q', function ($scope, $timeout, $q) {
-        $scope.courses = [{
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            status: (18 / 20) * 100,
-            statusText: ['18/20', '已开课'],
-            startAt: new Date(2016, 1, 24, 21, 0, 0),
-            endAt: new Date(2016, 10, 21, 21, 0, 0),
-            tags: [
-                {text: '职业规划', special: false},
-                {text: '面试辅导', special: false},
-                {text: '一对一', special: true}
-            ]
-        }, {
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            status: (18 / 20) * 100,
-            statusText: ['18/20', '已开课'],
-            startAt: new Date(2016, 10, 21, 20, 0, 0),
-            endAt: new Date(2016, 10, 21, 21, 0, 0)
-        }, {
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            startAt: new Date(2016, 11, 23, 10),
-            endAt: new Date(2016, 11, 23, 11),
-            status: -1,
-            statusText: ['开课失败', '人数不足']
-        }, {
-            name: '咨询公司求职,如何修改简历?',
-            teacher: 'Julia合得国际创始人,HBS Alumni',
-            status: '100',
-            startAt: new Date(2016, 10, 21, 20),
-            endAt: new Date(2016, 10, 21, 21),
-            statusText: ['01/01', '已开课']
-        }];
-
-        angular.forEach($scope.courses, function (value, key) {
-            value.countdown = new CountDown(new Date(value.startAt));
-        });
-
+    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', function ($scope, $timeout, $q, service) {
         $scope.loading = false;
-        $scope.courses.getData = function () {
-            var deferred = $q.defer();
 
-            $scope.loading = true;
-            $timeout(function () {
-                $scope.loading = false;
-                deferred.resolve('hello');
-            }, 1000);
-
-            return deferred.promise;
+        $scope.courses = {
+            rawData: []
         };
 
-        $scope.courses.NUMBER_PER_PAGE = 2;
-        $scope.totalPages = 4;
+        service.executePromiseAvoidDuplicate($scope, 'loading', function () {
+            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.coming)
+                .then(function (data) {
+                    $scope.courses.rawData =
+                        data.map(function (d) {
+                            return {
+                                name: d.description,
+                                teacher: d.teacher.display_name,
+                                status: (18 / 20) * 100,
+                                statusText: ['18/20', '已开课'],
+                                startAt: new Date(d.start_time),
+                                endAt: new Date(d.end_time),
+                                tags: d.teacher.tags.map(function (t) {
+                                    return {
+                                        text: t,
+                                        special: false
+                                    };
+                                })
+                            };
+                        });
+
+                    angular.forEach($scope.courses.rawData, function (value, key) {
+                        value.countdown = new CountDown(new Date(value.startAt));
+                    });
+
+                    $scope.courses.getData = function () {
+                        var deferred = $q.defer();
+
+                        $scope.loading = true;
+                        $timeout(function () {
+                            $scope.loading = false;
+                            deferred.resolve('hello');
+                        }, 1000);
+
+                        return deferred.promise;
+                    };
+
+                    $scope.courses.NUMBER_PER_PAGE = $scope.courses.rawData.length;
+                    $scope.totalPages = 1;
+                }, function (reason) {
+                    console.error(reason);
+                })
+                ;
+        });
 
         $scope.showDimmer = function ($event) {
             //$($event.target).closest('.dimmable').dimmer('show');

@@ -57,7 +57,7 @@ mixin courseTableHeader
 
 mixin courseTableBody(courses, rating, rated)
     tbody
-        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses} track by $index")
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.rawData track by $index")
             td
                 h4(class="ui grey header") {{c.name}}
                     div(class="sub header") {{c.teacher}}

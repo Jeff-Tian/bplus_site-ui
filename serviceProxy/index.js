@@ -9,13 +9,11 @@ var sms = require('./sms'),
     productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
     infomationService = require('./informationService'),
-    config = require('../config')
+    config = require('../config'),
+    leaveTrimmer = require('../utils/leaveTrimmer')
     ;
 
-var serviceUrls = {};
-for (var url in config.serviceUrls) {
-    serviceUrls[url] = config.serviceUrls[url].replace('/service-proxy', '');
-}
+var serviceUrls = leaveTrimmer.trim(config.serviceUrls, '/service-proxy');
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
@@ -24,6 +22,7 @@ module.exports = require('express').Router()
 
         next();
     })
+    .use('/study-center', require('./study-center.js'))
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
