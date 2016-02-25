@@ -31,7 +31,7 @@ angular.module('studyCenterModule')
         }];
 
         angular.forEach($scope.courses, function (value, key) {
-            value.countdown = new CountDown(new Date(value.startAt) - new Date());
+            value.countdown = new CountDown(new Date(value.startAt));
         });
 
         $scope.showDimmer = function ($event) {
@@ -49,12 +49,12 @@ angular.module('studyCenterModule')
         };
 
         function CountDown(init) {
-            this.value = init;
+            this.value = init - (new Date());
 
             var self = this;
             this.start = function () {
                 function countdown() {
-                    self.value -= 1000;
+                    self.value = init - (new Date());
 
                     $timeout(countdown, 1000);
                 }
