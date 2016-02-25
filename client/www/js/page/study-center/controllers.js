@@ -82,7 +82,7 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', 'service', function ($scope, service) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', function ($scope, service, $timeout) {
 
         $scope.fetching = false;
         $scope.courses = {rawData: []};
@@ -106,6 +106,14 @@ angular.module('studyCenterModule')
 
                     $scope.courses.NUMBER_PER_PAGE = 10;
                     $scope.totalPages = data.total;
+
+                    $timeout(function () {
+                        $(function () {
+                            $('td .rating')
+                                .rating({})
+                            ;
+                        });
+                    });
                 });
         });
     }])

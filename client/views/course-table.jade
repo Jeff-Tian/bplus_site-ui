@@ -28,9 +28,12 @@ mixin finishedUnratedCourseBlocks(c)
     td
         button(class="ui black button", ng-click="showRating=true", ng-disabled="showRating") 立刻评价
 
+mixin rating(max, rating)
+    div(class="ui star rating", data-max-rating="5", data-rating="4")
+
 mixin finishedRatedCourseBlocks(c)
     td
-        div(class="ui star rating", data-max-rating="5", data-rating="4")
+        + rating(5, 4)
     td
         button(class="ui black button", ng-click="showRating=true", ng-disabled="showRating") 评价详情
 
@@ -166,6 +169,43 @@ mixin finishedRatedCourseTable(courses)
     + finishedCourseTable(courses, '已评价', false, true)
         + finishedRatedCourseBlocks('c')
 
+mixin teacherTable(teachers)
+    + courseTable
+        + courseTableHead
+            th
+                h4(class="ui white header left aligned") 导师名称
+            th
+                h4(class="ui white header left aligned") 最新课程
+            th
+        tbody
+            tr(ng-repeat="t in #{teachers}")
+                td(class="ui items")
+                    div.item
+                        div(class="ui tiny image")
+                            img(ng-src="/{{t.image}}", class="avatar")
+                        div.content
+                            h5(class="ui header") {{t.name}}
+                                div(class="sub header") {{t.title}}
+                                div(class="sub header", style="margin-top: 5px; margin-bottom: 10px;")
+                                    + rating(5, 4)
+                                div(class="sub header")
+                                    span(class="ui light mini red label", style="margin-left: 0;") HBS
+                                    span(class="ui light mini red label") CEO
+                td
+                    p
+                        | 咨询公司求职,如何修改简历?
+                        | &nbsp;
+                        span(class="ui mini red label") 一对一
+                    p
+                        | 咨询公司求职,如何修改简历?
+                        | &nbsp;
+                        span(class="ui light red mini label") 小班课
+                    p
+                        | 咨询公司HR的简历指导
+                        | &nbsp;
+                        span(class="ui light red mini label") 一对一
+                td
+                    button(class="ui red mini button") 取消收藏
 
 mixin sticky
     div(class="right ui rail", style="margin: 0; padding: 0;")

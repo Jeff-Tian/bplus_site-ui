@@ -5,7 +5,6 @@
             scope: true,
             templateUrl: '/view-partial/opd/menu.html',
             link: function ($scope, element, attrs) {
-                console.log("hello')");
             }
         };
     };
