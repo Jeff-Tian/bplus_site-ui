@@ -21,6 +21,11 @@ module.exports = {
         classBooking: {
             coming: '/service-proxy/study-center/class-booking/coming',
             finished: '/service-proxy/study-center/class-booking/finished'
+        },
+        my: {
+            favorite: {
+                teachers: '/service-proxy/study-center/my/favorite/teachers'
+            }
         }
     }
 };
