@@ -1,15 +1,15 @@
 describe('PersonalHistoryCtrl', function () {
     var scope;
 
-    var baseTime = new Date(2015, 1, 1);
-    jasmine.clock().mockDate(baseTime);
-
     // load the controller's module
     beforeEach(module('personalHistory'));
 
     beforeEach(inject(function ($rootScope, $controller) {
         scope = $rootScope.$new();
         $controller('PersonalHistoryCtrl', {$scope: scope});
+
+        var baseTime = new Date(2015, 1, 1);
+        jasmine.clock().mockDate(baseTime);
     }));
 
     // tests start here

@@ -1,9 +1,33 @@
 angular.module('studyCenterModule')
-    .controller('UnfinishedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', function ($scope, $timeout, $q, service) {
+    .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', function ($scope, $timeout, $q, service) {
         $scope.loading = false;
 
         $scope.courses = {
             rawData: []
+        };
+
+        $scope.getCourseStatus = function (registered, minCapacity, startAt) {
+            var now = new Date();
+
+            if (now < startAt) {
+                if (registered < minCapacity) {
+                    return '未开课';
+                } else {
+                    return '已开课';
+                }
+            } else {
+                if (registered < minCapacity) {
+                    return '人数不足';
+                } else {
+                    return '已开课';
+                }
+            }
+        };
+
+        $scope.getCourseProgress = function (registered, minCapacity, maxCapacity, startAt) {
+            var status = $scope.getCourseStatus(registered, minCapacity, startAt);
+
+            return status === '人数不足' ? '开课失败' : registered + '/' + maxCapacity;
         };
 
         service.executePromiseAvoidDuplicate($scope, 'loading', function () {
@@ -11,11 +35,17 @@ angular.module('studyCenterModule')
                 .then(function (data) {
                     $scope.courses.rawData =
                         data.map(function (d) {
+                            var courseStatus = $scope.getCourseStatus(d.bookingCount, d.minCapacity, new Date(d.start_time));
+                            var progress = $scope.getCourseProgress(d.bookingCount, d.minCapacity, d.maxCapacity, new Date(d.start_time));
+
                             return {
-                                name: d.description,
+                                name: d.title,
                                 teacher: d.teacher.display_name,
                                 status: (18 / 20) * 100,
-                                statusText: ['18/20', '已开课'],
+                                statusText: [
+                                    progress,
+                                    status
+                                ],
                                 startAt: new Date(d.start_time),
                                 endAt: new Date(d.end_time),
                                 tags: d.teacher.tags.map(function (t) {
@@ -30,23 +60,6 @@ angular.module('studyCenterModule')
                     angular.forEach($scope.courses.rawData, function (value, key) {
                         value.countdown = new CountDown(new Date(value.startAt));
                     });
-
-                    $scope.courses.getData = function () {
-                        var deferred = $q.defer();
-
-                        $scope.loading = true;
-                        $timeout(function () {
-                            $scope.loading = false;
-                            deferred.resolve('hello');
-                        }, 1000);
-
-                        return deferred.promise;
-                    };
-
-                    $scope.courses.NUMBER_PER_PAGE = $scope.courses.rawData.length;
-                    $scope.totalPages = 1;
-                }, function (reason) {
-                    console.error(reason);
                 })
                 ;
         });
