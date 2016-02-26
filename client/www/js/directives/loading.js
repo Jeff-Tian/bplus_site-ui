@@ -3,7 +3,7 @@
         return {
             restrict: 'A',
             scope: {
-                showLoading: '='
+                showLoading: '=?'
             },
             link: function ($scope, $element, attrs, ngModel) {
                 $scope.showLoading = false;

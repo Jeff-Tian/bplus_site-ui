@@ -1,0 +1,7 @@
+<div class="ui segment thumb" ng-show="filterSetting.showThumb">
+    <i class="ui right floated angle large down icon" style="cursor: pointer;"
+       ng-click="filterSetting.showThumb = false" ng-if="filterSetting.showDetail"></i>
+    <strong ng-repeat-start="f in filters">{{f.thumbLabel || f.label}}</strong>
+    <span class="ui light red label" style="cursor: pointer;">{{filterSetting[f.key].text}}</span>
+    <span ng-repeat-end>&nbsp;&nbsp;</span>
+</div>

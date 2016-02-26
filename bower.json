@@ -21,7 +21,8 @@
     "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git",
     "competion-ui": "git@bitbucket.org:hcdlearning/cmpt2015-ui.git#develop-ui",
     "devbridge-autocomplete": "~1.2.24",
-    "SHARED-UI": "git@bitbucket.org:hcdlearning/shared-ui.git#develop"
+    "SHARED-UI": "git@bitbucket.org:hcdlearning/shared-ui.git#develop",
+    "angular-chart.js": "^0.8.8"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6",
@@ -35,6 +36,6 @@
     "when": "~3.7.3"
   },
   "resolutions": {
-    "angular": "1.4.8"
+    "angular": "1.4.9"
   }
 }

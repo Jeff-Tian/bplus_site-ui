@@ -266,5 +266,18 @@ module.exports = {
         proxyBPlus({
             path: '/resource/load/' + req.params.resourceKey + '/' + language
         })(req, res, next);
+    },
+
+    getResourceLocation: function (req, res, next) {
+        var locationID = req.params.locationID;
+        var path = "";
+        if (locationID) {
+            path = '/resource/childregion/' + locationID;
+        } else {
+            path = '/resource/region/';
+        }
+        proxyBPlus({
+            path: path
+        })(req, res, next);
     }
 };
