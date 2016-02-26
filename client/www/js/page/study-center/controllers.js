@@ -82,7 +82,7 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', function ($scope, service, $timeout) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', function ($scope, service, $timeout, $q) {
 
         $scope.fetching = false;
         $scope.courses = {rawData: []};
