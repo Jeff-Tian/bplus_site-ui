@@ -333,5 +333,11 @@ module.exports = {
         proxyBPlus({
             path: '/job/load'
         })(req, res, next);
+    },
+
+    companyDetail: function (req, res, next) {
+        proxyBPlus({
+            path: '/company/load'
+        })(req, res, next);
     }
 };

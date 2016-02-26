@@ -334,6 +334,32 @@
                 return data;
             });
         };
+        $scope.getCompanyDetail = function(companyid) {
+            var url = "/service-proxy/bplus-opd/companydetail";
+            var param = {
+                member_id: member_id,
+                company_id: companyid
+            }
+            return service.post(url, param).then(function(ret){
+                return {
+                    id: ret.id,
+                    abstraction: ret.abstraction || "",
+                    category: ret.category || [],
+                    description: ret.description || "",
+                    evaluation: ret.evaluation || "",
+                    industry: ret.industry || "",
+                    location: ret.location || "",
+                    logo: ret.logo || "",
+                    name: ret.name || "",
+                    nature_of_firms: ret.nature_of_firms || "",
+                    scale: ret.scale || "",
+                    tags: ret.tags || [],
+                    website: ret.website || "",
+                    match: (ret.match ? levelMapping(ret.match) : "")
+                };
+            });
+        };
+
         //Preload data
         Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(key) {
             if (key !== 'CHILD_REGION') {
