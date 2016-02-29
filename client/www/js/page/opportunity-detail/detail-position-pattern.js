@@ -30,8 +30,9 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 onClick: function(target) {
                     location.hash = "/job/" + target.jobID;
                 },
-                onCompanyClick: function(target) {
-                    console.log("onCompanyClick");
+                onCompanyClick: function(target, $event) {
+                    $event.stopPropagation();
+                    location.hash = "/job/corporation/" + target.companyinfo.id;
                 },
                 onDelete: function(target, $event) {
                     $event.stopPropagation();

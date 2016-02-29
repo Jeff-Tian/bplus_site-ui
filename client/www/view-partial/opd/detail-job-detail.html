@@ -46,9 +46,9 @@
             </div> -->
         </div>
     </div>
-    <div class="chart section">
+    <div class="chart section" ng-controller="RadarCtrl" ng-show="labels.length>0">
         <div class="ui grid">
-            <div class="six wide center aligned column competence" ng-controller="RadarCtrl">
+            <div class="six wide center aligned column competence">
                 <div class="title">职场能力需求</div>
                 <canvas id="radar" class="chart chart-radar"
                         chart-data="data" chart-labels="labels" style="height: 300px; width: 300px;" chart-colours="colors" chart-options="options">

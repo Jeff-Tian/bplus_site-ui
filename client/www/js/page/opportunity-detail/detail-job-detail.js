@@ -43,9 +43,9 @@ angular
                 $scope.companyData = companyData;
                 $scope.hasCollected = hasCollected;
                 $scope.hasSent = hasDelivered;
+                $scope.hasCollected = false;
                 $scope.onCollectClick = function(){
                     return $scope.saveFavoritePosition(jobID, true).then(function(ret){
-                        debugger;
                         $scope.hasCollected = ret;
                     });
                 };
@@ -76,22 +76,15 @@ angular
         });
     }])
     .controller('RadarCtrl', ['$scope', function ($scope) {
-        $scope.labels = ["数据分析", "团队合作", "战略思维", "商业洞察", "快速学习"];
         var dataObject = $scope.jobData.positionAdditional.evaluation;
-        dataObject = {
-            "数据分析": 45,
-            "团队合作": 90,
-            "战略思维": 65,
-        }
         var keys = Object.keys(dataObject);
         var values = [];
         keys.forEach(function(key){
             values.push(dataObject[key]);
         });
-        debugger;
         $scope.labels = keys;
 
-        $scope.data = values;
+        $scope.data = [values];
 
         $scope.colors = [
             '#F53E3E'

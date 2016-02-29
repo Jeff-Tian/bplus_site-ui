@@ -67,6 +67,10 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
                     deferred.resolve($scope.data.companies);
                     return deferred.promise;
                 },
+                redirectToPosition: function(target) {
+                    $scope.overallParams.searchCompanyID = target.id;
+                    location.hash = "/job";
+                },
                 data: []
             };
             if ($scope.hasLoggedin()) {

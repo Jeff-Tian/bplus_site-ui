@@ -24,15 +24,9 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
                 currentPage: currentPage,
                 getData: $scope.positions.getData,
                 onCompanyClick: function(target) {
-                    //TODO
-                    //TODO
-                    console.log("onCompanyClick");
+                    location.hash = "/job/corporation/" + target.id;
                 },
-                onPositionClick: function(target) {
-                    //TODO
-                    //TODO
-                    console.log("onPositionClick");
-                },
+                onPositionClick: $scope.positions.redirectToPosition,
                 onDelete: function(target, $event) {
                     $event.stopPropagation();
                     $scope.positions.delete(target);

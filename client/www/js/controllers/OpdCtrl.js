@@ -162,6 +162,8 @@
         $scope.overallParams = {
             //for homepage
             searchKeyWord: "",
+            //for favoritepage
+            searchCompanyID: ""
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
         var dataDisplayMapping = function(dateString) {
@@ -221,6 +223,7 @@
             searchParam.pageSize = pageSize;
             searchParam.page = page;
             searchParam.sortField = sortField || "";
+            searchParam.company_id = tags.companyID || "";
             var url = "";
             if (companyid) {
                 searchParam.company_id = companyid;
