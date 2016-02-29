@@ -268,6 +268,8 @@ setupOnlineStoreStaticResources('scripts');
 
 server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
 
+server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./study-center'));
+
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
 server.use(express.static(staticFolder, staticSetting));

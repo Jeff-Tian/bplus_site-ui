@@ -1,423 +1,368 @@
-angular.module('opdModule').directive('bopdrecommendation', function () {
+angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', function ($q, $timeout) {
     return {
         restrict: "E",
-        scope: {
-            src: '='
-        },
+        scope: true,
         templateUrl: '/view-partial/opd/detail-recommendation.html',
         link: function ($scope, element, attrs) {
+            if (!$scope.hasLoggedin()) {
+                // location.href = "/signin#/login?return_url=opportunity-detail%23%2Frecommended-positions";
+                return;
+            }
+            var FIRST_PAGE = 1;
+            var search = function (currentPage, target, options) {
+                var findConditionValue = function (key) {
+                    var ret = options.condition[key];
+                    if (ret.hasOwnProperty('id')) {
+                        if (ret.id === 0 || ret.id === "0") {
+                            ret = "";
+                            if (key === "monthlySalary") {
+                                ret = ["", ""];
+                            }
+                        } else {
+                            ret = ret.text;
+                        }
+                    } else if (key === "monthlySalary") {
+                        ret = ret.split("-");
+                    }
+                    return ret;
+                };
+                var conditions = {};
+                if (options.condition && Object.keys(options.condition).length > 0) {
+                    conditions = {
+                        education: findConditionValue("diplomas"),
+                        industry: findConditionValue("industry"),
+                        jobType: findConditionValue("jobCategory"),
+                        natureOfFirms: findConditionValue("companyType"),
+                        salaryFrom: findConditionValue("monthlySalary")[0].trim(),
+                        salaryTo: findConditionValue("monthlySalary")[1].trim(),
+                        workLocation: findConditionValue("workPlace")
+                    };
+                }
+                return $scope.getPositions(
+                    options.searchKeyWord,
+                    conditions,
+                    target.NUMBER_PER_PAGE,
+                    currentPage ? currentPage : FIRST_PAGE,
+                    $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                    options.sorting
+                ).then(function (ret) {
+                        target.currentPage = currentPage;
+                        target.data = new Array(ret.total);
+                        for (var i = 0; i < ret.total; i++) {
+                            target.data[i] = {};
+                        }
+                        ret.jobs.forEach(function (value, index) {
+                            target.data[(ret.currentPage - 1) * target.NUMBER_PER_PAGE + index] = value;
+                        });
+                        target.totalPage = ret.total;
+                    });
+            };
+            $scope.isSearching = true;
+            //Init the page
+            var data = {};
+            var dataPromises = Object.keys($scope.STATIC_PARAMS.RESOURCE_TYPE).map(function (key) {
+                var value = $scope.STATIC_PARAMS.RESOURCE_TYPE[key];
+                var promise;
+                if (value !== $scope.STATIC_PARAMS.RESOURCE_TYPE.REGION) {
+                    promise = $scope.getResource(value);
+                } else {
+                    promise = $scope.getRegionResource();
+                }
+                return promise.then(function (ret) {
+                    data[value] = ret.map(function (rawData, index) {
+                        return {
+                            id: rawData.id || index + 1,
+                            value: rawData.text || "",
+                            data: rawData.text || "",
+                            text: rawData.text || ""
+                        };
+                    });
+                    return ret;
+                });
+            });
+            $q.all(dataPromises).then(function () {
+                var DISPLAY_COUNT = 7;
+                //Search conditions
+                var placesRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.REGION];
+                var industriesRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.INDUSTRY];
+                var jobsRaw = data[$scope.STATIC_PARAMS.RESOURCE_TYPE.JOB];
+                $scope.filters = [{
+                    key: 'workPlace',
+                    label: '工作地点：',
+                    more: placesRaw.slice(DISPLAY_COUNT),
+                    list: [{
+                        id: 0,
+                        value: '全国',
+                        data: '全国',
+                        text: '全国'
+                    }].concat(placesRaw.slice(0, DISPLAY_COUNT))
+                }, {
+                    key: 'diplomas',
+                    label: '学历要求：',
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.QUALIFICATIONS])
+                }, {
+                    key: 'industry',
+                    label: '行业领域：',
+                    extraListValue: '',
+                    autoComplete: industriesRaw,
+                    autoCompletePlaceHolder: "",
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }, {
+                        id: 1,
+                        text: '移动互联网'
+                    }, {
+                        id: 2,
+                        text: '电子商务'
+                    }, {
+                        id: 3,
+                        text: '金融'
+                    }, {
+                        id: 4,
+                        text: '企业服务'
+                    }, {
+                        id: 5,
+                        text: '教育'
+                    }, {
+                        id: 6,
+                        text: '文化'
+                    }, {
+                        id: 7,
+                        text: '娱乐'
+                    }, {
+                        id: 8,
+                        text: '游戏'
+                    }]
+                }, {
+                    key: 'companyType',
+                    label: '公司性质：',
+                    list: [{
+                        id: 0,
+                        value: '不限',
+                        data: '全国',
+                        text: '全国'
+                    }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.NATIRE_OF_FIRM])
+                }, {
+                    key: 'jobCategory',
+                    label: '工作性质：',
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }].concat(data[$scope.STATIC_PARAMS.RESOURCE_TYPE.WORKTYPE])
+                }, {
+                    key: 'monthlySalary',
+                    label: '年\u2001\u2001薪：',
+                    rangeLabel: '人民币',
+                    type: 'range',
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }],
+                    range: {
+                        from: "",
+                        to: "",
+                        change: function (thisscope) {
+                            var fromValue = thisscope.range.from === undefined ? "" : thisscope.range.from;
+                            var toValue = thisscope.range.to === undefined ? "" : thisscope.range.to;
+                            if (fromValue === "" && toValue === "") {
+                                $scope.filterSetting.monthlySalary = thisscope.list[0];
+                            } else if (fromValue !== "" && toValue !== "") {
+                                var valueA = parseInt(fromValue);
+                                var valueB = parseInt(toValue);
+                                if (valueA > valueB) {
+                                    var tmpValue = valueA;
+                                    valueA = valueB;
+                                    valueB = tmpValue;
+                                }
+                                $scope.filterSetting.monthlySalary = valueA + " - " + valueB;
+                            } else {
+                                $scope.filterSetting.monthlySalary = fromValue + " - " + toValue;
+                            }
+                        }
+                    }
+                }, {
+                    key: 'position',
+                    label: '职\u2001\u2001位：',
+                    autoComplete: jobsRaw,
+                    autoCompletePlaceHolder: "请输入想订阅的职位",
+                    list: [{
+                        id: 0,
+                        text: '不限'
+                    }]
+                }];
+                var f = {};
+                for (var i = 0; i < $scope.filters.length; i++) {
+                    f[$scope.filters[i].key] = $scope.filters[i];
+                }
+
+                $scope.filterSetting = {
+                    findKey: function (scope, target) {
+                        var result = scope.list.find(function (value) {
+                            return (target === value.text);
+                        });
+                        return result;
+                    },
+                    autoCompleteConfirm: function (filterSetting, scope, target) {
+                        if (target && target !== "") {
+                            filterSetting[scope.key] = target;
+                            scope.type = "";
+                        }
+                    },
+                    showThumb: false,
+                    showDetail: true,
+                    hasThumbView: false,
+                    // workPlace: f.workPlace.list[0],
+                    // diplomas: f.diplomas.list[0],
+                    // industry: f.industry.list[3],
+                    // companyType: f.companyType.list[0],
+                    // jobCategory: f.jobCategory.list[0],
+                    // monthlySalary: f.monthlySalary.list[0],
+                    // position: f.position.list[0]
+                };
+                var rawSubscription = {};
+                var staticSubscription = {
+                    workPlace: f.workPlace.list[0],
+                    diplomas: f.diplomas.list[0],
+                    industry: f.industry.list[0],
+                    companyType: f.companyType.list[0],
+                    jobCategory: f.jobCategory.list[0],
+                    monthlySalary: f.monthlySalary.list[0],
+                    position: f.position.list[0]
+                };
+                $scope.hasSubscribed = false;
+                $scope.loadSubscription().then(function (value) {
+                    if (value.length > 0) {
+                        $scope.hasSubscribed = true;
+                        try {
+                            rawSubscription = JSON.parse(value[0].value);
+                        } catch (e) {
+                            $scope.hasSubscribed = false;
+                            rawSubscription = staticSubscription;
+                        }
+                    } else {
+                        rawSubscription = staticSubscription;
+                    }
+                    Object.keys(staticSubscription).forEach(function (key) {
+                        $scope.filterSetting[key] = rawSubscription[key];
+                    });
+
+                    $scope.data.subscriptionOpiton = {
+                        searchKeyWord: "",
+                        condition: rawSubscription,
+                        sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                    };
+                    var searchPromises = [
+                        search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton),
+                        search(FIRST_PAGE, $scope.data.recommendPositions, recommendOption),
+                        search(FIRST_PAGE, $scope.data.competivePositions, competiveOption)
+                    ];
+                    $q.all(searchPromises).then(function () {
+                        $scope.isSearching = false;
+                        $timeout(function () {
+                            $('.b-opd-favorite .tabular.menu .item').tab();
+                        });
+                    });
+                });
+
+                $scope.subscribe = function () {
+                    var paramToSave = {};
+                    Object.keys(staticSubscription).forEach(function (key) {
+                        paramToSave[key] = $scope.filterSetting[key];
+                    });
+                    $scope.saveSubscription(JSON.stringify(paramToSave));
+                    $scope.data.subscriptionOpiton = {
+                        searchKeyWord: "",
+                        condition: paramToSave,
+                        sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                    };
+                    $scope.isSubscriptionSearching = true;
+                    search(FIRST_PAGE, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function () {
+                        rawSubscription = paramToSave;
+                        $scope.isSubscriptionSearching = false;
+                    });
+                };
+                $scope.subscribeCancel = function () {
+                    Object.keys(staticSubscription).forEach(function (key) {
+                        $scope.filterSetting[key] = rawSubscription[key];
+                    });
+                };
+
+            });
+
+            var subscriptionOpiton = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+            };
+            var recommendOption = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+            };
+            var competiveOption = {
+                searchKeyWord: "",
+                condition: {},
+                sorting: $scope.STATIC_PARAMS.SORT_KEYS.COMPETIVE
+            };
             //Data for positions
             //Other names can also be used
             $scope.data = {};
-            $scope.data.positions = {
-                NUMBER_PER_PAGE: 3,
-                showPosition: false,
+            $scope.data.subscriptionOpiton = {};
+            $scope.data.subscribePositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
-                data: [{
-                    matchLevel: "a",
-                    progressRate: "50",
-                    position: {
-                        name: "产品经理",
-                        type: "兼职",
-                        salary: "9k-16k",
-                        certification: "学历不限",
-                    },
-                    issueTime: "2015-12-12",
-                    company: "苹果",
-                    status: "finished",     //finished, delivered
-                    statusText: "",
-                    companyinfo: {}
-                }, {
-                    matchLevel: "d",
-                    progressRate: "70",
-                    position: {
-                        name: "c",
-                        type: "d",
-                        salary: "111122",
-                        certification: "d",
-                    },
-                    status: "",
-                    statusText: "已有7家公司对你感兴趣!",
-                    issueTime: "2015-12-20",
-                    company: "ksj ksdf",
-                    companyinfo: {}
-                }]
+                deleteable: "false",
+                getData: function (currentPage) {
+                    $scope.isSubscriptionSearching = true;
+                    return search(currentPage, $scope.data.subscribePositions, $scope.data.subscriptionOpiton).then(function () {
+                        $scope.isSubscriptionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
+                data: [{}]
             };
-            var originObject = $scope.data.positions.data[0];
-            for (var i = 0; i < 3; i++) {
-                $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
-            }
-
-            var morePlaces = [{
-                key: 'huabei',
-                label: '华北地区：',
-                list: [{
-                    id: 1,
-                    text: '北京'
-                }, {
-                    id: 17,
-                    text: '天津'
-                }, {
-                    id: 18,
-                    text: '河北'
-                }, {
-                    id: 19,
-                    text: '山西'
-                }, {
-                    id: 20,
-                    text: '内蒙古'
-                }]
-            }, {
-                key: 'dongbei',
-                label: '东北地区：',
-                list: [{
-                    id: 21,
-                    text: '辽宁'
-                }, {
-                    id: 22,
-                    text: '吉林'
-                }, {
-                    id: 23,
-                    text: '黑龙江'
-                }, {
-                    id: 24,
-                    text: '大连'
-                }]
-            }, {
-                key: 'huadong',
-                label: '华东地区：',
-                list: [{
-                    id: 2,
-                    text: '上海'
-                }, {
-                    id: 26,
-                    text: '江苏'
-                }, {
-                    id: 27,
-                    text: '浙江'
-                }, {
-                    id: 28,
-                    text: '安徽'
-                }, {
-                    id: 29,
-                    text: '福建'
-                }, {
-                    id: 30,
-                    text: '江西'
-                }, {
-                    id: 31,
-                    text: '山东'
-                }, {
-                    id: 32,
-                    text: '宁波'
-                }, {
-                    id: 33,
-                    text: '厦门'
-                }, {
-                    id: 34,
-                    text: '青岛'
-                }]
-            }, {
-                key: 'zhongnan',
-                label: '中南地区：',
-                list: [{
-                    id: 35,
-                    text: '河南'
-                }, {
-                    id: 36,
-                    text: '湖北'
-                }, {
-                    id: 37,
-                    text: '湖南'
-                }, {
-                    id: 38,
-                    text: '广东'
-                }, {
-                    id: 39,
-                    text: '广西'
-                }, {
-                    id: 40,
-                    text: '海南'
-                }, {
-                    id: 3,
-                    text: '深圳'
-                }]
-            }, {
-                key: 'xinan',
-                label: '西南地区：',
-                list: [{
-                    id: 42,
-                    text: '重庆'
-                }, {
-                    id: 43,
-                    text: '四川'
-                }, {
-                    id: 44,
-                    text: '贵州'
-                }, {
-                    id: 45,
-                    text: '云南'
-                }, {
-                    id: 46,
-                    text: '西藏'
-                }]
-            }, {
-                key: 'xibei',
-                label: '西北地区：',
-                list: [{
-                    id: 47,
-                    text: '陕西'
-                }, {
-                    id: 48,
-                    text: '甘肃'
-                }, {
-                    id: 49,
-                    text: '青海'
-                }, {
-                    id: 50,
-                    text: '宁夏'
-                }, {
-                    id: 51,
-                    text: '新疆'
-                }]
-            }];
-
-            var moreIndustries = [{
-                id: 888,
-                text: '制造'
-            }, {
-                id: 889,
-                text: '营造'
-            }, {
-                id: 890,
-                text: '批发'
-            }, {
-                id: 891,
-                text: '零售'
-            }, {
-                id: 892,
-                text: '运输'
-            }, {
-                id: 893,
-                text: '仓储'
-            }, {
-                id: 894,
-                text: '餐饮'
-            }, {
-                id: 895,
-                text: '通信传播'
-            }, {
-                id: 896,
-                text: '保险业'
-            }, {
-                id: 897,
-                text: '不动产'
-            }, {
-                id: 898,
-                text: '科学'
-            }, {
-                id: 899,
-                text: '技术服务'
-            }, {
-                id: 900,
-                text: '公共行政'
-            }, {
-                id: 901,
-                text: '医疗保健'
-            }, {
-                id: 902,
-                text: '社会工作'
-            }, {
-                id: 903,
-                text: '艺术'
-            }];
-
-            $scope.subscribeFilters = [{
-                key: 'workPlace',
-                label: '工作地点：',
-                more: morePlaces,
-                list: [{
-                    id: 0,
-                    text: '全国'
-                }, {
-                    id: 1,
-                    text: '北京'
-                }, {
-                    id: 2,
-                    text: '上海'
-                }, {
-                    id: 3,
-                    text: '深圳'
-                }, {
-                    id: 4,
-                    text: '广州'
-                }, {
-                    id: 5,
-                    text: '杭州'
-                }, {
-                    id: 6,
-                    text: '成都'
-                }, {
-                    id: 7,
-                    text: '南京'
-                }, {
-                    id: 8,
-                    text: '武汉'
-                }, {
-                    id: 9,
-                    text: '西安'
-                }, {
-                    id: 10,
-                    text: '厦门'
-                }, {
-                    id: 11,
-                    text: '长沙'
-                }, {
-                    id: 12,
-                    text: '贵州'
-                }, {
-                    id: 13,
-                    text: '苏州'
-                }, {
-                    id: 14,
-                    text: '昆山'
-                }, {
-                    id: 15,
-                    text: '常州'
-                }]
-            }, {
-                key: 'diplomas',
-                label: '学历要求：',
-                list: [{
-                    id: 0,
-                    text: '不限'
-                }, {
-                    id: 1,
-                    text: '本科'
-                }, {
-                    id: 2,
-                    text: '大专'
-                }, {
-                    id: 3,
-                    text: '硕士'
-                }, {
-                    id: 4,
-                    text: '博士'
-                }]
-            }, {
-                key: 'industry',
-                label: '行业领域：',
-                more: moreIndustries,
-                list: [{
-                    id: 0,
-                    text: '不限'
-                }, {
-                    id: 1,
-                    text: '移动互联网'
-                }, {
-                    id: 2,
-                    text: '电子商务'
-                }, {
-                    id: 3,
-                    text: '金融'
-                }, {
-                    id: 4,
-                    text: '企业服务'
-                }, {
-                    id: 5,
-                    text: '教育'
-                }, {
-                    id: 6,
-                    text: '文化'
-                }, {
-                    id: 7,
-                    text: '娱乐'
-                }, {
-                    id: 8,
-                    text: '游戏'
-                }]
-            }, {
-                key: 'companyType',
-                label: '公司性质：',
-                list: [{
-                    id: 0,
-                    text: '不限'
-                }, {
-                    id: 1,
-                    text: '国企'
-                }, {
-                    id: 2,
-                    text: '外企'
-                }]
-            }, {
-                key: 'functionality',
-                label: '职\u2001\u2001能：',
-                thumbLabel: '职能：',
-                list: [{
-                    id: 0,
-                    text: '不限'
-                }, {
-                    id: 1,
-                    text: '市场'
-                }, {
-                    id: 2,
-                    text: '销售'
-                }, {
-                    id: 3,
-                    text: '公关'
-                }, {
-                    id: 4,
-                    text: '技术'
-                }, {
-                    id: 5,
-                    text: '设计'
-                }, {
-                    id: 6,
-                    text: '人事'
-                }, {
-                    id: 7,
-                    text: '仓管'
-                }, {
-                    id: 8,
-                    text: '行政'
-                }, {
-                    id: 9,
-                    text: '文书'
-                }]
-            }, {
-                key: 'jobCategory',
-                label: '工作性质：',
-                list: [{
-                    id: 0,
-                    text: '不限'
-                }, {
-                    id: 1,
-                    text: '实习'
-                }, {
-                    id: 2,
-                    text: '兼职'
-                }, {
-                    id: 3,
-                    text: '全职'
-                }]
-            }];
-
-            var f = {};
-            for (i = 0; i < $scope.subscribeFilters.length; i++) {
-                f[$scope.subscribeFilters[i].key] = $scope.subscribeFilters[i];
-            }
-
-            $scope.subscribeFiltersSetting = {
-                showThumb: false,
-                showDetail: true,
-                hasThumbView: false,
-                workPlace: f.workPlace.list[0],
-                diplomas: f.diplomas.list[4],
-                industry: f.industry.list[3],
-                companyType: f.companyType.list[1],
-                functionality: f.functionality.list[9]
+            $scope.isSubscriptionSearching = false;
+            $scope.data.recommendPositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
+                deleteable: "false",
+                getData: function (currentPage) {
+                    $scope.isRecommendPositionSearching = true;
+                    return search(currentPage, $scope.data.recommendPositions, recommendOption).then(function () {
+                        $scope.isRecommendPositionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
+                data: [{}]
             };
+            $scope.isRecommendPositionSearching = false;
+            $scope.data.competivePositions = {
+                NUMBER_PER_PAGE: 10,
+                showPosition: true,
+                showPageMenu: true,
+                showPageMore: false,
+                deleteable: "false",
+                getData: function (currentPage) {
+                    $scope.isCompetivePositionSearching = true;
+                    return search(currentPage, $scope.data.competivePositions, competiveOption).then(function () {
+                        $scope.isCompetivePositionSearching = false;
+                    });
+                },
+                totalPage: 0,
+                currentPage: FIRST_PAGE,
+                data: [{}]
+            };
+            $scope.isCompetivePositionSearching = false;
         }
     };
-});
+}]);
