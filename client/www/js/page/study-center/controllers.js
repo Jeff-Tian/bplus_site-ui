@@ -155,7 +155,7 @@ angular.module('studyCenterModule')
                                 link: '',
                                 target: ''
                             }]
-                        }
+                        };
                     });
 
                     $('* > .rating').rating({});

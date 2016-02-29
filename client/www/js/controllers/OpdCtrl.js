@@ -345,7 +345,8 @@
             var param = {
                 member_id: member_id,
                 company_id: companyid
-            }
+            };
+
             return service.post(url, param).then(function(ret){
                 return {
                     id: ret.id,

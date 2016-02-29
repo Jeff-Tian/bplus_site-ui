@@ -62,7 +62,7 @@ angular
     })
     .controller('detailJobDetail', ['$scope', '$stateParams', '$templateCache', function ($scope, $stateParams, $templateCache) {
         var jobID = $stateParams.jobid;
-        var hasLoggedin = false;
+        var hasLoggedIn = false;
         $scope.hasLoggedin = hasLoggedIn = $scope.hasLoggedin();
         $scope.isSearching = true;
         var initPromises = [
