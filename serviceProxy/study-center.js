@@ -34,7 +34,7 @@ module.exports = require('express').Router()
         return proxyBPlus({
             path: '/my/favorite/remove', method: 'POST', dataMapper: function (d) {
                 d.category = 'teacher';
-                d.item_id = req.body.teacher_id;
+                d.item_id = req.query.teacher_id;
 
                 return d;
             }

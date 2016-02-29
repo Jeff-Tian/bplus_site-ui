@@ -17,7 +17,7 @@ var serviceUrls = leaveTrimmer.trim(config.serviceUrls, '/service-proxy');
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
-        req.dualLog('service-proxy is being calling from this host: ' + req.hostname + '...');
+        req.dualLog('service-proxy is being calling as ' + req.method + ' from this host: ' + req.hostname + '...');
         req.dualLog((req.headers['origin'] || '') + req.originalUrl);
 
         next();

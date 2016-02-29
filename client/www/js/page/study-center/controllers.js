@@ -130,48 +130,57 @@ angular.module('studyCenterModule')
                 });
         });
     }])
-    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', function ($scope, FileReaderService, service) {
+    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', function ($scope, FileReaderService, service, MessageBox) {
         $scope.teachers = [];
         $scope.fetching = false;
-        service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
-            return service.get(angular.bplus.config.serviceUrls.studyCenter.my.favorite.teachers)
-                .then(function (data) {
-                    $scope.teachers = data.map(function (i) {
-                        return {
-                            id: i.teacher_id,
-                            name: i.display_name,
-                            description: 'todo description',
-                            title: 'todo title',
-                            image: i.image_url,
-                            topics: [{
-                                title: 'todo title topic',
-                                link: '',
-                                target: ''
-                            }, {
-                                title: 'todo title topic',
-                                link: '',
-                                target: ''
-                            }, {
-                                title: 'todo title topic',
-                                link: '',
-                                target: ''
-                            }]
-                        };
-                    });
 
-                    $('* > .rating').rating({});
-                });
-        });
+        function refreshTeachers() {
+            service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
+                return service.get(angular.bplus.config.serviceUrls.studyCenter.my.favorite.teachers)
+                    .then(function (data) {
+                        $scope.teachers = data.map(function (i) {
+                            return {
+                                id: i.teacher_id,
+                                name: i.display_name,
+                                description: 'todo description',
+                                title: 'todo title',
+                                image: i.image_url,
+                                topics: [{
+                                    title: 'todo title topic',
+                                    link: '',
+                                    target: ''
+                                }, {
+                                    title: 'todo title topic',
+                                    link: '',
+                                    target: ''
+                                }, {
+                                    title: 'todo title topic',
+                                    link: '',
+                                    target: ''
+                                }]
+                            };
+                        });
+
+                        $('* > .rating').rating({});
+                    });
+            });
+        }
+
+        refreshTeachers();
 
         $scope.deleting = {};
 
         $scope.removeFavTeacher = function (t) {
             service.executePromiseAvoidDuplicate($scope.deleting, t.id, function () {
                 return service.delete(angular.bplus.config.serviceUrls.studyCenter.my.favorite.teachers, {
-                    teacher_id: t.id
+                    params: {
+                        teacher_id: t.id
+                    }
                 })
                     .then(function (data) {
-                        console.log(data);
+                        refreshTeachers();
+                    }, function (reason) {
+                        MessageBox.show(reason.message);
                     })
                     ;
             })
