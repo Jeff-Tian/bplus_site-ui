@@ -282,6 +282,15 @@
             }
             return service.post(url, param);
         };
+        $scope.checkFavorite = function(id, isJob){
+            var url = "/service-proxy/bplus-opd/favoritejob/confirm";
+            var param = {
+                member_id: member_id,
+                item_id: id,
+                category: isJob ? "job" : "company"
+            }
+            return service.post(url, param);
+        };
         $scope.getDeliveredPositions = function(){
             var url = "/service-proxy/bplus-opd/deliveredjob/load";
             var param = {
@@ -296,12 +305,28 @@
                 return data;
             });
         };
-        $scope.removeDeliveredPosition = function(jobid) {
-            var url = "/service-proxy/bplus-opd/deliveredjob/remove";
+        $scope.deliveredPosition = function(jobid){
+            var url = "/service-proxy/bplus-opd/deliveredjob/save";
             var param = {
                 member_id: member_id,
-                item_id: jobid,
-                category: "company"
+                job_id: jobid
+            }
+            return service.post(url, param);
+        };
+        // $scope.removeDeliveredPosition = function(jobid) {
+        //     var url = "/service-proxy/bplus-opd/deliveredjob/remove";
+        //     var param = {
+        //         member_id: member_id,
+        //         item_id: jobid,
+        //         category: "company"
+        //     }
+        //     return service.post(url, param);
+        // };
+        $scope.checkDelivered = function(jobid){
+            var url = "/service-proxy/bplus-opd/deliveredjob/confirm";
+            var param = {
+                member_id: member_id,
+                job_id: jobid
             }
             return service.post(url, param);
         };
@@ -328,7 +353,8 @@
                     data.positionAdditional.description = ret.description || "";
                     data.positionAdditional.expireDate = ret.expire_at ? dataDisplayMapping(ret.expire_at) : "";
                     data.positionAdditional.expectCandidateIndustry = ret.expected_condicate_industry || "";
-                    data.positionAdditional.evaluation = ret.evaluation || "";
+                    data.positionAdditional.evaluation = ret.evaluation || {};
+                    data.positionAdditional.abstraction = ret.abstraction || "";
                     data.positionAdditional.age = (ret.age_from || "") + "-" + (ret.age_to || "");
                 }
                 return data;
@@ -346,7 +372,7 @@
                     abstraction: ret.abstraction || "",
                     category: ret.category || [],
                     description: ret.description || "",
-                    evaluation: ret.evaluation || "",
+                    evaluation: ret.evaluation || {},
                     industry: ret.industry || "",
                     location: ret.location || "",
                     logo: ret.logo || "",

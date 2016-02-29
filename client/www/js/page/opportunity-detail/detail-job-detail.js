@@ -19,68 +19,49 @@ angular
             }
         };
     })
-    .directive('favoriteJob', function () {
-        return {
-            link: function (scope, element, attrs) {
-                var $element = angular.element(element);
-                var id = attrs.favoriteJob;
-                $element.on('click', function () {
-                    if (!scope.hasFavorited) {
-                        scope.hasFavorited = true;
-                        scope.$apply();
-                        window.alert('Favorite Job!');
-                    }
-                });
-            }
-        };
-    })
-    .directive('sendResume', function () {
-        return {
-            link: function (scope, element, attrs) {
-                var $element = angular.element(element),
-                    id = attrs.sendResume,
-                    $modal;
-                $element.on('click', function () {
-                    if (!$element.hasClass('disabled')) {
-                        if (!scope.hasSent) {
-                            if (!$modal) {
-                                $modal = $element.parents('html').find('.ui.modal.modal-send-resume').clone();
-                                $modal.modal({
-                                    onApprove : function() {
-                                        scope.hasSent = true;
-                                        scope.$apply();
-                                        window.alert('Send Resume!');
-                                    }
-                                });
-                            }
-                            $modal.modal('show');
-                        }
-                    }
-                });
-            }
-        };
-    })
-    .controller('detailJobDetail', ['$scope', '$stateParams', '$templateCache', function ($scope, $stateParams, $templateCache) {
+    .controller('detailJobDetail', ['$scope', '$stateParams', '$templateCache', '$q', function ($scope, $stateParams, $templateCache, $q) {
         var jobID = $stateParams.jobid;
         var hasLoggedin = false;
-        $scope.hasLoggedin = hasLoggedIn = $scope.hasLoggedin();
+        $scope.isLoggedin = hasLoggedin = $scope.hasLoggedin();
         $scope.isSearching = true;
-        var initPromises = [
-        ]
 
-        var jobDetailPromise = $scope.getJobDetail(jobID).then(function(positionData){
+        $scope.getJobDetail(jobID).then(function(positionData){
             $scope.jobData = positionData;
-            //Description can be htmp template
+            //Description can be html template
             $templateCache.put('jobDescription.html', positionData.positionAdditional.description);
-            $scope.getCompanyDetail(positionData.companyinfo.id).then(function(companyData){
+            var initPromises = [
+                $scope.getCompanyDetail(positionData.companyinfo.id)
+            ];
+            if (hasLoggedin) {
+                initPromises.push($scope.checkFavorite(jobID, true));
+                initPromises.push($scope.checkDelivered(jobID));
+            }
+            $q.all(initPromises).then(function(ret){
+                var companyData = ret[0];
+                var hasCollected = ret[1];
+                var hasDelivered = ret[2];
                 $scope.companyData = companyData;
-                console.log("positionData", positionData);
-                console.log("companyData", companyData);
+                $scope.hasCollected = hasCollected;
+                $scope.hasSent = hasDelivered;
+                $scope.onCollectClick = function(){
+                    return $scope.saveFavoritePosition(jobID, true).then(function(ret){
+                        debugger;
+                        $scope.hasCollected = ret;
+                    });
+                };
+                $scope.onApplyClick = function(){
+                    $('.ui.modal.modal-send-resume').modal("show");
+                };
                 $scope.isSearching = false;
-            }) ;
+                $('.ui.modal.modal-send-resume').modal({
+                    onApprove: function(){
+                        return $scope.deliveredPosition(jobID).then(function(ret){
+                            $scope.hasSent = ret;
+                        });
+                    }
+                });
+            });
         });
-        $scope.hasFavorited = true;
-        $scope.hasSent = false;
     }])
     .config(['ChartJsProvider', function (ChartJsProvider) {
 
@@ -95,12 +76,22 @@ angular
         });
     }])
     .controller('RadarCtrl', ['$scope', function ($scope) {
-
         $scope.labels = ["数据分析", "团队合作", "战略思维", "商业洞察", "快速学习"];
+        var dataObject = $scope.jobData.positionAdditional.evaluation;
+        dataObject = {
+            "数据分析": 45,
+            "团队合作": 90,
+            "战略思维": 65,
+        }
+        var keys = Object.keys(dataObject);
+        var values = [];
+        keys.forEach(function(key){
+            values.push(dataObject[key]);
+        });
+        debugger;
+        $scope.labels = keys;
 
-        $scope.data = [
-            [50, 45, 70, 40, 30]
-        ];
+        $scope.data = values;
 
         $scope.colors = [
             '#F53E3E'
