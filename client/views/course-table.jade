@@ -190,7 +190,7 @@ mixin teacherTable(teachers)
                         | &nbsp;
                         span(class="ui light red mini label") 一对一
                 td
-                    button(class="ui red mini button") 取消收藏
+                    button(class="ui red mini button", ng-click="removeFavTeacher(t)") 取消收藏
 
 mixin sticky
     div(class="right ui rail", style="margin: 0; padding: 0;")

@@ -138,6 +138,7 @@ angular.module('studyCenterModule')
                 .then(function (data) {
                     $scope.teachers = data.map(function (i) {
                         return {
+                            id: i.teacher_id,
                             name: i.display_name,
                             description: 'todo description',
                             title: 'todo title',
@@ -161,6 +162,22 @@ angular.module('studyCenterModule')
                     $('* > .rating').rating({});
                 });
         });
+
+        $scope.deleting = {};
+
+        $scope.removeFavTeacher = function (t) {
+            service.executePromiseAvoidDuplicate($scope.deleting, t.id, function () {
+                return service.delete(angular.bplus.config.serviceUrls.studyCenter.my.favorite.teachers, {
+                    teacher_id: t.id
+                })
+                    .then(function (data) {
+                        console.log(data);
+                    })
+                    ;
+            })
+            ;
+        };
+
         //$scope.teachers = [{
         //    name: '钱申',
         //    description: '10年再线教育经验,港大MBA,复旦计算机硕士',

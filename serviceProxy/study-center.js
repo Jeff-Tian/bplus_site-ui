@@ -30,4 +30,14 @@ module.exports = require('express').Router()
             return d;
         }
     }))
+    .delete(studyCenterServiceUrls.my.favorite.teachers, function (req, res, next) {
+        return proxyBPlus({
+            path: '/my/favorite/remove', method: 'POST', dataMapper: function (d) {
+                d.category = 'teacher';
+                d.item_id = req.body.teacher_id;
+
+                return d;
+            }
+        })(req, res, next);
+    })
 ;
