@@ -7,7 +7,8 @@ describe('ComingCoursesCtrl', function () {
                 studyCenter: {
                     classBooking: {
                         coming: '',
-                        finished: ''
+                        unevaluated: '',
+                        evaluated: ''
                     }
                 }
             }

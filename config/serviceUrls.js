@@ -20,7 +20,8 @@ module.exports = {
     studyCenter: {
         classBooking: {
             coming: '/service-proxy/study-center/class-booking/coming',
-            finished: '/service-proxy/study-center/class-booking/finished'
+            unevaluated: '/service-proxy/study-center/class-booking/unevaluated',
+            evaluated: '/service-proxy/study-center/class-booking/unevaluated'
         },
         my: {
             favorite: {
