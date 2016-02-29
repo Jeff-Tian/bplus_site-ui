@@ -186,6 +186,7 @@
                         name: value.title || "",
                         type: value.job_type || "不限",
                         salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
+                        function: value.job_funciton || "不限",
                         certification: value.education || "学历不限"
                     },
                     issueTime: value.publish_at || "",
@@ -193,6 +194,7 @@
                     company: value.company.name,
                     status: value.apply.status || "",
                     statusText: "",
+                    location: value.location.join("-") || "",
                     companyinfo: {
                         id: value.company.id || "",
                         logo: value.company.logo || "",
@@ -314,8 +316,56 @@
                 member_id: member_id,
                 job_id: jobid
             };
-            return service.post(url, param);
+
+            return service.post(url, param).then(function(ret){
+                var data = ret;
+                if (data) {
+                    data = positionRetMapping([data])[0];
+                    data.companyinfo.id = ret.company_id;
+                    //Additional Information
+                    data.positionAdditional = {};
+                    data.positionAdditional.description = ret.description || "";
+                    data.positionAdditional.workLife = ret.work_life || "";
+                    data.positionAdditional.tags = ret.tags || [];
+                    data.positionAdditional.major = ret.major || "";
+                    data.positionAdditional.language = ret.language || "";
+                    data.positionAdditional.internshipWorkingInfo = ret.internship_days_per_week ? "每周工作" + ret.internship_days_per_week + "天" : "";
+                    data.positionAdditional.gender = ret.gender || "不限";
+                    data.positionAdditional.description = ret.description || "";
+                    data.positionAdditional.expireDate = ret.expire_at ? dataDisplayMapping(ret.expire_at) : "";
+                    data.positionAdditional.expectCandidateIndustry = ret.expected_condicate_industry || "";
+                    data.positionAdditional.evaluation = ret.evaluation || "";
+                    data.positionAdditional.age = (ret.age_from || "") + "-" + (ret.age_to || "");
+                }
+                return data;
+            });
         };
+        $scope.getCompanyDetail = function(companyid) {
+            var url = "/service-proxy/bplus-opd/companydetail";
+            var param = {
+                member_id: member_id,
+                company_id: companyid
+            }
+            return service.post(url, param).then(function(ret){
+                return {
+                    id: ret.id,
+                    abstraction: ret.abstraction || "",
+                    category: ret.category || [],
+                    description: ret.description || "",
+                    evaluation: ret.evaluation || "",
+                    industry: ret.industry || "",
+                    location: ret.location || "",
+                    logo: ret.logo || "",
+                    name: ret.name || "",
+                    nature_of_firms: ret.nature_of_firms || "",
+                    scale: ret.scale || "",
+                    tags: ret.tags || [],
+                    website: ret.website || "",
+                    match: (ret.match ? levelMapping(ret.match) : "")
+                };
+            });
+        };
+
         //Preload data
         Object.keys(STATIC_PARAMS.RESOURCE_TYPE).forEach(function(key) {
             if (key !== 'CHILD_REGION') {

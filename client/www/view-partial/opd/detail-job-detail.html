@@ -1,29 +1,45 @@
-<div class="b-opd-content-detail-job-detail-container">
+<div ng-if="isSearching" class="ui segment">正在加载，请稍后。。</div>
+<div ng-if="!isSearching" class="b-opd-content-detail-job-detail-container">
     <div class="my-header section">
         <div class="ui grid">
             <div class="two wide center aligned column">
                 职位匹配度<br/>
-                <img src="/img/opd/match_a.png"/>
+                <img ng-src="/img/opd/match_{{jobData.matchLevel}}.png"/>
             </div>
             <div class="two wide center aligned column">
                 你的竞争力<br/>
-                <bopdcompetitiveness data="competitiveness"></bopdcompetitiveness>
+                <bopdcompetitiveness data="jobData"></bopdcompetitiveness>
             </div>
             <div class="eleven wide column content">
                 <div class="department-updatedatetime">
-                    <a href="#/job/corporation/123456">阿里巴巴集团/产品部</a>
-                    <span class="updatedatetime">刷新时间：<span class="date">2015-10-27</span> <span
-                            class="enddatetime">(<span class="days">54</span>天后结束招聘)</span></span>
+                    <a href="#/job/corporation/{{companyData.id}}">{{companyData.name}}</a>
+                    <span class="updatedatetime">发布时间：<span class="date">{{jobData.issueTime}}</span> 
+                    <span class="enddatetime" ng-bind-template="({{jobData.positionAdditional.expireDate}}结束招聘)"></span>
                 </div>
-                <div class="position-city-count"><span class="internship">实习</span> <span
-                        class="position">互联网用户体验设计师</span> <span class="city">[<span class="name">上海</span>]</span>
-                    <span class="count">×<span class="count-num">2</span></span></div>
-                <div class="level-percentage">你的职位匹配等级<span class="level">B</span>，赢过<span class="percentage">60</span>%的竞争对手！快投个简历试试看！
+                <div class="position-city-count">
+                    <span class="internship">{{jobData.position.type}}</span>
+                    <span class="position">{{jobData.position.name}}
+                    </span>
+                    <span class="city">[
+                        <span class="name">{{jobData.location}}</span>
+                    ]</span>
+<!--                     <span class="count">×
+                        <span class="count-num">2
+                        </span>
+                    </span> -->
+                </div>
+                <div ng-if="!hasLoggedin" class="level-percentage">
+                    <a ng-href="/signin#/login?return_url=opportunity-detail%23%2Fjob%2F{{jobData.jobID}}">登录</a>
+                    查看已收藏的公司。
+                </div>
+                <div ng-if="hasLoggedin" class="level-percentage">你的职位匹配等级
+                    <span class="level" ng-bind="jobData.matchLevel.toUpperCase()"></span> ，赢过
+                    <span class="percentage">{{jobData.progressRate}}</span>%的竞争对手！快投个简历试试看！
                 </div>
             </div>
-            <div class="one wide column">
+<!--             <div class="one wide column">
                 <a href="javascript:void(0)" class="wechat-qrcode"><span style="background-image:url(/img/b-wechat.jpg);"><span></span></span></a>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="chart section">
@@ -35,13 +51,13 @@
                     {{data}}
                 </canvas>
             </div>
-            <div class="nine wide right floated center aligned column career" ng-controller="LineCtrl">
+            <!-- <div class="nine wide right floated center aligned column career" ng-controller="LineCtrl">
                 <div class="title">职业生涯</div>
                 <canvas id="line" class="chart chart-line" chart-data="data"
                         chart-labels="labels" chart-legend="true" chart-series="series"
                         chart-click="onClick" >
                 </canvas>
-            </div>
+            </div> -->
         </div>
         <div class="hr"></div>
     </div>
@@ -69,36 +85,7 @@
     </div>
     <div class="desc section">
         <div class="title">职位描述</div>
-        <div class="responsibilities">
-            <span class="title">工作职责：</span>
-            <ul class="ui ordered list">
-                <li class="item">不断地从用户的角度来进行网站产品的创新，提升网站整体可用性。</li>
-                <li class="item">负责网站产品用户体验评估工作，参与网站产品交互界面设计，分析影响网站产品用户体验的因素。</li>
-                <li class="item">定期开展网站用户测试，观察用户使用网站产品的情况，评估可用性水平，并协调相关合作团队及时提升网站产品体验。</li>
-                <li class="item">收集和采集客户对于网站产品使用的反馈，借助适当的技术提升客户体验。</li>
-            </ul>
-        </div>
-        <div class="qualifications">
-            <div class="title">任职资格：</div>
-            <div class="tags">
-                <div class="ui label">硕士</div>
-                <div class="ui label">1-2年工作经验</div>
-                <div class="ui label">英文</div>
-                <div class="ui label">女</div>
-                <div class="ui label">25 岁以上</div>
-            </div>
-            <ul class="ui ordered list">
-                <li class="item">人机交互、心理学、社会学等相关专业毕业优先。</li>
-                <li class="item">有互联网从业经验，从事2年以上的用户体验研究与设计工作经验。</li>
-                <li class="item">熟练掌握和运用用户体验研究的相关工具和方法，对用研相关的上下游岗位有较深刻的理解。</li>
-                <li class="item">设计用户行为及产品的信息构架，保证产品的可用性。</li>
-                <li class="item">参与互联网产品的规划构思，归纳用户目标、用户任务。</li>
-                <li class="item">参与用户研究，根据用户研究的结果对设计方案进行优化。</li>
-                <li class="item">对现有产品的可用性测试和评估提出改进方案，持续优化产品的用户体验。</li>
-                <li class="item">对互联网行业及移动互联网产品有强烈兴趣和系统的用户研究实践。</li>
-                <li class="item">良好的沟通、表达能力（包括口头和书面）、分析能力，优秀的洞察力及推进事情的能力，积极乐观，严谨治学，具备跨团队的协作能力。</li>
-            </ul>
-        </div>
+        <div ng-include="'jobDescription.html'"></div>
     </div>
     <div class="operation section">
         <div class="ui grid">
@@ -134,14 +121,15 @@
             </div>
         </div>
     </div>
-    <div class="similar">
+<!--     <div class="similar">
         <div class="ui top attached tabular menu">
             <div class="active item">
                 <div class="ui header">相似职位</div>
             </div>
         </div>
         <bopdpositionpattern positions="similarJobList"/>
-    </div>
+    </div> -->
+
 <!--     <div class="training-opportunity">
         <div class="ui top attached tabular menu">
             <div class="active item">

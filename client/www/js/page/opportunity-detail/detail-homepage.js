@@ -30,7 +30,9 @@ angular.module('opdModule').directive('bopdhomepage', function() {
             };
             //Position
             //Position-Recommendation
+            $scope.isSearchingRecommendation = true;
             var searchRecommendation = function(){
+                $scope.isSearchingRecommendation = true;
                 $scope.getPositions("", 
                     {}, 
                     $scope.recommendation.positions.NUMBER_PER_PAGE, 
@@ -47,6 +49,7 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                         });
                         $scope.recommendation.positions.totalPage = ret.total;
                         $scope.recommendation.positions.page = $scope.hasLoggedin() ? ($scope.recommendation.positions.data.length > 0 ? "data" : "empty") : "logout";
+                        $scope.isSearchingRecommendation = false;
                 });
             };
             $scope.recommendation = {};
@@ -64,7 +67,9 @@ angular.module('opdModule').directive('bopdhomepage', function() {
             };
             searchRecommendation();
             //Position-Hot
+            $scope.isSearchingHot = true;
             var searchHot = function() {
+                $scope.isSearchingHot = true;
                 $scope.getPositions("", 
                         {}, 
                         $scope.hot.positions.NUMBER_PER_PAGE, 
@@ -83,6 +88,7 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                         });
                         $scope.hot.positions.totalPage = ret.total;
                         $scope.hot.positions.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
+                        $scope.isSearchingHot = false;
                 });
             };
             $scope.hot = {};
