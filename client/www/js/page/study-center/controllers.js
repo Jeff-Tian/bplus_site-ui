@@ -6,17 +6,17 @@ angular.module('studyCenterModule')
             rawData: []
         };
 
-        $scope.getCourseStatus = function (registered, minCapacity, startAt) {
+        $scope.getCourseStatus = function (registered, mincapability, startAt) {
             var now = new Date();
 
             if (now < startAt) {
-                if (registered < minCapacity) {
+                if (registered < mincapability) {
                     return '未开课';
                 } else {
                     return '已开课';
                 }
             } else {
-                if (registered < minCapacity) {
+                if (registered < mincapability) {
                     return '人数不足';
                 } else {
                     return '已开课';
@@ -24,10 +24,10 @@ angular.module('studyCenterModule')
             }
         };
 
-        $scope.getCourseProgress = function (registered, minCapacity, maxCapacity, startAt) {
-            var status = $scope.getCourseStatus(registered, minCapacity, startAt);
+        $scope.getCourseProgress = function (registered, mincapability, capability, startAt) {
+            var status = $scope.getCourseStatus(registered, mincapability, startAt);
 
-            return status === '人数不足' ? '开课失败' : registered + '/' + maxCapacity;
+            return status === '人数不足' ? '开课失败' : registered + '/' + capability;
         };
 
         service.executePromiseAvoidDuplicate($scope, 'loading', function () {
@@ -35,16 +35,16 @@ angular.module('studyCenterModule')
                 .then(function (data) {
                     $scope.courses.rawData =
                         data.map(function (d) {
-                            var courseStatus = $scope.getCourseStatus(d.bookingCount, d.minCapacity, new Date(d.start_time));
-                            var progress = $scope.getCourseProgress(d.bookingCount, d.minCapacity, d.maxCapacity, new Date(d.start_time));
+                            var courseStatus = $scope.getCourseStatus(d.bookingCount, d.mincapability, new Date(d.start_time));
+                            var progress = $scope.getCourseProgress(d.bookingCount, d.mincapability, d.capability, new Date(d.start_time));
 
                             return {
                                 name: d.title,
                                 teacher: d.teacher.display_name,
-                                status: (18 / 20) * 100,
+                                status: Math.round(d.bookingCount / d.capability * 100),
                                 statusText: [
                                     progress,
-                                    status
+                                    courseStatus
                                 ],
                                 startAt: new Date(d.start_time),
                                 endAt: new Date(d.end_time),
