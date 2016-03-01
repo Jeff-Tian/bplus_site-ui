@@ -17,7 +17,7 @@ mixin rating(max, rating)
 
 mixin finishedRatedCourseBlocks(c)
     td
-        + rating(5, 4)
+        + rating(5, 'c.generalEvaluation')
     td
         button(class="ui mini black button", ng-click="showRating=true", ng-disabled="showRating") 评价详情
 
@@ -107,12 +107,12 @@ mixin courseTableBody(courses, rating, rated, singlePage)
                             div(style="border: solid 2px white; border-radius: 3px; padding: 10px;")
                                 | asdfjklasdfjladjsfkljasdfljadjsf
                         div(class="right floated", style="padding: 20px;")
-                            button(class="ui mini red button", type="submit") 追加评论
+                            button(class="ui mini red button", type="submit", ng-show="false") 追加评论
                         div(class="ui fitted clearing horizontal divider")
-                        div(style="padding: 0 20px;")
+                        div(style="padding: 0 20px;", ng-show="false")
                             p 追加评论
                             textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~")
-                        div(class="right floated field", style="padding: 20px;")
+                        div(class="right floated field", style="padding: 20px;", ng-show="false")
                             button(class="ui mini black button", type="reset") 取消
                             button(class="ui mini red button", type="submit") 完成
                         div(class="ui fitted clearing horizontal divider")

@@ -96,18 +96,18 @@ angular.module('studyCenterModule')
         }
     }])
     .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', function ($scope, service, $timeout, $q) {
-
         $scope.fetching = false;
         $scope.courses = {rawData: []};
         service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
-            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.finished)
+            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.unevaluated)
                 .then(function (data) {
                     $scope.courses.rawData = data.bookings.map(function (d) {
                         return {
                             name: d.title,
                             teacher: d.description,
                             startAt: new Date(d.start_time),
-                            endAt: new Date(d.end_time)
+                            endAt: new Date(d.end_time),
+                            generalEvaluation: d.general_evaluation
                         };
                     });
 
@@ -122,9 +122,43 @@ angular.module('studyCenterModule')
 
                     $timeout(function () {
                         $(function () {
-                            $('td .rating')
-                                .rating({})
+                            $('form .rating').rating({});
+                        });
+                    });
+                });
+        });
+
+        $scope.fetchingRated = false;
+        $scope.ratedCourses = {rawData: []};
+        service.executePromiseAvoidDuplicate($scope, 'fetchingRated', function () {
+            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.evaluated)
+                .then(function (data) {
+                    $scope.ratedCourses.rawData = data.bookings.map(function (d) {
+                        return {
+                            name: d.title,
+                            teacher: d.description,
+                            startAt: new Date(d.start_time),
+                            endAt: new Date(d.end_time),
+                            generalEvaluation: d.general_evaluation
+                        };
+                    });
+
+                    $scope.ratedCourses.getData = function () {
+                        var deferred = $q.defer();
+
+                        return deferred.promise;
+                    };
+
+                    $scope.ratedCourses.NUMBER_PER_PAGE = 10;
+                    $scope.totalPages = data.total;
+
+                    $timeout(function () {
+                        $(function () {
+                            $('td > .rating')
+                                .rating('disable')
                             ;
+
+                            $('form .rating').rating('disable');
                         });
                     });
                 });

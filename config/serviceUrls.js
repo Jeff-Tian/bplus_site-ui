@@ -21,7 +21,7 @@ module.exports = {
         classBooking: {
             coming: '/service-proxy/study-center/class-booking/coming',
             unevaluated: '/service-proxy/study-center/class-booking/unevaluated',
-            evaluated: '/service-proxy/study-center/class-booking/unevaluated'
+            evaluated: '/service-proxy/study-center/class-booking/evaluated'
         },
         my: {
             favorite: {
