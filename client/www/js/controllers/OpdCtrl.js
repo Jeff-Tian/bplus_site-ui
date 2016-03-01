@@ -207,7 +207,7 @@
             });
             return ret;
         };
-        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField, companyid) {
+        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField) {
             var searchParam = {};
             tags = tags || {};
             keyword = keyword || "";
@@ -225,9 +225,6 @@
             searchParam.sortField = sortField || "";
             searchParam.company_id = tags.companyID || "";
             var url = "";
-            if (companyid) {
-                searchParam.company_id = companyid;
-            }
             switch (searchTag) {
                 case STATIC_PARAMS.POSITION_SOURCE.SEARCH:
                     url ='/service-proxy/bplus-opd/jobsearch';

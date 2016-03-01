@@ -1,8 +1,5 @@
 angular
     .module('opdModule')
-    .filter('encodeURIComponent', function($window) {
-        return $window.encodeURIComponent;
-    })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('job/detail', {
             url: '/job/:jobid',
@@ -38,8 +35,8 @@ angular
             }
             $q.all(initPromises).then(function(ret){
                 var companyData = ret[0];
-                var hasCollected = ret[1];
-                var hasDelivered = ret[2];
+                var hasCollected = ret[1] ? true : false;
+                var hasDelivered = ret[2] ? true : false;
                 $scope.companyData = companyData;
                 $scope.hasCollected = hasCollected;
                 $scope.hasSent = hasDelivered;

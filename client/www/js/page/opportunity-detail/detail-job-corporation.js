@@ -1,155 +1,104 @@
 ﻿angular
     .module('opdModule')
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('job/corporation', {
+        $stateProvider
+        .state('job/corporation', {
             url: '/job/corporation/:corporationid',
             templateUrl: 'job-corporation.html',
             controller: 'detailJobCorporation'
-        }).state('job/corporation-recruit', {
-            url: '/job/corporation/:corporationid-recruit',
-            templateUrl: 'job-corporation.html',
-            controller: 'detailJobCorporation'
-        });
+        })
+        ;
     }])
     .directive('bopdjobcorporation', function () {
         return {
             templateUrl: '/view-partial/opd/detail-job-corporation.html',
+            scope: true,
             link: function (scope, element, attrs) {
                 scope.$element = angular.element(element);
             }
         };
     })
-    .directive('introJobs', function () {
-        return {
-            link: function (scope, element, arrts) {
-                var $item = angular.element(element).find('.menu .item');
-                $item.tab();
-                if (scope.isRecruit) {
-                    $item.eq(1).trigger('click');
-                }
-            }
-        };
-    })
-    .directive('favoriteCorporation', function () {
-        return {
-            link: function (scope, element, attrs) {
-                var $element = angular.element(element);
-                var id = attrs.favoriteCorporation;
-                $element.on('click', function () {
-                    if (!scope.hasFavorited) {
-                        scope.hasFavorited = true;
-                        window.alert('Favorite Corporation!');
+    .controller('detailJobCorporation', ['$scope', '$stateParams', '$q', '$templateCache', '$timeout', function ($scope, $stateParams, $q, $templateCache, $timeout) {
+        var FIRST_PAGE = 1;
+        var corporationID = $stateParams.corporationid;
+        $scope.isSearching = true;
+        $scope.isContentSearching = true;
+        var hasLoggedin = false;
+        $scope.isLoggedin = hasLoggedin = $scope.hasLoggedin();
+        var search = function(currentPage) {
+            $scope.isContentSearching = true;
+            return $scope.getPositions(
+                    "",
+                    {companyID: corporationID},
+                    $scope.searchList.NUMBER_PER_PAGE, 
+                    currentPage ? currentPage : FIRST_PAGE,
+                    $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
+                    $scope.STATIC_PARAMS.SORT_KEYS.DEFAULT
+                ).then(function(ret){
+                    $scope.searchList.currentPage = currentPage;
+                    $scope.searchList.data = new Array(ret.total);
+                    for (var i = 0; i < ret.total; i++) {
+                        $scope.searchList.data[i] = {};
                     }
-                });
-            }
+                    ret.jobs.forEach(function(value, index){
+                        $scope.searchList.data[(ret.currentPage - 1)*$scope.searchList.NUMBER_PER_PAGE+index] = value;
+                    });
+                    $scope.searchList.totalPage = ret.total;
+                    $scope.isContentSearching = false;
+            });
         };
-    })
-    .controller('detailJobCorporation', ['$scope', '$window', function ($scope, $window) {
-
-        $scope.chartPentagon = '4-2-3-2-2';
-
-        $scope.isRecruit = /-recruit$/.test($window.location.hash);
-
-        $scope.hasFavorited = false;
-
-        $scope.recruitFilter = [{
-            key: 'recruitKey',
-            label: '职位：',
-            list: [{
-                id: 0,
-                text: '全部'
-            }, {
-                id: 1,
-                text: '市场'
-            }, {
-                id: 2,
-                text: '销售'
-            }, {
-                id: 3,
-                text: '公关'
-            }, {
-                id: 4,
-                text: '技术'
-            }, {
-                id: 5,
-                text: '设计'
-            }, {
-                id: 6,
-                text: '人事'
-            }, {
-                id: 7,
-                text: '仓管'
-            }, {
-                id: 8,
-                text: '行政'
-            }, {
-                id: 9,
-                text: '文书'
-            }]
-        }];
-
-        $scope.recruitFilterSetting = {
-            showThumb: false,
-            showDetail: true,
-            hasThumbView: false,
-            inline: true,
-            recruitKey: {
-                id: 0,
-                text: '全部'
-            }
-        };
-
-        $scope.recruitList = {
-            NUMBER_PER_PAGE: 3,
+        //Search config and search results
+        $scope.searchList = {
+            NUMBER_PER_PAGE: 7,
             showPosition: false,
             showPageMenu: true,
             showPageMore: false,
+            deleteable: "false",
+            getData: search,
+            totalPage: 0,
+            currentPage: FIRST_PAGE,
             data: [{
-                matchLevel: "a",
-                progressRate: "50",
-                position: {
-                    name: "产品经理",
-                    type: "兼职",
-                    salary: "9k-16k",
-                    certification: "学历不限",
-                },
-                issueTime: "2015-12-12",
-                company: "苹果",
-                status: "finished",     //finished, delivered
-                statusText: "",
-                companyinfo: {
-                }
-            },{
-                matchLevel: "d",
-                progressRate: "70",
-                position: {
-                    name: "c",
-                    type: "d",
-                    salary: "111122",
-                    certification: "d",
-                },
-                status: "",
-                statusText: "已有7家公司对你感兴趣!",
-                issueTime: "2015-12-20",
-                company: "ksj ksdf",
-                companyinfo: {
-                }
             }]
         };
-
+        var initCalls = [
+            search(FIRST_PAGE),
+            $scope.getCompanyDetail(corporationID)
+        ];
+        if (hasLoggedin) {
+            initCalls.push($scope.checkFavorite(corporationID, false));
+        }
+        $q.all(initCalls).then(function(ret){
+            var companyDetail = ret[1];
+            var hasCollected = ret[2] ? true : false;
+            $templateCache.put('companyDescription.html', companyDetail.description);
+            $scope.companyData = companyDetail;
+            $scope.hasCollected = hasCollected;
+            $scope.onCollectClick = function(){
+                return $scope.saveFavoritePosition(corporationID, false).then(function(ret){
+                    $scope.hasCollected = ret;
+                });
+            };
+            $scope.onLookupPosition = function() {
+                $(".opd-intro-company-position").click();
+            };
+            $scope.isSearching = false;
+            $timeout(function(){
+                $(".intro-jobs .menu .item").tab();
+            });
+        });
     }])
     .controller('RadarCtrlCorporation', ['$scope', function ($scope) {
-
-        $scope.labels = ["薪酬福利", "公司环境", "团队气氛", "未来潜力", "升迁制度"];
-
-        $scope.data = [
-            [50, 45, 70, 40, 30]
-        ];
-
+        var dataObject = $scope.companyData.evaluation;
+        var keys = Object.keys(dataObject);
+        var values = [];
+        keys.forEach(function(key){
+            values.push(dataObject[key]);
+        });
+        $scope.labels = keys;
+        $scope.data = [values];
         $scope.colors = [
             '#F53E3E'
         ];
-
         $scope.options = {
             pointDot: false,
             scaleShowLine: true,
