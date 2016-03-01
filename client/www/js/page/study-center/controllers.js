@@ -172,7 +172,7 @@ angular.module('studyCenterModule')
                         });
 
                         $timeout(function () {
-                            $('* > .rating').rating({});
+                            $('* > .rating').rating('disable');
 
                             getLatestCourses();
                         });
