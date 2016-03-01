@@ -130,9 +130,18 @@ angular.module('studyCenterModule')
                 });
         });
     }])
-    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', function ($scope, FileReaderService, service, MessageBox) {
+    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', '$timeout', function ($scope, FileReaderService, service, MessageBox, $timeout) {
         $scope.teachers = [];
         $scope.fetching = false;
+
+        function getLatestCourses() {
+            angular.forEach($scope.teachers, function (t, key) {
+                service.get(angular.bplus.config.serviceUrls.studyCenter.teacher.latestCourses.replace(':teacherId', t.id)).then(function (data) {
+                    t.courses = data;
+                })
+                ;
+            });
+        }
 
         function refreshTeachers() {
             service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
@@ -142,9 +151,10 @@ angular.module('studyCenterModule')
                             return {
                                 id: i.teacher_id,
                                 name: i.display_name,
-                                description: 'todo description',
-                                title: 'todo title',
+                                title: '',
                                 image: i.image_url,
+                                rank: i.rank,
+                                tags: i.tags,
                                 topics: [{
                                     title: 'todo title topic',
                                     link: '',
@@ -161,7 +171,11 @@ angular.module('studyCenterModule')
                             };
                         });
 
-                        $('* > .rating').rating({});
+                        $timeout(function () {
+                            $('* > .rating').rating({});
+
+                            getLatestCourses();
+                        });
                     });
             });
         }
@@ -178,7 +192,12 @@ angular.module('studyCenterModule')
                     }
                 })
                     .then(function (data) {
-                        refreshTeachers();
+                        //refreshTeachers();
+                        for (var i = $scope.teachers.length - 1; i >= 0; i--) {
+                            if ($scope.teachers[i].id === t.id) {
+                                $scope.teachers.splice(i, 1);
+                            }
+                        }
                     }, function (reason) {
                         MessageBox.show(reason.message);
                     })

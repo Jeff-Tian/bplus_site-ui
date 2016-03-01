@@ -13,7 +13,7 @@ mixin finishedUnratedCourseBlocks(c)
         button(class="ui mini black button", ng-click="showRating=true", ng-disabled="showRating") 立刻评价
 
 mixin rating(max, rating)
-    div(class="ui star rating", data-max-rating="5", data-rating="4")
+    div(class="ui tiny star rating", data-max-rating="5", data-rating="{{#{rating}}}")
 
 mixin finishedRatedCourseBlocks(c)
     td
@@ -172,23 +172,14 @@ mixin teacherTable(teachers)
                             h5(class="ui header") {{t.name}}
                                 div(class="sub header") {{t.title}}
                                 div(class="sub header", style="margin-top: 5px; margin-bottom: 10px;")
-                                    + rating(5, 4)
+                                    + rating(5, 't.rank')
                                 div(class="sub header")
-                                    span(class="ui light mini red label", style="margin-left: 0;") HBS
-                                    span(class="ui light mini red label") CEO
+                                    span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags") {{tag}}
                 td
-                    p
-                        | 咨询公司求职,如何修改简历?
+                    p(ng-repeat="c in t.courses")
+                        | {{c.description}}
                         | &nbsp;
-                        span(class="ui mini red label") 一对一
-                    p
-                        | 咨询公司求职,如何修改简历?
-                        | &nbsp;
-                        span(class="ui light red mini label") 小班课
-                    p
-                        | 咨询公司HR的简历指导
-                        | &nbsp;
-                        span(class="ui light red mini label") 一对一
+                        span(class="ui mini red label", ng-repeat="courseTag in c.class_tags") {{courseTag}}
                 td
                     button(class="ui red mini button", ng-click="removeFavTeacher(t)") 取消收藏
 

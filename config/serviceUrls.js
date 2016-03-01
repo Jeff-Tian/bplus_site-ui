@@ -27,6 +27,9 @@ module.exports = {
             favorite: {
                 teachers: '/service-proxy/study-center/my/favorite/teachers'
             }
+        },
+        teacher: {
+            latestCourses: '/service-proxy/study-center/teacher/latest-courses/:teacherId'
         }
     }
 };

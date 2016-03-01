@@ -40,4 +40,13 @@ module.exports = require('express').Router()
             }
         })(req, res, next);
     })
+    .get(studyCenterServiceUrls.teacher.latestCourses, function (req, res, next) {
+        return proxyBPlus({
+            path: '/teacher/latestclass', method: 'POST', dataMapper: function (d) {
+                d.teacher_id = req.params.teacherId;
+
+                return d;
+            }
+        })(req, res, next);
+    })
 ;
