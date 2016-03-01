@@ -68,14 +68,17 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 } else {
                     promise = $scope.getRegionResource();
                 }
-                return promise.then(function (ret) {
-                    data[value] = ret.map(function (rawData, index) {
-                        return {
-                            id: rawData.id || index + 1,
-                            value: rawData.text || "",
-                            data: rawData.text || "",
-                            text: rawData.text || ""
-                        };
+                return promise.then(function(ret) {
+                    data[value] = [];
+                    ret.forEach(function(rawData, index) {
+                        if (rawData.searchPrioirty !== 0) {
+                            data[value].push({
+                                id: rawData.id || index + 1,
+                                value: rawData.text || "",
+                                data: rawData.text || "",
+                                text: rawData.text || "",
+                            });
+                        }
                     });
                     return ret;
                 });
