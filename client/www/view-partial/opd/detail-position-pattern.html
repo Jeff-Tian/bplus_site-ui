@@ -46,7 +46,7 @@
             </td>
             <td class="desc" ng-click="displayData.onClick(data, $index)">
                 <h3 class="ui header">
-                    <span class="position-title" ng-bind="data.position.name"></span> / <a class="company" ng-bind="data.company"> </a>
+                    <span class="position-title" ng-bind="data.position.name"></span> / <a class="company" ng-bind="data.company" ng-click="displayData.onCompanyClick(data, $event)"> </a>
                     <!-- <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span> -->
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='apply'">已投递</button>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </td>
-            <td class="description clickable" ng-show="displayData.showPosition" ng-click="displayData.onCompanyClick(data, $index)">
+            <td class="description clickable" ng-show="displayData.showPosition" ng-click="displayData.onCompanyClick(data, $event)">
                 <div ng-show="data.companyinfo.flag==='recommendation'" class="ribbon yellow right corner label">推荐
                 <i class="star icon"></i>
                 </div>
@@ -182,7 +182,7 @@
         </div>
         <div class="ui grid">
             <div class="six wide column" >
-                <div class="detail" ng-class="{'match':isNaN(chosenLevel) && chosenLevel>=60}">
+                <div class="detail" ng-class="{'match':chosenLevel !== '' && chosenLevel>=60}">
                     <div class="detail-title">你应征竞争力 80%、60%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level80.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level60.png?<%= cdn.version %>">
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="ten wide column">
-                <div class="detail" ng-class="{'match': isNaN(chosenLevel) && chosenLevel<60}">
+                <div class="detail" ng-class="{'match': chosenLevel !== '' && chosenLevel<60}">
                     <div class="detail-title">你应征竞争力 40%、20%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level40.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level20.png?<%= cdn.version %>">

@@ -8,13 +8,17 @@
             </div>
             <div class="two wide center aligned column">
                 你的竞争力<br/>
-                <bopdcompetitiveness data="jobData"></bopdcompetitiveness>
+                <bopdcompetitiveness data="jobData" ng-if="jobData.progressRate!==''"></bopdcompetitiveness>
+                <img ng-if="jobData.progressRate===''" ng-src="img/opd/rate_.png?<%= cdn.version %>"/>
             </div>
             <div class="eleven wide column content">
                 <div class="department-updatedatetime">
                     <a href="#/job/corporation/{{companyData.id}}">{{companyData.name}}</a>
-                    <span class="updatedatetime">发布时间：<span class="date">{{jobData.issueTime}}</span> 
-                    <span class="enddatetime" ng-bind-template="({{jobData.positionAdditional.expireDate}}结束招聘)"></span>
+                    <span class="updatedatetime">
+                        <span ng-show="jobData.issueTime !== ''">发布时间：</span>
+                        <span class="date">{{jobData.issueTime}}</span>
+                        <span class="enddatetime" ng-bind-template="({{jobData.positionAdditional.expireDate}}结束招聘)"></span>
+                    </span> 
                 </div>
                 <div class="position-city-count">
                     <span class="internship">{{jobData.position.type}}</span>
@@ -28,11 +32,11 @@
                         </span>
                     </span> -->
                 </div>
-                <div ng-if="!hasLoggedin" class="level-percentage">
+                <div ng-if="!isLoggedin" class="level-percentage">
                     <a ng-href="/signin#/login?return_url=opportunity-detail%23%2Fjob%2F{{jobData.jobID}}">登录</a>
-                    查看已收藏的公司。
+                    得知你的职位匹配等级与竞争力!
                 </div>
-                <div ng-if="hasLoggedin" class="level-percentage">你的职位匹配等级
+                <div ng-if="isLoggedin" class="level-percentage">你的职位匹配等级
                     <span class="level" ng-bind="jobData.matchLevel.toUpperCase()"></span> ，赢过
                     <span class="percentage">{{jobData.progressRate}}</span>%的竞争对手！快投个简历试试看！
                 </div>
@@ -42,9 +46,9 @@
             </div> -->
         </div>
     </div>
-    <div class="chart section">
+    <div class="chart section" ng-controller="RadarCtrl" ng-show="labels.length>0">
         <div class="ui grid">
-            <div class="six wide center aligned column competence" ng-controller="RadarCtrl">
+            <div class="six wide center aligned column competence">
                 <div class="title">职场能力需求</div>
                 <canvas id="radar" class="chart chart-radar"
                         chart-data="data" chart-labels="labels" style="height: 300px; width: 300px;" chart-colours="colors" chart-options="options">
@@ -62,24 +66,19 @@
         <div class="hr"></div>
     </div>
     <div class="feature section">
-        <div class="poster">一句招募这个职称的宣传特色标语，24个字为限。</div>
+        <div class="poster">{{jobData.positionAdditional.abstraction}}</div>
         <div class="tags">
-            <span class="ui label">月薪2k-4k</span>
-            <span class="ui label">五险一金</span>
-            <span class="ui label">双休</span>
-            <span class="ui label">带薪年假</span>
-            <span class="ui label">年底双薪</span>
-            <span class="ui label">效绩奖金</span>
-            <span class="ui label">节日礼金</span>
-            <span class="ui label">定期体检</span>
+            <span class="ui label" ng-repeat="tag in jobData.positionAdditional.tags">{{tag}}</span>
         </div>
         <div class="address">
+            <i class="marker icon"></i>
             <span class="title">工作地点：</span>
-            <a ng-href="http://map.baidu.com/m?word={{'渝中区-上清寺'|encodeURIComponent}}&fr=ps01000">渝中区-上清寺</a>
+            <a ng-href="http://map.baidu.com/m?word={{jobData.location|encodeURIComponent}}&fr=ps01000">{{jobData.location}}</a>
         </div>
-        <div class="internship">
-            <span class="title">实习长度：</span>
-            实习期最少3个月，每周工作4天以上
+        <div class="internship" ng-show="jobData.positionAdditional.internshipWorkingInfo!==''">
+            <i class="suitcase icon"></i>
+            <span class="title">实习要求：</span>
+            {{jobData.positionAdditional.internshipWorkingInfo}}
         </div>
         <div class="hr"></div>
     </div>
@@ -87,35 +86,41 @@
         <div class="title">职位描述</div>
         <div ng-include="'jobDescription.html'"></div>
     </div>
-    <div class="operation section">
+    <!-- todo -->
+    <div class="operation section" ng-if="isLoggedin">
         <div class="ui grid">
             <div class="ten wide column">
                 <div class="resume">
-                    你有一份：<a href="javascript:void(0);">陈大民的线上简历</a>可以投递<a class="btn-edit" href="javascript:void(0);"><i
+                    你有一份线上简历可以投递<a class="btn-edit" href="/profile"><i
                         class="big write icon"></i>编辑</a>
                 </div>
             </div>
             <div class="six wide right aligned column">
-                <a class="ui large red button{{hasFavorited ? ' disabled' : ''}}" favorite-job="123456" href="javascript:void(0);"><i class="favorite icon"></i>收藏职位</a>
-                <a class="ui large red button{{hasSent ? ' disabled' : ''}}" send-resume="123456" href="javascript:void(0);"><i class="mail icon"></i>投个简历</a>
+                <a class="ui large red button{{hasCollected ? ' disabled' : ''}}" ng-click="onCollectClick()"><i class="favorite icon"></i>{{hasCollected ? "已收藏" : "收藏职位"}}</a>
+                <a class="ui large red button{{hasSent ? ' disabled' : ''}}" ng-click="onApplyClick()"><i class="mail icon"></i>{{hasSent ? "已投递" : "投个简历"}}</a>
             </div>
         </div>
     </div>
+    <!-- todoend -->
+    <div class="operation section" ng-if="!isLoggedin">
+        <a ng-href="/signin#/login?return_url=opportunity-detail%23%2Fjob%2F{{jobData.jobID}}">登录</a>
+                    进行职位收藏或者简历投递
+    </div>
     <div class="corporation section">
-        <div class="ui large header">阿里巴巴集团</div>
+        <div class="ui large header">{{companyData.name}}</div>
         <div class="ui items">
             <div class="item">
                 <div class="image">
-                    <img src="">
+                    <img ng-src="{{companyData.logo}}">
                 </div>
                 <div class="content">
-                    <div class="ui header">一句招募这个职称的宣传特色标语，24 个字为限。</div>
+                    <div class="ui header">{{companyData.abstraction}}</div>
                     <div class="ui grid">
-                        <div class="eight wide column"><span class="ui tiny header">领域：</span>移动互联网、教育</div>
-                        <div class="eight wide column"><span class="ui tiny header">性质：</span>外企</div>
-                        <div class="eight wide column"><span class="ui tiny header">规模：</span>500-2000人</div>
+                        <div class="eight wide column"><span class="ui tiny header">领域：</span>{{companyData.industry}}</div>
+                        <div class="eight wide column"><span class="ui tiny header">性质：</span>{{companyData.nature_of_firms}}</div>
+                        <div class="eight wide column"><span class="ui tiny header">规模：</span>{{companyData.scale}}</div>
                         <div class="eight wide column"><span class="ui tiny header">主页：</span><a
-                                href="http://51talk.com" target="_blank">http://51talk.com</a></div>
+                                ng-href="{{companyData.website}}" target="_blank">{{companyData.website}}</a></div>
                     </div>
                 </div>
             </div>
@@ -145,8 +150,8 @@
     <div class="header">投个简历</div>
     <div class="content">
         <p>确定投递：</p>
-        <p>币币科技- 产品部的</p>
-        <p>[ 实习] 互联网用户体验设计师 [上海] 职位？</p>
+        <p>{{companyData.name}}：</p>
+        <p>{{jobData.position.name}}?</p>
     </div>
     <div class="actions">
         <div class="ui large red approve button">投个简历</div>

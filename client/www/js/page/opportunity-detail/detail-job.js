@@ -9,9 +9,10 @@ angular.module('opdModule')
                 $scope.isSearching = true;
                 var search = function(currentPage) {
                     $scope.isSearching = true;
+                    var conditions = $.extend(true, {companyID: $scope.searchOptions.searchCompanyID}, $scope.searchOptions.conditions);
                     return $scope.getPositions(
                             $scope.searchOptions.searchKeyWord,
-                            $scope.searchOptions.conditions,
+                            conditions,
                             $scope.searchList.NUMBER_PER_PAGE, 
                             currentPage ? currentPage : FIRST_PAGE,
                             $scope.STATIC_PARAMS.POSITION_SOURCE.SEARCH,
@@ -185,7 +186,9 @@ angular.module('opdModule')
                         monthlySalary: f.monthlySalary.list[0]
                     };
 
-                    search(FIRST_PAGE);
+                    search(FIRST_PAGE).then(function(){
+                        $scope.searchOptions.searchCompanyID = "";
+                    });
                 });
                 //Search filter
                 $scope.sortingAndFilter = [{
@@ -217,6 +220,7 @@ angular.module('opdModule')
                 };
                 //Search bar
                 var keyWordFromHomePage = $scope.overallParams.searchKeyWord;
+                var companyIDFromHomePage = $scope.overallParams.searchCompanyID;
                 var findConditionValue = function(key) {
                     var ret = $scope.filterSetting[key];
                     if (ret.hasOwnProperty('id')) {
@@ -237,6 +241,7 @@ angular.module('opdModule')
                     placeholder: "请输入职位名称或公司名称",
                     searchContent: keyWordFromHomePage,
                     searchKeyWord: keyWordFromHomePage,
+                    searchCompanyID: companyIDFromHomePage,
                     conditions: "",
                     search: function(keyword){
                         $scope.searchOptions.searchKeyWord = keyword;
@@ -253,6 +258,7 @@ angular.module('opdModule')
                     }
                 };
                 $scope.overallParams.searchKeyWord = "";
+                $scope.overallParams.searchCompanyID = "";
                 //Search config and search results
                 $scope.searchList = {
                     NUMBER_PER_PAGE: 10,

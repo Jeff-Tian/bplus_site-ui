@@ -162,6 +162,8 @@
         $scope.overallParams = {
             //for homepage
             searchKeyWord: "",
+            //for favoritepage
+            searchCompanyID: ""
         };
         $scope.STATIC_PARAMS = STATIC_PARAMS;
         var dataDisplayMapping = function(dateString) {
@@ -206,7 +208,7 @@
             });
             return ret;
         };
-        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField, companyid) {
+        $scope.getPositions = function (keyword, tags, pageSize, page, searchTag, sortField) {
             var searchParam = {};
             tags = tags || {};
             keyword = keyword || "";
@@ -222,10 +224,8 @@
             searchParam.pageSize = pageSize;
             searchParam.page = page;
             searchParam.sortField = sortField || "";
+            searchParam.company_id = tags.companyID || "";
             var url = "";
-            if (companyid) {
-                searchParam.company_id = companyid;
-            }
             switch (searchTag) {
                 case STATIC_PARAMS.POSITION_SOURCE.SEARCH:
                     url ='/service-proxy/bplus-opd/jobsearch';
@@ -285,6 +285,15 @@
 
             return service.post(url, param);
         };
+        $scope.checkFavorite = function(id, isJob){
+            var url = "/service-proxy/bplus-opd/favoritejob/confirm";
+            var param = {
+                member_id: member_id,
+                item_id: id,
+                category: isJob ? "job" : "company"
+            }
+            return service.post(url, param);
+        };
         $scope.getDeliveredPositions = function(){
             var url = "/service-proxy/bplus-opd/deliveredjob/load";
             var param = {
@@ -300,14 +309,29 @@
                 return data;
             });
         };
-        $scope.removeDeliveredPosition = function(jobid) {
-            var url = "/service-proxy/bplus-opd/deliveredjob/remove";
+        $scope.deliveredPosition = function(jobid){
+            var url = "/service-proxy/bplus-opd/deliveredjob/save";
             var param = {
                 member_id: member_id,
-                item_id: jobid,
-                category: "company"
-            };
-
+                job_id: jobid
+            }
+            return service.post(url, param);
+        };
+        // $scope.removeDeliveredPosition = function(jobid) {
+        //     var url = "/service-proxy/bplus-opd/deliveredjob/remove";
+        //     var param = {
+        //         member_id: member_id,
+        //         item_id: jobid,
+        //         category: "company"
+        //     }
+        //     return service.post(url, param);
+        // };
+        $scope.checkDelivered = function(jobid){
+            var url = "/service-proxy/bplus-opd/deliveredjob/confirm";
+            var param = {
+                member_id: member_id,
+                job_id: jobid
+            }
             return service.post(url, param);
         };
         $scope.getJobDetail = function(jobid) {
@@ -334,7 +358,8 @@
                     data.positionAdditional.description = ret.description || "";
                     data.positionAdditional.expireDate = ret.expire_at ? dataDisplayMapping(ret.expire_at) : "";
                     data.positionAdditional.expectCandidateIndustry = ret.expected_condicate_industry || "";
-                    data.positionAdditional.evaluation = ret.evaluation || "";
+                    data.positionAdditional.evaluation = ret.evaluation || {};
+                    data.positionAdditional.abstraction = ret.abstraction || "";
                     data.positionAdditional.age = (ret.age_from || "") + "-" + (ret.age_to || "");
                 }
                 return data;
@@ -353,7 +378,7 @@
                     abstraction: ret.abstraction || "",
                     category: ret.category || [],
                     description: ret.description || "",
-                    evaluation: ret.evaluation || "",
+                    evaluation: ret.evaluation || {},
                     industry: ret.industry || "",
                     location: ret.location || "",
                     logo: ret.logo || "",
