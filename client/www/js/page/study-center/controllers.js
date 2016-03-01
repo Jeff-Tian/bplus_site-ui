@@ -95,7 +95,7 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', function ($scope, service, $timeout, $q) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', 'MessageBox', function ($scope, service, $timeout, $q, MessageBox) {
         function mapCourse(d) {
             return {
                 name: d.title,
@@ -103,7 +103,19 @@ angular.module('studyCenterModule')
                 startAt: new Date(d.start_time),
                 endAt: new Date(d.end_time),
                 generalEvaluation: d.general_evaluation,
-                feedbackId: d.feedback_id
+                feedbackId: d.feedback_id,
+                classId: d.class_id,
+                teacherId: d.teacher_id,
+                feedback: {
+                    comment: '',
+                    generalEvaluation: 0,
+                    evaluations: {
+                        '准时': 0,
+                        '专业度': 0,
+                        '通话质量': 0,
+                        '态度': 0
+                    }
+                }
             };
         }
 
@@ -125,7 +137,14 @@ angular.module('studyCenterModule')
 
                     $timeout(function () {
                         $(function () {
-                            $('form .rating').rating({});
+                            $('.unrated form .rating').rating({
+                                onRate: function (value) {
+                                    var $this = angular.element(this);
+                                    var cmd = '$this.scope().' + $this.attr('model') + ' = value';
+
+                                    eval(cmd); // jshint: ignore line
+                                }
+                            });
                         });
                     });
                 });
@@ -149,11 +168,11 @@ angular.module('studyCenterModule')
 
                     $timeout(function () {
                         $(function () {
-                            $('td > .rating')
+                            $('.rated td > .rating')
                                 .rating('disable')
                             ;
 
-                            $('form .rating').rating('disable');
+                            $('.rated form .rating').rating('disable');
                         });
                     });
                 });
@@ -171,6 +190,38 @@ angular.module('studyCenterModule')
                     })
                 ;
             }
+        };
+
+        $scope.countItems = function (o) {
+            return Object.keys(o).length;
+        };
+
+        $scope.addingFeedback = false;
+        $scope.addFeedback = function (course) {
+            service.executePromiseAvoidDuplicate($scope, 'addingFeedback', function () {
+                return service.put(angular.bplus.config.serviceUrls.studyCenter.teacher.feedback, {
+                    class_id: course.classId,
+                    comment: course.feedback.comment,
+                    general_evaluation: course.feedback.generalEvaluation,
+                    evaluation: course.feedback.evaluations
+                }).then(function (data) {
+                    console.log(data);
+                    course.feedback.disabled = true;
+                    MessageBox.show('评价成功');
+                }, function (reason) {
+                    MessageBox.show(reason.message);
+                });
+            });
+        };
+
+        $scope.canAddFeedback = function (course) {
+            var can = course.feedback.comment && course.feedback.generalEvaluation;
+
+            for (var key in course.feedback.evaluations) {
+                can = can && course.feedback.evaluations[key];
+            }
+
+            return can;
         };
     }])
     .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', '$timeout', function ($scope, FileReaderService, service, MessageBox, $timeout) {

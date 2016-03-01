@@ -29,7 +29,8 @@ module.exports = {
             }
         },
         teacher: {
-            latestCourses: '/service-proxy/study-center/teacher/latest-courses/:teacherId'
+            latestCourses: '/service-proxy/study-center/teacher/latest-courses/:teacherId',
+            feedback: '/service-proxy/study-center/teacher/feedback'
         },
         classFeedback: '/service-proxy/study-center/class-feedback/:feedbackId'
     }

@@ -54,4 +54,8 @@ module.exports = require('express').Router()
             path: '/classfeedback/load/' + req.params.feedbackId
         })(req, res, next);
     })
+    .put(studyCenterServiceUrls.teacher.feedback, proxyBPlus({
+        path: '/classfeedback/toTeacher',
+        method: 'POST'
+    }))
 ;

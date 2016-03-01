@@ -8,8 +8,10 @@ script(type="text/ng-template", id="course.html")
             div(class="ui horizontal divider")
             //+ sticky
         div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="FinishedCoursesCtrl", ng-class="{'loading': fetching || fetchingRated}")
-            + finishedUnratedCourseTable('courses')
-            + finishedRatedCourseTable('ratedCourses', '已评价')
+            div.unrated
+                + finishedUnratedCourseTable('courses')
+            div.rated
+                + finishedRatedCourseTable('ratedCourses', '已评价')
             div(class="ui horizontal divider")
             //+ sticky
     script(type="text/javascript").
