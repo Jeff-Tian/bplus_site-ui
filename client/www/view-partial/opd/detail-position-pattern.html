@@ -182,7 +182,7 @@
         </div>
         <div class="ui grid">
             <div class="six wide column" >
-                <div class="detail" ng-class="{'match':isNaN(chosenLevel) && chosenLevel>=60}">
+                <div class="detail" ng-class="{'match':chosenLevel !== '' && chosenLevel>=60}">
                     <div class="detail-title">你应征竞争力 80%、60%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level80.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level60.png?<%= cdn.version %>">
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="ten wide column">
-                <div class="detail" ng-class="{'match': isNaN(chosenLevel) && chosenLevel<60}">
+                <div class="detail" ng-class="{'match': chosenLevel !== '' && chosenLevel<60}">
                     <div class="detail-title">你应征竞争力 40%、20%</div>
                     <img class="detail-image rate-image-size" src="img/opd/level40.png?<%= cdn.version %>">
                     <img class="detail-image rate-image-size" src="img/opd/level20.png?<%= cdn.version %>">

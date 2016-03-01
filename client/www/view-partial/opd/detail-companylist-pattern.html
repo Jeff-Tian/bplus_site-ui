@@ -27,7 +27,7 @@
     <tbody>
         <tr ng-repeat="data in displayData.data">
             <td style="padding: 1.5em;">
-                <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.match)" data-content="你与企业的匹配等级 {{data.match.toUpperCase()}}!" data-variation="inverted" ng-src="img/opd/match_{{data.match}}b.png?<%= cdn.version %>"/>
+                <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.match)" data-content="你与企业的匹配等级 {{data.match.toUpperCase()}}!" data-variation="inverted" ng-src="/img/opd/match_{{data.match===''?'':data.match+'b'}}.png"/>
             </td>
             <td class="description clickable" ng-click="displayData.onCompanyClick(data)">
                 <img ng-src="{{data.logo}}" class="left-floated-image">
