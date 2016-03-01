@@ -30,6 +30,7 @@ module.exports = {
         },
         teacher: {
             latestCourses: '/service-proxy/study-center/teacher/latest-courses/:teacherId'
-        }
+        },
+        classFeedback: '/service-proxy/study-center/class-feedback/:feedbackId'
     }
 };

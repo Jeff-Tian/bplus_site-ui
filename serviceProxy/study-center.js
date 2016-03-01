@@ -49,4 +49,9 @@ module.exports = require('express').Router()
             }
         })(req, res, next);
     })
+    .get(studyCenterServiceUrls.classFeedback, function (req, res, next) {
+        return proxyBPlus({
+            path: '/classfeedback/load/' + req.params.feedbackId
+        })(req, res, next);
+    })
 ;

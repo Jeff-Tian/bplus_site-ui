@@ -12,14 +12,15 @@ mixin finishedUnratedCourseBlocks(c)
     td
         button(class="ui mini black button", ng-click="showRating=true", ng-disabled="showRating") 立刻评价
 
-mixin rating(max, rating)
-    div(class="ui tiny star rating", data-max-rating="5", data-rating="{{#{rating}}}")
+mixin rating(max, rating, classes)
+    - classes = classes || 'tiny'
+    div(class="ui #{classes} star rating", data-max-rating="5", data-rating="{{#{rating}}}")
 
 mixin finishedRatedCourseBlocks(c)
     td
         + rating(5, 'c.generalEvaluation')
     td
-        button(class="ui mini black button", ng-click="showRating=true", ng-disabled="showRating") 评价详情
+        button(class="ui mini black button", ng-click="showRating=!showRating; showEvaluationDetail(c)") 评价详情
 
 mixin courseTable()
     table(class="ui basic table positions", style="border: none; background-color: white;")
@@ -85,27 +86,19 @@ mixin courseTableBody(courses, rating, rated, singlePage)
                     form(class="ui form", style="background-color: #f9f9f9; margin-bottom: 0; height: 100%;")
                         div(class="inline field", style="padding: 20px 20px 5px 20px;")
                             label 总体评分
-                            div(class="ui mini star rating", data-max-rating="5", data-rating="5")
+                            + rating(5, 'c.generalEvaluation')
                         div(style="padding: 10px 20px 20px 20px;")
                             div(class="", style="border: solid 2px white; border-radius: 3px; padding: 10px;")
                                 div(class="ui grid")
-                                    div(class="four wide column")
-                                        label(ng-bind="'准时\u2001\u2001'")
-                                        div(class="ui mini star rating", data-max-rating="5", data-rating="4")
-                                    div(class="four wide column")
-                                        label(ng-bind="'专业度\u2001'")
-                                        div(class="ui mini star rating", data-max-rating="5", data-rating="5")
-                                    div(class="four wide column")
-                                        label 通话质量
-                                        div(class="ui mini star rating", data-max-rating="5", data-rating="4")
-                                    div(class="four wide column")
-                                        label(ng-bind="'态度\u2001\u2001'")
-                                        div(class="ui mini star rating", data-max-rating="5", data-rating="4")
+                                    div(class="four wide column", ng-repeat="(key, item) in c.evaluationDetail.evaluation")
+                                        label(ng-bind="key")
+                                        | &nbsp;
+                                        + rating(5, 'item', 'mini')
                         div(class="ui fitted clearing horizontal divider")
                         div(style="padding: 0 20px;")
                             p 我的反馈评价
                             div(style="border: solid 2px white; border-radius: 3px; padding: 10px;")
-                                | asdfjklasdfjladjsfkljasdfljadjsf
+                                | {{c.evaluationDetail.comment}}
                         div(class="right floated", style="padding: 20px;")
                             button(class="ui mini red button", type="submit", ng-show="false") 追加评论
                         div(class="ui fitted clearing horizontal divider")

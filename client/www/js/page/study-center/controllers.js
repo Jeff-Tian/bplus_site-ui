@@ -96,20 +96,23 @@ angular.module('studyCenterModule')
         }
     }])
     .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', function ($scope, service, $timeout, $q) {
+        function mapCourse(d) {
+            return {
+                name: d.title,
+                teacher: d.description,
+                startAt: new Date(d.start_time),
+                endAt: new Date(d.end_time),
+                generalEvaluation: d.general_evaluation,
+                feedbackId: d.feedback_id
+            };
+        }
+
         $scope.fetching = false;
         $scope.courses = {rawData: []};
         service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
             return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.unevaluated)
                 .then(function (data) {
-                    $scope.courses.rawData = data.bookings.map(function (d) {
-                        return {
-                            name: d.title,
-                            teacher: d.description,
-                            startAt: new Date(d.start_time),
-                            endAt: new Date(d.end_time),
-                            generalEvaluation: d.general_evaluation
-                        };
-                    });
+                    $scope.courses.rawData = data.bookings.map(mapCourse);
 
                     $scope.courses.getData = function () {
                         var deferred = $q.defer();
@@ -133,15 +136,7 @@ angular.module('studyCenterModule')
         service.executePromiseAvoidDuplicate($scope, 'fetchingRated', function () {
             return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.evaluated)
                 .then(function (data) {
-                    $scope.ratedCourses.rawData = data.bookings.map(function (d) {
-                        return {
-                            name: d.title,
-                            teacher: d.description,
-                            startAt: new Date(d.start_time),
-                            endAt: new Date(d.end_time),
-                            generalEvaluation: d.general_evaluation
-                        };
-                    });
+                    $scope.ratedCourses.rawData = data.bookings.map(mapCourse);
 
                     $scope.ratedCourses.getData = function () {
                         var deferred = $q.defer();
@@ -163,6 +158,20 @@ angular.module('studyCenterModule')
                     });
                 });
         });
+
+        $scope.showEvaluationDetail = function (c) {
+            if (!c.evaluationDetail) {
+                service.get(angular.bplus.config.serviceUrls.studyCenter.classFeedback.replace(':feedbackId', c.feedbackId))
+                    .then(function (data) {
+                        c.evaluationDetail = data;
+
+                        $timeout(function () {
+                            $('form .ui.grid .rating').rating('disable');
+                        });
+                    })
+                ;
+            }
+        };
     }])
     .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', '$timeout', function ($scope, FileReaderService, service, MessageBox, $timeout) {
         $scope.teachers = [];
