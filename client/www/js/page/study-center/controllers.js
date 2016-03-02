@@ -131,7 +131,7 @@ angular.module('studyCenterModule')
                         var $this = angular.element(this);
                         var cmd = '$this.scope().' + $this.attr('model') + ' = value';
 
-                        eval(cmd); // jshint: ignore line
+                        eval(cmd); // jshint ignore : line
 
                         $this.scope().$apply();
                     }

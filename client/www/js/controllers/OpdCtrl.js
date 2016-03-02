@@ -291,7 +291,8 @@
                 member_id: member_id,
                 item_id: id,
                 category: isJob ? "job" : "company"
-            }
+            };
+
             return service.post(url, param);
         };
         $scope.getDeliveredPositions = function(){
@@ -314,7 +315,8 @@
             var param = {
                 member_id: member_id,
                 job_id: jobid
-            }
+            };
+
             return service.post(url, param);
         };
         // $scope.removeDeliveredPosition = function(jobid) {
@@ -331,7 +333,8 @@
             var param = {
                 member_id: member_id,
                 job_id: jobid
-            }
+            };
+
             return service.post(url, param);
         };
         $scope.getJobDetail = function(jobid) {
