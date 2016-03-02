@@ -15,14 +15,30 @@ function proxyBPlus(options) {
 
 module.exports = require('express').Router()
     .get(studyCenterServiceUrls.classBooking.coming, proxyBPlus({path: '/classBooking/coming', method: 'POST'}))
-    .get(studyCenterServiceUrls.classBooking.unevaluated, proxyBPlus({
-        path: '/classBooking/unevaluated',
-        method: 'POST'
-    }))
-    .get(studyCenterServiceUrls.classBooking.evaluated, proxyBPlus({
-        path: '/classBooking/evaluated',
-        method: 'POST'
-    }))
+    .get(studyCenterServiceUrls.classBooking.unevaluated, function (req, res, next) {
+        return proxyBPlus({
+            path: '/classBooking/unevaluated',
+            method: 'POST',
+            dataMapper: function (d) {
+                d.pageSize = req.query.pageSize;
+                d.page = req.query.page;
+
+                return d;
+            }
+        })(req, res, next);
+    })
+    .get(studyCenterServiceUrls.classBooking.evaluated, function (req, res, next) {
+        return proxyBPlus({
+            path: '/classBooking/evaluated',
+            method: 'POST',
+            dataMapper: function (d) {
+                d.pageSize = req.query.pageSize;
+                d.page = req.query.page;
+
+                return d;
+            }
+        })(req, res, next);
+    })
     .get(studyCenterServiceUrls.my.favorite.teachers, proxyBPlus({
         path: '/my/favorite/loadex', method: 'POST', dataMapper: function (d) {
             d.category = 'teacher';

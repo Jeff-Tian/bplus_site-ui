@@ -33,7 +33,7 @@ angular.module('studyCenterModule')
         service.executePromiseAvoidDuplicate($scope, 'loading', function () {
             return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.coming)
                 .then(function (data) {
-                    $scope.courses.rawData =
+                    $scope.courses.displayData =
                         data.map(function (d) {
                             var courseStatus = $scope.getCourseStatus(d.bookingCount, d.mincapability, new Date(d.start_time));
                             var progress = $scope.getCourseProgress(d.bookingCount, d.mincapability, d.capability, new Date(d.start_time));
@@ -57,7 +57,7 @@ angular.module('studyCenterModule')
                             };
                         });
 
-                    angular.forEach($scope.courses.rawData, function (value, key) {
+                    angular.forEach($scope.courses.displayData, function (value, key) {
                         value.countdown = new CountDown(new Date(value.startAt));
                     });
                 })
@@ -120,63 +120,61 @@ angular.module('studyCenterModule')
         }
 
         $scope.fetching = false;
-        $scope.courses = {rawData: []};
-        service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
-            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.unevaluated)
-                .then(function (data) {
-                    $scope.courses.rawData = data.bookings.map(mapCourse);
 
-                    $scope.courses.getData = function () {
-                        var deferred = $q.defer();
+        var pageSize = 10;
+        $scope.courses = new PaginationData('fetching', angular.bplus.config.serviceUrls.studyCenter.classBooking.unevaluated, pageSize, function (data) {
+            var ret = data.bookings.map(mapCourse);
 
-                        return deferred.promise;
-                    };
+            $timeout(function () {
+                $('.unrated form .rating').rating({
+                    onRate: function (value) {
+                        var $this = angular.element(this);
+                        var cmd = '$this.scope().' + $this.attr('model') + ' = value';
 
-                    $scope.courses.NUMBER_PER_PAGE = 10;
-                    $scope.totalPages = data.total;
+                        eval(cmd); // jshint: ignore line
 
-                    $timeout(function () {
-                        $(function () {
-                            $('.unrated form .rating').rating({
-                                onRate: function (value) {
-                                    var $this = angular.element(this);
-                                    var cmd = '$this.scope().' + $this.attr('model') + ' = value';
-
-                                    eval(cmd); // jshint: ignore line
-                                }
-                            });
-                        });
-                    });
+                        $this.scope().$apply();
+                    }
                 });
+            });
+
+            return ret;
         });
 
         $scope.fetchingRated = false;
-        $scope.ratedCourses = {rawData: []};
-        service.executePromiseAvoidDuplicate($scope, 'fetchingRated', function () {
-            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.evaluated)
-                .then(function (data) {
-                    $scope.ratedCourses.rawData = data.bookings.map(mapCourse);
 
-                    $scope.ratedCourses.getData = function () {
-                        var deferred = $q.defer();
+        $scope.ratedCourses = new PaginationData('fetchingRated', angular.bplus.config.serviceUrls.studyCenter.classBooking.evaluated, pageSize, function (data) {
+            return data.bookings.map(mapCourse);
+        });
 
-                        return deferred.promise;
-                    };
-
-                    $scope.ratedCourses.NUMBER_PER_PAGE = 10;
-                    $scope.totalPages = data.total;
-
-                    $timeout(function () {
-                        $(function () {
-                            $('.rated td > .rating')
-                                .rating('disable')
-                            ;
-
-                            $('.rated form .rating').rating('disable');
-                        });
+        function PaginationData(flag, dataSource, numberPerPage, gotData) {
+            function getData(page) {
+                return service.executePromiseAvoidDuplicate($scope, flag, function () {
+                    return service.get(dataSource, {
+                        params: {
+                            pageSize: numberPerPage,
+                            page: page
+                        }
                     });
                 });
-        });
+            }
+
+            this.rawData = [];
+            this.displayData = [];
+            this.NUMBER_PER_PAGE = numberPerPage;
+            this.currentPage = 0;
+
+            this.getData = function (page) {
+                var self = this;
+
+                return getData(page)
+                    .then(function (data) {
+                        self.rawData = new Array(data.total);
+                        self.currentPage = data.currentPage;
+                        self.displayData = gotData(data);
+                    });
+            };
+        }
 
         $scope.showEvaluationDetail = function (c) {
             if (!c.evaluationDetail) {

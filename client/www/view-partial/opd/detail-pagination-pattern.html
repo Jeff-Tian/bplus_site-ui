@@ -1,5 +1,6 @@
 <div class="ui loose pagination menu">
-    <a class="icon item" ng-class="{'disabled':paginationMenu.leftArrowDisabled}"
+    <a class="icon item"
+       ng-class="{'disabled':paginationMenu.leftArrowDisabled}"
        ng-click="paginationMenu.pageMenuClick(paginationMenu.PREVIOUS)">
         <i class="left chevron icon"></i>
     </a>
@@ -20,7 +21,7 @@
        ng-class="{'active':paginationMenu.activeItem==paginationMenu.LAST_ITEM}" ng-bind="paginationMenu.totalPages"
        ng-click="paginationMenu.pageMenuClick(paginationMenu.totalPages)"></a>
     <a class="icon item" ng-class="{'disabled':paginationMenu.rightArrowDisabled}"
-       ng-click="paginationMenu.pageMenuClick(paginationMenu.NEXT)">
+       ng-disabled="paginationMenu.rightArrowDisabled" ng-click="paginationMenu.pageMenuClick(paginationMenu.NEXT)">
         <i class="right chevron icon"></i>
     </a>
 </div>

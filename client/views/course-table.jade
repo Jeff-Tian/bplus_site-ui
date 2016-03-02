@@ -45,7 +45,7 @@ mixin courseTableHeader
 
 mixin courseTableBody(courses, rating, rated, singlePage)
     tbody
-        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.rawData track by $index")
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
             td
                 h4(class="ui grey header") {{c.name}}
                     div(class="sub header") {{c.teacher}}
@@ -82,8 +82,8 @@ mixin courseTableBody(courses, rating, rated, singlePage)
                         div(style="padding: 10px 20px 20px 20px;")
                             div(class="", style="border: solid 2px white; border-radius: 3px; padding: 10px;")
                                 div(class="ui grid")
-                                    div(class="four wide column", ng-repeat="(key, item) in c.evaluationDetail.evaluation")
-                                        label(ng-bind="key")
+                                    div(class="four wide column", ng-repeat="(key, item) in c.evaluationDetail.evaluation", style="white-space: nowrap;")
+                                        label(ng-bind="key", style="font-size: smaller;")
                                         | &nbsp;
                                         + rating(5, 'item', 'mini')
                         div(class="ui fitted clearing horizontal divider")
@@ -106,7 +106,7 @@ mixin courseTableBody(courses, rating, rated, singlePage)
         tfoot
             tr
                 th(colspan="4", style="text-align: right;")
-                    pagination(paginationdata="#{courses}")
+                    pagination(paginationdata="#{courses}", auto-fetch="true")
 
 
 mixin comingCourses(courses)

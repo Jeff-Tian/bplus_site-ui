@@ -7,7 +7,7 @@
             //Common params
             var paginationMenu = $scope.paginationMenu;
             var currentPage = paginationMenu.currentPage;
-            var totalPages = paginationMenu.totalPages;
+            var totalPages = $scope.paginationMenu.totalPages = Math.ceil($scope.paginationdata.rawData.length / $scope.paginationdata.NUMBER_PER_PAGE);
             //Refresh paginationdata
             $scope.paginationdata.data = data.slice((currentPage - 1) * NUMBER_PER_PAGE, currentPage * NUMBER_PER_PAGE);
             //Refresh paginationMenu
@@ -53,7 +53,7 @@
             },
             templateUrl: '/view-partial/opd/detail-pagination-pattern.html',
             link: function ($scope, element, attrs) {
-                var data = $scope.paginationdata.rawData || $scope.paginationdata;
+                var data = $scope.paginationdata.rawData;
                 var length = data.length;
                 var pages = Math.ceil(length / $scope.paginationdata.NUMBER_PER_PAGE);
                 var head = "head";
@@ -99,13 +99,17 @@
                         }
                         if (itemChanged) {
                             $scope.paginationdata.getData($scope.paginationMenu.currentPage).then(function () {
-                                data = $scope.paginationdata.rawData || $scope.paginationdata;
+                                data = $scope.paginationdata.rawData;
                                 displayPage($scope, data);
                             });
                         }
                     }
                 };
                 displayPage($scope, data);
+
+                if (attrs.autoFetch) {
+                    $scope.paginationMenu.pageMenuClick(1);
+                }
             }
         };
     };
