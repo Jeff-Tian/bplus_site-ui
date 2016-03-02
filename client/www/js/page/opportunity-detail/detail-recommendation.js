@@ -320,6 +320,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
             $scope.data.subscriptionOpiton = {};
             $scope.data.subscribePositions = {
                 NUMBER_PER_PAGE: 10,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
@@ -337,6 +338,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
             $scope.isSubscriptionSearching = false;
             $scope.data.recommendPositions = {
                 NUMBER_PER_PAGE: 10,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
@@ -354,6 +356,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
             $scope.isRecommendPositionSearching = false;
             $scope.data.competivePositions = {
                 NUMBER_PER_PAGE: 10,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,

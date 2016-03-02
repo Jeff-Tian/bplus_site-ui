@@ -11,7 +11,7 @@ angular.module('opdModule').directive('bopdcompanylistpattern', ['$timeout', fun
             $scope.isRending = true;
             var data = $scope.positions.data;
             var currentPage = $scope.positions.currentPage;
-            var loginin = $scope.positions.page !== "logout";
+            var loginin = $scope.positions.loginin;
             // $scope.rawData = data;
             $scope.sid = $scope.$id; 
             NUMBER_PER_PAGE = $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;

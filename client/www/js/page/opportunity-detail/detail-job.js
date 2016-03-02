@@ -268,6 +268,7 @@ angular.module('opdModule')
                 //Search config and search results
                 $scope.searchList = {
                     NUMBER_PER_PAGE: 10,
+                    loginin: $scope.hasLoggedin(),
                     showPosition: true,
                     showPageMenu: true,
                     showPageMore: false,

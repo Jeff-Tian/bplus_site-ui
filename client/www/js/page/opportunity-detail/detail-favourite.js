@@ -24,6 +24,7 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
             $scope.data = {};
             $scope.data.positions = {
                 NUMBER_PER_PAGE: 10,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: true,
                 showPageMore: false,
@@ -50,6 +51,7 @@ angular.module('opdModule').directive('bopdfavourite', ['$q', function ($q) {
 
             $scope.data.companies = {
                 NUMBER_PER_PAGE: 10,
+                loginin: $scope.hasLoggedin(),
                 totalPage: 1,
                 currentPage: FIRST_PAGE,
                 delete: function(target) {

@@ -13,7 +13,7 @@ angular.module('opdModule').directive('bopdpositionpattern', ['$window', '$timeo
                 currentPage = $scope.positions.currentPage,
                 $element = angular.element(element);
             $scope.sid = $scope.$id;
-            var loginin = $scope.positions.page !== "logout";
+            var loginin = $scope.positions.loginin;
             NUMBER_PER_PAGE = $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE;
             $scope.displayData = {
                 NUMBER_PER_PAGE: $scope.positions.NUMBER_PER_PAGE || NUMBER_PER_PAGE,

@@ -48,13 +48,13 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                             $scope.recommendation.positions.data[(ret.currentPage - 1)*$scope.recommendation.positions.NUMBER_PER_PAGE+index] = value;
                         });
                         $scope.recommendation.positions.totalPage = ret.total;
-                        $scope.recommendation.positions.page = $scope.hasLoggedin() ? ($scope.recommendation.positions.data.length > 0 ? "data" : "empty") : "logout";
                         $scope.isSearchingRecommendation = false;
                 });
             };
             $scope.recommendation = {};
             $scope.recommendation.positions = {
                 NUMBER_PER_PAGE: 5,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: false,
                 showPageMore: true,
@@ -87,19 +87,18 @@ angular.module('opdModule').directive('bopdhomepage', function() {
                             $scope.hot.positions.data[(ret.currentPage - 1)*$scope.hot.positions.NUMBER_PER_PAGE+index] = value;
                         });
                         $scope.hot.positions.totalPage = ret.total;
-                        $scope.hot.positions.page = $scope.hasLoggedin() ? (ret.total > 0 ? "data" : "empty") : "logout";
                         $scope.isSearchingHot = false;
                 });
             };
             $scope.hot = {};
             $scope.hot.positions = {
                 NUMBER_PER_PAGE: 100,
+                loginin: $scope.hasLoggedin(),
                 showPosition: true,
                 showPageMenu: false,
                 showPageMore: false,
                 pageMoreHash: "",
                 getData: searchHot,
-                page: "empty",//data, logout, empty
                 deleteable: "false",
                 currentPage: FIRST_PAGE,
                 totalPage: 0,

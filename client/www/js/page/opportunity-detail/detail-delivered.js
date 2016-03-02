@@ -19,6 +19,7 @@ angular.module('opdModule').directive('bopddelivered', ['$q', function($q) {
                 };
                 $scope.positions = {
                     NUMBER_PER_PAGE: 10,
+                    loginin: $scope.hasLoggedin(),
                     showPosition: false,
                     showPageMenu: true,
                     showPageMore: false,
