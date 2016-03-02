@@ -9,21 +9,20 @@ var sms = require('./sms'),
     productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
     infomationService = require('./informationService'),
-    config = require('../config')
+    config = require('../config'),
+    leaveTrimmer = require('../utils/leaveTrimmer')
     ;
 
-var serviceUrls = {};
-for (var url in config.serviceUrls) {
-    serviceUrls[url] = config.serviceUrls[url].replace('/service-proxy', '');
-}
+var serviceUrls = leaveTrimmer.trim(config.serviceUrls, '/service-proxy');
 
 module.exports = require('express').Router()
     .use(function (req, res, next) {
-        req.dualLog('service-proxy is being calling from this host: ' + req.hostname + '...');
+        req.dualLog('service-proxy is being calling as ' + req.method + ' from this host: ' + req.hostname + '...');
         req.dualLog((req.headers['origin'] || '') + req.originalUrl);
 
         next();
     })
+    .use('/study-center', require('./study-center.js'))
     .post('/sms/send', captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
@@ -54,6 +53,16 @@ module.exports = require('express').Router()
     .get('/bplus-resource/:resourceKey/:language', bplusService.getResource)
     .get('/bplus-resource-location/', bplusService.getResourceLocation)
     .get('/bplus-resource-location/:locationID', bplusService.getResourceLocation)
+    .get('/bplus-opd/load/:operation/:member_id', bplusService.getOpdOperation)
+    // .post('/bplus-opd/update/:operation', bplusService.updateOpdOperation)
+    .post('/bplus-opd/jobsearch', bplusService.searchJobs)
+    .post('/bplus-opd/jobdetail', bplusService.jobDetail)
+    .post('/bplus-opd/companydetail', bplusService.companyDetail)
+    .post('/bplus-opd/hotjob', bplusService.hotJobs)
+    .post('/bplus-opd/recommendjob', bplusService.recommendJobs)
+    .post('/bplus-opd/subscription/:operation', bplusService.subscription)
+    .post('/bplus-opd/favoritejob/:operation', bplusService.favoriteJobs)
+    .post('/bplus-opd/deliveredjob/:operation', bplusService.deliveredJobs)
     .get('/upload/callback', uploadCallbackService)
     .get('/info/ranking/:type/:target/:count', infomationService)
     .post('/payment/create-order/national-upsell-:option/by-b_alipay', membership.ensureAuthenticated, commerceService.createOrder)

@@ -268,6 +268,8 @@ setupOnlineStoreStaticResources('scripts');
 
 server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
 
+server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./study-center'));
+
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
 server.use(express.static(staticFolder, staticSetting));
@@ -304,7 +306,19 @@ server
             lang: lang
         });
     })
-    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express));
+    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
+    .get('/:lang/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
+        var lang = req.params.lang;
+        if (['zh', 'en'].indexOf(lang) < 0) {
+            return next();
+        }
+        var page = req.params.page || 'index';
+        res.render('study-center-ui/' + page, {
+            page: page,
+            lang: lang
+        });
+    })
+    .use('/studycenter', require('study-center-proxy')(express));
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');

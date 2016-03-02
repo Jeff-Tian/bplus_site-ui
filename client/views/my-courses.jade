@@ -1,0 +1,34 @@
+script(type="text/ng-template", id="course.html")
+    div.b-opd-favorite
+        div(class="ui top attached tabular menu")
+            a(class="active item", data-tab="unfinished-courses") 未完成的课程
+            a(class="item", data-tab="finished-courses")  已完成的课程
+        div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="ComingCoursesCtrl", ng-class="{'loading': loading}")
+            + comingCourses('courses')
+            div(class="ui horizontal divider")
+            //+ sticky
+        div(class="ui bottom attached tab segment b-opd-body", data-tab="finished-courses", style="background: transparent;", ng-controller="FinishedCoursesCtrl", ng-class="{'loading': fetching || fetchingRated}")
+            div.unrated
+                + finishedUnratedCourseTable('courses')
+            div.rated
+                + finishedRatedCourseTable('ratedCourses', '已评价')
+            div(class="ui horizontal divider")
+            //+ sticky
+    script(type="text/javascript").
+        angular.element(document).ready(function () {
+            $('.tabular.menu .item')
+                    .tab()
+            ;
+            $('.dimmable')
+                    .dimmer({
+                        opacity: 0.5
+                    })
+                    .dimmer('set opacity', 0.5)
+            ;
+            $('.ui.sticky')
+                    .sticky({
+                        context: '.tab'
+                    })
+            ;
+        });
+           

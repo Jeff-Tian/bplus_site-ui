@@ -111,7 +111,7 @@
   "FindPassword": "找回密码",
   "PleaseInputTheSignedUpEmail": "请输入注册的邮箱地址",
   "ServicePhoneNumber": "服务电话",
-  "ServicePhoneNumberValue": "4008-111-111",
+  "ServicePhoneNumberValue": "4009-200-152",
   "ResetPasswordViaMobile": "手机重设密码",
   "ResetPasswordViaEmail": "邮箱找回密码",
   "ResetPasswordSucceeded": "密码设定成功!",
@@ -788,5 +788,12 @@
   "请记得在比赛开始前,完成组队。": "请记得在比赛开始前,完成组队。",
   "大赛报名": "大赛报名",
   "已经成功购买了{{competition}}": "已经成功购买了{{competition}}",
-  "分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!": "分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!"
+  "分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!": "分享此页面邀请小伙伴，使用兑换码{{code}}, 即可免费参赛!",
+  "Sat": "周六",
+  "Sun": "周日",
+  "Mon": "周一",
+  "Tue": "周二",
+  "Wed": "周三",
+  "Thu": "周四",
+  "Fri": "周五"
 }

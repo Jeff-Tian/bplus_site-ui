@@ -33,6 +33,13 @@ module.exports = function (config) {
             '../js/page/personal-history/PersonalHistoryCtrl.js',
             '../js/page/personal-history/main.js',
             '../js/page/select-payment-method/main.js',
+            '../js/config/translate.js',
+            '../js/config/xhr.js',
+            '../js/page/bplusModule.js',
+            '../js/page/opportunity-detail/menuDirective.js',
+            '../js/page/opportunity-detail/widget/competitiveness/competitiveDirective.js',
+            '../js/page/study-center/app.js',
+            '../js/page/study-center/controllers.js',
             '../bower/angular-mocks/angular-mocks.js',
             '../../../locales/*.js',
             './**/*tests.js'
@@ -80,4 +87,4 @@ module.exports = function (config) {
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false
     })
-}
+};

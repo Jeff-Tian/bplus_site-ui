@@ -1,53 +1,47 @@
-angular.module('opdModule').directive('bopddelivered', function() {
+angular.module('opdModule').directive('bopddelivered', ['$q', function($q) {
         return {
             restrict: "E",
-            scope: {
-                src: '='
-            },
+            scope: true,
             templateUrl: '/view-partial/opd/detail-delivered.html',
             link: function($scope, element, attrs) {
-                $scope.data = {};
-                $scope.data.positions = {
-                    NUMBER_PER_PAGE: 3,
+                var FIRST_PAGE = 1;
+                var positionData = [];
+                $scope.isSearching = true;
+                var search = function() {
+                    $scope.isSearching = true;
+                    return $scope.getDeliveredPositions(
+                        ).then(function(ret){
+                            positionData = ret;
+                            $scope.positions.totalPage = positionData.length;
+                            $scope.positions.data = positionData;
+                            $scope.isSearching = false;
+                    });
+                };
+                $scope.positions = {
+                    NUMBER_PER_PAGE: 10,
+                    loginin: $scope.hasLoggedin(),
                     showPosition: false,
                     showPageMenu: true,
                     showPageMore: false,
-                    data: [{
-                        matchLevel: "a",
-                        progressRate: "50",
-                        position: {
-                            name: "产品经理",
-                            type: "兼职",
-                            salary: "9k-16k",
-                            certification: "学历不限",
-                        },
-                        issueTime: "2015-12-12",
-                        company: "苹果",
-                        status: "finished",     //finished, delivered
-                        statusText: "",
-                        companyinfo: {
-                        }
-                    },{
-                        matchLevel: "d",
-                        progressRate: "70",
-                        position: {
-                            name: "c",
-                            type: "d",
-                            salary: "111122",
-                            certification: "d",
-                        },
-                        status: "",
-                        statusText: "已有7家公司对你感兴趣!",
-                        issueTime: "2015-12-20",
-                        company: "ksj ksdf",
-                        companyinfo: {
-                        }
-                    }]
+                    deleteable: "false",
+                    delete: function(target) {},
+                    getData: function (currentPage) {
+                        $scope.positions.data = [];
+                        positionData.forEach(function(value) {
+                            $scope.positions.data.push(value);
+                        });
+                        $scope.positions.currentPage = currentPage;
+                        var deferred = $q.defer();
+                        deferred.resolve($scope.positions.data);
+                        return deferred.promise;
+                    },
+                    totalPage: 1,
+                    currentPage: FIRST_PAGE,
+                    data: []
                 };
-                var originObject = $scope.data.positions.data[0];
-                for (var i = 0; i < 3; i++) {
-                    $scope.data.positions.data.push($.extend(true, {}, originObject, {progressRate: i}));
+                if ($scope.hasLoggedin()) {
+                    search();
                 }
             }
         };
-    });
+    }]);

@@ -15,5 +15,23 @@ module.exports = {
     getMyProductList: '/service-proxy/member/get-my-product-list',
     getUnusedProducts: '/service-proxy/member/get-my-unused-products',
     getUsedProducts: '/service-proxy/member/get-my-used-products',
-    getOfferInfo: '/service-proxy/commerce/get-offer-info'
+    getOfferInfo: '/service-proxy/commerce/get-offer-info',
+
+    studyCenter: {
+        classBooking: {
+            coming: '/service-proxy/study-center/class-booking/coming',
+            unevaluated: '/service-proxy/study-center/class-booking/unevaluated',
+            evaluated: '/service-proxy/study-center/class-booking/evaluated'
+        },
+        my: {
+            favorite: {
+                teachers: '/service-proxy/study-center/my/favorite/teachers'
+            }
+        },
+        teacher: {
+            latestCourses: '/service-proxy/study-center/teacher/latest-courses/:teacherId',
+            feedback: '/service-proxy/study-center/teacher/feedback'
+        },
+        classFeedback: '/service-proxy/study-center/class-feedback/:feedbackId'
+    }
 };

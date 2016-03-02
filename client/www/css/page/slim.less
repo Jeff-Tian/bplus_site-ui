@@ -11,6 +11,11 @@
 @import "../theme/zh-cn";
 @import "../theme/header";
 @import "../theme/footer";
+@import "../theme/message";
+@import "./opportunity-detail/job/favorite/main";
+@import "./opportunity-detail/job/pattern.less";
+@import "../../js/page/opportunity-detail/widget/competitiveness/main.less";
+@import "pagination";
 
 .left.floated {
     float: left;
@@ -31,4 +36,19 @@
 
 .offer-list {
     padding-top: 4em;
+}
+
+.transparent.corner.label {
+    &:after {
+        border-right: none;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+}
+
+.light.red.label {
+    background-color: #F76E73 !important;
+    cursor: pointer;
 }

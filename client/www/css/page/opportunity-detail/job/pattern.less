@@ -13,6 +13,7 @@
                 font-size: small !important;
                 vertical-align: top!important;
             }
+            padding-left: 1.5em;
         }
         td {
             padding: 1.5em;
@@ -38,6 +39,29 @@
                     }
                 }
             }
+        }
+
+        &.hoverable {
+            tbody tr:hover:not(.rating) {
+                background-color: @color-grey;
+
+                color: white;
+
+                .ui.header {
+                    color: white;
+
+                    .sub.header {
+                        color: white;
+                    }
+                }
+
+                .red.hover {
+                    color: @color-brand;
+                }
+            }
+        }
+
+        tfoot {
         }
     }
 
@@ -212,6 +236,13 @@
     .b-opd-position-progressrate {
         cursor: pointer;
     }
+    .position-title {
+        color: #ff3c42;
+    }
+}
+.rate-image-size {
+    height: 77px;
+    width: 77px;
 }
 .b-opd-matchLevelDescription {
     .header,

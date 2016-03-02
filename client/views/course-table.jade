@@ -1,0 +1,174 @@
+mixin unfinishedCourseBlocks(c)
+    td(style="position: relative", class="dimmable", ng-mouseleave="hideDimmer($event)")
+        include share-course
+        bopdcompetitiveness(data="{progressRate: #{c}.status, text: #{c}.statusText}", classes="{classes: 'red small'}")
+    td
+        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="#{c}.status !== -1 && #{c}.countdown.value", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") 距离上课 {{#{c}.countdown.value | countdown}}
+        p
+            button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24 ? '进入课程' : '未到时间')}}
+
+mixin finishedUnratedCourseBlocks(c)
+    td 尚未评价
+    td
+        button(class="ui mini black button", ng-click="#{c}.showRating=true", ng-disabled="#{c}.showRating") 立刻评价
+
+mixin rating(max, rating, classes)
+    - classes = classes || 'tiny'
+    div(class="ui #{classes} star rating", data-max-rating="5", data-rating="{{#{rating}}}")&attributes(attributes)
+
+mixin finishedRatedCourseBlocks(c)
+    td
+        + rating(5, 'c.generalEvaluation')
+    td
+        button(class="ui mini black button", ng-click="c.showRating=!c.showRating; showEvaluationDetail(c)") 评价详情
+
+mixin courseTable()
+    table(class="ui basic table positions", style="border: none; background-color: white;")
+        block
+
+mixin courseTableColumnDef()
+    colgroup
+        col
+        col(style="background-color: #f6f6f6;")
+        col
+        col
+
+mixin courseTableHead()
+    thead
+        tr
+            block
+
+mixin courseTableHeader
+    + courseTableColumnDef
+    + courseTableHead
+        block
+
+mixin courseTableBody(courses, rating, rated, singlePage)
+    tbody
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
+            td
+                h4(class="ui grey header") {{c.name}}
+                    div(class="sub header") {{c.teacher}}
+                    div(class="sub header", style="margin-top: 10px;")
+                        span(class="ui mini red label", ng-repeat="t in c.tags", ng-style="($index === 0) && {'margin-left': 0}", ng-class="{'light': !t.special}") {{t.text}}
+            td
+                div(class="ui tiny grey header") {{c.startAt | date : 'yyyy.MM.dd'}}
+                    div(class="sub header", style="white-space: nowrap;") ({{c.startAt | date : 'EEE' | translate}}) {{c.startAt | date : 'HH:mm' }}~{{c.endAt | date : 'HH:mm' }}
+            block
+        tr.rating(ng-repeat-end, ng-show="c.showRating")
+            td(colspan="4", style="padding: 0;")
+                if rating
+                    form(class="ui form", ng-submit="addFeedback(c)")
+                        div(style="padding: 20px;")
+                            div(class="field")
+                                label 发表评论
+                                textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~", ng-model="c.feedback.comment", ng-disabled="c.feedback.disabled")
+                        div(class="inline field", style="background-color: #f9f9f9; padding: 5px 20px;")
+                            label 总体评分
+                            + rating(5, 0, 'mini')(model="c.feedback.generalEvaluation")
+                        div(style="padding: 20px;")
+                            div(class="inline field", ng-repeat="(key, item) in c.feedback.evaluations")
+                                label(ng-bind="key")
+                                + rating(5, 'item', 'mini')(model="c.feedback.evaluations['{{key}}']")
+
+                                div(class="right floated", ng-if="$index === countItems(c.feedback.evaluations) - 1")
+                                    button(class="ui mini black button", type="button", ng-click="c.showRating = false") 取消
+                                    button(class="ui mini red button", type="submit", ng-disabled="!canAddFeedback(c) || c.feedback.disabled") 完成
+                else if rated
+                    form(class="ui form", style="background-color: #f9f9f9; margin-bottom: 0; height: 100%;")
+                        div(class="inline field", style="padding: 20px 20px 5px 20px;")
+                            label 总体评分
+                            + rating(5, 'c.generalEvaluation')
+                        div(style="padding: 10px 20px 20px 20px;")
+                            div(class="", style="border: solid 2px white; border-radius: 3px; padding: 10px;")
+                                div(class="ui grid")
+                                    div(class="four wide column", ng-repeat="(key, item) in c.evaluationDetail.evaluation", style="white-space: nowrap;")
+                                        label(ng-bind="key", style="font-size: smaller;")
+                                        | &nbsp;
+                                        + rating(5, 'item', 'mini')
+                        div(class="ui fitted clearing horizontal divider")
+                        div(style="padding: 0 20px;")
+                            p 我的反馈评价
+                            div(style="border: solid 2px white; border-radius: 3px; padding: 10px;")
+                                | {{c.evaluationDetail.comment}}
+                        div(class="right floated", style="padding: 20px;")
+                            button(class="ui mini red button", type="submit", ng-show="false") 追加评论
+                        div(class="ui fitted clearing horizontal divider")
+                        div(style="padding: 0 20px;", ng-show="false")
+                            p 追加评论
+                            textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~")
+                        div(class="right floated field", style="padding: 20px;", ng-show="false")
+                            button(class="ui mini black button", type="reset") 取消
+                            button(class="ui mini red button", type="submit") 完成
+                        div(class="ui fitted clearing horizontal divider")
+
+    if !singlePage
+        tfoot
+            tr
+                th(colspan="4", style="text-align: right;")
+                    pagination(paginationdata="#{courses}", auto-fetch="true")
+
+
+mixin comingCourses(courses)
+    + courseTable
+        + courseTableHeader
+            th
+                h4(class="ui white header left aligned") 课程名称
+            th
+                h4(class="ui white header left aligned") 开课时间
+            th
+                h4(class="ui white header left aligned") 报名状态
+            th
+                h4(class="ui white header left aligned")
+        + courseTableBody(courses, null, null, true)
+            + unfinishedCourseBlocks('c')
+
+mixin finishedCourseTable(courses, header, rating, rated)
+    + courseTable
+        + courseTableHeader
+            th(colspan="4")
+                h4(class="ui white header left aligned") #{header}
+        + courseTableBody(courses, rating, rated)
+            block
+
+mixin finishedUnratedCourseTable(courses)
+    + finishedCourseTable(courses, '待评价', true, false)
+        + finishedUnratedCourseBlocks('c')
+
+mixin finishedRatedCourseTable(courses)
+    + finishedCourseTable(courses, '已评价', false, true)
+        + finishedRatedCourseBlocks('c')
+
+mixin teacherTable(teachers)
+    + courseTable
+        + courseTableHead
+            th
+                h4(class="ui white header left aligned") 导师名称
+            th
+                h4(class="ui white header left aligned") 最新课程
+            th
+        tbody
+            tr(ng-repeat="t in #{teachers}")
+                td(class="ui items")
+                    div.item
+                        div(class="ui tiny image")
+                            img(ng-src="/{{t.image}}", class="avatar")
+                        div.content
+                            h5(class="ui header") {{t.name}}
+                                div(class="sub header") {{t.title}}
+                                div(class="sub header", style="margin-top: 5px; margin-bottom: 10px;")
+                                    + rating(5, 't.rank')
+                                div(class="sub header")
+                                    span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags") {{tag}}
+                td
+                    p(ng-repeat="c in t.courses")
+                        | {{c.description}}
+                        | &nbsp;
+                        span(class="ui mini red label", ng-repeat="courseTag in c.class_tags") {{courseTag}}
+                td
+                    button(class="ui red mini button", ng-click="removeFavTeacher(t)") 取消收藏
+
+mixin sticky
+    div(class="right ui rail", style="margin: 0; padding: 0;")
+        div(class="ui sticky")
+            div(style="background-color: rgba(0, 0, 0, 0.8); color: white; padding: 5px; width: 2em; text-orientation: upright;") 今日课程

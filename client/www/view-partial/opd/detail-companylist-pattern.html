@@ -9,7 +9,7 @@
             <th>
                 <h4 class="ui white header">
                     公司匹配度
-                    <i class="help circle icon"></i>
+                    <i class="help circle icon b-opd-help-company-matching"></i>
                 </h4>
             </th>
             <th>
@@ -27,25 +27,25 @@
     <tbody>
         <tr ng-repeat="data in displayData.data">
             <td style="padding: 1.5em;">
-                <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.matchLevel)" data-content="你与企业的匹配等级 {{data.matchLevel}}!" data-variation="inverted" ng-src="img/opd/match_{{data.matchLevel}}b.png?<%= cdn.version %>"/>
+                <img class="matchlevel clickable" ng-click="displayData.onMatchlevelClick(data.match)" data-content="你与企业的匹配等级 {{data.match.toUpperCase()}}!" data-variation="inverted" ng-src="/img/opd/match_{{data.match===''?'':data.match+'b'}}.png"/>
             </td>
             <td class="description clickable" ng-click="displayData.onCompanyClick(data)">
-                <img ng-src="{{data.companyinfo.logo}}" class="left-floated-image">
-                <div class="company" ng-bind="data.companyinfo.name"></div>
-                <div class="field grey color" ng-bind="data.companyinfo.field"></div>
+                <img ng-src="{{data.logo}}" class="left-floated-image">
+                <div class="company" ng-bind="data.name"></div>
+                <div class="field grey color" ng-bind-template="{{data.industry}}\{{data.nature_of_firms}}"></div>
             </td>
             <td class="desc" ng-click="displayData.onPositionClick(data)">
                 <h3 class="ui header">
-                    <div class="red title" href="" ng-bind-template="{{data.positioninfo.onboard}}个在招职位"></div> 
+                    <div class="red title" href="" ng-bind-template="{{data.jobCount}}个在招职位"></div> 
                 </h3>
-                <div class="grey color">
+                <!-- <div class="grey color">
                     <span ng-show="data.positioninfo.newposition<1">没有新职位发布</span>
                     <span ng-show="data.positioninfo.newposition>0">
                         <span class="ui smooth red label" ng-bind="data.positioninfo.newposition"></span>
                         <span ng-bind-template="有{{data.positioninfo.newposition}}个新职位你还没看过!"></span>
                     </span>
                     <span class="ui right floated light grey color" ng-bind="data.positioninfo.issueTime"></span>
-                </div>
+                </div> -->
                 <div class="removeIcon" ng-click="displayData.onDelete(data, $event)" >
                     <div class="ui red right corner label">
                         <i class="remove icon"></i>
@@ -57,11 +57,34 @@
     <tfoot>
         <tr class="transparent">
             <th colspan="10" class="ui center aligned">
-                <bopdpaginationpattern displayData="displayData" rawData="rawData"/>
+                <bopdpaginationpattern paginationData="displayData" ng-if="!isRending">
             </th>
         </tr>
     </tfoot>
 </table>
+<div class="ui popup b-opd-popup-help-company-matchlevel">
+    <div class="header popup-margin">企业匹配度</div>
+    <div class="popup-margin">
+        <img class="ui spaced image rate-image-size" src="img/opd/match_ab.png?<%= cdn.version %>" >
+        <span>等级A</span>
+    </div>
+    <div class="popup-margin">
+        <img class="ui spaced image rate-image-size" src="img/opd/match_bb.png?<%= cdn.version %>" >
+        <span>等级B</span>
+    </div>
+    <div class="popup-margin">
+        <img class="ui spaced image rate-image-size" src="img/opd/match_cb.png?<%= cdn.version %>" >
+        <span>等级C</span>
+    </div>
+    <div class="popup-margin">
+        <img class="ui spaced image rate-image-size" src="img/opd/match_db.png?<%= cdn.version %>" >
+        <span>等级D</span>
+    </div>
+    <div class="popup-margin">
+        <img class="ui spaced image rate-image-size" src="img/opd/match_eb.png?<%= cdn.version %>" >
+        <span>等级E</span>
+    </div>
+</div>
 <div class="ui modal b-opd-matchLevelDescription b-opd-matchLevelDescription-{{sid}}">
     <div class="header">
         你与企业匹配度说明

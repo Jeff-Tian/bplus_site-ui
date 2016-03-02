@@ -15,4 +15,19 @@ angular.module('bplusModule', [
     .factory('WechatLogon', angular.bplus.WechatLogon)
     .directive('loading', angular.bplus.loading)
     .controller('AppCtrl', angular.bplus.AppCtrl)
+    .factory('MessageBox', [function () {
+        return {
+            show: function (msg, keep) {
+                var $scope = angular.element('.brand.message-wrapper').scope();
+
+                if (!keep) {
+                    $scope.message = msg;
+                } else {
+                    $scope.shamelessMessage = msg;
+                }
+
+                $scope.$apply();
+            }
+        };
+    }])
 ;
