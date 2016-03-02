@@ -117,28 +117,31 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                         text: '不限'
                     }, {
                         id: 1,
-                        text: '移动互联网'
+                        text: '互联网'
                     }, {
                         id: 2,
-                        text: '电子商务'
+                        text: '计算机'
                     }, {
                         id: 3,
-                        text: '金融'
+                        text: '地产'
                     }, {
                         id: 4,
-                        text: '企业服务'
+                        text: '能源'
                     }, {
                         id: 5,
-                        text: '教育'
+                        text: '快消'
                     }, {
                         id: 6,
-                        text: '文化'
+                        text: '零售'
                     }, {
                         id: 7,
-                        text: '娱乐'
+                        text: '金融'
                     }, {
                         id: 8,
                         text: '游戏'
+                    }, {
+                        id: 9,
+                        text: '教育'
                     }]
                 }, {
                     key: 'companyType',
