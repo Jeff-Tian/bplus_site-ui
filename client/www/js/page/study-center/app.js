@@ -20,7 +20,7 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
     .controller('StudyCtrl', ['$scope', function ($scope) {
         $scope.menus = [{
             text: '导师课程',
-            href: '#/study-plan',
+            href: '/zh/studycenter/teachercourse.html',
             icon: 'user',
             states: ['study-plan']
         }, {
