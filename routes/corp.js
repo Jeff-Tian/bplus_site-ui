@@ -3,7 +3,7 @@ var fs = require('fs');
 var jade = require('jade');
 var path = require('path');
 var ejs = require('ejs');
-var config = require('../config');
+var config = require('../config/index');
 
 function filterConfig(config) {
     var filtered = {};

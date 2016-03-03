@@ -211,7 +211,7 @@ function filterConfig(config) {
     return filtered;
 }
 
-server.use('/config.js', function (req, res, next) {
+server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
@@ -268,7 +268,9 @@ setupOnlineStoreStaticResources('scripts');
 
 server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
 
-server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./study-center'));
+server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
+
+server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
