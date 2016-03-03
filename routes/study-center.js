@@ -22,9 +22,8 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/config.js', function (req, res, next) {
-    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+router.get('/', function (req, res, next) {
+    res.redirect('/study-center/my');
 });
 
 router.get('/my', function (req, res, next) {
@@ -36,8 +35,6 @@ router.get('/my', function (req, res, next) {
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;
 }
-
-var fs = require('fs');
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {

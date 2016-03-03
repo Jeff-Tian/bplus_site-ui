@@ -1,6 +1,6 @@
 angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var states = ['study-plan', 'fav', 'course'];
+        var states = ['fav', 'course'];
 
         $urlRouterProvider.otherwise('/' + states[0]);
 

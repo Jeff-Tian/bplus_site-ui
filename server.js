@@ -309,12 +309,15 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
-    .get('/:lang/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
-        var lang = req.params.lang;
-        if (['zh', 'en'].indexOf(lang) < 0) {
+    .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
+        var lang = req.params.lang || localeHelper.getLocale(req.url, req);
+
+        if (localeHelper.supportedLocales.indexOf(lang) < 0) {
             return next();
         }
-        var page = req.params.page || 'index';
+
+        var page = req.params.page || 'teacher';
+
         res.render('study-center-ui/' + page, {
             page: page,
             lang: lang
@@ -396,7 +399,7 @@ server.use('/healthcheck', function (req, res, next) {
 
 server.get('/test', function (req, res, next) {
     var ua = req.headers['user-agent'];
-    res.send(ua);
+    res.send(req.url);
 });
 
 server.get('/mode', function (req, res, next) {
