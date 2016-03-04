@@ -28,7 +28,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/my', function (req, res, next) {
     renderMixin(res, 'study-center.jade', 'study-center-layout.jade', {
-        cdn: config.cdn
+        cdn: config.cdn,
+        title: '学习中心'
     });
 });
 
