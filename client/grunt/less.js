@@ -7,7 +7,8 @@ module.exports = function () {
                 "<%= config.src %>css/main.css": "<%= config.src %>css/page/main.less",
                 "<%= config.src %>css/slim.css": "<%= config.src %>css/page/slim.less",
                 "<%= config.src %>css/hp.css": "<%= config.src %>css/page/hp/hp.less",
-                "<%= config.src %>css/qa.css": "<%= config.src %>css/page/qa/qa.less"
+                "<%= config.src %>css/qa.css": "<%= config.src %>css/page/qa/qa.less",
+                "<%= config.src %>css/corp.css": "<%= config.src %>css/corp/main.less"
             }
         },
         production: {
@@ -22,7 +23,8 @@ module.exports = function () {
                 "<%= config.dist %>css/main.css": "<%= config.dist %>css/page/main.less",
                 "<%= config.src %>css/slim.css": "<%= config.src %>css/page/slim.less",
                 "<%= config.dist %>css/hp.css": "<%= config.dist %>css/page/hp/hp.less",
-                "<%= config.dist %>css/qa.css": "<%= config.dist %>css/page/qa/qa.less"
+                "<%= config.dist %>css/qa.css": "<%= config.dist %>css/page/qa/qa.less",
+                "<%= config.src %>css/corp.css": "<%= config.src %>css/corp/main.less"
             }
         }
     };

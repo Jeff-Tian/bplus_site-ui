@@ -66,8 +66,6 @@ router.get('/offers', function (req, res, next) {
     });
 });
 
-var fs = require('fs');
-
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {
         basedir: '/',
