@@ -20,7 +20,7 @@
             return url.replace(localePattern, '/' + locale + '$1');
         },
 
-        regexPath: function (p, strict) {
+        localePath: function (p, strict) {
             if (typeof strict === 'undefined') {
                 strict = true;
             }

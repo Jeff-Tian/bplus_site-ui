@@ -1,4 +1,4 @@
-var router = require('express').Router();
+var corp = require('express')();
 var fs = require('fs');
 var jade = require('jade');
 var path = require('path');
@@ -17,17 +17,18 @@ function filterConfig(config) {
     return filtered;
 }
 
-router.use(function (req, res, next) {
+corp.use(function (req, res, next) {
     //res.send('ok');
     next();
 });
 
-router.get('/config.js', function (req, res, next) {
-    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+corp.get('/', function (req, res, next) {
+    renderMixin(res, 'corp/index.jade', 'corp/layout.jade', {
+        cdn: config.cdn
+    });
 });
 
-router.get('/my', function (req, res, next) {
+corp.get('/my', function (req, res, next) {
     renderMixin(res, 'study-center.jade', 'study-center-layout.jade', {
         cdn: config.cdn
     });
@@ -36,8 +37,6 @@ router.get('/my', function (req, res, next) {
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;
 }
-
-var fs = require('fs');
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {
@@ -58,4 +57,4 @@ function renderMixin(res, jadeTemplate, jadeLayout, data) {
     res.send(ejs.render(compiled, res.locals, o));
 }
 
-module.exports = router;
+module.exports = corp;

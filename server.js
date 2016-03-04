@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
-var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 // To keep it from deleting by "npm prune --production"
@@ -22,6 +21,7 @@ var urlParser = require('url');
 var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;
+var subApps = ['corp'];
 i18n.configure({
     locales: supportedLocales,
     directory: __dirname + '/locales',
@@ -167,7 +167,7 @@ function mapRoute2Template(url, template, pipes) {
         renderOrRedirect(req, res, template);
     });
 
-    var args = [localeHelper.regexPath(url)].concat(pipes);
+    var args = [localeHelper.localePath(url)].concat(pipes);
 
     server.get.apply(server, args);
 }
@@ -231,15 +231,15 @@ function checkWechatHostAndSetCookie(req, res, next) {
     }
     next();
 }
-server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
-server.use(localeHelper.regexPath('/m', false), require('./mobile'));
-server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
+server.use(localeHelper.localePath('/m', false), checkWechatHostAndSetCookie);
+server.use(localeHelper.localePath('/m', false), require('./mobile'));
+server.use(localeHelper.localePath('/m', false), express.static(staticFolder));
 
-server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
+server.use(localeHelper.localePath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
 
 function setupOnlineStoreStaticResources(staticFolder) {
     server.use(
-        localeHelper.regexPath('/' + staticFolder, false),
+        localeHelper.localePath('/' + staticFolder, false),
         express.static(
             __dirname +
             onlineOfflinePathSwitch(
@@ -253,31 +253,38 @@ function setupOnlineStoreStaticResources(staticFolder) {
 }
 
 if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
 
-    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
 }
 
 //setupOnlineStoreStaticResources('semantic');
-server.use(localeHelper.regexPath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
+server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
 //setupOnlineStoreStaticResources('bower_components');
-server.use(localeHelper.regexPath('/bower_components', false), express.static(__dirname + '/client/dist/bower', staticSetting));
+server.use(localeHelper.localePath('/bower_components', false), express.static(__dirname + '/client/dist/bower', staticSetting));
 setupOnlineStoreStaticResources('images');
 setupOnlineStoreStaticResources('stylesheets');
 setupOnlineStoreStaticResources('scripts');
 
-server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
+server.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('./store'));
 
-server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
+server.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
 
-server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
+server.use(localeHelper.localePath('/corp', false), require('./routes/corp.js'));
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
-server.use(express.static(staticFolder, staticSetting));
-supportedLocales.map(function (l) {
-    server.use('/' + l, express.static(staticFolder, staticSetting));
-});
+
+function setupStaticResources() {
+    var staticServer = express.static(staticFolder, staticSetting);
+
+    server.use(staticServer);
+    supportedLocales.concat(subApps).map(function (l) {
+        server.use('/' + l, staticServer);
+    });
+}
+
+setupStaticResources();
 
 server.use('/service-proxy', require('./serviceProxy'));
 
@@ -349,7 +356,7 @@ mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
 mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
-server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, next) {
+server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('opportunity-detail');
     } else {
@@ -357,7 +364,7 @@ server.get(localeHelper.regexPath('/opportunity-detail'), function (req, res, ne
     }
 });
 
-server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
+server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
     if (!isFromMobile(req)) {
         if (res.locals.hcd_user) {
             res.redirect('/zh/cmpt/ranking');
@@ -369,22 +376,22 @@ server.get(localeHelper.regexPath('/ranking'), function (req, res, next) {
     }
 });
 
-server.get(localeHelper.regexPath('/study'), membership.ensureAuthenticated, function (req, res, next) {
+server.get(localeHelper.localePath('/study'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('game-training');
     } else {
         res.redirect('/m/game-training');
     }
 });
-server.get(localeHelper.regexPath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
+server.get(localeHelper.localePath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
     if (!isFromMobile(req)) {
         res.render('select-payment-method');
     } else {
         res.redirect('/m#/select-payment-method');
     }
 });
-server.get(localeHelper.regexPath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
-server.get(localeHelper.regexPath('/email-verify'), require('./email-verify.js'));
+server.get(localeHelper.localePath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
+server.get(localeHelper.localePath('/email-verify'), require('./email-verify.js'));
 
 server.get('/messages', function (req, res, next) {
     res.json(JSON.parse(fs.readFileSync('messages.json')));

@@ -9,7 +9,7 @@ describe('Locale Helper', function () {
     });
 
     it('should map request path to view accordingly', function () {
-        assert.equal(true, localeHelper.regexPath('/signin').test('/signin'));
-        assert.equal(false, localeHelper.regexPath('/signin').test('/m/signin'));
+        assert.equal(true, localeHelper.localePath('/signin').test('/signin'));
+        assert.equal(false, localeHelper.localePath('/signin').test('/m/signin'));
     });
 });
