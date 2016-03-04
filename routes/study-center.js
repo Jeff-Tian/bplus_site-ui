@@ -1,9 +1,8 @@
 var router = require('express').Router();
 var fs = require('fs');
-var jade = require('jade');
 var path = require('path');
-var ejs = require('ejs');
 var config = require('../config/index');
+var mixedEngine = require('./mixedViewEngine');
 
 function filterConfig(config) {
     var filtered = {};
@@ -27,7 +26,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/my', function (req, res, next) {
-    renderMixin(res, 'study-center.jade', 'study-center-layout.jade', {
+    mixedEngine.render(res, 'study-center.jade', 'study-center-layout.jade', {
         cdn: config.cdn,
         title: '学习中心'
     });
@@ -35,25 +34,6 @@ router.get('/my', function (req, res, next) {
 
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;
-}
-
-function renderMixin(res, jadeTemplate, jadeLayout, data) {
-    var o = {
-        basedir: '/',
-        filename: path.join(__dirname, '/../client/views/', jadeTemplate)
-    };
-
-    var contents = fs.readFileSync(__dirname + '/../client/views/' + jadeTemplate, 'utf-8');
-
-    if (jadeLayout) {
-        contents = 'extends ' + jadeLayout + '\n' + contents;
-    }
-
-    var compiled = jade.compile(contents, o);
-    compiled = compiled(data || {});
-
-    o.filename = path.join(__dirname, '/../client/www/view-partial/store-index.html');
-    res.send(ejs.render(compiled, res.locals, o));
 }
 
 module.exports = router;
