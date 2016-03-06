@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
-var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 // To keep it from deleting by "npm prune --production"
@@ -120,7 +119,14 @@ server.set('view engine', 'html');
 
 server.use(i18n.init);
 
-server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
+server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req, res, next) {
+    if (req.query.code && req.query.state) {
+        // Redirected from Wechat?
+        return res.redirect(new Buffer(req.query.state, 'base64').toString());
+    }
+
+    next();
+});
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
