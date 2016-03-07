@@ -17,21 +17,7 @@
       ng-class="{'chinese':language==='zh','english':language==='en'}">
 <%- include('view-partial/header.html') -%>
 <% if (typeof hcd_user === 'undefined' || !hcd_user.member_id) { %>
-<div class="ui">
-    <div class="ui container">
-        <div class="b-sign-in-position-wrapper">
-            <div class="b-sign-in-position">
-                <div class="ui b-signin-semi-transparent-wrapper">
-                    <div class="ui column b-signin-semi-transparent-container">
-                        <div class="b-signin-narrow" tab=".b-signin-narrow">
-                            <%- include('view-partial/sign-in.html') -%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%- include('../views/partial/sign-in-widget.html') -%>
 <% } %>
 <!-- Page Contents -->
 <div class="pusher">

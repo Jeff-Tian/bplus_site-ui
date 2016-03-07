@@ -1,0 +1,43 @@
+<div class="ui container">
+    <div class="b-sign-in-position-wrapper">
+        <div class="b-sign-in-position">
+            <div class="ui b-signin-semi-transparent-wrapper">
+                <div class="ui column b-signin-semi-transparent-container">
+                    <div class="b-signin-narrow" tab=".b-signin-narrow">
+                        <div class="ui fluid two item top pointing secondary menu brand">
+                            <a class="active item" data-tab="login"
+                               onclick="window.sendTrack('register.loginTab.click');"><%= __('SignIn')
+                                %></a>
+                            <a class="item" data-tab="register"
+                               onclick="window.sendTrack('login.registerTab.click');"><%= __('SignUp') %></a>
+                        </div>
+                        <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
+                            <corp-sign-in></corp-sign-in>
+                        </div>
+                        <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
+                            <div class="ui center aligned container subcontainer mobile">
+                                <h2 class="grey color"><%= __('SignUp') %></h2>
+                            </div>
+                            <register-form action="signUp" send-tracking="sendTracking"
+                                           control="registerFormCtrl"></register-form>
+
+                            <div class="field ui right aligned container subcontainer">
+                                <%= __('HasAccount') %> <a href="#/login" ng-click="login()"><%= __('SignInNow')
+                                %></a>
+                            </div>
+                        </div>
+                        <div class="ui bottom attached tab" data-tab="wechat-logon" ng-controller="WechatLoginCtrl">
+                            <iframe name="wechat-frame" class="b-wechat-frame b-background-lighter"
+                                    ng-src="{{wechatQRPage}}"></iframe>
+                            <button type="reset" class="ui fluid large red basic button"
+                                    ng-click="cancelWechatLogin()"
+                                    ng-class="{'inverted': invertCancelButtonTheme}"><%=
+                                __('Cancel') %>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
