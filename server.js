@@ -216,13 +216,27 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
+var serveDevLocaleHelper = express.static(__dirname + '/locales/localeHelper.js', staticSetting);
+var serveLocaleHelper = express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting);
+var localeHelperRoute = '/translation/localeHelper.js';
+
+function handleLocaleHelperRouter(serve) {
+    server.use(localeHelperRoute, serve);
+    subApps.map(function (s) {
+        server.use('/' + s + localeHelperRoute, serve);
+    });
+}
+
 if (getMode() === 'dev') {
-    server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
+    handleLocaleHelperRouter(serveDevLocaleHelper);
 } else {
-    server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
+    handleLocaleHelperRouter(serveLocaleHelper);
 }
 
 server.use('/translation', localeHelper.serveTranslations);
+subApps.map(function (s) {
+    server.use('/' + s + '/translation', localeHelper.serveTranslations);
+});
 
 function checkWechatHostAndSetCookie(req, res, next) {
     var query = urlParser.parse(req.url).query;
@@ -287,6 +301,9 @@ function setupStaticResources() {
 setupStaticResources();
 
 server.use('/service-proxy', require('./serviceProxy'));
+subApps.map(function (s) {
+    server.use('/' + s + '/service-proxy', require('./serviceProxy'));
+});
 
 //Competion Integration
 
