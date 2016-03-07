@@ -22,14 +22,8 @@ corp.use(function (req, res, next) {
     next();
 });
 
-corp.get('/', function (req, res, next) {
+corp.get('/index', function (req, res, next) {
     mixedViewEngine.render(res, 'corp/index.jade', 'layout.jade', {
-        cdn: config.cdn
-    });
-});
-
-corp.get('/my', function (req, res, next) {
-    mixedViewEngine.render(res, 'study-center.jade', 'study-center-layout.jade', {
         cdn: config.cdn
     });
 });
