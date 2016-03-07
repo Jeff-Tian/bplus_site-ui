@@ -35,9 +35,7 @@
 <% } %>
 <!-- Page Contents -->
 <div class="pusher">
-    <div class="b-masthead">
-        <%- include('../views/partial/carousel.html') -%>
-    </div>
+    <%- include('../views/partial/carousel.html') -%>
     <div class="page-content">
         <div class="b-client">
             <div class="ui container" id="b-client-content">
@@ -403,7 +401,7 @@
 <%- include('view-partial/footer.html') -%>
 <!--JS-->
 <script src="<%= cdn.normal %>bower/owl.carousel/dist/owl.carousel.js?<%= cdn.version %>"></script>
-
+<script src="<%= cdn.normal %>js/view/widgets/carousel/carousel.js?<%= cdn.version %>"></script>
 <% if (dev_mode) { %>
 <script src="js/directives/captcha.js"></script>
 <script src="js/directives/ngEnter.js"></script>

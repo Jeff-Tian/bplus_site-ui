@@ -1,36 +1,38 @@
-<div class="owl-carousel owl-theme b-slider masthead-carousel" id="superpulse">
-    <div class="b-slider-item first-item"
-         style="background-image: url('<%= cdn.normal %>img/salespage/bg_1.jpg?<%= cdn.version %>');">
-        <div class="ui container">
-            <h1 class="ui header"><%= __('IndexFirstItemHeader') %></h1>
+<div class="b-masthead">
+    <div class="owl-carousel owl-theme b-slider masthead-carousel" id="superpulse" style="max-height: 100%;">
+        <div class="b-slider-item first-item"
+             style="background-image: url('<%= cdn.normal %>img/salespage/bg_1.jpg?<%= cdn.version %>');">
+            <div class="ui container">
+                <h1 class="ui header"><%= __('IndexFirstItemHeader') %></h1>
 
-            <h2><%= __('IndexFirstItemContent') %><br><%= __('IndexFirstItemSubContent') %>
-            </h2>
+                <h2><%= __('IndexFirstItemContent') %><br><%= __('IndexFirstItemSubContent') %>
+                </h2>
+            </div>
         </div>
-    </div>
-    <div class="b-slider-item second-item"
-         style="background-image: url('<%= cdn.normal %>img/salespage/bg_2.jpg?<%= cdn.version %>');">
-        <div class="ui container">
-            <h1 class="ui header" ng-cloak><%= __('IndexSecondItemHeader') %></h1>
+        <div class="b-slider-item second-item"
+             style="background-image: url('<%= cdn.normal %>img/salespage/bg_2.jpg?<%= cdn.version %>');">
+            <div class="ui container">
+                <h1 class="ui header" ng-cloak><%= __('IndexSecondItemHeader') %></h1>
 
-            <h2 ng-cloak><%= __('IndexSecondItemContent') %><br><%= __('IndexSecondItemSubContent') %>
-            </h2>
+                <h2 ng-cloak><%= __('IndexSecondItemContent') %><br><%= __('IndexSecondItemSubContent') %>
+                </h2>
+            </div>
         </div>
-    </div>
-    <div class="b-slider-item third-item"
-         style="background-image: url('<%= cdn.normal %>img/salespage/bg_3.jpg?<%= cdn.version %>');">
-        <div class="ui container">
-            <h1 class="ui header" ng-cloak><%= __('IndexThirdItemHeader') %></h1>
+        <div class="b-slider-item third-item"
+             style="background-image: url('<%= cdn.normal %>img/salespage/bg_3.jpg?<%= cdn.version %>');">
+            <div class="ui container">
+                <h1 class="ui header" ng-cloak><%= __('IndexThirdItemHeader') %></h1>
 
-            <h2 ng-cloak><%= __('IndexThirdItemContent') %><br><%= __('IndexThirdItemSubContent') %>
-            </h2>
+                <h2 ng-cloak><%= __('IndexThirdItemContent') %><br><%= __('IndexThirdItemSubContent') %>
+                </h2>
+            </div>
         </div>
+        <% if (false) { %>
+        <a class="b-slider-item fourth-item" href="http://www.shixiseng.com/invite/Qmi6" target="_blank"
+           style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/shixiseng_bg.png?<%= cdn.version %>');">
+        </a>
+        <a class="b-slider-item fifth-item" href="http://www.xiaodao360.com" target="_blank"
+           style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/xiaodao.jpg?<%= cdn.version %>');"></a>
+        <% } %>
     </div>
-    <% if (false) { %>
-    <a class="b-slider-item fourth-item" href="http://www.shixiseng.com/invite/Qmi6" target="_blank"
-       style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/shixiseng_bg.png?<%= cdn.version %>');">
-    </a>
-    <a class="b-slider-item fifth-item" href="http://www.xiaodao360.com" target="_blank"
-       style="display: block; text-decoration: none; background-image: url('<%= cdn.normal %>img/partners/xiaodao.jpg?<%= cdn.version %>');"></a>
-    <% } %>
 </div>

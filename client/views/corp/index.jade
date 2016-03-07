@@ -1,2 +1,6 @@
 block content
-    include ../partial/carousel.html
+    div.pusher
+        include ../partial/carousel.html
+block extraJs
+    script(src="#{cdn.normal}bower/owl.carousel/dist/owl.carousel.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/view/widgets/carousel/carousel.js?#{cdn.version}")
