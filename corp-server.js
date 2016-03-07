@@ -2,8 +2,9 @@
 var express = require('express');
 var server = express();
 var config = require('./config');
+console.log(config);
 // Host & Port
-var port = 12001 || process.env.PORT || config.port;
+var port = process.env.PORT || config.corpport;
 server.listen(port, function () {
     console.log(port + ' is for Bridge+ Corporation');
 });
