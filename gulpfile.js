@@ -49,7 +49,12 @@ gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
 });
 
-var buildOnlineStore = require('./node_modules/online-store/gulpfile.js');
+gulp.task('build semantic', function (done) {
+    require('./semantic/tasks/build')(done);
+});
+
 gulp.task('release', function (done) {
-    buildOnlineStore(done);
+    // Don't change this line! don't even refactor it! To avoid
+    // conflict gulp task with buildSemantic above.
+    require('./node_modules/online-store/gulpfile.js')(done);
 });
