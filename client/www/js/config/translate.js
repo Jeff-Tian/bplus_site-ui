@@ -3,6 +3,8 @@
         $translateProvider.useLoader('translationLoader');
 
         $translateProvider.preferredLanguage(exports.localeHelper.getLocale(window.location.pathname));
+
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
     };
 
     exports.translate.$inject = ['$translateProvider'];

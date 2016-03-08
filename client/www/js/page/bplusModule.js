@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('bplusModule', [
     'ng.utils',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'ngSanitize'
 ])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)

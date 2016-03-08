@@ -3,8 +3,7 @@
 // Declare app level module which depends on views, and components
 angular
     .module('selectPaymentMethod', [
-        'ng.utils',
-        'pascalprecht.translate',
+        'bplusModule',
         'ui.router'
     ])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -38,19 +37,9 @@ angular
             })
         ;
     }])
-    .config(angular.bplus.translate)
-    .config(angular.bplus.xhr)
-    .directive('loading', angular.bplus.loading)
     .directive('countDown', angular.bplus.countDown)
-    .factory('translationLoader', angular.bplus.translationLoader)
-    .factory('service', angular.bplus.service)
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('queryParser', angular.bplus.queryParser)
     .factory('WechatWrapper', angular.bplus.WechatWrapper)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('SelectInterestCtrl', angular.bplus.SelectInterestCtrl)
     .controller('SelectPaymentMethodCtrl', angular.bplus.SelectPaymentMethodCtrl)
     .controller('PaidCtrl', angular.bplus.MobilePaidCtrl)

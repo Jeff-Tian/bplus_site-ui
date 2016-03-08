@@ -1,22 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('bplus', [
-    'ng.utils',
-    'pascalprecht.translate'
-])
-    .config(angular.bplus.translate)
-    .config(angular.bplus.xhr)
-    .factory('translationLoader', angular.bplus.translationLoader)
-    .factory('service', angular.bplus.service)
+angular.module('bplus', ['bplusModule'])
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('queryParser', angular.bplus.queryParser)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('queryParser', angular.bplus.queryParser)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .directive('loading', angular.bplus.loading)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('registerForm', angular.bplus.registerForm)
     .directive('tab', angular.bplus.tab)

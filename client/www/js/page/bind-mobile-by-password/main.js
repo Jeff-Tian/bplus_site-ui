@@ -1,18 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('bindMobileByPassword', ['pascalprecht.translate', 'ng.utils'])
-    .config(angular.bplus.translate)
-    .config(angular.bplus.xhr)
-    .factory('translationLoader', angular.bplus.translationLoader)
+angular.module('bindMobileByPassword', ['bplusModule'])
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('queryParser', angular.bplus.queryParser)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .directive('loading', angular.bplus.loading)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('BindMobileByPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         $scope.bindData = {
             mobile: '',

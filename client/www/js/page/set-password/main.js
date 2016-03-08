@@ -1,18 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('setPassword', ['pascalprecht.translate', 'ng.utils'])
-    .config(angular.bplus.translate)
-    .config(angular.bplus.xhr)
-    .factory('translationLoader', angular.bplus.translationLoader)
+angular.module('setPassword', ['bplusModule'])
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('queryParser', angular.bplus.queryParser)
-    .directive('loading', angular.bplus.loading)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('SetPasswordCtrl', ['$scope', 'service', 'FormValidation', function ($scope, service, FormValidation) {
         var $form = $('.ui.form.set-password');
         $scope.isSetPasswordFormValid = function () {

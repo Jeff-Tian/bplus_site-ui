@@ -1,17 +1,9 @@
 'use strict';
 angular
     .module('bplusUpsell', [
-        'ng.utils',
-        'pascalprecht.translate'
+        'bplusModule'
     ])
-    .config(angular.bplus.translate)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('UpsellCtrl', angular.bplus.UpsellCtrl)
     .controller('OffersCtrl', angular.bplus.OffersCtrl)
-    .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .factory('queryParser', angular.bplus.queryParser);
+;
