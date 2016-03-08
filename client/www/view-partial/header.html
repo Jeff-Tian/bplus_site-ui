@@ -63,8 +63,10 @@
     <a href="<%= localeLink('/game') %>" class="item" ng-class="{'active':current_page==='game'}"><%= __('Play') %></a>
     <a href="<%= localeLink('/opportunity') %>" class="item" ng-class="{'active':current_page==='opportunity'}"><%=
         __('Opportunity') %></a>
+    <% if (false) { %>
     <a href="<%= localeLink('/youth') %>" class="item"
        ng-class="{'active': current_page === 'poster'}"><%= __('全国大赛') %></a>
+    <% } %>
 </div>
 <!-- Initial Menu -->
 <div class="ui b-header">
