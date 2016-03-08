@@ -1,23 +1,11 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('accountSetting', ['pascalprecht.translate', 'ng.utils'])
-    .config(angular.bplus.translate)
-    .config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-    }])
-    .factory('translationLoader', angular.bplus.translationLoader)
+angular.module('accountSetting', ['bplusModule'])
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('queryParser', angular.bplus.queryParser)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .directive('captcha', angular.bplus.captcha)
     .directive('ngEnter', angular.bplus.ngEnter)
     .directive('registerForm', angular.bplus.registerForm)
-    .directive('loading', angular.bplus.loading)
     .controller('changeMobileCtrl', ['$scope', 'service', '$filter', function ($scope, service, $filter) {
         $scope.changeMobileFormCtrl = {};
 

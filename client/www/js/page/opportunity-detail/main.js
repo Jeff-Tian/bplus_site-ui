@@ -1,7 +1,6 @@
 angular
     .module('opdModule', [
-        'ng.utils',
-        'pascalprecht.translate',
+        'bplusModule',
         'ui.router',
         'chart.js'
     ])
@@ -27,16 +26,9 @@ angular
     .filter('encodeURIComponent', function($window) {
         return $window.encodeURIComponent;
     })
-    .controller('AppCtrl', angular.bplus.AppCtrl)
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('OpdCtrl', angular.bplus.OpdCtrl)
     .directive('autocomplete', angular.bplus.autoComplete)
     .factory('PipeCacheService', angular.bplus.PipeCacheService)
-    .factory('translationLoader', angular.bplus.translationLoader)
     .factory('FormValidation', angular.bplus.FormValidation)
-    .factory('DeviceHelper', angular.bplus.DeviceHelper)
-    .factory('service', angular.bplus.service)
-    .factory('MessageStore', angular.bplus.MessageStore)
-    .factory('WechatLogon', angular.bplus.WechatLogon)
-    .factory('queryParser', angular.bplus.queryParser)
 ;

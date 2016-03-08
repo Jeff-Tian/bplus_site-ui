@@ -17,7 +17,7 @@ function filterConfig(config) {
     return filtered;
 }
 
-function routerFactory(name, target){
+function routerFactory(name, target) {
     if (!target) {
         target = name;
     }
@@ -41,7 +41,6 @@ corp.use(function (req, res, next) {
     //res.send('ok');
     next();
 });
-
 
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;
