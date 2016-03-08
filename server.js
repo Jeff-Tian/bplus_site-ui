@@ -225,6 +225,7 @@ function handleLocaleHelperRouter(serve) {
     subApps.map(function (s) {
         server.use('/' + s + localeHelperRoute, serve);
     });
+    server.use('/corp/translation/localeHelper.js', serveDevLocaleHelper);
 }
 
 if (getMode() === 'dev') {
