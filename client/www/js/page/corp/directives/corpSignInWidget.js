@@ -28,8 +28,7 @@ angular.module('corpModule')
                         </div>\
                     </div>\
                 </div>\
-            </div>'
-            ,
+            </div>',
             scope: {},
             link: function ($scope, $element, attrs) {
                 angular.element($element).find('.menu.brand .item').tab();

@@ -33,8 +33,7 @@ angular.module('corpModule')
                     </div> \
                 </div>\
             </form>\
-            '
-            ,
+            ',
             scope: {},
             link: function ($scope, $element, attrs) {
 

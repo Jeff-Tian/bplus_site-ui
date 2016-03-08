@@ -17,6 +17,7 @@ module.exports = function () {
             //boss: true,
             //指定运行环境为node.js
             node: true,
+            multistr: true,
             // global variables
             "globals": {
                 "angular": false,
