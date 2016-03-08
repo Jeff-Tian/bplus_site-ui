@@ -3,6 +3,37 @@ block content
         corp-sign-in-widget
     div.pusher
         include ../partial/carousel.html
+    div(class="ui padded container")
+        div(class="ui horizontal divider")
+        div(class="ui three column center aligned relaxed grid")
+            div.column
+                div(class="ui tiny image")
+                    img(src="#{cdn.normal}img/corp/home_icon1.png?#{cdn.version}")
+                h4(class="ui red header", style="margin-top: 0;") 人才评价工具
+                div(class="ui left aligned container")
+                    ol(class="ui list")
+                        li(value="-") 简历包含个人能力模型和客观评价数据
+                        li(value="-") 根据多维度人才评价指标精准搜索简历
+            div.column
+                div(class="ui tiny image")
+                    img(src="#{cdn.normal}img/corp/home_icon2.png?#{cdn.version}")
+                h4(class="ui red header", style="margin-top: 0;") 简历智能推荐
+                div(class="ui left aligned container")
+                    ol(class="ui list")
+                        li(value="-") 系统性的获取企业岗位需求模型
+                        li(value="-") 根据简历与岗位的匹配度进行推荐
+            div.column
+                div(class="ui tiny image")
+                    img(src="#{cdn.normal}img/corp/home_icon3.png?#{cdn.version}")
+                h4(class="ui red header", style="margin-top: 0;") 大学生人才解决方案
+                div(class="ui left aligned container")
+                    ol(class="ui list")
+                        li(value="-") 根据企业需求提供定制化的人才方案
+                        li(value="-") 提供大数据评估的大学生人才质量报告
+        div(class="ui horizontal divider")
+    div(style="background-color: #2D353C;")
+        div(class="ui padded container inverted segment", style="background-color: transparent;")
+            h3(class="ui white centered header") 招聘企业端求才服务合作对象
 block extraJs
     script(src="#{cdn.normal}bower/owl.carousel/dist/owl.carousel.js?#{cdn.version}")
     script(src="#{cdn.normal}js/view/widgets/carousel/carousel.js?#{cdn.version}")

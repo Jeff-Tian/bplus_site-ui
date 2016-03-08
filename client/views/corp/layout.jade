@@ -5,7 +5,7 @@ html
         include ../../www/view-partial/slim-head.html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light grey background")
-        div#my-header(ng-controller="AppCtrl", style="margin-bottom: 80px;")
+        div#my-header(ng-controller="AppCtrl")
             include ../../www/view-partial/header.html
 
         block content
