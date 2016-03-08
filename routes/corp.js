@@ -33,7 +33,7 @@ function routerFactory(name, target){
 //Index
 routerFactory("");
 //Regist
-routerFactory("regist");
+routerFactory("register");
 //CV
 routerFactory("cv");
 
