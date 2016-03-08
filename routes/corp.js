@@ -17,16 +17,31 @@ function filterConfig(config) {
     return filtered;
 }
 
+function routerFactory(name, target){
+    if (!target) {
+        target = name;
+    }
+    if (target === '') {
+        target = 'index';
+    }
+    corp.get('/' + name, function (req, res, next) {
+        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', {
+            cdn: config.cdn
+        });
+    });
+}
+//Index
+routerFactory("");
+//Regist
+routerFactory("regist");
+//CV
+routerFactory("cv");
+
 corp.use(function (req, res, next) {
     //res.send('ok');
     next();
 });
 
-corp.get('/index', function (req, res, next) {
-    mixedViewEngine.render(res, 'corp/index.jade', 'layout.jade', {
-        cdn: config.cdn
-    });
-});
 
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;

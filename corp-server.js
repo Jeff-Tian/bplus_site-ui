@@ -124,7 +124,7 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
 function renderIndex(req, res, next) {
-    renderOrRedirect(req, res, 'index');
+    renderOrRedirect(req, res, '');
 }
 
 function renderTemplate(name) {
@@ -286,6 +286,7 @@ function setupStaticResources() {
 setupStaticResources();
 
 server.use('/service-proxy', require('./serviceProxy'));
+server.use('/corp-service-proxy', require('./serviceProxy/corp'));
 
 //Competion Integration
 

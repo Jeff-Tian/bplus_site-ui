@@ -1,7 +1,7 @@
 module.exports = function() {
     return {
         development: {
-            script: 'server.js'
+            script: 'app.js'
         }
     }
 };
