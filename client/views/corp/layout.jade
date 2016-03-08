@@ -12,6 +12,10 @@ html
 
         div#my-footer
             include ../../www/view-partial/footer.html
+            script(src="#{cdn.normal}js/page/corp/app.js?#{cdn.version}")
+            script(src="#{cdn.normal}js/page/corp/directives/corpSignInWidget.js?#{cdn.version}")
+            script(src="#{cdn.normal}js/page/corp/directives/corpSignIn.js?#{cdn.version}")
+            script(src="#{cdn.normal}js/page/corp/directives/corpRegister.js?#{cdn.version}")
             script(type="text/javascript").
                 angular.element(document).ready(function () {
                     angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
