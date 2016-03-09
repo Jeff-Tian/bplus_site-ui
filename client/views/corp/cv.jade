@@ -1,1 +1,23 @@
-cv.jade
+block content
+    div.ui.ten.column.centered.grid.corp-cv
+        div.row
+            div.ten.wide.column
+                div.ui.top.attached.tabular.menu.tabular-menu
+                    a.active.item.menu-item(data-tab="position") 
+                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu1.png?#{cdn.version}")
+                        | 待处理的简历
+                    a.menu-item.item(data-tab="p1osition")
+                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
+                        | 有意向的简历
+                    a.menu-item-lonely.item(data-tab="deleted")
+                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menudelete.png?#{cdn.version}")
+                        | 已删除的简历
+                div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
+                    span 职位
+                    select(multiple="",name="select")
+                        option(value="") 全部职位
+                div.ui.active.tab.segment.segment-bottom-shadow.segment-normal(data-tab="position") hello world
+                div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="p1osition") world
+                div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="deleted") end.
+block extraJs
+    script(src="#{cdn.normal}js/page/corp/cv/main.js?#{cdn.version}")

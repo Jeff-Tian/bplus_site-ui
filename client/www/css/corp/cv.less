@@ -1,1 +1,49 @@
-cv.less
+@import "./variable";
+.corp-cv {
+    .ui.image.menu-item-image {
+        width: auto;
+        height: 18px;
+    } 
+    .tabular-menu {
+        border-bottom: 10px solid @color-corp-red!important;
+    }
+    .menu-item {
+        color: @color-corp-text-white!important;
+        background-color: @color-corp-menu-normal-black!important;
+        border-left: none!important;
+        border-radius: 4px 4px 0px 0px!important;
+        &.active {
+            border-radius: 4px 4px 0px 0px!important;
+            background-color: @color-corp-menu-active!important;
+        }
+    }
+    .menu-item-lonely {
+        position: absolute!important;
+        right: 14px;
+        height: 34px;
+        color: @color-corp-text-white!important;
+        background-color: @color-corp-menu-normal-grey!important;
+        border-radius: 4px!important;
+        &.active.item {
+            background-color: @color-corp-menu-active!important;
+        }
+    }
+    .ui.tabular.menu {
+        .active.item.menu-item-lonely {
+            border-radius: 4px!important;
+        }
+    }
+    .segment-bottom-shadow {
+        border-bottom: 2px solid @color-corp-table-shadow!important;
+    }
+    .segment-menu {
+        border-left: 0px!important;
+        border-right: 0px!important;
+    }
+    .segment-normal {
+        border-radius: 0px!important;
+        border-left: 0px!important;
+        border-right: 0px!important;
+        box-shadow: none!important;
+    }
+}
