@@ -34,6 +34,21 @@ block content
     div(style="background-color: #2D353C;")
         div(class="ui padded container inverted segment", style="background-color: transparent;")
             h3(class="ui white centered header") 招聘企业端求才服务合作对象
+            div(class="ui horizontal divider")
+            div(class="ui eight column centered grid")
+                - for (var x = 0; x < 5; x++)
+                    div.column
+                        div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
+                            h4(class="ui header") 阿里巴巴
+            div(class="ui eight column centered grid")
+                - for(var x = 0; x < 5; x++)
+                    div.column
+                        div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
+                            h4(class="ui header") 阿里马马
+            div(class="ui horizontal divider")
+            div(class="ui center aligned container")
+                p 还在等什麽 ? 快速瞭解我们的求才服务
+                button(class="ui red button", style="padding-left: 4em; padding-right: 4em;") 立即加入
 block extraJs
     script(src="#{cdn.normal}bower/owl.carousel/dist/owl.carousel.js?#{cdn.version}")
     script(src="#{cdn.normal}js/view/widgets/carousel/carousel.js?#{cdn.version}")
