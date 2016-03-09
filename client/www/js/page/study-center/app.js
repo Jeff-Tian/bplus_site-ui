@@ -1,18 +1,37 @@
 angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var states = ['study-plan', 'fav', 'course'];
+        var states = [
+            {
+                url: 'fav',
+                data: {
+                    pageTitle: '我的收藏 - Bridge+'
+                }
+            },
+            {
+                url: 'course',
+                data: {
+                    pageTitle: '我的课程 - Bridge+'
+                }
+            }
+        ];
 
-        $urlRouterProvider.otherwise('/' + states[0]);
+        $urlRouterProvider.otherwise('/' + states[0].url);
 
         for (var i = 0; i < states.length; i++) {
             var state = states[i];
 
             $stateProvider
-                .state(state, {
-                    url: '/' + state,
-                    templateUrl: state + '.html'
+                .state(state.url, {
+                    url: '/' + state.url,
+                    templateUrl: state.url + '.html',
+                    data: state.data
                 });
         }
+    }])
+    .run(['$rootScope', '$state', function ($rootScope) {
+        $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+            angular.element('head title').text(toState.data.pageTitle);
+        });
     }])
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)

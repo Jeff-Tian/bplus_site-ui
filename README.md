@@ -66,3 +66,14 @@ Then open another terminal and
 ```
 grunt e2e
 ```
+
+### Sub domains
+```
+uat.corp.bridgeplus.cn --> 116.247.126.75 --> 10.20.32.51 --> uat.bridgeplus.cn/corp/*
+```
+
+### Back end Router Structure for new module
+To build a new module, for example, `corp` for BridgePlus Company users, add a *router file* (`corp.js`) under `~/routers/` folder. And then register it in the `server.js` by the following line:
+```javascript
+server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
+```

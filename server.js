@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
-var pack = require('./package.json');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
 // To keep it from deleting by "npm prune --production"
@@ -120,7 +119,14 @@ server.set('view engine', 'html');
 
 server.use(i18n.init);
 
-server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
+server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req, res, next) {
+    if (req.query.code && req.query.state) {
+        // Redirected from Wechat?
+        return res.redirect(new Buffer(req.query.state, 'base64').toString());
+    }
+
+    next();
+});
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
@@ -211,7 +217,7 @@ function filterConfig(config) {
     return filtered;
 }
 
-server.use('/config.js', function (req, res, next) {
+server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
@@ -268,7 +274,9 @@ setupOnlineStoreStaticResources('scripts');
 
 server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticated, require('./store'));
 
-server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./study-center'));
+server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
+
+server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
@@ -307,12 +315,15 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
-    .get('/:lang/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
-        var lang = req.params.lang;
-        if (['zh', 'en'].indexOf(lang) < 0) {
+    .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
+        var lang = req.params.lang || localeHelper.getLocale(req.url, req);
+
+        if (localeHelper.supportedLocales.indexOf(lang) < 0) {
             return next();
         }
-        var page = req.params.page || 'index';
+
+        var page = req.params.page || 'teacher';
+
         res.render('study-center-ui/' + page, {
             page: page,
             lang: lang
@@ -394,7 +405,7 @@ server.use('/healthcheck', function (req, res, next) {
 
 server.get('/test', function (req, res, next) {
     var ua = req.headers['user-agent'];
-    res.send(ua);
+    res.send(req.url);
 });
 
 server.get('/mode', function (req, res, next) {
