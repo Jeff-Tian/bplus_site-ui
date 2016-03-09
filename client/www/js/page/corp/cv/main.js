@@ -1,1 +1,1 @@
-$(".menu .item").tab();
+$(".corp-cv .menu .item").tab();

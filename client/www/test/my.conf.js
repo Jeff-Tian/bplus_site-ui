@@ -19,6 +19,7 @@ module.exports = function (config) {
             '../bower/semantic-ui/dist/semantic.js',
             '../bower/angular/angular.js',
             'mockBplus.js',
+            '../bower/angular-sanitize/angular-sanitize.js',
             '../bower/angular-translate/angular-translate.js',
             '../bower/angular-ui-router/release/angular-ui-router.min.js',
             '../js/config/*.js',
