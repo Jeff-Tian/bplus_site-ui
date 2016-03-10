@@ -311,7 +311,7 @@ module.exports = function (grunt) {
         process.env.RUN_FROM = 'local';
     });
 
-    grunt.registerTask('build', ['mochacli', 'karma', 'clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify', 'replace' /*, 'cssmin'*/]);
+    grunt.registerTask('build', ['mochacli', 'karma', 'clean:dist', 'replace', 'copy', 'inlineTranslation', 'less:production', 'ngtemplates', 'concat', 'uglify:production', 'htmlmin', 'requirejs', 'cdnify' /*, 'cssmin'*/]);
 
     grunt.registerTask('inlineTranslation', 'Inline Translation', function () {
         var fs = require('fs');
