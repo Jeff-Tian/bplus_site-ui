@@ -1,9 +1,24 @@
 @import "./variable";
 .corp-cv {
+    margin-top: 100px;
+    .inline-space {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .inline-block {
+        display: inline-block;
+    }
     .ui.image.menu-item-image {
         width: auto;
         height: 18px;
     } 
+    select.ui.dropdown.dropdown-inline {
+        height: 24px;
+        width: 128px;
+        padding: 0px;
+        border-radius: 0px;
+        border: 1px solid rgba(182, 182, 182, 0.8); //@color-corp-text-light-grey-text
+    }
     .tabular-menu {
         border-bottom: 10px solid @color-corp-red!important;
     }
@@ -45,5 +60,14 @@
         border-left: 0px!important;
         border-right: 0px!important;
         box-shadow: none!important;
+    }
+    .segment-after {
+        &:after {
+            content: '';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
     }
 }

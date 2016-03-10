@@ -8,10 +8,13 @@ html
         div#my-header(ng-controller="AppCtrl")
             include ../../www/view-partial/header.html
 
-        block content
+        div(ng-app="corpModule")
+            block content
 
         div#my-footer
             include ../../www/view-partial/footer.html
+            script(src="#{cdn.normal}js/widget/main.js?#{cdn.version}")
+            script(src="#{cdn.normal}js/widget/pagination.js?#{cdn.version}")
             script(src="#{cdn.normal}js/page/corp/app.js?#{cdn.version}")
             script(src="#{cdn.normal}js/page/corp/directives/corpSignInWidget.js?#{cdn.version}")
             script(src="#{cdn.normal}js/page/corp/directives/corpSignIn.js?#{cdn.version}")

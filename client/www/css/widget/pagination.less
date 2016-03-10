@@ -1,4 +1,7 @@
-@import "../widget/pagination"
+// The params which can be overridden by parent less
+@pagination-active-red: #F53C43;
+@pagination-border-grey: #C8C8C8;
+
 .loose.pagination.menu {
     border: none !important;
     box-shadow: none !important;
@@ -8,7 +11,7 @@
 .loose.pagination.menu .item {
     margin: 5px !important;
     min-width: 0 !important;
-    border: solid 1px #C8C8C8 !important;
+    border: solid 1px @pagination-border-grey!important;
     width: 36px !important;
     height: 36px !important;
     line-height: 36px !important;
@@ -37,7 +40,7 @@
 }
 
 .loose.pagination.menu .active.item {
-    background-color: #F53C43 !important;
+    background-color: @pagination-active-red !important;
     color: white !important;
     padding: 0 !important;
 }

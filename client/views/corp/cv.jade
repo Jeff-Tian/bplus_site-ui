@@ -1,23 +1,64 @@
 block content
-    div.ui.ten.column.centered.grid.corp-cv
-        div.row
-            div.ten.wide.column
-                div.ui.top.attached.tabular.menu.tabular-menu
-                    a.active.item.menu-item(data-tab="position") 
-                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu1.png?#{cdn.version}")
-                        | 待处理的简历
-                    a.menu-item.item(data-tab="p1osition")
-                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
-                        | 有意向的简历
-                    a.menu-item-lonely.item(data-tab="deleted")
-                        img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menudelete.png?#{cdn.version}")
-                        | 已删除的简历
-                div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
-                    span 职位
-                    select(multiple="",name="select")
-                        option(value="") 全部职位
-                div.ui.active.tab.segment.segment-bottom-shadow.segment-normal(data-tab="position") hello world
-                div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="p1osition") world
-                div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="deleted") end.
+    div.corp-cv(ng-controller="cvCtrl")
+        div.ui.ten.column.centered.grid
+            div.row
+                div.ten.wide.column
+                    div.ui.top.attached.tabular.menu.tabular-menu
+                        a.active.item.menu-item(data-tab="delivered") 
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu1.png?#{cdn.version}")
+                            | 待处理的简历
+                        a.menu-item.item(data-tab="interested")
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
+                            | 有意向的简历
+                        a.menu-item-lonely.item(data-tab="deleted")
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menudelete.png?#{cdn.version}")
+                            | 已删除的简历
+                    div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
+                        span.inline-space 职位
+                        div.ui.form.inline-block.inline-space
+                            select.ui.compact.dropdown.dropdown-inline(name="select")
+                                option(value="") 全部职位
+                                option(value="a1") 金融
+                                option(value="a2") IT
+                                option(value="a3") 医药
+                        div.ui.checkbox.inline-block.inline-space
+                            input(type="checkbox",name="checkbox1")
+                            label 大赛优胜
+                        div.ui.checkbox.inline-block.inline-space
+                            input(type="checkbox",name="checkbox1")
+                            label 高匹配度
+                    div
+                        pagination
+                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.active.tab(data-tab="delivered")
+                        span 目前共有 4 份待处理的简历
+                        div.ui.right.floated.button.mini
+                            i.remove.icon
+                            | 删除
+                        div
+                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.tab(data-tab="interested")
+                        span 目前共有 3 份待处理的简历
+                        div.ui.right.floated.button.mini
+                            i.remove.icon
+                            | 删除
+                        div
+                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.tab(data-tab="deleted")
+                        span 目前共有 2 份待处理的简历
+                        div.ui.right.floated.button.mini
+                            i.remove.icon
+                            | 删除
+                        div
+                        //- div.ui.grid
+                        //-     div.two.wide.column 职位匹配度
+                        //-     div.nine.wide.column 个人信息
+                        //-     div.two.wide.column 应徵职位
+                        //-     div.three.wide.column 投递日期
+                        //- div.ui.active.tab(data-tab="position") hello world
+                        //- div.ui.tab(data-tab="p1osition") hello world
+                        //- div.ui.tab(data-tab="deleted") hello end
+                    //- div.ui.active.tab.segment.segment-bottom-shadow.segment-normal(data-tab="position") hello world
+                    //- div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="p1osition") world
+                    //- div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="deleted") end.
+                    //- the last segment will have no margin-bottom according to semantic-ui. Add an empty div to avoid it.
+                    div
 block extraJs
     script(src="#{cdn.normal}js/page/corp/cv/main.js?#{cdn.version}")
