@@ -1,8 +1,8 @@
 {
   "name": "BridgePlus",
   "private": true,
-  "version": "1.1.7",
-  "date": "20160218_0838",
+  "version": "1.1.8",
+  "date": "20160310_0615",
   "description": "",
   "repository": "",
   "license": "",
@@ -51,6 +51,7 @@
     "grunt-string-replace": "*",
     "gulp": "^3.9.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.10",

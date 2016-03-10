@@ -120,7 +120,14 @@ server.set('view engine', 'html');
 
 server.use(i18n.init);
 
-server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
+server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req, res, next) {
+    if (req.query.code && req.query.state) {
+        // Redirected from Wechat?
+        return res.redirect(new Buffer(req.query.state, 'base64').toString());
+    }
+
+    next();
+});
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
