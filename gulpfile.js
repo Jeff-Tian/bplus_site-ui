@@ -49,12 +49,38 @@ gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
 });
 
-gulp.task('build semantic', function (done) {
+gulp.task('make own semantic json', function (done) {
+    sh.rm('./semantic.json');
+    sh.cp('./own-semantic.json', './semantic.json');
+    done();
+});
+
+gulp.task('build own semantic files', function (done) {
     require('./semantic/tasks/build')(done);
 });
 
-gulp.task('release', function (done) {
+gulp.task('build own semantic', function (done) {
+    sh.exec('gulp "make own semantic json"', function () {
+        sh.exec('gulp "build own semantic files"', done);
+    });
+});
+
+gulp.task('make online-store semantic json', function (done) {
+    sh.rm('./semantic.json');
+    sh.cp('./online-store-semantic.json', './semantic.json');
+    done();
+});
+
+gulp.task('build online-store semantic', function (done) {
     // Don't change this line! don't even refactor it! To avoid
     // conflict gulp task with buildSemantic above.
     require('./node_modules/online-store/gulpfile.js')(done);
+});
+
+gulp.task('release', function (done) {
+    sh.exec('gulp "make online-store semantic json"', function () {
+        sh.exec('gulp "build online-store semantic"', function () {
+            sh.exec('gulp "make own semantic json"', done);
+        });
+    });
 });
