@@ -1,10 +1,11 @@
 angular.module('corpModule')
-    .directive('corpRegister', [function () {
+    .directive('corpRegister', ['$rootScope', function ($rootScope) {
         return {
             template: '' +
             '\
-            <form class="ui large fluid form register" ng-class="{\'loading\': submitting}" ng-submit="tryRegister($event)" name="registerForm">\
-                <div class="ui error message brand"></div>\
+            <link rel="stylesheet" type="text/css"        href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
+            <form class="ui large fluid form register" ng-class="{\'loading\': submitting, error: errorMessages.length}" ng-submit="tryRegister($event)" name="registerForm">\
+                <div class="ui error message brand"><ul class="list"><li ng-repeat="m in errorMessages">{{m}}</li></ul><i class="large remove circle icon" ng-click="errorMessages = []"></i> </div>\
                 <div class="ui">\
                     <div class="field">\
                         <div class="ui left icon input">\
@@ -36,7 +37,10 @@ angular.module('corpModule')
             ',
             scope: {},
             link: function ($scope, $element, attrs) {
-
+                $scope.tryRegister = function ($event) {
+                    $scope.errorMessages = ['test'];
+                    console.log($scope.registerData);
+                };
             }
         };
     }])

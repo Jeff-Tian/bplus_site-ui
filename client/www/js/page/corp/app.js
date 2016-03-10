@@ -1,2 +1,2 @@
-angular.module('corpModule', ['bplusModule', 'widgetModule'])
+angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule'])
 ;

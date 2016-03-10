@@ -67,6 +67,13 @@ Then open another terminal and
 grunt e2e
 ```
 
+### Semantic
+If you customized semantic styles in the ./semantic folder, you need to run 
+```
+gulp 'build own semantic'
+```
+to generate the compiled files, and then commit and push to the source control.
+
 ### Sub domains
 ```
 uat.corp.bridgeplus.cn --> 116.247.126.75 --> 10.20.32.51 --> uat.bridgeplus.cn/corp/*
