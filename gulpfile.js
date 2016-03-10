@@ -49,12 +49,58 @@ gulp.task('hz', function (done) {
     runSequence('assemble', 'build', 'deploy-hz', done);
 });
 
-gulp.task('build semantic', function (done) {
+gulp.task('make own semantic json', function (done) {
+    sh.rm('./semantic.json');
+    sh.cp('./own-semantic.json', './semantic.json');
+    done();
+});
+
+gulp.task('build own semantic files', function (done) {
     require('./semantic/tasks/build')(done);
 });
 
-gulp.task('release', function (done) {
+gulp.task('build own semantic', function (done) {
+    sh.exec('gulp "make own semantic json"', function () {
+        sh.exec('gulp "build own semantic files"', done);
+    });
+});
+
+gulp.task('make online-store semantic json', function (done) {
+    sh.rm('./semantic.json');
+    sh.cp('./online-store-semantic.json', './semantic.json');
+    done();
+});
+
+gulp.task('build online-store semantic', function (done) {
     // Don't change this line! don't even refactor it! To avoid
     // conflict gulp task with buildSemantic above.
     require('./node_modules/online-store/gulpfile.js')(done);
+});
+
+gulp.task('replace-bplus', function (done) {
+    var replace = require('gulp-replace');
+
+    return gulp.src(['client/dist/semantic/dist/semantic.min.css'])
+        .pipe(replace(/https:\/\/fonts\.googleapis\.com\/css/g, 'http://fonts.useso.com/css'))
+        .pipe(gulp.dest('client/dist/semantic/dist/'));
+});
+
+gulp.task('run online-store-build', function (done) {
+    sh.exec('gulp "build online-store semantic"', done);
+});
+
+gulp.task('run replace-bplus', function (done) {
+    sh.exec('gulp replace-bplus', done);
+});
+
+gulp.task('release', function (done) {
+    // Here use sh.exec() to run 2 tasks to ensure
+    // the sequence not interrupted by the asynchronous events.
+    runSequence(
+        'make online-store semantic json',
+        'run online-store-build',
+        'run replace-bplus',
+        'make own semantic json',
+        done
+    );
 });
