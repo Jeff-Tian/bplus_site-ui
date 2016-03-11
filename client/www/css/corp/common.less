@@ -1,0 +1,86 @@
+@import "./variable";
+
+@ribbon-yellow: #F88D02;
+
+.clickable {
+    cursor: pointer;
+}
+.inline-block {
+    display: inline-block;
+}
+.valign-middle {
+    vertical-align: middle;
+}
+
+.ribbon.right.corner.label {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 10px;
+    color: white;
+    z-index: 4;
+}
+.ribbon{
+    &.yellow {
+        background-color: @ribbon-yellow;
+    }
+    &.red {
+        background-color: @color-corp-red;
+    }
+    &.right.corner.label {
+        &::before,
+        &::after {
+            display: block;
+            width: 0;
+            content: ' ';
+            height: 0;
+            position: absolute;
+            left: -15px;
+            border-left: solid 15px transparent;
+            border-right: none;
+        }
+        &.yellow::before {
+            top: 0;
+            border-top: solid 15px @ribbon-yellow;
+            border-bottom: none;
+        }
+        &.yellow::after {
+            bottom: 0;
+            border-bottom: solid 15px @ribbon-yellow;
+            border-top: none;
+        }
+        &.red::before {
+            top: 0;
+            border-top: solid 15px @color-corp-red;
+            border-bottom: none;
+        }
+        &.red::after {
+            bottom: 0;
+            border-bottom: solid 15px @color-corp-red;
+            border-top: none;
+        }
+    }
+}
+
+.segment-bottom-shadow {
+    border-bottom: 2px solid @color-corp-table-shadow!important;
+}
+.segment-menu {
+    border-left: 0px!important;
+    border-right: 0px!important;
+}
+.segment-normal {
+    border-radius: 0px!important;
+    border-left: 0px!important;
+    border-right: 0px!important;
+    box-shadow: none!important;
+}
+.segment-after {
+    &:after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}

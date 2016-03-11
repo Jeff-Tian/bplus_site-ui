@@ -1,12 +1,17 @@
 @import "./variable";
+@import "../widget/pagination";
+@pagination-active-red: @color-corp-red;
+
+.loose.pagination.menu .item {
+    background-color: white!important;
+    color: @color-corp-text-dark-grey-text !important;
+}
+
 .corp-cv {
     margin-top: 100px;
     .inline-space {
         margin-left: 10px;
         margin-right: 10px;
-    }
-    .inline-block {
-        display: inline-block;
     }
     .ui.image.menu-item-image {
         width: auto;
@@ -48,26 +53,12 @@
             border-radius: 4px!important;
         }
     }
-    .segment-bottom-shadow {
-        border-bottom: 2px solid @color-corp-table-shadow!important;
+    .cv-list-tab {
+        margin-top: 20px;
+        margin-bottom: 100px;
     }
-    .segment-menu {
-        border-left: 0px!important;
-        border-right: 0px!important;
-    }
-    .segment-normal {
-        border-radius: 0px!important;
-        border-left: 0px!important;
-        border-right: 0px!important;
-        box-shadow: none!important;
-    }
-    .segment-after {
-        &:after {
-            content: '';
-            display: block;
-            height: 0;
-            clear: both;
-            visibility: hidden;
-        }
+    .list-title {
+        color: white;
+        background-color: @color-corp-table-header;
     }
 }

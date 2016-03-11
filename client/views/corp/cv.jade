@@ -4,49 +4,35 @@ block content
             div.row
                 div.ten.wide.column
                     div.ui.top.attached.tabular.menu.tabular-menu
-                        a.active.item.menu-item(data-tab="delivered") 
+                        a.active.item.menu-item(data-tab="delivered" ng-click="tabmemuClick(STATIC_PARAM.DELIVERED)") 
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu1.png?#{cdn.version}")
                             | 待处理的简历
-                        a.menu-item.item(data-tab="interested")
+                        a.menu-item.item(data-tab="interested" ng-click="tabmemuClick(STATIC_PARAM.INTERESTED)")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
                             | 有意向的简历
-                        a.menu-item-lonely.item(data-tab="deleted")
+                        a.menu-item-lonely.item(data-tab="deleted" ng-click="tabmemuClick(STATIC_PARAM.DELETED)")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menudelete.png?#{cdn.version}")
                             | 已删除的简历
                     div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
                         span.inline-space 职位
                         div.ui.form.inline-block.inline-space
-                            select.ui.compact.dropdown.dropdown-inline(name="select")
+                            select.ui.compact.dropdown.dropdown-inline(name="select",ng-model="option.type")
                                 option(value="") 全部职位
                                 option(value="a1") 金融
                                 option(value="a2") IT
                                 option(value="a3") 医药
-                        div.ui.checkbox.inline-block.inline-space
-                            input(type="checkbox",name="checkbox1")
+                        div.ui.checkbox.inline-block.inline-space.option-win
+                            input(type="checkbox",name="win")
                             label 大赛优胜
-                        div.ui.checkbox.inline-block.inline-space
-                            input(type="checkbox",name="checkbox1")
+                        div.ui.checkbox.inline-block.inline-space.option-match
+                            input(type="checkbox",name="match")
                             label 高匹配度
-                    div
-                        pagination
-                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.active.tab(data-tab="delivered")
-                        span 目前共有 4 份待处理的简历
-                        div.ui.right.floated.button.mini
-                            i.remove.icon
-                            | 删除
-                        div
-                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.tab(data-tab="interested")
-                        span 目前共有 3 份待处理的简历
-                        div.ui.right.floated.button.mini
-                            i.remove.icon
-                            | 删除
-                        div
-                    div.ui.segment.segment-normal.segment-bottom-shadow.segment-after.tab(data-tab="deleted")
-                        span 目前共有 2 份待处理的简历
-                        div.ui.right.floated.button.mini
-                            i.remove.icon
-                            | 删除
-                        div
+                    div.ui.active.tab.cv-list-tab(data-tab="delivered")
+                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.DELIVERED")
+                    div.ui.tab.cv-list-tab(data-tab="interested")
+                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.INTERESTED")
+                    div.ui.tab.cv-list-tab(data-tab="deleted")
+                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.DELETED")
                         //- div.ui.grid
                         //-     div.two.wide.column 职位匹配度
                         //-     div.nine.wide.column 个人信息

@@ -1,0 +1,52 @@
+<div ng-if="!isLoading">
+    <div class="ui attached segment segment-normal segment-after">
+        <div>
+            <span>目前共有</span> 
+            <span>{{displayData.totalPages}}</span>
+            <span>份待处理的简历</span>
+            <div class="ui right floated basic button mini" ng-click="displayData.deleteData()">
+                <i class="remove icon"></i>
+                删除
+            </div>
+        </div>
+    </div>
+    <div class="ui attached segment segment-normal segment-bottom-shadow">
+        <div>
+            <div class="ui grid list-title">
+                <div class="three wide column center aligned">职位匹配度</div>
+                <div class="eight wide column">个人信息</div>
+                <div class="two wide column center aligned">应聘职位</div>
+                <div class="three wide column center aligned">
+                    投递日期
+                    <i class="ui sort icon clickable" ng-click="displayData.sortData()"></i>
+                    <input type="checkbox" class="valign-middle">
+                </div>
+            </div>
+            <div class="ui grid" ng-repeat="data in displayData.data">
+                <div class="three wide column center aligned">
+                    <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel"/>
+                </div>
+                <div class="eight wide column">个人信息</div>
+                <div class="two wide column center aligned">应徵职位</div>
+                <div class="three wide column">
+                    日期
+                    <div ng-show="data.flag!=='recommendation'" class="ribbon yellow right corner label">推荐
+                        <i class="star icon"></i>
+                    </div>
+                    <div ng-show="data.flag!=='win'" class="ribbon red right corner label">优胜
+                        <i class="thumbs up icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui right floated">
+        <pagination paginationdata='displayData'></pagination>
+    </div>
+</div>
+<div class="ui segment" ng-if="isLoading">
+    搜索中，请稍后。。
+</div>
+<style type="text/css">
+
+</style>

@@ -1,5 +1,7 @@
 // The params which can be overridden by parent less
 @pagination-active-red: #F53C43;
+@pagination-disabled-color: inherit;
+@pagination-disabled-background-color: inherit;
 @pagination-border-grey: #C8C8C8;
 
 .loose.pagination.menu {
@@ -39,8 +41,13 @@
     font-size: 120% !important;
 }
 
+.loose.pagination.menu .disabled.item {
+    background-color: @pagination-disabled-color!important;
+    color: @pagination-disabled-background-color!important;
+}
+
 .loose.pagination.menu .active.item {
-    background-color: @pagination-active-red !important;
+    background-color: @pagination-active-red!important;
     color: white !important;
     padding: 0 !important;
 }
