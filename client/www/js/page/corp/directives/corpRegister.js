@@ -42,7 +42,9 @@ angular.module('corpModule')
                     $scope.submitting = false;
                     service.put($rootScope.config.serviceUrls.corp.member.register, {
                         userName: $scope.registerData.username,
-                        password: $scope.registerData.password
+                        password: $scope.registerData.password,
+                        captchaId: $scope.registerData.captchaId,
+                        captcha: $scope.registerData.captcha
                     })
                         .then(function (result) {
                             location.href = '/fill-form?company_id=' + result.company_id + '&member_id=' + result.member_id;
