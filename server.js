@@ -315,7 +315,6 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
-    .use('/studycenter', require('study-center-proxy')(express))
     .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
         var lang = req.params.lang || localeHelper.getLocale(req.url, req);
 
@@ -323,13 +322,18 @@ server
             return next();
         }
 
-        var page = req.params.page || 'teacher';
+        var page = req.params.page || 'teachercourse';
 
-        res.render('study-center-ui/' + page, {
-            page: page,
-            lang: lang
-        });
+        try {
+            res.render('study-center-ui/' + page, {
+                page: page,
+                lang: lang
+            });
+        } catch (ex) {
+            next();
+        }
     })
+    .use('/studycenter', require('study-center-proxy')(express))
 ;
 
 mapRoute2Template('/index');
