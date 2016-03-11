@@ -29,11 +29,13 @@
                 <div class="eight wide column">个人信息</div>
                 <div class="two wide column center aligned">应徵职位</div>
                 <div class="three wide column">
-                    日期
-                    <div ng-show="data.flag!=='recommendation'" class="ribbon yellow right corner label">推荐
+                    <div>
+                        {{data.issueDate}}
+                    </div>
+                    <div ng-show="data.flag==='recommendation'" class="ribbon yellow right corner label">推荐
                         <i class="star icon"></i>
                     </div>
-                    <div ng-show="data.flag!=='win'" class="ribbon red right corner label">优胜
+                    <div ng-show="data.flag==='win'" class="ribbon red right corner label">优胜
                         <i class="thumbs up icon"></i>
                     </div>
                 </div>
@@ -47,6 +49,3 @@
 <div class="ui segment" ng-if="isLoading">
     搜索中，请稍后。。
 </div>
-<style type="text/css">
-
-</style>

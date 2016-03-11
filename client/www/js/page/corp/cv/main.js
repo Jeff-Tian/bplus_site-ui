@@ -37,7 +37,8 @@ angular.module('corpModule')
         $scope.displayData.rawData.push({
             text: "hello" + i,
             matchLevel: "a",
-            flag: "recommendation"
+            flag: "recommendation",
+            issueDate: "2016-2-27"
         });
     }
     //end
