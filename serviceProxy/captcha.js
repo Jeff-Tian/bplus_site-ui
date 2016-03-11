@@ -10,6 +10,7 @@ captcha.validate = proxy(
         host: captchaConfig.host,
         port: captchaConfig.port,
         path: '/captcha/validate',
+        method: 'POST',
         dataMapper: function (d) {
             return {
                 id: d.captchaId,

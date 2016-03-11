@@ -86,19 +86,6 @@ function setMode(req, res, next) {
     next();
 }
 
-// function onlineOfflinePathSwitch(onlinePath, offlinePath) {
-//     return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
-// }
-
-// function setOnlineStoreTemplate(req, res, next) {
-//     res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
-//             '/node_modules/',
-//             '/../') +
-//         'online-store/views/';
-
-//     next();
-// }
-
 server
     .use(Logger.express("auto"))
     .use(setLogger)
@@ -127,12 +114,6 @@ function renderIndex(req, res, next) {
     renderOrRedirect(req, res, '');
 }
 
-function renderTemplate(name) {
-    return function (req, res, next) {
-        res.render(name);
-    };
-}
-
 function renderOrRedirect(req, res, template) {
     if (!isFromMobile(req)) {
         res.redirect("/index");
@@ -152,24 +133,6 @@ function renderOrRedirect(req, res, template) {
             res.render(template);
         }
     }
-}
-function mapRoute2Template(url, template, pipes) {
-    if (typeof template !== 'string') {
-        pipes = template;
-        template = url;
-
-        if (template[0] === '/') {
-            template = template.substr(1);
-        }
-    }
-    pipes = pipes || [];
-    pipes.push(function (req, res, next) {
-        renderOrRedirect(req, res, template);
-    });
-
-    var args = [localeHelper.localePath(url)].concat(pipes);
-
-    server.get.apply(server, args);
 }
 
 function isFromMobile(req) {
@@ -212,8 +175,10 @@ function filterConfig(config) {
     return filtered;
 }
 server.use(/\/config\.js/, function (req, res, next) {
+    var filteredConfig = JSON.stringify(filterConfig(config));
+
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule", []).run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; console.log($rootScope.config);}]);');
 });
 
 if (getMode() === 'dev') {

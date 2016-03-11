@@ -9,8 +9,8 @@ angular.module('corpModule')
                             <div class="ui column b-signin-semi-transparent-container">\
                                 <div class="b-signin-narrow" tab=".b-signin-narrow">\
                                     <div class="ui fluid two item top pointing secondary menu brand">\
-                                        <a class="active item" data-tab="login">{{"SignIn" | translate }}</a>\
-                                        <a class="item" data-tab="register">{{ "SignUp" | translate }}</a>\
+                                        <a class="active item" data-tab="login" ng-cloak>{{"SignIn" | translate }}</a>\
+                                        <a class="item" data-tab="register" ng-cloak>{{ "SignUp" | translate }}</a>\
                                     </div>\
                                     <div class="ui bottom attached tab active" data-tab="login">\
                                         <corp-sign-in></corp-sign-in>\
@@ -19,7 +19,7 @@ angular.module('corpModule')
                                         <div class="ui center aligned container subcontainer mobile">\
                                         </div>\
                                         <corp-register></corp-register>\
-                                        <div class="field ui right aligned container subcontainer">\
+                                        <div class="field ui right aligned container subcontainer" ng-cloak>\
                                             {{ "HasAccount" | translate }} <a href="#/login" ng-click="login()">{{ "SignInNow" | translate }}</a>\
                                         </div>\
                                     </div>\

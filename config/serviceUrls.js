@@ -33,5 +33,11 @@ module.exports = {
             feedback: '/service-proxy/study-center/teacher/feedback'
         },
         classFeedback: '/service-proxy/study-center/class-feedback/:feedbackId'
+    },
+
+    corp: {
+        member: {
+            register: '/corp-service-proxy/member/register'
+        }
     }
 };

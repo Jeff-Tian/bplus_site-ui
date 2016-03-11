@@ -348,14 +348,19 @@ server
             return next();
         }
 
-        var page = req.params.page || 'teacher';
+        var page = req.params.page || 'teachercourse';
 
-        res.render('study-center-ui/' + page, {
-            page: page,
-            lang: lang
-        });
+        try {
+            res.render('study-center-ui/' + page, {
+                page: page,
+                lang: lang
+            });
+        } catch (ex) {
+            next();
+        }
     })
-    .use('/studycenter', require('study-center-proxy')(express));
+    .use('/studycenter', require('study-center-proxy')(express))
+;
 
 mapRoute2Template('/index');
 mapRoute2Template('/game');
