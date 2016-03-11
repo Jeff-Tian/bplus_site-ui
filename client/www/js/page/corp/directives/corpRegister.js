@@ -1,5 +1,5 @@
 angular.module('corpModule')
-    .directive('corpRegister', ['$rootScope', function ($rootScope) {
+    .directive('corpRegister', ['$rootScope', 'service', '$filter', function ($rootScope, service, $filter) {
         return {
             template: '' +
             '\
@@ -10,19 +10,19 @@ angular.module('corpModule')
                     <div class="field">\
                         <div class="ui left icon input">\
                             <i class="user icon"></i>\
-                            <input type="text" name="username" placeholder="用户名" ng-model="registerData.username">\
+                            <input type="text" name="username" placeholder="用户名" ng-model="registerData.username" ng-required="true">\
                         </div>\
                     </div>\
                     <div class="field">\
                         <div class="ui left icon input">\
                             <i class="lock icon"></i>\
-                            <input type="password" name="password" placeholder="密码" ng-model="registerData.password">\
+                            <input type="password" name="password" placeholder="5位以上密码" ng-model="registerData.password" ng-required="true" pattern=".{5,}">\
                         </div>\
                     </div>\
                     <div class="inline field" style="margin-bottom: 5px;">\
                         <div class="ui left icon input">\
                             <i class="pencil icon"></i>\
-                            <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="registerData.captcha" style="width: 162px;">&nbsp;\
+                            <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="registerData.captcha" style="width: 162px;" ng-required="true" ng-maxlength="4" maxlength="4">&nbsp;\
                             <img src="http://uat.bridgeplus.cn:10001/captcha/image/ec7a77a0-e50e-11e5-8080-65f5992c37ee?appid=bplus" style="height: 42px;">\
                         </div> \
                     </div>\
@@ -30,7 +30,7 @@ angular.module('corpModule')
                         <a href="">换一张</a> \
                     </div> \
                     <div class="field">\
-                        <button class="ui fluid red button">完成</button> \
+                        <button class="ui fluid red button" ng-disabled="!registerForm.$valid">完成</button> \
                     </div> \
                 </div>\
             </form>\
@@ -38,8 +38,22 @@ angular.module('corpModule')
             scope: {},
             link: function ($scope, $element, attrs) {
                 $scope.tryRegister = function ($event) {
-                    $scope.errorMessages = ['test'];
-                    console.log($scope.registerData);
+                    $scope.submitting = false;
+                    service.put($rootScope.config.serviceUrls.corp.member.register, {
+                        userName: $scope.registerData.username,
+                        password: $scope.registerData.password
+                    })
+                        .then(function (result) {
+                            location.href = '/fill-form?company_id=' + result.company_id + '&member_id=' + result.member_id;
+                        }, function (reason) {
+                            var errorCode = 'service-' + reason.code;
+                            var errorMessage = $filter('translate')(errorCode);
+                            if (errorMessage === errorCode) {
+                                errorMessage = reason.message;
+                            }
+
+                            $scope.errorMessages = [errorMessage];
+                        });
                 };
             }
         };

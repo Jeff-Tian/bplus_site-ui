@@ -152,5 +152,16 @@ proxy.execute = function (req, res, next, options) {
     advancedProxy(req, res, next, options);
 };
 
+proxy.proxyBPlus = function (options) {
+    return function (req, res, next) {
+        var config = require('../config');
+
+        options.host = config.bplusService.host;
+        options.port = config.bplusService.port;
+
+        proxy(options)(req, res, next);
+    };
+};
+
 module.exports = proxy;
 
