@@ -1,4 +1,5 @@
 angular.module('corpModule')
+    .directive('captcha', angular.bplus.captcha)
     .directive('corpRegister', ['$rootScope', 'service', '$filter', function ($rootScope, service, $filter) {
         return {
             template: '' +
@@ -23,11 +24,11 @@ angular.module('corpModule')
                         <div class="ui left icon input">\
                             <i class="pencil icon"></i>\
                             <input type="text" name="captcha" placeholder="请输入图形验证码" ng-model="registerData.captcha" style="width: 162px;" ng-required="true" ng-maxlength="4" maxlength="4">&nbsp;\
-                            <img src="http://uat.bridgeplus.cn:10001/captcha/image/ec7a77a0-e50e-11e5-8080-65f5992c37ee?appid=bplus" style="height: 42px;">\
+                            <div captcha ng-model="registerData.captchaId" style="height: 42px; cursor: pointer;"></div> \
                         </div> \
                     </div>\
                     <div class="right floated field" style="margin-top: 0;">\
-                        <a href="">换一张</a> \
+                        <a href="javascript: void(0);" ng-click="refreshCaptcha()">换一张</a> \
                     </div> \
                     <div class="field">\
                         <button class="ui fluid red button" ng-disabled="!registerForm.$valid">完成</button> \

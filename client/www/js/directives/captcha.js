@@ -15,7 +15,7 @@
         return {
             restrict: 'A',
             require: 'ngModel',
-            template: '<img ng-src="{{captchaImageUrl}}" ng-click="refreshCaptcha()">',
+            template: '<img ng-src="{{captchaImageUrl}}" ng-click="refreshCaptcha()" style="max-height: 100%;">',
             link: function ($scope, $element, attrs, ngModel) {
                 function errorHandler(res) {
                     console.error(res);
@@ -23,7 +23,7 @@
                 }
 
                 function refreshCaptcha(successCallback, isInit) {
-                    if(isInit !== true && typeof $scope.sendTracking === 'function'){
+                    if (isInit !== true && typeof $scope.sendTracking === 'function') {
                         $scope.sendTracking('changeIdentityCode.click');
                     }
 
