@@ -30,8 +30,8 @@ angular.module('corpModule')
         }
     };
     $scope.listData = {
-        
-    }
+
+    };
     //tmpdata
     for(var i = 0; i < 100; i++) {
         $scope.displayData.rawData.push({
@@ -79,5 +79,5 @@ angular.module('corpModule')
             });
             $(".corp-cv .menu .item").tab();
         });
-    })
+    });
 }]);
