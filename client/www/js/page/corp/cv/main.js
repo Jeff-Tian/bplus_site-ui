@@ -40,7 +40,7 @@ angular.module('corpModule')
             $scope.isLoading = false;
             //end
             deferred.resolve();
-        })
+        });
 
         return deferred.promise;
     };
@@ -72,7 +72,7 @@ angular.module('corpModule')
             var me = this;
             me.data.forEach(function(value){
                 value.hasChecked = me.allChecked;
-            })
+            });
         }
     };
     //tmpdata
