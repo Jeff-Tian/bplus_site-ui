@@ -1,3 +1,73 @@
 block content
-    div hello world
+    div.ui.container.crop-container
+        div.step-container
+            div.bg-red
+            div.bg
+            div.ui.grid
+                div.three.wide.column
+                    div.ui.header.title 注册流程
+                div.one.wide.column
+                div.twelve.wide.column
+                    div.ui.seven.column.center.aligned.grid.step-grid
+                        div.column
+                            img
+                            span 注册
+                        div.column
+                            img.arrow
+                        div.column
+                            img
+                            span 完善资料
+                        div.column
+                            img.arrow
+                        div.column
+                            img
+                            span 注册审核
+                        div.column
+                            img.arrow
+                        div.column
+                            img
+                            span 立即招聘服务
+        div.title
+            div.ui.two.column.grid
+                div.column
+                    span.ui.small.header
+                        i.icon
+                        div.content 填写信息资料
+                div.column.tel 客服热线：4009015
+        div.frm-container
+            form.ui.form
+                div.field.required
+                    label 公司名称
+                    input(type="text", name="corporation", placeholder="请务必和营业执照一致")
+                div.field.required
+                    label 所在地
+                    input(type="text", name="address", placeholder="请填入所在城市")
+                div.field.required
+                    label 营业执照上传
+                    div.ui.grid
+                        div.thirteen.wide.column
+                            input(type="text", name="businesslicense", placeholder="营业执照")
+                        div.three.wide.column
+                            button.ui.red.button 添加文件
+                div.field.required
+                    label 联系人
+                    input(type="text", name="contact", placeholder="请填入联系人")
+                div.field.required
+                    label 职位
+                    input(type="text", name="position", placeholder="请填入职位")
+                div.field.required
+                    label 邮箱
+                    input(type="text", name="email", placeholder="xxxxxx@xxxxxx.xxx")
+                div.field.required
+                    label 电话
+                    div.ui.grid
+                        div.thirteen.wide.column
+                            input(type="text", name="telephone", placeholder="13800000000")
+                        div.three.wide.column
+                            button.ui.red.button 发送验证码
+                div.field.required
+                    label 验证码
+                    input(type="text", name="CAPTCHA", placeholder="请输入短信提示的验证码")
+                div.submit-container
+                    button.ui.red.button(type="submit") 下一步
 block extraJs
