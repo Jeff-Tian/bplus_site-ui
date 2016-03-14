@@ -1,4 +1,3 @@
-// Use Expressjs as Node.js web framework
 var express = require('express');
 var server = express();
 var bodyParser = require('body-parser');
@@ -6,10 +5,6 @@ var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
 var config = require('./config');
-var membership = require('./serviceProxy/membership.js');
-// To keep it from deleting by "npm prune --production"
-//require('log4js-cassandra');
-//var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 var logger = {
     info: function () {
     },
@@ -94,7 +89,6 @@ server
     .use(setConfig)
     .use(setDeviceHelper)
     .use(setMode)
-    // .use(setOnlineStoreTemplate)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({
         extended: true
@@ -178,7 +172,7 @@ server.use(/\/config\.js/, function (req, res, next) {
     var filteredConfig = JSON.stringify(filterConfig(config));
 
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule", []).run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; console.log($rootScope.config);}]);');
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule", []).run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; }]);');
 });
 
 if (getMode() === 'dev') {
@@ -188,53 +182,6 @@ if (getMode() === 'dev') {
 }
 
 server.use('/translation', localeHelper.serveTranslations);
-
-function checkWechatHostAndSetCookie(req, res, next) {
-    var query = urlParser.parse(req.url).query;
-    if (query && query.indexOf("source=wechatServiceAccount") > -1) {
-        res.cookie('source', "wechatServiceAccount");
-    }
-    next();
-}
-// server.use(localeHelper.localePath('/m', false), checkWechatHostAndSetCookie);
-// server.use(localeHelper.localePath('/m', false), require('./mobile'));
-// server.use(localeHelper.localePath('/m', false), express.static(staticFolder));
-
-// server.use(localeHelper.localePath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
-
-// function setupOnlineStoreStaticResources(staticFolder) {
-//     server.use(
-//         localeHelper.localePath('/' + staticFolder, false),
-//         express.static(
-//             __dirname +
-//             onlineOfflinePathSwitch(
-//                 '/node_modules/',
-//                 '/../') +
-//             (getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
-//             staticFolder,
-//             staticSetting
-//         )
-//     );
-// }
-
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-}
-
-//setupOnlineStoreStaticResources('semantic');
-server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
-//setupOnlineStoreStaticResources('bower_components');
-server.use(localeHelper.localePath('/bower_components', false), express.static(__dirname + '/client/dist/bower', staticSetting));
-// setupOnlineStoreStaticResources('images');
-// setupOnlineStoreStaticResources('stylesheets');
-// setupOnlineStoreStaticResources('scripts');
-
-// server.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('./store'));
-
-// server.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
-
 
 // Customize client file path
 server.set('views', [viewFolder, staticFolder]);
@@ -253,126 +200,12 @@ setupStaticResources();
 server.use('/service-proxy', require('./serviceProxy'));
 server.use('/corp-service-proxy', require('./serviceProxy/corp'));
 
-//Competion Integration
-
-// server
-//     .get('/:lang/game', function (req, res, next) {
-//         var lang = req.params.lang;
-//         if (['zh', 'en'].indexOf(lang) < 0) {
-//             return next();
-//         }
-//         if (!res.locals.hcd_user) {
-//             return next();
-//         }
-//         res.redirect('/zh/cmpt');
-//     })
-//     .get('/:lang/cmpt/:page?', function (req, res, next) {
-//         var lang = req.params.lang;
-//         if (['zh', 'en'].indexOf(lang) < 0) {
-//             return next();
-//         }
-//         var page = req.params.page || 'index';
-//         if (page == 'index' && !res.locals.hcd_user) {
-//             return membership.ensureAuthenticated(req, res, next);
-//         }
-//         res.render('competion/' + page, {
-//             page: page,
-//             lang: lang
-//         });
-//     })
-//     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
-//     .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
-//         var lang = req.params.lang || localeHelper.getLocale(req.url, req);
-
-//         if (localeHelper.supportedLocales.indexOf(lang) < 0) {
-//             return next();
-//         }
-
-//         var page = req.params.page || 'teacher';
-
-//         res.render('study-center-ui/' + page, {
-//             page: page,
-//             lang: lang
-//         });
-//     })
-//     .use('/studycenter', require('study-center-proxy')(express));
-
-// mapRoute2Template('/index');
-// mapRoute2Template('/game');
-// mapRoute2Template('/contractus');
-// mapRoute2Template('/aboutus');
-// mapRoute2Template('/school');
-// mapRoute2Template('/statement');
-// mapRoute2Template('/youth');
-// mapRoute2Template('/preheating');
-// mapRoute2Template('/opportunity');
-// server.get('/data', require('./client/www/api/data.js').getData);
-// mapRoute2Template('/sign-in');
-// mapRoute2Template('/signin', 'sign-in');
-// mapRoute2Template('/reset-password-by-email');
-// mapRoute2Template('/reset-password');
-// mapRoute2Template('/set-password');
-// mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticated]);
-// mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
-// mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
-// mapRoute2Template('/profile', [membership.ensureAuthenticated]);
-// mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
-// mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
-// mapRoute2Template('/offers');
-// mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
-// mapRoute2Template('/map');
-// server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, next) {
-//     if (!isFromMobile(req)) {
-//         res.render('opportunity-detail');
-//     } else {
-//         res.render('mobile/opportunity-detail');
-//     }
-// });
-
-// server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
-//     if (!isFromMobile(req)) {
-//         if (res.locals.hcd_user) {
-//             res.redirect('/zh/cmpt/ranking');
-//         } else {
-//             res.render('ranking');
-//         }
-//     } else {
-//         res.render('mobile/ranking');
-//     }
-// });
-
-// server.get(localeHelper.localePath('/study'), membership.ensureAuthenticated, function (req, res, next) {
-//     if (!isFromMobile(req)) {
-//         res.render('game-training');
-//     } else {
-//         res.redirect('/m/game-training');
-//     }
-// });
-// server.get(localeHelper.localePath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
-//     if (!isFromMobile(req)) {
-//         res.render('select-payment-method');
-//     } else {
-//         res.redirect('/m#/select-payment-method');
-//     }
-// });
-// server.get(localeHelper.localePath('/account-setting'), membership.ensureAuthenticated, renderTemplate('account-setting'));
-// server.get(localeHelper.localePath('/email-verify'), require('./email-verify.js'));
-
-// server.get('/messages', function (req, res, next) {
-//     res.json(JSON.parse(fs.readFileSync('messages.json')));
-// });
-
 //Server status check api
 server.use('/healthcheck', function (req, res, next) {
     res.json({
         everything: 'is ok',
         time: new Date()
     });
-});
-
-server.get('/test', function (req, res, next) {
-    var ua = req.headers['user-agent'];
-    res.send(req.url);
 });
 
 server.get('/mode', function (req, res, next) {
