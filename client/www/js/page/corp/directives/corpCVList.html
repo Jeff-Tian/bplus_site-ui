@@ -1,36 +1,60 @@
-<div ng-if="!isLoading">
-    <div class="ui attached segment segment-normal segment-after">
+<div ng-if="!isLoading" class="corp-table">
+    <div class="ui attached segment segment-normal segment-after light-segment-background light-segment-background">
         <div>
             <span>目前共有</span> 
-            <span>{{displayData.totalPages}}</span>
-            <span>份待处理的简历</span>
+            <span class="color-red">{{displayData.rawData.length}}</span>
+            <span ng-show="displayData.currentTab===STATIC_PARAM.DELIVERED">份待处理的简历</span>
+            <span ng-show="displayData.currentTab===STATIC_PARAM.INTERESTED">份有意向的简历</span>
+            <span ng-show="displayData.currentTab===STATIC_PARAM.DELETED">份已删除的简历</span>
             <div class="ui right floated basic button mini" ng-click="displayData.deleteData()">
                 <i class="remove icon"></i>
                 删除
             </div>
         </div>
     </div>
-    <div class="ui attached segment segment-normal segment-bottom-shadow">
+    <div class="ui attached segment segment-normal segment-bottom-shadow list-container">
         <div>
-            <div class="ui grid list-title">
-                <div class="three wide column center aligned">职位匹配度</div>
+            <div class="ui grid dark-title-background white-color">
+                <div class="two wide column center aligned">职位匹配度</div>
                 <div class="eight wide column">个人信息</div>
-                <div class="two wide column center aligned">应聘职位</div>
+                <div class="three wide column center aligned">应聘职位</div>
                 <div class="three wide column center aligned">
                     投递日期
                     <i class="ui sort icon clickable" ng-click="displayData.sortData()"></i>
-                    <input type="checkbox" class="valign-middle">
+                    <input type="checkbox" class="valign-middle" ng-model="displayData.allChecked" ng-click="displayData.allCheck()" ng-if="displayData.hasCheckbox" >
                 </div>
             </div>
-            <div class="ui grid" ng-repeat="data in displayData.data">
-                <div class="three wide column center aligned">
-                    <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel"/>
+            <div class="ui grid shadow text-color-grey" ng-repeat="data in displayData.data" ng-class="{{data.hasChecked?'checked':''}}">
+                <div class="two wide column center aligned white-column-background">
+                    <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel inline-block"/>
                 </div>
-                <div class="eight wide column">个人信息</div>
-                <div class="two wide column center aligned">应徵职位</div>
-                <div class="three wide column">
-                    <div>
-                        {{data.issueDate}}
+                <div class="eight wide column light-column-background clickable-column">
+                    <div class="ui grid">
+                        <div class="four wide column center aligned">
+                            <img ng-src="{{data.headshot}}" class="ui circular image headshot inline-block" ng-class="data.gender">
+                        </div>
+                        <div class="twelve wide column">
+                            <div class="personal-name-container">
+                                <span class="personal-name">{{data.name}}</span>
+                            </div>
+                            <div>
+                                <span>2019/10/10~2010/38/12</span>
+                                <span>广东外语外贸大学</span>
+                                <span> | </span>
+                                <span>物流管理</span>
+                                <span> | </span>
+                                <span>本科</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column center aligned white-column-background">
+                    <div class="middle-single-text">{{data.position}}</div>
+                </div>
+                <div class="three wide column light-column-background center aligned">
+                    <div class="middle-single-text">
+                        <span>{{data.issueDate}}</span>
+                        <input type="checkbox" ng-if="displayData.hasCheckbox" class="valign-middle inline-checkbox-position" ng-model="data.hasChecked">
                     </div>
                     <div ng-show="data.flag==='recommendation'" class="ribbon yellow right corner label">推荐
                         <i class="star icon"></i>
@@ -42,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div class="ui right floated">
+    <div class="ui right floated pagination-container">
         <pagination paginationdata='displayData'></pagination>
     </div>
 </div>

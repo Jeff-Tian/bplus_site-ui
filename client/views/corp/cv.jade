@@ -28,22 +28,11 @@ block content
                             input(type="checkbox",name="match")
                             label 高匹配度
                     div.ui.active.tab.cv-list-tab(data-tab="delivered")
-                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.DELIVERED")
+                        corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELIVERED")
                     div.ui.tab.cv-list-tab(data-tab="interested")
-                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.INTERESTED")
+                        corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.INTERESTED")
                     div.ui.tab.cv-list-tab(data-tab="deleted")
-                        corp-cv-list(ng-if="currentTab===STATIC_PARAM.DELETED")
-                        //- div.ui.grid
-                        //-     div.two.wide.column 职位匹配度
-                        //-     div.nine.wide.column 个人信息
-                        //-     div.two.wide.column 应徵职位
-                        //-     div.three.wide.column 投递日期
-                        //- div.ui.active.tab(data-tab="position") hello world
-                        //- div.ui.tab(data-tab="p1osition") hello world
-                        //- div.ui.tab(data-tab="deleted") hello end
-                    //- div.ui.active.tab.segment.segment-bottom-shadow.segment-normal(data-tab="position") hello world
-                    //- div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="p1osition") world
-                    //- div.ui.tab.segment.segment-bottom-shadow.segment-normal(data-tab="deleted") end.
+                        corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELETED")
                     //- the last segment will have no margin-bottom according to semantic-ui. Add an empty div to avoid it.
                     div
 block extraJs

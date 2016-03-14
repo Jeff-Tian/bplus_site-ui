@@ -9,8 +9,38 @@ angular.module('corpModule')
     var getData = function(currentPage){
         var deferred = $q.defer();
         $scope.isLoading = true;
+        //Get data according $scope.displayData.currentTab;
+        switch($scope.displayData.currentTab) {
+            case STATIC_PARAM.DELIVERED:
+            case STATIC_PARAM.INTERESTED:
+                $scope.displayData.hasCheckbox = true;
+                break;
+            case STATIC_PARAM.DELETED:
+                $scope.displayData.hasCheckbox = false;
+                break;
+        }
+        setTimeout(function(){
+            $scope.displayData.allChecked = false;
+            $scope.displayData.rawData = [];
+            $scope.displayData.currentPage = currentPage;
+            //tmpdata
+            for(var i = 0; i < 100; i++) {
+                $scope.displayData.rawData.push({
+                    text: "hello" + i,
+                    matchLevel: "a",
+                    position: "销售实习生",
+                    headshot: "http://img.hcdlearning.com/FiVn2EYU-IWcmQad3lMWyM04jgoZ-minor",
+                    flag: "recommendation",
+                    issueDate: "2016-2-27",
+                    gender: "female",
+                    name: "许小婕",
+                    hasChecked: false
+                });
+            }
             $scope.isLoading = false;
+            //end
             deferred.resolve();
+        })
 
         return deferred.promise;
     };
@@ -21,24 +51,39 @@ angular.module('corpModule')
         data: [],
         rawData: [],
         totalPages: 10,
-        getData: getData,
-        deleteData: function(){
+        currentTab: STATIC_PARAM.DELIVERED,
+        getData: function(targetPage) {
+            var me = this;
+            me.allChecked = false;
+            return getData(targetPage);
+        },
+        hasCheckbox: true,
+        allChecked: false,
+        deleteData: function() {
             console.log("delete");
+            getData(FIRST_PAGE);
         },
         sortData: function(){
             console.log("sort");
+            var me = this;
+            getData(FIRST_PAGE);
+        },
+        allCheck: function(){
+            var me = this;
+            me.data.forEach(function(value){
+                value.hasChecked = me.allChecked;
+            })
         }
-    };
-    $scope.listData = {
-
     };
     //tmpdata
     for(var i = 0; i < 100; i++) {
         $scope.displayData.rawData.push({
             text: "hello" + i,
             matchLevel: "a",
+            position: "销售实习生",
             flag: "recommendation",
-            issueDate: "2016-2-27"
+            issueDate: "2016-2-27",
+            hasChecked: false
         });
     }
     //end
@@ -49,10 +94,9 @@ angular.module('corpModule')
     };
 
     $scope.STATIC_PARAM = STATIC_PARAM;
-    $scope.currentTab = STATIC_PARAM.DELIVERED;
     $scope.tabmemuClick = function(target){
-        if ($scope.currentTab !== target) {
-            $scope.currentTab = target;
+        if ($scope.displayData.currentTab !== target) {
+            $scope.displayData.currentTab = target;
             $scope.option.type = "";
             $(".corp-cv .ui.checkbox").checkbox("set unchecked");
             getData(FIRST_PAGE);
