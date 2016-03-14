@@ -1,21 +1,8 @@
-var corp = require('express')();
+var corp = require('express').Router();
 var fs = require('fs');
 var path = require('path');
 var mixedViewEngine = require('./mixedViewEngine');
-
 var config = require('../config/index');
-
-function filterConfig(config) {
-    var filtered = {};
-
-    filtered.serviceUrls = config.serviceUrls;
-    filtered.sharedUIPath = '/bower/SHARED-UI/';
-    filtered.cdn = config.cdn;
-    filtered.payment = config.payment.public;
-    filtered.onlineStoreMenuSource = config.onlineStoreMenuSource;
-
-    return filtered;
-}
 
 function routerFactory(name, target) {
     if (!target) {
@@ -37,13 +24,14 @@ routerFactory("register");
 //CV
 routerFactory("cv");
 
-corp.use(function (req, res, next) {
-    //res.send('ok');
-    next();
+corp.get('/reset-password', function (req, res, next) {
+    res.render('reset-password.html');
 });
 
-function cdnify(url, cdn) {
-    return cdn.normal + url + '?' + cdn.version;
-}
+mixedViewEngine
+    .renderEJS(corp, '/reset-password-by-email')
+    .renderEJS(corp, '/reset-password')
+    .renderEJS(corp, './set-password')
+;
 
 module.exports = corp;
