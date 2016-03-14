@@ -8,4 +8,8 @@ module.exports = require('express').Router()
         path: '/company/member/register',
         method: 'POST'
     }))
+    .post(corpServiceUrls.member.login, proxy.proxyBPlus({
+        path: '/company/member/logon',
+        method: 'POST'
+    }))
 ;

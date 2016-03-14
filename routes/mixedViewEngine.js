@@ -2,6 +2,7 @@ var jade = require('jade');
 var ejs = require('ejs');
 var path = require('path');
 var fs = require('fs');
+var localeHelper = require('../locales/localeHelper.js');
 
 function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var o = {
@@ -23,5 +24,18 @@ function renderMixin(res, jadeTemplate, jadeLayout, data) {
 }
 
 module.exports = {
-    render: renderMixin
+    render: renderMixin,
+    renderEJS: function (app, url) {
+        var template = url;
+
+        if (template[0] === '/') {
+            template = template.substr(1);
+        }
+
+        app.get(localeHelper.localePath(url), function (req, res, next) {
+            res.render(template);
+        });
+
+        return this;
+    }
 };

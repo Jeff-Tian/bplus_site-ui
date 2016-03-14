@@ -1,25 +1,25 @@
 angular.module('corpModule')
-    .directive('corpSignIn', [function () {
+    .directive('corpSignIn', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             template: '' +
             '\
-            <form class="ui large fluid form login" ng-class="{\'loading\': submitting}"\
+            <form class="ui large fluid form login" ng-class="{\'loading\': submitting, \'error\': errorMessages.length > 0}"\
                   ng-submit="tryLogin($event)"\
                   name="loginForm">\
-                <div class="ui error message brand"></div>\
+                <form-error></form-error>\
                 <div class="ui">\
                     <div class="field">\
                         <div class="ui left icon input">\
                             <i class="user icon"></i>\
-                            <input type="text" name="mobile" placeholder="用户名"\
-                                   ng-model="loginData.mobile">\
+                            <input type="text" name="username" placeholder="用户名"\
+                                   ng-model="loginData.username" ng-required="true">\
                             </div>\
                         </div>\
                         <div class="field">\
                             <div class="ui left icon input">\
                                 <i class="lock icon"></i>\
                                 <input type="password" name="password" placeholder="请输入密码"\
-                                       ng-model="loginData.password">\
+                                       ng-model="loginData.password" ng-required="true">\
                                 </div>\
                             </div>\
                             <div class="fields">\
@@ -32,24 +32,37 @@ angular.module('corpModule')
                             </div>\
                         </div>\
                         <div class="eight wide field ui right aligned container subcontainer">\
-                            <a href="reset-password" ng-click="resetPassword($event)">忘记密码 <i\
-                                        class="hidden help circle icon"></i> </a>\
+                            <a href="reset-password" ng-click="resetPassword($event)">忘记密码</a>\
                         </div>\
                     </div>\
-                    <div class="ui divider horizontal"></div>\
+                    <div>&nbsp;</div>\
                     <button loading type="submit" class="ui fluid large red submit button"\
-                            ng-disabled="!isLoginFormValid()" ng-cloak>\
+                            ng-disabled="!loginForm.$valid" ng-cloak>\
                             登录\
                     </button>\
                 </div>\
-            </form>\
-            <div class="ui right aligned container subcontainer">\
-                <div>\
-                    没有账号? <a href="#register" ng-click="register()">马上注册</a></div>\
-                </div>',
+                <div class="ui right aligned container subcontainer">\
+                    <div>&nbsp;</div>\
+                    <div>没有账号? <a href="#register" ng-click="register()">马上注册</a></div>\
+                </div>\
+            </form>',
             scope: {},
             link: function ($scope, $element, attrs) {
-
+                $scope.tryLogin = function ($event) {
+                    $scope.submitting = false;
+                    service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.login, {
+                            userName: $scope.loginData.username,
+                            password: $scope.loginData.password,
+                            remember: $scope.loginData.rememberMe
+                        })
+                            .then(function (result) {
+                                console.log(result);
+                            }, function (reason) {
+                                $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                            });
+                    });
+                };
             }
         };
     }])

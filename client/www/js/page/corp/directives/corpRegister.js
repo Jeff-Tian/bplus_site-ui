@@ -1,12 +1,12 @@
 angular.module('corpModule')
     .directive('captcha', angular.bplus.captcha)
-    .directive('corpRegister', ['$rootScope', 'service', '$filter', function ($rootScope, service, $filter) {
+    .directive('corpRegister', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             template: '' +
             '\
             <link rel="stylesheet" type="text/css"        href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
             <form class="ui large fluid form register" ng-class="{\'loading\': submitting, error: errorMessages.length}" ng-submit="tryRegister($event)" name="registerForm">\
-                <div class="ui error message brand"><ul class="list"><li ng-repeat="m in errorMessages">{{m}}</li></ul><i class="large remove circle icon" ng-click="errorMessages = []"></i> </div>\
+                <form-error></form-error>\
                 <div class="ui">\
                     <div class="field">\
                         <div class="ui left icon input">\
@@ -40,23 +40,21 @@ angular.module('corpModule')
             link: function ($scope, $element, attrs) {
                 $scope.tryRegister = function ($event) {
                     $scope.submitting = false;
-                    service.put($rootScope.config.serviceUrls.corp.member.register, {
-                        userName: $scope.registerData.username,
-                        password: $scope.registerData.password,
-                        captchaId: $scope.registerData.captchaId,
-                        captcha: $scope.registerData.captcha
-                    })
-                        .then(function (result) {
-                            location.href = '/fill-form?company_id=' + result.company_id + '&member_id=' + result.member_id;
-                        }, function (reason) {
-                            var errorCode = 'service-' + reason.code;
-                            var errorMessage = $filter('translate')(errorCode);
-                            if (errorMessage === errorCode) {
-                                errorMessage = reason.message;
-                            }
-
-                            $scope.errorMessages = [errorMessage];
-                        });
+                    service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.member.register, {
+                            userName: $scope.registerData.username,
+                            password: $scope.registerData.password,
+                            captchaId: $scope.registerData.captchaId,
+                            captcha: $scope.registerData.captcha
+                        })
+                            .then(function (result) {
+                                location.href = '/fill-form?company_id=' + result.company_id + '&member_id=' + result.member_id;
+                            }, function (reason) {
+                                $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                                $scope.refreshCaptcha();
+                                $scope.registerData.captcha = '';
+                            });
+                    });
                 };
             }
         };

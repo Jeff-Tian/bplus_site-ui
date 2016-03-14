@@ -31,7 +31,9 @@ angular.module('corpModule')
             </div>',
             scope: {},
             link: function ($scope, $element, attrs) {
-                angular.element($element).find('.menu.brand .item').tab();
+                angular.element($element).find('.menu.brand .item').tab({
+                    history: true
+                });
             }
         };
     }])

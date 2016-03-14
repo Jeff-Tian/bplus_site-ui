@@ -37,7 +37,8 @@ module.exports = {
 
     corp: {
         member: {
-            register: '/corp-service-proxy/member/register'
+            register: '/corp-service-proxy/member/register',
+            login: '/corp-service-proxy/member/login'
         }
     }
 };

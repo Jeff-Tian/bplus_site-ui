@@ -7,6 +7,7 @@ var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
 var config = require('./config');
 var membership = require('./serviceProxy/membership.js');
+
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
 //var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
