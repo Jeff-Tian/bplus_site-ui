@@ -34,6 +34,9 @@
         &:hover {
             background-color: @color-corp-table-dark;
             color: @color-corp-table-white;
+            .personal-name {
+                border-bottom: 1px solid @color-corp-table-white;
+            }
         }
     }
     .pagination-container {
@@ -67,6 +70,12 @@
         height: 1.25em;
     }
     .personal-name {
-        border-bottom: 2px solid @color-corp-text-dark-grey-text;
+        border-bottom: 1px solid @color-corp-text-dark-grey-text;
+    }
+    .checked {
+        &.white-column-background,
+        &.light-column-background {
+            background-color: @color-corp-table-medium-dark;
+        }
     }
 }

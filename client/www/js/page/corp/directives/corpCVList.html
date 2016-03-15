@@ -24,11 +24,11 @@
                     <input type="checkbox" class="valign-middle" ng-model="displayData.allChecked" ng-click="displayData.allCheck()" ng-if="displayData.hasCheckbox" >
                 </div>
             </div>
-            <div class="ui grid shadow text-color-grey" ng-repeat="data in displayData.data" ng-class="{{data.hasChecked?'checked':''}}">
-                <div class="two wide column center aligned white-column-background">
+            <div class="ui grid shadow text-color-grey" ng-repeat="data in displayData.data">
+                <div class="two wide column center aligned white-column-background" ng-class="{'checked': data.hasChecked}">
                     <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel inline-block"/>
                 </div>
-                <div class="eight wide column light-column-background clickable-column">
+                <div class="eight wide column light-column-background clickable-column" ng-class="{'checked': data.hasChecked}">
                     <div class="ui grid">
                         <div class="four wide column center aligned">
                             <img ng-src="{{data.headshot}}" class="ui circular image headshot inline-block" ng-class="data.gender">
@@ -48,10 +48,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="three wide column center aligned white-column-background">
+                <div class="three wide column center aligned white-column-background" ng-class="{'checked': data.hasChecked}">
                     <div class="middle-single-text">{{data.position}}</div>
                 </div>
-                <div class="three wide column light-column-background center aligned">
+                <div class="three wide column light-column-background center aligned" ng-class="{'checked': data.hasChecked}">
                     <div class="middle-single-text">
                         <span>{{data.issueDate}}</span>
                         <input type="checkbox" ng-if="displayData.hasCheckbox" class="valign-middle inline-checkbox-position" ng-model="data.hasChecked">

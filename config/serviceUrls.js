@@ -39,6 +39,14 @@ module.exports = {
         member: {
             register: '/corp-service-proxy/member/register',
             login: '/corp-service-proxy/member/login'
+        },
+        jobapply: {
+            todo: '/corp-service-proxy/jobapply/todo',
+            dropped: '/corp-service-proxy/jobapply/dropped',
+            unlocked: '/corp-service-proxy/jobapply/unlocked',
+            dropCandidate: '/corp-service-proxy/jobapply/dropCandidate',
+            restoreCandidate: '/corp-service-proxy/jobapply/restoreCandidate',
+            unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
         }
     }
 };

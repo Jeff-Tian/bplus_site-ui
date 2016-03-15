@@ -91,6 +91,7 @@ function advancedProxy(req, res, next, settings) {
                 next(err);
             });
         } else {
+            res.writeHead(response.statusCode, response.headers); 
             response.pipe(res);
         }
     });
