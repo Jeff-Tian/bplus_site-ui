@@ -5,11 +5,11 @@ var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-
 
 module.exports = require('express').Router()
     .put(corpServiceUrls.member.register, require('../captcha').validate, proxy.proxyBPlus({
-        path: '/company/member/register',
+        path: '/corp/member/register',
         method: 'POST'
     }))
     .post(corpServiceUrls.member.login, proxy.proxyBPlus({
-        path: '/company/member/logon',
+        path: '/corp/member/logon',
         method: 'POST'
     }))
 ;

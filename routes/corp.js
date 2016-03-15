@@ -24,10 +24,6 @@ routerFactory("register");
 //CV
 routerFactory("cv");
 
-corp.get('/reset-password', function (req, res, next) {
-    res.render('reset-password.html');
-});
-
 mixedViewEngine
     .renderEJS(corp, '/reset-password-by-email')
     .renderEJS(corp, '/reset-password')

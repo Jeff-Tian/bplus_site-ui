@@ -6,7 +6,8 @@ html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light-grey-background")
         div#my-header(ng-controller="AppCtrl")
-            include ../../www/view-partial/header.html
+            include message_holder
+            include header
 
         div(ng-app="corpModule")
             block content
