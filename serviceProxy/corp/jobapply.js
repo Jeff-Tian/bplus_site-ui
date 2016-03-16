@@ -6,6 +6,6 @@ Object.keys(config.serviceUrls.corp.jobapply).forEach(function(key){
         path: '/corp/jobApply/' + key,
         method: 'POST'
     }));
-})
+});
 
 module.exports = cv;

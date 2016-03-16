@@ -47,6 +47,9 @@ module.exports = {
             dropCandidate: '/corp-service-proxy/jobapply/dropCandidate',
             restoreCandidate: '/corp-service-proxy/jobapply/restoreCandidate',
             unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
+        },
+        resource: {
+            qualifications: '/corp-service-proxy/resources/qualifications'
         }
     }
 };
