@@ -48,6 +48,9 @@ module.exports = {
             restoreCandidate: '/corp-service-proxy/jobapply/restoreCandidate',
             unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
         },
+        candidate: {
+            resume: '/corp-service-proxy/candidate/resume',
+        },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications'
         }

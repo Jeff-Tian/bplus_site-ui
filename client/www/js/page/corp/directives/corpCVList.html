@@ -31,10 +31,10 @@
                 <div class="two wide column center aligned white-column-background" ng-class="{'checked': data.hasChecked}">
                     <img ng-src="img/opd/match_{{data.matchLevel}}.png?<%= cdn.version %>" class="b-opd-position-matchlevel inline-block"/>
                 </div>
-                <div class="eight wide column light-column-background clickable-column" ng-class="{'checked': data.hasChecked}">
+                <div class="eight wide column light-column-background clickable-column" ng-class="{'checked': data.hasChecked}" ng-click="displayData.detailClick(data)">
                     <div class="ui grid">
                         <div class="four wide column center aligned">
-                            <img ng-src="{{data.headshot}}" class="ui circular image headshot inline-block" ng-class="data.gender">
+                            <img ng-src="{{data.headshot}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
                         </div>
                         <div class="twelve wide column">
                             <div class="personal-name-container">

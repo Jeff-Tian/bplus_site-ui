@@ -35,7 +35,11 @@ block content
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELETED")
                     //- the last segment will have no margin-bottom according to semantic-ui. Add an empty div to avoid it.
                     div
+        div.ui.long.modal.corp-cv-modal
+            corp-cv-detail 
 block extraJs
+    script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/cv.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/cv/main.js?#{cdn.version}")

@@ -48,6 +48,34 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             }
             return ret;
         };
+        me.unlockCV = function(cv){
+            var url = '/corp-service-proxy/jobapply/unlockCandidate';
+            var param = {
+                applierList: [cv]
+            };
+            return service.post(url, parma);
+        };
+        me.restoreCV = function(cv){
+            var url = '/corp-service-proxy/jobapply/restoreCandidate';
+            var param = {
+                applierList: [cv]
+            };
+            return service.post(url, param);
+        };
+        me.dropCV = function(cvArray){
+            var url = '/corp-service-proxy/jobapply/dropCandidate';
+            var param = {
+                applierList: cvArray
+            };
+            return service.post(url, param);
+        };
+        me.getResume = function(idParam){
+            var url = '/corp-service-proxy/candidate/resume';
+            var param = $.extend(true, {
+company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
+            }, idParam);
+            return service.post(url, param);
+        }
         me.init = function() {
             // Get resources
             var resourcePromises = resourceSet.map(function(value){
