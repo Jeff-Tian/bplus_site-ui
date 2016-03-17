@@ -37,14 +37,14 @@ block content
             div(class="ui horizontal divider")
             div(class="ui seven column centered grid")
                 - for (var x = 0; x < 5; x++)
-                    div.column
-                        div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
-                            h4(class="ui header") 阿里巴巴
+                div.column
+                    div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
+                        h4(class="ui header") 阿里巴巴
             div(class="ui seven column centered grid")
                 - for(var x = 0; x < 5; x++)
-                    div.column
-                        div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
-                            h4(class="ui header") 阿里马马
+                div.column
+                    div(class="ui circular segment", style="width: 80px; height: 80px; padding: 5px;")
+                        h4(class="ui header") 阿里马马
             div(class="ui horizontal divider")
             div(class="ui center aligned container")
                 p 还在等什麽 ? 快速瞭解我们的求才服务
@@ -59,3 +59,8 @@ block extraJs
     script(src="#{cdn.normal}js/page/corp/directives/corpRegister.js?#{cdn.version}")
     script(src="#{cdn.normal}js/directives/form-error.js?#{cdn.version}")
     script.
+        angular.module('bplusModule')
+                .run(['$rootScope', function ($rootScope) {
+                    $rootScope.current_page = 'home';
+                }])
+        ;
