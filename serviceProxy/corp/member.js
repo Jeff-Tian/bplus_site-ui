@@ -10,6 +10,19 @@ module.exports = require('express').Router()
     }))
     .post(corpServiceUrls.member.login, proxy.proxyBPlus({
         path: '/corp/member/logon',
-        method: 'POST'
+        method: 'POST',
+        responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {
+            var sso = require('../sso.js');
+
+            if (upstreamJson.isSuccess) {
+                sso.setAuthToken(originalResponse, upstreamJson.result.token, originalRequest.body.remember, upstreamJson.result.member_id);
+
+                if (sso.jumpToReturnUrl(originalRequest, originalResponse)) {
+                    return undefined;
+                }
+            }
+
+            return false;
+        }
     }))
 ;

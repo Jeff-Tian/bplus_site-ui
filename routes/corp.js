@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var mixedViewEngine = require('./mixedViewEngine');
 var config = require('../config/index');
+var localeHelper = require('../locales/localeHelper.js');
 
 function routerFactory(name, title) {
     var target = name;
@@ -11,7 +12,7 @@ function routerFactory(name, title) {
         target = 'index';
     }
 
-    corp.get('/' + name, function (req, res, next) {
+    corp.get(localeHelper.localePath('/' + name), function (req, res, next) {
         var data = res.locals;
         data.title = title + ' -- Bridge+';
         mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', res.locals, data);

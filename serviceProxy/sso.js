@@ -97,7 +97,7 @@ module.exports = {
             }
         })(req, res, next);
     },
-    setAuthToken: function (req, res, next) {
+    delegateSetAuthToken: function (req, res, next) {
         setAuthToken(res, req.body.token, true);
 
         if (!jumpToReturnUrl(req, res)) {
@@ -256,5 +256,7 @@ module.exports = {
 
             return d;
         }
-    })
+    }),
+    jumpToReturnUrl: jumpToReturnUrl,
+    setAuthToken: setAuthToken
 };

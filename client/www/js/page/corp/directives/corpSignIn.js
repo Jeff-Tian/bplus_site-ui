@@ -58,6 +58,7 @@ angular.module('corpModule')
                         })
                             .then(function (result) {
                                 console.log(result);
+                                window.location.href = '/';
                             }, function (reason) {
                                 $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
                             });

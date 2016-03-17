@@ -104,41 +104,7 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
-function renderIndex(req, res, next) {
-    renderOrRedirect(req, res, '');
-}
-
-function renderOrRedirect(req, res, template) {
-    if (!isFromMobile(req)) {
-        res.redirect("/index");
-        res.render(template);
-    } else {
-        console.log('request from mobile');
-        try {
-            var stats = fs.lstatSync(viewFolder + '/mobile/' + template + '.html');
-            if (stats.isFile()) {
-                var redirectTo = '/m/' + template;
-                var query = urlParser.parse(req.url).query;
-                res.redirect(query ? redirectTo + '?' + query : redirectTo);
-            } else {
-                res.render(template);
-            }
-        } catch (e) {
-            res.render(template);
-        }
-    }
-}
-
-function isFromMobile(req) {
-    var ua = req.headers['user-agent'];
-    return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
-}
-
 server.use(require('./routes/corp.js'));
-server.get('/', renderIndex);
-supportedLocales.map(function (l) {
-    server.get('/' + l, renderIndex);
-});
 
 var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
 var viewFolder = __dirname + '/client/views';
@@ -239,25 +205,21 @@ function clientErrorHandler(err, req, res, next) {
     }
 }
 
+var mixedViewEngine = require('./routes/mixedViewEngine.js');
+
 function errorHandler(err, req, res, next) {
+    res.locals.title = '出错啦 - Bridge+';
     req.dualLogError(err);
     res.status(500);
-    if (!isFromMobile(req)) {
-        res.render('error', {error: err});
-    } else {
-        res.render('mobile/error', {error: err});
-    }
+    mixedViewEngine.render(res, 'corp/error.jade', 'layout.jade', res.locals);
 }
 
 server.use('*', function (req, res) {
+    res.locals.title = '找不到页面 - Bridge+';
     req.dualLogError('404 Error met for "' + (req.headers['origin'] + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
 
     res.status(404);
-    if (!isFromMobile(req)) {
-        res.render('404.html');
-    } else {
-        res.render('mobile/404.html');
-    }
+    mixedViewEngine.render(res, 'corp/404.jade', 'layout.jade', res.locals);
 });
 
 server.use(logErrors);
