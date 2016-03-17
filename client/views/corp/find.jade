@@ -1,0 +1,11 @@
+block content
+    div.corp-cv(ng-controller="findCtrl")
+block extraJs
+    script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/page/corp/find/main.js?#{cdn.version}")
+    script.
+        angular.module('bplusModule')
+                .run(['$rootScope', function ($rootScope) {
+                    $rootScope.current_page = 'find';
+                }])
+        ;

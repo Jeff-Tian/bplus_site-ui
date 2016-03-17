@@ -24,6 +24,10 @@ routerFactory("", '企业首页');
 routerFactory("register", '企业注册');
 //CV
 routerFactory("cv", '简历管理');
+//Find
+routerFactory("find", '找人才');
+//Setting
+routerFactory("setting", '账户管理');
 
 mixedViewEngine
     .renderEJS(corp, '/reset-password-by-email')
