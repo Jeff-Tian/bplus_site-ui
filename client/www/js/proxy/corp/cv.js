@@ -72,7 +72,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
         me.getResume = function(idParam){
             var url = '/corp-service-proxy/candidate/resume';
             var param = $.extend(true, {
-company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
+member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
             }, idParam);
             return service.post(url, param);
         }
