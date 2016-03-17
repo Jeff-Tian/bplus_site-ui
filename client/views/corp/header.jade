@@ -14,13 +14,13 @@ div(class="ui b-header")
                             a(class="center aligned item", href="/account-setting") #{__('AccountSetting')}
                             a(class="center aligned item", ng-click="signOut()") #{__('SignOut')}
                 else
-                    a(class="ui button") #{__('SignIn')}
-                    a(href="/signin#register", class="ui button") #{__('SignUp')}
+                    a(href="/#login", class="ui button") #{__('SignIn')}
+                    a(href="/#register", class="ui button") #{__('SignUp')}
 
-                a(class="ui button") #{__('otherLocale')}
+                a(class="ui button", ng-href="#{otherLocaleLink}{{hash}}") #{__(otherLocale)}
     div(class="ui menu b-header-nav")
         div(class="ui container")
-            a(href="/index", class="b-header-logo")
+            a(href="/", class="b-header-logo")
                 img(src="#{cdn.normal}img/logo.png?#{cdn.version}", height="60")
             div(class="right item")
                 include header_nav

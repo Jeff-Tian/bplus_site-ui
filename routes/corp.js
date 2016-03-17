@@ -12,11 +12,9 @@ function routerFactory(name, title) {
     }
 
     corp.get('/' + name, function (req, res, next) {
-        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', {
-            cdn: config.cdn,
-            __: req.__,
-            title: title + ' -- Bridge+'
-        });
+        var data = res.locals;
+        data.title = title + ' -- Bridge+';
+        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', res.locals, data);
     });
 }
 //Index
