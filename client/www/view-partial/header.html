@@ -79,7 +79,7 @@
             <div class="right item">
                 <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
                 <div class="ui right dropdown b-profile item" ng-cloak>
-                    <img ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-minor' : '/img/anonymous_default.png'}}"
+                    <img ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-minor' : '<%= cdn.normal %>img/anonymous_default.png?<%= cdn.version %>'}}"
                          class="ui circular image avatar">
                     <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
 

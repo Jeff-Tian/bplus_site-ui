@@ -208,8 +208,8 @@ server.use('/healthcheck', function (req, res, next) {
     });
 });
 
-server.get('/mode', function (req, res, next) {
-    res.send(res.locals.dev_mode);
+server.get('/test', function (req, res, next) {
+    res.send(req.__('Hello'));
 });
 
 server.get('/is_qa', function (req, res) {

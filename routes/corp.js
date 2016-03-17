@@ -4,25 +4,25 @@ var path = require('path');
 var mixedViewEngine = require('./mixedViewEngine');
 var config = require('../config/index');
 
-function routerFactory(name, target) {
-    if (!target) {
-        target = name;
-    }
+function routerFactory(name, title) {
+    var target = name;
+
     if (target === '') {
         target = 'index';
     }
+
     corp.get('/' + name, function (req, res, next) {
-        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', {
-            cdn: config.cdn
-        });
+        var data = res.locals;
+        data.title = title + ' -- Bridge+';
+        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', res.locals, data);
     });
 }
 //Index
-routerFactory("");
+routerFactory("", '企业首页');
 //Regist
-routerFactory("register");
+routerFactory("register", '企业注册');
 //CV
-routerFactory("cv");
+routerFactory("cv", '简历管理');
 
 mixedViewEngine
     .renderEJS(corp, '/reset-password-by-email')
