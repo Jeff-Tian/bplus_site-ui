@@ -88,7 +88,8 @@ angular.module('corpModule')
                 candidate_id: value.memberID,
                 job_id: value.jobID
             };
-            cvService.getResume(param).then(function(){
+            cvService.getResume(param).then(function(detail){
+                $scope.resumeDetail = detail;
                 $(".corp-cv-modal.ui.modal").modal("show");
             });
         },
@@ -127,9 +128,7 @@ angular.module('corpModule')
     };
     $scope.isSortDesc = true;
 
-    $scope.resumeDetail = {
-
-    }
+    $scope.resumeDetail = {};
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
         if ($scope.displayData.currentTab !== target) {
