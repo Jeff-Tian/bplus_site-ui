@@ -53,7 +53,7 @@ angular.module('corpModule')
                                 return service.post($rootScope.config.serviceUrls.corp.member.login, {
                                     userName: $scope.registerData.username,
                                     password: $scope.registerData.password,
-                                    return_url: window.encodeURI('/register')
+                                    return_url: window.encodeURI('/register?company_id=' + result.company_id)
                                 });
                             });
                         })

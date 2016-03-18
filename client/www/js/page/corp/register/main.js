@@ -8,7 +8,7 @@ angular
             }
         };
     }])
-    .controller("corpRegister", ['$scope', '$window', '$interval',  '$q', '$timeout', function($scope, $window, $interval, $q, $timeout) {
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', function ($scope, $window, $interval, $q, $timeout) {
         var config = {
             secondResendCAPTCHA: 60 * 5
         };
@@ -61,10 +61,11 @@ angular
                     break;
                 default:
                     break;
-            };
+            }
+            ;
         }
 
-        $scope.edit = function() {
+        $scope.edit = function () {
             callbackGetStatus(0);
         }
 
@@ -121,11 +122,12 @@ angular
                             $btnSendCAPTCHA.removeClass('disabled').html($btnSendCAPTCHA.attr('data-text-resend'));
                         }
                     }, 1000);
-                    $scope.$on('$destroy', function() {
+                    $scope.$on('$destroy', function () {
                         $interval.cancel(timerSendCAPTCHA);
                         timerSendCAPTCHA = undefined;
                     });
                 }
+
                 $timeout(callbackSendCAPTCHA, 2000);
             }
         };
@@ -147,6 +149,7 @@ angular
                     $form.removeClass('loading');
                     callbackGetStatus(1);
                 }
+
                 $timeout(post, 2000);
             }
             return false;
@@ -220,7 +223,11 @@ angular
                         }
                     };
                 $form.form(configForm);
-                $form.on('submit', scope.submit);
+                //$form.on('submit', scope.submit);
+
+                scope.saveBasicCorpInfo = function () {
+                    console.log(scope.data);
+                };
             }
         };
     }])
