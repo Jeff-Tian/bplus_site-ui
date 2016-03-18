@@ -71,7 +71,7 @@ function advancedProxy(req, res, next, settings) {
                     return next(e);
                 }
 
-                req.dualLog('response got from: ' + options.hostname + ':' + options.port + '/' + options.path);
+                req.dualLog('response got from: ' + options.hostname + ':' + options.port + options.path);
                 req.dualLog(chunks);
 
                 var continueNext = settings.responseInterceptor(res, chunks, req, next);

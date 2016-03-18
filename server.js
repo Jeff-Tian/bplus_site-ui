@@ -128,7 +128,68 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req
     next();
 });
 
-server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
+server.use('/', membership.setSignedInUser);
+
+var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var viewFolder = __dirname + '/client/views';
+
+var staticSetting = {
+    etag: true,
+    lastModified: true,
+    maxAge: 1000 * 3600 * 24 * 30,
+    setHeaders: function (res, path) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+};
+
+server.get('/', renderIndex);
+supportedLocales.map(function (l) {
+    server.get('/' + l, renderIndex);
+});
+
+// Customize client file path
+server.set('views', [staticFolder, viewFolder]);
+server.use(express.static(staticFolder, staticSetting));
+supportedLocales.map(function (l) {
+    server.use('/' + l, express.static(staticFolder, staticSetting));
+});
+
+server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
+
+if (getMode() === 'dev') {
+    server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
+} else {
+    server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
+}
+
+server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
+    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+});
+
+var proxy = require('./serviceProxy/proxy.js');
+server.use(/^\/(?!service-proxy|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
+    if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
+        return proxy.execute(req, res, next, {
+            host: config.bplusService.host,
+            port: config.bplusService.port,
+            path: '/profile/load/' + res.locals.hcd_user.member_id,
+            responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {
+                res.locals.needFillEducation = !upstreamJson.result.education || upstreamJson.result.education.length <= 0;
+
+                next();
+            }
+        });
+    }
+
+    next();
+}, function (req, res, next) {
+    if (res.locals.needFillEducation === true) {
+        res.redirect('/personal-history');
+    } else {
+        next();
+    }
+});
 
 function renderIndex(req, res, next) {
     renderOrRedirect(req, res, 'index');
@@ -183,23 +244,6 @@ function isFromMobile(req) {
     return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
 }
 
-server.get('/', renderIndex);
-supportedLocales.map(function (l) {
-    server.get('/' + l, renderIndex);
-});
-
-var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
-var viewFolder = __dirname + '/client/views';
-
-var staticSetting = {
-    etag: true,
-    lastModified: true,
-    maxAge: 1000 * 3600 * 24 * 30,
-    setHeaders: function (res, path) {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-    }
-};
-
 function filterConfig(config) {
     var filtered = {};
 
@@ -217,17 +261,6 @@ function filterConfig(config) {
     return filtered;
 }
 
-server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
-    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
-});
-
-if (getMode() === 'dev') {
-    server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
-} else {
-    server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
-}
-
 server.use('/translation', localeHelper.serveTranslations);
 
 function checkWechatHostAndSetCookie(req, res, next) {
@@ -237,9 +270,9 @@ function checkWechatHostAndSetCookie(req, res, next) {
     }
     next();
 }
+
 server.use(localeHelper.regexPath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.regexPath('/m', false), require('./mobile'));
-server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
 
 server.use(localeHelper.regexPath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
 
@@ -277,13 +310,6 @@ server.use(localeHelper.regexPath('/store', false), membership.ensureAuthenticat
 server.use(localeHelper.regexPath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
 
 server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
-
-// Customize client file path
-server.set('views', [staticFolder, viewFolder]);
-server.use(express.static(staticFolder, staticSetting));
-supportedLocales.map(function (l) {
-    server.use('/' + l, express.static(staticFolder, staticSetting));
-});
 
 server.use('/service-proxy', require('./serviceProxy'));
 
