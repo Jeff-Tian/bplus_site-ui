@@ -149,7 +149,7 @@ angular
                 $form.removeClass('loading');
                 callbackGetStatus(1);
             }
-            
+
             if ($form.form('is valid')) {
                 var vals = $form.form('get values');
                 $form.addClass('loading');
@@ -175,13 +175,13 @@ angular
                                     prompt: $form.find('[name=corporation]').attr('data-prompt')
                                 }]
                             },
-                            //businesslicense: {
-                            //    identifier: 'businesslicense',
-                            //    rules: [{
-                            //        type: 'empty',
-                            //        prompt: $form.find('[name=businesslicense]').attr('data-prompt')
-                            //    }]
-                            //},
+                            businesslicense: {
+                                identifier: 'businesslicense',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=businesslicense]').attr('data-prompt')
+                                }]
+                            },
                             city: {
                                 identifier: 'city',
                                 rules: [{
@@ -230,6 +230,7 @@ angular
                 //$form.on('submit', scope.submit);
 
                 scope.saveBasicCorpInfo = function () {
+                    scope.data.license;
                     console.log(scope.data);
                 };
             }
@@ -242,4 +243,20 @@ angular
                 $rootScope.$countdown = angular.element(element);
             }
         };
-    }]);
+    }])
+    .directive('fileread', [function () {
+        return {
+            scope: {
+                fileread: '='
+            },
+            link: function (scope, element, attrs) {
+                element.bind('change', function (changeEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = changeEvent.target.files[0];
+                        console.log(scope.fileread);
+                    });
+                });
+            }
+        }
+    }])
+;

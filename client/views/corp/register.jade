@@ -56,10 +56,11 @@ block content
                         input(type="text", name="city", placeholder="请填入所在城市", ng-model="data.city", ng-required="true")
                     div.field.required
                         label 营业执照上传
-                        div.ui.grid
-                            div.thirteen.wide.column
-                                input(type="text", name="businesslicense", readonly="readonly", placeholder="营业执照", data-text-placeholder="营业执照", data-prompt="请上传营业执照", ng-model="data.license", ng-required="true")
-                            div.three.wide.column
+                        div.ui.grid(style="position: relative; overflow: hidden;")
+                            input(type="file", style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; z-index: 100; padding-left: 2000px; cursor: pointer; border: none; outline: none;", accept=".pdf,.png,.gif,.jpeg,.jpg", fileread="data.license")
+                            div.twelve.wide.column
+                                input(type="text", name="businesslicense", placeholder="营业执照", data-text-placeholder="营业执照", data-prompt="请上传营业执照", ng-model="data.license.name", ng-required="true")
+                            div.four.wide.column
                                 div.ui.red.button
                                     i.attach.icon
                                     span 添加文件
@@ -75,9 +76,9 @@ block content
                     div.field.required
                         label 电话
                         div.ui.grid
-                            div.thirteen.wide.column
+                            div.twelve.wide.column
                                 input(type="text", name="telephone", placeholder="13800000000", data-prompt="请输入正确的手机号码", ng-model="data.mobile", ng-required="true")
-                            div.three.wide.column
+                            div.four.wide.column
                                 div.ui.red.button.btn-sendCAPTCHA(ng-click="sendCAPTCHA()", data-text-resend="重新发送验证码") 发送验证码
                     div.field.required
                         label 验证码
