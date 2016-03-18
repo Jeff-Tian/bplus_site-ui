@@ -1,5 +1,5 @@
 angular.module('corpModule')
-    .directive('corpSignIn', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
+    .directive('corpSignIn', ['service', 'serviceErrorParser', '$rootScope', 'queryParser', function (service, serviceErrorParser, $rootScope, queryParser) {
         return {
             template: '' +
             '\
@@ -54,11 +54,12 @@ angular.module('corpModule')
                         return service.post($rootScope.config.serviceUrls.corp.member.login, {
                             userName: $scope.loginData.username,
                             password: $scope.loginData.password,
-                            remember: $scope.loginData.rememberMe
+                            remember: $scope.loginData.rememberMe,
+                            return_url: queryParser.get('return_url')
                         })
                             .then(function (result) {
                                 console.log(result);
-                                window.location.href = '/';
+                                //window.location.href = '/';
                             }, function (reason) {
                                 $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
                             });

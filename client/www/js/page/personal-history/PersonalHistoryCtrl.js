@@ -144,7 +144,8 @@
             service
                 .post(path, $scope.schoolInfo)
                 .then(function (res) {
-                    $scope.gotoPay();
+                    //$scope.gotoPay();
+                    $scope.gotoGamePage();
                 })
                 .catch(FormValidation.delegateHandleFormError($form2))
                 .finally(function () {

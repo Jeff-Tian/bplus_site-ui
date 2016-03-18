@@ -46,15 +46,24 @@ angular.module('corpModule')
                             password: $scope.registerData.password,
                             captchaId: $scope.registerData.captchaId,
                             captcha: $scope.registerData.captcha
-                        })
-                            .then(function (result) {
-                                location.href = '/fill-form?company_id=' + result.company_id + '&member_id=' + result.member_id;
-                            }, function (reason) {
-                                $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
-                                $scope.refreshCaptcha();
-                                $scope.registerData.captcha = '';
+                        });
+                    })
+                        .then(function (result) {
+                            return service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
+                                return service.post($rootScope.config.serviceUrls.corp.member.login, {
+                                    userName: $scope.registerData.username,
+                                    password: $scope.registerData.password,
+                                    return_url: window.encodeURI('/register?company_id=' + result.company_id)
+                                });
                             });
-                    });
+                        })
+                        .then(function (result) {
+                            console.log('login success', result);
+                        }, function (reason) {
+                            $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                            $scope.refreshCaptcha();
+                            $scope.registerData.captcha = '';
+                        });
                 };
             }
         };

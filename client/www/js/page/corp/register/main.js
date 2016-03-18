@@ -8,19 +8,19 @@ angular
             }
         };
     }])
-    .controller("corpRegister", ['$scope', '$window', '$interval',  '$q', '$timeout', function($scope, $window, $interval, $q, $timeout) {
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', function ($scope, $window, $interval, $q, $timeout) {
         var config = {
             secondResendCAPTCHA: 60 * 5
         };
 
-        var $corpRegister = undefined,
-            $form = undefined,
-            configForm = undefined,
-            $btnSendCAPTCHA = undefined,
-            $inputTelephone = undefined,
-            timerSendCAPTCHA = undefined,
-            $countdown = undefined,
-            timerCountdown = undefined;
+        var $form,
+            configForm,
+            $btnSendCAPTCHA,
+            $inputTelephone,
+            timerSendCAPTCHA,
+            $countdown,
+            timerCountdown
+            ;
 
         $scope.status = -1;
 
@@ -61,12 +61,12 @@ angular
                     break;
                 default:
                     break;
-            };
+            }
         }
 
-        $scope.edit = function() {
+        $scope.edit = function () {
             callbackGetStatus(0);
-        }
+        };
 
         $scope.sendCAPTCHA = function () {
             if ((!$form || !$form.length) && ($scope.$form && $scope.$form.length)) {
@@ -106,26 +106,30 @@ angular
             });
             isValid = $form.form('is valid');
             $form.form(configForm);
+
+
+            function callbackSendCAPTCHA() {
+                $btnSendCAPTCHA.removeClass('loading').addClass('disabled').html(config.secondResendCAPTCHA);
+                timerSendCAPTCHA = $interval(function () {
+                    var n = parseInt($btnSendCAPTCHA.html());
+                    if (n) {
+                        $btnSendCAPTCHA.html(n - 1);
+                    } else {
+                        $interval.cancel(timerSendCAPTCHA);
+                        timerSendCAPTCHA = undefined;
+                        $btnSendCAPTCHA.removeClass('disabled').html($btnSendCAPTCHA.attr('data-text-resend'));
+                    }
+                }, 1000);
+                $scope.$on('$destroy', function () {
+                    $interval.cancel(timerSendCAPTCHA);
+                    timerSendCAPTCHA = undefined;
+                });
+            }
+
             if (isValid) {
                 var valTelephone = $inputTelephone.val();
                 $btnSendCAPTCHA.addClass('loading');
-                function callbackSendCAPTCHA() {
-                    $btnSendCAPTCHA.removeClass('loading').addClass('disabled').html(config.secondResendCAPTCHA);
-                    timerSendCAPTCHA = $interval(function () {
-                        var n = parseInt($btnSendCAPTCHA.html());
-                        if (n) {
-                            $btnSendCAPTCHA.html(n - 1);
-                        } else {
-                            $interval.cancel(timerSendCAPTCHA);
-                            timerSendCAPTCHA = undefined;
-                            $btnSendCAPTCHA.removeClass('disabled').html($btnSendCAPTCHA.attr('data-text-resend'));
-                        }
-                    }, 1000);
-                    $scope.$on('$destroy', function() {
-                        $interval.cancel(timerSendCAPTCHA);
-                        timerSendCAPTCHA = undefined;
-                    });
-                }
+
                 $timeout(callbackSendCAPTCHA, 2000);
             }
         };
@@ -140,13 +144,16 @@ angular
             if ($form.hasClass('loading')) {
                 return false;
             }
+
+            function post() {
+                $form.removeClass('loading');
+                callbackGetStatus(1);
+            }
+
             if ($form.form('is valid')) {
                 var vals = $form.form('get values');
                 $form.addClass('loading');
-                function post() {
-                    $form.removeClass('loading');
-                    callbackGetStatus(1);
-                }
+
                 $timeout(post, 2000);
             }
             return false;
@@ -168,13 +175,13 @@ angular
                                     prompt: $form.find('[name=corporation]').attr('data-prompt')
                                 }]
                             },
-                            //businesslicense: {
-                            //    identifier: 'businesslicense',
-                            //    rules: [{
-                            //        type: 'empty',
-                            //        prompt: $form.find('[name=businesslicense]').attr('data-prompt')
-                            //    }]
-                            //},
+                            businesslicense: {
+                                identifier: 'businesslicense',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=businesslicense]').attr('data-prompt')
+                                }]
+                            },
                             city: {
                                 identifier: 'city',
                                 rules: [{
@@ -220,7 +227,12 @@ angular
                         }
                     };
                 $form.form(configForm);
-                $form.on('submit', scope.submit);
+                //$form.on('submit', scope.submit);
+
+                scope.saveBasicCorpInfo = function () {
+                    scope.data.license;
+                    console.log(scope.data);
+                };
             }
         };
     }])
@@ -231,4 +243,20 @@ angular
                 $rootScope.$countdown = angular.element(element);
             }
         };
-    }]);
+    }])
+    .directive('fileread', [function () {
+        return {
+            scope: {
+                fileread: '='
+            },
+            link: function (scope, element, attrs) {
+                element.bind('change', function (changeEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = changeEvent.target.files[0];
+                        console.log(scope.fileread);
+                    });
+                });
+            }
+        }
+    }])
+;

@@ -162,7 +162,7 @@ mixin teacherTable(teachers)
                                     span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags") {{tag}}
                 td
                     p(ng-repeat="c in t.courses")
-                        | {{c.description}}
+                        | {{c.title}}
                         | &nbsp;
                         span(class="ui mini red label", ng-repeat="courseTag in c.class_tags") {{courseTag}}
                 td

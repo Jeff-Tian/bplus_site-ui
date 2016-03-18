@@ -795,5 +795,6 @@
   "Tue": "周二",
   "Wed": "周三",
   "Thu": "周四",
-  "Fri": "周五"
+  "Fri": "周五",
+  "Password can't be empty": "密码不能为空"
 }
