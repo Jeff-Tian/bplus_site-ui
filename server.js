@@ -168,11 +168,12 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
 });
 
 var proxy = require('./serviceProxy/proxy.js');
-server.use(/^\/(?!service-proxy|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
+server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
     if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
         return proxy.execute(req, res, next, {
             host: config.bplusService.host,
             port: config.bplusService.port,
+            method: 'GET',
             path: '/profile/load/' + res.locals.hcd_user.member_id,
             responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {
                 res.locals.needFillEducation = !upstreamJson.result.education || upstreamJson.result.education.length <= 0;
