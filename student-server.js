@@ -163,7 +163,7 @@ function setupStaticResources() {
 
 setupStaticResources();
 
-server.use(localeHelper.regexPath('/m', false), express.static(staticFolder));
+server.use(localeHelper.localePath('/m', false), express.static(staticFolder));
 
 if (getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));

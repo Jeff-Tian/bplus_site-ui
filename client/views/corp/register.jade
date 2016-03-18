@@ -50,38 +50,38 @@ block content
                 form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo()")
                     div.field.required
                         label 公司名称
-                        input(type="text", name="corporation", placeholder="请务必和营业执照一致", data-prompt="请输入公司名称", ng-model="data.companyName")
+                        input(type="text", name="corporation", placeholder="请务必和营业执照一致", data-prompt="请输入公司名称", ng-model="data.companyName", ng-required="true")
                     div.field.required
                         label 所在地
-                        input(type="text", name="city", placeholder="请填入所在城市", ng-model="data.city")
+                        input(type="text", name="city", placeholder="请填入所在城市", ng-model="data.city", ng-required="true")
                     div.field.required
                         label 营业执照上传
                         div.ui.grid
                             div.thirteen.wide.column
-                                input(type="text", name="businesslicense", readonly="readonly", placeholder="营业执照", data-text-placeholder="营业执照", data-prompt="请上传营业执照", ng-model="data.license")
+                                input(type="text", name="businesslicense", readonly="readonly", placeholder="营业执照", data-text-placeholder="营业执照", data-prompt="请上传营业执照", ng-model="data.license", ng-required="true")
                             div.three.wide.column
                                 div.ui.red.button
                                     i.attach.icon
                                     span 添加文件
                     div.field.required
                         label 联系人
-                        input(type="text", name="contact", placeholder="请填入联系人", ng-model="data.contact")
+                        input(type="text", name="contact", placeholder="请填入联系人", ng-model="data.contact", ng-required="true")
                     div.field.required
                         label 职位
-                        input(type="text", name="position", placeholder="请填入职位", ng-model="data.position")
+                        input(type="text", name="position", placeholder="请填入职位", ng-model="data.position", ng-required="true")
                     div.field.required
                         label 邮箱
-                        input(type="text", name="email", placeholder="xxxxxx@xxxxxx.xxx", data-prompt="请输入正确的邮箱地址", ng-model="data.email")
+                        input(type="text", name="email", placeholder="xxxxxx@xxxxxx.xxx", data-prompt="请输入正确的邮箱地址", ng-model="data.email", ng-required="true")
                     div.field.required
                         label 电话
                         div.ui.grid
                             div.thirteen.wide.column
-                                input(type="text", name="telephone", placeholder="13800000000", data-prompt="请输入正确的手机号码", ng-model="data.mobile")
+                                input(type="text", name="telephone", placeholder="13800000000", data-prompt="请输入正确的手机号码", ng-model="data.mobile", ng-required="true")
                             div.three.wide.column
                                 div.ui.red.button.btn-sendCAPTCHA(ng-click="sendCAPTCHA()", data-text-resend="重新发送验证码") 发送验证码
                     div.field.required
                         label 验证码
-                        input(type="text", name="CAPTCHA", placeholder="请输入短信提示的验证码", ng-model="data.verificationCode")
+                        input(type="text", name="CAPTCHA", placeholder="请输入短信提示的验证码", ng-model="data.verificationCode", ng-required="true")
                     div.submit-container
                         button.ui.red.button(type="submit", ng-disabled="!corpInfoForm.$valid") 下一步
         div.review-container(ng-if="status == 1")

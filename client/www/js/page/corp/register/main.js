@@ -13,14 +13,14 @@ angular
             secondResendCAPTCHA: 60 * 5
         };
 
-        var $corpRegister = undefined,
-            $form = undefined,
-            configForm = undefined,
-            $btnSendCAPTCHA = undefined,
-            $inputTelephone = undefined,
-            timerSendCAPTCHA = undefined,
-            $countdown = undefined,
-            timerCountdown = undefined;
+        var $form,
+            configForm,
+            $btnSendCAPTCHA,
+            $inputTelephone,
+            timerSendCAPTCHA,
+            $countdown,
+            timerCountdown
+            ;
 
         $scope.status = -1;
 
@@ -62,12 +62,11 @@ angular
                 default:
                     break;
             }
-            ;
         }
 
         $scope.edit = function () {
             callbackGetStatus(0);
-        }
+        };
 
         $scope.sendCAPTCHA = function () {
             if ((!$form || !$form.length) && ($scope.$form && $scope.$form.length)) {
@@ -107,26 +106,29 @@ angular
             });
             isValid = $form.form('is valid');
             $form.form(configForm);
+
+
+            function callbackSendCAPTCHA() {
+                $btnSendCAPTCHA.removeClass('loading').addClass('disabled').html(config.secondResendCAPTCHA);
+                timerSendCAPTCHA = $interval(function () {
+                    var n = parseInt($btnSendCAPTCHA.html());
+                    if (n) {
+                        $btnSendCAPTCHA.html(n - 1);
+                    } else {
+                        $interval.cancel(timerSendCAPTCHA);
+                        timerSendCAPTCHA = undefined;
+                        $btnSendCAPTCHA.removeClass('disabled').html($btnSendCAPTCHA.attr('data-text-resend'));
+                    }
+                }, 1000);
+                $scope.$on('$destroy', function () {
+                    $interval.cancel(timerSendCAPTCHA);
+                    timerSendCAPTCHA = undefined;
+                });
+            }
+
             if (isValid) {
                 var valTelephone = $inputTelephone.val();
                 $btnSendCAPTCHA.addClass('loading');
-                function callbackSendCAPTCHA() {
-                    $btnSendCAPTCHA.removeClass('loading').addClass('disabled').html(config.secondResendCAPTCHA);
-                    timerSendCAPTCHA = $interval(function () {
-                        var n = parseInt($btnSendCAPTCHA.html());
-                        if (n) {
-                            $btnSendCAPTCHA.html(n - 1);
-                        } else {
-                            $interval.cancel(timerSendCAPTCHA);
-                            timerSendCAPTCHA = undefined;
-                            $btnSendCAPTCHA.removeClass('disabled').html($btnSendCAPTCHA.attr('data-text-resend'));
-                        }
-                    }, 1000);
-                    $scope.$on('$destroy', function () {
-                        $interval.cancel(timerSendCAPTCHA);
-                        timerSendCAPTCHA = undefined;
-                    });
-                }
 
                 $timeout(callbackSendCAPTCHA, 2000);
             }
@@ -142,13 +144,15 @@ angular
             if ($form.hasClass('loading')) {
                 return false;
             }
+
+            function post() {
+                $form.removeClass('loading');
+                callbackGetStatus(1);
+            }
+            
             if ($form.form('is valid')) {
                 var vals = $form.form('get values');
                 $form.addClass('loading');
-                function post() {
-                    $form.removeClass('loading');
-                    callbackGetStatus(1);
-                }
 
                 $timeout(post, 2000);
             }

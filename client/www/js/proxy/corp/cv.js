@@ -53,7 +53,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             var param = {
                 applierList: [cv]
             };
-            return service.post(url, parma);
+            return service.post(url, param);
         };
         me.restoreCV = function(cv){
             var url = '/corp-service-proxy/jobapply/restoreCandidate';
@@ -75,7 +75,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
 member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
             }, idParam);
             return service.post(url, param);
-        }
+        };
         me.init = function() {
             // Get resources
             var resourcePromises = resourceSet.map(function(value){
@@ -88,5 +88,5 @@ member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
                 });
             });
         };
-    }]);
+    }])
 ;

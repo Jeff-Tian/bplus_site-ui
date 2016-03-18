@@ -11,16 +11,16 @@ angular.module('corpModule')
         var endDateString = '';
         function getYearAndMonth(dataString) {
             var date = new Date(dataString);
-            return date.getFullYear() + '/' + (date.getMonth() + 1)
+            return date.getFullYear() + '/' + (date.getMonth() + 1);
         }
         startDateString = getYearAndMonth(startDate);
-        if (endDate == "") {
+        if (endDate === "") {
             endDateString = '至今';
         } else {
             endDateString = getYearAndMonth(endDate);
         }
         return startDateString + "~" + endDateString;
-    }
+    };
     var getData = function(currentPage){
         $scope.isLoading = true;
         //Get data according $scope.displayData.currentTab;
@@ -129,7 +129,7 @@ angular.module('corpModule')
 
     $scope.resumeDetail = {
 
-    }
+    };
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
         if ($scope.displayData.currentTab !== target) {
