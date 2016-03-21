@@ -159,7 +159,7 @@ angular
             return false;
         };
     }])
-    .directive('corpRegisterForm', ['$rootScope', function ($rootScope) {
+    .directive('corpRegisterForm', ['$rootScope', 'service', function ($rootScope, service) {
         return {
             //scope: { '*': '=' },
             link: function (scope, element, attrs) {
@@ -229,9 +229,59 @@ angular
                 $form.form(configForm);
                 //$form.on('submit', scope.submit);
 
+                scope.saving = false;
                 scope.saveBasicCorpInfo = function () {
-                    scope.data.license;
                     console.log(scope.data);
+
+                    service.executePromiseAvoidDuplicate(scope, 'saving', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
+                            file: scope.data.license,
+                            'x:category': 'upload-' + Math.random().toString()
+                        }, {
+                            transformRequest: function (data, getHeaders) {
+                                function appendFormData(formData, key, value) {
+                                    if (value instanceof File) {
+                                        formData.append(key, value, value.name);
+                                        return;
+                                    }
+
+                                    if (value instanceof Blob) {
+                                        formData.append(key, value, key + '.png');
+                                        return;
+                                    }
+
+                                    if (typeof value !== 'undefined') {
+                                        formData.append(key, value);
+                                        return;
+                                    }
+                                }
+
+                                var headers = getHeaders();
+                                // To force a header like the following:
+                                // Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryKqqmv0GHZUiUdzIx
+                                headers['Content-Type'] = undefined;
+                                var formData = new FormData();
+                                angular.forEach(data, function (value, key) {
+                                    if (value instanceof Array) {
+                                        for (var i = 0; i < value.length; i++) {
+                                            appendFormData(formData, key + '[' + i + ']', value[i]);
+                                        }
+                                    } else {
+                                        appendFormData(formData, key, value);
+                                    }
+                                });
+
+                                return formData;
+                            }
+                        })
+                            .then(function (data) {
+                                console.log(data);
+                            })
+                            .then(function (reason) {
+                                scope.errorMessages = [reason];
+                            })
+                            ;
+                    });
                 };
             }
         };

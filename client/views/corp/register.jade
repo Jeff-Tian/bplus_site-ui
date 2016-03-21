@@ -47,7 +47,8 @@ block content
                 div.column.tel 客服热线：4009-200-152
         div(ng-if="status == 0")
             div.frm-container
-                form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo()")
+                form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo()", ng-class="{'loading': saving, error: errorMessages.length}")
+                    form-error
                     div.field.required
                         label 公司名称
                         input(type="text", name="corporation", placeholder="请务必和营业执照一致", data-prompt="请输入公司名称", ng-model="data.companyName", ng-required="true")

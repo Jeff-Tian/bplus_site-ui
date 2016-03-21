@@ -38,7 +38,8 @@ module.exports = {
     corp: {
         member: {
             register: '/corp-service-proxy/member/register',
-            login: '/corp-service-proxy/member/login'
+            login: '/corp-service-proxy/member/login',
+            uploadLicense: '/corp-service-proxy/member/upload-license'
         },
         jobapply: {
             todo: '/corp-service-proxy/jobapply/todo',

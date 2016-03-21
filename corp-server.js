@@ -131,6 +131,7 @@ function filterConfig(config) {
     filtered.competitions = config.competitions;
     filtered.mode = getMode();
     filtered.durableMessageSource = config.durableMessageSource;
+    filtered.upload = config.upload.public;
 
     return filtered;
 }

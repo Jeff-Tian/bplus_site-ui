@@ -25,4 +25,10 @@ module.exports = require('express').Router()
             return false;
         }
     }))
+    .put(corpServiceUrls.member.uploadLicense, proxy({
+        host: config.upload.public.host,
+        port: config.upload.public.port,
+        path: '/upload/bplus-corp-resource',
+        method: 'PUT'
+    }))
 ;
