@@ -147,7 +147,7 @@ function advancedProxy(req, res, next, settings) {
                         request.write('\r\n');
                     }
 
-                    request.end('--' + boundaryKey + '--');
+                    request.write('--' + boundaryKey + '--');
                 }
             } else {
                 req.dualLog('proxying with no data.');

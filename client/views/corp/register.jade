@@ -47,6 +47,7 @@ block content
                 div.column.tel 客服热线：4009-200-152
         div(ng-if="status == 0")
             div.frm-container
+                link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/module/form.css?#{cdn.version}")
                 form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo()", ng-class="{'loading': saving, error: errorMessages.length}")
                     form-error
                     div.field.required
@@ -108,3 +109,5 @@ block content
                 button.ui.red.button(ng-click="edit();") 立即修改
 block extraJs
     script(src="#{cdn.normal}js/page/corp/register/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/directives/form-error.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")

@@ -20,9 +20,13 @@
   },
   "upload": {
     "public": {
-      "host": "localhost",
+      "host": "uat.bridgeplus.cn",
       "port": 10003,
       "code": "HCD_S1"
+    },
+    "inner": {
+      "host": "uat.bridgeplus.cn",
+      "port": 10003
     }
   },
   "sso": {

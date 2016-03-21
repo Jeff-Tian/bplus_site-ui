@@ -4,7 +4,7 @@ angular.module('bridgeplus.corp')
             getErrorMessage: function (reason) {
                 var errorCode = 'service-' + reason.code;
                 var errorMessage = $filter('translate')(errorCode);
-                if (errorMessage === errorCode) {
+                if (errorMessage === errorCode || !errorMessage) {
                     errorMessage = reason.message;
                 }
 

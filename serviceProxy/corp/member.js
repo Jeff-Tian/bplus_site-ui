@@ -17,6 +17,12 @@ module.exports = require('express').Router()
             if (upstreamJson.isSuccess) {
                 sso.setAuthToken(originalResponse, upstreamJson.result.token, originalRequest.body.remember, upstreamJson.result.member_id);
 
+                originalResponse.cookie('corp_id', upstreamJson.result.company.company_id, {
+                    expires: 0,
+                    path: '/',
+                    httpOnly: false
+                });
+
                 if (sso.jumpToReturnUrl(originalRequest, originalResponse)) {
                     return undefined;
                 }
@@ -25,7 +31,7 @@ module.exports = require('express').Router()
             return false;
         }
     }))
-    .post(corpServiceUrls.member.uploadLicense, function (req, res, next) {
+    .put(corpServiceUrls.member.uploadLicense, function (req, res, next) {
         req.files = {};
 
         req.busboy.on('file', function (fieldName, file, fileName, encoding, mimeType) {
@@ -71,12 +77,24 @@ module.exports = require('express').Router()
         req.body.file = req.files.file;
         next();
     }, proxy({
-        host: config.upload.public.host,
-        port: config.upload.public.port,
+        host: config.upload.inner.host,
+        port: config.upload.inner.port,
         path: '/upload/bplus-corp-resource',
         method: 'PUT',
         headers: {
             'Content-Type': 'multipart/form-data; boundary=' + Math.random().toString(16)
+        },
+        responseInterceptor: function (originalRes, upstreamJson, originalReq, next) {
+            originalRes.json({
+                isSuccess: true,
+                result: upstreamJson
+            });
+
+            return undefined;
         }
+    }))
+    .post(corpServiceUrls.member.saveBasicInfo, proxy.proxyBPlus({
+        path: '/corp/member/savebasic',
+        method: 'POST'
     }))
 ;

@@ -159,7 +159,7 @@ angular
             return false;
         };
     }])
-    .directive('corpRegisterForm', ['$rootScope', 'service', function ($rootScope, service) {
+    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, serviceErrorParser, DeviceHelper) {
         return {
             //scope: { '*': '=' },
             link: function (scope, element, attrs) {
@@ -227,14 +227,11 @@ angular
                         }
                     };
                 $form.form(configForm);
-                //$form.on('submit', scope.submit);
 
                 scope.saving = false;
                 scope.saveBasicCorpInfo = function () {
-                    console.log(scope.data);
-
                     service.executePromiseAvoidDuplicate(scope, 'saving', function () {
-                        return service.post($rootScope.config.serviceUrls.corp.member.uploadLicense, {
+                        return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
                             file: scope.data.license,
                             'x:category': 'upload-' + Math.random().toString()
                         }, {
@@ -273,15 +270,30 @@ angular
 
                                 return formData;
                             }
+                        });
+                    })
+                        .then(function (data) {
+                            scope.data.licenseInfo = data;
+
+                            return service.executePromiseAvoidDuplicate(scope, 'saving', function () {
+                                return service.post($rootScope.config.serviceUrls.corp.member.saveBasicInfo, {
+                                    name: scope.data.companyName,
+                                    company_id: DeviceHelper.getCookie('corp_id'),
+                                    location: scope.data.city,
+                                    contact: scope.data.contact,
+                                    contact_position: scope.data.position,
+                                    contact_mail: scope.data.email,
+                                    contact_mobile: scope.data.mobile,
+                                    business_license_url: '//' + data.host + '/' + data.key
+                                });
+                            });
                         })
-                            .then(function (data) {
-                                console.log(data);
-                            })
-                            .then(function (reason) {
-                                scope.errorMessages = [reason];
-                            })
-                            ;
-                    });
+                        .then(function (result) {
+                            console.log(result);
+                        }, function (reason) {
+                            scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                        })
+                    ;
                 };
             }
         };

@@ -4,7 +4,7 @@ angular.module('corpModule')
         return {
             template: '' +
             '\
-            <link rel="stylesheet" type="text/css"        href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
+            <link rel="stylesheet" type="text/css" href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
             <form class="ui large fluid form register" ng-class="{\'loading\': submitting, error: errorMessages.length}" ng-submit="tryRegister($event)" name="registerForm">\
                 <form-error></form-error>\
                 <div class="ui">\
