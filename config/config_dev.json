@@ -20,7 +20,7 @@
   },
   "upload": {
     "public": {
-      "host": "uat.bridgeplus.cn",
+      "host": "localhost",
       "port": 10003,
       "code": "HCD_S1"
     }

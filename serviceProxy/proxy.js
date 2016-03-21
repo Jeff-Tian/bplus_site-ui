@@ -91,7 +91,7 @@ function advancedProxy(req, res, next, settings) {
                 next(err);
             });
         } else {
-            res.writeHead(response.statusCode, response.headers); 
+            res.writeHead(response.statusCode, response.headers);
             response.pipe(res);
         }
     });
@@ -114,10 +114,43 @@ function advancedProxy(req, res, next, settings) {
             }
 
             if (data) {
-                req.dualLog('proxying data: ' + JSON.stringify(data));
-                request.write(JSON.stringify(data));
+                var multipartFlag = 'multipart/form-data; boundary=';
+                var contentType = options.headers['Content-Type'];
+
+                if (contentType.indexOf(multipartFlag) < 0) {
+                    req.dualLog('proxying data: ' + JSON.stringify(data));
+                    request.write(JSON.stringify(data));
+                } else {
+                    req.dualLog('Posting data...');
+                    var boundaryKey = contentType.replace(multipartFlag, '').replace('"', '');
+                    request.setHeader('Content-Type', multipartFlag + '"' + boundaryKey + '"');
+
+                    for (var p in data) {
+                        console.log('typeof ' + p + ' is: ');
+                        console.log(typeof data[p]);
+
+                        if (data[p] instanceof Object && data[p].buffer) {
+                            request.write(
+                                '--' + boundaryKey + '\r\n'
+                                + 'Content-Disposition: form-data; name="' + p + '"; filename="' + data[p].filename + '"\r\n'
+                                + 'Content-Type: ' + data[p].mimetype + '\r\n\r\n'
+                            );
+                            request.write(data[p].buffer);
+                        } else {
+                            request.write(
+                                '--' + boundaryKey + '\r\n'
+                                + 'Content-Disposition: form-data; name="' + p + '";' + '\r\n\r\n'
+                            );
+                            request.write(data[p]);
+                        }
+
+                        request.write('\r\n');
+                    }
+
+                    request.end('--' + boundaryKey + '--');
+                }
             } else {
-                rq.dualLog('proxying with no data.');
+                req.dualLog('proxying with no data.');
             }
         }
     }

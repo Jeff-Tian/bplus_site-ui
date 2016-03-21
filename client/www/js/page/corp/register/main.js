@@ -234,10 +234,14 @@ angular
                     console.log(scope.data);
 
                     service.executePromiseAvoidDuplicate(scope, 'saving', function () {
-                        return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
+                        return service.post($rootScope.config.serviceUrls.corp.member.uploadLicense, {
                             file: scope.data.license,
                             'x:category': 'upload-' + Math.random().toString()
                         }, {
+                            headers: {
+                                'X-Requested-With': undefined,
+                                'Content-Type': undefined
+                            },
                             transformRequest: function (data, getHeaders) {
                                 function appendFormData(formData, key, value) {
                                     if (value instanceof File) {
@@ -256,10 +260,6 @@ angular
                                     }
                                 }
 
-                                var headers = getHeaders();
-                                // To force a header like the following:
-                                // Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryKqqmv0GHZUiUdzIx
-                                headers['Content-Type'] = undefined;
                                 var formData = new FormData();
                                 angular.forEach(data, function (value, key) {
                                     if (value instanceof Array) {
