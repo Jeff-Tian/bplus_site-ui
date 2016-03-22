@@ -8,7 +8,19 @@ angular
             }
         };
     }])
-    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope) {
+    .value('corpStatus', {
+        unknown: '-1',
+        init: 'init',
+        audit: 'audit',
+        pass: 'passed',
+        fail: 'fail'
+    })
+    .value('events', {
+        corpStatus: {
+            updated: 'corpStatus:updated'
+        }
+    })
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', 'corpStatus', 'msgBus', 'events', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope, DeviceHelper, corpStatus, msgBus, events) {
         var config = {
             secondResendCAPTCHA: 60 * 1
         };
@@ -22,24 +34,27 @@ angular
             timerCountdown
             ;
 
-        $scope.status = -1;
+        $scope.status = corpStatus.unknown;
 
         function getStatus() {
-            callbackGetStatus(0);
+            callbackGetStatus(DeviceHelper.getCookie('corp_status'));
         }
 
-        $timeout(getStatus, 1000);
+        getStatus();
+
+        msgBus.onMsg(events.corpStatus.updated, $scope, function ($events, status) {
+            console.log('on this msg: ', status);
+            callbackGetStatus(status);
+        });
 
         function callbackGetStatus(status) {
             switch (status) {
-                case (0):
-                    $scope.status = 0;
+                case corpStatus.init:
+                case corpStatus.audit:
+                    $scope.status = status;
                     break;
-                case (1):
-                    $scope.status = 1;
-                    break;
-                case (2):
-                    $scope.status = 2;
+                case corpStatus.pass:
+                    $scope.status = status;
                     $scope.$apply();
                     if ((!$countdown || !$countdown.length) && ($scope.$countdown && $scope.$countdown.length)) {
                         $countdown = $scope.$countdown;
@@ -56,8 +71,8 @@ angular
                         }, 1000);
                     }
                     break;
-                case (3):
-                    $scope.status = 3;
+                case corpStatus.fail:
+                    $scope.status = status;
                     break;
                 default:
                     break;
@@ -65,7 +80,7 @@ angular
         }
 
         $scope.edit = function () {
-            callbackGetStatus(0);
+            callbackGetStatus(corpStatus.init);
         };
 
         $scope.sendCAPTCHA = function () {
@@ -176,7 +191,7 @@ angular
             return false;
         };
     }])
-    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, serviceErrorParser, DeviceHelper) {
+    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', '$q', '$timeout', 'corpStatus', 'msgBus', 'events', function ($rootScope, service, serviceErrorParser, DeviceHelper, $q, $timeout, corpStatus, msgBus, events) {
         return {
             //scope: { '*': '=' },
             link: function (scope, element, attrs) {
@@ -255,46 +270,53 @@ angular
                     }
 
                     service.executePromiseAvoidDuplicate(scope, 'saving', function () {
-                        return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
-                            file: scope.data.license,
-                            'x:category': 'upload-' + Math.random().toString()
-                        }, {
-                            headers: {
-                                'X-Requested-With': undefined,
-                                'Content-Type': undefined
-                            },
-                            transformRequest: function (data, getHeaders) {
-                                function appendFormData(formData, key, value) {
-                                    if (value instanceof File) {
-                                        formData.append(key, value, value.name);
-                                        return;
-                                    }
-
-                                    if (value instanceof Blob) {
-                                        formData.append(key, value, key + '.png');
-                                        return;
-                                    }
-
-                                    if (typeof value !== 'undefined') {
-                                        formData.append(key, value);
-                                        return;
-                                    }
-                                }
-
-                                var formData = new FormData();
-                                angular.forEach(data, function (value, key) {
-                                    if (value instanceof Array) {
-                                        for (var i = 0; i < value.length; i++) {
-                                            appendFormData(formData, key + '[' + i + ']', value[i]);
+                        if (!scope.data.licenseInfo) {
+                            return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
+                                file: scope.data.license,
+                                'x:category': 'upload-' + Math.random().toString()
+                            }, {
+                                headers: {
+                                    'X-Requested-With': undefined,
+                                    'Content-Type': undefined
+                                },
+                                transformRequest: function (data, getHeaders) {
+                                    function appendFormData(formData, key, value) {
+                                        if (value instanceof window.File) {
+                                            formData.append(key, value, value.name);
+                                            return;
                                         }
-                                    } else {
-                                        appendFormData(formData, key, value);
-                                    }
-                                });
 
-                                return formData;
-                            }
-                        });
+                                        if (value instanceof window.Blob) {
+                                            formData.append(key, value, key + '.png');
+                                            return;
+                                        }
+
+                                        if (typeof value !== 'undefined') {
+                                            formData.append(key, value);
+                                            return;
+                                        }
+                                    }
+
+                                    var formData = new window.FormData();
+                                    angular.forEach(data, function (value, key) {
+                                        if (value instanceof Array) {
+                                            for (var i = 0; i < value.length; i++) {
+                                                appendFormData(formData, key + '[' + i + ']', value[i]);
+                                            }
+                                        } else {
+                                            appendFormData(formData, key, value);
+                                        }
+                                    });
+
+                                    return formData;
+                                }
+                            });
+                        } else {
+                            console.log('licenseInfo:', scope.data.licenseInfo);
+                            var deferred = $q.defer();
+                            deferred.resolve(scope.data.licenseInfo);
+                            return deferred.promise;
+                        }
                     })
                         .then(function (data) {
                             scope.data.licenseInfo = data;
@@ -308,14 +330,20 @@ angular
                                     contact_position: scope.data.position,
                                     contact_mail: scope.data.email,
                                     contact_mobile: scope.data.mobile,
-                                    business_license_url: '//' + data.host + '/' + data.key
+                                    business_license_url: '//' + data.host + '/' + data.key,
+                                    verificationCode: scope.data.verificationCode
                                 });
                             });
                         })
                         .then(function (result) {
                             console.log(result);
+                            DeviceHelper.setCookie('corp_status', corpStatus.audit);
+                            msgBus.emitMsg(events.corpStatus.updated, corpStatus.audit);
                         }, function (reason) {
-                            scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                            $rootScope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                            $timeout(function () {
+                                $form.addClass('error');
+                            });
                         })
                     ;
                 };
@@ -343,6 +371,6 @@ angular
                     });
                 });
             }
-        }
+        };
     }])
 ;

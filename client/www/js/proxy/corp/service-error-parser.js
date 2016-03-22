@@ -9,6 +9,10 @@ angular.module('bridgeplus.corp')
                     errorMessage = reason.message;
                 }
 
+                if (!errorMessage && typeof reason === 'string') {
+                    errorMessage = reason;
+                }
+
                 return errorMessage;
             }
         };

@@ -12,7 +12,7 @@ div(class="ui b-header")
                             img(ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '#{cdn.normal}img/male_default.png?#{cdn.version}' : '#{cdn.normal}img/female_default.png?#{cdn.version}')}}", class="ui circular image avatar")
                             a(class="center aligned item", href="/profile") #{__('Profile')}
                             a(class="center aligned item", href="/account-setting") #{__('AccountSetting')}
-                            a(class="center aligned item", ng-click="signOut()") #{__('SignOut')}
+                            a(class="center aligned item", ng-click="corpSignOut()") #{__('SignOut')}
                 else
                     a(href="/#login", class="ui button") #{__('SignIn')}
                     a(href="/#register", class="ui button") #{__('SignUp')}

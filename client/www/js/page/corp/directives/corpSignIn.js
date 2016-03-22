@@ -1,5 +1,5 @@
 angular.module('corpModule')
-    .directive('corpSignIn', ['service', 'serviceErrorParser', '$rootScope', 'queryParser', function (service, serviceErrorParser, $rootScope, queryParser) {
+    .directive('corpSignIn', ['service', 'serviceErrorParser', '$rootScope', 'queryParser', 'DeviceHelper', function (service, serviceErrorParser, $rootScope, queryParser, DeviceHelper) {
         return {
             template: '' +
             '\
@@ -59,7 +59,11 @@ angular.module('corpModule')
                         })
                             .then(function (result) {
                                 console.log(result);
-                                //window.location.href = '/';
+                                if (result.company.status === 'pass' && DeviceHelper.getCookie('corp_status') !== 'audit') {
+                                    window.location.href = '/';
+                                } else {
+                                    window.location.href = '/register?company_id=' + result.company.company_id;
+                                }
                             }, function (reason) {
                                 $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
                             });

@@ -17,11 +17,14 @@ module.exports = require('express').Router()
             if (upstreamJson.isSuccess) {
                 sso.setAuthToken(originalResponse, upstreamJson.result.token, originalRequest.body.remember, upstreamJson.result.member_id);
 
-                originalResponse.cookie('corp_id', upstreamJson.result.company.company_id, {
+                var cookieSetting = {
                     expires: 0,
                     path: '/',
                     httpOnly: false
-                });
+                };
+
+                originalResponse.cookie('corp_id', upstreamJson.result.company.company_id, cookieSetting);
+                originalResponse.cookie('corp_status', upstreamJson.result.company.status, cookieSetting);
 
                 if (sso.jumpToReturnUrl(originalRequest, originalResponse)) {
                     return undefined;
@@ -93,8 +96,22 @@ module.exports = require('express').Router()
             return undefined;
         }
     }))
-    .post(corpServiceUrls.member.saveBasicInfo, proxy.proxyBPlus({
+    .post(corpServiceUrls.member.saveBasicInfo, function (req, res, next) {
+        req.body.mobile = req.body.contact_mobile;
+
+        next();
+    }, require('../sms').validate, proxy.proxyBPlus({
         path: '/corp/member/savebasic',
         method: 'POST'
+    }))
+    .delete(corpServiceUrls.member.signOut, require('../sso').createLogoutProcessor(function (req, res, next) {
+        var deleteCookieOption = {
+            expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+            path: '/',
+            httpOnly: true
+        };
+
+        res.cookie('corp_id', '', deleteCookieOption);
+        //res.cookie('corp_status', '', deleteCookieOption);
     }))
 ;
