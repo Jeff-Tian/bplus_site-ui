@@ -104,7 +104,7 @@
 
                     if ($scope.isSignUpFormPartiallyValid()) {
                         service.executePromiseAvoidDuplicate($scope, 'sendingMobileCode', function () {
-                            return service.post('/service-proxy/sms/send', $scope.signUpData)
+                            return service.post(angular.bplus.config.serviceUrls.general.sms.send, $scope.signUpData)
                                 .then(function (res) {
                                     pollUpdateButtonText(function () {
                                         $scope.refreshCaptcha(function () {

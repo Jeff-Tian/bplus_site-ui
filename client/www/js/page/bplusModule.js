@@ -31,4 +31,13 @@ angular.module('bplusModule', [
             }
         };
     }])
+    .run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
+        $rootScope.$watch('message', function (newValue, oldValue) {
+            if (newValue) {
+                $timeout(function () {
+                    delete $rootScope.message;
+                }, 3000);
+            }
+        });
+    }])
 ;

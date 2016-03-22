@@ -8,9 +8,9 @@ angular
             }
         };
     }])
-    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', function ($scope, $window, $interval, $q, $timeout) {
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope) {
         var config = {
-            secondResendCAPTCHA: 60 * 5
+            secondResendCAPTCHA: 60 * 1
         };
 
         var $form,
@@ -126,11 +126,28 @@ angular
                 });
             }
 
+            $scope.sendingVerificationCode = false;
             if (isValid) {
                 var valTelephone = $inputTelephone.val();
                 $btnSendCAPTCHA.addClass('loading');
 
-                $timeout(callbackSendCAPTCHA, 2000);
+                service.executePromiseAvoidDuplicate($scope, 'sendingVerificationCode', function () {
+                    return service.put($rootScope.config.serviceUrls.corp.sms.sendWithoutCaptcha, {
+                        mobile: valTelephone
+                    });
+                })
+                    .then(function (result) {
+                        console.log(result);
+                        delete $scope.errorMessages;
+                        $rootScope.message = '短信验证码已发送至 ' + valTelephone + ', 请注意查收';
+                    })
+                    .then(null, function (reason) {
+                        $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                    })
+                    .finally(function () {
+                        callbackSendCAPTCHA();
+                    })
+                ;
             }
         };
 
@@ -229,7 +246,14 @@ angular
                 $form.form(configForm);
 
                 scope.saving = false;
-                scope.saveBasicCorpInfo = function () {
+                scope.saveBasicCorpInfo = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+
+                    if (!$form.form('is valid')) {
+                        return false;
+                    }
+
                     service.executePromiseAvoidDuplicate(scope, 'saving', function () {
                         return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
                             file: scope.data.license,

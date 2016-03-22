@@ -6,10 +6,10 @@ html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light-grey-background")
         div#my-header(ng-controller="AppCtrl")
-            include message_holder
             include header
 
         div(ng-app="corpModule")
+            include message_holder
             block content
 
         div#my-footer

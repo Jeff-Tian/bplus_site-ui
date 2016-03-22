@@ -51,10 +51,19 @@ module.exports = {
             unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
         },
         candidate: {
-            resume: '/corp-service-proxy/candidate/resume',
+            resume: '/corp-service-proxy/candidate/resume'
         },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications'
+        },
+        sms: {
+            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha'
+        }
+    },
+
+    general: {
+        sms: {
+            send: '/service-proxy/sms/send'
         }
     }
 };

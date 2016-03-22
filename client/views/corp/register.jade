@@ -48,8 +48,8 @@ block content
         div(ng-if="status == 0")
             div.frm-container
                 link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/module/form.css?#{cdn.version}")
-                form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo()", ng-class="{'loading': saving, error: errorMessages.length}")
-                    form-error
+                form.ui.form(corp-register-form, name="corpInfoForm", ng-submit="saveBasicCorpInfo($event)", ng-class="{'loading': saving, error: errorMessages.length}")
+                    form-error(scope="$parent")
                     div.field.required
                         label 公司名称
                         input(type="text", name="corporation", placeholder="请务必和营业执照一致", data-prompt="请输入公司名称", ng-model="data.companyName", ng-required="true")
