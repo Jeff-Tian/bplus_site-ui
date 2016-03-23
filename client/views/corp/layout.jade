@@ -13,7 +13,8 @@ html
             block content
 
         div#my-footer
-            include ../../www/view-partial/footer.html
+            include footer
+            include ../../www/view-partial/js.html
             script(src="#{cdn.normal}js/widget/main.js?#{cdn.version}")
             script(src="#{cdn.normal}js/widget/pagination.js?#{cdn.version}")
             script(src="#{cdn.normal}js/proxy/corp/main.js")
@@ -25,4 +26,4 @@ html
                     angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
                 });
             block extraJs
-            include ../../www/view-partial/external-js.html
+            //include ../../www/view-partial/external-js.html
