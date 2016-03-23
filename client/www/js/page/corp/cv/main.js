@@ -6,7 +6,8 @@ angular.module('corpModule')
         DELETED : 'deleted'
     };
     var FIRST_PAGE = 1;
-    var getData = function(currentPage){
+    var getData = function(currentPage, defautlSort){
+        $scope.isSortDesc = defautlSort ? true : false;
         $scope.isLoading = true;
         //Get data according $scope.displayData.currentTab;
         switch($scope.displayData.currentTab) {
@@ -19,6 +20,8 @@ angular.module('corpModule')
                 break;
         }
         var param = {
+            champion: $scope.option.win,
+            highMatch: $scope.option.match,
             sortDirection: $scope.isSortDesc ? 'desc' : 'asc'
          };
         return cvService.getCV($scope.displayData.currentTab, param).then(function(ret){
@@ -119,30 +122,40 @@ angular.module('corpModule')
         if ($scope.displayData.currentTab !== target) {
             $scope.displayData.currentTab = target;
             $scope.option.type = "";
-            $scope.isSortDesc = true;
             $(".corp-cv .ui.checkbox").checkbox("set unchecked");
-            getData(FIRST_PAGE);
+            getData(FIRST_PAGE, true);
         }
+    };
+    $scope.payCV = function() {
+        getData(FIRST_PAGE, true);
+    };
+    $scope.printCV = function() {
+        var targetURL = "\printcv";
+        window.open(targetURL); 
     };
     $scope.isLoading = true;
     cvService.init().then(function(){
-        return getData(FIRST_PAGE);
+        return getData(FIRST_PAGE, true);
     }).then(function(){
         $timeout(function(){
             $(".corp-cv .ui.checkbox.option-win").checkbox({
                 onChecked: function() {
                     $scope.option.win = true;
+                    getData(FIRST_PAGE, true);
                 },
                 onUnchecked: function() {
                     $scope.option.win = false;
+                    getData(FIRST_PAGE, true);
                 }
             });
             $(".corp-cv .ui.checkbox.option-match").checkbox({
                 onChecked: function() {
                     $scope.option.match = true;
+                    getData(FIRST_PAGE, true);
                 },
                 onUnchecked: function() {
                     $scope.option.match = false;
+                    getData(FIRST_PAGE, true);
                 }
             });
             $(".corp-cv .menu .item").tab();
