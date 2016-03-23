@@ -3,21 +3,17 @@ div(class="ui b-header")
         div(class="ui container")
             div(class="right item")
                 if typeof hcd_user !== 'undefined' && hcd_user.member_id
-                    div(class="ui right dropdown b-profile item", ng-cloak="")
-                        img(ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-minor' : '#{cdn.normal}img/anonymous_default.png?#{cdn.version}'}}", class="ui circular image avatar")
-                        span(class="ui button")
-                            | {{memberInfo.displayName}}
-                            i(class="large angle down icon")
-                        div(class="ui inverted vertical center aligned b-profile menu")
-                            img(ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '#{cdn.normal}img/male_default.png?#{cdn.version}' : '#{cdn.normal}img/female_default.png?#{cdn.version}')}}", class="ui circular image avatar")
-                            a(class="center aligned item", href="/profile") #{__('Profile')}
-                            a(class="center aligned item", href="/account-setting") #{__('AccountSetting')}
-                            a(class="center aligned item", ng-click="corpSignOut()") #{__('SignOut')}
+                    a.ui.button(ng-cloak="") 您好, {{corpBasicInfo.companyName}}
+                    a(class="center ui button", href="")
+                        i.setting.icon
+                        | 账户管理
+                    a(class="center ui button", ng-click="corpSignOut()")
+                        i.power.icon
+                        | #{__('安全退出')}
                 else
                     a(href="/#login", class="ui button") #{__('SignIn')}
                     a(href="/#register", class="ui button") #{__('SignUp')}
-
-                a(class="ui button", ng-href="#{otherLocaleLink}{{hash}}") #{__(otherLocale)}
+                    a(class="ui button", ng-href="#{otherLocaleLink}{{hash}}") #{__(otherLocale)}
     div(class="ui menu b-header-nav")
         div(class="ui container")
             a(href="/", class="b-header-logo")

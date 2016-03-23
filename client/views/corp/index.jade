@@ -1,6 +1,8 @@
 block content
     if !hcd_user
         div
+            a(name="/register")
+            a(name="/login")
             corp-sign-in-widget
     div.pusher
         include ../partial/carousel.html
@@ -49,7 +51,7 @@ block content
             div(class="ui horizontal divider")
             div(class="ui center aligned container")
                 p 还在等什麽 ? 快速瞭解我们的求才服务
-                button(class="ui red button", style="padding-left: 4em; padding-right: 4em;") 立即加入
+                a(class="ui red button", style="padding-left: 4em; padding-right: 4em;", href="#/register") 立即加入
 
 block extraJs
     script(src="#{cdn.normal}bower/owl.carousel/dist/owl.carousel.js?#{cdn.version}")
