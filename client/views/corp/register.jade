@@ -1,6 +1,6 @@
 block content
     div.ui.container.crop-container(ng-controller="corpRegister", corp-register)
-        div(ng-if="status == -1 || fetching", ng-cloak="")
+        div(ng-if="status == -1 || loadingData", ng-cloak="")
             div.ui.loading.form
                 span &nbsp;
         div.step-container(ng-if="status != -1", ng-cloak="")

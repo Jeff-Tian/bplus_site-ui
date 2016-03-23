@@ -20,7 +20,7 @@ angular
             updated: 'corpStatus:updated'
         }
     })
-    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', 'corpStatus', 'msgBus', 'events', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope, DeviceHelper, corpStatus, msgBus, events) {
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', 'corpStatus', 'msgBus', 'events', 'corpModuleEvents', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope, DeviceHelper, corpStatus, msgBus, events, corpModuleEvents) {
         var config = {
             secondResendCAPTCHA: 60 * 1
         };
@@ -34,26 +34,10 @@ angular
             timerCountdown
             ;
 
-        $scope.fetching = false;
-        service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
-            return service.get($rootScope.config.serviceUrls.corp.member.basicInfo, {
-                params: {
-                    company_id: DeviceHelper.getCookie('corp_id')
-                }
-            }).then(function (result) {
-                $scope.data = {
-                    companyName: result.name,
-                    city: result.location,
-                    license: {name: result.business_license_url},
-                    licenseInfo: result.business_license_url ? result.business_license_url : undefined,
-                    contact: result.contact,
-                    position: result.contact_position,
-                    email: result.contact_mail,
-                    mobile: result.contact_mobile
-                };
-
-                callbackGetStatus(result.register_status);
-            });
+        msgBus.onMsg(corpModuleEvents.corpInfo.loaded, $scope, function (loadEvent, data) {
+            $scope.data = data;
+            callbackGetStatus(data.auditStatus);
+            console.log('reload page by status ', data.auditStatus);
         });
 
         $scope.status = corpStatus.unknown;
