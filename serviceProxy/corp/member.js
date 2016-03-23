@@ -2,6 +2,7 @@ var proxy = require('../proxy');
 var leaveTrimmer = require('../../utils/leaveTrimmer');
 var config = require('../../config');
 var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-proxy/member');
+var membership = require('../membership');
 
 module.exports = require('express').Router()
     .put(corpServiceUrls.member.register, require('../captcha').validate, proxy.proxyBPlus({
@@ -96,12 +97,19 @@ module.exports = require('express').Router()
             return undefined;
         }
     }))
-    .post(corpServiceUrls.member.saveBasicInfo, function (req, res, next) {
+    .post(corpServiceUrls.member.basicInfo, function (req, res, next) {
         req.body.mobile = req.body.contact_mobile;
 
         next();
     }, require('../sms').validate, proxy.proxyBPlus({
         path: '/corp/member/savebasic',
+        method: 'POST'
+    }))
+    .get(corpServiceUrls.member.basicInfo, membership.ensureAuthenticated, function (req, res, next) {
+        req.body.company_id = req.query.company_id;
+        next();
+    }, proxy.proxyBPlus({
+        path: '/corp/member/loadbasic',
         method: 'POST'
     }))
     .delete(corpServiceUrls.member.signOut, require('../sso').createLogoutProcessor(function (req, res, next) {
