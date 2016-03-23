@@ -59,7 +59,7 @@ angular.module('corpModule')
                         })
                             .then(function (result) {
                                 console.log(result);
-                                if (result.company.status === 'pass' && DeviceHelper.getCookie('corp_status') !== 'audit') {
+                                if (result.company.status === 'passed' && DeviceHelper.getCookie('corp_status') !== 'audit') {
                                     window.location.href = '/';
                                 } else {
                                     window.location.href = '/register?company_id=' + result.company.company_id;

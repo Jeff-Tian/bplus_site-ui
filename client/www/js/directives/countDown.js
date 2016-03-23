@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.countDown = function (service, $timeout, msgBus) {
+    exports.countDown = function ($timeout) {
         return {
             restrict: 'A',
             scope: {},
@@ -23,5 +23,5 @@
         };
     };
 
-    exports.countDown.$inject = ['service', '$timeout', 'msgBus'];
+    exports.countDown.$inject = ['$timeout'];
 })(angular.bplus = angular.bplus || {});

@@ -34,6 +34,28 @@ angular
             timerCountdown
             ;
 
+        $scope.fetching = false;
+        service.executePromiseAvoidDuplicate($scope, 'fetching', function () {
+            return service.get($rootScope.config.serviceUrls.corp.member.basicInfo, {
+                params: {
+                    company_id: DeviceHelper.getCookie('corp_id')
+                }
+            }).then(function (result) {
+                $scope.data = {
+                    companyName: result.name,
+                    city: result.location,
+                    license: {name: result.business_license_url},
+                    licenseInfo: result.business_license_url ? result.business_license_url : undefined,
+                    contact: result.contact,
+                    position: result.contact_position,
+                    email: result.contact_mail,
+                    mobile: result.contact_mobile
+                };
+
+                callbackGetStatus(result.register_status);
+            });
+        });
+
         $scope.status = corpStatus.unknown;
 
         function getStatus() {
@@ -55,7 +77,6 @@ angular
                     break;
                 case corpStatus.pass:
                     $scope.status = status;
-                    $scope.$apply();
                     if ((!$countdown || !$countdown.length) && ($scope.$countdown && $scope.$countdown.length)) {
                         $countdown = $scope.$countdown;
                     }
@@ -260,6 +281,10 @@ angular
                     };
                 $form.form(configForm);
 
+                scope.clearOldFile = function () {
+                    delete scope.data.licenseInfo;
+                };
+
                 scope.saving = false;
                 scope.saveBasicCorpInfo = function ($event) {
                     $event.preventDefault();
@@ -322,7 +347,7 @@ angular
                             scope.data.licenseInfo = data;
 
                             return service.executePromiseAvoidDuplicate(scope, 'saving', function () {
-                                return service.post($rootScope.config.serviceUrls.corp.member.saveBasicInfo, {
+                                return service.post($rootScope.config.serviceUrls.corp.member.basicInfo, {
                                     name: scope.data.companyName,
                                     company_id: DeviceHelper.getCookie('corp_id'),
                                     location: scope.data.city,
@@ -350,14 +375,7 @@ angular
             }
         };
     }])
-    .directive('corpRegisterCountdown', ['$rootScope', function ($rootScope) {
-        return {
-            //scope: { '*': '=' },
-            link: function (scope, element, attrs) {
-                $rootScope.$countdown = angular.element(element);
-            }
-        };
-    }])
+    .directive('countDown', angular.bplus.countDown)
     .directive('fileread', [function () {
         return {
             scope: {
@@ -367,7 +385,10 @@ angular
                 element.bind('change', function (changeEvent) {
                     scope.$apply(function () {
                         scope.fileread = changeEvent.target.files[0];
-                        console.log(scope.fileread);
+
+                        if (attrs.fileChangedHandler) {
+                            angular.element(element).scope()[attrs.fileChangedHandler]();
+                        }
                     });
                 });
             }

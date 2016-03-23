@@ -1,6 +1,6 @@
 block content
     div.ui.container.crop-container(ng-controller="corpRegister", corp-register)
-        div(ng-if="status == -1", ng-cloak="")
+        div(ng-if="status == -1 || fetching", ng-cloak="")
             div.ui.loading.form
                 span &nbsp;
         div.step-container(ng-if="status != -1", ng-cloak="")
@@ -59,7 +59,7 @@ block content
                     div.field.required
                         label 营业执照上传
                         div.ui.grid(style="position: relative; overflow: hidden;")
-                            input(type="file", style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; z-index: 100; padding-left: 2000px; cursor: pointer; border: none; outline: none;", accept=".pdf,.png,.gif,.jpeg,.jpg", fileread="data.license")
+                            input(type="file", style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; z-index: 100; padding-left: 2000px; cursor: pointer; border: none; outline: none;", accept=".pdf,.png,.gif,.jpeg,.jpg", fileread="data.license", file-changed-handler="clearOldFile")
                             div.twelve.wide.column
                                 input(type="text", name="businesslicense", placeholder="营业执照", data-text-placeholder="营业执照", data-prompt="请上传营业执照", ng-model="data.license.name", ng-required="true")
                             div.four.wide.column
@@ -92,10 +92,10 @@ block content
             div.image
                 img(ng-src="#{cdnify('img/corp/regist_status1.png')}")
                 div.ui.huge.header 审核中
-        div.success-container(ng-if="status == 'passed''", ng-cloak="")
+        div.success-container(ng-if="status == 'passed'", ng-cloak="")
             div.title
                 span 感谢您的申请，欢迎立即享受高质量的智能人才推荐服务页，页面将于
-                span(corp-register-countdown) 5
+                span(count-down="", href="/") 5
                 span 秒后跳转至首页
             div.image
                 img(ng-src="#{cdnify('img/corp/regist_status3.png')}")
@@ -108,6 +108,7 @@ block content
             div.btn
                 button.ui.red.button(ng-click="edit();") 立即修改
 block extraJs
+    script(src="#{cdn.normal}js/directives/countDown.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/register/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/directives/form-error.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")
