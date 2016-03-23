@@ -36,6 +36,8 @@ angular
 
         msgBus.onMsg(corpModuleEvents.corpInfo.loaded, $scope, function (loadEvent, data) {
             $scope.data = data;
+            callbackGetStatus(data.auditStatus);
+            console.log('reload page by status ', data.auditStatus);
         });
 
         $scope.status = corpStatus.unknown;
