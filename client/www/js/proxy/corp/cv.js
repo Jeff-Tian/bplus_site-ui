@@ -1,6 +1,7 @@
 angular.module('bridgeplus.corp')
     .service('cvService', ['$q', 'service', function ($q, service) {
         var me = this;
+        var hasInitialized = false;
         var resourceData = {};
         var resourceSet = [
             "qualifications"
@@ -22,6 +23,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
                 return value;
             });
         };
+        // Resources
         me.getQulificationsByID = function(id) {
             var key = "qualifications";
             var data = resourceData[key];
@@ -32,6 +34,23 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
                 }
             }
             return "";
+        };
+        /////////////
+        // Two functions below are utils function for data parsing
+        me.produceDataString = function(startDate, endDate){
+            var startDateString = '';
+            var endDateString = '';
+            function getYearAndMonth(dataString) {
+                var date = new Date(dataString);
+                return date.getFullYear() + '/' + (date.getMonth() + 1);
+            }
+            startDateString = getYearAndMonth(startDate);
+            if (endDate === "") {
+                endDateString = '至今';
+            } else {
+                endDateString = getYearAndMonth(endDate);
+            }
+            return startDateString + "~" + endDateString;
         };
         me.levelMapping = function(value) {
             var ret = 0;
@@ -48,6 +67,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             }
             return ret;
         };
+        ////////
         me.unlockCV = function(cv){
             var url = '/corp-service-proxy/jobapply/unlockCandidate';
             var param = {
@@ -86,6 +106,7 @@ member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
                 resourceSet.forEach(function(value, index){
                     resourceData[value] = ret[index];
                 });
+                hasInitialized = true;
             });
         };
     }])

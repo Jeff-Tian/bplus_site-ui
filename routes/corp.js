@@ -6,7 +6,8 @@ var config = require('../config/index');
 var localeHelper = require('../locales/localeHelper.js');
 var membership = require('../serviceProxy/membership.js');
 
-function getRenderer(title, target) {
+function getRenderer(title, target, ignoreLayout) {
+    var jadeLayout = ignoreLayout === true ? null : "layout.jade";
     return function (req, res, next) {
         res.locals.title = title + ' -- Bridge+';
         res.locals.cdnify = function (url) {
@@ -16,11 +17,11 @@ function getRenderer(title, target) {
 
             return config.cdn.normal + url + '?' + config.cdn.version;
         };
-        mixedViewEngine.render(res, 'corp/' + target + '.jade', 'layout.jade', res.locals);
+        mixedViewEngine.render(res, 'corp/' + target + '.jade', jadeLayout, res.locals);
     };
 }
 
-function routerFactory(name, title, pipes) {
+function routerFactory(name, title, pipes, ignoreLayout) {
     var target = name;
 
     if (target === '') {
@@ -33,14 +34,16 @@ function routerFactory(name, title, pipes) {
         args = args.concat(pipes);
     }
 
-    args = args.concat([getRenderer(title, target)]);
+    args = args.concat([getRenderer(title, target, ignoreLayout)]);
 
     corp.get.apply(corp, args);
 }
 
 routerFactory("", '企业首页');
 routerFactory("register", '企业注册', membership.ensureAuthenticated);
+//CV
 routerFactory("cv", '简历管理');
+routerFactory("printCV", '简历打印', null, true);
 //Find
 routerFactory("find", '找人才');
 //Setting

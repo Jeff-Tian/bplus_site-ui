@@ -1,0 +1,23 @@
+
+
+// div.titlepage {
+//     page: blank;
+// }
+// @page {
+//     size: 10cm 10cm;
+//     margin: 30mm mm 30mm 45mm; /* change the margins as you want them to be. */
+// }
+
+@media print {
+    body {
+        font-size: 4px;
+    }
+    @page {
+        size: 10cm 10cm;
+        margin: 30mm 30mm 45mm; /* change the margins as you want them to be. */
+   }
+    div.chapter,
+    div.appendix {
+        page-break-after: always;
+    }
+}

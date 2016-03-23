@@ -6,21 +6,6 @@ angular.module('corpModule')
         DELETED : 'deleted'
     };
     var FIRST_PAGE = 1;
-    var produceDataString = function(startDate, endDate){
-        var startDateString = '';
-        var endDateString = '';
-        function getYearAndMonth(dataString) {
-            var date = new Date(dataString);
-            return date.getFullYear() + '/' + (date.getMonth() + 1);
-        }
-        startDateString = getYearAndMonth(startDate);
-        if (endDate === "") {
-            endDateString = '至今';
-        } else {
-            endDateString = getYearAndMonth(endDate);
-        }
-        return startDateString + "~" + endDateString;
-    };
     var getData = function(currentPage){
         $scope.isLoading = true;
         //Get data according $scope.displayData.currentTab;
@@ -53,7 +38,7 @@ angular.module('corpModule')
                         issueDate: rawData.apply_date.split("T")[0],
                         gender: rawData.member.gender,
                         name: rawData.member.real_name,
-                        eduData: produceDataString(rawData.education.start_date, rawData.education.end_date),
+                        eduData: cvService.produceDataString(rawData.education.start_date, rawData.education.end_date),
                         school: rawData.education.university,
                         major: rawData.education.major,
                         qulification: cvService.getQulificationsByID(rawData.education.qualifications_id),
