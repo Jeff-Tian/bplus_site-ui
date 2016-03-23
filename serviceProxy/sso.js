@@ -51,6 +51,41 @@ function jumpToReturnUrl(req, res) {
     return false;
 }
 
+function createLogoutProcessor(clearingJobs) {
+    return function (req, res, next) {
+        proxySSO({
+            path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
+                if (requestFrom.headers.cookie) {
+                    var token = requestFrom.headers.cookie.match(/(?:^|;) *token=([^;]*)/)[1];
+
+                    requestTo.write(JSON.stringify({token: token}));
+                }
+            },
+            responseInterceptor: function (originalResponse, responseJson) {
+                membership.unsetSensativeCookies(res);
+
+                if (typeof clearingJobs === 'function') {
+                    clearingJobs(req, res, next);
+                }
+
+                var locale = localeHelper.getLocale(req.url, req);
+                if (!req.xhr) {
+                    res.redirect(localeHelper.generateLocaleLink('/', locale));
+                } else {
+                    res.json({
+                        isSuccess: false,
+                        code: '302',
+                        message: localeHelper.generateLocaleLink('/', locale)
+                    });
+                }
+
+                return undefined;
+            },
+            method: 'POST'
+        })(req, res, next);
+    };
+}
+
 module.exports = {
     signUp: proxySSO({path: '/member/register'}),
     authenticate: function (req, res, next) {
@@ -174,33 +209,8 @@ module.exports = {
         path: '/member/resetPassword'
     }),
     resetPasswordByEmail: proxySSO({path: '/member/password/resetByMail'}),
-    logout: function (req, res, next) {
-        proxySSO({
-            path: '/logon/logout', requestInterceptor: function (requestFrom, requestTo) {
-                if (requestFrom.headers.cookie) {
-                    var token = requestFrom.headers.cookie.match(/(?:^|;) *token=([^;]*)/)[1];
-
-                    requestTo.write(JSON.stringify({token: token}));
-                }
-            },
-            responseInterceptor: function (originalResponse, responseJson) {
-                membership.unsetSensativeCookies(res);
-
-                var locale = localeHelper.getLocale(req.url, req);
-                if (!req.xhr) {
-                    res.redirect(localeHelper.generateLocaleLink('/', locale));
-                } else {
-                    res.json({
-                        isSuccess: false,
-                        code: '302',
-                        message: localeHelper.generateLocaleLink('/', locale)
-                    });
-                }
-
-                return undefined;
-            }
-        })(req, res, next);
-    },
+    logout: createLogoutProcessor(),
+    createLogoutProcessor: createLogoutProcessor,
     getMailToken: proxySSO({
         path: '/member/password/mailToken',
         dataMapper: function (d) {

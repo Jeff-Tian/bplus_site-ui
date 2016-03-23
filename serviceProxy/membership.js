@@ -26,7 +26,6 @@ function setMemberCookie(res, member_id) {
 function unsetSensativeCookies(res) {
     var deleteCookieOption = {
         expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
-        // "max-age": -1,
         path: '/',
         httpOnly: true
     };

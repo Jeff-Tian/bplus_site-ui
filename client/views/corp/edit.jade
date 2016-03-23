@@ -1,0 +1,93 @@
+block content
+    div.ui.container.crop-edit-container(corp-edit)
+        div.ui.grid
+            div.four.wide.column
+                div.logo-container
+                div.ui.red.button.btn-logo-upload
+                    i.icon
+                    span 公司LOGO上传
+            div.twelve.wide.column
+                div.corp-edit-section
+                    div.title(crop-edit-title)
+                        h2.ui.medium.header
+                            i.account-info-icon.icon
+                            div.content 账户信息
+                    div.form-container.account-info-form-container
+                        form.ui.form
+                            div.field
+                                label 用户名修改
+                                input(type="text", name="username", readonly, value="testtesttest")
+                                i.write.icon
+                            div.field
+                                label 密码修改
+                                input(type="password", name="password", readonly, value="*********")
+                                i.write.icon
+                            div.field
+                                label 手机绑定
+                                input(type="text", name="telephone", readonly, value="13*******00")
+                                i.write.icon
+                            div.field
+                                label 邮箱绑定
+                                input(type="text", name="email", readonly, value="test@qp1.org")
+                                i.write.icon
+                div.corp-edit-section
+                    div.title(crop-edit-title)
+                        h2.ui.medium.header
+                            i.basic-info-icon.icon
+                            div.content 基本信息
+                    div.form-container
+                        form.ui.form
+                            div.field
+                                label 公司名称
+                                input(type="text", name="corporation", readonly, value="阿里巴巴（上海）有限公司")
+                            div.field
+                                label 行业
+                                input(type="text", name="industry", value="")
+                            div.field
+                                label 规模
+                                input(type="text", name="size", value="")
+                            div.field
+                                label 性质
+                                input(type="text", name="nature", value="")
+                            div.field
+                                label 主页
+                                input(type="text", name="homepage", value="")
+                            div.field
+                                label 地点
+                                input(type="text", name="address", value="")
+                            div.field
+                                label 联系人
+                                input(class="contact-input", type="text", name="contact", value="")
+                                select(class="contact-select", name="gender")
+                                    option(value="male") 先生
+                                    option(value="female") 女士
+                            div.field
+                                label 职位
+                                input(type="text", name="position", value="")
+                            div.field
+                                button.ui.red.button(type="submit") 保存
+                                div.ui.basic.button 取消
+                div.corp-edit-section
+                    div.title(crop-edit-title)
+                        h2.ui.medium.header
+                            i.company-info-icon.icon
+                            div.content 公司介绍
+                    div.form-container
+                        form.ui.form
+                            div.field
+                                label 一句话公司宣传标语
+                                input(type="text", name="slogan", value="全球企业间(B2B)电子商务的著名品牌")
+                            div.field
+                                label 公司简介
+                                textarea(name="description", rows="5")
+                                div.ui.bottom.attached.segment
+                                    div.inline.field
+                                        label
+                                            i.tags.icon
+                                            span 标签
+                                        input(type="text", name="tags", value="")
+                            div.field
+                                button.ui.red.button(type="submit") 保存
+                                div.ui.basic.button 取消
+block extraJs
+    script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")

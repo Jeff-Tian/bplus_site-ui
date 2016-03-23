@@ -5,11 +5,11 @@ html
         include ../../www/view-partial/slim-head.html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light-grey-background")
-        div#my-header(ng-controller="AppCtrl")
-            include message_holder
-            include header
 
         div(ng-app="corpModule")
+            div#my-header(ng-controller="AppCtrl")
+                include message_holder
+                include header
             block content
 
         div#my-footer
@@ -22,7 +22,6 @@ html
             script(src="#{cdn.normal}js/directives/captcha.js?#{cdn.version}")
             script(type="text/javascript").
                 angular.element(document).ready(function () {
-                    angular.bootstrap(document.getElementById('my-header'), ['bplusModule']);
                     angular.bootstrap(document.getElementById('my-footer'), ['bplusModule']);
                 });
             block extraJs

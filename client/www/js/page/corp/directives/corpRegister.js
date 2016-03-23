@@ -4,8 +4,8 @@ angular.module('corpModule')
         return {
             template: '' +
             '\
-            <link rel="stylesheet" type="text/css"        href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
-            <form class="ui large fluid form register" ng-class="{\'loading\': submitting, error: errorMessages.length}" ng-submit="tryRegister($event)" name="registerForm">\
+            <link rel="stylesheet" type="text/css" href="' + $rootScope.config.cdn.normal + 'css/module/form.css?' + $rootScope.config.cdn.version + '">\
+            <form class="ui large fluid form register" ng-class="{\'loading\': submitting, \'error\': (errorMessages || $parent.errorMessages || $root.errorMessages).length}" ng-submit="tryRegister($event)" name="registerForm">\
                 <form-error></form-error>\
                 <div class="ui">\
                     <div class="field">\
@@ -49,6 +49,7 @@ angular.module('corpModule')
                         });
                     })
                         .then(function (result) {
+                            console.log(result);
                             return service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
                                 return service.post($rootScope.config.serviceUrls.corp.member.login, {
                                     userName: $scope.registerData.username,

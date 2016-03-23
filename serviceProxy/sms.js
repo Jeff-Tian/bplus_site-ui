@@ -9,6 +9,7 @@ module.exports = {
             host: sms.host,
             port: sms.port,
             path: '/service/sms/send',
+            method: 'POST',
             dataMapper: function (d) {
                 return {
                     phone: d.mobile,

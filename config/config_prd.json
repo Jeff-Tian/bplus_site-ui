@@ -23,6 +23,10 @@
       "host": "upload.service.bridgeplus.cn",
       "port": 80,
       "code": "HCD_S1"
+    },
+    "inner": {
+      "host": "upload.service.bridgeplus.cn",
+      "port": 80
     }
   },
   "sso": {

@@ -8,9 +8,21 @@ angular
             }
         };
     }])
-    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', function ($scope, $window, $interval, $q, $timeout) {
+    .value('corpStatus', {
+        unknown: '-1',
+        init: 'init',
+        audit: 'audit',
+        pass: 'passed',
+        fail: 'fail'
+    })
+    .value('events', {
+        corpStatus: {
+            updated: 'corpStatus:updated'
+        }
+    })
+    .controller("corpRegister", ['$scope', '$window', '$interval', '$q', '$timeout', 'service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', 'corpStatus', 'msgBus', 'events', function ($scope, $window, $interval, $q, $timeout, service, serviceErrorParser, $rootScope, DeviceHelper, corpStatus, msgBus, events) {
         var config = {
-            secondResendCAPTCHA: 60 * 5
+            secondResendCAPTCHA: 60 * 1
         };
 
         var $form,
@@ -22,24 +34,27 @@ angular
             timerCountdown
             ;
 
-        $scope.status = -1;
+        $scope.status = corpStatus.unknown;
 
         function getStatus() {
-            callbackGetStatus(0);
+            callbackGetStatus(DeviceHelper.getCookie('corp_status'));
         }
 
-        $timeout(getStatus, 1000);
+        getStatus();
+
+        msgBus.onMsg(events.corpStatus.updated, $scope, function ($events, status) {
+            console.log('on this msg: ', status);
+            callbackGetStatus(status);
+        });
 
         function callbackGetStatus(status) {
             switch (status) {
-                case (0):
-                    $scope.status = 0;
+                case corpStatus.init:
+                case corpStatus.audit:
+                    $scope.status = status;
                     break;
-                case (1):
-                    $scope.status = 1;
-                    break;
-                case (2):
-                    $scope.status = 2;
+                case corpStatus.pass:
+                    $scope.status = status;
                     $scope.$apply();
                     if ((!$countdown || !$countdown.length) && ($scope.$countdown && $scope.$countdown.length)) {
                         $countdown = $scope.$countdown;
@@ -56,8 +71,8 @@ angular
                         }, 1000);
                     }
                     break;
-                case (3):
-                    $scope.status = 3;
+                case corpStatus.fail:
+                    $scope.status = status;
                     break;
                 default:
                     break;
@@ -65,7 +80,7 @@ angular
         }
 
         $scope.edit = function () {
-            callbackGetStatus(0);
+            callbackGetStatus(corpStatus.init);
         };
 
         $scope.sendCAPTCHA = function () {
@@ -126,11 +141,28 @@ angular
                 });
             }
 
+            $scope.sendingVerificationCode = false;
             if (isValid) {
                 var valTelephone = $inputTelephone.val();
                 $btnSendCAPTCHA.addClass('loading');
 
-                $timeout(callbackSendCAPTCHA, 2000);
+                service.executePromiseAvoidDuplicate($scope, 'sendingVerificationCode', function () {
+                    return service.put($rootScope.config.serviceUrls.corp.sms.sendWithoutCaptcha, {
+                        mobile: valTelephone
+                    });
+                })
+                    .then(function (result) {
+                        console.log(result);
+                        delete $scope.errorMessages;
+                        $rootScope.message = '短信验证码已发送至 ' + valTelephone + ', 请注意查收';
+                    })
+                    .then(null, function (reason) {
+                        $scope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                    })
+                    .finally(function () {
+                        callbackSendCAPTCHA();
+                    })
+                ;
             }
         };
 
@@ -159,7 +191,7 @@ angular
             return false;
         };
     }])
-    .directive('corpRegisterForm', ['$rootScope', function ($rootScope) {
+    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', '$q', '$timeout', 'corpStatus', 'msgBus', 'events', function ($rootScope, service, serviceErrorParser, DeviceHelper, $q, $timeout, corpStatus, msgBus, events) {
         return {
             //scope: { '*': '=' },
             link: function (scope, element, attrs) {
@@ -227,11 +259,93 @@ angular
                         }
                     };
                 $form.form(configForm);
-                //$form.on('submit', scope.submit);
 
-                scope.saveBasicCorpInfo = function () {
-                    scope.data.license;
-                    console.log(scope.data);
+                scope.saving = false;
+                scope.saveBasicCorpInfo = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+
+                    if (!$form.form('is valid')) {
+                        return false;
+                    }
+
+                    service.executePromiseAvoidDuplicate(scope, 'saving', function () {
+                        if (!scope.data.licenseInfo) {
+                            return service.put($rootScope.config.serviceUrls.corp.member.uploadLicense, {
+                                file: scope.data.license,
+                                'x:category': 'upload-' + Math.random().toString()
+                            }, {
+                                headers: {
+                                    'X-Requested-With': undefined,
+                                    'Content-Type': undefined
+                                },
+                                transformRequest: function (data, getHeaders) {
+                                    function appendFormData(formData, key, value) {
+                                        if (value instanceof window.File) {
+                                            formData.append(key, value, value.name);
+                                            return;
+                                        }
+
+                                        if (value instanceof window.Blob) {
+                                            formData.append(key, value, key + '.png');
+                                            return;
+                                        }
+
+                                        if (typeof value !== 'undefined') {
+                                            formData.append(key, value);
+                                            return;
+                                        }
+                                    }
+
+                                    var formData = new window.FormData();
+                                    angular.forEach(data, function (value, key) {
+                                        if (value instanceof Array) {
+                                            for (var i = 0; i < value.length; i++) {
+                                                appendFormData(formData, key + '[' + i + ']', value[i]);
+                                            }
+                                        } else {
+                                            appendFormData(formData, key, value);
+                                        }
+                                    });
+
+                                    return formData;
+                                }
+                            });
+                        } else {
+                            console.log('licenseInfo:', scope.data.licenseInfo);
+                            var deferred = $q.defer();
+                            deferred.resolve(scope.data.licenseInfo);
+                            return deferred.promise;
+                        }
+                    })
+                        .then(function (data) {
+                            scope.data.licenseInfo = data;
+
+                            return service.executePromiseAvoidDuplicate(scope, 'saving', function () {
+                                return service.post($rootScope.config.serviceUrls.corp.member.saveBasicInfo, {
+                                    name: scope.data.companyName,
+                                    company_id: DeviceHelper.getCookie('corp_id'),
+                                    location: scope.data.city,
+                                    contact: scope.data.contact,
+                                    contact_position: scope.data.position,
+                                    contact_mail: scope.data.email,
+                                    contact_mobile: scope.data.mobile,
+                                    business_license_url: '//' + data.host + '/' + data.key,
+                                    verificationCode: scope.data.verificationCode
+                                });
+                            });
+                        })
+                        .then(function (result) {
+                            console.log(result);
+                            DeviceHelper.setCookie('corp_status', corpStatus.audit);
+                            msgBus.emitMsg(events.corpStatus.updated, corpStatus.audit);
+                        }, function (reason) {
+                            $rootScope.errorMessages = [serviceErrorParser.getErrorMessage(reason)];
+                            $timeout(function () {
+                                $form.addClass('error');
+                            });
+                        })
+                    ;
                 };
             }
         };
@@ -257,6 +371,6 @@ angular
                     });
                 });
             }
-        }
+        };
     }])
 ;

@@ -11,7 +11,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "competion-api": "git@bitbucket.org:hcdlearning/cmpt2015-api.git#develop",
-    "study-center-proxy": "git@bitbucket.org:hcdlearning/studycenterproxy.git#develop",
+    "connect-busboy": "0.0.2",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "extend": "^3.0.0",
@@ -20,7 +20,8 @@
     "logger": "git://github.com/HCDLearning/logger.git#v1.0.0",
     "online-store": "git+ssh://git@bitbucket.org/hcdlearning/online-store.git#develop",
     "q": "^1.4.1",
-    "semantic-ui": "^2.1.8"
+    "semantic-ui": "^2.1.8",
+    "study-center-proxy": "git@bitbucket.org:hcdlearning/studycenterproxy.git#develop"
   },
   "devDependencies": {
     "bower": "^1.3.1",

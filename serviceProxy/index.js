@@ -23,7 +23,7 @@ module.exports = require('express').Router()
         next();
     })
     .use('/study-center', require('./study-center.js'))
-    .post('/sms/send', captcha.validate, sms.getVerificationCode)
+    .post(serviceUrls.general.sms.send, captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
     .post('/member/bind-mobile', membership.ensureAuthenticated, sms.validate, sso.changeMobile)

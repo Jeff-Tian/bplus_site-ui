@@ -1,3 +1,4 @@
 angular.module('corpModule')
-.controller("settingCtrl", ['$scope', '$timeout', function($scope, $timeout) {
-}]);
+    .controller("settingCtrl", ['$scope', '$timeout', function ($scope, $timeout) {
+    }])
+;

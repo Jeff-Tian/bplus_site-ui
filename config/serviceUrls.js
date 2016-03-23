@@ -38,7 +38,10 @@ module.exports = {
     corp: {
         member: {
             register: '/corp-service-proxy/member/register',
-            login: '/corp-service-proxy/member/login'
+            login: '/corp-service-proxy/member/login',
+            uploadLicense: '/corp-service-proxy/member/upload-license',
+            saveBasicInfo: '/corp-service-proxy/member/save-basic-info',
+            signOut: '/corp-service-proxy/member/sign-out'
         },
         jobapply: {
             todo: '/corp-service-proxy/jobapply/todo',
@@ -49,10 +52,19 @@ module.exports = {
             unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
         },
         candidate: {
-            resume: '/corp-service-proxy/candidate/resume',
+            resume: '/corp-service-proxy/candidate/resume'
         },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications'
+        },
+        sms: {
+            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha'
+        }
+    },
+
+    general: {
+        sms: {
+            send: '/service-proxy/sms/send'
         }
     }
 };

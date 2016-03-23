@@ -5,6 +5,8 @@ var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('logger');
 var config = require('./config');
+var busboy = require('connect-busboy');
+
 var logger = {
     info: function () {
     },
@@ -84,15 +86,17 @@ function setMode(req, res, next) {
 server
     .use(Logger.express("auto"))
     .use(setLogger)
+    .use(bodyParser.json())
+    .use(bodyParser.urlencoded({
+        extended: true
+    }))
+    .use(busboy())
     .use(setCDN)
     .use(setFeatureSwitcher)
     .use(setConfig)
     .use(setDeviceHelper)
     .use(setMode)
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({
-        extended: true
-    }));
+;
 
 // Set the view engine to ejs, but specify file type with ".html"
 server.engine('html', ejs.renderFile);
@@ -131,6 +135,7 @@ function filterConfig(config) {
     filtered.competitions = config.competitions;
     filtered.mode = getMode();
     filtered.durableMessageSource = config.durableMessageSource;
+    filtered.upload = config.upload.public;
 
     return filtered;
 }

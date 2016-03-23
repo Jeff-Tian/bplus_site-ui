@@ -17,6 +17,15 @@ module.exports = require('express').Router()
             if (upstreamJson.isSuccess) {
                 sso.setAuthToken(originalResponse, upstreamJson.result.token, originalRequest.body.remember, upstreamJson.result.member_id);
 
+                var cookieSetting = {
+                    expires: 0,
+                    path: '/',
+                    httpOnly: false
+                };
+
+                originalResponse.cookie('corp_id', upstreamJson.result.company.company_id, cookieSetting);
+                originalResponse.cookie('corp_status', upstreamJson.result.company.status, cookieSetting);
+
                 if (sso.jumpToReturnUrl(originalRequest, originalResponse)) {
                     return undefined;
                 }
@@ -24,5 +33,85 @@ module.exports = require('express').Router()
 
             return false;
         }
+    }))
+    .put(corpServiceUrls.member.uploadLicense, function (req, res, next) {
+        req.files = {};
+
+        req.busboy.on('file', function (fieldName, file, fileName, encoding, mimeType) {
+            if (!fileName) {
+                return;
+            }
+
+            file.fileRead = [];
+
+            console.log('uploading: ', fileName);
+            console.log(file);
+            file.on('data', function (data) {
+                console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
+                file.fileRead.push(data);
+            });
+
+            file.on('end', function () {
+                var finalBuffer = Buffer.concat(this.fileRead);
+
+                req.files[fieldName] = {
+                    buffer: finalBuffer,
+                    size: finalBuffer.length,
+                    filename: fileName,
+                    mimetype: mimeType
+                };
+
+                console.log('File [' + fieldName + '] Finished');
+            });
+        });
+
+        req.busboy.on('field', function (key, value, keyTruncated, valueTruncated) {
+            console.log(key, '=', value);
+            req.body[key] = value;
+        });
+
+        req.busboy.on('finish', function () {
+            console.log('busboy finish');
+            next();
+        });
+
+        return req.pipe(req.busboy);
+    }, function (req, res, next) {
+        req.body.file = req.files.file;
+        next();
+    }, proxy({
+        host: config.upload.inner.host,
+        port: config.upload.inner.port,
+        path: '/upload/bplus-corp-resource',
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=' + Math.random().toString(16)
+        },
+        responseInterceptor: function (originalRes, upstreamJson, originalReq, next) {
+            originalRes.json({
+                isSuccess: true,
+                result: upstreamJson
+            });
+
+            return undefined;
+        }
+    }))
+    .post(corpServiceUrls.member.saveBasicInfo, function (req, res, next) {
+        req.body.mobile = req.body.contact_mobile;
+
+        next();
+    }, require('../sms').validate, proxy.proxyBPlus({
+        path: '/corp/member/savebasic',
+        method: 'POST'
+    }))
+    .delete(corpServiceUrls.member.signOut, require('../sso').createLogoutProcessor(function (req, res, next) {
+        var deleteCookieOption = {
+            expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
+            path: '/',
+            httpOnly: true
+        };
+
+        res.cookie('corp_id', '', deleteCookieOption);
+        //res.cookie('corp_status', '', deleteCookieOption);
     }))
 ;
