@@ -8,17 +8,17 @@
     "offerListSource": "/store/json/offer-list.json"
   },
   "offer-b": {
-    "text": "复活赛－服务",
-    "image": "img/online-store/icon_resurgence_red_35x35.png",
-    "activeImage": "img/online-store/icon_resurgence_white_35x35.png",
+    "text": "小班课",
+    "image": "images/icons/product_type_3_red.png",
+    "activeImage": "images/icons/product_type_3_white.png",
     "state": "offer-b",
     "target": "#/offer-b",
     "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
   },
   "offer-d": {
-    "text": "待定",
-    "image": "",
-    "activeImage": "",
+    "text": "一对一导师",
+    "image": "images/icons/product_type_5_red.png",
+    "activeImage": "images/icons/product_type_5_white.png",
     "state": "offer-d",
     "target": "#/offer-d",
     "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
