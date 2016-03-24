@@ -5,7 +5,7 @@
     "activeImage": "img/online-store/icon_discount_white_30x30.png",
     "state": "offer-a",
     "target": "#/offer-a",
-    "offerListSource": "//source.bridgeplus.cn/json/offer-list.json"
+    "offerListSource": "/store/json/offer-list.json"
   },
   "offer-b": {
     "text": "复活赛－服务",
