@@ -52,6 +52,7 @@ routerFactory("setting", '账户管理');
 routerFactory('about-us', '关于我们');
 routerFactory('school', '学校合作');
 routerFactory('contact-us', '联系我们');
+routerFactory('statement', '服务声明');
 
 mixedViewEngine
     .renderEJS(corp, '/reset-password-by-email')
