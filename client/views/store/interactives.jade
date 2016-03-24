@@ -1,0 +1,108 @@
+mixin teacherCard(teacher)
+    div.column
+        div.ui.fluid.card
+            div.image(style="background-color: white; padding: 20px;")
+                img(src="#{cdn.normal}img/store/#{teacher.image}?#{cdn.version}")
+            div.ui.secondary.inverted.segment.center.aligned(style="background-color: #4A4A4A!important;")
+                h3.header #{teacher.header}
+                div.description #{teacher.description}
+mixin redHeader(text)
+    div.header(style="background-color: #FC3F48; color: white; text-align: center;") #{text}
+
+mixin grayContent()
+    div.image.content(style="background-color: #EFEFEF;")
+        block
+
+div.ui.small.modal.one2one
+    + redHeader('全名师阵容1对1针对性辅导, 为你答疑解惑, 指点迷津')
+    + grayContent
+        div.ui.three.column.grid
+            + teacherCard({
+                image: 'Julia.png',
+                header: 'Julia 李青青',
+                description: 'HCD 合得创始人'
+            })
+            + teacherCard({
+                image: 'Joseph.png',
+                header: 'Joseph 周国元',
+                description: 'HCD 合得CFO'
+            })
+            + teacherCard({
+                image: 'Alice.png',
+                header: 'Alice 徐迎春',
+                description: 'HCD 合得COO'
+            })
+    + redHeader('热门主题')
+    + grayContent
+        div.ui.equal.width.grid(style="color: red;")
+            div.equal.width.row
+                div.column
+                    div.ui.segment.center.aligned 赛后点评
+                div.column
+                    div.ui.segment.center.aligned 市场营销
+                div.column
+                    div.ui.segment.center.aligned 战略管理
+            div.equal.width.row
+                div.column
+                    div.ui.segment.center.aligned 数据分析
+                div.column
+                    div.ui.segment.center.aligned 团队合作
+                div.column
+                    div.ui.segment.center.aligned 职业生涯辅导
+            div.equal.width.row
+                div.column
+                    div.ui.segment(style="color: #838383;")
+                        div 使用流程:
+                        div 1. 在导师平台挑选你喜欢的话题和合适的时间完成订单。
+                        div 2. 在既定的时间完成上课。
+                        div 3. 课程结束后给予老师评价。
+                        div &nbsp;
+                        div 客服热线：400-9200-152（工作日10:00 - 18:00）
+
+div.ui.small.modal.english.certificate
+    +redHeader('中国商战模拟和体验式学习协会和Willfried 教授共同颁发')
+    div.image.content
+        div.ui.small.image
+            img(src="#{cdn.normal}img/store/willfried.png?#{cdn.version}")
+        div.description
+            div.ui.header Willfried Vanhonacker
+            div 游戏开发者
+            div 中欧国际工商学院联合创始人、前教务长
+            div 俄罗斯总统梅德韦杰夫教育顾问
+            div 商战模拟游戏专家
+    div.image.content
+        div.ui.fluid.image
+            img(src="#{cdn.normal}img/store/english-certificate.png?#{cdn.version}")
+    div.content(style="color: #838383;")
+        div 使用流程:
+        div 1. 在导师平台挑选你喜欢的话题和合适的时间完成订单。
+        div 2. 在既定的时间完成上课。
+        div 3. 课程结束后给予老师评价。
+        div &nbsp;
+        div 客服热线：400-9200-152（工作日10:00 - 18:00）
+
+script.
+
+    (function (exports) {
+        function one2oneDetail() {
+            $('.ui.modal.one2one').modal('show');
+        }
+
+        function englishCertifcate() {
+            $('.ui.modal.english.certificate').modal('show');
+        }
+
+        exports.interactives = {
+            one2oneDetail: one2oneDetail,
+            englishCertificate: englishCertifcate
+        };
+    })(angular.bplus = angular.bplus || {});
+
+    $(function () {
+        $(document).on('click', 'a[ng-href^="javascript:"]', function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            var action = $(this).attr('ng-href').replace('javascript:', '');
+            window.eval(action);
+        });
+    });
