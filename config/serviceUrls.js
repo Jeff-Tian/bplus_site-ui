@@ -55,7 +55,9 @@ module.exports = {
             resume: '/corp-service-proxy/candidate/resume'
         },
         resource: {
-            qualifications: '/corp-service-proxy/resources/qualifications'
+            qualifications: '/corp-service-proxy/resources/qualifications',
+            worktype: '/corp-service-proxy/resources/worktype',
+            job: '/corp-service-proxy/resources/job'
         },
         sms: {
             sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha'

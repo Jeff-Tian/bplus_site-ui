@@ -1,4 +1,11 @@
 @import "./variable";
+@male: #206CB6;
+@female: #EB6754;
+.headshotimage(@gender){
+    width: 72px;
+    height: 72px;
+    border: 3px solid @gender;
+}
 
 .corp-table {
     font-size: 16px;
@@ -56,13 +63,11 @@
         padding: 1rem;
     }
     .headshot.image {
-        width: 72px;
-        height: 72px;
         &.male {
-            border: 3px solid #206CB6;
+            .headshotimage(@male);
         }
         &.female {
-            border: 3px solid #EB6754;
+            .headshotimage(@female);
         }
     }
     .personal-name-container {
@@ -87,6 +92,14 @@
 .corp-cv-detail {
     padding-top: 1em;
     padding-bottom: 1em;
+    .headshot.image {
+        &.male {
+            .headshotimage(@male);
+        }
+        &.female {
+            .headshotimage(@female);
+        }
+    }
     .corp-cv-detail-segment {
         .corp-cv-detail-segment-header,
         .corp-cv-detail-segment-body {
@@ -95,5 +108,8 @@
             padding-top: 1em;
             padding-bottom: 1em;
         }
+    }
+    .corp-cv-detail-body-head {
+        color: @color-corp-text-light-grey-header;
     }
 }

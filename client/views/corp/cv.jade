@@ -38,19 +38,25 @@ block content
         div.ui.long.modal.corp-cv-modal
             div.corp-cv-detail-header.light-grey-background
                 div.corp-cv-detail-button-group
-                    button.ui.red.button(ng-click="payCV()")
-                        | 收藏至有意向的简历
-                    button.ui.red.button 
-                        | 删除简历
-                    button.ui.red.button 
-                        | 恢复简历
-                    button.ui.red.button(ng-click="printCV()")
+                    button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
+                        i.reply.icon
+                        | 移至有意向的简历
+                    button.ui.black.button(ng-click="printCV()")
+                        i.print.icon
                         | 打印简历
-                    label.right.floated 
+                    button.ui.black.button(ng-click="printCV()",ng-if="!resumeDetail.unlocked") 
+                        i.trash.icon
                         | 删除简历
-            corp-cv-detail 
-            div.corp-cv-detail-footer.light-grey-background
-                | hello
+                    button.ui.red.button(ng-click="printCV()",ng-if="resumeDetail.status==='drop'") 
+                        i.undo.icon
+                        | 恢复简历
+                    button.right.floated.circular.ui.icon.grey.button.close
+                        i.remove.icon
+            div.corp-cv-detail-body
+                corp-cv-detail(ng-if="!isDetailLoading")
+            div.corp-cv-detail-footer
+                div.corp-cv-detail-right
+                    | Powered by Bridge+
 block extraJs
     script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
@@ -59,7 +65,7 @@ block extraJs
     script(src="#{cdn.normal}js/page/corp/cv/main.js?#{cdn.version}")
     script.
         angular.module('bplusModule')
-                .run(['$rootScope', function ($rootScope) {
-                    $rootScope.current_page = 'cv';
-                }])
+            .run(['$rootScope', function ($rootScope) {
+                $rootScope.current_page = 'cv';
+            }])
         ;

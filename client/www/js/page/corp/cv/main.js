@@ -76,7 +76,9 @@ angular.module('corpModule')
                 candidate_id: value.memberID,
                 job_id: value.jobID
             };
+            $scope.isDetailLoading = true;
             cvService.getResume(param).then(function(detail){
+                $scope.isDetailLoading = false;
                 $scope.resumeDetail = detail;
                 $(".corp-cv-modal.ui.modal").modal("show");
             });
@@ -115,6 +117,7 @@ angular.module('corpModule')
         match: false
     };
     $scope.isSortDesc = true;
+    $scope.isDetailLoading = true;
 
     $scope.resumeDetail = {};
     $scope.STATIC_PARAM = STATIC_PARAM;
@@ -159,6 +162,9 @@ angular.module('corpModule')
                 }
             });
             $(".corp-cv .menu .item").tab();
+            $(".corp-cv-modal.ui.modal").modal({
+                closable: false
+            });
         });
     });
 }]);

@@ -1,26 +1,56 @@
 <div class="corp-cv-detail">
     <div class="ui corp-cv-detail-segment">
-        <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
-            <img ng-src="img/corp/profile_personal.png?<%= cdn.version %>" class="ui mini spaced image"/>
-            <span>个人信息</span>
-        </div>
         <div class="corp-cv-detail-segment-body"> 
-            hello world
+            <div class="ui grid">
+                <div class="one wide column">
+                </div>
+                <div class="twelve wide column">
+                    <div>
+                        <span clsss="corp-cv-detail-name">{{resumeDetail.member.name}}</span>
+                        <span>{{resumeDetail.member.name}}</span>
+                        <span>{{resumeDetail.member.gender==='F'?"女":"男"}}</span>
+                        <span>/</span>
+                        <span>{{resumeDetail.member.age}}</span>
+                        <span>/</span>
+                        <span>{{resumeDetail.memberExt.current_location}}</span>
+                    </div>
+                    <div>
+                        <span>手机号码 :</span>
+                        <span ng-if="!resumeDetail.unlocked">***********</span>
+                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.phone}}</span>
+                        <span>电子邮件 :</span>
+                        <span ng-if="!resumeDetail.unlocked">***********************</span>
+                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.email}}</span>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <div>
+                        <img ng-src="{{resumeDetail.member.headshot}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[resumeDetail.member.gender]">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_education.png?<%= cdn.version %>" class="ui mini spaced image"/>
-            <span>教育背景</span>
+            <span class="corp-cv-detail-body-head">教育背景</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
-            hello world
+            <div class="ui grid">
+                <div class="three wide column">
+                    
+                </div>
+                <div class="thirteen wide column">
+                    
+                </div>
+            </div>
         </div>
     </div>
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_experience.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span>工作经历</span>
+            <span class="corp-cv-detail-body-head">工作经历</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
             hello world
@@ -29,7 +59,7 @@
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_personal.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span>社团经历</span>
+            <span class="corp-cv-detail-body-head">社团经历</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
             hello world
@@ -38,13 +68,13 @@
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_language.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span>语言能力</span>
+            <span class="corp-cv-detail-body-head">语言能力</span>
         </div>
     </div>
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_award.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span>获得奖项</span>
+            <span class="corp-cv-detail-body-head">获得奖项</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
             hello world
@@ -53,7 +83,7 @@
     <div class="ui corp-cv-detail-segment">
         <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
             <img ng-src="img/corp/profile_skill.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span>技能描述</span>
+            <span class="corp-cv-detail-body-head">技能描述</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
             hello world
