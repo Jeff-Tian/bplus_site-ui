@@ -4,7 +4,9 @@ angular.module('bridgeplus.corp')
         var hasInitialized = false;
         var resourceData = {};
         var resourceSet = [
-            "qualifications"
+            "qualifications",
+            "worktype",
+            "job"
         ];
         var PARAM_MAPPING = {
             'delivered': "todo",
@@ -24,8 +26,7 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             });
         };
         // Resources
-        me.getQulificationsByID = function(id) {
-            var key = "qualifications";
+        me.getResourceByID = function(key, id){
             var data = resourceData[key];
             // Array.prototype.find
             for (var i = 0; i < data.length; i++) {
@@ -35,6 +36,19 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             }
             return "";
         };
+        me.getQulificationsByID = function(id) {
+            var key = "qualifications";
+            return me.getResourceByID(key, id);
+        };
+        me.getJobByID = function(id) {
+            var key = "job";
+            return me.getResourceByID(key, id);
+        };
+        me.getWorktypeByID = function(id) {
+            var key = "worktype";
+            return me.getResourceByID(key, id);
+        };
+
         /////////////
         // Two functions below are utils function for data parsing
         me.produceDataString = function(startDate, endDate){
