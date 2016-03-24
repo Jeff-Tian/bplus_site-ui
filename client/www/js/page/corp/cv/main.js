@@ -80,7 +80,9 @@ angular.module('corpModule')
             cvService.getResume(param).then(function(detail){
                 $scope.isDetailLoading = false;
                 $scope.resumeDetail = detail;
-                $(".corp-cv-modal.ui.modal").modal("show");
+                $timeout(function(){
+                    $(".corp-cv-modal.ui.modal").modal("show");
+                });
             });
         },
         deleteData: function() {

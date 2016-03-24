@@ -5,7 +5,7 @@ html
         include ../../www/view-partial/slim-head.html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body
-        div(ng-app="corpModule")
+        div(ng-app="corpModule", ng-controller="printcvCtrl")
             div.printable-container
                 div.titlepage title
                 corp-cv-detail
@@ -22,4 +22,5 @@ html
         script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
         script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
         script(src="#{cdn.normal}js/proxy/corp/cv.js?#{cdn.version}")
+        script(src="#{cdn.normal}js/page/corp/printCV/main.js?#{cdn.version}")
         include ../../www/view-partial/external-js.html

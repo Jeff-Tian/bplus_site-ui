@@ -11,6 +11,7 @@ angular.module('corpModule')
         job_id: value.jobID
     };
     cvService.getResume(param).then(function(detail){
-        
+        $scope.isLoading = false;
+        $scope.resumeDetail = detail;
     });
 }]);
