@@ -64,6 +64,11 @@ mixin certificate(image)
         div 4. 证书将在7个工作日之内寄出。
         + hotLine
 
+mixin imageSide(image)
+    div.side
+        div.ui.fluid.image
+            img(src="#{cdn.normal}img/store/#{image}?#{cdn.version}")
+
 div.ui.small.modal.one2one
     + redHeader('全名师阵容1对1针对性辅导, 为你答疑解惑, 指点迷津')
     + grayContent
@@ -96,8 +101,25 @@ div.ui.small.modal.chinese.certificate
 div.ui.small.modal.report
     + redHeader('由跨国专家团队编写的针对性结果分析报告（英文版）')
     div.image.content
-        div.ui.fluid.image
-            img(src="#{cdn.normal}img/store/Marksimos - Feedback Report - 1099 (1)-01.jpg?#{cdn.version}")
+        div.ui.middle.aligned.centered.grid
+            div.row
+                div.column.one.wide.report.left.arrow(style="cursor: pointer;")
+                    img(src="#{cdn.normal}img/store/arrow_left.png?#{cdn.version}")
+                div.column.fourteen.wide
+                    div.ui.shape.report
+                        div.sides
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-01.jpg?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-02.png?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-04.jpg?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-06.jpg?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-07.jpg?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-08.jpg?#{cdn.version}')
+                            + imageSide('Marksimos - Feedback Report - 1099 (1)-09.jpg?#{cdn.version}')
+
+                div.column.one.wide.report.right.arrow(style="cursor: pointer;")
+                    div.ui.fluid.image
+                        img(src="#{cdn.normal}img/store/arrow_right.png?#{cdn.version}")
+
     div.content(style="color: #838383;")
         div 使用流程:
         div 1. 在[我的比赛记录]中找到你想要报告的场次。
@@ -147,6 +169,10 @@ script.
 
         function reportDetail() {
             $('.ui.modal.report').modal('show');
+            window.setTimeout(function () {
+                console.log('shape');
+                $('.shape').shape('flip over');
+            }, 100);
         }
 
         function privateClass() {
@@ -168,5 +194,13 @@ script.
             $event.stopPropagation();
             var action = $(this).attr('ng-href').replace('javascript:', '');
             window.eval(action);
+        });
+
+        $(document).on('click', '.report.left.arrow', function ($event) {
+            $('.report.shape').shape('flip left');
+        });
+
+        $(document).on('click', '.report.right.arrow', function ($event) {
+            $('.report.shape').shape('flip right');
         });
     });
