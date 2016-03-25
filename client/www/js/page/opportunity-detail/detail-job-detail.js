@@ -51,6 +51,7 @@ angular
                 };
                 $scope.isSearching = false;
                 $('.ui.modal.modal-send-resume').modal({
+                    detachable: false,
                     onApprove: function(){
                         return $scope.deliveredPosition(jobID).then(function(ret){
                             $scope.hasSent = ret;
