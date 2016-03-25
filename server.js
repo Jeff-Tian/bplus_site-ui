@@ -149,6 +149,20 @@ supportedLocales.map(function (l) {
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
+
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), function (req, res, next) {
+        console.log('ohohoh', req.url);
+        next();
+    }, express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), function (req, res, next) {
+            console.log(req.url);
+            next();
+        },
+        express.static('/Users/tianjie/SHARED-UI'));
+}
+
 server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
     server.use('/' + l, express.static(staticFolder, staticSetting));
@@ -290,12 +304,6 @@ function setupOnlineStoreStaticResources(staticFolder) {
             staticSetting
         )
     );
-}
-
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-
-    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
 }
 
 //setupOnlineStoreStaticResources('semantic');
