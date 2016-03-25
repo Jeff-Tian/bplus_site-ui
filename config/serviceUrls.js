@@ -44,6 +44,7 @@ module.exports = {
             signOut: '/corp-service-proxy/member/sign-out'
         },
         jobapply: {
+            publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',
             todo: '/corp-service-proxy/jobapply/todo',
             dropped: '/corp-service-proxy/jobapply/dropped',
             unlocked: '/corp-service-proxy/jobapply/unlocked',
@@ -57,6 +58,11 @@ module.exports = {
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications',
             worktype: '/corp-service-proxy/resources/worktype',
+            communityposition: '/corp-service-proxy/resources/communityposition',
+            language: '/corp-service-proxy/resources/language',
+            langguageproficiency: '/corp-service-proxy/resources/langguageproficiency',
+            englishlevel: '/corp-service-proxy/resources/englishlevel',
+            industry: '/corp-service-proxy/resources/industry',
             job: '/corp-service-proxy/resources/job'
         },
         sms: {

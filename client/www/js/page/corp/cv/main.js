@@ -12,9 +12,9 @@ angular.module('corpModule')
         //Get data according $scope.displayData.currentTab;
         switch($scope.displayData.currentTab) {
             case STATIC_PARAM.DELIVERED:
-            case STATIC_PARAM.INTERESTED:
                 $scope.displayData.hasCheckbox = true;
                 break;
+            case STATIC_PARAM.INTERESTED:
             case STATIC_PARAM.DELETED:
                 $scope.displayData.hasCheckbox = false;
                 break;
@@ -79,6 +79,7 @@ angular.module('corpModule')
             $scope.isDetailLoading = true;
             cvService.getResume(param).then(function(detail){
                 $scope.isDetailLoading = false;
+                $scope.resumeParam = param;
                 $scope.resumeDetail = detail;
                 $timeout(function(){
                     $(".corp-cv-modal.ui.modal").modal("show");
@@ -118,10 +119,15 @@ angular.module('corpModule')
         win: false,
         match: false
     };
+    $scope.publishJobs = []; 
+    $scope.$watch("option.type", function(newValue, oldValue, scope){
+        getData(FIRST_PAGE);
+    });
     $scope.isSortDesc = true;
     $scope.isDetailLoading = true;
 
     $scope.resumeDetail = {};
+    $scope.resumeParam = {};
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
         if ($scope.displayData.currentTab !== target) {
@@ -131,15 +137,49 @@ angular.module('corpModule')
             getData(FIRST_PAGE, true);
         }
     };
+    var handleCV = function(type) {
+        var action;
+        switch (type) {
+            case "pay":
+                action = cvService.unlockCV;
+                break;
+            case "restore":
+                action = cvService.restoreCV;
+                break;
+            case "drop":
+                action = cvService.dropCV;
+                break;
+        }
+        var param = {
+            member_id: $scope.resumeParam.candidate_id,
+            job_id: $scope.resumeParam.job_id
+        };
+        action(param).then(function(){
+            return getData(FIRST_PAGE, true);
+        }).then(function(){
+            return cvService.getResume($scope.resumeParam)
+        }).then(function(detail){
+            $scope.resumeDetail = detail;
+        });
+    };
     $scope.payCV = function() {
-        getData(FIRST_PAGE, true);
+        handleCV("pay");
     };
     $scope.printCV = function() {
-        var targetURL = "\printcv";
+        var targetURL = "\printcv#cid=" + $scope.resumeParam.candidate_id + ";jid=" + $scope.resumeParam.job_id;
         window.open(targetURL); 
+    };
+    $scope.dropCV = function(){
+        handleCV("drop");
+    };
+    $scope.restoreCV = function(){
+        handleCV("restore");
     };
     $scope.isLoading = true;
     cvService.init().then(function(){
+        return cvService.getPublishedJobs();
+    }).then(function(publishJobs){
+        $scope.publishJobs = publishJobs;
         return getData(FIRST_PAGE, true);
     }).then(function(){
         $timeout(function(){

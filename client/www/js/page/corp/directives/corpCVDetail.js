@@ -42,6 +42,16 @@ angular.module('corpModule')
                             case "work_type":
                                 item['work_type_text'] = cvService.getWorktypeByID(itemValue);
                                 break;
+                            case "position":
+                                item['position_text'] = cvService.getCommunityPosition(itemValue);
+                                break;
+                            case "tags":
+                                if (itemValue) {
+                                    item['tagsDisplay'] = itemValue.split(" ").slice(0, 2);
+                                } else {
+                                    item['tagsDisplay'] = [];
+                                }
+                                break;
                         }
                     });
                 });

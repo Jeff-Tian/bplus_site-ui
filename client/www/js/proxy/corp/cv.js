@@ -6,6 +6,11 @@ angular.module('bridgeplus.corp')
         var resourceSet = [
             "qualifications",
             "worktype",
+            "communityposition",
+            "language",
+            "langguageproficiency",
+            "englishlevel",
+            "industry",
             "job"
         ];
         var PARAM_MAPPING = {
@@ -35,6 +40,26 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
                 }
             }
             return "";
+        };
+        me.getIndustry = function(id) {
+            var key = "industry";
+            return me.getResourceByID(key, id);
+        };
+        me.getLanguage = function(id) {
+            var key = "language";
+            return me.getResourceByID(key, id);
+        };
+        me.getCommunityPosition = function(id) {
+            var key = "communityposition";
+            return me.getResourceByID(key, id);
+        };
+        me.getLangguageProficiency = function(id) {
+            var key = "langguageproficiency";
+            return me.getResourceByID(key, id);
+        };
+        me.getEnglishLevel = function(id) {
+            var key = "englishlevel";
+            return me.getResourceByID(key, id);
         };
         me.getQulificationsByID = function(id) {
             var key = "qualifications";
@@ -108,6 +133,13 @@ company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             var param = $.extend(true, {
 member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
             }, idParam);
+            return service.post(url, param);
+        };
+        me.getPublishedJobs = function(){
+            var url = '/corp-service-proxy/jobapply/publishedJobs';
+            var param = {
+company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
+            };
             return service.post(url, param);
         };
         me.init = function() {

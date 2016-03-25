@@ -17,15 +17,15 @@
                     <div>
                         <span>手机号码 :</span>
                         <span ng-if="!resumeDetail.unlocked">***********</span>
-                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.phone}}</span>
+                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.mobile}}</span>
                         <span>电子邮件 :</span>
                         <span ng-if="!resumeDetail.unlocked">***********************</span>
-                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.email}}</span>
+                        <span ng-if="resumeDetail.unlocked">{{resumeDetail.member.mail}}</span>
                     </div>
                 </div>
                 <div class="three wide column">
                     <div>
-                        <img ng-src="{{resumeDetail.member.headshot}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[resumeDetail.member.gender]">
+                        <img ng-src="{{resumeDetail.member.avatar}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[resumeDetail.member.gender]">
                     </div>
                 </div>
             </div>
@@ -37,12 +37,28 @@
             <span class="corp-cv-detail-body-head">教育背景</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
-            <div class="ui grid">
-                <div class="three wide column">
-                    
-                </div>
-                <div class="thirteen wide column">
-                    
+            <div class="corp-cv-detail-record" ng-repeat="record in resumeDetail.education">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="one wide column"></div>
+                        <div class="three wide column">
+                            <div ng-bind-template="{{record.startDate}} - {{record.endDate===''?'至今':record.endDate}}"></div>
+                        </div>
+                        <div class="twelve wide column">
+                            <div>
+                                <span>{{record.university}}/{{record.major}}/{{record.qualification_text}}</span>
+                            </div>
+                            <div>
+                                <div  ng-repeat="tag in record.tagsDisplay" class="ui label">{{tag}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="four wide column"></div>
+                        <div class="twelve wide column">
+                            {{record.special_experience}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,7 +69,30 @@
             <span class="corp-cv-detail-body-head">工作经历</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
-            hello world
+            <div class="corp-cv-detail-record" ng-repeat="record in resumeDetail.workExperience">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="one wide column"></div>
+                        <div class="three wide column">
+                            <div ng-bind-template="{{record.startDate}} - {{record.endDate===''?'至今':record.endDate}}"></div>
+                        </div>
+                        <div class="twelve wide column">
+                            <div>
+                                <span>{{record.company}}/{{record.job_text}}/{{record.work_type_text}}</span>
+                            </div>
+                            <div>
+                                <div  ng-repeat="tag in record.tagsDisplay" class="ui label">{{tag}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="four wide column"></div>
+                        <div class="twelve wide column">
+                            {{record.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="ui corp-cv-detail-segment">
@@ -62,13 +101,30 @@
             <span class="corp-cv-detail-body-head">社团经历</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
-            hello world
-        </div>
-    </div>
-    <div class="ui corp-cv-detail-segment">
-        <div class="corp-cv-detail-segment-header segment-bottom-shadow"> 
-            <img ng-src="img/corp/profile_language.png?<%= cdn.version %>" class="ui image mini spaced"/>
-            <span class="corp-cv-detail-body-head">语言能力</span>
+            <div class="corp-cv-detail-record" ng-repeat="record in resumeDetail.communityExperience">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="one wide column"></div>
+                        <div class="three wide column">
+                            <div ng-bind-template="{{record.startDate}} - {{record.endDate===''?'至今':record.endDate}}"></div>
+                        </div>
+                        <div class="twelve wide column">
+                            <div>
+                                <span>{{record.name}}/{{record.position_text}}</span>
+                            </div>
+                            <div>
+                                <div  ng-repeat="tag in record.tagsDisplay" class="ui basic black label">{{tag}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="four wide column"></div>
+                        <div class="twelve wide column">
+                            {{record.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="ui corp-cv-detail-segment">
@@ -77,7 +133,31 @@
             <span class="corp-cv-detail-body-head">技能与获奖</span>
         </div>
         <div class="corp-cv-detail-segment-body"> 
-            hello world
+            <div class="ui grid">
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">语言：</div>
+                    <div class="thirteen wide column">
+                        <div ng-repeat="language in languageSkill">
+                            <!-- {{language.}} -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">技能：</div>
+                    <div class="thirteen wide column">
+                        <div ng-repeat="language in languageSkill"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">获奖：</div>
+                    <div class="thirteen wide column">
+                        <div ng-repeat="language in languageSkill"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
