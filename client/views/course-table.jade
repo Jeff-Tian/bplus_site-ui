@@ -3,7 +3,9 @@ mixin unfinishedCourseBlocks(c)
         include share-course
         bopdcompetitiveness(data="{progressRate: #{c}.status, text: #{c}.statusText}", classes="{classes: 'red small'}")
     td
-        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="#{c}.status !== -1 && #{c}.countdown.value", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") 距离上课 {{#{c}.countdown.value | countdown}}
+        p(style="font-size: smaller; white-space: nowrap;", class="ui red color", ng-show="#{c}.status !== -1 && #{c}.countdown.value < 0") 已进行 {{-#{c}.countdown.value | countdown}}
+
+        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="#{c}.status !== -1 && #{c}.countdown.value >= 0", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") 距离上课 {{#{c}.countdown.value | countdown}}
         p
             button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24 ? '进入课程' : '未到时间')}}
 
