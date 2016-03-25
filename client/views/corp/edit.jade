@@ -8,38 +8,40 @@ block content
                     span 公司LOGO上传
             div.twelve.wide.column
                 div.corp-edit-section
-                    div.title(crop-edit-title)
+                    div.title(ng-click="showAccountInfo = !showAccountInfo")
                         h2.ui.medium.header
                             i.account-info-icon.icon
                             div.content 账户信息
-                    div.form-container.account-info-form-container
-                        form.ui.form
+                    div.form-container.account-info-form-container(ng-if="showAccountInfo")
+                        form.ui.form(form-username)
                             div.field
                                 label 用户名修改
-                                input(type="text", name="username", readonly, value="testtesttest")
-                                i.write.icon
+                                input(type="text", name="username", data-prompt="请输入用户名", value="testtesttest")
+                                button(type="submit")
+                        form.ui.form
                             div.field
                                 label 密码修改
                                 input(type="password", name="password", readonly, value="*********")
-                                i.write.icon
+                                i.icon(ng-click="modalPassword()")
                             div.field
                                 label 手机绑定
                                 input(type="text", name="telephone", readonly, value="13*******00")
-                                i.write.icon
+                                i.icon(ng-click="modalTelephone()")
+                        form.ui.form(form-email)
                             div.field
                                 label 邮箱绑定
-                                input(type="text", name="email", readonly, value="test@qp1.org")
-                                i.write.icon
+                                input(type="text", name="email", data-prompt="请输入正确的邮箱地址", value="test@qp1.org")
+                                button(type="submit")
                 div.corp-edit-section
-                    div.title(crop-edit-title)
+                    div.title(ng-click="showBasicInfo = !showBasicInfo")
                         h2.ui.medium.header
                             i.basic-info-icon.icon
                             div.content 基本信息
-                    div.form-container
+                    div.form-container(ng-if="showBasicInfo")
                         form.ui.form
                             div.field
                                 label 公司名称
-                                input(type="text", name="corporation", readonly, value="阿里巴巴（上海）有限公司")
+                                input(type="text", name="corporation", readonly, disabled="disabled" value="阿里巴巴（上海）有限公司")
                             div.field
                                 label 行业
                                 input(type="text", name="industry", value="")
@@ -68,11 +70,11 @@ block content
                                 button.ui.red.button(type="submit") 保存
                                 div.ui.basic.button 取消
                 div.corp-edit-section
-                    div.title(crop-edit-title)
+                    div.title(ng-click="showCompanyInfo = !showCompanyInfo")
                         h2.ui.medium.header
                             i.company-info-icon.icon
                             div.content 公司介绍
-                    div.form-container
+                    div.form-container(ng-if="showCompanyInfo")
                         form.ui.form
                             div.field
                                 label 一句话公司宣传标语
@@ -89,5 +91,46 @@ block content
                             div.field
                                 button.ui.red.button(type="submit") 保存
                                 div.ui.basic.button 取消
+    div.ui.modal.modal-password(modal-password)
+        div.header 修改密码
+            div.btn-close
+                i.close.icon
+        div.content
+            form.ui.form
+                div.field
+                    i.lock.icon
+                    input(type="password", name="oldPassword", placeholder="请输入原来密码", value="")
+                div.field
+                    i.lock.icon
+                    input(type="password", name="newPassword", placeholder="重新设置新密码", value="")
+                div.field
+                    i.lock.icon
+                    input(type="password", name="reEnterPassword", placeholder="再次输入新密码", value="")
+                div.field.btn-container
+                    button.fluid.ui.red.button.disabled 完成
+    div.ui.modal.modal-telephone(modal-telephone)
+        div.header 修改手机
+            div.btn-close
+                i.close.icon
+        div.content
+            form.ui.form
+                div.field
+                    i.phone.icon
+                    input(type="text", name="telephone", placeholder="请输入手机号码", value="")
+                div.field
+                    div.ui.grid.CAPTCHA-grid
+                        div.ui.nine.wide.column
+                            i.write.icon
+                            input(type="text", name="CAPTCHA", placeholder="请输入图形验证", value="")
+                        div.ui.seven.wide.column
+                            img(src="")
+                            a(href="javascript:void(0);") 换一张
+                div.field.btn-container
+                    div.fluid.ui.red.button.disabled 获取手机验证码
+                div.field.btn-container
+                    i.lock.icon
+                    input(type="password", name="password", placeholder="请设置登录密码", value="")
+                div.field
+                    button.fluid.ui.red.button.disabled 完成
 block extraJs
     script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")
