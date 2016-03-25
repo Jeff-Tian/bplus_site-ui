@@ -53,7 +53,10 @@ angular.module('studyCenterModule')
                                         text: t,
                                         special: false
                                     };
-                                })
+                                }),
+                                class_id: d.class_id,
+                                course_id: d.course_id,
+                                teacherInfo: d.teacher
                             };
                         });
 
