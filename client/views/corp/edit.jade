@@ -1,12 +1,21 @@
 block content
     div.ui.container.crop-edit-container(corp-edit)
         div.ui.grid
-            div.four.wide.column
-                div.logo-container
+            div.six.wide.column
+                div.percent {{completion}}%
+                    span 公司信息完成度{{completion}}%，差强人意，多说些
+                div.logo-container.corp-edit-completion(class="corp-edit-completion-{{completion}}")
+                    div.corp-edit-completion-body
+                        div.corp-edit-completion-left
+                            div.corp-edit-completion-left-cycle
+                        div.corp-edit-completion-right
+                            div.corp-edit-completion-right-cycle
+                        div.corp-edit-completion-logo(style="background-image:url({{logo}});")
+                    div.line
                 div.ui.red.button.btn-logo-upload
                     i.icon
                     span 公司LOGO上传
-            div.twelve.wide.column
+            div.ten.wide.column
                 div.corp-edit-section
                     div.title(ng-click="showAccountInfo = !showAccountInfo")
                         h2.ui.medium.header
@@ -16,7 +25,7 @@ block content
                         form.ui.form(form-username)
                             div.field
                                 label 用户名修改
-                                input(type="text", name="username", data-prompt="请输入用户名", value="testtesttest")
+                                input(type="text", name="username", data-prompt="请输入用户名", value="{{username}}")
                                 button(type="submit")
                         form.ui.form
                             div.field
@@ -25,12 +34,12 @@ block content
                                 i.icon(ng-click="modalPassword()")
                             div.field
                                 label 手机绑定
-                                input(type="text", name="telephone", readonly, value="13*******00")
+                                input(type="text", name="telephone", readonly, value="{{telephone}}")
                                 i.icon(ng-click="modalTelephone()")
                         form.ui.form(form-email)
                             div.field
                                 label 邮箱绑定
-                                input(type="text", name="email", data-prompt="请输入正确的邮箱地址", value="test@qp1.org")
+                                input(type="text", name="email", data-prompt="请输入正确的邮箱地址", value="{{email}}")
                                 button(type="submit")
                 div.corp-edit-section
                     div.title(ng-click="showBasicInfo = !showBasicInfo")
@@ -38,7 +47,7 @@ block content
                             i.basic-info-icon.icon
                             div.content 基本信息
                     div.form-container(ng-if="showBasicInfo")
-                        form.ui.form
+                        form.ui.form(form-basic-info)
                             div.field
                                 label 公司名称
                                 input(type="text", name="corporation", readonly, disabled="disabled" value="阿里巴巴（上海）有限公司")
@@ -75,13 +84,13 @@ block content
                             i.company-info-icon.icon
                             div.content 公司介绍
                     div.form-container(ng-if="showCompanyInfo")
-                        form.ui.form
+                        form.ui.form(form-company-info)
                             div.field
                                 label 一句话公司宣传标语
-                                input(type="text", name="slogan", value="全球企业间(B2B)电子商务的著名品牌")
+                                input(type="text", name="slogan", value="{{slogan}}")
                             div.field
                                 label 公司简介
-                                textarea(name="description", rows="5")
+                                textarea(name="description", rows="5") {{description}}
                                 div.ui.bottom.attached.segment
                                     div.inline.field
                                         label
