@@ -20,10 +20,11 @@ angular.module('corpModule')
                 break;
         }
         var param = {
+            jobTitle: $scope.option.type,
             champion: $scope.option.win,
             highMatch: $scope.option.match,
             sortDirection: $scope.isSortDesc ? 'desc' : 'asc'
-         };
+        };
         return cvService.getCV($scope.displayData.currentTab, param).then(function(ret){
             $scope.displayData.allChecked = false;
             $scope.displayData.rawData = [];
@@ -121,7 +122,10 @@ angular.module('corpModule')
     };
     $scope.publishJobs = []; 
     $scope.$watch("option.type", function(newValue, oldValue, scope){
-        getData(FIRST_PAGE);
+        if (oldValue !== newValue) {
+            $scope.option.type = newValue;
+            getData(FIRST_PAGE);
+        }
     });
     $scope.isSortDesc = true;
     $scope.isDetailLoading = true;
