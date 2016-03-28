@@ -63,12 +63,14 @@ routerFactory('statement', '服务声明');
 routerFactory('reset-password-by-email', '通过邮箱找回密码', null, false, {
     legacy: true
 });
+routerFactory('reset-password', '找回密码', null, false, {
+    legacy: true
+});
+routerFactory('set-password', '重设密码', null, false, {
+    legacy: true
+});
 
-mixedViewEngine
-    .renderEJS(corp, '/reset-password')
-    .renderEJS(corp, '/set-password')
-;
-
+corp.get(localeHelper.localePath('/signin'), getRenderer('企业登录 - Bridge+', 'index'));
 corp.get(localeHelper.localePath('/sign-in'), getRenderer('企业登录 - Bridge+', 'index'));
 
 module.exports = corp;
