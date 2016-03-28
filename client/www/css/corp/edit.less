@@ -14,10 +14,9 @@
             .logo-container {
                 display: inline-block;
                 margin-top: 3rem;
-                border-radius: 50%;
-                width: 13rem;
-                height: 13rem;
-                background-color: #31373e;
+                width: 150px;
+                height: 150px;
+                text-align: center;
             }
             .btn-logo-upload {
                 margin-top: 2rem;
@@ -142,15 +141,18 @@
         }
     }
 }
+
 .ui.modal.modal-password,
 .ui.modal.modal-telephone {
     margin-left: -180px !important;
     width: 360px !important;
 }
+
 .scrolling .ui.modal.modal-password,
 .scrolling .ui.modal.modal-telephone {
     margin-left: auto !important;
 }
+
 .ui.modal.modal-password,
 .ui.modal.modal-telephone {
     > .header {
@@ -186,6 +188,7 @@
         }
     }
 }
+
 .ui.modal.modal-password {
     > .content {
         > .ui.form {
@@ -194,7 +197,9 @@
             }
         }
     }
-}.ui.modal.modal-telephone {
+}
+
+.ui.modal.modal-telephone {
     > .content {
         > .ui.form {
             > .field {
@@ -229,4 +234,8 @@
             }
         }
     }
- }
+}
+
+.loading input {
+    z-index: -1 !important;
+}

@@ -127,7 +127,6 @@ angular
             isValid = $form.form('is valid');
             $form.form(configForm);
 
-
             function callbackSendCAPTCHA() {
                 $btnSendCAPTCHA.removeClass('loading').addClass('disabled').html(config.secondResendCAPTCHA);
                 timerSendCAPTCHA = $interval(function () {
@@ -196,7 +195,7 @@ angular
             return false;
         };
     }])
-    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', '$q', '$timeout', 'corpStatus', 'msgBus', 'events', function ($rootScope, service, serviceErrorParser, DeviceHelper, $q, $timeout, corpStatus, msgBus, events) {
+    .directive('corpRegisterForm', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', '$q', '$timeout', 'corpStatus', 'msgBus', 'events', 'requestTransformers', function ($rootScope, service, serviceErrorParser, DeviceHelper, $q, $timeout, corpStatus, msgBus, events, requestTransformers) {
         return {
             //scope: { '*': '=' },
             link: function (scope, element, attrs) {
@@ -297,37 +296,7 @@ angular
                                     'X-Requested-With': undefined,
                                     'Content-Type': undefined
                                 },
-                                transformRequest: function (data, getHeaders) {
-                                    function appendFormData(formData, key, value) {
-                                        if (value instanceof window.File) {
-                                            formData.append(key, value, value.name);
-                                            return;
-                                        }
-
-                                        if (value instanceof window.Blob) {
-                                            formData.append(key, value, key + '.png');
-                                            return;
-                                        }
-
-                                        if (typeof value !== 'undefined') {
-                                            formData.append(key, value);
-                                            return;
-                                        }
-                                    }
-
-                                    var formData = new window.FormData();
-                                    angular.forEach(data, function (value, key) {
-                                        if (value instanceof Array) {
-                                            for (var i = 0; i < value.length; i++) {
-                                                appendFormData(formData, key + '[' + i + ']', value[i]);
-                                            }
-                                        } else {
-                                            appendFormData(formData, key, value);
-                                        }
-                                    });
-
-                                    return formData;
-                                }
+                                transformRequest: requestTransformers.transformToFormData
                             });
                         } else {
                             console.log('licenseInfo:', scope.data.licenseInfo);
@@ -370,22 +339,4 @@ angular
         };
     }])
     .directive('countDown', angular.bplus.countDown)
-    .directive('fileread', [function () {
-        return {
-            scope: {
-                fileread: '='
-            },
-            link: function (scope, element, attrs) {
-                element.bind('change', function (changeEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = changeEvent.target.files[0];
-
-                        if (attrs.fileChangedHandler) {
-                            angular.element(element).scope()[attrs.fileChangedHandler]();
-                        }
-                    });
-                });
-            }
-        };
-    }])
 ;

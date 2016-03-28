@@ -40,8 +40,10 @@ module.exports = {
             register: '/corp-service-proxy/member/register',
             login: '/corp-service-proxy/member/login',
             uploadLicense: '/corp-service-proxy/member/upload-license',
+            uploadProfile: '/corp-service-proxy/member/upload-profile',
             basicInfo: '/corp-service-proxy/member/basic-info',
-            signOut: '/corp-service-proxy/member/sign-out'
+            signOut: '/corp-service-proxy/member/sign-out',
+            profile: '/corp-service-proxy/member/profile'
         },
         jobapply: {
             publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',

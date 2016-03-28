@@ -4,6 +4,75 @@ var config = require('../../config');
 var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-proxy/member');
 var membership = require('../membership');
 
+function handleFiles(req, res, next) {
+    req.files = {};
+
+    req.busboy.on('file', function (fieldName, file, fileName, encoding, mimeType) {
+        if (!fileName) {
+            return;
+        }
+
+        file.fileRead = [];
+
+        console.log('uploading: ', fileName);
+        console.log(file);
+        file.on('data', function (data) {
+            console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
+            file.fileRead.push(data);
+        });
+
+        file.on('end', function () {
+            var finalBuffer = Buffer.concat(this.fileRead);
+
+            req.files[fieldName] = {
+                buffer: finalBuffer,
+                size: finalBuffer.length,
+                filename: fileName,
+                mimetype: mimeType
+            };
+
+            console.log('File [' + fieldName + '] Finished');
+        });
+    });
+
+    req.busboy.on('field', function (key, value, keyTruncated, valueTruncated) {
+        console.log(key, '=', value);
+        req.body[key] = value;
+    });
+
+    req.busboy.on('finish', function () {
+        console.log('busboy finish');
+        next();
+    });
+
+    return req.pipe(req.busboy);
+}
+
+function passFile(req, res, next) {
+    req.body.file = req.files.file;
+    next();
+}
+
+function uploadToBucket(req, res, next) {
+    return proxy({
+        host: config.upload.inner.host,
+        port: config.upload.inner.port,
+        path: '/upload/bplus-corp-resource',
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=' + Math.random().toString(16)
+        },
+        responseInterceptor: function (originalRes, upstreamJson, originalReq, next) {
+            originalRes.json({
+                isSuccess: true,
+                result: upstreamJson
+            });
+
+            return undefined;
+        }
+    })(req, res, next);
+}
+
 module.exports = require('express').Router()
     .put(corpServiceUrls.member.register, require('../captcha').validate, proxy.proxyBPlus({
         path: '/corp/member/register',
@@ -35,68 +104,8 @@ module.exports = require('express').Router()
             return false;
         }
     }))
-    .put(corpServiceUrls.member.uploadLicense, function (req, res, next) {
-        req.files = {};
-
-        req.busboy.on('file', function (fieldName, file, fileName, encoding, mimeType) {
-            if (!fileName) {
-                return;
-            }
-
-            file.fileRead = [];
-
-            console.log('uploading: ', fileName);
-            console.log(file);
-            file.on('data', function (data) {
-                console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
-                file.fileRead.push(data);
-            });
-
-            file.on('end', function () {
-                var finalBuffer = Buffer.concat(this.fileRead);
-
-                req.files[fieldName] = {
-                    buffer: finalBuffer,
-                    size: finalBuffer.length,
-                    filename: fileName,
-                    mimetype: mimeType
-                };
-
-                console.log('File [' + fieldName + '] Finished');
-            });
-        });
-
-        req.busboy.on('field', function (key, value, keyTruncated, valueTruncated) {
-            console.log(key, '=', value);
-            req.body[key] = value;
-        });
-
-        req.busboy.on('finish', function () {
-            console.log('busboy finish');
-            next();
-        });
-
-        return req.pipe(req.busboy);
-    }, function (req, res, next) {
-        req.body.file = req.files.file;
-        next();
-    }, proxy({
-        host: config.upload.inner.host,
-        port: config.upload.inner.port,
-        path: '/upload/bplus-corp-resource',
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'multipart/form-data; boundary=' + Math.random().toString(16)
-        },
-        responseInterceptor: function (originalRes, upstreamJson, originalReq, next) {
-            originalRes.json({
-                isSuccess: true,
-                result: upstreamJson
-            });
-
-            return undefined;
-        }
-    }))
+    .put(corpServiceUrls.member.uploadProfile, handleFiles, passFile, uploadToBucket)
+    .put(corpServiceUrls.member.uploadLicense, handleFiles, passFile, uploadToBucket)
     .post(corpServiceUrls.member.basicInfo, function (req, res, next) {
         req.body.mobile = req.body.contact_mobile;
 
