@@ -24,6 +24,7 @@ angular.module('bridgeplus.corp')
         me.getCV = function(currentTab, option){
             var url = JOB_URL_PREFIX + PARAM_MAPPING[currentTab];
             var param = $.extend(true, {
+// company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
 company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             }, option);
             return service.post(url, param).then(function(value){
@@ -138,6 +139,7 @@ member_id : "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
         me.getPublishedJobs = function(){
             var url = '/corp-service-proxy/jobapply/publishedJobs';
             var param = {
+// company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
 company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             };
             return service.post(url, param);

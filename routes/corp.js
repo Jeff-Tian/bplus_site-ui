@@ -54,6 +54,8 @@ routerFactory("cv", '简历管理');
 routerFactory("printCV", '简历打印', null, true);
 //Find
 routerFactory("find", '找人才');
+//Post
+routerFactory("jobpost", '发布职位');
 //Setting
 routerFactory("setting", '账户管理');
 routerFactory('about-us', '关于我们');

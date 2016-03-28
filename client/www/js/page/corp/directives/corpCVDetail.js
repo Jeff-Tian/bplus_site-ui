@@ -36,6 +36,8 @@ angular.module('corpModule')
                                 break;
                             case "qualifications_id":
                             case "job_id":
+                            case "proficiency_id":
+                            case "language_id":
                                 var itemKeyArray = itemKey.split("_");
                                 item[itemKey.replace(itemKeyArray[1], "text")] = cvService.getResourceByID(itemKeyArray[0], itemValue);
                                 break;
