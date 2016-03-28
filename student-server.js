@@ -152,6 +152,13 @@ supportedLocales.map(function (l) {
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
 
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false),
+        express.static('/Users/tianjie/SHARED-UI'));
+}
+
 function setupStaticResources() {
     var staticServer = express.static(staticFolder, staticSetting);
 
@@ -361,6 +368,16 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
+    .get(localeHelper.localePath('/studycenter', true), membership.ensureAuthenticated, function (req, res, next) {
+        var lang = localeHelper.getLocale(req.url, req);
+        var redirect = '/studycenter/';
+
+        if (lang) {
+            redirect = '/' + lang + redirect;
+        }
+
+        res.redirect(redirect);
+    })
     .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
         var lang = req.params.lang || localeHelper.getLocale(req.url, req);
 

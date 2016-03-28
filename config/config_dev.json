@@ -146,10 +146,10 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "1.1.8",
-  "date": "20160310_0615",
+  "version": "1.1.10",
+  "date": "20160325_1307",
   "trackingUrl": "http://uat.tracking.hcd.com",
-  "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",
+  "onlineStoreMenuSource": "/store/json/store-menu.json",
   "durableMessageSource_local": "/messages",
   "durableMessageSource": "//source.bridgeplus.cn/json/messages.json"
 }
