@@ -1,11 +1,19 @@
+mixin fileInput()
+    input(type="file", style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; z-index: 100; padding-left: 2000px; cursor: pointer; border: none; outline: none;", accept=".png,.gif,.jpeg,.jpg", fileread="basicInfo.avatar", file-changed-handler="fileChanged")
+
 block content
     div.ui.container.crop-edit-container(corp-edit)
-        div.ui.grid
+        div.ui.top.aligned.grid
             div.four.wide.column
-                div.logo-container
-                div.ui.red.button.btn-logo-upload
-                    i.icon
-                    span 公司LOGO上传
+                div.ui.vertical.segment(ng-class="{'loading': uploading}",style="position: relative;")
+                    div.logo-container
+                        div.ui.fluid.image.circular(style="background-color: #31373e;")
+                            img(style="width: 100%; height:100%;", ng-src="{{avatarUrl ? avatarUrl : \'#{cdnify('/img/anonymous_default.png')}\'}}")
+                            + fileInput
+                    div.ui.red.button.btn-logo-upload(style="position: relative;")
+                        i.icon
+                        span 公司LOGO上传
+                        + fileInput
             div.twelve.wide.column
                 div.corp-edit-section
                     div.title(ng-click="showAccountInfo = !showAccountInfo")
@@ -134,3 +142,4 @@ block content
                     button.fluid.ui.red.button.disabled 完成
 block extraJs
     script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")

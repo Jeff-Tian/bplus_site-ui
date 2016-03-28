@@ -1,6 +1,6 @@
 angular
     .module('corpModule')
-    .directive('corpEdit', ['$rootScope', function ($rootScope) {
+    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', function ($rootScope, service, requestTransformers, serviceErrorParser) {
         return {
             //scope: {
             //    '*': '='
@@ -17,6 +17,32 @@ angular
                         $scope.$modalTelephone.modal('show');
                     }
                 };
+
+                $scope.uploading = false;
+                $scope.fileChanged = function (avatar) {
+                    console.log(avatar);
+
+                    service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.member.uploadProfile, {
+                            file: avatar,
+                            'x:category': 'upload-' + Math.random().toString()
+                        }, {
+                            headers: {
+                                'X-Requested-With': undefined,
+                                'Content-Type': undefined
+                            },
+                            transformRequest: requestTransformers.transformToFormData
+                        });
+                    }).then(function (result) {
+                        console.log(result);
+                        $scope.avatarUrl = '//' + result.host + '/' + result.key + '';
+                    }).then(null, function (reason) {
+                        console.error(reason);
+                        $rootScope.message = serviceErrorParser.getErrorMessage(reason);
+                    });
+                };
+
+                
             }],
             link: function (scope, element, attrs) {
             }
