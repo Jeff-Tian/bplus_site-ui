@@ -33,6 +33,10 @@ router.get('/my', function (req, res, next) {
     });
 });
 
+router.get('/json/:json', function (req, res, next) {
+    res.send(fs.readFileSync(__dirname + '/./' + req.params.json));
+});
+
 function cdnify(url, cdn) {
     return cdn.normal + url + '?' + cdn.version;
 }
