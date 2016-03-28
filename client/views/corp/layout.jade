@@ -1,3 +1,9 @@
+mixin headerPart()
+    div#my-header
+        include message_holder
+        include header
+    block content
+
 html
     head
         title!= title
@@ -6,11 +12,12 @@ html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light-grey-background")
 
-        div(ng-app="corpModule")
-            div#my-header
-                include message_holder
-                include header
-            block content
+        if !legacy
+            div#corp-content(ng-app="corpModule")
+                + headerPart
+        else
+            div#corp-content
+                + headerPart
 
         div#my-footer
             include footer

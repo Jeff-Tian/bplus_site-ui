@@ -19,7 +19,7 @@ angular.module('corpModule')
 
             Object.keys($scope.resumeDetail).forEach(function(key){
                 var type = $scope.resumeDetail[key];
-                var type = $.isArray(type) ? type : [type];
+                type = $.isArray(type) ? type : [type];
                 type.forEach(function(value, index){
                     var item = value;
                     Object.keys(item).forEach(function(itemKey){

@@ -70,6 +70,13 @@ block content
                         label 联系人
                         input(type="text", name="contact", placeholder="请填入联系人", ng-model="data.contact", ng-required="true")
                     div.field.required
+                        label 性别
+                        select(name="gender", class="ui dropdown", placeholder="请选择联系人性别", ng-required="true", ng-model="data.gender")
+                            option(value="") 请选择
+                            option(value="U") 保密
+                            option(value="M") 男
+                            option(value="F") 女
+                    div.field.required
                         label 职位
                         input(type="text", name="position", placeholder="请填入职位", ng-model="data.position", ng-required="true")
                     div.field.required

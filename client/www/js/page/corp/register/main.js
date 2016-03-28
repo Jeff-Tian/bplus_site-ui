@@ -230,14 +230,21 @@ angular
                                 identifier: 'contact',
                                 rules: [{
                                     type: 'empty',
-                                    prompt: $form.find('[name=contact]').prop('placeholder')
+                                    prompt: $form.find('[name=contact]').attr('placeholder')
+                                }]
+                            },
+                            gender: {
+                                identifier: 'gender',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=gender]').attr('placeholder')
                                 }]
                             },
                             position: {
                                 identifier: 'position',
                                 rules: [{
                                     type: 'empty',
-                                    prompt: $form.find('[name=position]').prop('placeholder')
+                                    prompt: $form.find('[name=position]').attr('placeholder')
                                 }]
                             },
                             email: {
@@ -275,6 +282,8 @@ angular
                     $event.stopPropagation();
 
                     if (!$form.form('is valid')) {
+                        $rootScope.errorMessages = ['请填写完整的信息'];
+
                         return false;
                     }
 
@@ -337,6 +346,7 @@ angular
                                     location: scope.data.city,
                                     contact: scope.data.contact,
                                     contact_position: scope.data.position,
+                                    contact_gender: scope.data.gender,
                                     contact_mail: scope.data.email,
                                     contact_mobile: scope.data.mobile,
                                     business_license_url: '//' + data.host + '/' + data.key,

@@ -163,7 +163,7 @@ angular.module('corpModule')
         action(param).then(function(){
             return getData(FIRST_PAGE, true);
         }).then(function(){
-            return cvService.getResume($scope.resumeParam)
+            return cvService.getResume($scope.resumeParam);
         }).then(function(detail){
             $scope.isDetailLoading = false;
             $scope.resumeDetail = detail;
