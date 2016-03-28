@@ -143,6 +143,10 @@ angular.module('corpModule')
     };
     var handleCV = function(type) {
         var action;
+        var param = {
+            member_id: $scope.resumeParam.candidate_id,
+            job_id: $scope.resumeParam.job_id
+        };
         switch (type) {
             case "pay":
                 action = cvService.unlockCV;
@@ -152,17 +156,16 @@ angular.module('corpModule')
                 break;
             case "drop":
                 action = cvService.dropCV;
+                param = [param];
                 break;
         }
-        var param = {
-            member_id: $scope.resumeParam.candidate_id,
-            job_id: $scope.resumeParam.job_id
-        };
+        $scope.isDetailLoading = true;
         action(param).then(function(){
             return getData(FIRST_PAGE, true);
         }).then(function(){
             return cvService.getResume($scope.resumeParam)
         }).then(function(detail){
+            $scope.isDetailLoading = false;
             $scope.resumeDetail = detail;
         });
     };
