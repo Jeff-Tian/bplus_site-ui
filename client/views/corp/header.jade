@@ -4,7 +4,7 @@ div(class="ui b-header")
             div(class="right item")
                 if typeof hcd_user !== 'undefined' && hcd_user.member_id
                     a.ui.button(ng-cloak="") 您好, {{corpBasicInfo.companyName}}
-                    a(class="center ui button", href="")
+                    a(class="center ui button", href="/edit")
                         i.setting.icon
                         | 账户管理
                     a(class="center ui button", ng-click="corpSignOut()")

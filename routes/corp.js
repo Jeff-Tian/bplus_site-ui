@@ -48,7 +48,7 @@ function routerFactory(name, title, pipes, ignoreLayout, options) {
 
 routerFactory("", '企业首页');
 routerFactory("register", '企业注册', membership.ensureAuthenticated);
-routerFactory("edit", '修改企业资料');
+routerFactory("edit", '修改企业资料', membership.ensureAuthenticated);
 //CV
 routerFactory("cv", '简历管理');
 routerFactory("printCV", '简历打印', null, true);
