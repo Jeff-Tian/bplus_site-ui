@@ -6,7 +6,7 @@ var config = require('../config/index');
 var localeHelper = require('../locales/localeHelper.js');
 var membership = require('../serviceProxy/membership.js');
 
-function getRenderer(title, target, ignoreLayout) {
+function getRenderer(title, target, ignoreLayout, options) {
     var jadeLayout = ignoreLayout === true ? null : "layout.jade";
     return function (req, res, next) {
         res.locals.title = title + ' -- Bridge+';
@@ -17,11 +17,18 @@ function getRenderer(title, target, ignoreLayout) {
 
             return config.cdn.normal + url + '?' + config.cdn.version;
         };
+
+        if (options) {
+            for (var p in options) {
+                res.locals[p] = options[p];
+            }
+        }
+
         mixedViewEngine.render(res, 'corp/' + target + '.jade', jadeLayout, res.locals);
     };
 }
 
-function routerFactory(name, title, pipes, ignoreLayout) {
+function routerFactory(name, title, pipes, ignoreLayout, options) {
     var target = name;
 
     if (target === '') {
@@ -34,7 +41,7 @@ function routerFactory(name, title, pipes, ignoreLayout) {
         args = args.concat(pipes);
     }
 
-    args = args.concat([getRenderer(title, target, ignoreLayout)]);
+    args = args.concat([getRenderer(title, target, ignoreLayout, options)]);
 
     corp.get.apply(corp, args);
 }
@@ -53,17 +60,15 @@ routerFactory('about-us', '关于我们');
 routerFactory('school', '学校合作');
 routerFactory('contact-us', '联系我们');
 routerFactory('statement', '服务声明');
+routerFactory('reset-password-by-email', '通过邮箱找回密码', null, false, {
+    legacy: true
+});
 
 mixedViewEngine
-    .renderEJS(corp, '/reset-password-by-email')
     .renderEJS(corp, '/reset-password')
     .renderEJS(corp, '/set-password')
 ;
 
 corp.get(localeHelper.localePath('/sign-in'), getRenderer('企业登录 - Bridge+', 'index'));
-
-corp.get(localeHelper.localePath('/long'), function (req, res, next) {
-
-});
 
 module.exports = corp;

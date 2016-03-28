@@ -8,14 +8,17 @@ angular
             controller: ['$scope', function ($scope) {
                 $scope.showAccountInfo = true;
                 $scope.modalPassword = function () {
-                    $scope.$modalPassword && $scope.$modalPassword.modal('show');
+                    if ($scope.$modalPassword) {
+                        $scope.$modalPassword.modal('show');
+                    }
                 };
                 $scope.modalTelephone = function () {
-                    $scope.$modalTelephone && $scope.$modalTelephone.modal('show');
+                    if ($scope.$modalTelephone) {
+                        $scope.$modalTelephone.modal('show');
+                    }
                 };
             }],
             link: function (scope, element, attrs) {
-                ;
             }
         };
     }])

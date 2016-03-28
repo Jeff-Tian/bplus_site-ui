@@ -19,7 +19,7 @@ function renderMixin(res, jadeTemplate, jadeLayout, data) {
     var compiled = jade.compile(contents, o);
     compiled = compiled(data || {});
 
-    o.filename = path.join(__dirname, '/../client/www/view-partial/store-index.html');
+    o.filename = path.join(__dirname, '/../client/www/view-partial/virtual.html');
     res.send(ejs.render(compiled, res.locals, o));
 }
 
