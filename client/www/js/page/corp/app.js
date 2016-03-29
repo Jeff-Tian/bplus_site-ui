@@ -69,7 +69,7 @@ angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule'
 
                 msgBus.emitMsg(corpModuleEvents.corpInfo.loaded, $rootScope.corpBasicInfo);
                 if ($rootScope.corpBasicInfo.auditStatus !== 'passed' && window.location.pathname !== '/register') {
-                    window.location = '/register?company_id=' + corp_id;
+                    // window.location = '/register?company_id=' + corp_id;
                 }
             });
         }
