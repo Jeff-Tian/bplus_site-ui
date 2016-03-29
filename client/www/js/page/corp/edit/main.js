@@ -1,6 +1,7 @@
 angular
     .module('corpModule')
-    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', function ($rootScope, service, requestTransformers, serviceErrorParser) {
+    .directive('captcha', angular.bplus.captcha)
+    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper) {
         return {
             //scope: {
             //    '*': '='
@@ -20,8 +21,6 @@ angular
 
                 $scope.uploading = false;
                 $scope.fileChanged = function (avatar) {
-                    console.log(avatar);
-
                     service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
                         return service.put($rootScope.config.serviceUrls.corp.member.uploadProfile, {
                             file: avatar,
@@ -36,21 +35,94 @@ angular
                     }).then(function (result) {
                         console.log(result);
                         $scope.avatarUrl = '//' + result.host + '/' + result.key + '';
-                    }).then(null, function (reason) {
+
+                        service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                logo: $scope.avatarUrl
+                            });
+                        })
+                    }).then(function (result) {
+                        console.log(result);
+                        $scope.corpProfile = result;
+                    }, function (reason) {
                         console.error(reason);
                         $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                     });
                 };
 
-                
+                $scope.fetchingData = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingData', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.profile, {
+                        params: {
+                            company_id: DeviceHelper.getCookie('corp_id')
+                        }
+                    });
+                }).then(function (result) {
+                    console.log(result);
+                    $scope.avatarUrl = result.logo;
+                    $scope.corpProfile = result;
+                    $scope.corpProfile.name = $scope.corpProfile.name || $rootScope.corpBasicInfo.companyName;
+                }).then(null, function (reason) {
+                    $rootScope.message = serviceErrorParser.getErrorMessage(reason);
+                });
+
+                $scope.savingCorpBasicProfile = false;
+                $scope.saveCorpBasicInfo = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpBasicProfile', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                name: $scope.corpProfile.name,
+                                industry: $scope.corpProfile.industry,
+                                scale: $scope.corpProfile.scale,
+                                nature_of_firms: $scope.corpProfile.nature_of_firms,
+                                website: $scope.corpProfile.website,
+                                location: $scope.corpProfile.location,
+                                contact: $scope.corpProfile.contact,
+                                contact_gender: $scope.corpProfile.contact_gender,
+                                contact_position: $scope.corpProfile.contact_position
+                            });
+                        }
+                    ).then(function (result) {
+                            $rootScope.message = '保存基本信息成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+                    ;
+                };
+
+                $scope.savingCorpDescription = false;
+                $scope.saveCorpDescription = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpDescription', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            abstraction: $scope.corpProfile.abstraction,
+                            tags: [$scope.corpProfile.tags]
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '保存公司介绍成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+
+                    ;
+                };
             }],
             link: function (scope, element, attrs) {
             }
-        };
+        }
+            ;
     }])
-    .directive('formUsername', [function () {
+    .
+    directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
+                scope.loadingSSO = false;
+                service.executePromiseAvoidDuplicate(scope, 'loadingSSO', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.ssoInfo);
+                }).then(function (result) {
+                    scope.ssoInfo = result;
+                }).then(null, serviceErrorParser.handleError);
+
                 var $form = angular.element(element);
                 $form.form({
                     on: 'blur',
@@ -73,21 +145,53 @@ angular
             }
         };
     }])
-    .directive('modalPassword', [function () {
+    .directive('modalPassword', ['service', 'serviceErrorParser', function (service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalPassword = angular.element(element);
+
+                scope.changingPassword = false;
+                scope.changePassword = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                            oldPassword: scope.changePasswordData.oldPassword,
+                            password: scope.changePasswordData.newPassword
+                        });
+                    }).then(function (result) {
+                        console.log(result);
+                    }).then(null, serviceErrorParser.handleFormError);
+                };
             }
         };
     }])
-    .directive('modalTelephone', [function ($rootScope) {
+    .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
+
+                scope.sendingVerificationCode = false;
+                scope.sendVerificationCode = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'sendingVerificationCode', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.sms.sendWithCaptcha, {
+                            captchaId: scope.changeMobileData.captchaId,
+                            captcha: scope.changeMobileData.captcha,
+                            mobile: scope.changeMobileData.mobile
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '短信验证码已发送,请注意查收';
+                        })
+                        .then(null, function (reason) {
+                            scope.refreshCaptcha();
+                            scope.changeMobileData.captcha = '';
+                            serviceErrorParser.handleFormError(reason);
+                        })
+                    ;
+                };
             }
         };
     }])
-    .directive('formEmail', [function () {
+    .directive('formEmail', ['service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', function (service, serviceErrorParser, $rootScope, DeviceHelper) {
         return {
             link: function (scope, element, attrs) {
                 var $form = angular.element(element);
@@ -103,12 +207,25 @@ angular
                             }]
                         }
                     }
-                }).on('submit', function () {
-                    if (!$form.hasClass('loading') && $form.form('is valid')) {
-                        $form.addClass('loading');
-                    }
-                    return false;
                 });
+
+                scope.changingEmail = false;
+                scope.changeEmail = function () {
+                    if (!$form.form('is valid')) {
+                        return false;
+                    }
+
+                    service.executePromiseAvoidDuplicate(scope, 'changingEmail', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            contact_mail: scope.corpProfile.contact_mail
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '更新 Email 成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError);
+                };
             }
         };
     }]);

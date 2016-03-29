@@ -121,6 +121,17 @@ module.exports = require('express').Router()
         path: '/corp/member/loadbasic',
         method: 'POST'
     }))
+    .get(corpServiceUrls.member.profile, membership.ensureAuthenticated, function (req, res, next) {
+        proxy.proxyBPlus({
+            path: '/corp/company/load/' + req.query.company_id,
+            method: 'GET'
+        })(req, res, next);
+    })
+    .post(corpServiceUrls.member.profile, membership.ensureAuthenticated, proxy.proxyBPlus({
+        path: '/corp/company/save',
+        method: 'POST'
+    }))
+    .get(corpServiceUrls.member.ssoInfo, membership.ensureAuthenticated, membership.loadProfile)
     .delete(corpServiceUrls.member.signOut, require('../sso').createLogoutProcessor(function (req, res, next) {
         var deleteCookieOption = {
             expires: new Date(Date.now() - (1000 * 60 * 60 * 24 * 365)),
