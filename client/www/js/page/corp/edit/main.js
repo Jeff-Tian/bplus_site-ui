@@ -43,7 +43,7 @@ angular
                         })
                     }).then(function (result) {
                         console.log(result);
-
+                        $scope.corpProfile = result;
                     }, function (reason) {
                         console.error(reason);
                         $rootScope.message = serviceErrorParser.getErrorMessage(reason);
@@ -61,15 +61,41 @@ angular
                     console.log(result);
                     $scope.avatarUrl = result.logo;
                     $scope.corpProfile = result;
+                    $scope.corpProfile.name = $scope.corpProfile.name || $rootScope.corpBasicInfo.companyName;
                 }).then(null, function (reason) {
                     $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                 });
+
+                $scope.savingCorpBasicProfile = false;
+                $scope.saveCorpBasicInfo = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpBasicProfile', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                name: $scope.corpProfile.name,
+                                industry: $scope.corpProfile.industry,
+                                scale: $scope.corpProfile.scale,
+                                nature_of_firms: $scope.corpProfile.nature_of_firms,
+                                website: $scope.corpProfile.website,
+                                location: $scope.corpProfile.location,
+                                contact: $scope.corpProfile.contact,
+                                contact_gender: $scope.corpProfile.contact_gender,
+                                contact_position: $scope.corpProfile.contact_position
+                            });
+                        }
+                    ).then(function (result) {
+                            $rootScope.message = '保存基本信息成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+                    ;
+                };
             }],
             link: function (scope, element, attrs) {
             }
-        };
+        }
+            ;
     }])
-    .directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
+    .
+    directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
                 scope.loadingSSO = false;

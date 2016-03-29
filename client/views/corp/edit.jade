@@ -46,37 +46,38 @@ block content
                             i.basic-info-icon.icon
                             div.content 基本信息
                     div.form-container(ng-if="showBasicInfo")
-                        form.ui.form
+                        form.ui.form(name="corpBasicInfoForm", ng-submit="saveCorpBasicInfo()", ng-class="{'loading': savingCorpBasicProfile}")
                             div.field
                                 label 公司名称
-                                input(type="text", name="corporation", readonly, disabled="disabled" value="阿里巴巴（上海）有限公司")
+                                input(type="text", name="corporation", readonly, disabled="disabled", ng-model="corpProfile.name")
                             div.field
                                 label 行业
-                                input(type="text", name="industry", value="")
+                                input(type="text", name="industry", ng-model="corpProfile.industry")
                             div.field
                                 label 规模
-                                input(type="text", name="size", value="")
+                                input(type="text", name="size", ng-model="corpProfile.scale")
                             div.field
                                 label 性质
-                                input(type="text", name="nature", value="")
+                                input(type="text", name="nature", ng-model="corpProfile.nature_of_firms")
                             div.field
                                 label 主页
-                                input(type="text", name="homepage", value="")
+                                input(type="text", name="homepage", ng-model="corpProfile.website")
                             div.field
                                 label 地点
-                                input(type="text", name="address", value="")
+                                input(type="text", name="address", ng-model="corpProfile.location")
                             div.field
                                 label 联系人
-                                input(class="contact-input", type="text", name="contact", value="")
-                                select(class="contact-select", name="gender")
-                                    option(value="male") 先生
-                                    option(value="female") 女士
+                                input(class="contact-input", type="text", name="contact", ng-model="corpProfile.contact")
+                                select(class="contact-select", name="gender", ng-model="corpProfile.contact_gender")
+                                    option(value="U") --
+                                    option(value="M") 先生
+                                    option(value="F") 女士
                             div.field
                                 label 职位
-                                input(type="text", name="position", value="")
+                                input(type="text", name="position", ng-model="corpProfile.contact_position")
                             div.field
                                 button.ui.red.button(type="submit") 保存
-                                div.ui.basic.button 取消
+                                div.ui.basic.button(type="reset") 取消
                 div.corp-edit-section
                     div.title(ng-click="showCompanyInfo = !showCompanyInfo")
                         h2.ui.medium.header
