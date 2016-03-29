@@ -84,22 +84,22 @@ block content
                             i.company-info-icon.icon
                             div.content 公司介绍
                     div.form-container(ng-if="showCompanyInfo")
-                        form.ui.form
+                        form.ui.form(name="descriptionForm", ng-submit="saveCorpDescription()", ng-class="{'loading': savingCorpDescription}")
                             div.field
                                 label 一句话公司宣传标语
                                 input(type="text", name="slogan", value="全球企业间(B2B)电子商务的著名品牌")
                             div.field
                                 label 公司简介
-                                textarea(name="description", rows="5")
+                                textarea(name="description", rows="5", ng-model="corpProfile.abstraction")
                                 div.ui.bottom.attached.segment
                                     div.inline.field
                                         label
                                             i.tags.icon
                                             span 标签
-                                        input(type="text", name="tags", value="")
+                                        input(type="text", name="tags", ng-model="corpProfile.tags")
                             div.field
                                 button.ui.red.button(type="submit") 保存
-                                div.ui.basic.button 取消
+                                div.ui.basic.button(type="reset") 取消
     div.ui.modal.modal-password(modal-password)
         div.header 修改密码
             div.btn-close

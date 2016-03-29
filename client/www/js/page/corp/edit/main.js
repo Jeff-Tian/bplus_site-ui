@@ -88,6 +88,23 @@ angular
                         .then(null, serviceErrorParser.handleError)
                     ;
                 };
+
+                $scope.savingCorpDescription = false;
+                $scope.saveCorpDescription = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpDescription', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            abstraction: $scope.corpProfile.abstraction,
+                            tags: [$scope.corpProfile.tags]
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '保存公司介绍成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+
+                    ;
+                };
             }],
             link: function (scope, element, attrs) {
             }
