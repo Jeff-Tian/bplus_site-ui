@@ -110,14 +110,17 @@ block content
             form.ui.form(name="changePasswordForm", ng-submit="changePassword()")
                 form-error
                 div.field
-                    i.lock.icon
-                    input(type="password", name="oldPassword", placeholder="请输入原来密码", ng-model="changePasswordData.oldPassword")
+                    div.ui.left.icon.input.fluid
+                        i.lock.icon
+                        input(type="password", name="oldPassword", placeholder="请输入原来密码", ng-model="changePasswordData.oldPassword")
                 div.field
-                    i.lock.icon
-                    input(type="password", name="newPassword", placeholder="重新设置新密码", ng-model="changePasswordData.newPassword")
+                    div.ui.left.icon.input.fluid
+                        i.lock.icon
+                        input(type="password", name="newPassword", placeholder="重新设置新密码", ng-model="changePasswordData.newPassword")
                 div.field
-                    i.lock.icon
-                    input(type="password", name="reEnterPassword", placeholder="再次输入新密码", ng-model="changePasswordData.newPassword2")
+                    div.ui.left.icon.input.fluid
+                        i.lock.icon
+                        input(type="password", name="reEnterPassword", placeholder="再次输入新密码", ng-model="changePasswordData.newPassword2")
                 div.field.btn-container
                     button.fluid.ui.red.button(ng-class="{'disabled': !changePasswordForm.$valid}") 完成
     div.ui.modal.modal-telephone(modal-telephone)
@@ -128,21 +131,30 @@ block content
             form.ui.form(name="changeMobileForm", ng-submit="changeMobile()", ng-class="{'error': (errorMessages || scope.errorMessages || $root.errorMessages).length}")
                 form-error
                 div.field
-                    i.phone.icon
-                    input(type="text", name="telephone", placeholder="请输入手机号码", ng-model="changeMobileData.mobile")
+                    div.ui.left.icon.input.fluid
+                        i.phone.icon
+                        input(type="text", name="telephone", placeholder="请输入手机号码", ng-model="changeMobileData.mobile")
                 div.field
                     div.ui.grid.CAPTCHA-grid
                         div.ui.eleven.wide.column
-                            i.write.icon
-                            input(type="text", name="CAPTCHA", placeholder="请输入图形验证", ng-model="changeMobileData.captcha", maxlength="4")
+                            div.ui.left.icon.input.fluid
+                                i.write.icon
+                                input(type="text", name="CAPTCHA", placeholder="请输入图形验证", ng-model="changeMobileData.captcha", maxlength="4")
                         div.ui.five.wide.column
                             div(captcha="", ng-model="changeMobileData.captchaId", style="height: 42px; cursor: pointer; float: right;", autocomplete="off")
                             a(href="javascript:void(0);", ng-click="refreshCaptcha()") 换一张
                 div.field.btn-container
                     button.fluid.ui.red.button(ng-disabled="!changeMobileData.mobile || !changeMobileData.captcha", ng-click="sendVerificationCode()") 获取手机验证码
+                div.field
+                    div.ui.left.icon.input.fluid
+                        i.write.icon
+                        input(type="text", name="verificationCode", placeholder="请输入手机验证码", ng-model="changeMobileData.verificationCode", autocomplete="off")
+                        | &nbsp;
+                        button.ui.red.button(type="button") 再次发送
                 div.field.btn-container
-                    i.lock.icon
-                    input(type="password", name="password", placeholder="请设置登录密码", value="")
+                    div.ui.left.icon.input.fluid
+                        i.lock.icon
+                        input(type="password", name="password", placeholder="请设置登录密码", value="")
                 div.field
                     button.fluid.ui.red.button.disabled 完成
 block extraJs
