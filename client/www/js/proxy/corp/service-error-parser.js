@@ -1,7 +1,7 @@
 angular.module('bridgeplus.corp')
     .factory('serviceErrorParser', ['$filter', '$rootScope', function ($filter, $rootScope) {
         var o = {};
-        
+
         o.getErrorMessage = function (reason) {
             console.log('error!', reason);
             var errorCode = 'service-' + reason.code;
@@ -18,11 +18,11 @@ angular.module('bridgeplus.corp')
         };
 
         o.handleError = function (reason) {
-            $rootScope.message = this.getErrorMessage(reason);
+            $rootScope.message = o.getErrorMessage(reason);
         };
 
         o.handleFormError = function (reason) {
-            $rootScope.errorMessages = [this.getErrorMessage(reason)];
+            $rootScope.errorMessages = [o.getErrorMessage(reason)];
         };
 
         return o;

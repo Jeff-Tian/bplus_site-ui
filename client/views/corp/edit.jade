@@ -35,10 +35,10 @@ block content
                                 label 手机绑定
                                 input(type="text", name="telephone", readonly, value="13*******00")
                                 i.icon(ng-click="modalTelephone()")
-                        form.ui.form(form-email)
+                        form.ui.form(form-email, ng-submit="changeEmail()", ng-class="{'loading': changingEmail}")
                             div.field
                                 label 邮箱绑定
-                                input(type="text", name="email", data-prompt="请输入正确的邮箱地址", value="test@qp1.org")
+                                input(type="text", name="email", data-prompt="请输入正确的邮箱地址", ng-model="corpProfile.contact_mail")
                                 button(type="submit")
                 div.corp-edit-section
                     div.title(ng-click="showBasicInfo = !showBasicInfo")

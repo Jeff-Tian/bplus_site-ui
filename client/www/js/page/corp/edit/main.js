@@ -170,7 +170,7 @@ angular
             }
         };
     }])
-    .directive('formEmail', [function () {
+    .directive('formEmail', ['service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', function (service, serviceErrorParser, $rootScope, DeviceHelper) {
         return {
             link: function (scope, element, attrs) {
                 var $form = angular.element(element);
@@ -186,12 +186,25 @@ angular
                             }]
                         }
                     }
-                }).on('submit', function () {
-                    if (!$form.hasClass('loading') && $form.form('is valid')) {
-                        $form.addClass('loading');
-                    }
-                    return false;
                 });
+
+                scope.changingEmail = false;
+                scope.changeEmail = function () {
+                    if (!$form.form('is valid')) {
+                        return false;
+                    }
+
+                    service.executePromiseAvoidDuplicate(scope, 'changingEmail', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            contact_mail: scope.corpProfile.contact_mail
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '更新 Email 成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError);
+                };
             }
         };
     }]);
