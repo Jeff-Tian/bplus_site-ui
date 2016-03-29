@@ -1,4 +1,18 @@
 angular.module('corpModule')
 .controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', function($scope, $timeout, jobpostService) {
-    console.log("jobpost ctrl");
+    $timeout(function(){
+        $('.corp-jobpost-form').form({
+            fields: {
+              name: {
+                identifier: 'name',
+                rules: [
+                  {
+                    type: 'empty',
+                    prompt: ''
+                  }
+                ]
+              },
+            }
+        });
+    });
 }]);
