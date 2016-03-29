@@ -19,7 +19,7 @@ angular.module('corpModule')
 
             Object.keys($scope.resumeDetail).forEach(function(key){
                 var type = $scope.resumeDetail[key];
-                var type = $.isArray(type) ? type : [type];
+                type = $.isArray(type) ? type : [type];
                 type.forEach(function(value, index){
                     var item = value;
                     Object.keys(item).forEach(function(itemKey){
@@ -31,16 +31,26 @@ angular.module('corpModule')
                             case "start_date":
                                 item.startDate = formatDataPreiod(itemValue);
                                 break;
+                            case "issue_date":
+                                item.issueDate = formatDataPreiod(itemValue);
+                                break;
                             case "birthday":
                                 item.age = getAge(itemValue);
                                 break;
                             case "qualifications_id":
                             case "job_id":
+                            case "language_id":
                                 var itemKeyArray = itemKey.split("_");
                                 item[itemKey.replace(itemKeyArray[1], "text")] = cvService.getResourceByID(itemKeyArray[0], itemValue);
                                 break;
                             case "work_type":
                                 item['work_type_text'] = cvService.getWorktypeByID(itemValue);
+                                break;
+                            case "proficiency_id":
+                                item['proficiency_text'] = cvService.getLangguageProficiency(itemValue);
+                                break;
+                            case "certification":
+                                item['certification_text'] = cvService.getEnglishLevel(itemValue);
                                 break;
                             case "position":
                                 item['position_text'] = cvService.getCommunityPosition(itemValue);

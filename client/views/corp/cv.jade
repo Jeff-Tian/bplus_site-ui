@@ -25,6 +25,8 @@ block content
                         div.ui.checkbox.inline-block.inline-space.option-match
                             input(type="checkbox",name="match")
                             label 高匹配度
+                    div
+                        | 操作简历后，如列表未更新，请等待10秒钟后刷新界面，简历即可归类到新的位置
                     div.ui.active.tab.cv-list-tab(data-tab="delivered")
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELIVERED")
                     div.ui.tab.cv-list-tab(data-tab="interested")

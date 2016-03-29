@@ -1,5 +1,3 @@
-@import "./widget/completion";
-
 .ui.container.crop-edit-container {
     margin-top: 7rem;
     margin-bottom: 2rem;
@@ -13,46 +11,14 @@
         > .wide.column:first-child {
             padding-right: 2rem;
             text-align: center;
-            > .percent {
-                position: absolute;
-                top: 0;
-                left: 50%;
-                margin-left: -1.5em;
-                width: 2em;
-                font-size: 2rem;
-                font-weight: bold;
-                line-height: 1em;
-                color: @color-corp-text-red;
-                > span {
-                    position: absolute;
-                    top: 0;
-                    right: -11em;
-                    width: 10em;
-                    font-size: 12px;
-                    font-weight: normal;
-                    line-height: 1.333333em;
-                    color: @color-corp-text-dark-grey-header;
-                    text-align: left;
-                }
-            }
-            > .logo-container {
-                position: relative;
+            .logo-container {
                 display: inline-block;
-                margin-top: 2.5rem;
-                border-radius: 50%;
-                width: 13rem;
-                height: 13rem;
-                background-color: @color-corp-text-dark-grey-header;
-                > .line {
-                    position: absolute;
-                    top: calc(~"-1rem + 7px");
-                    left: 50%;
-                    width: 2px;
-                    height: 1rem;
-                    background-color: @color-corp-red;
-                }
+                margin-top: 3rem;
+                width: 150px;
+                height: 150px;
+                text-align: center;
             }
-            > .btn-logo-upload {
+            .btn-logo-upload {
                 margin-top: 2rem;
                 > i.icon {
                     background: url(/img/corp/logo_upload.png) no-repeat center center;
@@ -175,15 +141,18 @@
         }
     }
 }
+
 .ui.modal.modal-password,
 .ui.modal.modal-telephone {
     margin-left: -180px !important;
     width: 360px !important;
 }
+
 .scrolling .ui.modal.modal-password,
 .scrolling .ui.modal.modal-telephone {
     margin-left: auto !important;
 }
+
 .ui.modal.modal-password,
 .ui.modal.modal-telephone {
     > .header {
@@ -206,12 +175,6 @@
         > .ui.form {
             > .field {
                 position: relative;
-                i.icon {
-                    position: absolute;
-                    top: 0.67861429em;
-                    left: 1em;
-                    color: #909096;
-                }
                 input {
                     padding-left: 2.5em;
                 }
@@ -219,6 +182,7 @@
         }
     }
 }
+
 .ui.modal.modal-password {
     > .content {
         > .ui.form {
@@ -227,7 +191,9 @@
             }
         }
     }
-}.ui.modal.modal-telephone {
+}
+
+.ui.modal.modal-telephone {
     > .content {
         > .ui.form {
             > .field {
@@ -262,4 +228,8 @@
             }
         }
     }
- }
+}
+
+.loading input {
+    z-index: -1 !important;
+}

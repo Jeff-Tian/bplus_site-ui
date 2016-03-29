@@ -1,9 +1,42 @@
-angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule', 'bridgeplus.corp'])
+angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule', 'bridgeplus.corp', 'file-reader'])
     .value('corpModuleEvents', {
         corpInfo: {
             loaded: 'corpInfo:loaded'
         }
     })
+    .service('requestTransformers', [function () {
+        this.transformToFormData = function (data, getHeaders) {
+            function appendFormData(formData, key, value) {
+                if (value instanceof window.File) {
+                    formData.append(key, value, value.name);
+                    return;
+                }
+
+                if (value instanceof window.Blob) {
+                    formData.append(key, value, key + '.png');
+                    return;
+                }
+
+                if (typeof value !== 'undefined') {
+                    formData.append(key, value);
+                    return;
+                }
+            }
+
+            var formData = new window.FormData();
+            angular.forEach(data, function (value, key) {
+                if (value instanceof Array) {
+                    for (var i = 0; i < value.length; i++) {
+                        appendFormData(formData, key + '[' + i + ']', value[i]);
+                    }
+                } else {
+                    appendFormData(formData, key, value);
+                }
+            });
+
+            return formData;
+        };
+    }])
     .run(['$rootScope', 'service', 'DeviceHelper', 'corpModuleEvents', 'msgBus', function ($rootScope, service, DeviceHelper, corpModuleEvents, msgBus) {
         $rootScope.corpSignOut = function () {
             service.delete($rootScope.config.serviceUrls.corp.member.signOut)
@@ -35,7 +68,6 @@ angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule'
                 };
 
                 msgBus.emitMsg(corpModuleEvents.corpInfo.loaded, $rootScope.corpBasicInfo);
-
                 if ($rootScope.corpBasicInfo.auditStatus !== 'passed' && window.location.pathname !== '/register') {
                     window.location = '/register?company_id=' + corp_id;
                 }

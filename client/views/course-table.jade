@@ -3,9 +3,14 @@ mixin unfinishedCourseBlocks(c)
         include share-course
         bopdcompetitiveness(data="{progressRate: #{c}.status, text: #{c}.statusText}", classes="{classes: 'red small'}")
     td
-        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="#{c}.status !== -1 && #{c}.countdown.value", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") 距离上课 {{#{c}.countdown.value | countdown}}
-        p
-            button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24 ? '进入课程' : '未到时间')}}
+        p(style="font-size: smaller; white-space: nowrap;", class="ui red color", ng-show="#{c}.status !== -1 && #{c}.countdown.value < 0") 已进行 {{-#{c}.countdown.value | countdown}}
+
+        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="#{c}.status !== -1 && #{c}.countdown.value >= 0", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }") 距离上课 {{#{c}.countdown.value | countdown}}
+        p(ng-show="#{c}.status !== -1 && #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24")
+            a(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24", ng-href="/studycenter/course.html?class_id={{#{c}.class_id}}&teacher_id={{#{c}.teacherInfo.teacher_id}}&course_id={{#{c}.course_id}}") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24 ? '进入课程' : '未到时间')}}
+
+        p(ng-show="#{c}.status === -1 || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24")
+            button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24, 'grey': !#{c}.countdown.value || #{c}.countdown.value > 1000 * 60 * 60 * 60 * 24 }", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24", ng-href="/studycenter/course.html?class_id={{#{c}.class_id}}&teacher_id={{#{c}.teacherInfo.teacher_id}}&course_id={{#{c}.course_id}}") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= 1000 * 60 * 60 * 60 * 24 ? '进入课程' : '未到时间')}}
 
 mixin finishedUnratedCourseBlocks(c)
     td 尚未评价
@@ -151,10 +156,11 @@ mixin teacherTable(teachers)
             tr(ng-repeat="t in #{teachers}")
                 td(class="ui items")
                     div.item
-                        div(class="ui tiny image")
-                            img(ng-src="/{{t.image}}", class="avatar")
+                        a(class="ui tiny image", ng-href="/studycenter/teacher.html?teacher_id={{t.id}}", target="_blank")
+                            img(ng-src="/{{t.image}}", class="avatar", style="border: none;")
                         div.content
-                            h5(class="ui header") {{t.name}}
+                            h5(class="ui header")
+                                a(ng-href="/studycenter/teacher.html?teacher_id={{t.id}}", target="_blank", style="color: black;") {{t.name}}
                                 div(class="sub header") {{t.title}}
                                 div(class="sub header", style="margin-top: 5px; margin-bottom: 10px;")
                                     + rating(5, 't.rank')
@@ -162,7 +168,7 @@ mixin teacherTable(teachers)
                                     span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags") {{tag}}
                 td
                     p(ng-repeat="c in t.courses")
-                        | {{c.title}}
+                        a(href="/studycenter/course.html?class_id={{c.class_id}}&teacher_id={{c.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: black;") {{c.title}}
                         | &nbsp;
                         span(class="ui mini red label", ng-repeat="courseTag in c.class_tags") {{courseTag}}
                 td

@@ -150,6 +150,20 @@ supportedLocales.map(function (l) {
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
+
+if (process.env.RUN_FROM === 'jeff') {
+    server.use(localeHelper.regexPath('/bower/SHARED-UI', false), function (req, res, next) {
+        console.log('ohohoh', req.url);
+        next();
+    }, express.static('/Users/tianjie/SHARED-UI'));
+
+    server.use(localeHelper.regexPath('/bower_components/SHARED-UI', false), function (req, res, next) {
+            console.log(req.url);
+            next();
+        },
+        express.static('/Users/tianjie/SHARED-UI'));
+}
+
 server.use(express.static(staticFolder, staticSetting));
 supportedLocales.map(function (l) {
     server.use('/' + l, express.static(staticFolder, staticSetting));
@@ -296,12 +310,6 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-}
-
 //setupOnlineStoreStaticResources('semantic');
 server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
 //setupOnlineStoreStaticResources('bower_components');
@@ -349,6 +357,16 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
+    .get(localeHelper.regexPath('/studycenter', true), membership.ensureAuthenticated, function (req, res, next) {
+        var lang = localeHelper.getLocale(req.url, req);
+        var redirect = '/studycenter/';
+
+        if (lang) {
+            redirect = '/' + lang + redirect;
+        }
+
+        res.redirect(redirect);
+    })
     .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
         var lang = req.params.lang || localeHelper.getLocale(req.url, req);
 

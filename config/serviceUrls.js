@@ -40,8 +40,12 @@ module.exports = {
             register: '/corp-service-proxy/member/register',
             login: '/corp-service-proxy/member/login',
             uploadLicense: '/corp-service-proxy/member/upload-license',
+            uploadProfile: '/corp-service-proxy/member/upload-profile',
             basicInfo: '/corp-service-proxy/member/basic-info',
-            signOut: '/corp-service-proxy/member/sign-out'
+            signOut: '/corp-service-proxy/member/sign-out',
+            profile: '/corp-service-proxy/member/profile',
+            ssoInfo: '/corp-service-proxy/member/sso-profile',
+            changePassword: '/corp-service-proxy/member/change-password'
         },
         jobapply: {
             publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',
@@ -66,7 +70,8 @@ module.exports = {
             job: '/corp-service-proxy/resources/job'
         },
         sms: {
-            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha'
+            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha',
+            sendWithCaptcha: '/corp-service-proxy/sms/send-with-captcha'
         }
     },
 

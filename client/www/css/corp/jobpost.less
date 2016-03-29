@@ -1,0 +1,36 @@
+@import "./variable";
+
+
+
+.corp-jobpost {
+    min-height: 80%;
+    margin-top: 100px;
+    .corp-jobpost-header {
+        vertical-align: middle;
+        font-size: 16px;
+        color: @color-corp-text-light-grey-header;
+    }
+    .corp-jobpost-segment {
+        padding-left: 2em!important;
+        padding-right: 2em!important;
+    }
+    .corp-jobpost-dark-segment {
+        background-color: @color-corp-table-medium-dark;
+    }
+    .corp-jobpost-content-title {
+        margin-top: 0.75em;
+        margin-bottom: 0.75em;
+    }
+    .required-title {
+        &:before {
+            content: '*';
+            color: @color-corp-text-red;
+        }
+    }
+    .corp-jobpost-content-input-container {
+        padding-bottom: 0.5em;
+    }
+    .corp-jobpost-content-input-normal {
+        width: 100%;
+    }
+}

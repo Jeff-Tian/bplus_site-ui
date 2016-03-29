@@ -1,62 +1,128 @@
 angular
     .module('corpModule')
-    .directive('corpEdit', [function () {
+    .directive('captcha', angular.bplus.captcha)
+    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper) {
         return {
             //scope: {
             //    '*': '='
             //},
-            controller: ['$scope', '$http', function ($scope, $http) {
-                $scope.completion = 0;
+            controller: ['$scope', function ($scope) {
                 $scope.showAccountInfo = true;
-
                 $scope.modalPassword = function () {
-                    $scope.$modalPassword && $scope.$modalPassword.modal('show');
+                    if ($scope.$modalPassword) {
+                        $scope.$modalPassword.modal('show');
+                    }
                 };
                 $scope.modalTelephone = function () {
-                    $scope.$modalTelephone && $scope.$modalTelephone.modal('show');
+                    if ($scope.$modalTelephone) {
+                        $scope.$modalTelephone.modal('show');
+                    }
                 };
 
-                $http({
-                    url: '/js/page/corp/edit/data.json',
-                    method: 'GET'
-                }).then(function (response) {
-                    if (response && response.status == 200 && response.statusText && response.statusText.toString().toLowerCase() == 'ok' && response.data) {
-                        var data = response.data;
-                        if (data.completion) {
-                            $scope.completion = data.completion;
+                $scope.uploading = false;
+                $scope.fileChanged = function (avatar) {
+                    service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.member.uploadProfile, {
+                            file: avatar,
+                            'x:category': 'upload-' + Math.random().toString()
+                        }, {
+                            headers: {
+                                'X-Requested-With': undefined,
+                                'Content-Type': undefined
+                            },
+                            transformRequest: requestTransformers.transformToFormData
+                        });
+                    }).then(function (result) {
+                        console.log(result);
+                        $scope.avatarUrl = '//' + result.host + '/' + result.key + '';
+
+                        service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                logo: $scope.avatarUrl
+                            });
+                        })
+                    }).then(function (result) {
+                        console.log(result);
+                        $scope.corpProfile = result;
+                    }, function (reason) {
+                        console.error(reason);
+                        $rootScope.message = serviceErrorParser.getErrorMessage(reason);
+                    });
+                };
+
+                $scope.fetchingData = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingData', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.profile, {
+                        params: {
+                            company_id: DeviceHelper.getCookie('corp_id')
                         }
-                        if (data.logo) {
-                            $scope.logo = data.logo;
-                        }
-                        if (data.username) {
-                            $scope.username = data.username;
-                        }
-                        if (data.telephone) {
-                            $scope.telephone = data.telephone.toString().replace(/^(\d{3})\d{6}(\d{2})$/, '$1' + '******' + '$2');
-                        }
-                        if (data.email) {
-                            $scope.email = data.email;
-                        }
-                        if (data.slogan) {
-                            $scope.slogan = data.slogan;
-                        }
-                        if (data.description) {
-                            $scope.description = data.description;
-                        }
-                        if (data.tags) {
-                            $scope.tags = data.tags;
-                        }
-                    }
+                    });
+                }).then(function (result) {
+                    console.log(result);
+                    $scope.avatarUrl = result.logo;
+                    $scope.corpProfile = result;
+                    $scope.corpProfile.name = $scope.corpProfile.name || $rootScope.corpBasicInfo.companyName;
+                }).then(null, function (reason) {
+                    $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                 });
+
+                $scope.savingCorpBasicProfile = false;
+                $scope.saveCorpBasicInfo = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpBasicProfile', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                name: $scope.corpProfile.name,
+                                industry: $scope.corpProfile.industry,
+                                scale: $scope.corpProfile.scale,
+                                nature_of_firms: $scope.corpProfile.nature_of_firms,
+                                website: $scope.corpProfile.website,
+                                location: $scope.corpProfile.location,
+                                contact: $scope.corpProfile.contact,
+                                contact_gender: $scope.corpProfile.contact_gender,
+                                contact_position: $scope.corpProfile.contact_position
+                            });
+                        }
+                    ).then(function (result) {
+                            $rootScope.message = '保存基本信息成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+                    ;
+                };
+
+                $scope.savingCorpDescription = false;
+                $scope.saveCorpDescription = function () {
+                    service.executePromiseAvoidDuplicate($scope, 'savingCorpDescription', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            abstraction: $scope.corpProfile.abstraction,
+                            tags: [$scope.corpProfile.tags]
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '保存公司介绍成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError)
+
+                    ;
+                };
             }],
             link: function (scope, element, attrs) {
-                ;
             }
-        };
+        }
+            ;
     }])
-    .directive('formUsername', ['$timeout', function ($timeout) {
+    .
+    directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
+                scope.loadingSSO = false;
+                service.executePromiseAvoidDuplicate(scope, 'loadingSSO', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.ssoInfo);
+                }).then(function (result) {
+                    scope.ssoInfo = result;
+                }).then(null, serviceErrorParser.handleError);
+
                 var $form = angular.element(element);
                 $form.form({
                     on: 'blur',
@@ -73,30 +139,59 @@ angular
                 }).on('submit', function () {
                     if (!$form.hasClass('loading') && $form.form('is valid')) {
                         $form.addClass('loading');
-                        $timeout(function () {
-                            $form.removeClass('loading');
-                        }, 3000);
                     }
                     return false;
                 });
             }
         };
     }])
-    .directive('modalPassword', [function () {
+    .directive('modalPassword', ['service', 'serviceErrorParser', function (service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalPassword = angular.element(element);
+
+                scope.changingPassword = false;
+                scope.changePassword = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                            oldPassword: scope.changePasswordData.oldPassword,
+                            password: scope.changePasswordData.newPassword
+                        });
+                    }).then(function (result) {
+                        console.log(result);
+                    }).then(null, serviceErrorParser.handleFormError);
+                };
             }
         };
     }])
-    .directive('modalTelephone', [function ($rootScope) {
+    .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
+
+                scope.sendingVerificationCode = false;
+                scope.sendVerificationCode = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'sendingVerificationCode', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.sms.sendWithCaptcha, {
+                            captchaId: scope.changeMobileData.captchaId,
+                            captcha: scope.changeMobileData.captcha,
+                            mobile: scope.changeMobileData.mobile
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '短信验证码已发送,请注意查收';
+                        })
+                        .then(null, function (reason) {
+                            scope.refreshCaptcha();
+                            scope.changeMobileData.captcha = '';
+                            serviceErrorParser.handleFormError(reason);
+                        })
+                    ;
+                };
             }
         };
     }])
-    .directive('formEmail', [function () {
+    .directive('formEmail', ['service', 'serviceErrorParser', '$rootScope', 'DeviceHelper', function (service, serviceErrorParser, $rootScope, DeviceHelper) {
         return {
             link: function (scope, element, attrs) {
                 var $form = angular.element(element);
@@ -112,51 +207,25 @@ angular
                             }]
                         }
                     }
-                }).on('submit', function () {
-                    if (!$form.hasClass('loading') && $form.form('is valid')) {
-                        $form.addClass('loading');
-                        $timeout(function () {
-                            $form.removeClass('loading');
-                        }, 3000);
-                    }
-                    return false;
                 });
-            }
-        };
-    }])
-    .directive('formBasicInfo', ['$timeout', function ($timeout) {
-        return {
-            link: function (scope, element, attrs) {
-                var $form = angular.element(element);
-                $form.on('submit', function () {
-                    if (!$form.hasClass('loading')) {
-                        $form.addClass('loading');
-                        var vals = $form.form('get values');
-                        console.log(vals);
-                        $timeout(function () {
-                            $form.removeClass('loading');
-                        }, 3000);
+
+                scope.changingEmail = false;
+                scope.changeEmail = function () {
+                    if (!$form.form('is valid')) {
+                        return false;
                     }
-                    return false;
-                });
-            }
-        };
-    }])
-    .directive('formCompanyInfo', ['$timeout', function ($timeout) {
-        return {
-            link: function (scope, element, attrs) {
-                var $form = angular.element(element);
-                $form.on('submit', function () {
-                    if (!$form.hasClass('loading')) {
-                        $form.addClass('loading');
-                        var vals = $form.form('get values');
-                        console.log(vals);
-                        $timeout(function () {
-                            $form.removeClass('loading');
-                        }, 3000);
-                    }
-                    return false;
-                });
+
+                    service.executePromiseAvoidDuplicate(scope, 'changingEmail', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                            company_id: DeviceHelper.getCookie('corp_id'),
+                            contact_mail: scope.corpProfile.contact_mail
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '更新 Email 成功!';
+                        })
+                        .then(null, serviceErrorParser.handleError);
+                };
             }
         };
     }]);

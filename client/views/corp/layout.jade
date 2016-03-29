@@ -1,3 +1,9 @@
+mixin headerPart()
+    div#my-header
+        include message_holder
+        include header
+    block content
+
 html
     head
         title!= title
@@ -6,11 +12,12 @@ html
         link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/corp.css?#{cdn.version}")
     body(class="light-grey-background")
 
-        div(ng-app="corpModule")
-            div#my-header
-                include message_holder
-                include header
-            block content
+        if !legacy
+            div#corp-content(ng-app="corpModule")
+                + headerPart
+        else
+            div#corp-content
+                + headerPart
 
         div#my-footer
             include footer
@@ -18,6 +25,7 @@ html
             script(src="#{cdn.normal}js/widget/main.js?#{cdn.version}")
             script(src="#{cdn.normal}js/widget/pagination.js?#{cdn.version}")
             script(src="#{cdn.normal}js/proxy/corp/main.js")
+            script(src="#{cdn.normal}js/common/file-reader.js?#{cdn.version}")
             script(src="#{cdn.normal}js/page/corp/app.js?#{cdn.version}")
             script(src="#{cdn.normal}js/page/corp/directives/corpSignInWidget.js?#{cdn.version}")
             script(src="#{cdn.normal}js/directives/captcha.js?#{cdn.version}")
