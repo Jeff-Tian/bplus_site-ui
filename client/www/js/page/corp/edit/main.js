@@ -1,5 +1,6 @@
 angular
     .module('corpModule')
+    .directive('captcha', angular.bplus.captcha)
     .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper) {
         return {
             //scope: {
@@ -163,10 +164,30 @@ angular
             }
         };
     }])
-    .directive('modalTelephone', [function ($rootScope) {
+    .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
+
+                scope.sendingVerificationCode = false;
+                scope.sendVerificationCode = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'sendingVerificationCode', function () {
+                        return service.put($rootScope.config.serviceUrls.corp.sms.sendWithCaptcha, {
+                            captchaId: scope.changeMobileData.captchaId,
+                            captcha: scope.changeMobileData.captcha,
+                            mobile: scope.changeMobileData.mobile
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '短信验证码已发送,请注意查收';
+                        })
+                        .then(null, function (reason) {
+                            scope.refreshCaptcha();
+                            scope.changeMobileData.captcha = '';
+                            serviceErrorParser.handleFormError(reason);
+                        })
+                    ;
+                };
             }
         };
     }])

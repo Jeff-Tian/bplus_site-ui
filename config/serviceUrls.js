@@ -70,7 +70,8 @@ module.exports = {
             job: '/corp-service-proxy/resources/job'
         },
         sms: {
-            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha'
+            sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha',
+            sendWithCaptcha: '/corp-service-proxy/sms/send-with-captcha'
         }
     },
 

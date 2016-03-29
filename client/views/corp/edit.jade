@@ -2,6 +2,8 @@ mixin fileInput()
     input(type="file", style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; z-index: 100; padding-left: 2000px; cursor: pointer; border: none; outline: none;", accept=".png,.gif,.jpeg,.jpg", fileread="basicInfo.avatar", file-changed-handler="fileChanged")
 
 block content
+    link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/module/form.css?#{cdn.version}")
+
     div.ui.container.crop-edit-container(corp-edit)
         div.ui.top.aligned.grid
             div.four.wide.column
@@ -33,7 +35,7 @@ block content
                                 i.icon(ng-click="modalPassword()")
                             div.field
                                 label 手机绑定
-                                input(type="text", name="telephone", readonly, value="13*******00")
+                                input(type="text", name="telephone", readonly, ng-model="corpProfile.contact_mobile")
                                 i.icon(ng-click="modalTelephone()")
                         form.ui.form(form-email, ng-submit="changeEmail()", ng-class="{'loading': changingEmail}")
                             div.field
@@ -123,20 +125,21 @@ block content
             div.btn-close
                 i.close.icon
         div.content
-            form.ui.form
+            form.ui.form(name="changeMobileForm", ng-submit="changeMobile()", ng-class="{'error': (errorMessages || scope.errorMessages || $root.errorMessages).length}")
+                form-error
                 div.field
                     i.phone.icon
-                    input(type="text", name="telephone", placeholder="请输入手机号码", value="")
+                    input(type="text", name="telephone", placeholder="请输入手机号码", ng-model="changeMobileData.mobile")
                 div.field
                     div.ui.grid.CAPTCHA-grid
-                        div.ui.nine.wide.column
+                        div.ui.eleven.wide.column
                             i.write.icon
-                            input(type="text", name="CAPTCHA", placeholder="请输入图形验证", value="")
-                        div.ui.seven.wide.column
-                            img(src="")
-                            a(href="javascript:void(0);") 换一张
+                            input(type="text", name="CAPTCHA", placeholder="请输入图形验证", ng-model="changeMobileData.captcha", maxlength="4")
+                        div.ui.five.wide.column
+                            div(captcha="", ng-model="changeMobileData.captchaId", style="height: 42px; cursor: pointer; float: right;", autocomplete="off")
+                            a(href="javascript:void(0);", ng-click="refreshCaptcha()") 换一张
                 div.field.btn-container
-                    div.fluid.ui.red.button.disabled 获取手机验证码
+                    button.fluid.ui.red.button(ng-disabled="!changeMobileData.mobile || !changeMobileData.captcha", ng-click="sendVerificationCode()") 获取手机验证码
                 div.field.btn-container
                     i.lock.icon
                     input(type="password", name="password", placeholder="请设置登录密码", value="")
@@ -145,3 +148,4 @@ block content
 block extraJs
     script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/directives/form-error.js?#{cdn.version}")
