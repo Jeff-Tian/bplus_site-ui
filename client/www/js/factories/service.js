@@ -56,9 +56,8 @@
                     }
                 }).error(function (reason) {
                     dfd.reject(reason);
-
                     if (reason && reason.code && String(reason.code) === '401') {
-                        window.location.href = '/sign-in?return_url=' + encodeURIComponent(window.location.href);
+                        // window.location.href = '/sign-in?return_url=' + encodeURIComponent(window.location.href);
                     }
                 });
 
