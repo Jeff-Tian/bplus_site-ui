@@ -1,6 +1,6 @@
 angular
     .module('corpModule')
-    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', function ($rootScope, service, requestTransformers, serviceErrorParser) {
+    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper) {
         return {
             //scope: {
             //    '*': '='
@@ -20,8 +20,6 @@ angular
 
                 $scope.uploading = false;
                 $scope.fileChanged = function (avatar) {
-                    console.log(avatar);
-
                     service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
                         return service.put($rootScope.config.serviceUrls.corp.member.uploadProfile, {
                             file: avatar,
@@ -36,21 +34,51 @@ angular
                     }).then(function (result) {
                         console.log(result);
                         $scope.avatarUrl = '//' + result.host + '/' + result.key + '';
-                    }).then(null, function (reason) {
+
+                        service.executePromiseAvoidDuplicate($scope, 'uploading', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.profile, {
+                                company_id: DeviceHelper.getCookie('corp_id'),
+                                logo: $scope.avatarUrl
+                            });
+                        })
+                    }).then(function (result) {
+                        console.log(result);
+
+                    }, function (reason) {
                         console.error(reason);
                         $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                     });
                 };
 
-                
+                $scope.fetchingData = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingData', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.profile, {
+                        params: {
+                            company_id: DeviceHelper.getCookie('corp_id')
+                        }
+                    });
+                }).then(function (result) {
+                    console.log(result);
+                    $scope.avatarUrl = result.logo;
+                    $scope.corpProfile = result;
+                }).then(null, function (reason) {
+                    $rootScope.message = serviceErrorParser.getErrorMessage(reason);
+                });
             }],
             link: function (scope, element, attrs) {
             }
         };
     }])
-    .directive('formUsername', [function () {
+    .directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
+                scope.loadingSSO = false;
+                service.executePromiseAvoidDuplicate(scope, 'loadingSSO', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.member.ssoInfo);
+                }).then(function (result) {
+                    scope.ssoInfo = result;
+                }).then(null, serviceErrorParser.handleError);
+
                 var $form = angular.element(element);
                 $form.form({
                     on: 'blur',
@@ -73,10 +101,22 @@ angular
             }
         };
     }])
-    .directive('modalPassword', [function () {
+    .directive('modalPassword', ['service', 'serviceErrorParser', function (service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalPassword = angular.element(element);
+
+                scope.changingPassword = false;
+                scope.changePassword = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                            oldPassword: scope.changePasswordData.oldPassword,
+                            password: scope.changePasswordData.newPassword
+                        });
+                    }).then(function (result) {
+                        console.log(result);
+                    }).then(null, serviceErrorParser.handleFormError);
+                };
             }
         };
     }])
