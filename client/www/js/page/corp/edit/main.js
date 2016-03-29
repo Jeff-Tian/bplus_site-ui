@@ -112,8 +112,7 @@ angular
         }
             ;
     }])
-    .
-    directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
+    .directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
                 scope.loadingSSO = false;
@@ -161,6 +160,45 @@ angular
                         console.log(result);
                     }).then(null, serviceErrorParser.handleFormError);
                 };
+
+                var $form = angular.element(element).find('form');
+                $form.form({
+                    on: 'blur',
+                    fields: {
+                        oldPassword: {
+                            identifier: 'oldPassword',
+                            rules: [{
+                                type: 'empty',
+                                prompt: $form.find('[name=oldPassword]').attr('placeholder')
+                            }]
+                        },
+                        newPassword: {
+                            identifier: 'newPassword',
+                            rules: [{
+                                type: 'empty',
+                                prompt: $form.find('[name=newPassword]').attr('placeholder')
+                            }, {
+                                type: 'different[oldPassword]',
+                                prompt: $form.find('[name=newPassword]').attr('data-prompt')
+                            }]
+                        },
+                        reEnterPassword: {
+                            identifier: 'reEnterPassword',
+                            rules: [{
+                                type: 'empty',
+                                prompt: $form.find('[name=reEnterPassword]').attr('placeholder')
+                            }, {
+                                type: 'match[newPassword]',
+                                prompt: $form.find('[name=reEnterPassword]').attr('data-prompt')
+                            }]
+                        }
+                    }
+                }).on('submit', function () {
+                    if (!$form.hasClass('loading') && $form.form('is valid')) {
+                        $form.addClass('loading');
+                    }
+                    return false;
+                });
             }
         };
     }])
@@ -226,6 +264,22 @@ angular
                         })
                         .then(null, serviceErrorParser.handleError);
                 };
+            }
+        };
+    }])
+    .directive('selectionDropdown', [function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $combineBox = angular.element(element);
+                $combineBox.dropdown();
+            }
+        };
+    }])
+    .directive('combineBox', [function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $combineBox = angular.element(element);
+                $combineBox.dropdown({allowAdditions: true});
             }
         };
     }]);

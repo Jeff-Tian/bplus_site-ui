@@ -54,13 +54,40 @@ block content
                                 input(type="text", name="corporation", readonly, disabled="disabled", ng-model="corpProfile.name")
                             div.field
                                 label 行业
-                                input(type="text", name="industry", ng-model="corpProfile.industry")
+                                div.ui.fluid.search.special.selection.dropdown(combine-box)
+                                    input(type="hidden", name="industry", ng-model="corpProfile.industry")
+                                    i.dropdown.icon
+                                    div.default.text 请选择...
+                                    div.menu
+                                        div.item(data-value="1") 选项一
+                                        div.item(data-value="2") 选项二
+                                        div.item(data-value="3") 选项三
+                                        div.item(data-value="4") 选项四
+                                        div.item(data-value="5") 选项五
                             div.field
                                 label 规模
-                                input(type="text", name="size", ng-model="corpProfile.scale")
+                                div.ui.fluid.search.special.selection.dropdown(combine-box)
+                                    input(type="hidden", name="scale", ng-model="corpProfile.scale")
+                                    i.dropdown.icon
+                                    div.default.text 请选择...
+                                    div.menu
+                                        div.item(data-value="1") 选项一
+                                        div.item(data-value="2") 选项二
+                                        div.item(data-value="3") 选项三
+                                        div.item(data-value="4") 选项四
+                                        div.item(data-value="5") 选项五
                             div.field
                                 label 性质
-                                input(type="text", name="nature", ng-model="corpProfile.nature_of_firms")
+                                div.ui.fluid.search.special.selection.dropdown(combine-box)
+                                    input(type="hidden", name="nature_of_firms", ng-model="corpProfile.nature_of_firms")
+                                    i.dropdown.icon.nature-of-firms-icon
+                                    div.default.text 请选择...
+                                    div.menu
+                                        div.item(data-value="1") 选项一
+                                        div.item(data-value="2") 选项二
+                                        div.item(data-value="3") 选项三
+                                        div.item(data-value="4") 选项四
+                                        div.item(data-value="5") 选项五
                             div.field
                                 label 主页
                                 input(type="text", name="homepage", ng-model="corpProfile.website")
@@ -70,10 +97,14 @@ block content
                             div.field
                                 label 联系人
                                 input(class="contact-input", type="text", name="contact", ng-model="corpProfile.contact")
-                                select(class="contact-select", name="gender", ng-model="corpProfile.contact_gender")
-                                    option(value="U") --
-                                    option(value="M") 先生
-                                    option(value="F") 女士
+                                div.ui.selection.dropdown.contact-select(selection-dropdown)
+                                    input(type="hidden", name="contact_gender", ng-model="corpProfile.contact_gender", value="U")
+                                    i.dropdown.icon
+                                    div.text --
+                                    div.menu
+                                        div.item(data-value="U") --
+                                        div.item(data-value="M") 先生
+                                        div.item(data-value="F") 女士
                             div.field
                                 label 职位
                                 input(type="text", name="position", ng-model="corpProfile.contact_position")
@@ -116,11 +147,11 @@ block content
                 div.field
                     div.ui.left.icon.input.fluid
                         i.lock.icon
-                        input(type="password", name="newPassword", placeholder="重新设置新密码", ng-model="changePasswordData.newPassword")
+                        input(type="password", name="newPassword", placeholder="重新设置新密码", data-prompt="与原来密码一致，无需修改", ng-model="changePasswordData.newPassword")
                 div.field
                     div.ui.left.icon.input.fluid
                         i.lock.icon
-                        input(type="password", name="reEnterPassword", placeholder="再次输入新密码", ng-model="changePasswordData.newPassword2")
+                        input(type="password", name="reEnterPassword", placeholder="再次输入新密码", data-prompt="两次输入的密码不一致" ng-model="changePasswordData.newPassword2")
                 div.field.btn-container
                     button.fluid.ui.red.button(ng-class="{'disabled': !changePasswordForm.$valid}") 完成
     div.ui.modal.modal-telephone(modal-telephone)
