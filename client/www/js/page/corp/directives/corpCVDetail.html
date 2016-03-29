@@ -126,27 +126,34 @@
         </div>
         <div class="corp-cv-detail-segment-body"> 
             <div class="ui grid">
-                <div class="row corp-cv-detail-row">
+                <div class="row">
                     <div class="one wide column"></div>
                     <div class="two wide column">语言：</div>
                     <div class="thirteen wide column">
-                        <div ng-repeat="language in languageSkill">
-                            <!-- {{language.}} -->
+                        <div ng-repeat="language in resumeDetail.languageSkill">
+                            <span>{{language.language_text}}</span>
+                            <span>,&nbsp;&nbsp;</span>
+                            <span ng-if="language.certification_text">{{language.certification_text}}:&nbsp;&nbsp;{{language.score}},&nbsp;&nbsp;</span>
+                            <span>{{language.proficiency_text}}</span>
                         </div>
                     </div>
                 </div>
-                <div class="row corp-cv-detail-row">
+                <div class="row">
                     <div class="one wide column"></div>
                     <div class="two wide column">技能：</div>
                     <div class="thirteen wide column">
-                        <div ng-repeat="language in languageSkill"></div>
+                        <div ng-repeat="skill in resumeDetail.skill">
+                            {{skill.name}},&nbsp;&nbsp;{{skill.description}}
+                        </div>
                     </div>
                 </div>
-                <div class="row corp-cv-detail-row">
+                <div class="row">
                     <div class="one wide column"></div>
                     <div class="two wide column">获奖：</div>
                     <div class="thirteen wide column">
-                        <div ng-repeat="language in languageSkill"></div>
+                        <div ng-repeat="archievement in resumeDetail.archivement">
+                            {{archievement.issueDate}},&nbsp;&nbsp;{{archievement.description}}({{archievement.issue_by}})
+                        </div>
                     </div>
                 </div>
             </div>
