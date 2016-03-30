@@ -25,6 +25,16 @@ angular.module('bridgeplus.corp')
             $rootScope.errorMessages = [o.getErrorMessage(reason)];
         };
 
+        o.delegateHandleFormError = function ($form) {
+            return function (reason) {
+                o.handleFormError(reason);
+
+                if ($rootScope.errorMessages instanceof Array && $rootScope.errorMessages.length) {
+                    $form.removeClass('success').addClass('error');
+                }
+            };
+        };
+
         return o;
     }])
 ;

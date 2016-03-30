@@ -133,27 +133,7 @@ block content
                             div.field
                                 button.ui.red.button(type="submit") 保存
                                 div.ui.basic.button(type="reset") 取消
-    div.ui.modal.modal-password(modal-password)
-        div.header 修改密码
-            div.btn-close
-                i.close.icon
-        div.content
-            form.ui.form(name="changePasswordForm", ng-submit="changePassword()")
-                form-error
-                div.field
-                    div.ui.left.icon.input.fluid
-                        i.lock.icon
-                        input(type="password", name="oldPassword", placeholder="请输入原来密码", ng-model="changePasswordData.oldPassword")
-                div.field
-                    div.ui.left.icon.input.fluid
-                        i.lock.icon
-                        input(type="password", name="newPassword", placeholder="重新设置新密码", data-prompt="与原来密码一致，无需修改", ng-model="changePasswordData.newPassword")
-                div.field
-                    div.ui.left.icon.input.fluid
-                        i.lock.icon
-                        input(type="password", name="reEnterPassword", placeholder="再次输入新密码", data-prompt="两次输入的密码不一致" ng-model="changePasswordData.newPassword2")
-                div.field.btn-container
-                    button.fluid.ui.red.button(ng-class="{'disabled': !changePasswordForm.$valid}") 完成
+    include changePassword
     div.ui.modal.modal-telephone(modal-telephone)
         div.header 修改手机
             div.btn-close

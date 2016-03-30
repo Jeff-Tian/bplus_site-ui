@@ -144,64 +144,73 @@ angular
             }
         };
     }])
-    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
-        return {
-            link: function (scope, element, attrs) {
-                scope.$modalPassword = angular.element(element);
+    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', '$compile',
+        function (service, serviceErrorParser, $rootScope, $compile) {
+            return {
+                link: function (scope, element, attrs) {
+                    scope.$modalPassword = angular.element(element);
 
-                scope.changingPassword = false;
-                scope.changePassword = function () {
-                    service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
-                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
-                            oldPassword: scope.changePasswordData.oldPassword,
-                            password: scope.changePasswordData.newPassword
-                        });
-                    }).then(function (result) {
-                        console.log(result);
-                    }).then(null, serviceErrorParser.handleFormError);
-                };
-
-                var $form = angular.element(element).find('form');
-                $form.form({
-                    on: 'blur',
-                    fields: {
-                        oldPassword: {
-                            identifier: 'oldPassword',
-                            rules: [{
-                                type: 'empty',
-                                prompt: $form.find('[name=oldPassword]').attr('placeholder')
-                            }]
-                        },
-                        newPassword: {
-                            identifier: 'newPassword',
-                            rules: [{
-                                type: 'empty',
-                                prompt: $form.find('[name=newPassword]').attr('placeholder')
-                            }, {
-                                type: 'different[oldPassword]',
-                                prompt: $form.find('[name=newPassword]').attr('data-prompt')
-                            }]
-                        },
-                        reEnterPassword: {
-                            identifier: 'reEnterPassword',
-                            rules: [{
-                                type: 'empty',
-                                prompt: $form.find('[name=reEnterPassword]').attr('placeholder')
-                            }, {
-                                type: 'match[newPassword]',
-                                prompt: $form.find('[name=reEnterPassword]').attr('data-prompt')
-                            }]
+                    scope.changingPassword = false;
+                    scope.changePasswordData = {};
+                    scope.changePassword = function ($event) {
+                        if (!$form.form('is valid')) {
+                            return false;
                         }
-                    }
-                }).on('submit', function () {
-                    if (!$form.hasClass('loading') && $form.form('is valid')) {
-                        $form.addClass('loading');
-                    }
-                    return false;
-                });
-            }
-        };
-    }])
+
+                        service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                                oldPassword: scope.changePasswordData.oldPassword,
+                                password: scope.changePasswordData.newPassword
+                            });
+                        }).then(function (result) {
+                            console.log(result);
+                        }).then(null, serviceErrorParser.delegateHandleFormError($form));
+                    };
+
+                    var $form = angular.element(element).find('form');
+                    $form.form({
+                        on: 'blur',
+                        fields: {
+                            oldPassword: {
+                                identifier: 'oldPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=oldPassword]').attr('placeholder')
+                                }]
+                            },
+                            newPassword: {
+                                identifier: 'newPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=newPassword]').attr('placeholder')
+                                }, {
+                                    type: 'different[oldPassword]',
+                                    prompt: $form.find('[name=newPassword]').attr('data-prompt')
+                                }]
+                            },
+                            reEnterPassword: {
+                                identifier: 'reEnterPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=reEnterPassword]').attr('placeholder')
+                                }, {
+                                    type: 'match[newPassword]',
+                                    prompt: $form.find('[name=reEnterPassword]').attr('data-prompt')
+                                }]
+                            }
+                        },
+
+                        templates: {
+                            error: function (errors) {
+                                $rootScope.errorMessages = errors;
+                                scope.$apply();
+                                return $compile($('<ul class="list"><li ng-repeat="m in (errorMessages || scope.errorMessages || $root.errorMessages)" ng-bind="m"></li></ul><i class="large remove circle icon" ng-click="errorMessages = scope.errorMessages = $root.errorMessages = undefined"></i>'))(scope);
+                            }
+                        }
+                    });
+                }
+            };
+        }])
     .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
