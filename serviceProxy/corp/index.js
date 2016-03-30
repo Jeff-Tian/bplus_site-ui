@@ -3,5 +3,6 @@ module.exports = require('express').Router()
     .use('/jobapply', require('./jobapply'))
     .use('/candidate', require('./candidate'))
     .use('/resource', require('./resource'))
+    .use('/resources', require('./resources'))
     .use('/sms', require('./sms.js'))
 ;

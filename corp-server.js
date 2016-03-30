@@ -232,7 +232,7 @@ server.use(clientErrorHandler);
 server.use(errorHandler);
 
 // Host & Port
-var port = process.env.PORT || config.corpport;
+var port = process.env.CORP_PORT || config.corpport;
 server.listen(port, function () {
     console.log(port + ' is for Bridge+ Corporation');
 });

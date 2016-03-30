@@ -107,7 +107,7 @@ angular
                             company_id: DeviceHelper.getCookie('corp_id'),
                             abstraction: $scope.corpProfile.abstraction,
                             slogan: $scope.corpProfile.slogan,
-                            tags: [$scope.corpProfile.tags]
+                            tags: $scope.corpProfile.tags
                         });
                     })
                         .then(function (result) {
