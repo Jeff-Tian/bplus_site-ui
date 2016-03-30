@@ -41,7 +41,7 @@ angular
                                 company_id: DeviceHelper.getCookie('corp_id'),
                                 logo: $scope.avatarUrl
                             });
-                        })
+                        });
                     }).then(function (result) {
                         console.log(result);
                         $scope.corpProfile = result;
@@ -144,7 +144,7 @@ angular
             }
         };
     }])
-    .directive('modalPassword', ['service', 'serviceErrorParser', function (service, serviceErrorParser) {
+    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalPassword = angular.element(element);
@@ -206,26 +206,6 @@ angular
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
-
-                scope.sendingVerificationCode = false;
-                scope.sendVerificationCode = function () {
-                    service.executePromiseAvoidDuplicate(scope, 'sendingVerificationCode', function () {
-                        return service.put($rootScope.config.serviceUrls.corp.sms.sendWithCaptcha, {
-                            captchaId: scope.changeMobileData.captchaId,
-                            captcha: scope.changeMobileData.captcha,
-                            mobile: scope.changeMobileData.mobile
-                        });
-                    })
-                        .then(function (result) {
-                            $rootScope.message = '短信验证码已发送,请注意查收';
-                        })
-                        .then(null, function (reason) {
-                            scope.refreshCaptcha();
-                            scope.changeMobileData.captcha = '';
-                            serviceErrorParser.handleFormError(reason);
-                        })
-                    ;
-                };
             }
         };
     }])

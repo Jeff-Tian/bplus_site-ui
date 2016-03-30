@@ -174,21 +174,23 @@ block content
                         div.ui.five.wide.column
                             div(captcha="", ng-model="changeMobileData.captchaId", style="height: 42px; cursor: pointer; float: right;", autocomplete="off")
                             a(href="javascript:void(0);", ng-click="refreshCaptcha()") 换一张
-                div.field.btn-container
-                    button.fluid.ui.red.button(ng-disabled="!changeMobileData.mobile || !changeMobileData.captcha", ng-click="sendVerificationCode()") 获取手机验证码
-                div.field
+                div.field.btn-container(ng-hide="verificationSent")
+                    button.fluid.ui.red.button(ng-disabled="!changeMobileData.mobile || !changeMobileData.captcha", ng-click="sendVerificationCode()", ng-class="{'loading': sendingVerificationCode}") 获取手机验证码
+                div.field(ng-show="verificationSent || true")
                     div.ui.left.icon.input.fluid
                         i.write.icon
                         input(type="text", name="verificationCode", placeholder="请输入手机验证码", ng-model="changeMobileData.verificationCode", autocomplete="off")
                         | &nbsp;
-                        button.ui.red.button(type="button") 再次发送
+                        button.ui.red.button(type="button", resend-verification, ng-click="sendVerificationCode()", ng-class="{'loading': sendingVerificationCode}", ng-disabled="!changeMobileData.mobile || !changeMobileData.captcha") {{verificationCodeButtonText}}
                 div.field.btn-container
                     div.ui.left.icon.input.fluid
                         i.lock.icon
-                        input(type="password", name="password", placeholder="请设置登录密码", value="")
+                        input(type="password", name="password", placeholder="请输入登录密码", ng-model="changeMobileData.password")
                 div.field
                     button.fluid.ui.red.button.disabled 完成
 block extraJs
     script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")
     script(src="#{cdn.normal}js/directives/form-error.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/common/validationPatterns.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/directives/resend-verification.js?#{cdn.version}")
