@@ -3,6 +3,7 @@ var leaveTrimmer = require('../../utils/leaveTrimmer');
 var config = require('../../config');
 var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-proxy/member');
 var membership = require('../membership');
+var sso = require('../sso');
 
 function handleFiles(req, res, next) {
     req.files = {};
@@ -142,4 +143,5 @@ module.exports = require('express').Router()
         res.cookie('corp_id', '', deleteCookieOption);
         //res.cookie('corp_status', '', deleteCookieOption);
     }))
+    .post(corpServiceUrls.member.changePassword, membership.ensureAuthenticated, sso.authenticateCurrentUser, sso.changePassword)
 ;

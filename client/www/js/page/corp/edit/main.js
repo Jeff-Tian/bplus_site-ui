@@ -7,15 +7,25 @@ angular
             //    '*': '='
             //},
             controller: ['$scope', function ($scope) {
+                function clearErrorMessages() {
+                    $scope.$apply(function () {
+                        $rootScope.errorMessages = [];
+                    });
+                }
+
                 $scope.showAccountInfo = true;
                 $scope.modalPassword = function () {
                     if ($scope.$modalPassword) {
-                        $scope.$modalPassword.modal('show');
+                        $scope.$modalPassword.modal({
+                            onHide: clearErrorMessages
+                        }).modal('show');
                     }
                 };
                 $scope.modalTelephone = function () {
                     if ($scope.$modalTelephone) {
-                        $scope.$modalTelephone.modal('show');
+                        $scope.$modalTelephone.modal({
+                            onHide: clearErrorMessages
+                        }).modal('show');
                     }
                 };
 
@@ -41,7 +51,7 @@ angular
                                 company_id: DeviceHelper.getCookie('corp_id'),
                                 logo: $scope.avatarUrl
                             });
-                        })
+                        });
                     }).then(function (result) {
                         console.log(result);
                         $scope.corpProfile = result;
@@ -96,15 +106,21 @@ angular
                         return service.post($rootScope.config.serviceUrls.corp.member.profile, {
                             company_id: DeviceHelper.getCookie('corp_id'),
                             abstraction: $scope.corpProfile.abstraction,
-                            tags: [$scope.corpProfile.tags]
+                            slogan: $scope.corpProfile.slogan,
+                            tags: $scope.corpProfile.tags
                         });
                     })
                         .then(function (result) {
                             $rootScope.message = '保存公司介绍成功!';
                         })
-                        .then(null, serviceErrorParser.handleError)
+                        .then(null, serviceErrorParser.handleFormError)
 
                     ;
+                };
+
+                $scope.avoidFormSubmit = function ($event) {
+                    $event.stopPropagation();
+                    console.log($event);
                 };
             }],
             link: function (scope, element, attrs) {
@@ -112,8 +128,7 @@ angular
         }
             ;
     }])
-    .
-    directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
+    .directive('formUsername', ['service', 'serviceErrorParser', '$rootScope', function (service, serviceErrorParser, $rootScope) {
         return {
             link: function (scope, element, attrs) {
                 scope.loadingSSO = false;
@@ -145,47 +160,94 @@ angular
             }
         };
     }])
-    .directive('modalPassword', ['service', 'serviceErrorParser', function (service, serviceErrorParser) {
-        return {
-            link: function (scope, element, attrs) {
-                scope.$modalPassword = angular.element(element);
+    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', '$compile',
+        function (service, serviceErrorParser, $rootScope, $compile) {
+            return {
+                link: function (scope, element, attrs) {
+                    scope.$modalPassword = angular.element(element);
 
-                scope.changingPassword = false;
-                scope.changePassword = function () {
-                    service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
-                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
-                            oldPassword: scope.changePasswordData.oldPassword,
-                            password: scope.changePasswordData.newPassword
-                        });
-                    }).then(function (result) {
-                        console.log(result);
-                    }).then(null, serviceErrorParser.handleFormError);
-                };
-            }
-        };
-    }])
+                    scope.changingPassword = false;
+                    scope.changePasswordData = {};
+                    scope.changePassword = function ($event) {
+                        if (!$form.form('is valid')) {
+                            return false;
+                        }
+
+                        service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
+                            return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                                oldPassword: scope.changePasswordData.oldPassword,
+                                password: scope.changePasswordData.newPassword
+                            });
+                        }).then(function (result) {
+                            console.log(result);
+                        }).then(null, serviceErrorParser.delegateHandleFormError($form));
+                    };
+
+                    var $form = angular.element(element).find('form');
+                    $form.form({
+                        on: 'blur',
+                        fields: {
+                            oldPassword: {
+                                identifier: 'oldPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=oldPassword]').attr('placeholder')
+                                }]
+                            },
+                            newPassword: {
+                                identifier: 'newPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=newPassword]').attr('placeholder')
+                                }, {
+                                    type: 'different[oldPassword]',
+                                    prompt: $form.find('[name=newPassword]').attr('data-prompt')
+                                }]
+                            },
+                            reEnterPassword: {
+                                identifier: 'reEnterPassword',
+                                rules: [{
+                                    type: 'empty',
+                                    prompt: $form.find('[name=reEnterPassword]').attr('placeholder')
+                                }, {
+                                    type: 'match[newPassword]',
+                                    prompt: $form.find('[name=reEnterPassword]').attr('data-prompt')
+                                }]
+                            }
+                        },
+
+                        templates: {
+                            error: function (errors) {
+                                scope.$apply(function () {
+                                    $rootScope.errorMessages = errors;
+                                });
+                                return $compile($('<ul class="list"><li ng-repeat="m in (errorMessages || scope.errorMessages || $root.errorMessages)" ng-bind="m"></li></ul><i class="large remove circle icon" ng-click="errorMessages = scope.errorMessages = $root.errorMessages = undefined"></i>'))(scope);
+                            }
+                        }
+                    });
+                }
+            };
+        }])
     .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
 
-                scope.sendingVerificationCode = false;
-                scope.sendVerificationCode = function () {
-                    service.executePromiseAvoidDuplicate(scope, 'sendingVerificationCode', function () {
-                        return service.put($rootScope.config.serviceUrls.corp.sms.sendWithCaptcha, {
-                            captchaId: scope.changeMobileData.captchaId,
-                            captcha: scope.changeMobileData.captcha,
-                            mobile: scope.changeMobileData.mobile
+                scope.changingMobile = false;
+                scope.changeMobile = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'changingMobile', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                            mobile: scope.changeMobileData.mobile,
+                            verificationCode: scope.changeMobileData.verificationCode,
+                            password: scope.changeMobileData.password
                         });
                     })
                         .then(function (result) {
-                            $rootScope.message = '短信验证码已发送,请注意查收';
+                            $rootScope.message = '修改手机号成功!';
+                            scope.$modalTelephone.modal('hide');
+                            scope.corpProfile.contact_mobile = scope.changeMobileData.mobile;
                         })
-                        .then(null, function (reason) {
-                            scope.refreshCaptcha();
-                            scope.changeMobileData.captcha = '';
-                            serviceErrorParser.handleFormError(reason);
-                        })
+                        .then(null, serviceErrorParser.handleFormError)
                     ;
                 };
             }
@@ -228,4 +290,39 @@ angular
                 };
             }
         };
-    }]);
+    }])
+    .directive('selectionDropdown', [function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $combineBox = angular.element(element);
+                $combineBox.dropdown();
+            }
+        };
+    }])
+    .directive('combineBox', [function () {
+        return {
+            link: function (scope, element, attrs) {
+                var $combineBox = angular.element(element);
+                $combineBox.dropdown({allowAdditions: true});
+            }
+        };
+    }])
+    .directive('searchDropdown', ['$timeout', function ($timeout) {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModel) {
+                var $select = $(element);
+
+                $timeout(function () {
+                    $select.dropdown({
+                        useLabels: true,
+                        allowAdditions: true,
+                        apiSettings: {
+                            url: $select.attr('remoteUrl')
+                        }
+                    }).dropdown('set selected', ngModel.$viewValue);
+                });
+            }
+        };
+    }])
+;

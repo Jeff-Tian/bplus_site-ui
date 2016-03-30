@@ -73,6 +73,9 @@ module.exports = {
             salarytype: '/corp-service-proxy/resources/salarytype',
             job: '/corp-service-proxy/resources/job'
         },
+        resources: {
+            tags: '/corp-service-proxy/resources/tags/{query}'
+        },
         sms: {
             sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha',
             sendWithCaptcha: '/corp-service-proxy/sms/send-with-captcha'
