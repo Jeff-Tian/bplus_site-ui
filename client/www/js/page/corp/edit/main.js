@@ -7,15 +7,25 @@ angular
             //    '*': '='
             //},
             controller: ['$scope', function ($scope) {
+                function clearErrorMessages() {
+                    $scope.$apply(function () {
+                        $rootScope.errorMessages = [];
+                    });
+                }
+
                 $scope.showAccountInfo = true;
                 $scope.modalPassword = function () {
                     if ($scope.$modalPassword) {
-                        $scope.$modalPassword.modal('show');
+                        $scope.$modalPassword.modal({
+                            onHide: clearErrorMessages
+                        }).modal('show');
                     }
                 };
                 $scope.modalTelephone = function () {
                     if ($scope.$modalTelephone) {
-                        $scope.$modalTelephone.modal('show');
+                        $scope.$modalTelephone.modal({
+                            onHide: clearErrorMessages
+                        }).modal('show');
                     }
                 };
 
@@ -96,13 +106,14 @@ angular
                         return service.post($rootScope.config.serviceUrls.corp.member.profile, {
                             company_id: DeviceHelper.getCookie('corp_id'),
                             abstraction: $scope.corpProfile.abstraction,
+                            slogan: $scope.corpProfile.slogan,
                             tags: [$scope.corpProfile.tags]
                         });
                     })
                         .then(function (result) {
                             $rootScope.message = '保存公司介绍成功!';
                         })
-                        .then(null, serviceErrorParser.handleError)
+                        .then(null, serviceErrorParser.handleFormError)
 
                     ;
                 };
@@ -202,8 +213,9 @@ angular
 
                         templates: {
                             error: function (errors) {
-                                $rootScope.errorMessages = errors;
-                                scope.$apply();
+                                scope.$apply(function () {
+                                    $rootScope.errorMessages = errors;
+                                });
                                 return $compile($('<ul class="list"><li ng-repeat="m in (errorMessages || scope.errorMessages || $root.errorMessages)" ng-bind="m"></li></ul><i class="large remove circle icon" ng-click="errorMessages = scope.errorMessages = $root.errorMessages = undefined"></i>'))(scope);
                             }
                         }
@@ -227,6 +239,8 @@ angular
                     })
                         .then(function (result) {
                             $rootScope.message = '修改手机号成功!';
+                            scope.$modalTelephone.modal('hide');
+                            scope.corpProfile.contact_mobile = scope.changeMobileData.mobile;
                         })
                         .then(null, serviceErrorParser.handleFormError)
                     ;

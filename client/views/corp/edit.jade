@@ -3,14 +3,14 @@ mixin fileInput()
 
 block content
     link(rel="stylesheet", type="text/css", href="#{cdn.normal}css/module/form.css?#{cdn.version}")
-
+    include ../partial/error-form.jade
     div.ui.container.crop-edit-container(corp-edit)
         div.ui.top.aligned.grid
             div.four.wide.column
                 div.ui.vertical.segment(ng-class="{'loading': uploading}",style="position: relative; overflow: hidden;")
                     div.logo-container
                         div.ui.fluid.image.circular(style="background-color: #31373e;")
-                            img(style="width: 100%; height:100%;", ng-src="{{avatarUrl ? avatarUrl : \'#{cdnify('/img/anonymous_default.png')}\'}}")
+                            img(style="width: 100%; height:100%;", ng-src="{{avatarUrl ? avatarUrl : \'\'}}")
                             + fileInput
                     div.ui.red.button.btn-logo-upload(style="position: relative;")
                         i.icon
@@ -117,58 +117,9 @@ block content
                             i.company-info-icon.icon
                             div.content 公司介绍
                     div.form-container(ng-if="showCompanyInfo")
-                        form.ui.form(name="descriptionForm", ng-submit="saveCorpDescription()", ng-class="{'loading': savingCorpDescription}")
-                            div.field
-                                label 一句话公司宣传标语
-                                input(type="text", name="slogan", value="全球企业间(B2B)电子商务的著名品牌")
-                            div.field
-                                label 公司简介
-                                textarea(name="description", rows="5", ng-model="corpProfile.abstraction")
-                                div.ui.bottom.attached.segment
-                                    div.inline.field
-                                        label
-                                            i.tags.icon
-                                            span 标签
-                                        input(type="text", name="tags", ng-model="corpProfile.tags")
-                            div.field
-                                button.ui.red.button(type="submit") 保存
-                                div.ui.basic.button(type="reset") 取消
+                        include changeDescription
     include changePassword
-    div.ui.modal.modal-telephone(modal-telephone)
-        div.header 修改手机
-            div.btn-close
-                i.close.icon
-        div.content
-            form.ui.form(name="changeMobileForm", ng-submit="changeMobile()", ng-class="{'error': (errorMessages || scope.errorMessages || $root.errorMessages).length}")
-                form-error
-                div.field
-                    div.ui.left.icon.input.fluid
-                        i.phone.icon
-                        input(type="text", name="telephone", placeholder="请输入手机号码", ng-model="changeMobileData.mobile", ng-required="true")
-                div.field
-                    div.ui.grid.CAPTCHA-grid
-                        div.ui.eleven.wide.column
-                            div.ui.left.icon.input.fluid
-                                i.write.icon
-                                input(type="text", name="CAPTCHA", placeholder="请输入图形验证", ng-model="changeMobileData.captcha", maxlength="4", ng-required="true")
-                        div.ui.five.wide.column
-                            div(captcha="", ng-model="changeMobileData.captchaId", style="height: 39px; cursor: pointer; float: right;", autocomplete="off")
-                            a(href="javascript:void(0);", ng-click="refreshCaptcha()") 换一张
-                div.field.btn-container(ng-hide="verificationButtonClicked")
-                    resend-verification.fluid
-                div.field(ng-show="verificationButtonClicked")
-                    div.ui.horizontal.divider
-                    div.ui.left.icon.input.fluid
-                        i.write.icon
-                        input(type="text", name="verificationCode", placeholder="请输入手机验证码", ng-model="changeMobileData.verificationCode", autocomplete="off", ng-required="true", maxlength="6")
-                        | &nbsp;
-                        resend-verification
-                div.field.btn-container
-                    div.ui.left.icon.input.fluid
-                        i.lock.icon
-                        input(type="password", name="password", placeholder="请输入登录密码", ng-model="changeMobileData.password", ng-required="true")
-                div.field
-                    button.fluid.ui.red.button(ng-disabled="!changeMobileForm.$valid") 完成
+    include changeMobile
 block extraJs
     script(src="#{cdn.normal}js/page/corp/edit/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/service-error-parser.js?#{cdn.version}")
