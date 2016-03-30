@@ -59,6 +59,9 @@ module.exports = {
         candidate: {
             resume: '/corp-service-proxy/candidate/resume'
         },
+        job: {
+            publish: '/corp-service-proxy/job/publish'
+        },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications',
             worktype: '/corp-service-proxy/resources/worktype',
@@ -67,6 +70,7 @@ module.exports = {
             langguageproficiency: '/corp-service-proxy/resources/langguageproficiency',
             englishlevel: '/corp-service-proxy/resources/englishlevel',
             industry: '/corp-service-proxy/resources/industry',
+            salarytype: '/corp-service-proxy/resources/salarytype',
             job: '/corp-service-proxy/resources/job'
         },
         sms: {

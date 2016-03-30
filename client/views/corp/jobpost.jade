@@ -2,64 +2,78 @@ block content
     div.corp-jobpost(ng-controller="jobpostCtrl")
         div.ui.eight.column.centered.grid
             div.eight.wide.column
-                form.ui.error.form.corp-jobpost-form(nonvalidate)
+                form.ui.form.corp-jobpost-form(nonvalidate,ng-class="{'error': hasSubmitted && hasError}")
                     div.ui.error.message 红框处必填字段未完成，请全部填写完成后按下保存
-                        //- div.ui.top.attached.segment.segment-bottom-shadow.corp-jobpost-segment
-                        //-     img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost1.png?#{cdn.version}")
-                        //-     span.corp-jobpost-header 基本职位信息
-                        //- div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
-                        //-         div.field
-                        //-             div.corp-jobpost-content-title.required-title 职位名称
-                        //-             div.corp-jobpost-content-input-container
-                        //-                 input(name="positionname",type="text")
-                            //- div.corp-jobpost-content-title.required-title 职位类别
-                            //- div.corp-jobpost-content-input-container
-                            //-     input
-                            //- div.corp-jobpost-content-title.required-title 所属部门
-                            //- div.corp-jobpost-content-input-container
-                            //-     input
-                            //- div.corp-jobpost-content-title.required-title 工作地点
-                            //- div.corp-jobpost-content-input-container
-                            //-     input
-                            //- div.corp-jobpost-content-title.required-title 待遇
-                            //- div.corp-jobpost-content-input-container
-                            //-     div.ui.four.field
-                            //-         input
-                            //-         input
-                            //-         span 元 ----
-                            //-         input
-                    //- div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-segment
-                    //-     img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost2.png?#{cdn.version}")
-                    //-     span 职位要求
-                    //- div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
-                    //-     div 职位特色标语
-                    //-     div.corp-jobpost-content-input-container
-                    //-         input.corp-jobpost-content-input-normal
-                    //-     div 职位诱感
-                    //-     div.corp-jobpost-content-input-container
-                    //-         div
-                    //-             i
-                    //-             | 标签
-                    //-         input.corp-jobpost-content-input-normal
-                    //-     div.corp-jobpost-content-title.required-title 任职资格要求
-                    //-     div.corp-jobpost-content-input-container
-                    //-         div
-                    //-             i
-                    //-             | 标签
-                    //-         input.corp-jobpost-content-input-normal
-                    //-     div.corp-jobpost-content-title.required-title 职位描述
-                    //-     div.corp-jobpost-content-input-container
-                    //-         textarea
-                    //-     div.corp-jobpost-content-title.required-title 招募截止日期
-                    //-         input
-                    //-         span 年
-                    //-         input
-                    //-         span 月
-                    //-         input
-                    //-         span 日
-                    //- div
-                    div.ui.blue.submit.button submit
-                        //- div.ui.button
+                    div.ui.top.attached.segment.segment-bottom-shadow.corp-jobpost-segment
+                        img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost1.png?#{cdn.version}")
+                        span.corp-jobpost-header 基本职位信息
+                    div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
+                            div.field(ng-class="{'error': hasSubmitted && postData.jobtitle==='' }")
+                                div.corp-jobpost-content-title.required-title 职位名称
+                                div.corp-jobpost-content-input-container
+                                    select.corp-jobpost-select(name="jobtitle" ng-model="postData.jobtitle")
+                                        option(value="") 请选择。。
+                                        option(value="{{item.id}}" ng-repeat='item in displayData.jobtitles') {{item.text}}
+                            div.field(ng-class="{'error': hasSubmitted && postData.jobtype ==='' }")
+                                div.corp-jobpost-content-title.required-title 职位类别
+                                div.corp-jobpost-content-input-container
+                                   select.corp-jobpost-select(name="jobtype" ng-model="postData.jobtype")
+                                        option(value="") 请选择。。
+                                        option(value="71bb0925-cbc6-4aa1-93dd-0906b1a19a5d") 全职
+                                        //- option(value="{{item.id}}" ng-repeat='item in displayData.jobtypes') {{item.text}}
+                            div.field(ng-class="{'error': hasSubmitted && postData.department ==='' }")
+                                div.corp-jobpost-content-title.required-title 所属部门
+                                div.corp-jobpost-content-input-container
+                                    input(type="text" ng-model="postData.department")
+                            div.field(ng-class="{'error': hasSubmitted && postData.location ==='' }")
+                                div.corp-jobpost-content-title.required-title 工作地点
+                                div.corp-jobpost-content-input-container
+                                    input(type="text",ng-model="postData.location")
+                            div.corp-jobpost-content-title.required-title 待遇
+                            div.field.inline-block(ng-class="{'error': hasSubmitted && postData.salarytype ===''}")
+                                div.corp-jobpost-content-input-container
+                                    select.corp-jobpost-select(name="jobtitle" ng-model="postData.salarytype")
+                                        option(value="") 请选择。。
+                                        option(value="{{item.id}}" ng-repeat='item in displayData.salarytypes') {{item.text}}
+                            div.inline-block.width5
+                            div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.salaryfrom ==='' || postData.salaryto === '') && postData.salarytype !=='e0495498-07e5-420a-9788-603e57e602fc'}")
+                                div.corp-jobpost-content-input-container.corp-jobpost-content-inlinefield
+                                    input.width30(type="text",ng-disabled="postData.salarytype ==='e0495498-07e5-420a-9788-603e57e602fc'||postData.salarytype ===''",ng-model="postData.salaryto")
+                                    span &nbsp;&nbsp;元 ----&nbsp;&nbsp;
+                                    input.width30(type="text",ng-disabled="postData.salarytype ==='e0495498-07e5-420a-9788-603e57e602fc'||postData.salarytype ===''",ng-model="postData.salaryfrom")
+                                    span &nbsp;&nbsp;元
+                    div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-segment
+                        img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost2.png?#{cdn.version}")
+                        span 职位要求
+                    div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
+                        div 职位特色标语
+                        div.corp-jobpost-content-input-container
+                            input.corp-jobpost-content-input-normal
+                        div 职位诱感
+                        div.corp-jobpost-content-input-container
+                            div
+                                i
+                                | 标签
+                            input.corp-jobpost-content-input-normal
+                        div.corp-jobpost-content-title.required-title 任职资格要求
+                        div.corp-jobpost-content-input-container
+                            div
+                                i
+                                | 标签
+                            input.corp-jobpost-content-input-normal
+                        div.corp-jobpost-content-title.required-title 职位描述
+                        div.corp-jobpost-content-input-container
+                            textarea
+                        div.corp-jobpost-content-title.required-title 招募截止日期
+                            input
+                            span 年
+                            input
+                            span 月
+                            input
+                            span 日
+                        div
+                            div.ui.red.button(ng-click="submit()") submit
+                            div.ui.red.button submit
         div.ui.modal
             div 确认是否立即发布?( 注 : 发布后任何修改需要联系招聘顾问 )
             div
