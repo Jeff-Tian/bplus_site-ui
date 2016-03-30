@@ -11,17 +11,7 @@
                 label
                     i.tags.icon
                     span 标签
-                select.ui.fluid.search.dropdown(multiple="", ng-model="corpProfile.tags", name="tags")
-                    option(value="t", ng-repeat="t in corpProfile.tags") {{t}}
-                script.
-                    $('.ui.fluid.search.dropdown[name="tags"]')
-                            .dropdown({
-                                useLabels: true,
-                                allowAdditions: true,
-                                apiSettings: {
-                                    url: angular.bplus.config.serviceUrls.corp.resources.tags
-                                }
-                            });
+                select.ui.fluid.search.dropdown(multiple="", ng-model="corpProfile.tags", name="tags", remoteUrl="#{serviceUrls.corp.resources.tags}", search-dropdown="")
     div.field
         button.ui.red.button(type="submit") 保存
         button.ui.basic.button(type="reset", ng-click="errorMessages = []") 取消

@@ -117,6 +117,11 @@ angular
 
                     ;
                 };
+
+                $scope.avoidFormSubmit = function ($event) {
+                    $event.stopPropagation();
+                    console.log($event);
+                };
             }],
             link: function (scope, element, attrs) {
             }
@@ -301,4 +306,23 @@ angular
                 $combineBox.dropdown({allowAdditions: true});
             }
         };
-    }]);
+    }])
+    .directive('searchDropdown', ['$timeout', function ($timeout) {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModel) {
+                var $select = $(element);
+
+                $timeout(function () {
+                    $select.dropdown({
+                        useLabels: true,
+                        allowAdditions: true,
+                        apiSettings: {
+                            url: $select.attr('remoteUrl')
+                        }
+                    }).dropdown('set selected', ngModel.$viewValue);
+                });
+            }
+        };
+    }])
+;
