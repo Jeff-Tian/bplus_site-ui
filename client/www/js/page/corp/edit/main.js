@@ -206,6 +206,22 @@ angular
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
+
+                scope.changingMobile = false;
+                scope.changeMobile = function () {
+                    service.executePromiseAvoidDuplicate(scope, 'changingMobile', function () {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                            mobile: scope.changeMobileData.mobile,
+                            verificationCode: scope.changeMobileData.verificationCode,
+                            password: scope.changeMobileData.password
+                        });
+                    })
+                        .then(function (result) {
+                            $rootScope.message = '修改手机号成功!';
+                        })
+                        .then(null, serviceErrorParser.handleFormError)
+                    ;
+                };
             }
         };
     }])
