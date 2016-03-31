@@ -4,7 +4,7 @@ mixin fileInput()
 div.ui.vertical.segment(ng-class="{'loading': uploading}",style="position: relative; overflow: hidden;")
     div.logo-container
         div.ui.fluid.image.circular(style="background-color: #31373e;")
-            img(style="width: 100%; height:100%;", ng-src="{{avatarUrl ? avatarUrl : \'\'}}")
+            img(style="height:100%;", ng-src="{{avatarUrl}}", ng-style="!avatarUrl && {'width': '0'} || !!avatarUrl && {'width': '100%'}")
             + fileInput
     div.ui.red.button.btn-logo-upload(style="position: relative;")
         i.icon

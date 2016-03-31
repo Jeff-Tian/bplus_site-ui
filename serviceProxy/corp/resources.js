@@ -6,16 +6,25 @@ var leaveTrimmer = require('../../utils/leaveTrimmer');
 var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-proxy/resources');
 
 resources.get(corpServiceUrls.resources.tags.replace('{query}', ':query?'), membership.ensureAuthenticated, function (req, res, next) {
-    var results = [
-        {
-            name: 'abc',
-            value: 'abc'
-        },
-        {
-            name: 'cde',
-            value: 'cde'
-        }
-    ];
+    //var results = [
+    //    {
+    //        name: 'abc',
+    //        value: 'abc'
+    //    },
+    //    {
+    //        name: 'cde',
+    //        value: 'cde'
+    //    }
+    //];
+
+    var results = [];
+
+    if (req.params.query) {
+        results.push({
+            name: req.params.query,
+            value: req.params.query
+        });
+    }
 
     res.json({
         success: true,
