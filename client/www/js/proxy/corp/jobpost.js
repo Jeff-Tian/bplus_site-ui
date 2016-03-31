@@ -1,5 +1,5 @@
 angular.module('bridgeplus.corp')
-    .service('jobpostService', ['$q', '$rootScope', 'service', function ($q, $rootScope, service) {
+    .service('jobpostService', ['$q', '$rootScope', 'service', 'DeviceHelper', function ($q, $rootScope, service, DeviceHelper) {
         var me = this;
         var resourceData = {};
         var resourceSet = {
@@ -32,10 +32,20 @@ angular.module('bridgeplus.corp')
         me.getResource = function(type){
             return resourceData[type];
         };
+        me.getResourceByID = function (key, id) {
+            var data = resourceData[key];
+            // Array.prototype.find
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id === id) {
+                    return data[i].text;
+                }
+            }
+            return "";
+        };
         me.postJob = function(param) {
             var url = $rootScope.config.serviceUrls.corp.job.publish;
             param = $.extend(true, {
-company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
+                company_id : DeviceHelper.getCookie("corp_id")
             }, param);
             return service.post(url, param);
         };
