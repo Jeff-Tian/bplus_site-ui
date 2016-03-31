@@ -7,14 +7,17 @@ form.ui.form(name="corpBasicInfoForm", ng-submit="saveCorpBasicInfo()", ng-class
         //select.ui.fluid.search.dropdown(ng-model="corpProfile.industry", name="industry", remoteUrl="#{serviceUrls.corp.resources.industry}", search-dropdown="", allow-additions="false", use-labels="false")
         //    option(value="") 请输入...
         select.ui.fluid.search.dropdown(ng-model="corpProfile.industry_id", name="industry", search-dropdown="", allow-additions="false", use-labels="false", ng-class="{'loading': fetchingIndustries}")
+            option(value="") 请选择...
             option(value="{{o.value}}", ng-repeat="o in industries") {{o.name}}
     div.field
         label 规模
         select.ui.fluid.search.dropdown(ng-model="corpProfile.scale_id", name="scale", search-dropdown="", allow-addtions="false", use-labels="false", ng-class="{'loading': fetchingScales}")
+            option(value="") 请选择...
             option(value="{{o.value}}", ng-repeat="o in corpScales") {{o.name}}
     div.field
         label 性质
         select.ui.fluid.search.dropdown(ng-model="corpProfile.nature_of_firms_id", name="nature_of_firms", search-dropdown="", allow-additions="false", use-labels="false", ng-class="{'loading': fetchingNatureOfFirms}")
+            option(value="") 请选择...
             option(value="{{o.value}}", ng-repeat="o in natureOfFirms") {{o.name}}
     div.field
         label 主页

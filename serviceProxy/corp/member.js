@@ -143,5 +143,12 @@ module.exports = require('express').Router()
         res.cookie('corp_id', '', deleteCookieOption);
         //res.cookie('corp_status', '', deleteCookieOption);
     }))
-    .post(corpServiceUrls.member.changePassword, membership.ensureAuthenticated, sso.authenticateCurrentUser, sso.changePassword)
+    .post(corpServiceUrls.member.changePassword, membership.ensureAuthenticated, proxy.proxyBPlus({
+        path: '/corp/member/changepassword',
+        method: 'POST'
+    }))
+    .post(corpServiceUrls.member.changeMobile, membership.ensureAuthenticated, proxy.proxyBPlus({
+        path: '/corp/company/save',
+        method: 'POST'
+    }))
 ;

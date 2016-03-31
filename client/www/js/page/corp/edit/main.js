@@ -1,14 +1,14 @@
 angular
     .module('corpModule')
     .directive('captcha', angular.bplus.captcha)
-    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper) {
+    .directive('corpEdit', ['$rootScope', 'service', 'requestTransformers', 'serviceErrorParser', 'DeviceHelper', '$timeout', function ($rootScope, service, requestTransformers, serviceErrorParser, DeviceHelper, $timeout) {
         return {
             //scope: {
             //    '*': '='
             //},
             controller: ['$scope', function ($scope) {
                 function clearErrorMessages() {
-                    $scope.$apply(function () {
+                    $timeout(function () {
                         $rootScope.errorMessages = [];
                     });
                 }
@@ -17,14 +17,22 @@ angular
                 $scope.modalPassword = function () {
                     if ($scope.$modalPassword) {
                         $scope.$modalPassword.modal({
-                            onHide: clearErrorMessages
+                            onHide: function () {
+                                clearErrorMessages();
+
+                                $scope.changePasswordData = {};
+                            }
                         }).modal('show');
                     }
                 };
                 $scope.modalTelephone = function () {
                     if ($scope.$modalTelephone) {
                         $scope.$modalTelephone.modal({
-                            onHide: clearErrorMessages
+                            onHide: function () {
+                                clearErrorMessages();
+
+                                $scope.changeMobileData = {};
+                            }
                         }).modal('show');
                     }
                 };
@@ -184,8 +192,8 @@ angular
             }
         };
     }])
-    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', '$compile',
-        function (service, serviceErrorParser, $rootScope, $compile) {
+    .directive('modalPassword', ['service', 'serviceErrorParser', '$rootScope', '$compile', '$timeout',
+        function (service, serviceErrorParser, $rootScope, $compile, $timeout) {
             return {
                 link: function (scope, element, attrs) {
                     scope.$modalPassword = angular.element(element);
@@ -199,11 +207,15 @@ angular
 
                         service.executePromiseAvoidDuplicate(scope, 'changingPassword', function () {
                             return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
-                                oldPassword: scope.changePasswordData.oldPassword,
-                                password: scope.changePasswordData.newPassword
+                                password: scope.changePasswordData.oldPassword,
+                                newPassword: scope.changePasswordData.newPassword
                             });
                         }).then(function (result) {
                             console.log(result);
+                            scope.$modalPassword.modal('hide');
+                            $timeout(function () {
+                                $rootScope.message = '密码修改成功';
+                            });
                         }).then(null, serviceErrorParser.delegateHandleFormError($form));
                     };
 
@@ -252,24 +264,27 @@ angular
                 }
             };
         }])
-    .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', function ($rootScope, service, serviceErrorParser) {
+    .directive('modalTelephone', ['$rootScope', 'service', 'serviceErrorParser', 'DeviceHelper', function ($rootScope, service, serviceErrorParser, DeviceHelper) {
         return {
             link: function (scope, element, attrs) {
                 scope.$modalTelephone = angular.element(element);
 
                 scope.changingMobile = false;
+                window.scope = scope;
                 scope.changeMobile = function () {
                     service.executePromiseAvoidDuplicate(scope, 'changingMobile', function () {
-                        return service.post($rootScope.config.serviceUrls.corp.member.changePassword, {
+                        return service.post($rootScope.config.serviceUrls.corp.member.changeMobile, {
                             mobile: scope.changeMobileData.mobile,
                             verificationCode: scope.changeMobileData.verificationCode,
-                            password: scope.changeMobileData.password
+                            password: scope.changeMobileData.password,
+                            contact_mobile: scope.changeMobileData.mobile,
+                            company_id: DeviceHelper.getCookie('corp_id')
                         });
                     })
                         .then(function (result) {
+                            scope.corpProfile.contact_mobile = scope.changeMobileData.mobile;
                             $rootScope.message = '修改手机号成功!';
                             scope.$modalTelephone.modal('hide');
-                            scope.corpProfile.contact_mobile = scope.changeMobileData.mobile;
                         })
                         .then(null, serviceErrorParser.handleFormError)
                     ;
@@ -343,16 +358,13 @@ angular
                 }
 
                 $timeout(function () {
+                    function fallback() {
+                        $dd.dropdown('set selected', ngModel.$viewValue);
+                    }
+
                     var $dd = $select.dropdown(dropdownOption);
 
                     if (ngModel.$viewValue) {
-                        console.log(ngModel.$viewValue);
-
-                        function fallback() {
-                            console.log('fallback');
-                            $dd.dropdown('set selected', ngModel.$viewValue);
-                        }
-
                         if (!remoteUrl || dropdownOption.useLabels) {
                             fallback();
                         } else {

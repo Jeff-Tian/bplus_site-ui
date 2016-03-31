@@ -1,198 +1,202 @@
 angular.module('corpModule')
-.controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', function($scope, $timeout, jobpostService) {
-    var requiredData = [
-      "jobtitle",
-      "jobtype",
-      "department",
-      "salarytype",
-      "location",
-      "requirementtag",
-      "description",
-      "expireyear",
-      "expiremonth",
-      "expireday"
-    ];
-    var specialRequiredData = [
-        "salaryfrom",
-        "salaryto"
-    ];
-    $scope.hasError = false;
-    $scope.hasSubmitted = false;
-    $scope.isloading = false;
-    return jobpostService.init().then(function(){
-        $scope.postData = {
-            jobtitle: "",
-            jobtype: "",
-            department: "",
-            salarytype: "",
-            location: "",
-            salaryfrom: "",
-            salaryto: "",
-            slogan: "",
-            slogantag: [],
-            requirementtag: [],
-            description: "",
-            expireyear: "",
-            expiremonth: "",
-            expireday: ""
-        };
-        $scope.tmpTags = {
-            slogantag: "",
-            requirementtag: "",
-        };
-        $scope.displayData = {
-            jobtitles: jobpostService.getResource(jobpostService.RESOURCE_KEY.job),
-            jobtypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.worktype),
-            salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype),
-            expireyears: [],
-            expiredays: [],
-            expiremonths: []
-        };
-        var currentTime = new Date();
-        for (var i = 0; i < 10; i++) {
-            var year = currentTime.getFullYear() + i;
-            $scope.displayData.expireyears.push({
-                id: year,
-                text: year.toString()
-            });
-        };
-        $scope.yearChange = function() {
-            var beginMonth = 0;
-            $scope.displayData.expiremonths = [];
-            $scope.displayData.expiredays = [];
-            if ($scope.postData.expireyear === "") {
-               $scope.postData.expiremonth = "";
-               $scope.postData.expireday = "";
-               return;
-            }
-            if ($scope.postData.expireyear === currentTime.getFullYear().toString()) {
-                beginMonth = currentTime.getMonth();
-            }
-            for (var i = beginMonth; i < 12; i++) {
-                $scope.displayData.expiremonths.push({
-                    id: i,
-                    text: (i+1).toString()
+    .controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', function ($scope, $timeout, jobpostService) {
+        var requiredData = [
+            "jobtitle",
+            "jobtype",
+            "department",
+            "salarytype",
+            "location",
+            "requirementtag",
+            "description",
+            "expireyear",
+            "expiremonth",
+            "expireday"
+        ];
+        var specialRequiredData = [
+            "salaryfrom",
+            "salaryto"
+        ];
+        $scope.hasError = false;
+        $scope.hasSubmitted = false;
+        $scope.isloading = false;
+        return jobpostService.init().then(function () {
+            $scope.postData = {
+                jobtitle: "",
+                jobtype: "",
+                department: "",
+                salarytype: "",
+                location: "",
+                salaryfrom: "",
+                salaryto: "",
+                slogan: "",
+                slogantag: [],
+                requirementtag: [],
+                description: "",
+                expireyear: "",
+                expiremonth: "",
+                expireday: ""
+            };
+            $scope.tmpTags = {
+                slogantag: "",
+                requirementtag: ""
+            };
+            $scope.displayData = {
+                jobtitles: jobpostService.getResource(jobpostService.RESOURCE_KEY.job),
+                jobtypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.worktype),
+                salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype),
+                expireyears: [],
+                expiredays: [],
+                expiremonths: []
+            };
+            var currentTime = new Date();
+            for (var i = 0; i < 10; i++) {
+                var year = currentTime.getFullYear() + i;
+                $scope.displayData.expireyears.push({
+                    id: year,
+                    text: year.toString()
                 });
-            };
-            $scope.postData.expiremonth = "";
-            $scope.postData.expireday = "";
-        };
-        $scope.monthChange = function() {
-            var endDay = 31;
-            $scope.displayData.expiredays = [];
-            var date = new Date();
-            $scope.postData.expireday = "";
-            for (var i = 31; i > 27; i-- ) {
-                date.setUTCFullYear($scope.postData.expireyear, $scope.postData.expiremonth, i);
-                if (date.getUTCMonth().toString() === $scope.postData.expiremonth) {
-                    endDay = i;
-                    break;
-                }
-            };
-            for (var i = 1; i <= endDay; i++) {
-                $scope.displayData.expiredays.push({
-                    id: i,
-                    text: i.toString()
-                });
-            };
-        };
-        $scope.labelChange = function(labelType){
-            var key = "";
-            var target;
-            if (labelType === "slogantag") {
-                value = $scope.tmpTags.slogantag;
-                target = $scope.postData.slogantag;
-            } else if (labelType === "requirementtag") {
-                value = $scope.tmpTags.requirementtag;
-                target = $scope.postData.requirementtag;
             }
-            if (value.indexOf(' ')===0 || value.indexOf('　')===0) {
-                $scope.tmpTags[labelType] = "";
-            } else if (value.indexOf(' ')>0 || value.indexOf('　')>0) {
-                var index = value.indexOf(' ')>0 ? value.indexOf(' ') : value.indexOf('　');
-                value = value.substr(0, index);
-                if (target.indexOf(value) < 0) {
-                    target.push(value);
+
+            $scope.yearChange = function () {
+                var beginMonth = 0;
+                $scope.displayData.expiremonths = [];
+                $scope.displayData.expiredays = [];
+                if ($scope.postData.expireyear === "") {
+                    $scope.postData.expiremonth = "";
+                    $scope.postData.expireday = "";
+                    return;
                 }
-                $scope.tmpTags[labelType] = "";
-            }
-        };
-        $scope.lableDelete = function(labelType, value){
-            var targetArray = $scope.postData[labelType];
-            var index = targetArray.indexOf(value);
-            if (index >= 0) {
-                targetArray.splice(index, 1);
-            }
-        };
-        $scope.submit = function(){
-            $scope.hasSubmitted = true;
-            $scope.hasError = false;
-            var requiredDataToHandle = requiredData;
-            //Handle special requirement
-            if ($scope.postData.salarytype !== "e0495498-07e5-420a-9788-603e57e602fc") {
-                var isnumber = /[^\d]+/;
-                if (isnumber.test($scope.postData.salaryfrom)) {
-                    $scope.postData.salaryfrom = 0;
+                if ($scope.postData.expireyear === currentTime.getFullYear().toString()) {
+                    beginMonth = currentTime.getMonth();
                 }
-                if (isnumber.test($scope.postData.salaryto)) {
-                    $scope.postData.salaryto = 0;
-                }
-                requiredDataToHandle = requiredData.concat(specialRequiredData);
-            }
-            //Handle requirement
-            for (var i = 0; i < requiredDataToHandle.length; i++) {
-                var value = $scope.postData[requiredDataToHandle[i]];
-                if (!value && value !== 0) {
-                    $scope.hasError = true;
-                    break;
-                } else if($.isArray(value) && value.length ===0) {
-                    $scope.hasError = true;
-                    break;
-                }
-            };
-            if (!$scope.hasError) {
-                $(".postconfirm").modal("show");
-                return;
-            }
-        };
-        $timeout(function(){
-            $(".postsuccess").modal({
-                closable: false,
-                onApprove : function() {
-                    window.location.reload();
-                }
-            });
-            $(".postfailure").modal({
-                closable: false
-            });
-            $(".postconfirm").modal({
-                allowMultiple: false,
-                closable  : false,
-                onApprove : function() {
-                    var param = {
-                        title: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.job, $scope.postData.jobtitle),
-                        title_id: $scope.postData.jobtitle,
-                        job_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.worktype, $scope.postData.jobtype),
-                        job_type_id: $scope.postData.jobtype,
-                        department: $scope.postData.department,
-                        location: $scope.postData.location,
-                        requirement_tags: $scope.postData.requirementtag,
-                        description: $scope.postData.description,
-                        expire_at: new Date($scope.postData.expireyear,$scope.postData.expiremonth,$scope.postData.expireday),
-                        salary_type_id: $scope.postData.salarytype,
-                        salary_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.salarytype, $scope.postData.salarytype),
-                        annual_salary_from: parseInt($scope.postData.salaryfrom),
-                        annual_salary_to: parseInt($scope.postData.salaryto),
-                        slogan: $scope.postData.slogan,
-                        slogan_tags: $scope.postData.slogantag
-                    }
-                    return jobpostService.postJob(param).then(function(){
-                        $(".postsuccess").modal("show");
-                    }, function(){
-                        $(".postfailure").modal("show");
+                for (var i = beginMonth; i < 12; i++) {
+                    $scope.displayData.expiremonths.push({
+                        id: i,
+                        text: (i + 1).toString()
                     });
                 }
+
+                $scope.postData.expiremonth = "";
+                $scope.postData.expireday = "";
+            };
+            $scope.monthChange = function () {
+                var endDay = 31;
+                $scope.displayData.expiredays = [];
+                var date = new Date();
+                $scope.postData.expireday = "";
+                for (var i = 31; i > 27; i--) {
+                    date.setUTCFullYear($scope.postData.expireyear, $scope.postData.expiremonth, i);
+                    if (date.getUTCMonth().toString() === $scope.postData.expiremonth) {
+                        endDay = i;
+                        break;
+                    }
+                }
+
+                for (i = 1; i <= endDay; i++) {
+                    $scope.displayData.expiredays.push({
+                        id: i,
+                        text: i.toString()
+                    });
+                }
+            };
+            $scope.labelChange = function (labelType) {
+                var value;
+                var target;
+                if (labelType === "slogantag") {
+                    value = $scope.tmpTags.slogantag;
+                    target = $scope.postData.slogantag;
+                } else if (labelType === "requirementtag") {
+                    value = $scope.tmpTags.requirementtag;
+                    target = $scope.postData.requirementtag;
+                }
+                if (value.indexOf(' ') === 0 || value.indexOf('　') === 0) {
+                    $scope.tmpTags[labelType] = "";
+                } else if (value.indexOf(' ') > 0 || value.indexOf('　') > 0) {
+                    var index = value.indexOf(' ') > 0 ? value.indexOf(' ') : value.indexOf('　');
+                    value = value.substr(0, index);
+                    if (target.indexOf(value) < 0) {
+                        target.push(value);
+                    }
+                    $scope.tmpTags[labelType] = "";
+                }
+            };
+            $scope.lableDelete = function (labelType, value) {
+                var targetArray = $scope.postData[labelType];
+                var index = targetArray.indexOf(value);
+                if (index >= 0) {
+                    targetArray.splice(index, 1);
+                }
+            };
+            $scope.submit = function () {
+                $scope.hasSubmitted = true;
+                $scope.hasError = false;
+                var requiredDataToHandle = requiredData;
+                //Handle special requirement
+                if ($scope.postData.salarytype !== "e0495498-07e5-420a-9788-603e57e602fc") {
+                    var isnumber = /[^\d]+/;
+                    if (isnumber.test($scope.postData.salaryfrom)) {
+                        $scope.postData.salaryfrom = 0;
+                    }
+                    if (isnumber.test($scope.postData.salaryto)) {
+                        $scope.postData.salaryto = 0;
+                    }
+                    requiredDataToHandle = requiredData.concat(specialRequiredData);
+                }
+                //Handle requirement
+                for (var i = 0; i < requiredDataToHandle.length; i++) {
+                    var value = $scope.postData[requiredDataToHandle[i]];
+                    if (!value && value !== 0) {
+                        $scope.hasError = true;
+                        break;
+                    } else if ($.isArray(value) && value.length === 0) {
+                        $scope.hasError = true;
+                        break;
+                    }
+                }
+                if (!$scope.hasError) {
+                    $(".postconfirm").modal("show");
+                    return;
+                }
+            };
+            $timeout(function () {
+                $(".postsuccess").modal({
+                    closable: false,
+                    onApprove: function () {
+                        window.location.reload();
+                    }
+                });
+                $(".postfailure").modal({
+                    closable: false
+                });
+                $(".postconfirm").modal({
+                    allowMultiple: false,
+                    closable: false,
+                    onApprove: function () {
+                        var param = {
+                            title: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.job, $scope.postData.jobtitle),
+                            title_id: $scope.postData.jobtitle,
+                            job_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.worktype, $scope.postData.jobtype),
+                            job_type_id: $scope.postData.jobtype,
+                            department: $scope.postData.department,
+                            location: $scope.postData.location,
+                            requirement_tags: $scope.postData.requirementtag,
+                            description: $scope.postData.description,
+                            expire_at: new Date($scope.postData.expireyear, $scope.postData.expiremonth, $scope.postData.expireday),
+                            salary_type_id: $scope.postData.salarytype,
+                            salary_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.salarytype, $scope.postData.salarytype),
+                            annual_salary_from: parseInt($scope.postData.salaryfrom),
+                            annual_salary_to: parseInt($scope.postData.salaryto),
+                            slogan: $scope.postData.slogan,
+                            slogan_tags: $scope.postData.slogantag
+                        };
+
+                        return jobpostService.postJob(param).then(function () {
+                            $(".postsuccess").modal("show");
+                        }, function () {
+                            $(".postfailure").modal("show");
+                        });
+                    }
+                });
             });
-        })
-    });
-}]);
+        });
+    }]);

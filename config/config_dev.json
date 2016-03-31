@@ -146,8 +146,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "1.1.10",
-  "date": "20160325_1307",
+  "version": "2.0.0",
+  "date": "20160331_1135",
   "trackingUrl": "http://uat.tracking.hcd.com",
   "onlineStoreMenuSource": "/store/json/store-menu.json",
   "durableMessageSource_local": "/messages",

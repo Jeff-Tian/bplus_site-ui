@@ -147,8 +147,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "1.1.10",
-  "date": "20160325_1307",
+  "version": "2.0.0",
+  "date": "20160331_1135",
   "trackingUrl": "http://tracking.bridgeplus.cn",
   "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",
   "durableMessageSource": "//source.bridgeplus.cn/json/messages.json"
