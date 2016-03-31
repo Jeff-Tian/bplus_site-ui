@@ -38,9 +38,9 @@ block content
                             div.inline-block.width5
                             div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.salaryfrom ==='' || postData.salaryto === '') && postData.salarytype !=='e0495498-07e5-420a-9788-603e57e602fc'}")
                                 div.corp-jobpost-content-input-container.corp-jobpost-content-inlinefield
-                                    input.width30(type="text",ng-disabled="postData.salarytype ==='e0495498-07e5-420a-9788-603e57e602fc'||postData.salarytype ===''",ng-model="postData.salaryto")
-                                    span &nbsp;&nbsp;元 ----&nbsp;&nbsp;
                                     input.width30(type="text",ng-disabled="postData.salarytype ==='e0495498-07e5-420a-9788-603e57e602fc'||postData.salarytype ===''",ng-model="postData.salaryfrom")
+                                    span &nbsp;&nbsp;元 ----&nbsp;&nbsp;
+                                    input.width30(type="text",ng-disabled="postData.salarytype ==='e0495498-07e5-420a-9788-603e57e602fc'||postData.salarytype ===''",ng-model="postData.salaryto")
                                     span &nbsp;&nbsp;元
                     div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-segment
                         img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost2.png?#{cdn.version}")
