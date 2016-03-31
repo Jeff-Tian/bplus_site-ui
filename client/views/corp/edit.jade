@@ -37,69 +37,7 @@ block content
                             i.basic-info-icon.icon
                             div.content 基本信息
                     div.form-container(ng-if="showBasicInfo")
-                        form.ui.form(name="corpBasicInfoForm", ng-submit="saveCorpBasicInfo()", ng-class="{'loading': savingCorpBasicProfile}")
-                            div.field
-                                label 公司名称
-                                input(type="text", name="corporation", readonly, disabled="disabled", ng-model="corpProfile.name")
-                            div.field
-                                label 行业
-                                div.ui.fluid.search.special.selection.dropdown(combine-box)
-                                    input(type="hidden", name="industry", ng-model="corpProfile.industry")
-                                    i.dropdown.icon
-                                    div.default.text 请选择...
-                                    div.menu
-                                        div.item(data-value="1") 选项一
-                                        div.item(data-value="2") 选项二
-                                        div.item(data-value="3") 选项三
-                                        div.item(data-value="4") 选项四
-                                        div.item(data-value="5") 选项五
-                            div.field
-                                label 规模
-                                div.ui.fluid.search.special.selection.dropdown(combine-box)
-                                    input(type="hidden", name="scale", ng-model="corpProfile.scale")
-                                    i.dropdown.icon
-                                    div.default.text 请选择...
-                                    div.menu
-                                        div.item(data-value="1") 选项一
-                                        div.item(data-value="2") 选项二
-                                        div.item(data-value="3") 选项三
-                                        div.item(data-value="4") 选项四
-                                        div.item(data-value="5") 选项五
-                            div.field
-                                label 性质
-                                div.ui.fluid.search.special.selection.dropdown(combine-box)
-                                    input(type="hidden", name="nature_of_firms", ng-model="corpProfile.nature_of_firms")
-                                    i.dropdown.icon.nature-of-firms-icon
-                                    div.default.text 请选择...
-                                    div.menu
-                                        div.item(data-value="1") 选项一
-                                        div.item(data-value="2") 选项二
-                                        div.item(data-value="3") 选项三
-                                        div.item(data-value="4") 选项四
-                                        div.item(data-value="5") 选项五
-                            div.field
-                                label 主页
-                                input(type="text", name="homepage", ng-model="corpProfile.website")
-                            div.field
-                                label 地点
-                                input(type="text", name="address", ng-model="corpProfile.location")
-                            div.field
-                                label 联系人
-                                input(class="contact-input", type="text", name="contact", ng-model="corpProfile.contact")
-                                div.ui.selection.dropdown.contact-select(selection-dropdown)
-                                    input(type="hidden", name="contact_gender", ng-model="corpProfile.contact_gender", value="U")
-                                    i.dropdown.icon
-                                    div.text --
-                                    div.menu
-                                        div.item(data-value="U") --
-                                        div.item(data-value="M") 先生
-                                        div.item(data-value="F") 女士
-                            div.field
-                                label 职位
-                                input(type="text", name="position", ng-model="corpProfile.contact_position")
-                            div.field
-                                button.ui.red.button(type="submit") 保存
-                                div.ui.basic.button(type="reset") 取消
+                        include changeBasicInfo
                 div.corp-edit-section
                     div.title(ng-click="showCompanyInfo = !showCompanyInfo")
                         h2.ui.medium.header

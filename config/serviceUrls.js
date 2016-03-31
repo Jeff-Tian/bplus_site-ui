@@ -74,7 +74,10 @@ module.exports = {
             job: '/corp-service-proxy/resources/job'
         },
         resources: {
-            tags: '/corp-service-proxy/resources/tags/{query}'
+            tags: '/corp-service-proxy/resources/tags/:query?',
+            industry: '/corp-service-proxy/resources/industry/:query?',
+            corpScales: '/corp-service-proxy/resources/corpscale/:query?',
+            natureOfFirms: '/corp-service-proxy/resources/nature-of-firms/:query?'
         },
         sms: {
             sendWithoutCaptcha: '/corp-service-proxy/sms/send-without-captcha',

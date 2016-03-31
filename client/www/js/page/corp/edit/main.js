@@ -77,15 +77,28 @@ angular
                     $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                 });
 
+                function findNameByValue(list, value) {
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].value === value) {
+                            return list[i].name;
+                        }
+                    }
+
+                    return '';
+                }
+
                 $scope.savingCorpBasicProfile = false;
                 $scope.saveCorpBasicInfo = function () {
                     service.executePromiseAvoidDuplicate($scope, 'savingCorpBasicProfile', function () {
                             return service.post($rootScope.config.serviceUrls.corp.member.profile, {
                                 company_id: DeviceHelper.getCookie('corp_id'),
                                 name: $scope.corpProfile.name,
-                                industry: $scope.corpProfile.industry,
-                                scale: $scope.corpProfile.scale,
-                                nature_of_firms: $scope.corpProfile.nature_of_firms,
+                                industry: findNameByValue($scope.industries, $scope.corpProfile.industry_id),
+                                industry_id: $scope.corpProfile.industry_id,
+                                scale: findNameByValue($scope.corpScales, $scope.corpProfile.scale_id),
+                                scale_id: $scope.corpProfile.scale_id,
+                                nature_of_firms: findNameByValue($scope.natureOfFirms, $scope.corpProfile.nature_of_firms_id),
+                                nature_of_firms_id: $scope.corpProfile.nature_of_firms_id,
                                 website: $scope.corpProfile.website,
                                 location: $scope.corpProfile.location,
                                 contact: $scope.corpProfile.contact,
@@ -118,10 +131,26 @@ angular
                     ;
                 };
 
-                $scope.avoidFormSubmit = function ($event) {
-                    $event.stopPropagation();
-                    console.log($event);
-                };
+                $scope.fetchingIndustries = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingIndustries', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.resources.industry.replace(':query?', ''));
+                }).then(function (data) {
+                    $scope.industries = data;
+                });
+
+                $scope.fetchingScales = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingScales', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.resources.corpScales.replace(':query?', ''));
+                }).then(function (data) {
+                    $scope.corpScales = data;
+                });
+
+                $scope.fetchingNatureOfFirms = false;
+                service.executePromiseAvoidDuplicate($scope, 'fetchingNatureOfFirms', function () {
+                    return service.get($rootScope.config.serviceUrls.corp.resources.natureOfFirms.replace(':query', ''));
+                }).then(function (data) {
+                    $scope.natureOfFirms = data;
+                });
             }],
             link: function (scope, element, attrs) {
             }
@@ -151,11 +180,6 @@ angular
                             }]
                         }
                     }
-                }).on('submit', function () {
-                    if (!$form.hasClass('loading') && $form.form('is valid')) {
-                        $form.addClass('loading');
-                    }
-                    return false;
                 });
             }
         };
@@ -299,28 +323,57 @@ angular
             }
         };
     }])
-    .directive('combineBox', [function () {
-        return {
-            link: function (scope, element, attrs) {
-                var $combineBox = angular.element(element);
-                $combineBox.dropdown({allowAdditions: true});
-            }
-        };
-    }])
-    .directive('searchDropdown', ['$timeout', function ($timeout) {
+    .directive('searchDropdown', ['$timeout', '$http', function ($timeout, $http) {
         return {
             require: 'ngModel',
             link: function (scope, element, attrs, ngModel) {
                 var $select = $(element);
 
+                var dropdownOption = {
+                    useLabels: attrs.useLabels === 'true',
+                    allowAdditions: attrs.allowAdditions === 'true'
+                };
+
+                var remoteUrl = $select.attr('remoteUrl');
+                if (remoteUrl) {
+                    console.log('remoteUrl', remoteUrl);
+                    dropdownOption.apiSettings = {url: remoteUrl.replace(':query?', '{query}')};
+                } else {
+                    dropdownOption.apiSettings = false;
+                }
+
                 $timeout(function () {
-                    $select.dropdown({
-                        useLabels: true,
-                        allowAdditions: true,
-                        apiSettings: {
-                            url: $select.attr('remoteUrl')
+                    var $dd = $select.dropdown(dropdownOption);
+
+                    if (ngModel.$viewValue) {
+                        console.log(ngModel.$viewValue);
+
+                        function fallback() {
+                            console.log('fallback');
+                            $dd.dropdown('set selected', ngModel.$viewValue);
                         }
-                    }).dropdown('set selected', ngModel.$viewValue);
+
+                        if (!remoteUrl) {
+                            fallback();
+                        } else {
+                            $http.get(dropdownOption.apiSettings.url.replace('{query}', ''))
+                                .success(function (result) {
+                                    if (result.results instanceof Array && result.results.length >= 0) {
+                                        var selected = result.results.filter(function (e) {
+                                            return e.value == ngModel.$viewValue;
+                                        });
+
+                                        console.log('selected', selected.map(function (s) {
+                                            return s.name;
+                                        }));
+
+                                        $dd.dropdown('set selected', selected);
+                                    } else {
+                                        fallback();
+                                    }
+                                }).error(fallback);
+                        }
+                    }
                 });
             }
         };
