@@ -315,7 +315,7 @@ angular
                                     location: scope.data.city,
                                     contact: scope.data.contact,
                                     contact_position: scope.data.position,
-                                    contact_gender: scope.data.gender,
+                                    contact_gender: scope.data.contact_gender,
                                     contact_mail: scope.data.email,
                                     contact_mobile: scope.data.mobile,
                                     business_license_url: '//' + data.host + '/' + data.key,

@@ -61,6 +61,7 @@ angular.module('corpModule', ['bplusModule', 'widgetModule', 'bplusConfigModule'
                     license: {name: result.business_license_url},
                     licenseInfo: result.business_license_url ? result.business_license_url : undefined,
                     contact: result.contact,
+                    contact_gender: result.contact_gender,
                     position: result.contact_position,
                     email: result.contact_mail,
                     mobile: result.contact_mobile,
