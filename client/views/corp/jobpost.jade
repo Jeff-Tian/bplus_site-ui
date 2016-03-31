@@ -12,13 +12,13 @@ block content
                                 div.corp-jobpost-content-title.required-title 职位名称
                                 div.corp-jobpost-content-input-container
                                     select.corp-jobpost-select(name="jobtitle" ng-model="postData.jobtitle")
-                                        option(value="") 请选择。。
+                                        option(value="") 请选择
                                         option(value="{{item.id}}" ng-repeat='item in displayData.jobtitles') {{item.text}}
                             div.field(ng-class="{'error': hasSubmitted && postData.jobtype ==='' }")
                                 div.corp-jobpost-content-title.required-title 职位类别
                                 div.corp-jobpost-content-input-container
                                    select.corp-jobpost-select(name="jobtype" ng-model="postData.jobtype")
-                                        option(value="") 请选择。。
+                                        option(value="") 请选择
                                         option(value="71bb0925-cbc6-4aa1-93dd-0906b1a19a5d") 全职
                                         //- option(value="{{item.id}}" ng-repeat='item in displayData.jobtypes') {{item.text}}
                             div.field(ng-class="{'error': hasSubmitted && postData.department ==='' }")
@@ -33,7 +33,7 @@ block content
                             div.field.inline-block(ng-class="{'error': hasSubmitted && postData.salarytype ===''}")
                                 div.corp-jobpost-content-input-container
                                     select.corp-jobpost-select(name="jobtitle" ng-model="postData.salarytype")
-                                        option(value="") 请选择。。
+                                        option(value="") 请选择
                                         option(value="{{item.id}}" ng-repeat='item in displayData.salarytypes') {{item.text}}
                             div.inline-block.width5
                             div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.salaryfrom ==='' || postData.salaryto === '') && postData.salarytype !=='e0495498-07e5-420a-9788-603e57e602fc'}")
@@ -59,31 +59,54 @@ block content
                                     a.ui.label.labled-input-label(ng-repeat="tag in postData.slogantag")
                                         | {{tag}}
                                         i.delete.icon(ng-click="lableDelete('slogantag', tag)")
-                                    input.labeled-input-input(type="text",ng-model="tmpTags.slogantag",ng-change="labelChange('slogantag')",ng-trim="false",placeholder="添加标签，多个标签请以空格分割")
+                                    input.labeled-input-input(type="text",ng-model="tmpTags.slogantag",ng-change="labelChange('slogantag')",ng-trim="false",placeholder="添加标签并按空格完成添加")
                         div.corp-jobpost-content-title.required-title 任职资格要求
                         div.corp-jobpost-content-input-container
-                            div.ui.labeled.input.corp-jobpost-content-input-normal
-                                div.ui.basic.label.corp-jobpost-label-text
+                            div.ui.labeled.input.corp-jobpost-content-input-normal.labled-input-with-tag
+                                div.ui.basic.label.corp-jobpost-label-text.label-container
                                     i.ui.tag.icon.corp-jobpost-tagicon-color
                                     | 标签
-                                input.corp-jobpost-content-input-with-label(type="text",ng-model="postData.requirementtag",placeholder="添加标签，多个标签请以空格分割")
-                        div.corp-jobpost-content-title.required-title 职位描述
-                        div.corp-jobpost-content-input-container
-                            textarea(ng-model="postData.description")
+                                div.corp-jobpost-content-input-with-label.labeled-input-container(ng-class="{'error': hasSubmitted && postData.requirementtag.length===0}")
+                                    a.ui.label.labled-input-label(ng-repeat="tag in postData.requirementtag")
+                                        | {{tag}}
+                                        i.delete.icon(ng-click="lableDelete('requirementtag', tag)")
+                                    input.labeled-input-input(type="text",ng-model="tmpTags.requirementtag",ng-change="labelChange('requirementtag')",ng-trim="false",placeholder="添加标签并按空格完成添加")
+                        div.field(ng-class="{'error': hasSubmitted && postData.description ==='' }")
+                                div.corp-jobpost-content-title.required-title 职位描述
+                                div.corp-jobpost-content-input-container
+                                    textarea(ng-model="postData.description")
                         div.corp-jobpost-content-title.required-title 招募截止日期
-                            input
-                            span 年
-                            input
-                            span 月
-                            input
-                            span 日
+                        div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.expireday ===''||postData.expiremonth ===''||postData.expireyear ==='')}")
+                            div.corp-jobpost-content-input-container
+                                select.corp-jobpost-select.inline-block.init-width(name="jobtitle" ng-model="postData.expireyear",ng-change="yearChange()")
+                                    option(value="") 请选择
+                                    option(value="{{item.id}}" ng-repeat='item in displayData.expireyears') {{item.text}}
+                                span &nbsp;&nbsp;年&nbsp;&nbsp;
+                                select.corp-jobpost-select.inline-block.init-width(name="jobtitle",ng-model="postData.expiremonth",ng-change="monthChange()")
+                                    option(value="") 请选择
+                                    option(value="{{item.id}}" ng-repeat='item in displayData.expiremonths') {{item.text}}
+                                span &nbsp;&nbsp;年&nbsp;&nbsp;
+                                select.corp-jobpost-select.inline-block.init-width(name="jobtitle" ng-model="postData.expireday")
+                                    option(value="") 请选择
+                                    option(value="{{item.id}}" ng-repeat='item in displayData.expiredays') {{item.text}}
+                                span &nbsp;&nbsp;日
                         div
-                            div.ui.red.button(ng-click="submit()") submit
-                            div.ui.red.button submit
-        div.ui.modal
-            div 确认是否立即发布?( 注 : 发布后任何修改需要联系招聘顾问 )
-            div
-                button
+                            div.ui.red.button(ng-click="submit()") 发布职位
+        div.ui.small.modal.postconfirm.corp-jobpost-modal
+            i.close.icon
+            div.content
+                div 确认是否立即发布?
+                div ( 注 : 发布后任何修改需要联系招聘顾问 )
+            div.actions
+                div.ui.red.ok.button 立即发布
+        div.ui.small.modal.postsuccess.corp-jobpost-modal
+            div.content 发布成功！
+            div.actions
+                div.ui.red.ok.button 确定
+        div.ui.small.modal.postfailure.corp-jobpost-modal
+            div.content 发布失败！
+            div.actions
+                div.ui.red.ok.button 确定
 block extraJs
     //- script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
     //- script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
