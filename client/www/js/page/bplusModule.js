@@ -32,11 +32,26 @@ angular.module('bplusModule', [
         };
     }])
     .run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
+        function increaseZIndex() {
+            $timeout(function () {
+                angular.element('.ui.center.aligned.container.brand.message-wrapper')
+                    .css('z-index', '99999999');
+            }, 500);
+        }
+
         $rootScope.$watch('message', function (newValue, oldValue) {
             if (newValue) {
+                increaseZIndex();
+
                 $timeout(function () {
                     delete $rootScope.message;
                 }, 3000);
+            }
+        });
+
+        $rootScope.$watch('shamelessMessage', function (newValue, oldValue) {
+            if (newValue) {
+                increaseZIndex();
             }
         });
     }])
