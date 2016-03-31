@@ -1,7 +1,6 @@
 var proxy = require('../proxy');
 var resources = require('express').Router();
 var config = require('../../config');
-var membership = require('../membership');
 var leaveTrimmer = require('../../utils/leaveTrimmer');
 var corpServiceUrls = leaveTrimmer.trim(config.serviceUrls.corp, '/corp-service-proxy/resources');
 var localeHelper = require('../../locales/localeHelper.js');
@@ -56,13 +55,13 @@ function proxyResource(path) {
     };
 }
 
-resources.get(corpServiceUrls.resources.natureOfFirms, membership.ensureAuthenticated, proxyResource('/resource/load/natureoffirm/'));
+resources.get(corpServiceUrls.resources.natureOfFirms, proxyResource('/resource/load/natureoffirm/'));
 
-resources.get(corpServiceUrls.resources.corpScales, membership.ensureAuthenticated, proxyResource('/resource/load/corpscale/'));
+resources.get(corpServiceUrls.resources.corpScales, proxyResource('/resource/load/corpscale/'));
 
-resources.get(corpServiceUrls.resources.industry, membership.ensureAuthenticated, proxyResource('/resource/load/industry/'));
+resources.get(corpServiceUrls.resources.industry, proxyResource('/resource/load/industry/'));
 
-resources.get(corpServiceUrls.resources.tags, membership.ensureAuthenticated, function (req, res, next) {
+resources.get(corpServiceUrls.resources.tags, function (req, res, next) {
     //var results = [
     //    {
     //        name: 'abc',
