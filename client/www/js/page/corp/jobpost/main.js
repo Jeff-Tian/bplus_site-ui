@@ -8,7 +8,9 @@ angular.module('corpModule')
       "jobtype",
       "department",
       "salarytype",
-      "location"
+      "location",
+      "requirementtag",
+      "description"
     ];
     var specialRequiredData = [
         "salaryfrom",
@@ -25,12 +27,46 @@ angular.module('corpModule')
             location: "",
             salaryfrom: "",
             salaryto: "",
-        }
+            slogan: "",
+            slogantag: [],
+            requirementtag: [],
+            description: ""
+        };
+        $scope.tmpTags = {
+            slogantag: "",
+            requirementtag: "",
+        };
         $scope.displayData = {
             jobtitles: jobpostService.getResource(jobpostService.RESOURCE_KEY.job),
             jobtypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.worktype),
             salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype),
-        }
+        };
+        $scope.labelChange = function(labelType){
+            var key = "";
+            var target;
+            if (labelType === "slogantag") {
+                value = $scope.tmpTags.slogantag;
+                target = $scope.postData.slogantag;
+            } else if (labelType === "requirementtag") {
+                value = $scope.tmpTags.requirementtag;
+                target = $scope.postData.requirementtag;
+            }
+            if (value.indexOf(' ')===0 || value.indexOf('　')===0) {
+                $scope.tmpTags[labelType] = "";
+            } else if (value.indexOf(' ')>0 || value.indexOf('　')>0) {
+                var index = value.indexOf(' ')>0 ? value.indexOf(' ') : value.indexOf('　');
+                value = value.substr(0, index);
+                if (target.indexOf(value) < 0) {
+                    target.push(value);
+                }
+                $scope.tmpTags[labelType] = "";
+            }
+        };
+        $scope.lableDelete = function(labelType, value){
+            // var targetArray = $scope.postData[labelType];
+            // var index = 
+            // if (indexOf())
+        };
         $scope.submit = function(){
             $scope.hasSubmitted = true;
             $scope.hasError = false;
@@ -70,7 +106,9 @@ angular.module('corpModule')
                     salary_type_id: "e0495498-07e5-420a-9788-603e57e602fc",
                     salary_type_text: "面议",
                     annual_salary_from: 0,
-                    annual_salary_to: 1
+                    annual_salary_to: 1,
+                    slogan: "",
+                    slogan_tag: ""
                 }
                 ////////////
                 return jobpostService.postJob(param);

@@ -44,26 +44,32 @@ block content
                                     span &nbsp;&nbsp;元
                     div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-segment
                         img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost2.png?#{cdn.version}")
-                        span 职位要求
+                        span.corp-jobpost-header  职位要求
                     div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
-                        div 职位特色标语
+                        div.corp-jobpost-content-title 职位特色标语
                         div.corp-jobpost-content-input-container
-                            input.corp-jobpost-content-input-normal
-                        div 职位诱感
+                            input(type="text",ng-model="postData.slogan",placeholder="一句招募这个职称的宣传特色标语")
+                        div.corp-jobpost-content-title 职位诱感
                         div.corp-jobpost-content-input-container
-                            div
-                                i
-                                | 标签
-                            input.corp-jobpost-content-input-normal
+                            div.ui.labeled.input.corp-jobpost-content-input-normal.labled-input-with-tag
+                                div.ui.basic.label.corp-jobpost-label-text.label-container
+                                    i.ui.tag.icon.corp-jobpost-tagicon-color
+                                    | 标签
+                                div.corp-jobpost-content-input-with-label.labeled-input-container
+                                    a.ui.label.labled-input-label(ng-repeat="tag in postData.slogantag")
+                                        | {{tag}}
+                                        i.delete.icon(ng-click="lableDelete('slogantag', tag)")
+                                    input.labeled-input-input(type="text",ng-model="tmpTags.slogantag",ng-change="labelChange('slogantag')",ng-trim="false",placeholder="添加标签，多个标签请以空格分割")
                         div.corp-jobpost-content-title.required-title 任职资格要求
                         div.corp-jobpost-content-input-container
-                            div
-                                i
-                                | 标签
-                            input.corp-jobpost-content-input-normal
+                            div.ui.labeled.input.corp-jobpost-content-input-normal
+                                div.ui.basic.label.corp-jobpost-label-text
+                                    i.ui.tag.icon.corp-jobpost-tagicon-color
+                                    | 标签
+                                input.corp-jobpost-content-input-with-label(type="text",ng-model="postData.requirementtag",placeholder="添加标签，多个标签请以空格分割")
                         div.corp-jobpost-content-title.required-title 职位描述
                         div.corp-jobpost-content-input-container
-                            textarea
+                            textarea(ng-model="postData.description")
                         div.corp-jobpost-content-title.required-title 招募截止日期
                             input
                             span 年
