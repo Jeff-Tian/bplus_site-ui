@@ -353,7 +353,7 @@ angular
                             $dd.dropdown('set selected', ngModel.$viewValue);
                         }
 
-                        if (!remoteUrl) {
+                        if (!remoteUrl || dropdownOption.useLabels) {
                             fallback();
                         } else {
                             $http.get(dropdownOption.apiSettings.url.replace('{query}', ''))
