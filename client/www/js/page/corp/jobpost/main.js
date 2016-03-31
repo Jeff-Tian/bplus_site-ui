@@ -34,15 +34,15 @@ angular.module('corpModule')
         };
         $scope.tmpTags = {
             slogantag: "",
-            requirementtag: "",
+            requirementtag: ""
         };
         $scope.displayData = {
             jobtitles: jobpostService.getResource(jobpostService.RESOURCE_KEY.job),
             jobtypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.worktype),
-            salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype),
+            salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype)
         };
         $scope.labelChange = function(labelType){
-            var key = "";
+            var value;
             var target;
             if (labelType === "slogantag") {
                 value = $scope.tmpTags.slogantag;
@@ -74,7 +74,6 @@ angular.module('corpModule')
             //Handle special requirement
             if ($scope.postData.salarytype !== "e0495498-07e5-420a-9788-603e57e602fc") {
                 var isnumber = /[^\d]+/;
-                debugger;
                 if (isnumber.test($scope.postData.salaryfrom)) {
                     $scope.postData.salaryfrom = "";
                 }
@@ -89,7 +88,7 @@ angular.module('corpModule')
                     $scope.hasError = true;
                     break;
                 }
-            };
+            }
             if (!$scope.hasError) {
 
                 //todo
@@ -109,11 +108,10 @@ angular.module('corpModule')
                     annual_salary_to: 1,
                     slogan: "",
                     slogan_tag: ""
-                }
+                };
                 ////////////
                 return jobpostService.postJob(param);
             }
-            debugger;
         };
     });
 }]);

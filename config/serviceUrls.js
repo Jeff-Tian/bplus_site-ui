@@ -45,7 +45,8 @@ module.exports = {
             signOut: '/corp-service-proxy/member/sign-out',
             profile: '/corp-service-proxy/member/profile',
             ssoInfo: '/corp-service-proxy/member/sso-profile',
-            changePassword: '/corp-service-proxy/member/change-password'
+            changePassword: '/corp-service-proxy/member/change-password',
+            changeMobile: '/corp-service-proxy/member/change-mobile'
         },
         jobapply: {
             publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',
