@@ -23,15 +23,22 @@ module.exports = function () {
             }
         };
 
-    for (var i in files) {
-        var ma = i.toString().toLowerCase().match(/\/(.*?)\.css$/);
-        if (ma && (ma.length > 1)) {
-            reObj[ma[1]] = {
-                files: {}
-            };
-            reObj[ma[1]].files[i] = files[i];
-        }
-    }
+    //TODO: Don't ever run the following code on production!!! Otherwise some css won't
+    //  be created and the site would look messy.
+    // If you want to run the following code on your own machine only, please add an
+    // environment variable. For example,
+    // if(process.env.RUN_FROM === 'your_name') {
+    //      ...
+    // }
+    //for (var i in files) {
+    //    var ma = i.toString().toLowerCase().match(/\/(.*?)\.css$/);
+    //    if (ma && (ma.length > 1)) {
+    //        reObj[ma[1]] = {
+    //            files: {}
+    //        };
+    //        reObj[ma[1]].files[i] = files[i];
+    //    }
+    //}
 
     return reObj;
 };
