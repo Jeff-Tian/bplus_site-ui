@@ -206,9 +206,8 @@ angular.module('studyCenterModule')
                     general_evaluation: course.feedback.generalEvaluation,
                     evaluation: course.feedback.evaluations
                 }).then(function (data) {
-                    console.log(data);
                     course.feedback.disabled = true;
-                    MessageBox.show('评价成功');
+                    MessageBox.show('评价成功, 稍候可刷新页面至已评价课程中查看.');
                 }, function (reason) {
                     MessageBox.show(reason.message);
                 });

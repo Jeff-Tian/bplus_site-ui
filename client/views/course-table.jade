@@ -52,8 +52,10 @@ mixin courseTableBody(courses, rating, rated, singlePage)
     tbody
         tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
             td
-                h4(class="ui grey header") {{c.name}}
-                    div(class="sub header") {{c.teacher}}
+                h4(class="ui grey header")
+                    a(ng-href="/studycenter/course.html?class_id={{c.class_id}}&teacher_id={{c.teacherInfo.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: #666;") {{c.name}}
+                    div(class="sub header")
+                        a(ng-href="/studycenter/teacher.html?teacher_id={{c.teacherInfo.teacher_id}}", target="_blank", style="color: #666;") {{c.teacher}}
                     div(class="sub header", style="margin-top: 10px;")
                         span(class="ui mini red label", ng-repeat="t in c.tags", ng-style="($index === 0) && {'margin-left': 0}", ng-class="{'light': !t.special}") {{t.text}}
             td
@@ -63,7 +65,7 @@ mixin courseTableBody(courses, rating, rated, singlePage)
         tr.rating(ng-repeat-end, ng-show="c.showRating")
             td(colspan="4", style="padding: 0;")
                 if rating
-                    form(class="ui form", ng-submit="addFeedback(c)")
+                    form(class="ui form", ng-submit="addFeedback(c)", ng-disabled="c.feedback.disabled", ng-hide="c.feedback.disabled")
                         div(style="padding: 20px;")
                             div(class="field")
                                 label 发表评论
