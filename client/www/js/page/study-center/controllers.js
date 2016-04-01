@@ -30,6 +30,8 @@ angular.module('studyCenterModule')
             return status === '人数不足' ? '开课失败' : registered + '/' + capability;
         };
 
+        $scope.timeThreshold = 1000 * 60 * 60;
+
         service.executePromiseAvoidDuplicate($scope, 'loading', function () {
             return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.coming)
                 .then(function (data) {
