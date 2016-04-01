@@ -23,9 +23,9 @@ angular
     .run(['$rootScope', function ($rootScope) {
         $rootScope.cdn = angular.bplus.config.cdn;
     }])
-    .filter('encodeURIComponent', function($window) {
+    .filter('encodeURIComponent', ['$window', function($window) {
         return $window.encodeURIComponent;
-    })
+    }])
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('OpdCtrl', angular.bplus.OpdCtrl)
     .directive('autocomplete', angular.bplus.autoComplete)
