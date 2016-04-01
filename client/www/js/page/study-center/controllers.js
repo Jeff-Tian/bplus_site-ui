@@ -116,9 +116,9 @@ angular.module('studyCenterModule')
                     generalEvaluation: 0,
                     evaluations: {
                         '准时': 0,
+                        '态度': 0,
                         '专业度': 0,
-                        '通话质量': 0,
-                        '态度': 0
+                        '通话质量': 0
                     }
                 }
             };
@@ -149,7 +149,13 @@ angular.module('studyCenterModule')
         $scope.fetchingRated = false;
 
         $scope.ratedCourses = new PaginationData('fetchingRated', angular.bplus.config.serviceUrls.studyCenter.classBooking.evaluated, pageSize, function (data) {
-            return data.bookings.map(mapCourse);
+            var ret = data.bookings.map(mapCourse);
+
+            $timeout(function () {
+                $('td .rating').rating('disable');
+            });
+
+            return ret;
         });
 
         function PaginationData(flag, dataSource, numberPerPage, gotData) {
@@ -248,7 +254,7 @@ angular.module('studyCenterModule')
                             return {
                                 id: i.teacher_id,
                                 name: i.display_name,
-                                title: '',
+                                title: i.title,
                                 image: i.image_url,
                                 rank: i.rank,
                                 tags: i.tags,

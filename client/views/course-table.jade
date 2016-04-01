@@ -15,7 +15,7 @@ mixin unfinishedCourseBlocks(c)
 mixin finishedUnratedCourseBlocks(c)
     td {{#{c}.rated ? '已评价' : '尚未评价'}}
     td
-        button(class="ui mini black button", ng-click="#{c}.showRating=true", ng-disabled="#{c}.showRating") 立刻评价
+        button(class="ui mini red button", ng-click="#{c}.showRating=true", ng-disabled="#{c}.showRating") 立刻评价
 
 mixin rating(max, rating, classes)
     - classes = classes || 'tiny'
@@ -25,7 +25,7 @@ mixin finishedRatedCourseBlocks(c)
     td
         + rating(5, 'c.generalEvaluation')
     td
-        button(class="ui mini black button", ng-click="c.showRating=!c.showRating; showEvaluationDetail(c)") 评价详情
+        button(class="ui mini red button", ng-click="c.showRating=!c.showRating; showEvaluationDetail(c)") 评价详情
 
 mixin courseTable()
     table(class="ui basic table positions", style="border: none; background-color: white;")
@@ -52,12 +52,12 @@ mixin courseTableBody(courses, rating, rated, singlePage)
     tbody
         tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
             td
-                h4(class="ui grey header")
+                h3(class="ui grey header")
                     a(ng-href="/studycenter/course.html?class_id={{c.class_id}}&teacher_id={{c.teacherInfo.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: #666;") {{c.name}}
                     div(class="sub header")
                         a(ng-href="/studycenter/teacher.html?teacher_id={{c.teacherInfo.teacher_id}}", target="_blank", style="color: #666;") {{c.teacher}}
                     div(class="sub header", style="margin-top: 10px;")
-                        span(class="ui mini red label", ng-repeat="t in c.tags", ng-style="($index === 0) && {'margin-left': 0}", ng-class="{'light': !t.special}") {{t.text}}
+                        span(class="ui mini red label", ng-repeat="t in c.tags", ng-style="($index === 0) && {'margin-left': 0}", ng-class="{'light': !t.special}", style="font-size: 0.5rem;") {{t.text}}
             td
                 div(class="ui tiny grey header") {{c.startAt | date : 'yyyy.MM.dd'}}
                     div(class="sub header", style="white-space: nowrap;") ({{c.startAt | date : 'EEE' | translate}}) {{c.startAt | date : 'HH:mm' }}~{{c.endAt | date : 'HH:mm' }}
@@ -148,6 +148,10 @@ mixin finishedRatedCourseTable(courses)
 
 mixin teacherTable(teachers)
     + courseTable
+        colgroup
+            col(style="width: 30%;")
+            col(style="width: 50%;")
+            col(style="width: 20%;")
         + courseTableHead
             th
                 h4(class="ui white header left aligned") 导师名称
@@ -167,12 +171,12 @@ mixin teacherTable(teachers)
                                 div(class="sub header", style="margin-top: 5px; margin-bottom: 10px;")
                                     + rating(5, 't.rank')
                                 div(class="sub header")
-                                    span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags") {{tag}}
+                                    span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags", style="font-size: 0.5rem;") {{tag}}
                 td
                     p(ng-repeat="c in t.courses")
                         a(href="/studycenter/course.html?class_id={{c.class_id}}&teacher_id={{c.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: black;") {{c.title}}
                         | &nbsp;
-                        span(class="ui mini red label", ng-repeat="courseTag in c.class_tags") {{courseTag}}
+                        span(class="ui mini red label", ng-repeat="courseTag in c.class_tags", style="font-size: 0.5rem;", ng-show="false") {{courseTag}}
                 td
                     button(class="ui red mini button", ng-click="removeFavTeacher(t)") 取消收藏
 
