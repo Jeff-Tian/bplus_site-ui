@@ -1,8 +1,8 @@
 script(type="text/ng-template", id="course.html")
     div.b-opd-favorite
         div(class="ui top attached tabular menu")
-            a(class="active item", data-tab="unfinished-courses") 未完成的课程
-            a(class="item", data-tab="finished-courses")  已完成的课程
+            a(class="active item", data-tab="unfinished-courses") 未完成
+            a(class="item", data-tab="finished-courses")  已完成
         div(class="ui bottom attached active tab segment b-opd-body", data-tab="unfinished-courses", style="background: transparent;", ng-controller="ComingCoursesCtrl", ng-class="{'loading': loading}")
             + comingCourses('courses')
             div(class="ui horizontal divider")

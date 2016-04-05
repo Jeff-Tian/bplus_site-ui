@@ -58,7 +58,7 @@ module.exports = require('express').Router()
     //            "course_id": "84685efc-5096-44fc-baa6-6bac1aa673b8",
     //            "description": "description2",
     //            "end_time": "2016-12-17T07:40:51.670Z",
-    //            "start_time": "2016-12-17T07:40:51.670Z",
+    //            "start_time": "2016-04-01T11:30:51.670Z",
     //            "student_id": "759c1586-2e9b-4535-9d43-01a8cc8f2e89",
     //            "teacher_id": "de557af6-9654-48d7-95f2-33fc17780a24",
     //            "title": "title2",
