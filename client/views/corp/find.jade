@@ -1,5 +1,29 @@
 block content
-    div.corp-cv(ng-controller="findCtrl")
+    div.corp-find(ng-controller="findCtrl")
+        div.ui.ten.column.centered.grid
+            div.row
+                div.ten.wide.column
+                    //- div.ui.segment
+                        | advertisement
+                    div.ui.top.attached.tabular.menu.tabular-menu
+                        a.active.item.menu-item(data-tab="delivered" ng-click="tabmemuClick(STATIC_PARAM.DELIVERED)")
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/smart-recommendation.png?#{cdn.version}")
+                            | 智能推荐
+                        a.menu-item.item(data-tab="interested" ng-click="tabmemuClick(STATIC_PARAM.INTERESTED)")
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/contest-winners.png?#{cdn.version}")
+                            | 大赛优胜
+                    div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
+                        span.inline-space 职位
+                     div.ui.active.tab.list-tab(data-tab="delivered")
+                        div.ui.equal.width.grid
+                            div.column
+                                div.corp-find-item-contaner
+                                    div.corp-find-item-head
+                                    div.corp-find-item-body
+                                        img(src="#{cdn.normal}img/corp/smart-recommendation.png?#{cdn.version}")
+                                        div name
+                                        div school
+                                    div.corp-find-item-foot
 block extraJs
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/find/main.js?#{cdn.version}")

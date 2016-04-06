@@ -1,0 +1,39 @@
+@import "./variable";
+
+.corp-find {
+    min-height: 80%;
+    margin-top: 100px;
+    .tabular-menu {
+        border-bottom: 10px solid @color-corp-red!important;
+    }
+    .menu-item {
+        color: @color-corp-text-white!important;
+        background-color: @color-corp-menu-normal-black!important;
+        border-left: none!important;
+        border-radius: 4px 4px 0px 0px!important;
+        &.active {
+            border-radius: 4px 4px 0px 0px!important;
+            background-color: @color-corp-menu-active!important;
+        }
+    }
+    .list-tab {
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+
+    .corp-find-item-contaner {
+        height: 500px;
+    }
+    .corp-find-item-head {
+        height: 100px;
+        background-color: @color-corp-background-dark-grey;
+    }
+    .corp-find-item-body {
+        height: 200px;
+        background-color: @color-corp-table-white;
+    }
+    .corp-find-item-foot {
+        height: 200px;
+        background-color: @color-corp-background-dark-grey;
+    }
+}
