@@ -3,10 +3,11 @@ mixin unfinishedCourseBlocks(c)
         include share-course
         bopdcompetitiveness(data="{progressRate: #{c}.status, text: #{c}.statusText}", classes="{classes: 'red small'}")
     td
-        p(style="font-size: smaller; white-space: nowrap;", class="ui red color", ng-show="#{c}.status !== -1 && #{c}.countdown.value < 0") 已进行 {{-#{c}.countdown.value | countdown}}
+        p(style="font-size: smaller; white-space: nowrap;", class="ui red color", ng-show="showProgressCountDown(#{c})") 已进行 {{-#{c}.countdown.value | countdown}}
 
-        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="(#{c}.status !== -1) && (#{c}.countdown.value >= 0) && (#{c}.statusText[1] !== '未开课')", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold }") 距离上课 {{#{c}.countdown.value | countdown}}
-        p(ng-show="#{c}.status !== -1 && #{c}.countdown.value <= timeThreshold")
+        p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="showCountDown(#{c})", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold }") 距离上课 {{#{c}.countdown.value | countdown}}
+
+        p(ng-show="enableCourseButton(#{c})")
             a(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="/studycenter/course.html?class_id={{#{c}.class_id}}&teacher_id={{#{c}.teacherInfo.teacher_id}}&course_id={{#{c}.course_id}}") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
 
         p(ng-show="#{c}.status === -1 || #{c}.countdown.value > timeThreshold")
@@ -79,35 +80,10 @@ mixin courseTableBody(courses, rating, rated, singlePage)
                                 + rating(5, 'item', 'mini')(model="c.feedback.evaluations['{{key}}']")
 
                                 div(class="right floated", ng-if="$index === countItems(c.feedback.evaluations) - 1")
-                                    button(class="ui mini black button", type="button", ng-click="c.showRating = false") 取消
+                                    button(class="ui mini red button", type="button", ng-click="c.showRating = false") 取消
                                     button(class="ui mini red button", type="submit", ng-disabled="!canAddFeedback(c) || c.feedback.disabled") 完成
                 else if rated
-                    form(class="ui form", style="background-color: #f9f9f9; margin-bottom: 0; height: 100%;")
-                        div(class="inline field", style="padding: 20px 20px 5px 20px;")
-                            label 总体评分
-                            + rating(5, 'c.generalEvaluation')
-                        div(style="padding: 10px 20px 20px 20px;")
-                            div(class="", style="border: solid 2px white; border-radius: 3px; padding: 10px;")
-                                div(class="ui grid")
-                                    div(class="four wide column", ng-repeat="(key, item) in c.evaluationDetail.evaluation", style="white-space: nowrap;")
-                                        label(ng-bind="key", style="font-size: smaller;")
-                                        | &nbsp;
-                                        + rating(5, 'item', 'mini')
-                        div(class="ui fitted clearing horizontal divider")
-                        div(style="padding: 0 20px;")
-                            p 我的反馈评价
-                            div(style="border: solid 2px white; border-radius: 3px; padding: 10px;")
-                                | {{c.evaluationDetail.comment}}
-                        div(class="right floated", style="padding: 20px;")
-                            button(class="ui mini red button", type="submit", ng-show="false") 追加评论
-                        div(class="ui fitted clearing horizontal divider")
-                        div(style="padding: 0 20px;", ng-show="false")
-                            p 追加评论
-                            textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~")
-                        div(class="right floated field", style="padding: 20px;", ng-show="false")
-                            button(class="ui mini black button", type="reset") 取消
-                            button(class="ui mini red button", type="submit") 完成
-                        div(class="ui fitted clearing horizontal divider")
+                    include evaluated-form
 
     if !singlePage
         tfoot
