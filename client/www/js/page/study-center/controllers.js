@@ -1,5 +1,9 @@
 angular.module('studyCenterModule')
-    .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', function ($scope, $timeout, $q, service) {
+    .value('CourseTypeTags', {
+        one2one: '一对一',
+        one2many: '小班课'
+    })
+    .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', function ($scope, $timeout, $q, service, CourseTypeTags) {
         $scope.loading = false;
 
         $scope.courses = {
@@ -72,15 +76,19 @@ angular.module('studyCenterModule')
                                 ],
                                 startAt: new Date(d.start_time),
                                 endAt: new Date(d.end_time),
-                                tags: d.teacher.tags.map(function (t) {
+                                tags: (d.class_tags || d.course_tags || []).map(function (t) {
                                     return {
                                         text: t,
                                         special: false
                                     };
-                                }),
+                                }).concat(d.product ? [{
+                                    text: CourseTypeTags[d.product],
+                                    special: true
+                                }] : []),
                                 class_id: d.class_id,
                                 course_id: d.course_id,
-                                teacherInfo: d.teacher
+                                teacherInfo: d.teacher,
+                                classUrl: d.class_url
                             };
                         });
 
@@ -122,7 +130,7 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', 'MessageBox', function ($scope, service, $timeout, $q, MessageBox) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', 'MessageBox', 'CourseTypeTags', function ($scope, service, $timeout, $q, MessageBox, CourseTypeTags) {
         function mapCourse(d) {
             return {
                 name: d.title,
@@ -133,6 +141,19 @@ angular.module('studyCenterModule')
                 feedbackId: d.feedback_id,
                 classId: d.class_id,
                 teacherId: d.teacher_id,
+                courseId: d.course_id,
+                class_id: d.class_id,
+                teacherInfo: {teacher_id: d.teacher_id},
+                course_id: d.course_id,
+                tags: (d.class_tags || d.course_tags || []).map(function (t) {
+                    return {
+                        text: t,
+                        special: false
+                    };
+                }).concat(d.product ? [{
+                    text: CourseTypeTags[d.product],
+                    special: true
+                }] : []),
                 feedback: {
                     comment: '',
                     generalEvaluation: 0,

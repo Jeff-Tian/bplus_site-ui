@@ -8,10 +8,10 @@ mixin unfinishedCourseBlocks(c)
         p(style="font-size: smaller; white-space: nowrap;", class="ui color", ng-show="showCountDown(#{c})", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold }") 距离上课 {{#{c}.countdown.value | countdown}}
 
         p(ng-show="enableCourseButton(#{c})")
-            a(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="/studycenter/course.html?class_id={{#{c}.class_id}}&teacher_id={{#{c}.teacherInfo.teacher_id}}&course_id={{#{c}.course_id}}") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
+            a(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="{{#{c}.classUrl}}", target="_blank") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
 
         p(ng-show="#{c}.status === -1 || #{c}.countdown.value > timeThreshold")
-            button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="/studycenter/course.html?class_id={{#{c}.class_id}}&teacher_id={{#{c}.teacherInfo.teacher_id}}&course_id={{#{c}.course_id}}") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
+            button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="{{#{c}.classUrl}}", target="_blank") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
 
 mixin finishedUnratedCourseBlocks(c)
     td {{#{c}.rated ? '已评价' : '尚未评价'}}
@@ -66,22 +66,7 @@ mixin courseTableBody(courses, rating, rated, singlePage)
         tr.rating(ng-repeat-end, ng-show="c.showRating")
             td(colspan="4", style="padding: 0;")
                 if rating
-                    form(class="ui form", ng-submit="addFeedback(c)", ng-disabled="c.feedback.disabled", ng-hide="c.feedback.disabled")
-                        div(style="padding: 20px;")
-                            div(class="field")
-                                label 发表评论
-                                textarea(rows="2", placeholder="写下对课程的感受吧 ! 对他人的帮助很大喔 ~", ng-model="c.feedback.comment", ng-disabled="c.feedback.disabled")
-                        div(class="inline field", style="background-color: #f9f9f9; padding: 5px 20px;")
-                            label 总体评分
-                            + rating(5, 0, 'mini')(model="c.feedback.generalEvaluation")
-                        div(style="padding: 20px;")
-                            div(class="inline field", ng-repeat="(key, item) in c.feedback.evaluations")
-                                label(ng-bind="key")
-                                + rating(5, 'item', 'mini')(model="c.feedback.evaluations['{{key}}']")
-
-                                div(class="right floated", ng-if="$index === countItems(c.feedback.evaluations) - 1")
-                                    button(class="ui mini red button", type="button", ng-click="c.showRating = false") 取消
-                                    button(class="ui mini red button", type="submit", ng-disabled="!canAddFeedback(c) || c.feedback.disabled") 完成
+                    include evaluation-form
                 else if rated
                     include evaluated-form
 
