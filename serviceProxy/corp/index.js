@@ -7,5 +7,6 @@ module.exports = require('express').Router()
     .use('/resource', membership.ensureAuthenticated, require('./resource'))
     .use('/job', membership.ensureAuthenticated, require('./job'))
     .use('/resources', membership.ensureAuthenticated, require('./resources'))
+    .use('/recommend', require('./recommend'))
     .use('/sms', require('./sms.js'))
 ;

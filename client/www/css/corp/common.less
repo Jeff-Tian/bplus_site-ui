@@ -14,9 +14,18 @@
 
 .clickable {
     cursor: pointer;
+    &.disabled {
+        cursor: auto;
+    }
 }
 .inline-block {
     display: inline-block!important;
+}
+.position-relative {
+    position: relative!important;
+}
+.hidden {
+    visibility: hidden;
 }
 .valign-middle {
     vertical-align: middle;

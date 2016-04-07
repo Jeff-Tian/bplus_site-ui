@@ -1,32 +1,82 @@
 block content
     div.corp-find(ng-controller="findCtrl")
-        div.ui.ten.column.centered.grid
+        div.ui.twelve.column.centered.grid
             div.row
-                div.ten.wide.column
+                div.twelve.wide.column
                     //- div.ui.segment
                         | advertisement
                     div.ui.top.attached.tabular.menu.tabular-menu
-                        a.active.item.menu-item(data-tab="delivered" ng-click="tabmemuClick(STATIC_PARAM.DELIVERED)")
+                        a.active.item.menu-item(data-tab="smart" ng-click="tabmemuClick(STATIC_PARAM.SMART)" style="height:53px")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/smart-recommendation.png?#{cdn.version}")
                             | 智能推荐
-                        a.menu-item.item(data-tab="interested" ng-click="tabmemuClick(STATIC_PARAM.INTERESTED)")
+                        a.menu-item.item(data-tab="winner" ng-click="tabmemuClick(STATIC_PARAM.WINNER)")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/contest-winners.png?#{cdn.version}")
                             | 大赛优胜
-                    div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
-                        span.inline-space 职位
-                     div.ui.active.tab.list-tab(data-tab="delivered")
-                        div.ui.equal.width.grid
-                            div.column
-                                div.corp-find-item-contaner
+                    div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu.corp-find-option
+                        span.inline-space.corp-find-option-text 职位
+                        div.ui.form.inline-block.inline-space
+                            select.dropdown-inline(name="position")
+                                option(value="") a
+                                option(value="a1") a1
+                    div.ui.active.tab.list-tab
+                        div(ng-if="isloading") 加载中，请稍后……
+                        div.ui.equal.width.grid.position-relative(ng-if="!isloading")
+                            i.icon.angle.right.arrow-right.arrow-attr.clickable(ng-click="arrowClick('right')")
+                            i.icon.angle.left.arrow-left.arrow-attr.clickable(ng-click="arrowClick('left')")
+                            div.column(ng-repeat="data in displayData", ng-class="{'hidden': data.hide}")
+                                div.corp-find-item-contaner.clickable(ng-click="cvClick(data)")
+                                    div.corp-find-item-overlay
+                                        | 简历详情
                                     div.corp-find-item-head
+                                        div.corp-find-route-label
+                                            div.corp-find-route-label-line
+                                            div.corp-find-route-label-text {{data.job_title}}
                                     div.corp-find-item-body
-                                        img(src="#{cdn.normal}img/corp/smart-recommendation.png?#{cdn.version}")
-                                        div name
-                                        div school
-                                    div.corp-find-item-foot
+                                        <img ng-src="{{data.avatar}}-small" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
+                                        div.corp-find-item-body-name {{data.real_name}}
+                                        div.corp-find-item-body-info
+                                            span {{data.education.university}}
+                                            span &nbsp;|&nbsp;
+                                            span {{data.education.major}}
+                                            span &nbsp;|&nbsp;
+                                            span {{data.education.qualifications}}
+                                    div.corp-find-item-foot.segment-bottom-shadow
+                                        div.ui.grid
+                                            div.five.wide.column.center.aligned
+                                                img(ng-src="img/opd/match_{{levelMapping(data.member_job_match)}}.png?<%= cdn.version %>")
+                                                div.corp-find-item-foot-matchtext 职位匹配度
+                                            div.eleven.wide.column
+                                                div.corp-find-item-foot-label hello1
+                                                div.corp-find-item-foot-label hello1
+                                                div.corp-find-item-foot-label hello1
+                                                div.corp-find-item-foot-label hello1
+                                                div.corp-find-item-foot-label hello1
+        div.ui.long.modal.corp-cv-modal
+            div.corp-cv-detail-header.light-grey-background
+                div.corp-cv-detail-button-group
+                    button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
+                        i.reply.icon
+                        | 移至有意向的简历
+                    button.ui.black.button(ng-click="printCV()")
+                        i.print.icon
+                        | 打印简历
+                    button.ui.black.button(ng-click="dropCV()",ng-if="resumeDetail.status==='apply'") 
+                        i.trash.icon
+                        | 删除简历
+                    button.ui.red.button(ng-click="restoreCV()",ng-if="resumeDetail.status==='drop'") 
+                        i.undo.icon
+                        | 恢复简历
+                    button.right.floated.circular.ui.icon.grey.button.close
+                        i.remove.icon
+            div.corp-cv-detail-body
+                corp-cv-detail(ng-if="!isDetailLoading")
+            div.corp-cv-detail-footer
+                div.corp-cv-detail-right
+                    | Powered by Bridge+
 block extraJs
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/find/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/proxy/corp/find.js?#{cdn.version}")
     script.
         angular.module('bplusModule')
                 .run(['$rootScope', function ($rootScope) {

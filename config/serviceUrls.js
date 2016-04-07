@@ -63,6 +63,10 @@ module.exports = {
         job: {
             publish: '/corp-service-proxy/job/publish'
         },
+        recommend: {
+            smart: '/corp-service-proxy/recommend/smart',
+            champion: '/corp-service-proxy/recommend/champion'
+        },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications',
             worktype: '/corp-service-proxy/resources/worktype',
