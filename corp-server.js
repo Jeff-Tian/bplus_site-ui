@@ -3,18 +3,23 @@ var server = express();
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
-var Logger = require('logger');
+var Logger = require('greenShared').logger;
 var config = require('./config');
 var busboy = require('connect-busboy');
+var pack = require('./package.json');
 
-var logger = {
-    info: function () {
-    },
-    error: function () {
-    }
-};
+var logger = (Logger.init({
+    logger: 'BridgePlusCorp'
+}), Logger(pack.name + pack.version));
+
+// var logger = {
+//     info: function () {
+//     },
+//     error: function () {
+//     }
+// };
 var mobileDetector = require('./mobile/mobileDetector');
-var urlParser = require('url');
+
 var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;

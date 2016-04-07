@@ -4,19 +4,20 @@ var server = express();
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
-var Logger = require('logger');
+var Logger = require('greenShared').logger;
 var config = require('./config');
+var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
 
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
-//var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
-var logger = {
-    info: function () {
-    },
-    error: function () {
-    }
-};
+var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+// var logger = {
+//     info: function () {
+//     },
+//     error: function () {
+//     }
+// };
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
 var fs = require('fs');
