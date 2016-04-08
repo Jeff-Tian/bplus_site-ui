@@ -12,12 +12,7 @@ var membership = require('./serviceProxy/membership.js');
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
 var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
-// var logger = {
-//     info: function () {
-//     },
-//     error: function () {
-//     }
-// };
+
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
 var fs = require('fs');
