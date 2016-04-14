@@ -6,6 +6,7 @@ tmp
 .idea
 .project
 npm-debug.log
+.jshintrc
 
 # Folders
 assets/
