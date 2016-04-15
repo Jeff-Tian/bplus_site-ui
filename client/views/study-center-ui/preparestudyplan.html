@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>课程详情 Bridge+</title>
+    <title>规划学习计划 Bridge+</title>
     <meta name="description" content="Bridge+">
     <link type="text/css" rel="stylesheet"
           href="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.css?<%= cdn.version %>" media="all"/>
@@ -14,28 +14,25 @@
 </head>
 
 <body class="bplus" ng-init="page='<%=page%>';lang='<%=lang%>';site='bplus'" ng-app="bplus" ng-controller="AppCtrl">
-<%- include('../view-partial/header.html') -%>
+<%- include('../../www/view-partial/header.html') -%>
 
 <div class="study-center cloak" ng-controller="studyCenterBaseCtrl">
 
     <div class="ui container">
         <div class="ui grid">
             <div class="four wide column">
-                <study-center-menu></study-center-menu>
+                <bopdmenu ng-controller="StudyCtrl"></bopdmenu>
             </div>
             <div class="twelve wide column">
-                <course></course>
+                <studyplan-prepare></studyplan-prepare>
             </div>
         </div>
     </div>
 </div>
 
-<%- include('../view-partial/footer.html') -%>
-<script src="/studycenter/config.js"></script>
-<script src="<%= cdn.normal %>studycenter/dist/main.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/page/studycenter/main.js?<%= cdn.version %>"></script>
-
-<%- include('../view-partial/external-js.html') -%>
+<%- include('../../www/view-partial/footer.html') -%>
+<%- include('footer.html') -%>
+<%- include('../../www/view-partial/external-js.html') -%>
 </body>
 
 </html>

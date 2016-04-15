@@ -1,6 +1,7 @@
 angular.module('corpModule')
     .controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', function ($scope, $timeout, jobpostService) {
         var requiredData = [
+            "position",
             "jobtitle",
             "jobtype",
             "department",
@@ -21,6 +22,7 @@ angular.module('corpModule')
         $scope.isloading = false;
         return jobpostService.init().then(function () {
             $scope.postData = {
+                position: "",
                 jobtitle: "",
                 jobtype: "",
                 department: "",
@@ -173,6 +175,7 @@ angular.module('corpModule')
                     closable: false,
                     onApprove: function () {
                         var param = {
+                            position: $scope.postData.position,
                             title: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.job, $scope.postData.jobtitle),
                             title_id: $scope.postData.jobtitle,
                             job_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.worktype, $scope.postData.jobtype),

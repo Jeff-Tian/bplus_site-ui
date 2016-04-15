@@ -8,17 +8,7 @@ var config = require('./config');
 var busboy = require('connect-busboy');
 var pack = require('./package.json');
 
-var logger = (Logger.init({
-    logger: 'BridgePlusCorp'
-}), Logger(pack.name + pack.version));
-
-// var logger = {
-//     info: function () {
-//     },
-//     error: function () {
-//     }
-// };
-var mobileDetector = require('./mobile/mobileDetector');
+var logger = (Logger.init(config.corpLogger), Logger(pack.name + pack.version));
 
 var fs = require('fs');
 
@@ -66,18 +56,6 @@ function setConfig(req, res, next) {
     next();
 }
 
-function setDeviceHelper(req, res, next) {
-    var ua = req.headers['user-agent'];
-
-    res.locals.device = {
-        isFromMobile: mobileDetector.isFromMobile(ua),
-        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua),
-        isFromAndroid: mobileDetector.isFromAndroid(ua)
-    };
-
-    next();
-}
-
 function getMode() {
     return process.env.NODE_ENV || 'dev';
 }
@@ -99,7 +77,6 @@ server
     .use(setCDN)
     .use(setFeatureSwitcher)
     .use(setConfig)
-    .use(setDeviceHelper)
     .use(setMode)
 ;
 
