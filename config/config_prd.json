@@ -134,6 +134,7 @@
   "version": "3.0.0",
   "date": "20160412_0538",
   "trackingUrl": "http://tracking.bridgeplus.cn",
+  "trackingJs": "http://uat.tracking.hcd.com/js/t.js",
   "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",
   "durableMessageSource": "//source.bridgeplus.cn/json/messages.json"
 }

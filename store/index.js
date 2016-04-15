@@ -44,6 +44,7 @@ function cdnify(url, cdn) {
 router.get('/offers', function (req, res, next) {
     renderMixin(res, 'offers.jade', 'offers-layout.jade', {
         cdn: config.cdn,
+        trackingJs: config.trackingJs + '?' + config.cdn.version,
         title: '商城',
         paymentMethods: {
             pcAlipay: 'b_alipay'
