@@ -118,6 +118,9 @@
   "logger": {
     "appName": "BridgePlus"
   },
+  "corpLogger": {
+    "appName": "BridgePlusCorp"
+  },
   "applicationId": "2b33cf2c-e5dd-4e82-8687-d3fe099a3504",
   "port": 12000,
   "corpport": 12001,
@@ -128,8 +131,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": true
   },
-  "version": "2.0.0",
-  "date": "20160331_1135",
+  "version": "3.0.0",
+  "date": "20160412_0538",
   "trackingUrl": "http://uat.tracking.hcd.com",
   "onlineStoreMenuSource": "/store/json/store-menu.json",
   "durableMessageSource_local": "/messages",

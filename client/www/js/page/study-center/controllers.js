@@ -68,7 +68,7 @@ angular.module('studyCenterModule')
 
                             return {
                                 name: d.title,
-                                teacher: d.teacher.display_name,
+                                teacher: d.teacher ? d.teacher.display_name : '',
                                 status: Math.round(d.bookingCount / d.capability * 100),
                                 statusText: [
                                     progress,
