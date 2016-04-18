@@ -17,11 +17,6 @@ function filterConfig(config) {
     return filtered;
 }
 
-router.use(function (req, res, next) {
-    //res.send('ok');
-    next();
-});
-
 router.get('/config.js', function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
@@ -29,7 +24,8 @@ router.get('/config.js', function (req, res, next) {
 
 router.get('/my', function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade', {
-        cdn: config.cdn
+        cdn: config.cdn,
+        trackingJs: config.trackingJs + '?' + config.cdn.version
     });
 });
 

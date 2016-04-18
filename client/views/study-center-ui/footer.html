@@ -1,4 +1,66 @@
 <script src="/studycenter/config.js"></script>
 <script src="<%= cdn.normal %>studycenter/dist/main.js?<%= cdn.version %>"></script>
 <script type="text/javascript" src="<%= cdn.cdnify('js/page/opportunity-detail/menuDirective.js') %>"></script>
+<script src="<%= config.trackingJs %>?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/studycenter/main.js?<%= cdn.version %>"></script>
+
+<script type="text/javascript">
+    angular.module('bplus')
+            .controller('studyCenterTrackingCtrl', ['tracking', function (tracking) {
+                if (window.location.pathname === '/study-center/teachercourse.html') {
+                    tracking.send('studyCenterMentorCourses');
+                }
+
+                function hijackLinkClick($event, $currentTarget, trackingName, data) {
+                    var url = $currentTarget.attr("href");
+                    var target = $currentTarget.attr('target');
+
+                    if (url && (!target || target !== '_blank')) {
+                        $event.preventDefault();
+                        $event.stopPropagation();
+                    }
+
+                    tracking.send(trackingName, data, function () {
+                        if (url && (!target || target !== '_blank')) {
+                            window.location.href = url;
+                        }
+                    });
+                }
+
+                $(function () {
+                    $(document).on('click', '.teacher-avatar .avatar a img', function ($event) {
+                        var $currentTarget = $($event.currentTarget).parent();
+
+                        hijackLinkClick($event, $currentTarget, 'studyCenterMentorCourses.teacherImage.click');
+                    });
+
+                    $(document).on('click', '.teacher-avatar-inner .teacher-brief a', function ($event) {
+                        hijackLinkClick($event, $($event.currentTarget), 'studyCenterMentorCourses.teacherName.click');
+                    });
+
+                    $(document).on('click', '.teacher_classes .course-item .teacher-avatar+div > a', function ($event) {
+                        hijackLinkClick($event, $($event.currentTarget), 'studyCenterMentorCourses.courseName.click');
+                    });
+
+                    $(document).on('click', '.teacher_classes .course-item .course-date a', function ($event) {
+                        hijackLinkClick($event, $($event.currentTarget), 'studyCenterMentorCourses.joinCourse.click	');
+                    });
+
+                    var $activeSorting = $('.sort-grid .filter-value ul li a.active');
+
+                    if ($activeSorting.length) {
+                        tracking.send('studyCenterMentorCourses.orderBy.tab', {
+                            rule: $activeSorting.text()
+                        });
+                    }
+
+                    $(document).on('click', '.sort-grid .filter-value ul li a', function ($event) {
+                        var $currentTarget = $($event.currentTarget);
+                        hijackLinkClick($event, $currentTarget, 'studyCenterMentorCourses.orderBy.tab', {
+                            rule: $currentTarget.text()
+                        });
+                    });
+                });
+            }])
+    ;
+</script>

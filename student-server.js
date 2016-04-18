@@ -362,16 +362,6 @@ server
         });
     })
     .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
-    .get(localeHelper.localePath('/studycenter', true), membership.ensureAuthenticated, function (req, res, next) {
-        var lang = localeHelper.getLocale(req.url, req);
-        var redirect = '/studycenter/';
-
-        if (lang) {
-            redirect = '/' + lang + redirect;
-        }
-
-        res.redirect(redirect);
-    })
     .use('/studycenter', require('study-center-proxy')(express));
 
 mapRoute2Template('/index');
