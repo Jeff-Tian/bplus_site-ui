@@ -1,5 +1,5 @@
 angular.module('bridgeplus.corp')
-    .service('cvService', ['$q', 'service', 'DeviceHelper', function ($q, service, DeviceHelper) {
+    .service('cvService', ['$q', 'service', 'DeviceHelper', '$rootScope', function ($q, service, DeviceHelper, $rootScope) {
         var me = this;
         var hasInitialized = false;
         var resourceData = {};
@@ -112,35 +112,56 @@ angular.module('bridgeplus.corp')
         };
         ////////
         me.unlockCV = function (cv) {
-            var url = '/corp-service-proxy/jobapply/unlockCandidate';
+            var url = $rootScope.config.serviceUrls.corp.jobapply.unlockCandidate;
+            var param = {
+                applierList: [cv]
+            };
+            return service.post(url, param);
+        };
+        me.markCV = function (cv) {
+            var url = $rootScope.config.serviceUrls.corp.jobapply.markCandidate;
             var param = {
                 applierList: [cv]
             };
             return service.post(url, param);
         };
         me.restoreCV = function (cv) {
-            var url = '/corp-service-proxy/jobapply/restoreCandidate';
+            var url = $rootScope.config.serviceUrls.corp.jobapply.restoreCandidate;
+            var param = {
+                applierList: [cv]
+            };
+            return service.post(url, param);
+        };
+        me.restoreAndMarkCv = function (cv) {
+            var url = $rootScope.config.serviceUrls.corp.jobapply.restoreCandidate;
             var param = {
                 applierList: [cv]
             };
             return service.post(url, param);
         };
         me.dropCV = function (cvArray) {
-            var url = '/corp-service-proxy/jobapply/dropCandidate';
+            var url = $rootScope.config.serviceUrls.corp.jobapply.dropCandidate;
+            var param = {
+                applierList: cvArray
+            };
+            return service.post(url, param);
+        };
+        me.dropProtenial = function (cvArray) {
+            var url = $rootScope.config.serviceUrls.corp.jobapply.dropCandidate;
             var param = {
                 applierList: cvArray
             };
             return service.post(url, param);
         };
         me.getResume = function (idParam) {
-            var url = '/corp-service-proxy/candidate/resume';
-            var param = $.extend(true, {
-                member_id: "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
-            }, idParam);
-            return service.post(url, param);
+            var url = $rootScope.config.serviceUrls.corp.jobapply.resume;
+//             var param = $.extend(true, {
+// member_id: "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
+//             }, idParam);
+            return service.post(url, idParam);
         };
         me.getPublishedJobs = function () {
-            var url = '/corp-service-proxy/jobapply/publishedJobs';
+            var url = $rootScope.config.serviceUrls.corp.jobapply.publishedJobs;
             var param = {
 // company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
 //                company_id: "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"

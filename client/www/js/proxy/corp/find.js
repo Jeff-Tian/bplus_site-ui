@@ -17,5 +17,12 @@ param.company_id = "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
 param.company_id = "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             return service.post(url, param);
         };
+        me.markCandidate = function(cv) {
+            var url = $rootScope.config.serviceUrls.corp.recommend.markCandidate;
+            var param = {
+                applierList: [cv]
+            };
+            return service.post(url, param);
+        };
     }])
 ;

@@ -47,6 +47,7 @@ angular.module('corpModule')
         return dataInput;
     };
     findService.getSmart().then(function(data){
+//TODO
 data.list.pop();
         $scope.displayData = fulfillData(data.list);
         $timeout(function(){

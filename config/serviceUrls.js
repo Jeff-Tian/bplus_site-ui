@@ -49,23 +49,29 @@ module.exports = {
             changeMobile: '/corp-service-proxy/member/change-mobile'
         },
         jobapply: {
-            publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',
+            publishedPositions: '/corp-service-proxy/jobapply/publishedPositions',
             todo: '/corp-service-proxy/jobapply/todo',
-            dropped: '/corp-service-proxy/jobapply/dropped',
-            unlocked: '/corp-service-proxy/jobapply/unlocked',
             dropCandidate: '/corp-service-proxy/jobapply/dropCandidate',
-            restoreCandidate: '/corp-service-proxy/jobapply/restoreCandidate',
-            unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
+            markCandidate: '/corp-service-proxy/jobapply/markCandidate'
         },
         candidate: {
-            resume: '/corp-service-proxy/candidate/resume'
+            resume: '/corp-service-proxy/candidate/resume',
+            dropProtenial: '/corp-service-proxy/candidate/dropCandidate',
+            restoreProtenial: '/corp-service-proxy/candidate/restoreCandidate',
+            dropped: '/corp-service-proxy/candidate/dropped',
+            potential: '/corp-service-proxy/candidate/potential'
         },
         job: {
             publish: '/corp-service-proxy/job/publish'
         },
         recommend: {
             smart: '/corp-service-proxy/recommend/smart',
-            champion: '/corp-service-proxy/recommend/champion'
+            champion: '/corp-service-proxy/recommend/champion',
+            markCandidate: '/corp-service-proxy/recommend/markCandidate'
+        },
+        talent: {
+            save: '/corp-service-proxy/talent/save',
+            search: '/corp-service-proxy/talent/search'
         },
         resource: {
             qualifications: '/corp-service-proxy/resources/qualifications',
