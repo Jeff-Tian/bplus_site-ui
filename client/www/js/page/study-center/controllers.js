@@ -3,6 +3,34 @@ angular.module('studyCenterModule')
         one2one: '一对一',
         one2many: '小班课'
     })
+    .value('RequestStatus', {
+        request: '已预约'
+    })
+    .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus) {
+        $scope.loading = false;
+
+        $scope.courses = {
+            rawData: []
+        };
+
+        service.executePromiseAvoidDuplicate($scope, 'loading', function () {
+            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.booked)
+                .then(function (data) {
+                    $scope.courses.displayData = data.map(function (d) {
+                        return {
+                            name: d.topic,
+                            teacher: d.teacher ? d.teacher.display_name : '',
+                            startAt: new Date(d.booking_from),
+                            endAt: new Date(d.booking_to),
+                            tags: [],
+                            teacherInfo: d.teacher,
+                            requestStatus: d.request_status,
+                            feedback: d.student_comment
+                        };
+                    });
+                });
+        });
+    }])
     .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', function ($scope, $timeout, $q, service, CourseTypeTags) {
         $scope.loading = false;
 
