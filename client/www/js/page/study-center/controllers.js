@@ -276,7 +276,7 @@ angular.module('studyCenterModule')
             return can;
         };
     }])
-    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', '$timeout', 'tracking', function ($scope, FileReaderService, service, MessageBox, $timeout, tracking) {
+    .controller('FavTeachersCtrl', ['$scope', 'FileReaderService', 'service', 'MessageBox', '$timeout', 'tracking', 'url', function ($scope, FileReaderService, service, MessageBox, $timeout, tracking, url) {
         $scope.teachers = [];
         $scope.fetching = false;
 
@@ -376,6 +376,11 @@ angular.module('studyCenterModule')
             $scope.replyData.pictures.splice(index, 1);
         };
 
-        tracking.send('studyCenterMentorCourses.myFavorite.click');
+        var l = url.parse(document.referrer);
+        if (l.pathname === '/study-center/teacher.html') {
+            tracking.send('studyCenterMentorDetail.myFavorite.click');
+        } else if (l.pathname === '/study-center/teachercourse.html') {
+            tracking.send('studyCenterMentorCourses.myFavorite.click');
+        }
     }])
 ;

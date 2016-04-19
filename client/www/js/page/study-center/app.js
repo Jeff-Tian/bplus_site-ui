@@ -28,15 +28,19 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule
                 });
         }
     }])
-    .run(['$rootScope', '$state', 'tracking', function ($rootScope, $state, tracking) {
+    .run(['$rootScope', function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
             angular.element('head title').text(toState.data.pageTitle);
         });
-
-        tracking.send('studyCenterMentorCourses');
     }])
-    .controller('MyCoursesCtrl', ['tracking', function (tracking) {
-        tracking.send('studyCenterMentorCourses.myCourses.click');
+    .controller('MyCoursesCtrl', ['tracking', 'url', function (tracking, url) {
+        var l = url.parse(document.referrer);
+
+        if (l.pathname === '/study-center/teacher.html') {
+            tracking.send('studyCenterMentorDetail.myCourses.click');
+        } else if (l.pathname === '/study-center/teachercourse.html') {
+            tracking.send('studyCenterMentorCourses.myCourses.click');
+        }
     }])
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)
