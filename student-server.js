@@ -4,19 +4,15 @@ var server = express();
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
-var Logger = require('logger');
+var Logger = require('greenShared').logger;
 var config = require('./config');
+var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
 
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
-//var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
-var logger = {
-    info: function () {
-    },
-    error: function () {
-    }
-};
+var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
+
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
 var fs = require('fs');
@@ -329,9 +325,7 @@ setupOnlineStoreStaticResources('images');
 setupOnlineStoreStaticResources('stylesheets');
 setupOnlineStoreStaticResources('scripts');
 
-server.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('./store'));
-
-server.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./routes/study-center.js'));
+server.use(require('./routes/student'));
 
 server.use(localeHelper.localePath('/corp', false), require('./routes/corp.js'));
 
@@ -377,24 +371,6 @@ server
         }
 
         res.redirect(redirect);
-    })
-    .get('/:lang?/studycenter/:page?', membership.ensureAuthenticated, function (req, res, next) {
-        var lang = req.params.lang || localeHelper.getLocale(req.url, req);
-
-        if (localeHelper.supportedLocales.indexOf(lang) < 0) {
-            return next();
-        }
-
-        var page = req.params.page || 'teachercourse';
-
-        try {
-            res.render('study-center-ui/' + page, {
-                page: page,
-                lang: lang
-            });
-        } catch (ex) {
-            next();
-        }
     })
     .use('/studycenter', require('study-center-proxy')(express));
 
@@ -468,27 +444,6 @@ server.use('/healthcheck', function (req, res, next) {
         everything: 'is ok',
         time: new Date()
     });
-});
-
-server.get('/test', function (req, res, next) {
-    var ua = req.headers['user-agent'];
-    res.send(req.url);
-});
-
-server.get('/mode', function (req, res, next) {
-    res.send(res.locals.dev_mode);
-});
-
-server.get('/is_qa', function (req, res) {
-    res.send('is_qa = ' + process.env.IS_QA);
-});
-
-server.get('/run_from', function (req, res) {
-    res.send('run_form = ' + process.env.RUN_FROM);
-});
-
-server.get('/locale', function (req, res, next) {
-    res.send(req.getLocale());
 });
 
 function logErrors(err, req, res, next) {

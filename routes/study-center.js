@@ -1,29 +1,8 @@
 var router = require('express').Router();
 var fs = require('fs');
-var path = require('path');
 var config = require('../config/index');
 var mixedEngine = require('./mixedViewEngine');
-
-function filterConfig(config) {
-    var filtered = {};
-
-    filtered.serviceUrls = config.serviceUrls;
-    filtered.sharedUIPath = '/bower/SHARED-UI/';
-    filtered.cdn = config.cdn;
-    filtered.payment = config.payment.public;
-    filtered.onlineStoreMenuSource = config.onlineStoreMenuSource;
-
-    return filtered;
-}
-
-router.use(function (req, res, next) {
-    //res.send('ok');
-    next();
-});
-
-router.get('/', function (req, res, next) {
-    res.redirect('/study-center/my');
-});
+var localeHelper = require('../locales/localeHelper');
 
 router.get('/my', function (req, res, next) {
     mixedEngine.render(res, 'study-center.jade', 'study-center-layout.jade', {
@@ -32,8 +11,24 @@ router.get('/my', function (req, res, next) {
     });
 });
 
-function cdnify(url, cdn) {
-    return cdn.normal + url + '?' + cdn.version;
-}
+router.get('/:page?', function (req, res, next) {
+    var lang = req.params.lang || localeHelper.getLocale(req.url, req);
+
+    if (localeHelper.supportedLocales.indexOf(lang) < 0) {
+        return next();
+    }
+
+    var page = req.params.page || 'teachercourse';
+
+    try {
+        res.render('study-center-ui/' + page, {
+            page: page,
+            lang: lang
+        });
+    } catch (ex) {
+        next();
+    }
+})
+;
 
 module.exports = router;

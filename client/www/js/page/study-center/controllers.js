@@ -1,5 +1,9 @@
 angular.module('studyCenterModule')
-    .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', function ($scope, $timeout, $q, service) {
+    .value('CourseTypeTags', {
+        one2one: '一对一',
+        one2many: '小班课'
+    })
+    .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', function ($scope, $timeout, $q, service, CourseTypeTags) {
         $scope.loading = false;
 
         $scope.courses = {
@@ -32,6 +36,28 @@ angular.module('studyCenterModule')
 
         $scope.timeThreshold = 1000 * 60 * 60;
 
+        $scope.showProgressCountDown = function (c) {
+            return c.status !== -1 &&
+                c.countdown.value < 0 &&
+                c.statusText[0] !== '开课失败'
+                ;
+        };
+
+        $scope.showCountDown = function (c) {
+            return c.status !== -1 &&
+                c.countdown.value >= 0 &&
+                c.countdown.value < $scope.timeThreshold &&
+                c.statusText[1] !== '未开课'
+                ;
+        };
+
+        $scope.enableCourseButton = function (c) {
+            return c.status !== -1 &&
+                c.countdown.value <= $scope.timeThreshold &&
+                c.statusText[1] === '已开课'
+                ;
+        };
+
         service.executePromiseAvoidDuplicate($scope, 'loading', function () {
             return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.coming)
                 .then(function (data) {
@@ -42,7 +68,7 @@ angular.module('studyCenterModule')
 
                             return {
                                 name: d.title,
-                                teacher: d.teacher.display_name,
+                                teacher: d.teacher ? d.teacher.display_name : '',
                                 status: Math.round(d.bookingCount / d.capability * 100),
                                 statusText: [
                                     progress,
@@ -50,15 +76,19 @@ angular.module('studyCenterModule')
                                 ],
                                 startAt: new Date(d.start_time),
                                 endAt: new Date(d.end_time),
-                                tags: d.teacher.tags.map(function (t) {
+                                tags: (d.class_tags || d.course_tags || []).map(function (t) {
                                     return {
                                         text: t,
                                         special: false
                                     };
-                                }),
+                                }).concat(d.product ? [{
+                                    text: CourseTypeTags[d.product],
+                                    special: true
+                                }] : []),
                                 class_id: d.class_id,
                                 course_id: d.course_id,
-                                teacherInfo: d.teacher
+                                teacherInfo: d.teacher,
+                                classUrl: d.class_url
                             };
                         });
 
@@ -100,7 +130,7 @@ angular.module('studyCenterModule')
             this.start();
         }
     }])
-    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', 'MessageBox', function ($scope, service, $timeout, $q, MessageBox) {
+    .controller('FinishedCoursesCtrl', ['$scope', 'service', '$timeout', '$q', 'MessageBox', 'CourseTypeTags', function ($scope, service, $timeout, $q, MessageBox, CourseTypeTags) {
         function mapCourse(d) {
             return {
                 name: d.title,
@@ -111,6 +141,19 @@ angular.module('studyCenterModule')
                 feedbackId: d.feedback_id,
                 classId: d.class_id,
                 teacherId: d.teacher_id,
+                courseId: d.course_id,
+                class_id: d.class_id,
+                teacherInfo: {teacher_id: d.teacher_id},
+                course_id: d.course_id,
+                tags: (d.class_tags || d.course_tags || []).map(function (t) {
+                    return {
+                        text: t,
+                        special: false
+                    };
+                }).concat(d.product ? [{
+                    text: CourseTypeTags[d.product],
+                    special: true
+                }] : []),
                 feedback: {
                     comment: '',
                     generalEvaluation: 0,
@@ -152,7 +195,7 @@ angular.module('studyCenterModule')
             var ret = data.bookings.map(mapCourse);
 
             $timeout(function () {
-                $('td .rating').rating('disable');
+                $('.rated td .rating').rating('disable');
             });
 
             return ret;
@@ -258,19 +301,7 @@ angular.module('studyCenterModule')
                                 image: i.image_url,
                                 rank: i.rank,
                                 tags: i.tags,
-                                topics: [{
-                                    title: 'todo title topic',
-                                    link: '',
-                                    target: ''
-                                }, {
-                                    title: 'todo title topic',
-                                    link: '',
-                                    target: ''
-                                }, {
-                                    title: 'todo title topic',
-                                    link: '',
-                                    target: ''
-                                }]
+                                topics: []
                             };
                         });
 
@@ -290,10 +321,10 @@ angular.module('studyCenterModule')
         $scope.removeFavTeacher = function (t) {
             service.executePromiseAvoidDuplicate($scope.deleting, t.id, function () {
                 return service.delete(angular.bplus.config.serviceUrls.studyCenter.my.favorite.teachers, {
-                    params: {
-                        teacher_id: t.id
-                    }
-                })
+                        params: {
+                            teacher_id: t.id
+                        }
+                    })
                     .then(function (data) {
                         //refreshTeachers();
                         for (var i = $scope.teachers.length - 1; i >= 0; i--) {

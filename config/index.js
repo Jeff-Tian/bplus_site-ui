@@ -11,8 +11,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
 } else if (process.env.NODE_ENV === 'uat') {
     config = require('./config_uat.js');
 } else {
-    config = require('./config_prd.js');
+    config = require('./config_prd.js.');
 }
+
+config.cdn.cdnify = function (resource) {
+    return config.cdn.normal + resource + '?' + config.cdn.version;
+};
 
 config.serviceUrls = require('./serviceUrls.js');
 

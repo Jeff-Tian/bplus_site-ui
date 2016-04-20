@@ -68,7 +68,7 @@
 <% } else { %>
 <script src="<%= config.normal %>js/cdn/m/sign-in.js?<%= cdn.version %>"></script>
 <% } %>
-
+<%- include('external-js.html') -%>
 <script type="text/javascript">
     setTimeout(function () {
         var a = document.createElement("script");
