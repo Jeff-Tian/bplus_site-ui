@@ -2,6 +2,18 @@ block content
     div.corp-jobpost(ng-controller="jobpostCtrl")
         div.ui.eight.column.centered.grid
             div.eight.wide.column
+                div.ui.segment.segment-bottom-shadow
+                    span.inline-space 筛选条件
+                    div.ui.form.inline-block.inline-space
+                        select.ui.compact.dropdown.dropdown-inline(name="select",ng-model="option.type")
+                            option(value="") 全部
+                            option(value="") 在招
+                            option(value="") 过期
+                            option(value="") 待发布
+                            option(value="") 已下线
+                    a.ui.red.button.right.floated
+                        | 发布职位
+                    div.hint-warning-text 操作职位后，请等待10秒钟后刷新界面，即可看到职位更新
                 form.ui.form.corp-jobpost-form(nonvalidate,ng-class="{'error': hasSubmitted && hasError}")
                     div.ui.error.message 红框处必填字段未完成，请全部填写完成后按下保存
                     div.ui.top.attached.segment.segment-bottom-shadow.corp-jobpost-segment
@@ -91,7 +103,9 @@ block content
                                     option(value="{{item.id}}" ng-repeat='item in displayData.expiredays') {{item.text}}
                                 span &nbsp;&nbsp;日
                         div
-                            div.ui.red.button(ng-click="submit()") 发布职位
+                            div.ui.red.button.inline-space(ng-click="cancel()") 取消
+                            div.ui.red.button.inline-space(ng-click="save()") 保存
+                            div.ui.red.button.inline-space(ng-click="submit()") 保存并发布
         div.ui.small.modal.postconfirm.corp-jobpost-modal
             i.close.icon
             div.content

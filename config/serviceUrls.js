@@ -59,6 +59,7 @@ module.exports = {
             dropProtenial: '/corp-service-proxy/candidate/dropCandidate',
             restoreProtenial: '/corp-service-proxy/candidate/restoreCandidate',
             dropped: '/corp-service-proxy/candidate/dropped',
+            jobstatus: '/corp-service-proxy/candidate/jobstatus',
             potential: '/corp-service-proxy/candidate/potential'
         },
         job: {
@@ -74,15 +75,15 @@ module.exports = {
             search: '/corp-service-proxy/talent/search'
         },
         resource: {
-            qualifications: '/corp-service-proxy/resources/qualifications',
-            worktype: '/corp-service-proxy/resources/worktype',
-            communityposition: '/corp-service-proxy/resources/communityposition',
-            language: '/corp-service-proxy/resources/language',
-            langguageproficiency: '/corp-service-proxy/resources/langguageproficiency',
-            englishlevel: '/corp-service-proxy/resources/englishlevel',
-            industry: '/corp-service-proxy/resources/industry',
-            salarytype: '/corp-service-proxy/resources/salarytype',
-            job: '/corp-service-proxy/resources/job'
+            qualifications: '/corp-service-proxy/resource/qualifications',
+            worktype: '/corp-service-proxy/resource/worktype',
+            communityposition: '/corp-service-proxy/resource/communityposition',
+            language: '/corp-service-proxy/resource/language',
+            langguageproficiency: '/corp-service-proxy/resource/langguageproficiency',
+            englishlevel: '/corp-service-proxy/resource/englishlevel',
+            industry: '/corp-service-proxy/resource/industry',
+            salarytype: '/corp-service-proxy/resource/salarytype',
+            job: '/corp-service-proxy/resource/job'
         },
         resources: {
             tags: '/corp-service-proxy/resources/tags/:query?',

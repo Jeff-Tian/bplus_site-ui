@@ -10,14 +10,17 @@ block content
                         a.menu-item.item(data-tab="interested" ng-click="tabmemuClick(STATIC_PARAM.INTERESTED)")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
                             | 有意向的简历
+                        a.menu-item.item(data-tab="pool" ng-click="tabmemuClick(STATIC_PARAM.POOL)")
+                            img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menu2.png?#{cdn.version}")
+                            | 人才库
                         a.menu-item-lonely.item(data-tab="deleted" ng-click="tabmemuClick(STATIC_PARAM.DELETED)")
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/cv_menudelete.png?#{cdn.version}")
                             | 已删除的简历
                     div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu
-                        span.inline-space 职位
+                        span.inline-space 职能类别
                         div.ui.form.inline-block.inline-space
                             select.ui.compact.dropdown.dropdown-inline(name="select",ng-model="option.type")
-                                option(value="") 全部职位
+                                option(value="") 全部职能
                                 option(value="{{publishedjob}}",ng-repeat="publishedjob in publishJobs") {{publishedjob}}
                         div.ui.checkbox.inline-block.inline-space.option-win
                             input(type="checkbox",name="win")
@@ -29,6 +32,8 @@ block content
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELIVERED")
                     div.ui.tab.cv-list-tab(data-tab="interested")
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.INTERESTED")
+                    div.ui.tab.cv-list-tab(data-tab="pool")
+                        corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.POOL")
                     div.ui.tab.cv-list-tab(data-tab="deleted")
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELETED")
                     //- the last segment will have no margin-bottom according to semantic-ui. Add an empty div to avoid it.
@@ -39,6 +44,9 @@ block content
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
                         i.reply.icon
                         | 移至有意向的简历
+                    button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
+                        i.reply.icon
+                        | 解锁简历
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
                         | 打印简历

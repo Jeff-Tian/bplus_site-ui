@@ -1,9 +1,10 @@
 angular.module('corpModule')
-.controller("cvCtrl", ['$scope', '$timeout', 'cvService', function($scope, $timeout, cvService) {
+.controller("cvCtrl", ['$scope', '$timeout', 'cvService', '$q', function($scope, $timeout, cvService, $q) {
     var STATIC_PARAM = {
         DELIVERED: 'delivered',
-        INTERESTED : 'interested',
-        DELETED : 'deleted'
+        INTERESTED: 'interested',
+        DELETED: 'deleted',
+        POOL: "pool"
     };
     var FIRST_PAGE = 1;
     var getData = function(currentPage, defautlSort){
@@ -12,9 +13,9 @@ angular.module('corpModule')
         //Get data according $scope.displayData.currentTab;
         switch($scope.displayData.currentTab) {
             case STATIC_PARAM.DELIVERED:
+            case STATIC_PARAM.INTERESTED:
                 $scope.displayData.hasCheckbox = true;
                 break;
-            case STATIC_PARAM.INTERESTED:
             case STATIC_PARAM.DELETED:
                 $scope.displayData.hasCheckbox = false;
                 break;
@@ -78,10 +79,16 @@ angular.module('corpModule')
                 job_id: value.jobID
             };
             $scope.isDetailLoading = true;
-            cvService.getResume(param).then(function(detail){
+            $q.all([
+                cvService.getResume(param),
+                cvService.getJobStatus(param)
+            ]).then(function(ret){
+                var detail = ret[0];
+                var status = ret[1] || "";
                 $scope.isDetailLoading = false;
                 $scope.resumeParam = param;
                 $scope.resumeDetail = detail;
+                $scope.resumeStatus = status;
                 $timeout(function(){
                     $(".corp-cv-modal.ui.modal").modal("show");
                 });
@@ -131,6 +138,7 @@ angular.module('corpModule')
     $scope.isDetailLoading = true;
 
     $scope.resumeDetail = {};
+    $scope.resumeStatus = "";
     $scope.resumeParam = {};
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
@@ -148,6 +156,9 @@ angular.module('corpModule')
             job_id: $scope.resumeParam.job_id
         };
         switch (type) {
+            case "mark":
+                action = cvService.markCV;
+                break;
             case "pay":
                 action = cvService.unlockCV;
                 break;
@@ -168,6 +179,9 @@ angular.module('corpModule')
             $scope.isDetailLoading = false;
             $scope.resumeDetail = detail;
         });
+    };
+    $scope.markCV = function() {
+        handleCV("pay");
     };
     $scope.payCV = function() {
         handleCV("pay");

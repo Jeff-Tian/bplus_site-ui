@@ -2,7 +2,7 @@
 @male: #206CB6;
 @female: #EB6754;
 @image-size: 128px;
-.headshotimage(@gender){
+.headshotimagefind(@gender){
     width: @image-size;
     height: @image-size;
     border: 6px solid @gender;
@@ -12,16 +12,16 @@
 .corp-find {
     min-height: 80%;
     margin-top: 100px;
-    .inline-space {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+    // .inline-space {
+    //     margin-left: 10px;
+    //     margin-right: 10px;
+    // }
     .headshot.image {
         &.male {
-            .headshotimage(@male);
+            .headshotimagefind(@male);
         }
         &.female {
-            .headshotimage(@female);
+            .headshotimagefind(@female);
         }
     }
     .corp-find-route-label {
