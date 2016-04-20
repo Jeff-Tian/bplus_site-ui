@@ -116,26 +116,10 @@
     }
   },
   "logger": {
-    "levels": {
-      "[all]": "ERROR"
-    },
-    "appenders": [
-      {
-        "type": "console"
-      },
-      {
-        "type": "log4js_cassandra",
-        "nodes": [
-          "live.cass01.server",
-          "live.cass02.server"
-        ],
-        "username": "cassandra",
-        "password": "HCDhcd@123",
-        "keyspace": "logdb",
-        "table": "log",
-        "appName": "BridgePlus"
-      }
-    ]
+    "appName": "BridgePlus"
+  },
+  "corpLogger": {
+    "appName": "BridgePlusCorp"
   },
   "applicationId": "2b33cf2c-e5dd-4e82-8687-d3fe099a3504",
   "port": 12000,
@@ -147,8 +131,8 @@
     "enableWechat": true,
     "enableLogoutOnMobile": false
   },
-  "version": "2.0.0",
-  "date": "20160331_1135",
+  "version": "3.0.0",
+  "date": "20160412_0538",
   "trackingUrl": "http://tracking.bridgeplus.cn",
   "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",
   "durableMessageSource": "//source.bridgeplus.cn/json/messages.json"

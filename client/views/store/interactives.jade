@@ -3,9 +3,11 @@ mixin teacherCard(teacher)
         div.ui.fluid.card
             div.image(style="background-color: white; padding: 20px;")
                 img(src="#{cdn.normal}img/store/#{teacher.image}?#{cdn.version}")
-            div.ui.secondary.inverted.segment.center.aligned(style="background-color: #4A4A4A!important;")
-                h3.header #{teacher.header}
-                div.description #{teacher.description}
+            div.content.center.aligned.centered(style="background-color: #4A4A4A!important;")
+                a.header(style="color: white!important;") #{teacher.header}
+                div.meta
+                    span.date(style="color: #aaa!important;") #{teacher.description}
+                div.description(style="color: white!important;") #{teacher.description2}
 mixin redHeader(text)
     div.header(style="background-color: #FC3F48; color: white; text-align: center;") #{text}
 
@@ -84,17 +86,20 @@ div.ui.small.modal.one2one
             + teacherCard({
                 image: 'Julia.png',
                 header: 'Julia 李青青',
-                description: 'HCD 合得创始人'
+                description: 'HCD 合得创始人',
+                description2: '美国商战模拟游戏协会董事'
             })
             + teacherCard({
                 image: 'Joseph.png',
                 header: 'Joseph 周国元',
-                description: 'HCD 合得CFO'
+                description: 'HCD 合得CFO',
+                description2: '曾任麦肯锡（香港）、安永（美国）'
             })
             + teacherCard({
                 image: 'Alice.png',
                 header: 'Alice 徐迎春',
-                description: 'HCD 合得COO'
+                description: 'HCD 合得合伙人',
+                description2: '曾任友邦集团人才管理总监'
             })
     + redHeader('热门主题')
     + grayContent
@@ -149,17 +154,20 @@ div.ui.small.modal.private.class
             + teacherCard({
                 image: 'qian-shen.png',
                 header: 'Shen 钱申',
-                description: 'HCD 合得CTO'
+                description: 'Bridge+ CTO',
+                description2: '在线教育与大数据专家'
             })
             + teacherCard({
                 image: 'Anil.png',
                 header: 'Anil Raparla',
-                description: '赛果分析报告主要撰写者'
+                description: '中欧商学院MBA',
+                description2: '分析报告主要撰写者'
             })
             + teacherCard({
                 image: 'Clara.png',
                 header: 'Clara 王渝佳',
-                description: '人力资源战略咨询师'
+                description: '人力资源战略咨询师',
+                description2: '曾任沃尔玛人力资源副总'
             })
     + redHeader('热门主题')
     + grayContent

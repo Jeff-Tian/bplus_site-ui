@@ -20,8 +20,12 @@ block content
                         img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost1.png?#{cdn.version}")
                         span.corp-jobpost-header 基本职位信息
                     div.ui.middle.attached.segment.segment-bottom-shadow.corp-jobpost-dark-segment.corp-jobpost-segment
-                            div.field(ng-class="{'error': hasSubmitted && postData.jobtitle==='' }")
+                            div.field(ng-class="{'error': hasSubmitted && postData.position ==='' }")
                                 div.corp-jobpost-content-title.required-title 职位名称
+                                div.corp-jobpost-content-input-container
+                                    input(type="text" ng-model="postData.position")
+                            div.field(ng-class="{'error': hasSubmitted && postData.jobtitle==='' }")
+                                div.corp-jobpost-content-title.required-title 职能类别
                                 div.corp-jobpost-content-input-container
                                     select.corp-jobpost-select(name="jobtitle" ng-model="postData.jobtitle")
                                         option(value="") 请选择

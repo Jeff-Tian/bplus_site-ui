@@ -8,7 +8,7 @@ var proxyBPlus = proxy.proxyBPlus;
 
 module.exports = require('express').Router()
     .get(studyCenterServiceUrls.classBooking.coming, proxyBPlus({path: '/classBooking/coming', method: 'POST'}))
-    //.get(studyCenterServiceUrls.classBooking.coming, function (req, res, next) {
+    // .get(studyCenterServiceUrls.classBooking.coming, function (req, res, next) {
     //    var result = {
     //        "isSuccess": true,
     //        "result": [{
@@ -99,8 +99,8 @@ module.exports = require('express').Router()
     //            "class_id": "44675389-19a7-4c0f-89c5-994c1f2679da",
     //            "course_id": "bc50d4fe-8e51-4614-bd75-1aefcf412cad",
     //            "description": "description18",
-    //            "end_time": "2016-12-17T07:40:51.733Z",
-    //            "start_time": "2016-12-17T07:40:51.733Z",
+    //            "end_time": "2016-04-06T07:40:51.733Z",
+    //            "start_time": "2016-04-06T07:40:51.733Z",
     //            "student_id": "759c1586-2e9b-4535-9d43-01a8cc8f2e89",
     //            "teacher_id": "c937dc30-1513-4075-abf0-a042b3d6021d",
     //            "title": "title18",
@@ -114,7 +114,7 @@ module.exports = require('express').Router()
     //                "title": "title c937dc30-1513-4075-abf0-a042b3d6021d"
     //            },
     //            "bookingCount": 1,
-    //            "mincapability": 1,
+    //            "mincapability": 2,
     //            "capability": 28
     //        }, {
     //            "class_id": "51fc2789-5e44-49ec-bc91-62f8f39d6453",
@@ -351,7 +351,7 @@ module.exports = require('express').Router()
     //    };
     //
     //    res.json(result);
-    //})
+    // })
     .get(studyCenterServiceUrls.classBooking.unevaluated, function (req, res, next) {
         return proxyBPlus({
             path: '/classBooking/unevaluated',

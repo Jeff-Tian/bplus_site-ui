@@ -3,18 +3,13 @@ var server = express();
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
-var Logger = require('logger');
+var Logger = require('greenShared').logger;
 var config = require('./config');
 var busboy = require('connect-busboy');
+var pack = require('./package.json');
 
-var logger = {
-    info: function () {
-    },
-    error: function () {
-    }
-};
-var mobileDetector = require('./mobile/mobileDetector');
-var urlParser = require('url');
+var logger = (Logger.init(config.corpLogger), Logger(pack.name + pack.version));
+
 var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;
@@ -61,18 +56,6 @@ function setConfig(req, res, next) {
     next();
 }
 
-function setDeviceHelper(req, res, next) {
-    var ua = req.headers['user-agent'];
-
-    res.locals.device = {
-        isFromMobile: mobileDetector.isFromMobile(ua),
-        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua),
-        isFromAndroid: mobileDetector.isFromAndroid(ua)
-    };
-
-    next();
-}
-
 function getMode() {
     return process.env.NODE_ENV || 'dev';
 }
@@ -94,7 +77,6 @@ server
     .use(setCDN)
     .use(setFeatureSwitcher)
     .use(setConfig)
-    .use(setDeviceHelper)
     .use(setMode)
 ;
 
