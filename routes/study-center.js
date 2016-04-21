@@ -7,6 +7,7 @@ var localeHelper = require('../locales/localeHelper');
 router.get('/my', function (req, res, next) {
     mixedEngine.render(res, 'study-center.jade', 'study-center-layout.jade', {
         cdn: config.cdn,
+        trackingJs: config.trackingJs + '?' + config.cdn.version,
         title: '学习中心'
     });
 });

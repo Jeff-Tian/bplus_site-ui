@@ -1,4 +1,4 @@
-angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
+angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule'])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var states = [
             {
@@ -28,10 +28,19 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router'])
                 });
         }
     }])
-    .run(['$rootScope', '$state', function ($rootScope) {
+    .run(['$rootScope', function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
             angular.element('head title').text(toState.data.pageTitle);
         });
+    }])
+    .controller('MyCoursesCtrl', ['tracking', 'url', function (tracking, url) {
+        var l = url.parse(document.referrer);
+
+        if (l.pathname.match(/\/study-center\/teacher\.html/i)) {
+            tracking.send('studyCenterMentorDetail.myCourses.click');
+        } else if (l.pathname.match(/\/study-center\/teachercourse.html/i)) {
+            tracking.send('studyCenterMentorCourses.myCourses.click');
+        }
     }])
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)

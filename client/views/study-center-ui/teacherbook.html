@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>课程详情 Bridge+</title>
+    <title>导师特约课程 Bridge+</title>
     <meta name="description" content="Bridge+">
     <link type="text/css" rel="stylesheet"
           href="<%= cdn.normal %>bower/semantic-ui/dist/semantic.min.css?<%= cdn.version %>" media="all"/>
@@ -18,13 +18,13 @@
 
 <div class="study-center cloak" ng-controller="studyCenterBaseCtrl">
 
-    <div class="ui container" ng-controller="studyCenterTrackingCtrl">
+    <div class="ui container">
         <div class="ui grid">
             <div class="four wide column">
                 <bopdmenu ng-controller="StudyCtrl"></bopdmenu>
             </div>
             <div class="twelve wide column">
-                <course></course>
+                <teacher-list></teacher-list>
             </div>
         </div>
     </div>

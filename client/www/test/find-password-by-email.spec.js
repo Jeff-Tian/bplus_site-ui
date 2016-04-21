@@ -1,6 +1,6 @@
 describe('find password by email', function () {
     it('should display error message when input wrong captcha', function () {
-        browser.get('http://10.20.32.51:5678/zh/reset-password-by-email');
+        browser.get('/zh/reset-password-by-email');
 
         element(by.model('resetData.email')).sendKeys('jie.tian@hotmail.com');
         element(by.model('resetData.captcha')).sendKeys('wrong captcha');
