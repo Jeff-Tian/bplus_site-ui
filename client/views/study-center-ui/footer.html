@@ -58,14 +58,14 @@
 
                     if ($activeSorting.length) {
                         tracking.send('studyCenterMentorCourses.orderBy.tab', {
-                            rule: $activeSorting.text()
+                            rule: $activeSorting.attr('data-tracking') || $activeSorting.text()
                         });
                     }
 
                     $(document).on('click', '.sort-grid .filter-value ul li a', function ($event) {
                         var $currentTarget = $($event.currentTarget);
                         trackLinkClick.hijack($event, $currentTarget, 'studyCenterMentorCourses.orderBy.tab', {
-                            rule: $currentTarget.text()
+                            rule: $currentTarget.attr('data-tracking') || $currentTarget.text()
                         });
                     });
                 });
