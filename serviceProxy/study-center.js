@@ -7,9 +7,7 @@ var studyCenterServiceUrls = leaveTrimmer.trim(config.serviceUrls.studyCenter, '
 var proxyBPlus = proxy.proxyBPlus;
 
 module.exports = require('express').Router()
-    .get(studyCenterServiceUrls.classBooking.booked, function (req, res, next) {
-        return proxyBPlus({path: '/classRequest/load/' + req.body.member_id, method: 'GET'})(req, res, next);
-    })
+    .get(studyCenterServiceUrls.classBooking.booked, proxyBPlus({path: '/classRequest/load', method: 'POST'}))
     .get(studyCenterServiceUrls.classBooking.coming, proxyBPlus({path: '/classBooking/coming', method: 'POST'}))
     // .get(studyCenterServiceUrls.classBooking.coming, function (req, res, next) {
     //    var result = {
