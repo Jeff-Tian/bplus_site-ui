@@ -19,6 +19,7 @@ module.exports = {
 
     studyCenter: {
         classBooking: {
+            booked: '/service-proxy/study-center/class-booking/booked',
             coming: '/service-proxy/study-center/class-booking/coming',
             unevaluated: '/service-proxy/study-center/class-booking/unevaluated',
             evaluated: '/service-proxy/study-center/class-booking/evaluated'

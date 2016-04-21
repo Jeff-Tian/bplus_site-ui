@@ -3,7 +3,8 @@
 angular
     .module('bplus', [
         'bplusModule',
-        'studyCenter'
+        'studyCenter',
+        'trackingModule'
     ])
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .controller('OpdMenuCtrl', ['$scope', function ($scope) {
