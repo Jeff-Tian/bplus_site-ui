@@ -8,7 +8,13 @@ angular
     ])
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .controller('OpdMenuCtrl', ['$scope', function ($scope) {
-        $scope.currentState = 'study-plan';
+        if (window.location.pathname.match(/\/study-center\/teachercourse\.html/i)) {
+            $scope.currentState = 'study-plan';
+        }
+
+        if (window.location.pathname.match(/\/study-center\/teacherbook\.html/i)) {
+            $scope.currentState = 'study-teacher-book';
+        }
     }])
     .controller('StudyCtrl', ['$scope', function ($scope) {
         $scope.menus = [{

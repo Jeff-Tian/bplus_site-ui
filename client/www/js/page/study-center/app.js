@@ -36,9 +36,9 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule
     .controller('MyCoursesCtrl', ['tracking', 'url', function (tracking, url) {
         var l = url.parse(document.referrer);
 
-        if (l.pathname === '/study-center/teacher.html') {
+        if (l.pathname.match(/\/study-center\/teacher\.html/i)) {
             tracking.send('studyCenterMentorDetail.myCourses.click');
-        } else if (l.pathname === '/study-center/teachercourse.html') {
+        } else if (l.pathname.match(/\/study-center\/teachercourse.html/i)) {
             tracking.send('studyCenterMentorCourses.myCourses.click');
         }
     }])

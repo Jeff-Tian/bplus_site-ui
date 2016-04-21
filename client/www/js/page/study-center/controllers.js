@@ -4,7 +4,10 @@ angular.module('studyCenterModule')
         one2many: '小班课'
     })
     .value('RequestStatus', {
-        request: '已预约'
+        request: '待确认',
+        accept: '已确认',
+        reject: '被拒绝',
+        cancelled: '已取消'
     })
     .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus) {
         $scope.loading = false;
@@ -24,7 +27,7 @@ angular.module('studyCenterModule')
                             endAt: new Date(d.booking_to),
                             tags: [],
                             teacherInfo: d.teacher,
-                            requestStatus: d.request_status,
+                            requestStatus: RequestStatus[d.request_status],
                             feedback: d.student_comment
                         };
                     });
@@ -405,9 +408,9 @@ angular.module('studyCenterModule')
         };
 
         var l = url.parse(document.referrer);
-        if (l.pathname === '/study-center/teacher.html') {
+        if (l.pathname.match(/\/study-center\/teacher\.html/i)) {
             tracking.send('studyCenterMentorDetail.myFavorite.click');
-        } else if (l.pathname === '/study-center/teachercourse.html') {
+        } else if (l.pathname.match(/\/study-center\/teachercourse\.html/i)) {
             tracking.send('studyCenterMentorCourses.myFavorite.click');
         }
     }])

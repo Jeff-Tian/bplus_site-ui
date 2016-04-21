@@ -20,7 +20,7 @@ mixin finishedUnratedCourseBlocks(c)
 
 mixin bookedCourseBlocks(c)
     td {{#{c}.requestStatus}}
-    td {{#{c}.feedback}}
+    td
 
 mixin rating(max, rating, classes)
     - classes = classes || 'tiny'
@@ -106,7 +106,7 @@ mixin bookedCourses(courses)
             th
                 h4(class="ui white header left aligned") 预约状态
             th
-                h4(class="ui white header left aligned") 预约反馈
+                h4(class="ui white header left aligned")
         + courseTableBody(courses, null, null, true)
             + bookedCourseBlocks('c')
 

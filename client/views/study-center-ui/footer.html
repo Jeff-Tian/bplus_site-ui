@@ -31,7 +31,7 @@
 
                 var referrer = url.parse(document.referrer);
 
-                if (referrer.pathname === '/study-center/teacher.html') {
+                if (referrer.pathname.match(/\/study-center\/teacher\.html/i)) {
                     tracking.send('studyCenterMentorDetail.mentorCourses.click');
                 }
 
