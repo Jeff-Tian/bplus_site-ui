@@ -37,7 +37,7 @@
                 <div class="eight wide column light-column-background clickable-column" ng-class="{'checked': data.hasChecked}" ng-click="displayData.detailClick(data)">
                     <div class="ui grid">
                         <div class="four wide column center aligned">
-                            <img ng-src="{{data.headshot?data.headshot+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
+                            <img ng-src="{{data.headshot}}-small" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
                         </div>
                         <div class="twelve wide column">
                             <div class="personal-name-container">

@@ -33,15 +33,15 @@ block content
                     div.ui.tab.cv-list-tab(data-tab="interested")
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.INTERESTED")
                     div.ui.tab.cv-list-tab(data-tab="pool")
-                        corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.POOL")
+                        corp-cv-telent-list(ng-if="displayData.currentTab===STATIC_PARAM.POOL")
                     div.ui.tab.cv-list-tab(data-tab="deleted")
                         corp-cv-list(ng-if="displayData.currentTab===STATIC_PARAM.DELETED")
                     //- the last segment will have no margin-bottom according to semantic-ui. Add an empty div to avoid it.
                     div
-        div.ui.long.modal.corp-cv-modal
+        div.ui.long.coupled.modal.corp-cv-modal.corp-cvdetail
             div.corp-cv-detail-header.light-grey-background
                 div.corp-cv-detail-button-group
-                    button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
+                    button.ui.red.button(ng-click="markCV()",ng-if="!resumeStatus.unlocked")
                         i.reply.icon
                         | 移至有意向的简历
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
@@ -63,8 +63,30 @@ block content
             div.corp-cv-detail-footer
                 div.corp-cv-detail-right
                     | Powered by Bridge+
+        div.ui.small.modal.coupled.corp-cv-modal.corp-cvdetailerror
+            div.corp-cv-detail-body(ng-if="errorInfo.code===70008")
+                div.removeicon-container
+                    button.right.floated.circular.ui.icon.grey.button.close
+                        i.remove.icon
+                div.centered-content-container
+                    p 抱歉,您的剩余简历解锁数量不足。
+                    p 请联系您的专属招聘顾问为您开通。
+                div.centered-content-container-centertext
+                    button.ui.red.button(ng-click="errorConfirm()")
+                        | 我知道了
+            div.corp-cv-detail-body(ng-if="errorInfo.code!==70008")
+                div.removeicon-container
+                    button.right.floated.circular.ui.icon.grey.button.close
+                        i.remove.icon
+                div.centered-content-container
+                    p 抱歉,您刚才简历操作失败。
+                    p 请稍后尝试再次操作。
+                div.centered-content-container-centertext
+                    button.ui.red.button(ng-click="errorConfirm()")
+                        | 确认
 block extraJs
     script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/page/corp/directives/corpCVTelentList.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/cv.js?#{cdn.version}")

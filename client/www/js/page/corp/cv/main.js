@@ -35,20 +35,24 @@ angular.module('corpModule')
             for(var i = 0; i < ret.total; i++) {
                 if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i) {
                     var rawData = ret.applies[i];
+                    if (!rawData.education) {
+                        rawData.education = {start_date:"", end_date:""};
+                    }
                     $scope.displayData.rawData.push({
                         matchLevel: cvService.levelMapping(rawData.job_match),
                         position: rawData.job_title,
-                        headshot: rawData.member.avatar,
+                        headshot: rawData.member.avatar || "",
                         flag: "",
-                        issueDate: rawData.apply_date.split("T")[0],
-                        gender: rawData.member.gender,
-                        name: rawData.member.real_name,
+                        issueDate: (rawData.apply_date || rawData.action_date).split("T")[0],
+                        gender: rawData.member.gender || "",
+                        name: rawData.member.real_name || "",
                         eduData: cvService.produceDataString(rawData.education.start_date, rawData.education.end_date),
-                        school: rawData.education.university,
-                        major: rawData.education.major,
+                        school: rawData.education.university || "",
+                        major: rawData.education.major || "",
                         qulification: cvService.getQulificationsByID(rawData.education.qualifications_id),
                         hasChecked: false,
                         jobID: rawData.job_id,
+                        companyID: rawData.company_id,
                         memberID: rawData.member_id
                     });
                 } else {
@@ -76,6 +80,7 @@ angular.module('corpModule')
         detailClick: function (value){
             var param = {
                 candidate_id: value.memberID,
+                company_id: value.companyID,
                 job_id: value.jobID
             };
             $scope.isDetailLoading = true;
@@ -90,7 +95,7 @@ angular.module('corpModule')
                 $scope.resumeDetail = detail;
                 $scope.resumeStatus = status;
                 $timeout(function(){
-                    $(".corp-cv-modal.ui.modal").modal("show");
+                    $(".corp-cvdetail").modal("show");
                 });
             });
         },
@@ -100,7 +105,7 @@ angular.module('corpModule')
                 return value.hasChecked;
             }).map(function(value){
                 return {
-                    member_id: value.memberID,
+                    candidate_id: value.memberID,
                     job_id: value.jobID
                 };
             });
@@ -149,11 +154,15 @@ angular.module('corpModule')
             getData(FIRST_PAGE, true);
         }
     };
+    $scope.errorConfirm = function(){
+        $(".corp-cvdetailerror").modal("hide");
+    };
     var handleCV = function(type) {
         var action;
         var param = {
-            member_id: $scope.resumeParam.candidate_id,
-            job_id: $scope.resumeParam.job_id
+            candidate_id: $scope.resumeParam.candidate_id,
+            job_id: $scope.resumeParam.job_id,
+            company_id: $scope.resumeParam.company_id
         };
         switch (type) {
             case "mark":
@@ -170,18 +179,25 @@ angular.module('corpModule')
                 param = [param];
                 break;
         }
-        $scope.isDetailLoading = true;
         action(param).then(function(){
             return getData(FIRST_PAGE, true);
         }).then(function(){
-            return cvService.getResume($scope.resumeParam);
-        }).then(function(detail){
+            $scope.isDetailLoading = true;
+            return $q.all([
+                cvService.getResume($scope.resumeParam),
+                cvService.getJobStatus($scope.resumeParam)
+            ]);
+        }).then(function(ret){
             $scope.isDetailLoading = false;
-            $scope.resumeDetail = detail;
+            $scope.resumeDetail = ret[0];
+            $scope.resumeStatus = ret[1];
+        }).catch(function(error){
+            $scope.errorInfo = error;
+            $(".corp-cvdetailerror").modal("show");
         });
     };
     $scope.markCV = function() {
-        handleCV("pay");
+        handleCV("mark");
     };
     $scope.payCV = function() {
         handleCV("pay");
@@ -226,7 +242,8 @@ angular.module('corpModule')
             });
             $(".corp-cv .menu .item").tab();
             $(".corp-cv-modal.ui.modal").modal({
-                closable: false
+                closable: false,
+                allowMultiple: true
             });
         });
     });
