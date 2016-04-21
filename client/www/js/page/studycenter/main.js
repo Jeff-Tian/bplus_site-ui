@@ -12,6 +12,10 @@ angular
             $scope.currentState = 'study-plan';
         }
 
+        if (window.location.pathname.match(/\/study-center\/?$/i)) {
+            $scope.currentState = 'study-plan';
+        }
+
         if (window.location.pathname.match(/\/study-center\/teacherbook\.html/i)) {
             $scope.currentState = 'study-teacher-book';
         }
