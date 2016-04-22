@@ -24,9 +24,6 @@ angular.module('bridgeplus.corp')
         me.getCV = function (currentTab, option) {
             var url = PARAM_MAPPING[currentTab];
             var param = $.extend(true, {
-//TODO
-// company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
-//company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
                 company_id: DeviceHelper.getCookie('corp_id')
             }, option);
             return service.post(url, param).then(function (value) {
@@ -131,19 +128,16 @@ angular.module('bridgeplus.corp')
             };
             return corpPost(url, param);
         };
+        me.markCVPosition = function (param) {
+            var url = $rootScope.config.serviceUrls.corp.talent.assignJob;
+            return corpPost(url, param);
+        };
         me.restoreCV = function (cv) {
             var url = $rootScope.config.serviceUrls.corp.candidate.restorePotential;
             var param = {
                 applierList: [cv]
             };
             return corpPost(url, param);
-        };
-        me.restoreAndMarkCV = function (cv) {
-            // var url = $rootScope.config.serviceUrls.corp.jobapply.restoreCandidate;
-            // var param = {
-            //     applierList: [cv]
-            // };
-            // return service.post(url, param);
         };
         me.dropCV = function (cvArray, isStatusApply) {
             var url = isStatusApply ? $rootScope.config.serviceUrls.corp.jobapply.dropCandidate : $rootScope.config.serviceUrls.corp.candidate.dropPotential;

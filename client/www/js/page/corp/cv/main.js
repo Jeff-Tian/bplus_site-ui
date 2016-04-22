@@ -147,7 +147,7 @@ angular.module('corpModule')
     $scope.resumeDetail = {};
     $scope.resumeStatus = "";
     $scope.resumeParam = {};
-    $scope.payOption = "";
+    $scope.positionConfirmOption = "";
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
         if ($scope.displayData.currentTab !== target) {
@@ -177,22 +177,19 @@ angular.module('corpModule')
                 break;
             case "pay":
                 action = cvService.unlockCV;
-                $scope.payOption = "";
+                $scope.positionConfirmOption = "";
                 flow = function(){
                     var deferred = $q.defer();
-                    $scope.cancelPayment = function(){
+                    $scope.cancelDetailConfirm = function(){
                         $(".corp-cvdetail-positionconfirm").modal("hide");
                         deferred.reject("cancel");
                     };
-                    $scope.confirmPayment = function(){
+                    $scope.confirmDetailConfirm = function(){
                         $(".corp-cvdetail-positionconfirm").modal("hide");
-                        param.job_title_text = $scope.payOption;
+                        param.job_title_text = $scope.positionConfirmOption;
                         deferred.resolve();
                     };
-                    $(".corp-cvdetail-positionconfirm").modal({
-                        closable: false,
-                        allowMultiple: true,
-                    }).modal("show");
+                    $(".corp-cvdetail-positionconfirm").modal("show");
                     return deferred.promise;
                 };
                 break;
@@ -224,6 +221,23 @@ angular.module('corpModule')
                 $(".corp-cvdetailerror").modal("show");
             }
         });
+    };
+    $scope.editCVPosition = function(target) {
+        //TODO
+        $scope.positionConfirmOption = "";//target.position_title;
+        $scope.cancelDetailConfirm = function(){
+            $(".corp-cvdetail-positionconfirm").modal("hide");
+            var param = {
+                candidate_id: target.member_id,
+                job_id: target.job_id,
+                job_title_text: ""
+            };
+            return cvService.markCVPosition(param);
+        };
+        $scope.confirmDetailConfirm = function(){
+            $(".corp-cvdetail-positionconfirm").modal("hide");
+        };
+        $(".corp-cvdetail-positionconfirm").modal("show");
     };
     $scope.markCV = function() {
         handleCV("mark");
@@ -273,6 +287,10 @@ angular.module('corpModule')
             $(".corp-cv-modal.ui.modal").modal({
                 closable: false,
                 allowMultiple: true
+            });
+            $(".corp-cvdetail-positionconfirm").modal({
+                closable: false,
+                allowMultiple: true,
             });
         });
     });
