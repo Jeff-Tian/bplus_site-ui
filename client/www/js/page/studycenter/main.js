@@ -13,7 +13,7 @@ angular
         }
 
         if (window.location.pathname.match(/\/study-center\/?$/i)) {
-            $scope.currentState = 'study-plan';
+            $scope.currentState = 'study-teacher-book';
         }
 
         if (window.location.pathname.match(/\/study-center\/teacherbook\.html/i)) {
@@ -22,15 +22,15 @@ angular
     }])
     .controller('StudyCtrl', ['$scope', function ($scope) {
         $scope.menus = [{
+            text: '预约导师',
+            href: '/study-center/teacherbook.html',
+            icon: 'user',
+            states: ['study-teacher-book']
+        }, {
             text: '导师课程',
             href: '/study-center/teachercourse.html',
             icon: 'user',
             states: ['study-plan']
-        }, {
-            text: '导师特约课程',
-            href: '/study-center/teacherbook.html',
-            icon: 'user',
-            states: ['study-teacher-book']
         }, {
             text: '我的课程',
             href: '/study-center/my#/course',

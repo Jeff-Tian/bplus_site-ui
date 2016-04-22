@@ -47,15 +47,15 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
     .controller('StudyCtrl', ['$scope', function ($scope) {
         $scope.menus = [{
+            text: '预约导师',
+            href: '/study-center/teacherbook.html',
+            icon: 'user',
+            states: ['study-teacher-book']
+        }, {
             text: '导师课程',
             href: '/study-center/teachercourse.html',
             icon: 'user',
             states: ['study-plan']
-        }, {
-            text: '导师特约课程',
-            href: '/study-center/teacherbook.html',
-            icon: 'user',
-            states: ['study-teacher-book']
         }, {
             text: '我的课程',
             href: '#/course',
