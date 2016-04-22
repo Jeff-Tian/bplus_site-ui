@@ -16,7 +16,7 @@ angular.module('studyCenterModule')
         $scope.courses = new paginationData({
             sourceUrl: angular.bplus.config.serviceUrls.studyCenter.classBooking.booked,
             dataField: 'requests',
-            pageSize: 10,
+            pageSize: 5,
             dataMapping: function (a) {
                 return a.map(function (d) {
                     return {
@@ -27,13 +27,23 @@ angular.module('studyCenterModule')
                         tags: [],
                         teacherInfo: d.teacher,
                         requestStatus: RequestStatus[d.request_status],
-                        feedback: d.student_comment
+                        feedback: d.student_comment,
+                        request_id: d.request_id
                     };
                 });
             }
         });
 
         $scope.courses.getNextPage();
+
+        $scope.loading = false;
+        $scope.cancelBooking = function (c) {
+            service.executePromiseAvoidDuplicate($scope, 'loading', function () {
+                service.post(angular.bplus.config.serviceUrls.studyCenter.classBooking.cancel, {
+                    request_id: c.request_id
+                });
+            });
+        };
     }])
     .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', function ($scope, $timeout, $q, service, CourseTypeTags) {
         $scope.loading = false;
