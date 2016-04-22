@@ -75,19 +75,34 @@
         }
     }
     .removeicon-container {
-        height: 1em;
+        height: 3em;
         margin-top: 1em;
         margin-right: 1em;
     }
-    .centered-content-container-centertext, 
+    .centered-content-container, 
     .centered-content-container {
-        margin: 2em 30%;
+        margin: 1em 30%;
         width: 40%;
-    }
-    .centered-content-container {
         font-size: 17px;
+        &.centertext {
+            text-align: center;
+        }
     }
-    .centered-content-container-centertext {
-        text-align: center;
+    &.mini {
+        width: 500px;
+        margin: 0 0 0 -250px;
+    }
+    .blank {
+        height:1em;
+        width: 100%;
+    }
+    &.corp-cvdetail-positionconfirm {
+        .title {
+            font-size: 24px;
+            padding-left: 2em;
+        }
+        .centered-content-container .button {
+            width: 100%;
+        }
     }
 }

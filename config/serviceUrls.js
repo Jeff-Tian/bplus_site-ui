@@ -56,8 +56,8 @@ module.exports = {
         },
         candidate: {
             resume: '/corp-service-proxy/candidate/resume',
-            dropProtenial: '/corp-service-proxy/candidate/dropCandidate',
-            restoreProtenial: '/corp-service-proxy/candidate/restoreCandidate',
+            dropPotential: '/corp-service-proxy/candidate/dropPotential',
+            restorePotential: '/corp-service-proxy/candidate/restorePotential',
             dropped: '/corp-service-proxy/candidate/dropped',
             jobstatus: '/corp-service-proxy/candidate/jobstatus',
             potential: '/corp-service-proxy/candidate/potential'
@@ -72,6 +72,7 @@ module.exports = {
         },
         talent: {
             save: '/corp-service-proxy/talent/save',
+            assignJob: '/corp-service-proxy/talent/assignJob',
             search: '/corp-service-proxy/talent/search'
         },
         resource: {

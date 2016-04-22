@@ -21,6 +21,7 @@ angular.module('corpModule')
                 break;
         }
         var param = {
+            currentPage: currentPage,
             jobTitle: $scope.option.type,
             champion: $scope.option.win,
             highMatch: $scope.option.match,
@@ -93,7 +94,7 @@ angular.module('corpModule')
                 $scope.isDetailLoading = false;
                 $scope.resumeParam = param;
                 $scope.resumeDetail = detail;
-                $scope.resumeStatus = status;
+                $scope.resumeStatus = status || "";
                 $timeout(function(){
                     $(".corp-cvdetail").modal("show");
                 });
@@ -109,8 +110,9 @@ angular.module('corpModule')
                     job_id: value.jobID
                 };
             });
+            var isApplied = $scope.displayData.currentTab === STATIC_PARAM.DELIVERED;
             if (cvArray.length > 0){
-                cvService.dropCV(cvArray).then(function(){
+                cvService.dropCV(cvArray, isApplied).then(function(){
                     getData(FIRST_PAGE);
                 });
             }
@@ -145,6 +147,7 @@ angular.module('corpModule')
     $scope.resumeDetail = {};
     $scope.resumeStatus = "";
     $scope.resumeParam = {};
+    $scope.payOption = "";
     $scope.STATIC_PARAM = STATIC_PARAM;
     $scope.tabmemuClick = function(target){
         if ($scope.displayData.currentTab !== target) {
@@ -164,12 +167,34 @@ angular.module('corpModule')
             job_id: $scope.resumeParam.job_id,
             company_id: $scope.resumeParam.company_id
         };
+        var flow = function(){
+            return $q.when();
+        };
+        var isApplied = $scope.resumeStatus==="";
         switch (type) {
             case "mark":
                 action = cvService.markCV;
                 break;
             case "pay":
                 action = cvService.unlockCV;
+                $scope.payOption = "";
+                flow = function(){
+                    var deferred = $q.defer();
+                    $scope.cancelPayment = function(){
+                        $(".corp-cvdetail-positionconfirm").modal("hide");
+                        deferred.reject("cancel");
+                    };
+                    $scope.confirmPayment = function(){
+                        $(".corp-cvdetail-positionconfirm").modal("hide");
+                        param.job_title_text = $scope.payOption;
+                        deferred.resolve();
+                    };
+                    $(".corp-cvdetail-positionconfirm").modal({
+                        closable: false,
+                        allowMultiple: true,
+                    }).modal("show");
+                    return deferred.promise;
+                };
                 break;
             case "restore":
                 action = cvService.restoreCV;
@@ -179,7 +204,9 @@ angular.module('corpModule')
                 param = [param];
                 break;
         }
-        action(param).then(function(){
+        flow().then(function(){
+            return action(param, isApplied);
+        }).then(function(){
             return getData(FIRST_PAGE, true);
         }).then(function(){
             $scope.isDetailLoading = true;
@@ -192,8 +219,10 @@ angular.module('corpModule')
             $scope.resumeDetail = ret[0];
             $scope.resumeStatus = ret[1];
         }).catch(function(error){
-            $scope.errorInfo = error;
-            $(".corp-cvdetailerror").modal("show");
+            if (error !== "cancel"){
+                $scope.errorInfo = error;
+                $(".corp-cvdetailerror").modal("show");
+            }
         });
     };
     $scope.markCV = function() {

@@ -3,16 +3,7 @@
         <div>
             <span>目前共有</span> 
             <span class="color-red">{{displayData.rawData.length}}</span>
-            <span ng-show="displayData.currentTab===STATIC_PARAM.DELIVERED">份待处理的简历</span>
-            <span ng-show="displayData.currentTab===STATIC_PARAM.INTERESTED">份有意向的简历</span>
-            <span ng-show="displayData.currentTab===STATIC_PARAM.DELETED">份已删除的简历</span>
-            <div class="ui right floated basic button mini" ng-click="displayData.deleteData()" ng-show="displayData.rawData.length>0" ng-if="displayData.currentTab===STATIC_PARAM.DELIVERED">
-                <i class="remove icon"></i>
-                删除
-            </div>
-            <div class="ui right floated smaller text color-red" ng-if="displayData.currentTab===STATIC_PARAM.DELETED">
-                已删除的简历将在15天后被永久删除
-            </div>
+            <span>份待处理的简历</span>
         </div>
         <div class="hint-warning-text">
             操作简历后，请等待10秒钟后刷新界面，简历即可归类到新的位置
