@@ -7,6 +7,6 @@ var router = express.Router();
 
 router.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('../store'));
 
-router.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./study-center.js'));
+router.use(localeHelper.localePath('/study-center', false), require('./study-center.js'));
 
 module.exports = router;

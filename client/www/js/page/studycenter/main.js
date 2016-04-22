@@ -20,7 +20,9 @@ angular
             $scope.currentState = 'study-teacher-book';
         }
     }])
-    .controller('StudyCtrl', ['$scope', function ($scope) {
+    .controller('StudyCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $rootScope.current_page = 'study-center';
+
         $scope.menus = [{
             text: '预约导师',
             href: '/study-center/teacherbook.html',

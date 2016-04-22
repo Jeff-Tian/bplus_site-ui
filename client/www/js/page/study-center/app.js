@@ -45,7 +45,7 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule
     .directive('bopdmenu', angular.bplus.leftColumnMenu)
     .directive('bopdcompetitiveness', angular.bplus.bopdcompetitiveness)
     .controller('OpdMenuCtrl', angular.bplus.OpdMenuCtrl)
-    .controller('StudyCtrl', ['$scope', function ($scope) {
+    .controller('StudyCtrl', ['$scope', '$rootScope', function ($scope) {
         $scope.menus = [{
             text: '预约导师',
             href: '/study-center/teacherbook.html',

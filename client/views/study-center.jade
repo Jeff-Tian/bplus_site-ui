@@ -1,7 +1,7 @@
 block customizedHead
     include ../www/view-partial/slim-head.html
 block customizedHeader
-    div#my-header(ng-controller="AppCtrl", style="margin-bottom: 80px;")
+    div#my-header(ng-controller="AppCtrl", ng-init="current_page='study-center'", style="margin-bottom: 80px;")
         include ../www/view-partial/header.html
 block customizedFooter
     div#my-footer
