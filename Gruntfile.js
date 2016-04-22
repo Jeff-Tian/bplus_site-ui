@@ -244,7 +244,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    src: ['client/www/bower/semantic-ui/dist/semantic.min.css', 'client/www/css/semantic-ui/semantic.min.css'],
+                    src: ['client/www/bower/semantic-ui/dist/semantic.min.css', 'client/www/css/semantic-ui/semantic.min.css']
                 }]
             }
         },
