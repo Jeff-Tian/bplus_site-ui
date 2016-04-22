@@ -27,12 +27,12 @@ angular
             icon: 'user',
             states: ['study-teacher-book']
         }, {
-            text: '导师课程',
+            text: '预约课程',
             href: '/study-center/teachercourse.html',
             icon: 'user',
             states: ['study-plan']
         }, {
-            text: '我的课程',
+            text: '我的预约',
             href: '/study-center/my#/course',
             icon: 'book',
             states: ['course']

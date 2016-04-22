@@ -55,7 +55,7 @@ mixin courseTableHeader
 
 mixin courseTableBody(courses, rating, rated, singlePage)
     tbody
-        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in (#{courses}.displayData || #{courses}.records[#{courses}.pageIndex]) track by $index")
             td
                 h3(class="ui grey header")
                     a(ng-href="/study-center/course.html?class_id={{c.class_id}}&teacher_id={{c.teacherInfo.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: #666;", ng-if="c.class_id && c.course_id") {{c.name}}

@@ -1,7 +1,8 @@
 angular.module('studyCenterModule')
     .value('CourseTypeTags', {
         one2one: '一对一',
-        one2many: '小班课'
+        one2many: '小班课',
+        lecture: '公开课'
     })
     .value('RequestStatus', {
         request: '待确认',
@@ -9,30 +10,29 @@ angular.module('studyCenterModule')
         reject: '被拒绝',
         cancelled: '已取消'
     })
-    .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus) {
+    .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', 'paginationData', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus, paginationData) {
         $scope.loading = false;
 
-        $scope.courses = {
-            rawData: []
-        };
-
-        service.executePromiseAvoidDuplicate($scope, 'loading', function () {
-            return service.get(angular.bplus.config.serviceUrls.studyCenter.classBooking.booked)
-                .then(function (data) {
-                    $scope.courses.displayData = data.map(function (d) {
-                        return {
-                            name: d.topic,
-                            teacher: d.teacher ? d.teacher.display_name : '',
-                            startAt: new Date(d.booking_from),
-                            endAt: new Date(d.booking_to),
-                            tags: [],
-                            teacherInfo: d.teacher,
-                            requestStatus: RequestStatus[d.request_status],
-                            feedback: d.student_comment
-                        };
-                    });
+        $scope.courses = new paginationData({
+            sourceUrl: angular.bplus.config.serviceUrls.studyCenter.classBooking.booked,
+            dataField: 'requests',
+            dataMapping: function (a) {
+                return a.map(function (d) {
+                    return {
+                        name: d.topic,
+                        teacher: d.teacher ? d.teacher.display_name : '',
+                        startAt: new Date(d.booking_from),
+                        endAt: new Date(d.booking_to),
+                        tags: [],
+                        teacherInfo: d.teacher,
+                        requestStatus: RequestStatus[d.request_status],
+                        feedback: d.student_comment
+                    };
                 });
+            }
         });
+
+        $scope.courses.getNextPage();
     }])
     .controller('ComingCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', function ($scope, $timeout, $q, service, CourseTypeTags) {
         $scope.loading = false;
