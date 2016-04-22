@@ -16,7 +16,7 @@ angular
             $scope.currentState = 'study-teacher-book';
         }
 
-        if (window.location.pathname.match(/\/study-center\/teacherbook\.html/i)) {
+        if (window.location.pathname.match(/\/study-center\/teacher(?:book)?\.html/i)) {
             $scope.currentState = 'study-teacher-book';
         }
     }])

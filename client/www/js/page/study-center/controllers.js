@@ -16,6 +16,7 @@ angular.module('studyCenterModule')
         $scope.courses = new paginationData({
             sourceUrl: angular.bplus.config.serviceUrls.studyCenter.classBooking.booked,
             dataField: 'requests',
+            pageSize: 10,
             dataMapping: function (a) {
                 return a.map(function (d) {
                     return {
