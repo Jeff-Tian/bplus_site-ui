@@ -21,6 +21,7 @@ mixin finishedUnratedCourseBlocks(c)
 mixin bookedCourseBlocks(c)
     td {{#{c}.requestStatus}}
     td
+        button(class="ui mini red button", ng-if="#{c}.requestStatus === '待确认'", ng-click="cancelBooking(#{c})", ng-show="false") 取消预约
 
 mixin rating(max, rating, classes)
     - classes = classes || 'tiny'
@@ -55,7 +56,7 @@ mixin courseTableHeader
 
 mixin courseTableBody(courses, rating, rated, singlePage)
     tbody
-        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in #{courses}.displayData track by $index")
+        tr(ng-mouseenter="hovering[$index]=true", ng-mouseleave="hovering[$index]=false", ng-repeat-start="c in (#{courses}.displayData || #{courses}.records[#{courses}.pageIndex]) track by $index")
             td
                 h3(class="ui grey header")
                     a(ng-href="/study-center/course.html?class_id={{c.class_id}}&teacher_id={{c.teacherInfo.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: #666;", ng-if="c.class_id && c.course_id") {{c.name}}
@@ -76,10 +77,15 @@ mixin courseTableBody(courses, rating, rated, singlePage)
                     include evaluated-form
 
     if !singlePage
-        tfoot
+        include ../www/bower/angular-service/views/pagination2
+        tfoot(ng-if="#{courses}.displayData")
             tr
                 th(colspan="4", style="text-align: right;")
                     pagination(paginationdata="#{courses}", auto-fetch="true")
+        tfoot(ng-if="#{courses}.records")
+            tr
+                th(colspan="4", style="padding: 0; background-color: white;")
+                    + pagination2(courses)
 
 
 mixin comingCourses(courses)
@@ -107,7 +113,7 @@ mixin bookedCourses(courses)
                 h4(class="ui white header left aligned") 预约状态
             th
                 h4(class="ui white header left aligned")
-        + courseTableBody(courses, null, null, true)
+        + courseTableBody(courses, null, null, false)
             + bookedCourseBlocks('c')
 
 mixin finishedCourseTable(courses, header, rating, rated)

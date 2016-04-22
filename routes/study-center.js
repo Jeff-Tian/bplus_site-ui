@@ -19,7 +19,7 @@ router.get('/:page?', function (req, res, next) {
         return next();
     }
 
-    var page = req.params.page || 'teachercourse';
+    var page = req.params.page || 'teacherbook';
 
     try {
         res.render('study-center-ui/' + page, {
