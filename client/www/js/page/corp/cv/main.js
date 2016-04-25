@@ -8,15 +8,25 @@ angular.module('corpModule')
     };
     var FIRST_PAGE = 1;
     var getData = function(currentPage, defautlSort){
-        $scope.isSortDesc = defautlSort ? true : false;
+        $scope.isSortDesc = defautlSort ? true : $scope.isSortDesc;
         $scope.isLoading = true;
         //Get data according $scope.displayData.currentTab;
+        var sortFieldKey = "";
         switch($scope.displayData.currentTab) {
             case STATIC_PARAM.DELIVERED:
-            case STATIC_PARAM.INTERESTED:
+                sortFieldKey = "apply_date";
                 $scope.displayData.hasCheckbox = true;
                 break;
+            case STATIC_PARAM.INTERESTED:
+                sortFieldKey = "action_date";
+                $scope.displayData.hasCheckbox = true;
+                break;
+            case STATIC_PARAM.POOL:
+                sortFieldKey = "add_date";
+                $scope.displayData.hasCheckbox = false;
+                break;
             case STATIC_PARAM.DELETED:
+                sortFieldKey = "action_date";
                 $scope.displayData.hasCheckbox = false;
                 break;
         }
@@ -25,6 +35,7 @@ angular.module('corpModule')
             jobTitle: $scope.option.type,
             champion: $scope.option.win,
             highMatch: $scope.option.match,
+            sortField: sortFieldKey,
             sortDirection: $scope.isSortDesc ? 'desc' : 'asc'
         };
         return cvService.getCV($scope.displayData.currentTab, param).then(function(ret){
@@ -35,16 +46,18 @@ angular.module('corpModule')
             $scope.displayData.totalPages = ret.total;
             for(var i = 0; i < ret.total; i++) {
                 if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i) {
-                    var rawData = ret.applies[i];
+                    ret.list = ret.list || [];
+                    var rawData = ret.list[i];
                     if (!rawData.education) {
                         rawData.education = {start_date:"", end_date:""};
                     }
                     $scope.displayData.rawData.push({
                         matchLevel: cvService.levelMapping(rawData.job_match),
-                        position: rawData.job_title,
+                        position: rawData.job_position || "",
+                        function: rawData.job_title || "",
                         headshot: rawData.member.avatar || "",
                         flag: "",
-                        issueDate: (rawData.apply_date || rawData.action_date).split("T")[0],
+                        issueDate: (rawData.apply_date || rawData.action_date || rawData.add_date || "").split("T")[0],
                         gender: rawData.member.gender || "",
                         name: rawData.member.real_name || "",
                         eduData: cvService.produceDataString(rawData.education.start_date, rawData.education.end_date),
@@ -85,10 +98,11 @@ angular.module('corpModule')
                 job_id: value.jobID
             };
             $scope.isDetailLoading = true;
-            $q.all([
+            var promiseArray = [
                 cvService.getResume(param),
-                cvService.getJobStatus(param)
-            ]).then(function(ret){
+                $scope.displayData.currentTab === STATIC_PARAM.POOL ? $q.when({status:"unlocked"}) : cvService.getJobStatus(param)
+            ];
+            $q.all(promiseArray).then(function(ret){
                 var detail = ret[0];
                 var status = ret[1] || "";
                 $scope.isDetailLoading = false;
@@ -221,6 +235,9 @@ angular.module('corpModule')
                 $(".corp-cvdetailerror").modal("show");
             }
         });
+    };
+    $scope.editCVFunction = function(){
+        debugger;
     };
     $scope.editCVPosition = function(target) {
         //TODO

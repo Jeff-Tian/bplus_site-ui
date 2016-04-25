@@ -3,7 +3,7 @@
         <div>
             <span>目前共有</span> 
             <span class="color-red">{{displayData.rawData.length}}</span>
-            <span>份待处理的简历</span>
+            <span>份已解锁的简历</span>
         </div>
         <div class="hint-warning-text">
             操作简历后，请等待10秒钟后刷新界面，简历即可归类到新的位置
@@ -23,7 +23,7 @@
                 <div class="ten wide column light-column-background clickable-column" ng-class="{'checked': data.hasChecked}" ng-click="displayData.detailClick(data)">
                     <div class="ui grid">
                         <div class="four wide column center aligned">
-                            <img ng-src="{{data.headshot}}-small" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
+                            <img ng-src="{{data.headshot?data.headshot+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
                         </div>
                         <div class="twelve wide column">
                             <div class="personal-name-container">
@@ -41,7 +41,11 @@
                     </div>
                 </div>
                 <div class="three wide column center aligned white-column-background" ng-class="{'checked': data.hasChecked}">
-                    <div class="middle-single-text">{{data.position}}</div>
+                    <div class="middle-single-text clickable editable-item" ng-click="editCVFunction()">
+                        <span>{{data.function}}</span>
+                        <span>&nbsp;&nbsp;</span>
+                        <i class="edit icon editable-item-icon"></i>
+                    </div>
                 </div>
                 <div class="three wide column light-column-background center aligned" ng-class="{'checked': data.hasChecked}">
                     <div class="middle-single-text">

@@ -25,7 +25,7 @@ block content
                         div.ui.checkbox.inline-block.inline-space.option-win
                             input(type="checkbox",name="win")
                             label 大赛优胜
-                        div.ui.checkbox.inline-block.inline-space.option-match
+                        div.ui.checkbox.inline-block.inline-space.option-match(ng-show="displayData.currentTab!==STATIC_PARAM.POOL")
                             input(type="checkbox",name="match")
                             label 高匹配度
                     div.ui.active.tab.cv-list-tab(data-tab="delivered")
@@ -46,7 +46,7 @@ block content
                         | 移至有意向的简历
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
                         i.reply.icon
-                        | 解锁简历
+                        | 解锁联系方式
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
                         | 打印简历
