@@ -238,16 +238,18 @@ angular.module('corpModule')
     };
     $scope.editCVFunction = function(target) {
         $scope.positionConfirmOption = target.function;
-        $scope.cancelDetailConfirm = function(){
+        $scope.confirmDetailConfirm = function(){
             $(".corp-cvdetail-positionconfirm").modal("hide");
             var param = {
-                candidate_id: target.member_id,
-                job_id: target.job_id,
-                job_title_text: ""
+                candidate_id: target.memberID,
+                job_title_id: cvService.getJobIDByText($scope.positionConfirmOption),
+                job_title_text: $scope.positionConfirmOption
             };
-            return cvService.markCVPosition(param);
+            return cvService.markCVPosition(param).then(function(){
+                target.function = $scope.positionConfirmOption;
+            });
         };
-        $scope.confirmDetailConfirm = function(){
+        $scope.cancelDetailConfirm = function(){
             $(".corp-cvdetail-positionconfirm").modal("hide");
         };
         $(".corp-cvdetail-positionconfirm").modal("show");

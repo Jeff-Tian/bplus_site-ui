@@ -41,6 +41,16 @@ angular.module('bridgeplus.corp')
             }
             return "";
         };
+        me.getResourceIDByText = function (key, text) {
+            var data = resourceData[key];
+            // Array.prototype.find
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].text === text) {
+                    return data[i].id;
+                }
+            }
+            return "";
+        };
         me.getIndustry = function (id) {
             var key = "industry";
             return me.getResourceByID(key, id);
@@ -68,6 +78,10 @@ angular.module('bridgeplus.corp')
         me.getJobByID = function (id) {
             var key = "job";
             return me.getResourceByID(key, id);
+        };
+        me.getJobIDByText = function (value) {
+            var key = "job";
+            return me.getResourceIDByText(key, value);
         };
         me.getWorktypeByID = function (id) {
             var key = "worktype";
