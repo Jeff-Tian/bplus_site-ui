@@ -236,12 +236,8 @@ angular.module('corpModule')
             }
         });
     };
-    $scope.editCVFunction = function(){
-        debugger;
-    };
-    $scope.editCVPosition = function(target) {
-        //TODO
-        $scope.positionConfirmOption = "";//target.position_title;
+    $scope.editCVFunction = function(target) {
+        $scope.positionConfirmOption = target.function;
         $scope.cancelDetailConfirm = function(){
             $(".corp-cvdetail-positionconfirm").modal("hide");
             var param = {

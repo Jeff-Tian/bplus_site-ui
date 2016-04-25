@@ -45,7 +45,7 @@ block content
                         i.reply.icon
                         | 移至有意向的简历
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
-                        i.reply.icon
+                        i.unlock.icon
                         | 解锁联系方式
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
@@ -63,7 +63,7 @@ block content
             div.corp-cv-detail-footer
                 div.corp-cv-detail-right
                     | Powered by Bridge+
-        div.ui.small.modal.coupled.corp-cv-modal.corp-cvdetailerror
+        div.ui.mini.modal.coupled.corp-cv-modal.corp-cvdetailerror
             div.corp-cv-detail-body(ng-if="errorInfo.code===70008")
                 div.removeicon-container
                     button.right.floated.circular.ui.icon.grey.button.close
@@ -90,7 +90,7 @@ block content
                 div.blank
         div.ui.mini.modal.coupled.corp-cv-modal.corp-cvdetail-positionconfirm
             div.corp-cv-detail-header.light-grey-background.action
-                span.title 请选择关联职能
+                span.title 修改关联职能
                 button.right.floated.circular.ui.icon.grey.button.cancel(ng-click="cancelDetailConfirm()")
                     i.remove.icon
             div.corp-cv-detail-body
@@ -102,7 +102,7 @@ block content
                                 option(value="{{publishedjob}}",ng-repeat="publishedjob in publishJobs") {{publishedjob}}
                 div.blank
                 div.centered-content-container.centertext.action
-                    button.ui.red.button(ng-click="confirmDetailConfirm()",ng-class="{'disabled':payOption===''}")
+                    button.ui.red.button(ng-click="confirmDetailConfirm()",ng-class="{'disabled':positionConfirmOption===''}")
                         | 确定
 block extraJs
     script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
