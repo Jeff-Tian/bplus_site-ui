@@ -21,7 +21,7 @@ mixin finishedUnratedCourseBlocks(c)
 mixin bookedCourseBlocks(c)
     td {{#{c}.requestStatus}}
     td
-        button(class="ui mini red button", ng-if="#{c}.requestStatus === '待确认'", ng-click="cancelBooking(#{c})", ng-show="false") 取消预约
+        button(class="ui mini red button", ng-if="#{c}.requestStatus === '待确认'", ng-click="cancelBooking(#{c})", ng-class="{'loading': loading || cancelling[c.request_id]}") 取消预约
 
 mixin rating(max, rating, classes)
     - classes = classes || 'tiny'
