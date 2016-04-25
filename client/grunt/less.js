@@ -1,27 +1,37 @@
 module.exports = function () {
-    var files = {
-            "<%= config.src %>css/mobile.css": "<%= config.src %>css/mobile/main.less",
-            "<%= config.src %>css/pc-mobile.css": "<%= config.src %>css/mobile/pc-mobile.less",
-            "<%= config.src %>css/main.css": "<%= config.src %>css/page/main.less",
-            "<%= config.src %>css/slim.css": "<%= config.src %>css/page/slim.less",
-            "<%= config.src %>css/hp.css": "<%= config.src %>css/page/hp/hp.less",
-            "<%= config.src %>css/qa.css": "<%= config.src %>css/page/qa/qa.less",
-            "<%= config.src %>css/corp.css": "<%= config.src %>css/corp/main.less",
-            "<%= config.src %>css/module/form.css": "<%= config.src %>css/module/form.less"
-        },
-        reObj = {
-            development: {
-                files: files
-            },
-            production: {
-                options: {
-                    compress: true,
-                    yuicompress: true,
-                    optimization: 2
-                },
-                files: files
-            }
+    function getFiles(target) {
+        var files = {
+            "css/mobile.css": "<%= config.src %>css/mobile/main.less",
+            "css/pc-mobile.css": "<%= config.src %>css/mobile/pc-mobile.less",
+            "css/main.css": "<%= config.src %>css/page/main.less",
+            "css/slim.css": "<%= config.src %>css/page/slim.less",
+            "css/hp.css": "<%= config.src %>css/page/hp/hp.less",
+            "css/qa.css": "<%= config.src %>css/page/qa/qa.less",
+            "css/corp.css": "<%= config.src %>css/corp/main.less",
+            "css/module/form.css": "<%= config.src %>css/module/form.less"
         };
+
+        var ret = {};
+        for (var key in files) {
+            ret[target + key] = files[key];
+        }
+
+        return ret;
+    }
+
+    var reObj = {
+        development: {
+            files: getFiles('<%= config.src %>')
+        },
+        production: {
+            options: {
+                compress: true,
+                yuicompress: true,
+                optimization: 2
+            },
+            files: getFiles('<%= config.dist %>')
+        }
+    };
 
     //TODO: Don't ever run the following code on production!!! Otherwise some css won't
     //  be created and the site would look messy.

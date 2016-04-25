@@ -2,3 +2,4 @@
 artifacts
 .idea
 test
+client/grunt
