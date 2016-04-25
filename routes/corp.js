@@ -52,14 +52,14 @@ routerFactory("edit", '修改企业资料', membership.ensureAuthenticated, fals
     serviceUrls: config.serviceUrls
 });
 //CV
-routerFactory("cv", '简历管理');
+routerFactory("cv", '简历管理', membership.ensureAuthenticated);
 routerFactory("printCV", '简历打印', null, true);
 //Find
-routerFactory("find", '找人才');
+routerFactory("find", '找人才', membership.ensureAuthenticated);
 //Post
-routerFactory("jobpost", '发布职位');
+routerFactory("jobpost", '发布职位', membership.ensureAuthenticated);
 //Setting
-routerFactory("setting", '账户管理');
+routerFactory("setting", '账户管理', membership.ensureAuthenticated);
 routerFactory('about-us', '关于我们');
 routerFactory('school', '学校合作');
 routerFactory('contact-us', '联系我们');
