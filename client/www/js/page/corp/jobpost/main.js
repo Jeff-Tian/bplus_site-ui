@@ -1,5 +1,5 @@
 angular.module('corpModule')
-    .controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', function ($scope, $timeout, jobpostService) {
+    .controller("jobpostCtrl", ['$scope', '$timeout', 'jobpostService', 'resourceService', function ($scope, $timeout, jobpostService, resourceService) {
         var requiredData = [
             "position",
             "jobtitle",
@@ -20,7 +20,7 @@ angular.module('corpModule')
         $scope.hasError = false;
         $scope.hasSubmitted = false;
         $scope.isloading = false;
-        return jobpostService.init().then(function () {
+        return resourceService.init().then(function () {
             $scope.postData = {
                 position: "",
                 jobtitle: "",
@@ -43,9 +43,9 @@ angular.module('corpModule')
                 requirementtag: ""
             };
             $scope.displayData = {
-                jobtitles: jobpostService.getResource(jobpostService.RESOURCE_KEY.job),
-                jobtypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.worktype),
-                salarytypes: jobpostService.getResource(jobpostService.RESOURCE_KEY.salarytype),
+                jobtitles: resourceService.getResource(resourceService.RESOURCE_KEY.JOB),
+                jobtypes: resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE),
+                salarytypes: resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE),
                 expireyears: [],
                 expiredays: [],
                 expiremonths: []
@@ -176,9 +176,9 @@ angular.module('corpModule')
                     onApprove: function () {
                         var param = {
                             position: $scope.postData.position,
-                            title: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.job, $scope.postData.jobtitle),
+                            title: resourceService.getResource(resourceService.RESOURCE_KEY.JOB, $scope.postData.jobtitle),
                             title_id: $scope.postData.jobtitle,
-                            job_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.worktype, $scope.postData.jobtype),
+                            job_type_text: resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE, $scope.postData.jobtype),
                             job_type_id: $scope.postData.jobtype,
                             department: $scope.postData.department,
                             location: $scope.postData.location,
@@ -186,7 +186,7 @@ angular.module('corpModule')
                             description: $scope.postData.description,
                             expire_at: new Date($scope.postData.expireyear, $scope.postData.expiremonth, $scope.postData.expireday),
                             salary_type_id: $scope.postData.salarytype,
-                            salary_type_text: jobpostService.getResourceByID(jobpostService.RESOURCE_KEY.salarytype, $scope.postData.salarytype),
+                            salary_type_text: resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE, $scope.postData.salarytype),
                             annual_salary_from: parseInt($scope.postData.salaryfrom),
                             annual_salary_to: parseInt($scope.postData.salaryto),
                             slogan: $scope.postData.slogan,

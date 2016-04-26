@@ -181,29 +181,26 @@ angular.module('corpModule')
             job_id: $scope.resumeParam.job_id,
             company_id: $scope.resumeParam.company_id
         };
-        var flow = function(){
+        var isApplied = $scope.resumeStatus==="";
+        var endingflow = function(){
             return $q.when();
         };
-        var isApplied = $scope.resumeStatus==="";
         switch (type) {
             case "mark":
                 action = cvService.markCV;
                 break;
             case "pay":
                 action = cvService.unlockCV;
-                $scope.positionConfirmOption = "";
-                flow = function(){
+                endingflow = function(){
                     var deferred = $q.defer();
-                    $scope.cancelDetailConfirm = function(){
-                        $(".corp-cvdetail-positionconfirm").modal("hide");
-                        deferred.reject("cancel");
-                    };
-                    $scope.confirmDetailConfirm = function(){
-                        $(".corp-cvdetail-positionconfirm").modal("hide");
-                        param.job_title_text = $scope.positionConfirmOption;
+                    $scope.successConfirm = function(){
+                        $(".corp-cvdetailsuccess").modal("hide");
                         deferred.resolve();
                     };
-                    $(".corp-cvdetail-positionconfirm").modal("show");
+                    cvService.getCoupon().then(function(amount){
+                        $scope.couponLeft = amount;
+                        $(".corp-cvdetailsuccess").modal("show");
+                    });
                     return deferred.promise;
                 };
                 break;
@@ -215,9 +212,7 @@ angular.module('corpModule')
                 param = [param];
                 break;
         }
-        flow().then(function(){
-            return action(param, isApplied);
-        }).then(function(){
+        action(param, isApplied).then(function(){
             return getData(FIRST_PAGE, true);
         }).then(function(){
             $scope.isDetailLoading = true;
@@ -229,6 +224,8 @@ angular.module('corpModule')
             $scope.isDetailLoading = false;
             $scope.resumeDetail = ret[0];
             $scope.resumeStatus = ret[1];
+        }).then(function(ret){
+            return endingflow();
         }).catch(function(error){
             if (error !== "cancel"){
                 $scope.errorInfo = error;
@@ -271,7 +268,11 @@ angular.module('corpModule')
         handleCV("restore");
     };
     $scope.isLoading = true;
+    $scope.couponLeft = 0;
     cvService.init().then(function(){
+        return cvService.getCoupon();
+    }).then(function(amount){
+        $scope.couponLeft = amount;
         return cvService.getPublishedJobs();
     }).then(function(publishJobs){
         $scope.publishJobs = publishJobs;
@@ -302,10 +303,6 @@ angular.module('corpModule')
             $(".corp-cv-modal.ui.modal").modal({
                 closable: false,
                 allowMultiple: true
-            });
-            $(".corp-cvdetail-positionconfirm").modal({
-                closable: false,
-                allowMultiple: true,
             });
         });
     });

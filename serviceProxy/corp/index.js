@@ -2,6 +2,7 @@ var membership = require('../membership');
 
 module.exports = require('express').Router()
     .use('/member', require('./member'))
+    .use('/account', membership.ensureAuthenticated, require('./account'))
     .use('/jobapply', membership.ensureAuthenticated, require('./jobapply'))
     .use('/candidate', membership.ensureAuthenticated, require('./candidate'))
     .use('/talent', membership.ensureAuthenticated, require('./talent'))

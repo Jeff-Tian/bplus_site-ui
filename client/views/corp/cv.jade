@@ -46,11 +46,12 @@ block content
                         | 移至有意向的简历
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
                         i.unlock.icon
-                        | 解锁联系方式
+                        span 解锁联系方式
+                        span.smaller-text （剩余点数：{{couponLeft}}）
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
                         | 打印简历
-                    button.ui.black.button(ng-click="dropCV()",ng-if="resumeStatus.status!=='deleted'&&!resumeDetail.unlocked") 
+                    button.ui.black.button(ng-click="dropCV()",ng-if="resumeStatus===''||resumeStatus.status==='potential'") 
                         i.trash.icon
                         | 删除简历
                     button.ui.red.button(ng-click="restoreCV()",ng-if="resumeStatus.status==='deleted'") 
@@ -86,6 +87,19 @@ block content
                 div.blank
                 div.centered-content-container.centertext
                     button.ui.red.button(ng-click="errorConfirm()")
+                        | 确认
+                div.blank
+        div.ui.mini.modal.coupled.corp-cv-modal.corp-cvdetailsuccess
+            div.corp-cv-detail-body
+                div.removeicon-container
+                    button.right.floated.circular.ui.icon.grey.button.close
+                        i.remove.icon
+                div.centered-content-container
+                    p 解锁成功！ 
+                    p 剩余点数：{{couponLeft}}
+                div.blank
+                div.centered-content-container.centertext
+                    button.ui.red.button(ng-click="successConfirm()")
                         | 确认
                 div.blank
         div.ui.mini.modal.coupled.corp-cv-modal.corp-cvdetail-positionconfirm

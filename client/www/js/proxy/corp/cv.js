@@ -174,6 +174,15 @@ angular.module('bridgeplus.corp')
             var url = $rootScope.config.serviceUrls.corp.candidate.jobstatus;
             return corpPost(url, idParam);
         };
+        me.getCoupon = function(){
+            var url = $rootScope.config.serviceUrls.corp.account.coupon;
+            var param = {
+                products: "unlockResume"
+            };
+            return corpPost(url, param).then(function(ret){
+                return ret[0].count || 0;
+            });
+        };
         me.init = function () {
             // Get resources
             var resourcePromises = resourceSet.map(function (value) {

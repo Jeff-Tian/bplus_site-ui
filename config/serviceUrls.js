@@ -48,6 +48,9 @@ module.exports = {
             changePassword: '/corp-service-proxy/member/change-password',
             changeMobile: '/corp-service-proxy/member/change-mobile'
         },
+        account: {
+            coupon: '/corp-service-proxy/account/coupon',
+        },
         jobapply: {
             publishedPositions: '/corp-service-proxy/jobapply/publishedPositions',
             todo: '/corp-service-proxy/jobapply/todo',

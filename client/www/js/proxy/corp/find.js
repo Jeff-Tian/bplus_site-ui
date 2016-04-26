@@ -6,7 +6,6 @@ angular.module('bridgeplus.corp')
             var param = {
                 company_id: DeviceHelper.getCookie('corp_id')
             };
-param.company_id = "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             return service.post(url, param);
         };
         me.getWinner = function(){
@@ -14,7 +13,6 @@ param.company_id = "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             var param = {
                 company_id: DeviceHelper.getCookie('corp_id')
             };
-param.company_id = "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
             return service.post(url, param);
         };
         me.markCandidate = function(cv) {
