@@ -2,10 +2,10 @@
 
 // Declare app level module which depends on views, and components
 angular.module('bplusModule', [
-    'ng.utils',
-    'pascalprecht.translate',
-    'ngSanitize'
-])
+        'ng.utils',
+        'pascalprecht.translate',
+        'ngSanitize'
+    ])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
@@ -30,6 +30,44 @@ angular.module('bplusModule', [
                 $scope.$apply();
             }
         };
+    }])
+    .factory('serviceErrorParser', ['$filter', '$rootScope', function ($filter, $rootScope) {
+        var o = {};
+
+        o.getErrorMessage = function (reason) {
+            console.log('error!', reason);
+            var errorCode = 'service-' + reason.code;
+            var errorMessage = $filter('translate')(errorCode);
+            if (errorMessage === errorCode || !errorMessage) {
+                errorMessage = reason.message;
+            }
+
+            if (!errorMessage && typeof reason === 'string') {
+                errorMessage = reason;
+            }
+
+            return errorMessage;
+        };
+
+        o.handleError = function (reason) {
+            $rootScope.message = o.getErrorMessage(reason);
+        };
+
+        o.handleFormError = function (reason) {
+            $rootScope.errorMessages = [o.getErrorMessage(reason)];
+        };
+
+        o.delegateHandleFormError = function ($form) {
+            return function (reason) {
+                o.handleFormError(reason);
+
+                if ($rootScope.errorMessages instanceof Array && $rootScope.errorMessages.length) {
+                    $form.removeClass('success').addClass('error');
+                }
+            };
+        };
+
+        return o;
     }])
     .run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
         function increaseZIndex() {

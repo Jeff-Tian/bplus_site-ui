@@ -82,6 +82,7 @@ gulp release
 ```
 so that your `~/client/dist/` folder would have a `semantic` folder. And it will work.
 
+
 ### Sub domains
 ```
 uat.corp.bridgeplus.cn --> 116.247.126.75 --> 10.20.32.51 --> uat.bridgeplus.cn/corp/*

@@ -10,7 +10,7 @@ angular.module('studyCenterModule')
         reject: '被拒绝',
         cancelled: '已取消'
     })
-    .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', 'paginationData', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus, paginationData) {
+    .controller('BookedCoursesCtrl', ['$scope', '$timeout', '$q', 'service', 'CourseTypeTags', 'RequestStatus', 'paginationData', '$rootScope', 'serviceErrorParser', function ($scope, $timeout, $q, service, CourseTypeTags, RequestStatus, paginationData, $rootScope, serviceErrorParser) {
         $scope.loading = false;
 
         $scope.courses = new paginationData({
@@ -36,11 +36,15 @@ angular.module('studyCenterModule')
 
         $scope.courses.getNextPage();
 
-        $scope.loading = false;
+        $scope.cancelling = {};
         $scope.cancelBooking = function (c) {
-            service.executePromiseAvoidDuplicate($scope, 'loading', function () {
-                service.post(angular.bplus.config.serviceUrls.studyCenter.classBooking.cancel, {
+            service.executePromiseAvoidDuplicate($scope.cancelling, c.request_id, function () {
+                return service.post(angular.bplus.config.serviceUrls.studyCenter.classBooking.cancel, {
                     request_id: c.request_id
+                }).then(function () {
+                    c.requestStatus = '已取消';
+                }, function (reason) {
+                    $rootScope.message = serviceErrorParser.getErrorMessage(reason);
                 });
             });
         };
