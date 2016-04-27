@@ -49,7 +49,10 @@ module.exports = {
             changeMobile: '/corp-service-proxy/member/change-mobile'
         },
         account: {
-            coupon: '/corp-service-proxy/account/coupon',
+            coupon: '/corp-service-proxy/account/coupon'
+        },
+        company: {
+            hasJobRecommend: '/corp-service-proxy/company/hasJobRecommend'
         },
         jobapply: {
             publishedPositions: '/corp-service-proxy/jobapply/publishedPositions',

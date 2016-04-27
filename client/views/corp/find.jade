@@ -13,7 +13,7 @@ block content
                             img.ui.right.spaced.image.menu-item-image(src="#{cdn.normal}img/corp/contest-winners.png?#{cdn.version}")
                             | 大赛优胜
                     div.ui.middle.attached.segment.segment-bottom-shadow.segment-menu.corp-find-option
-                        span.inline-space.corp-find-option-text 职位
+                        span.inline-space.corp-find-option-text 职能
                         div.ui.form.inline-block.inline-space
                             select.dropdown-inline(name="position")
                                 option(value="") a
@@ -46,11 +46,7 @@ block content
                                                 img(ng-src="img/opd/match_{{levelMapping(data.member_job_match)}}.png?<%= cdn.version %>")
                                                 div.corp-find-item-foot-matchtext 职位匹配度
                                             div.eleven.wide.column
-                                                div.corp-find-item-foot-label hello1
-                                                div.corp-find-item-foot-label hello1
-                                                div.corp-find-item-foot-label hello1
-                                                div.corp-find-item-foot-label hello1
-                                                div.corp-find-item-foot-label hello1
+                                                div.corp-find-item-foot-label(ng-repeat="label in data.label") {{label}}
             //- div.row
             //-     div.centered.column
             //-         div hello
@@ -81,6 +77,7 @@ block content
                     | Powered by Bridge+
 block extraJs
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/proxy/corp/resource.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/find/main.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/find.js?#{cdn.version}")
     script.

@@ -1,26 +1,28 @@
 angular.module('bridgeplus.corp')
     .service('findService', ['$q', '$rootScope', 'service', 'DeviceHelper', function ($q, $rootScope, service, DeviceHelper) {
         var me = this;
-        me.getSmart = function(){
-            var url = $rootScope.config.serviceUrls.corp.recommend.smart;
-            var param = {
+        var corpPost = function(url, idParam){
+            var param = $.extend(true, {
+                member_id: DeviceHelper.getCookie('mid'),
                 company_id: DeviceHelper.getCookie('corp_id')
-            };
+            }, idParam);
             return service.post(url, param);
         };
-        me.getWinner = function(){
+        me.checkVIP = function(){
+            var url = $rootScope.config.serviceUrls.corp.company.hasJobRecommend;
+            return corpPost(url);
+        };
+        me.getSmart = function(param){
+            var url = $rootScope.config.serviceUrls.corp.recommend.smart;
+            return corpPost(url, param);
+        };
+        me.getWinner = function(param){
             var url = $rootScope.config.serviceUrls.corp.recommend.champion;
-            var param = {
-                company_id: DeviceHelper.getCookie('corp_id')
-            };
-            return service.post(url, param);
+            return corpPost(url, param);
         };
         me.markCandidate = function(cv) {
             var url = $rootScope.config.serviceUrls.corp.recommend.markCandidate;
-            var param = {
-                applierList: [cv]
-            };
-            return service.post(url, param);
+            return corpPost(url, param);
         };
     }])
 ;

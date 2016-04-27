@@ -1,6 +1,6 @@
 angular.module('corpModule')
-.controller("findCtrl", ['$scope', '$timeout', 'findService', '$q', function($scope, $timeout, findService, $q) {
-    console.log("hello world");
+.controller("findCtrl", ['$scope', '$timeout', 'findService', 'resourceService','$q', function($scope, $timeout, findService, resourceService, $q) {
+
     var STATIC_PARAM = {
         SMART: "smart",
         WINNER: "winner"
@@ -46,7 +46,12 @@ angular.module('corpModule')
         }
         return dataInput;
     };
-    findService.getSmart().then(function(data){
+    resourceService.init().then(function(){
+        return findService.checkVIP();
+    }).then(function(isVIP){
+        $scope.isVIP = isVIP;
+        return findService.getSmart();
+    }).then(function(data){
 //TODO
 data.list = data.list.slice(0, 2);
         $scope.displayData = fulfillData(data.list);

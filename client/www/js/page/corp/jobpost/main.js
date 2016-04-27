@@ -20,7 +20,16 @@ angular.module('corpModule')
         $scope.hasError = false;
         $scope.hasSubmitted = false;
         $scope.isloading = false;
+        $scope.STATUS = {
+            VIEW: "view",
+            POST: "post",
+        };
+        $scope.status = $scope.STATUS.VIEW;
         return resourceService.init().then(function () {
+            $scope.postJob = function(){
+                $scope.status = $scope.STATUS.POST;
+            };
+            //Job Post functions
             $scope.postData = {
                 position: "",
                 jobtitle: "",
@@ -159,6 +168,9 @@ angular.module('corpModule')
                     $(".postconfirm").modal("show");
                     return;
                 }
+            };
+            $scope.cancel = function(){
+                $scope.status = $scope.STATUS.VIEW;
             };
             $timeout(function () {
                 $(".postsuccess").modal({

@@ -47,7 +47,6 @@ block content
                     button.ui.red.button(ng-click="payCV()",ng-if="!resumeDetail.unlocked")
                         i.unlock.icon
                         span 解锁联系方式
-                        span.smaller-text （剩余点数：{{couponLeft}}）
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
                         | 打印简历
@@ -56,7 +55,7 @@ block content
                         | 删除简历
                     button.ui.red.button(ng-click="restoreCV()",ng-if="resumeStatus.status==='deleted'") 
                         i.undo.icon
-                        | 恢复简历
+                        | 恢复至有意向的简历
                     button.right.floated.circular.ui.icon.grey.button.close
                         i.remove.icon
             div.corp-cv-detail-body

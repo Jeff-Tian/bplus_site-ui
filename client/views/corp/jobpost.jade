@@ -2,7 +2,7 @@ block content
     div.corp-jobpost(ng-controller="jobpostCtrl")
         div.ui.eight.column.centered.grid
             div.eight.wide.column
-                div.ui.segment.segment-bottom-shadow
+                div.ui.segment.segment-bottom-shadow(ng-if="status===STATUS.VIEW")
                     span.inline-space 筛选条件
                     div.ui.form.inline-block.inline-space
                         select.ui.compact.dropdown.dropdown-inline.corp-jobpost-dropdown(name="select",ng-model="option.type")
@@ -11,10 +11,12 @@ block content
                             option(value="") 过期
                             option(value="") 待发布
                             option(value="") 已下线
-                    a.ui.red.button.right.floated
+                    a.ui.red.button.right.floated(ng-click="postJob()")
                         | 发布职位
                     div.hint-warning-text 操作职位后，请等待10秒钟后刷新界面，即可看到职位更新
-                form.ui.form.corp-jobpost-form(nonvalidate,ng-class="{'error': hasSubmitted && hasError}")
+                div.ui.active.tab
+                    corp-cv-jobpost-list
+                form.ui.form.corp-jobpost-form(nonvalidate,ng-class="{'error': hasSubmitted && hasError}",ng-if="status===STATUS.POST")
                     div.ui.error.message 红框处必填字段未完成，请全部填写完成后按下保存
                     div.ui.top.attached.segment.segment-bottom-shadow.corp-jobpost-segment
                         img.ui.right.spaced.image(ng-src="#{cdn.normal}img/corp/jobpost1.png?#{cdn.version}")
@@ -129,6 +131,7 @@ block extraJs
     //- script(src="#{cdn.normal}js/page/corp/directives/corpCVList.js?#{cdn.version}")
     //- script(src="#{cdn.normal}js/page/corp/directives/corpCVDetail.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/main.js?#{cdn.version}")
+    script(src="#{cdn.normal}js/page/corp/directives/corpJobPostList.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/resource.js?#{cdn.version}")
     script(src="#{cdn.normal}js/proxy/corp/jobpost.js?#{cdn.version}")
     script(src="#{cdn.normal}js/page/corp/jobpost/main.js?#{cdn.version}")
