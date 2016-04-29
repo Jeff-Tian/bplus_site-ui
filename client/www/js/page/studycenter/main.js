@@ -26,7 +26,7 @@ angular
         $scope.menus = [{
             text: '预约导师',
             href: '/study-center/teacherbook.html',
-            icon: 'user',
+            icon: 'announcement',
             states: ['study-teacher-book']
         }, {
             text: '预约课程',
@@ -36,7 +36,7 @@ angular
         }, {
             text: '我的预约',
             href: '/study-center/my#/course',
-            icon: 'book',
+            icon: 'calendar',
             states: ['course']
         }, {
             text: '我的收藏',
