@@ -13,4 +13,6 @@ router.use(localeHelper.localePath('/study-center', true), function (req, res, n
 
 router.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./study-center.js'));
 
+router.use(localeHelper.localePath('/spa', false), require('./spa.js'));
+
 module.exports = router;

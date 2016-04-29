@@ -1,0 +1,43 @@
+html
+    head
+        title test spa
+        base(href="/spa/")
+    body(ng-app="myApp")
+        h1 test spa
+        a(href="stuff") Stuff
+        br
+        a(href="foo") foo
+
+        div(ng-view="")
+        script(type="text/ng-template", ng-controller="stuffCtrl", id="stuff.html")
+            input(ng-model="firstName", type="text")
+            input(ng-model="lastName", type="text")
+        script(type="text/ng-template", id="foo.html")
+            p foo
+
+        script(src="#{cdn.cdnify('bower/angular/angular.min.js')}")
+        script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular-route.js")
+        script(type="text/javascript").
+            angular.module('myApp', ['ngRoute'])
+                    .config(['$locationProvider', function ($locationProvider) {
+                        $locationProvider.html5Mode(true);
+                    }])
+                    .config(['$routeProvider', function ($routeProvider) {
+                        $routeProvider
+                                .when('/stuff', {
+                                    templateUrl: 'stuff.html',
+                                    controller: 'stuffCtrl'
+                                })
+                                .when('/foo', {
+                                    templateUrl: 'foo.html',
+                                    controller: ''
+                                })
+                                .otherwise({
+                                    redirectTo: '/stuff'
+                                })
+                    }])
+                    .controller('stuffCtrl', ['$scope', function ($scope) {
+                        $scope.firstName = 'first';
+                        $scope.lastName = 'last';
+                    }])
+            ;
