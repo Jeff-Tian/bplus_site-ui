@@ -111,6 +111,7 @@ server
         extended: true
     }));
 
+
 // Set the view engine to ejs, but specify file type with ".html"
 server.engine('html', ejs.renderFile);
 server.set('view engine', 'html');
@@ -173,6 +174,10 @@ if (getMode() === 'dev') {
 } else {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
 }
+
+
+server.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000'));
+
 
 server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
