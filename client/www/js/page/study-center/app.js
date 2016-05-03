@@ -49,12 +49,12 @@ angular.module('studyCenterModule', ['bplusModule', 'ui.router', 'trackingModule
         $scope.menus = [{
             text: '预约导师',
             href: '/study-center/teacherbook.html',
-            icon: 'announcement',
+            icon: 'user',
             states: ['study-teacher-book']
         }, {
             text: '预约课程',
             href: '/study-center/teachercourse.html',
-            icon: 'user',
+            icon: 'book',
             states: ['study-plan']
         }, {
             text: '我的预约',
