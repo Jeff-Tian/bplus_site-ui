@@ -16,7 +16,6 @@ block content
                         span.inline-space.corp-find-option-text 职能
                         div.ui.form.inline-block.inline-space
                             select.ui.dropdown.dropdown-inline(name="position",ng-model="searchOption.position")
-                                option(value="") 全部职能
                                 option(ng-repeat="data in positions",value="{{data.text}}"){{data.text}}
                     div.ui.active.tab.list-tab
                         div(ng-if="isloading") 加载中，请稍后……
@@ -32,8 +31,8 @@ block content
                                             div.corp-find-route-label-line
                                             div.corp-find-route-label-text {{data.job_title}}
                                     div.corp-find-item-body
-                                        <img ng-src="{{data.avatar?data.avatar+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.gender]">
-                                        div.corp-find-item-body-name {{data.real_name}}
+                                        <img ng-src="{{data.member.avatar?data.member.avatar+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.member.gender]">
+                                        div.corp-find-item-body-name {{data.member.real_name}}
                                         div.corp-find-item-body-info
                                             span {{data.education.university}}
                                             span &nbsp;|&nbsp;
@@ -42,11 +41,11 @@ block content
                                             span {{data.education.qualifications}}
                                     div.corp-find-item-foot.segment-bottom-shadow
                                         div.ui.grid
-                                            div.five.wide.column.center.aligned
+                                            div.sixteen.wide.column.center.aligned
                                                 img(ng-src="img/opd/match_{{levelMapping(data.member_job_match)}}.png?<%= cdn.version %>")
                                                 div.corp-find-item-foot-matchtext 职位匹配度
-                                            div.eleven.wide.column
-                                                div.corp-find-item-foot-label(ng-repeat="label in data.label") {{label}}
+                                            //- div.eleven.wide.column
+                                            //-     div.corp-find-item-foot-label(ng-repeat="label in data.label") {{label}}
                         div.corp-pagination-dots.container
                             div.corp-pagination-dots.inline-block.inline-space.clickable(ng-class="{'active':page===1}",ng-click="onPageClick(1)",ng-show="maxPage>0")
                             div.corp-pagination-dots.inline-block.inline-space.clickable(ng-class="{'active':page===2}",ng-click="onPageClick(2)",ng-show="maxPage>1")

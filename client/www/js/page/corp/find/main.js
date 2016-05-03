@@ -28,7 +28,7 @@ angular.module('corpModule')
         return dataFunction.then(function(ret){
             $scope.isloading = false;
             _data = ret.list;
-            var totalPage = Math.floor(_data.length / ITEM_PER_PAGE);
+            var totalPage = Math.floor(ret.total / ITEM_PER_PAGE);
             $scope.page = 1;
             $scope.maxPage = totalPage > PAGE_LIMIT ? PAGE_LIMIT : totalPage;
             $scope.displayData = fulfillData(_data.slice(0, 3));
@@ -103,12 +103,11 @@ angular.module('corpModule')
         position: ''
     };
     $scope.$watch("searchOption.position", function(newValue, oldValue){
-        if (oldValue !== newValue){
+        if (oldValue !== newValue && oldValue !== ""){
             getData();
         }
     });
     $scope.cvClick = function(value){
-        console.log(value);
         var param = {
             candidate_id: value.member_id,
             job_id: value.job_id
@@ -145,7 +144,7 @@ angular.module('corpModule')
             $scope.currentTab = targetItem;
             $(".menu .item").removeClass("active");
             $(".menu .item[data-tab='" + targetItem + "']").addClass("active");
-            $scope.searchOption.position = "";
+            $scope.searchOption.position = $scope.positions[0].text;
             getData();
         }
     };
@@ -200,14 +199,12 @@ angular.module('corpModule')
         return findService.checkVIP();
     }).then(function(isVIP){
         _isVIP = isVIP;
-        var initPromise = [
-            getData(),
-            resourceService.getResource(resourceService.RESOURCE_KEY.JOB)
-        ];
-        return $q.all(initPromise);
-    }).then(function(data){
-        var jobpositions = data[1];
+        return resourceService.getResource(resourceService.RESOURCE_KEY.JOB)
+    }).then(function(jobpositions){
         $scope.positions = jobpositions;
+        $scope.searchOption.position = jobpositions[0].text;
+        return getData();
+    }).then(function(){
         $timeout(function(){
             $(".corp-cv-modal.ui.modal").modal({
                 allowMultiple: true,
