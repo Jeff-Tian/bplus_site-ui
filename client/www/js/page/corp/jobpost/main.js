@@ -17,6 +17,13 @@ angular.module('corpModule')
             "salaryfrom",
             "salaryto"
         ];
+        var POST_STATUS = {
+            "PUBLISH": "publish",
+            "DROPPED": "dropped",
+            "EXPIRED": "expired",
+            "OFFLINE": "offline",
+            "TEMPSAVE": "tempSave"
+        };
         $scope.hasError = false;
         $scope.hasSubmitted = false;
         $scope.isloading = false;
@@ -26,6 +33,9 @@ angular.module('corpModule')
         };
         $scope.status = $scope.STATUS.VIEW;
         return resourceService.init().then(function () {
+            jobpostService.searchPost().then(function(data){
+                $scope.displayData = data;
+            });
             $scope.postJob = function(){
                 $scope.status = $scope.STATUS.POST;
             };

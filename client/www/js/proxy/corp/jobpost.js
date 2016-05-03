@@ -12,5 +12,21 @@ angular.module('bridgeplus.corp')
             var url = $rootScope.config.serviceUrls.corp.job.publish;
             return corpPost(url, param);
         };
+        me.saveDraft = function(param) {
+            var url = $rootScope.config.serviceUrls.corp.job.save;
+            return corpPost(url, param);
+        };
+        me.offline = function(param) {
+            var url = $rootScope.config.serviceUrls.corp.job.offline;
+            return corpPost(url, param);
+        };
+        me.dropPost = function(param) {
+            var url = $rootScope.config.serviceUrls.corp.job.drop;
+            return corpPost(url, param);
+        };
+        me.searchPost = function(param) {
+            var url = $rootScope.config.serviceUrls.corp.job.search;
+            return corpPost(url, param);
+        };
     }])
 ;
