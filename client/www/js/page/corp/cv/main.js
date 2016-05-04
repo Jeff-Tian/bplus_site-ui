@@ -45,7 +45,7 @@ angular.module('corpModule')
             $scope.displayData.currentPage = ret.currentPage;
             $scope.displayData.totalPages = ret.total;
             for(var i = 0; i < ret.total; i++) {
-                if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i) {
+                if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
                     ret.list = ret.list || [];
                     var rawData = ret.list[i];
                     if (!rawData.education) {

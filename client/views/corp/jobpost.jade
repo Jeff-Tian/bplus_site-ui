@@ -8,13 +8,13 @@ block content
                         div.ui.form.inline-block.inline-space
                             select.ui.compact.dropdown.dropdown-inline.corp-jobpost-dropdown(name="select",ng-model="option.type")
                                 option(value="") 全部
-                                option(value="") 在招
-                                option(value="") 过期
-                                option(value="") 待发布
-                                option(value="") 已下线
+                                option(value="{{POST_STATUS.PUBLISH}}") 在招
+                                option(value="{{POST_STATUS.EXPIRED}}") 过期
+                                option(value="{{POST_STATUS.TEMPSAVE}}") 待发布
+                                option(value="{{POST_STATUS.OFFLINE}}") 已下线
                         a.ui.red.button.right.floated(ng-click="postJob()")
                             | 发布职位
-                        div.hint-warning-text 操作职位后，请等待10秒钟后刷新界面，即可看到职位更新
+                        div.hint-warning-text 操作职位后，请等待10秒钟后刷新界面，即可看到职位状态更新
                     corp-job-post-list
                 form.ui.form.corp-jobpost-form(nonvalidate,ng-class="{'error': hasSubmitted && hasError}",ng-if="status===STATUS.POST")
                     div.ui.error.message 红框处必填字段未完成，请全部填写完成后按下保存
@@ -31,14 +31,14 @@ block content
                                 div.corp-jobpost-content-input-container
                                     select.corp-jobpost-select(name="jobtitle" ng-model="postData.jobtitle")
                                         option(value="") 请选择
-                                        option(value="{{item.id}}" ng-repeat='item in displayData.jobtitles') {{item.text}}
+                                        option(value="{{item.id}}" ng-repeat='item in displayForm.jobtitles') {{item.text}}
                             div.field(ng-class="{'error': hasSubmitted && postData.jobtype ==='' }")
                                 div.corp-jobpost-content-title.required-title 职位类别
                                 div.corp-jobpost-content-input-container
                                    select.corp-jobpost-select(name="jobtype" ng-model="postData.jobtype")
                                         option(value="") 请选择
                                         option(value="71bb0925-cbc6-4aa1-93dd-0906b1a19a5d") 全职
-                                        //- option(value="{{item.id}}" ng-repeat='item in displayData.jobtypes') {{item.text}}
+                                        //- option(value="{{item.id}}" ng-repeat='item in displayForm.jobtypes') {{item.text}}
                             div.field(ng-class="{'error': hasSubmitted && postData.department ==='' }")
                                 div.corp-jobpost-content-title.required-title 所属部门
                                 div.corp-jobpost-content-input-container
@@ -52,7 +52,7 @@ block content
                                 div.corp-jobpost-content-input-container
                                     select.corp-jobpost-select(name="jobtitle" ng-model="postData.salarytype")
                                         option(value="") 请选择
-                                        option(value="{{item.id}}" ng-repeat='item in displayData.salarytypes') {{item.text}}
+                                        option(value="{{item.id}}" ng-repeat='item in displayForm.salarytypes') {{item.text}}
                             div.inline-block.width5
                             div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.salaryfrom ==='' || postData.salaryto === '') && postData.salarytype !=='e0495498-07e5-420a-9788-603e57e602fc'}")
                                 div.corp-jobpost-content-input-container.corp-jobpost-content-inlinefield
@@ -98,15 +98,15 @@ block content
                             div.corp-jobpost-content-input-container
                                 select.corp-jobpost-select.inline-block.init-width(name="jobtitle" ng-model="postData.expireyear",ng-change="yearChange()")
                                     option(value="") 请选择
-                                    option(value="{{item.id}}" ng-repeat='item in displayData.expireyears') {{item.text}}
+                                    option(value="{{item.id}}" ng-repeat='item in displayForm.expireyears') {{item.text}}
                                 span &nbsp;&nbsp;年&nbsp;&nbsp;
                                 select.corp-jobpost-select.inline-block.init-width(name="jobtitle",ng-model="postData.expiremonth",ng-change="monthChange()")
                                     option(value="") 请选择
-                                    option(value="{{item.id}}" ng-repeat='item in displayData.expiremonths') {{item.text}}
+                                    option(value="{{item.id}}" ng-repeat='item in displayForm.expiremonths') {{item.text}}
                                 span &nbsp;&nbsp;年&nbsp;&nbsp;
                                 select.corp-jobpost-select.inline-block.init-width(name="jobtitle" ng-model="postData.expireday")
                                     option(value="") 请选择
-                                    option(value="{{item.id}}" ng-repeat='item in displayData.expiredays') {{item.text}}
+                                    option(value="{{item.id}}" ng-repeat='item in displayForm.expiredays') {{item.text}}
                                 span &nbsp;&nbsp;日
                         div
                             div.ui.red.button.inline-space(ng-click="cancel()") 取消

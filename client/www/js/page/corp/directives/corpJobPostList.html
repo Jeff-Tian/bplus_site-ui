@@ -1,38 +1,36 @@
 <div ng-if="!isLoading" class="corp-table">
-    <div class="ui attached segment segment-normal segment-bottom-shadow list-container" ng-if="displayData.list.length>0">
+    <div class="ui attached segment segment-normal segment-bottom-shadow list-container" ng-if="displayData.data.length>0">
         <div>
             <div class="ui grid dark-title-background white-color">
-                <div class="four wide column">职位名称</div>
-                <div class="three wide column">截止日期</div>
-                <div class="three wide column">职位状态</div>
-                <div class="six wide column">
+                <div class="four wide column center aligned">职位名称</div>
+                <div class="four wide column center aligned">截止日期</div>
+                <div class="three wide column center aligned">职位状态</div>
+                <div class="five wide column center aligned">
                 </div>
             </div>
-            <div class="ui grid shadow text-color-grey" ng-repeat="data in displayData.list">
+            <div class="ui grid shadow text-color-grey" ng-repeat="data in displayData.data">
                 <div class="four wide column center aligned white-column-background">
                     <div class="middle-single-text">
                         {{data.position}}
                     </div>
                 </div>
-                <div class="three wide column light-column-background">
+                <div class="four wide column center aligned light-column-background">
                     <div class="middle-single-text">
-                        {{data.expire_at.split("T")[0]}}
+                        {{data.expire_at_text}}
                     </div>
                 </div>
-                <div class="three wide column center aligned white-column-background" ng-class="{'checked': data.hasChecked}">
-                    <div class="middle-single-text">{{data.position+'/'+data.function}}</div>
+                <div class="three wide column center aligned white-column-background">
+                    <div ng-switch="data.status" class="middle-single-text">
+                        <div ng-switch-when="publish"> 在招 </div>
+                        <div ng-switch-when="tempSave"> 待发布 </div>
+                        <div ng-switch-when="expired"> 过期 </div>
+                        <div ng-switch-when="offline"> 待发布 </div>
+                    </div>
                 </div>
-                <div class="six wide column light-column-background center aligned" ng-class="{'checked': data.hasChecked}">
-                    <div class="middle-single-text">
-                        <span>{{data.issueDate}}</span>
-                        <input type="checkbox" ng-if="displayData.hasCheckbox" class="valign-middle inline-checkbox-position" ng-model="data.hasChecked">
-                    </div>
-                    <div ng-show="data.flag==='recommendation'" class="ribbon yellow right corner label">推荐
-                        <i class="star icon"></i>
-                    </div>
-                    <div ng-show="data.flag==='win'" class="ribbon red right corner label">优胜
-                        <i class="thumbs up icon"></i>
-                    </div>
+                <div class="five wide column light-column-background">
+                    <div class="ui basic button valign-middle-button" ng-click="offline(data)"ng-if="data.status==='publish'"> 下线 </div> 
+                    <div class="ui basic button valign-middle-button" ng-click="edit(data)"ng-if="data.status!=='publish'"> 编辑 </div> 
+                    <div class="ui basic button valign-middle-button" ng-click="delete(data)"ng-if="data.status!=='publish'"> 删除 </div> 
                 </div>
             </div>
         </div>

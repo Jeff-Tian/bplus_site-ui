@@ -16,7 +16,7 @@ angular.module('bridgeplus.corp')
             var url = $rootScope.config.serviceUrls.corp.job.save;
             return corpPost(url, param);
         };
-        me.offline = function(param) {
+        me.offlinePost = function(param) {
             var url = $rootScope.config.serviceUrls.corp.job.offline;
             return corpPost(url, param);
         };
