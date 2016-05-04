@@ -1,5 +1,5 @@
-.git
-artifacts
-.idea
-test
-client/grunt
+/.git
+/artifacts
+/.idea
+/test
+/client/grunt
