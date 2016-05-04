@@ -1,5 +1,5 @@
 angular.module('corpModule')
-.directive('corpCvDetail', ['cvService', function (cvService) {
+.directive('corpCvDetail', ['resourceService', function (resourceService) {
     return {
         templateUrl: 'js/page/corp/directives/corpCVDetail.html',
         scope: true,    //Need param: resumeDetail
@@ -41,19 +41,19 @@ angular.module('corpModule')
                             case "job_id":
                             case "language_id":
                                 var itemKeyArray = itemKey.split("_");
-                                item[itemKey.replace(itemKeyArray[1], "text")] = cvService.getResourceByID(itemKeyArray[0], itemValue);
+                                item[itemKey.replace(itemKeyArray[1], "text")] = resourceService.getResource(itemKeyArray[0], itemValue);
                                 break;
                             case "work_type":
-                                item['work_type_text'] = cvService.getWorktypeByID(itemValue);
+                                item['work_type_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE, itemValue);
                                 break;
                             case "proficiency_id":
-                                item['proficiency_text'] = cvService.getLangguageProficiency(itemValue);
+                                item['proficiency_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.LANGGUAGEPROFICIENCY, itemValue);
                                 break;
                             case "certification":
-                                item['certification_text'] = cvService.getEnglishLevel(itemValue);
+                                item['certification_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.QUALIFICATIONS, itemValue);
                                 break;
                             case "position":
-                                item['position_text'] = cvService.getCommunityPosition(itemValue);
+                                item['position_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.COMMUNITYPOSITION, itemValue);
                                 break;
                             case "tags":
                                 if (itemValue) {

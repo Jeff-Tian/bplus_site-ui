@@ -1,5 +1,5 @@
 angular.module('bridgeplus.corp')
-    .service('cvService', ['$q', 'service', 'DeviceHelper', function ($q, service, DeviceHelper) {
+    .service('cvService', ['$q', 'service', 'DeviceHelper', '$rootScope', function ($q, service, DeviceHelper, $rootScope) {
         var me = this;
         var hasInitialized = false;
         var resourceData = {};
@@ -14,18 +14,16 @@ angular.module('bridgeplus.corp')
             "job"
         ];
         var PARAM_MAPPING = {
-            'delivered': "todo",
-            'interested': "unlocked",
-            'deleted': "dropped"
+            'delivered': $rootScope.config.serviceUrls.corp.jobapply.todo,
+            'interested': $rootScope.config.serviceUrls.corp.candidate.potential,
+            'pool': $rootScope.config.serviceUrls.corp.talent.search,
+            'deleted': $rootScope.config.serviceUrls.corp.candidate.dropped
         };
-        var JOB_URL_PREFIX = "corp-service-proxy/jobapply/";
         var RESOURCE_URL_PREFIX = "corp-service-proxy/resource/";
 
         me.getCV = function (currentTab, option) {
-            var url = JOB_URL_PREFIX + PARAM_MAPPING[currentTab];
+            var url = PARAM_MAPPING[currentTab];
             var param = $.extend(true, {
-// company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
-//company_id : "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
                 company_id: DeviceHelper.getCookie('corp_id')
             }, option);
             return service.post(url, param).then(function (value) {
@@ -39,6 +37,16 @@ angular.module('bridgeplus.corp')
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
                     return data[i].text;
+                }
+            }
+            return "";
+        };
+        me.getResourceIDByText = function (key, text) {
+            var data = resourceData[key];
+            // Array.prototype.find
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].text === text) {
+                    return data[i].id;
                 }
             }
             return "";
@@ -71,6 +79,10 @@ angular.module('bridgeplus.corp')
             var key = "job";
             return me.getResourceByID(key, id);
         };
+        me.getJobIDByText = function (value) {
+            var key = "job";
+            return me.getResourceIDByText(key, value);
+        };
         me.getWorktypeByID = function (id) {
             var key = "worktype";
             return me.getResourceByID(key, id);
@@ -86,8 +98,9 @@ angular.module('bridgeplus.corp')
                 var date = new Date(dataString);
                 return date.getFullYear() + '/' + (date.getMonth() + 1);
             }
-
-            startDateString = getYearAndMonth(startDate);
+            if (startDate !== ""){
+                startDateString = getYearAndMonth(startDate);
+            }
             if (endDate === "") {
                 endDateString = '至今';
             } else {
@@ -111,42 +124,64 @@ angular.module('bridgeplus.corp')
             return ret;
         };
         ////////
-        me.unlockCV = function (cv) {
-            var url = '/corp-service-proxy/jobapply/unlockCandidate';
-            var param = {
-                applierList: [cv]
-            };
-            return service.post(url, param);
-        };
-        me.restoreCV = function (cv) {
-            var url = '/corp-service-proxy/jobapply/restoreCandidate';
-            var param = {
-                applierList: [cv]
-            };
-            return service.post(url, param);
-        };
-        me.dropCV = function (cvArray) {
-            var url = '/corp-service-proxy/jobapply/dropCandidate';
-            var param = {
-                applierList: cvArray
-            };
-            return service.post(url, param);
-        };
-        me.getResume = function (idParam) {
-            var url = '/corp-service-proxy/candidate/resume';
+        var corpPost = function(url, idParam){
             var param = $.extend(true, {
-                member_id: "759c1586-2e9b-4535-9d43-01a8cc8f2e89"
+                member_id: DeviceHelper.getCookie('mid'),
+                company_id: DeviceHelper.getCookie('corp_id')
             }, idParam);
             return service.post(url, param);
         };
-        me.getPublishedJobs = function () {
-            var url = '/corp-service-proxy/jobapply/publishedJobs';
+        me.unlockCV = function (idParam) {
+            var url = $rootScope.config.serviceUrls.corp.talent.save;
+            return corpPost(url, idParam);
+        };
+        me.markCV = function (cv) {
+            var url = $rootScope.config.serviceUrls.corp.jobapply.markCandidate;
             var param = {
-// company_id : "26198a21-16cb-481a-a4e0-ec5350ccf7fa"
-//                company_id: "ed0842cf-c96b-46b5-b5c8-033c5ac3dbd5"
-                company_id: DeviceHelper.getCookie('corp_id')
+                applierList: [cv]
             };
-            return service.post(url, param);
+            return corpPost(url, param);
+        };
+        me.markCVPosition = function (param) {
+            var url = $rootScope.config.serviceUrls.corp.talent.assignJob;
+            return corpPost(url, param);
+        };
+        me.restoreCV = function (cv) {
+            var url = $rootScope.config.serviceUrls.corp.candidate.restorePotential;
+            var param = {
+                applierList: [cv]
+            };
+            return corpPost(url, param);
+        };
+        me.dropCV = function (cvArray, isStatusApply) {
+            var url = isStatusApply ? $rootScope.config.serviceUrls.corp.jobapply.dropCandidate : $rootScope.config.serviceUrls.corp.candidate.dropPotential;
+            var param = {
+                applierList: cvArray
+            };
+            return corpPost(url, param);
+        };
+        me.getResume = function (idParam) {
+            var url = $rootScope.config.serviceUrls.corp.candidate.resume;
+            return corpPost(url, idParam);
+        };
+        me.getPublishedJobs = function () {
+            // Use resource instead of published jobs here.
+            return $q.when(resourceData["job"].map(function(value){
+                return value.text;
+            }));
+        };
+        me.getJobStatus = function(idParam){
+            var url = $rootScope.config.serviceUrls.corp.candidate.jobstatus;
+            return corpPost(url, idParam);
+        };
+        me.getCoupon = function(){
+            var url = $rootScope.config.serviceUrls.corp.account.coupon;
+            var param = {
+                products: "unlockResume"
+            };
+            return corpPost(url, param).then(function(ret){
+                return ret[0].count || 0;
+            });
         };
         me.init = function () {
             // Get resources
