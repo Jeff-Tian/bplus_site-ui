@@ -44,10 +44,10 @@ angular.module('corpModule')
             $scope.displayData.data = [];
             $scope.displayData.currentPage = ret.currentPage;
             $scope.displayData.totalPages = ret.total;
-            for(var i = 0; i < ret.total; i++) {
+            for(var i = 0,j = 0; i < ret.total; i++) {
                 if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
                     ret.list = ret.list || [];
-                    var rawData = ret.list[i];
+                    var rawData = ret.list[j++];
                     if (!rawData.education) {
                         rawData.education = {start_date:"", end_date:""};
                     }

@@ -20,17 +20,17 @@
                     </div>
                 </div>
                 <div class="three wide column center aligned white-column-background">
-                    <div ng-switch="data.status" class="middle-single-text">
+                    <div ng-if="data.is_expired && data.status === 'publish'" class="middle-single-text">已过期</div>
+                    <div ng-if="!data.is_expired || data.status !== 'publish'"ng-switch="data.status" class="middle-single-text">
                         <div ng-switch-when="publish"> 在招 </div>
                         <div ng-switch-when="tempSave"> 待发布 </div>
-                        <div ng-switch-when="expired"> 过期 </div>
-                        <div ng-switch-when="offline"> 待发布 </div>
+                        <div ng-switch-when="offline"> 已下线 </div>
                     </div>
                 </div>
                 <div class="five wide column light-column-background">
-                    <div class="ui basic button valign-middle-button" ng-click="offline(data)"ng-if="data.status==='publish'"> 下线 </div> 
-                    <div class="ui basic button valign-middle-button" ng-click="edit(data)"ng-if="data.status!=='publish'"> 编辑 </div> 
-                    <div class="ui basic button valign-middle-button" ng-click="delete(data)"ng-if="data.status!=='publish'"> 删除 </div> 
+                    <div class="ui basic button valign-middle-button" ng-click="offline(data)"ng-if="data.status==='publish'&&!data.is_expired"> 下线 </div> 
+                    <div class="ui basic button valign-middle-button" ng-click="edit(data)"ng-if="data.status!=='publish'||data.is_expired"> 编辑 </div> 
+                    <div class="ui basic button valign-middle-button" ng-click="delete(data)"ng-if="data.status!=='publish'||data.is_expired"> 删除 </div> 
                 </div>
             </div>
         </div>

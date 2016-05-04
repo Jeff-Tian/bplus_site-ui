@@ -9,7 +9,7 @@ block content
                             select.ui.compact.dropdown.dropdown-inline.corp-jobpost-dropdown(name="select",ng-model="option.type")
                                 option(value="") 全部
                                 option(value="{{POST_STATUS.PUBLISH}}") 在招
-                                option(value="{{POST_STATUS.EXPIRED}}") 过期
+                                option(value="{{POST_STATUS.EXPIRED}}") 已过期
                                 option(value="{{POST_STATUS.TEMPSAVE}}") 待发布
                                 option(value="{{POST_STATUS.OFFLINE}}") 已下线
                         a.ui.red.button.right.floated(ng-click="postJob()")

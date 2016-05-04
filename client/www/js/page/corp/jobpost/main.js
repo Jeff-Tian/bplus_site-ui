@@ -31,10 +31,10 @@ angular.module('corpModule')
                 $scope.displayData.data = [];
                 $scope.displayData.currentPage = ret.currentPage;
                 $scope.displayData.totalPages = ret.total;
-                for(var i = 0; i < ret.total; i++) {
-                    if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
+                for(var i = 0,j = 0; i < ret.total; i++) {
+                    if (i >= (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
                         ret.list = ret.list || [];
-                        var rawData = ret.list[i];
+                        var rawData = ret.list[j++];
                         var expireTime = new Date(rawData.expire_at);
                         rawData.expire_at_text = expireTime.getFullYear() + '-' + (expireTime.getMonth() + 1) + '-' + expireTime.getDate();
                         $scope.displayData.rawData.push(rawData);
@@ -91,7 +91,7 @@ angular.module('corpModule')
                     jobtype: resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE, target.job_type_text),
                     department: target.department,
                     salarytype: resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE ,target.salary_type_text),
-                    location: target.location[0],
+                    location: (target.location && target.location[0]) || "",
                     salaryfrom: target.annual_salary_from || "",
                     salaryto: target.annual_salary_to || "",
                     slogan: target.slogan,
