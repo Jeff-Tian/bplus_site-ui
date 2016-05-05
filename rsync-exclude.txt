@@ -1,5 +1,9 @@
-/.git
-/artifacts
-/.idea
-/test
-/client/grunt
+.git
+artifacts
+.idea
+test
+client/grunt
+client/css
+client/js
+client/test
+semantic
