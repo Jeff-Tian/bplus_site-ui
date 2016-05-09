@@ -46,7 +46,7 @@
             </td>
             <td class="desc" ng-click="displayData.onClick(data, $index)">
                 <h3 class="ui header">
-                    <span class="position-title" ng-bind="data.position.name"></span> / <a class="company" ng-bind="data.company" ng-click="displayData.onCompanyClick(data, $event)"> </a>
+                    <span class="position-title" ng-bind="data.position.name"></span> / {{data.position.title}} / <a class="company" ng-bind="data.company" ng-click="displayData.onCompanyClick(data, $event)"> </a>
                     <!-- <span class="ui right floated grey color status-text" ng-show="data.status!='delivered'&&data.status!='finished'" ng-bind="data.statusText"></span> -->
                     <button class="ui grey small button right floated" ng-show="data.status==='finished'">已结束</button>
                     <button class="ui grey small button right floated" ng-show="data.status==='apply'">已投递</button>
@@ -55,8 +55,10 @@
                     <span class="ui smooth label" ng-bind="data.position.type" ng-hide="data.position.type===''"></span>
                     <span class="grey color loose" ng-bind="data.position.salary"></span>
                     <span class="grey color loose" ng-bind="data.position.certification"></span>
-                    <span class="ui right floated light grey color" ng-bind="data.issueTime"></span>
-                    <span class="ui right floated grey color status-text" ng-bind="data.appiedTime"></span>
+                </div>
+                <div>
+                    <span class="ui right floated light grey color" ng-bind-template="{{data.issueTime}}发布" ng-show="data.appiedTime === ''"></span>
+                    <span class="ui right floated light grey color status-text" ng-bind="data.appiedTime"></span>
                 </div>
                 <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status==='apply'">
                     <div class="ui red right corner label">

@@ -185,13 +185,14 @@
                     matchLevel: (value.jobMatch.match ? levelMapping(value.jobMatch.match) : ""),
                     progressRate: (value.jobMatch.competitiveness ? value.jobMatch.competitiveness : ""),
                     position: {
-                        name: value.title || "",
-                        type: value.job_type || "不限",
+                        name: value.position || "",
+                        title: value.title || "",
+                        type: value.job_type_text || "不限",
                         salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
                         function: value.job_funciton || "不限",
                         certification: value.education || "学历不限"
                     },
-                    issueTime: value.publish_at || "",
+                    issueTime: value.publish_at ? dataDisplayMapping(value.publish_at) : "",
                     appiedTime: value.apply.apply_date ? dataDisplayMapping(value.apply.apply_date) + "投递" : "",
                     company: value.company.name,
                     status: value.apply.status || "",
