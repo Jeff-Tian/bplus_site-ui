@@ -436,21 +436,6 @@ server.use('/healthcheck', function (req, res, next) {
     });
 });
 
-function logErrors(err, req, res, next) {
-    req.logger.error(err);
-    console.error(err.stack);
-    next(err);
-}
-
-function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        req.dualLogError(err);
-        res.status(500).send({isSuccess: false, code: '500', message: 'Something blew up!'});
-    } else {
-        next(err);
-    }
-}
-
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
     res.status(500);
@@ -462,7 +447,7 @@ function errorHandler(err, req, res, next) {
 }
 
 server.use('*', function (req, res) {
-    req.dualLogError('404 Error met for "' + (req.headers['origin'] + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
+    req.dualLogError('404 Error met for "' + ((req.headers['origin'] + '') + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
 
     res.status(404);
     if (!isFromMobile(req)) {
@@ -472,8 +457,8 @@ server.use('*', function (req, res) {
     }
 });
 
-server.use(logErrors);
-server.use(clientErrorHandler);
+var commonServer = require('./server');
+commonServer.handleError(server);
 server.use(errorHandler);
 
 // Host & Port

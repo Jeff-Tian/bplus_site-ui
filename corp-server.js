@@ -161,37 +161,6 @@ server.use('/healthcheck', function (req, res, next) {
     });
 });
 
-server.get('/test', function (req, res, next) {
-    res.send(req.__('Hello'));
-});
-
-server.get('/is_qa', function (req, res) {
-    res.send('is_qa = ' + process.env.IS_QA);
-});
-
-server.get('/run_from', function (req, res) {
-    res.send('run_form = ' + process.env.RUN_FROM);
-});
-
-server.get('/locale', function (req, res, next) {
-    res.send(req.getLocale());
-});
-
-function logErrors(err, req, res, next) {
-    req.logger.error(err);
-    console.error(err.stack);
-    next(err);
-}
-
-function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        req.dualLogError(err);
-        res.status(500).send({isSuccess: false, code: '500', message: 'Something blew up!'});
-    } else {
-        next(err);
-    }
-}
-
 var mixedViewEngine = require('./routes/mixedViewEngine.js');
 
 function errorHandler(err, req, res, next) {
@@ -203,14 +172,15 @@ function errorHandler(err, req, res, next) {
 
 server.use('*', function (req, res) {
     res.locals.title = '找不到页面 - Bridge+';
-    req.dualLogError('404 Error met for "' + (req.headers['origin'] + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
+    req.dualLogError('404 Error met for "' + ((req.headers['origin'] || '') + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
 
     res.status(404);
     mixedViewEngine.render(res, 'corp/404.jade', 'layout.jade', res.locals);
 });
 
-server.use(logErrors);
-server.use(clientErrorHandler);
+var commonServer = require('./server');
+
+commonServer.handleError(server);
 server.use(errorHandler);
 
 // Host & Port

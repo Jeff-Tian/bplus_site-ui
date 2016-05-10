@@ -15,6 +15,10 @@ module.exports = function () {
                         'js/**',
                         'mobile/**',
                         'view-partial/**',
+                        'mock/major.en.json',
+                        'mock/major.zh.json',
+                        'profile-achievement.json',
+                        'profile-growing.json',
                         '*'
                     ],
                     dest: "<%= config.dist %>"
