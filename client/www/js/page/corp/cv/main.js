@@ -31,7 +31,7 @@ angular.module('corpModule')
                 break;
         }
         var param = {
-            currentPage: currentPage,
+            page: currentPage,
             jobTitle: $scope.option.type,
             champion: $scope.option.win,
             highMatch: $scope.option.match,
