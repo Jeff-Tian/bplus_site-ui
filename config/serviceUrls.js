@@ -50,31 +50,53 @@ module.exports = {
             changePassword: '/corp-service-proxy/member/change-password',
             changeMobile: '/corp-service-proxy/member/change-mobile'
         },
+        account: {
+            coupon: '/corp-service-proxy/account/coupon'
+        },
+        company: {
+            hasJobRecommend: '/corp-service-proxy/company/hasJobRecommend'
+        },
         jobapply: {
-            publishedJobs: '/corp-service-proxy/jobapply/publishedJobs',
+            publishedPositions: '/corp-service-proxy/jobapply/publishedPositions',
             todo: '/corp-service-proxy/jobapply/todo',
-            dropped: '/corp-service-proxy/jobapply/dropped',
-            unlocked: '/corp-service-proxy/jobapply/unlocked',
             dropCandidate: '/corp-service-proxy/jobapply/dropCandidate',
-            restoreCandidate: '/corp-service-proxy/jobapply/restoreCandidate',
-            unlockCandidate: '/corp-service-proxy/jobapply/unlockCandidate'
+            markCandidate: '/corp-service-proxy/jobapply/markCandidate'
         },
         candidate: {
-            resume: '/corp-service-proxy/candidate/resume'
+            resume: '/corp-service-proxy/candidate/resume',
+            dropPotential: '/corp-service-proxy/candidate/dropPotential',
+            restorePotential: '/corp-service-proxy/candidate/restorePotential',
+            dropped: '/corp-service-proxy/candidate/dropped',
+            jobstatus: '/corp-service-proxy/candidate/jobstatus',
+            potential: '/corp-service-proxy/candidate/potential'
         },
         job: {
-            publish: '/corp-service-proxy/job/publish'
+            publish: '/corp-service-proxy/job/publish',
+            offline: '/corp-service-proxy/job/offline',
+            save: '/corp-service-proxy/job/save',
+            drop: '/corp-service-proxy/job/drop',
+            search: '/corp-service-proxy/job/search',
+        },
+        recommend: {
+            smart: '/corp-service-proxy/recommend/smart',
+            champion: '/corp-service-proxy/recommend/champion',
+            markCandidate: '/corp-service-proxy/recommend/markCandidate'
+        },
+        talent: {
+            save: '/corp-service-proxy/talent/save',
+            assignJob: '/corp-service-proxy/talent/assignJob',
+            search: '/corp-service-proxy/talent/search'
         },
         resource: {
-            qualifications: '/corp-service-proxy/resources/qualifications',
-            worktype: '/corp-service-proxy/resources/worktype',
-            communityposition: '/corp-service-proxy/resources/communityposition',
-            language: '/corp-service-proxy/resources/language',
-            langguageproficiency: '/corp-service-proxy/resources/langguageproficiency',
-            englishlevel: '/corp-service-proxy/resources/englishlevel',
-            industry: '/corp-service-proxy/resources/industry',
-            salarytype: '/corp-service-proxy/resources/salarytype',
-            job: '/corp-service-proxy/resources/job'
+            qualifications: '/corp-service-proxy/resource/qualifications',
+            worktype: '/corp-service-proxy/resource/worktype',
+            communityposition: '/corp-service-proxy/resource/communityposition',
+            language: '/corp-service-proxy/resource/language',
+            langguageproficiency: '/corp-service-proxy/resource/langguageproficiency',
+            englishlevel: '/corp-service-proxy/resource/englishlevel',
+            industry: '/corp-service-proxy/resource/industry',
+            salarytype: '/corp-service-proxy/resource/salarytype',
+            job: '/corp-service-proxy/resource/job'
         },
         resources: {
             tags: '/corp-service-proxy/resources/tags/:query?',

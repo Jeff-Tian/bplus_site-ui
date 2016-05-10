@@ -159,7 +159,7 @@ mixin teacherTable(teachers)
                                 div(class="sub header")
                                     span(class="ui light mini red label", ng-style="$index === 0 && {'margin-left': '0'}", ng-repeat="tag in t.tags", style="font-size: 0.5rem;") {{tag}}
                 td
-                    p(ng-repeat="c in t.courses")
+                    p(ng-repeat="c in t.courses | limitTo: 3")
                         a(href="/study-center/course.html?class_id={{c.class_id}}&teacher_id={{c.teacher_id}}&course_id={{c.course_id}}", target="_blank", style="color: black;") {{c.title}}
                         | &nbsp;
                         span(class="ui mini red label", ng-repeat="courseTag in c.class_tags", style="font-size: 0.5rem;", ng-show="false") {{courseTag}}

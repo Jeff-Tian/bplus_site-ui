@@ -56,6 +56,9 @@
         padding-top: 30px;
         padding-bottom: 30px;
     }
+    .valign-middle-button {
+        margin-top: 22px;
+    }
     .inline-checkbox-position {
         margin-left: 22px;
     }
@@ -92,6 +95,11 @@
         color: @color-corp-text-light-grey-text;
         font-size: 12px;
         margin-top: 0.5em;
+    }
+    .editable-item:hover {
+        .editable-item-icon {
+            color: @color-corp-red;
+        }
     }
 }
 .corp-cv-detail {
@@ -152,5 +160,52 @@
     }
     .corp-cv-detail-period {
         text-align: center;
+    }
+}
+.corp-cv-modal {
+    .corp-cv-detail-header {
+        padding: 1.5em;
+    }
+    .corp-cv-detail-footer {
+        width: 100%;
+        padding: 1.5em;
+        background-color: @color-corp-background-shadow-grey;
+        .corp-cv-detail-right {
+            text-align: right;
+            font-weight: 700;
+            color: white;
+            margin-right: 2em;
+        }
+    }
+    .removeicon-container {
+        height: 3em;
+        margin-top: 1em;
+        margin-right: 1em;
+    }
+    .centered-content-container, 
+    .centered-content-container {
+        margin: 1em 20%;
+        width: 60%;
+        font-size: 17px;
+        &.centertext {
+            text-align: center;
+        }
+        .button {
+            width: 100%;
+        }
+    }
+    &.mini {
+        width: 500px;
+        margin: 0 0 0 -250px;
+    }
+    .blank {
+        height:1em;
+        width: 100%;
+    }
+    &.corp-cvdetail-positionconfirm {
+        .title {
+            font-size: 24px;
+            padding-left: 2em;
+        }
     }
 }
