@@ -4,11 +4,11 @@ angular.module('ng.utils')
     .factory('msgBus', ['$rootScope', function ($rootScope) {
         var msgBus = {};
         msgBus.emitMsg = function (msg, data) {
-            console.log('msg: ', msg, data);
+            // console.log('msg: ', msg, data);
             $rootScope.$emit(msg, data);
         };
         msgBus.onMsg = function (msg, scope, func) {
-            console.log('on msg ', func);
+            // console.log('on msg ', func);
             var unbind = $rootScope.$on(msg, func);
             scope.$on('$destroy', unbind);
         };
