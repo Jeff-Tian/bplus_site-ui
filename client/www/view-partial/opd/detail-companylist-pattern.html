@@ -32,7 +32,7 @@
             <td class="description clickable" ng-click="displayData.onCompanyClick(data)">
                 <img ng-src="{{data.logo}}" class="left-floated-image">
                 <div class="company" ng-bind="data.name"></div>
-                <div class="field grey color" ng-bind-template="{{data.industry}}\{{data.nature_of_firms}}"></div>
+                <div class="field grey color" ng-bind-template="{{data.industry}}/{{data.nature_of_firms}}"></div>
             </td>
             <td class="desc" ng-click="displayData.onPositionClick(data)">
                 <h3 class="ui header">
