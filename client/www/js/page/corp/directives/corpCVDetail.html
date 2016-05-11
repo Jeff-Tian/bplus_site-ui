@@ -130,7 +130,7 @@
                     <div class="one wide column"></div>
                     <div class="two wide column">语言：</div>
                     <div class="thirteen wide column">
-                        <div ng-repeat="language in resumeDetail.languageSkill">
+                        <div class="corp-cv-detail-language" ng-repeat="language in resumeDetail.languageSkill">
                             <span>{{language.language_text}}</span>
                             <span>,&nbsp;&nbsp;</span>
                             <span ng-if="language.certification_text">{{language.certification_text}}:&nbsp;&nbsp;{{language.score}},&nbsp;&nbsp;</span>
