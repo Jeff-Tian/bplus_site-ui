@@ -17,8 +17,8 @@ module.exports = function () {
                         'view-partial/**',
                         'mock/major.en.json',
                         'mock/major.zh.json',
-                        'profile-achievement.json',
-                        'profile-growing.json',
+                        'schoolname.en.json',
+                        'schoolname.zh.json',
                         '*'
                     ],
                     dest: "<%= config.dist %>"

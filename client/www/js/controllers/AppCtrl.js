@@ -107,17 +107,21 @@
                 });
         };
 
+        // TODO: Find out why this method will trigger
+        // GET /translation?lang=zh
+        // request
         function locationHashChanged() {
-            $scope.$apply(function () {
+            $timeout(function () {
                 $scope.hash = window.location.hash;
             });
+            // $scope.$apply(function () {
+            //     $scope.hash = window.location.hash;
+            // });
         }
 
         $scope.hash = window.location.hash;
         window.addEventListener('load', locationHashChanged);
-        window.addEventListener('hashchange', function () {
-            locationHashChanged();
-        });
+        window.addEventListener('hashchange', locationHashChanged);
 
         msgBus.onMsg(msgBus.events.profile.updated, $scope, $scope.fetchProfile);
 

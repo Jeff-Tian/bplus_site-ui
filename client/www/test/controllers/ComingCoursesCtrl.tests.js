@@ -1,25 +1,6 @@
 describe('ComingCoursesCtrl', function () {
     var scope;
 
-    angular.bplus = {
-        config: {
-            serviceUrls: {
-                studyCenter: {
-                    classBooking: {
-                        coming: '',
-                        unevaluated: '',
-                        evaluated: ''
-                    }
-                }
-            }
-        },
-        localeHelper: {
-            getLocale: function () {
-                return 'zh';
-            }
-        }
-    };
-
     // load the controller's module
     beforeEach(module('studyCenterModule'));
 
