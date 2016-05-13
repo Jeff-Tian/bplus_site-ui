@@ -17,8 +17,8 @@ module.exports = function () {
                         'view-partial/**',
                         'mock/major.en.json',
                         'mock/major.zh.json',
-                        'schoolname.en.json',
-                        'schoolname.zh.json',
+                        'mock/schoolname.en.json',
+                        'mock/schoolname.zh.json',
                         '*'
                     ],
                     dest: "<%= config.dist %>"
