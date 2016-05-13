@@ -71,7 +71,7 @@ angular.module('corpModule')
             VIEW: "view",
             POST: "post",
         };
-        $scope.option = function(){
+        $scope.option = {
             type: ""
         };
         $scope.$watch("option.type", function(oldValue, newValue){

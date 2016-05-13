@@ -39,7 +39,7 @@ define([
     }
 
     return function (agModule) {
-        agModule.controller('achievement', ['$scope', '$http', "personalinfoService", "DeviceHelper", function ($scope, $http, model, DeviceHelper) {
+        agModule.controller('achievement', ['$scope', '$rootScope', '$http', "personalinfoService", "DeviceHelper", function ($scope, $rootScope, $http, model, DeviceHelper) {
             $scope.classNameFaceEdit = '';
             $scope.dataLoaded = false;
             $scope.data = {
@@ -52,7 +52,7 @@ define([
 
             var moduleTrack = new window.ModuleTrack(DeviceHelper.isMobile() ? 'm.profile' : 'profile');
 
-            $scope.editface = function() {
+            $scope.editface = function () {
                 moduleTrack.send('image.click');
 
                 return $("#avatarUpload .upload-file")[0].click();
@@ -67,7 +67,7 @@ define([
                 var imgUrl = "//" + ret.host + "/" + ret.key;
                 var dataToUpdate = {avatar: imgUrl};
 
-                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate).then(function() {
+                model.updateData(MEMBER_EXT_SERVICE, dataToUpdate).then(function () {
                     model.getData(MEMBER_EXT_SERVICE, null, true);
                 });
             };
@@ -97,7 +97,7 @@ define([
 
                     (function () {
                         if ($scope.data.avatar !== "") {
-                            $scope.data.face = $scope.data.avatar + "-small";
+                            $scope.data.face = $rootScope.getAvatarUrl($scope.data.avatar, '-small');
                         } else if ($scope.data.gender.toString().toUpperCase() !== 'F') {
                             $scope.data.face = '/img/profile/icon_profile_picture_male_big.png';
                         } else {

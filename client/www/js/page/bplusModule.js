@@ -92,5 +92,13 @@ angular.module('bplusModule', [
                 increaseZIndex();
             }
         });
+
+        $rootScope.getAvatarUrl = function (url, size) {
+            if (url.indexOf('//upload.bridgeplus.cn') === 0) {
+                return url + size;
+            }
+
+            return url;
+        };
     }])
 ;

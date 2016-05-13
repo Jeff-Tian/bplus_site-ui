@@ -98,7 +98,7 @@ angular.module('corpModule')
     $scope.positions = "";
     $scope.currentTab = STATIC_PARAM.SMART;
     $scope.page = 1;
-    $scope.maxPage;
+    $scope.maxPage = 0;
     $scope.searchOption = {
         position: ''
     };
@@ -199,7 +199,7 @@ angular.module('corpModule')
         return findService.checkVIP();
     }).then(function(isVIP){
         _isVIP = isVIP;
-        return resourceService.getResource(resourceService.RESOURCE_KEY.JOB)
+        return resourceService.getResource(resourceService.RESOURCE_KEY.JOB);
     }).then(function(jobpositions){
         $scope.positions = jobpositions;
         $scope.searchOption.position = jobpositions[0].text;

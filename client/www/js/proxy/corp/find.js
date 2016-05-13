@@ -20,7 +20,7 @@ angular.module('bridgeplus.corp')
             var url = $rootScope.config.serviceUrls.corp.recommend.champion;
             return corpPost(url, param);
         };
-        me.markCandidate = function(cv) {
+        me.markCandidate = function(param) {
             var url = $rootScope.config.serviceUrls.corp.recommend.markCandidate;
             return corpPost(url, param);
         };

@@ -88,15 +88,19 @@
                         checkAutoLogin: $scope.loginData.rememberMe
                     });
 
-                    MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
+                    try {
+                        MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
+                    } catch (ex) {
+                    } finally {
+                        setTimeout(function () {
+                            if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
+                                window.location.href = '/zh/cmpt';
+                            } else {
+                                window.location.href = '/m/youth';
+                            }
 
-                    setTimeout(function () {
-                        if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
-                            window.location.href = '/zh/cmpt';
-                        } else {
-                            window.location.href = '/m/youth';
-                        }
-                    }, 500);
+                        }, 500);
+                    }
                 }).catch(function (reason) {
                     FormValidation.delegateHandleFormError($loginForm)(reason);
 

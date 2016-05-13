@@ -62,10 +62,10 @@ block content
                     button.ui.black.button(ng-click="printCV()")
                         i.print.icon
                         | 打印简历
-                    button.ui.black.button(ng-click="dropCV()",ng-if="resumeDetail.status==='apply'") 
+                    button.ui.black.button(ng-click="dropCV()",ng-if="resumeDetail.status==='apply'")
                         i.trash.icon
                         | 删除简历
-                    button.ui.red.button(ng-click="restoreCV()",ng-if="resumeDetail.status==='drop'") 
+                    button.ui.red.button(ng-click="restoreCV()",ng-if="resumeDetail.status==='drop'")
                         i.undo.icon
                         | 恢复简历
                     button.right.floated.circular.ui.icon.grey.button.close

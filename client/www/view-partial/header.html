@@ -20,13 +20,13 @@
             <div class="right item">
                 <% if (signedIn) { %>
                 <div class="ui right dropdown b-profile item" ng-cloak>
-                    <img ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-minor' : '/img/anonymous_default.png'}}"
+                    <img ng-src="{{memberInfo.avatar ? getAvatarUrl(memberInfo.avatar, '-minor'): '/img/anonymous_default.png'}}"
                          class="ui circular image avatar">
                     <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
 
                     <div class="ui inverted vertical center aligned b-profile menu">
                         <img
-                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
+                                ng-src="{{memberInfo.avatar ? getAvatarUrl(memberInfo.avatar) : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
                         <a class="center aligned item" href="<%= localeLink('account-setting') %>"><%=
@@ -79,13 +79,13 @@
             <div class="right item">
                 <% if (typeof hcd_user !== 'undefined' && hcd_user.member_id) { %>
                 <div class="ui right dropdown b-profile item" ng-cloak>
-                    <img ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-minor' : '<%= cdn.normal %>img/anonymous_default.png?<%= cdn.version %>'}}"
+                    <img ng-src="{{memberInfo.avatar ? getAvatarUrl(memberInfo.avatar, '-minor') : '<%= cdn.normal %>img/anonymous_default.png?<%= cdn.version %>'}}"
                          class="ui circular image avatar">
                     <span class="ui button">{{memberInfo.displayName}} <i class="large angle down icon"></i></span>
 
                     <div class="ui inverted vertical center aligned b-profile menu">
                         <img
-                                ng-src="{{memberInfo.avatar ? memberInfo.avatar + '-small' : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
+                                ng-src="{{memberInfo.avatar ? getAvatarUrl(memberInfo.avatar) : (memberInfo.gender.toString().toUpperCase() !== 'F' ? '<%= cdn.normal %>img/male_default.png?<%= cdn.version %>' : '<%= cdn.normal %>img/female_default.png?<%= cdn.version %>')}}"
                                 class="ui circular image avatar">
                         <a class="center aligned item" href="<%= localeLink('profile') %>"><%= __('Profile') %></a>
                         <a class="center aligned item" href="<%= localeLink('store/my') %>"><%= __('我的订单') %></a>
