@@ -55,12 +55,18 @@
     <div class="ui right aligned container subcontainer">
         <div><%= __('NoAccount') %> <a href="#register" ng-click="register()"><%= __('SignUpNow') %></a></div>
     </div>
-    <% if (featureSwitcher.enableWechat === true && (!device.isFromMobile || device.isFromWechatBrowser)) { %>
+    <% if (!device.isFromMobile || device.isFromWechatBrowser) { %>
     <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
     <div class="ui" ng-hide="!!loginData.wechatToken">
+        <%= __('SignInWithOtherWays') %>
+
         <a class="wechat link" ng-click="logOnViaWechat()">
-            <%= __('SignInWithOtherWays') %>
             <i class="big wechat icon"></i>
+
+        </a>
+
+        <a class="linkedin link" ng-click="logOnViaLinkedIn()">
+            <i class="big linkedin square icon"></i>
         </a>
     </div>
     <% } %>

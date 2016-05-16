@@ -129,6 +129,10 @@
             }
         };
 
+        $scope.logOnViaLinkedIn = function () {
+            alert('hello');
+        };
+
         if (DeviceHelper.isInWechatBrowser() && (!queryParser.get('wechat_token')) && (location.href.indexOf('token') < 0) && (location.href.indexOf('is_registed') < 0)) {
             // If the wechat_token is not present, then auto login to get the wechat token.
 
