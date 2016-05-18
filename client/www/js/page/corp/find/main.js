@@ -216,6 +216,7 @@ angular.module('corpModule')
     };
     $scope.errorConfirm = function(){
         $(".corp-cvdetailerror").modal("hide");
+        $(".corp-cvdetailerror-vip").modal("hide");
     };
     var fulfillData = function(dataInput) {
         for (var i = dataInput.length; i < 3; i++) {
