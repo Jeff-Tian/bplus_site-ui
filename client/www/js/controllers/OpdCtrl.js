@@ -168,9 +168,9 @@
         $scope.STATIC_PARAMS = STATIC_PARAMS;
         var dataDisplayMapping = function(dateString) {
             var targetDate = new Date(dateString);
-            var ret = targetDate.getFullYear() + "年" +
-                    (targetDate.getMonth()+1) + "月" +
-                    targetDate.getDay()+"日";
+            var ret = targetDate.getFullYear() + "-" +
+                    (targetDate.getMonth()+1) + "-" +
+                    targetDate.getDay();
 
             return ret;
         };
