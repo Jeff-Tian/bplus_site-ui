@@ -50,7 +50,7 @@ angular.module('corpModule')
                                 item['proficiency_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.LANGGUAGEPROFICIENCY, itemValue);
                                 break;
                             case "certification":
-                                item['certification_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.QUALIFICATIONS, itemValue);
+                                item['certification_text'] = itemValue ? resourceService.getResource(resourceService.RESOURCE_KEY.ENGLISHLEVEL, itemValue) : "";
                                 break;
                             case "position":
                                 item['position_text'] = resourceService.getResource(resourceService.RESOURCE_KEY.COMMUNITYPOSITION, itemValue);
