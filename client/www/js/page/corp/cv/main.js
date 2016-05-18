@@ -1,5 +1,5 @@
 angular.module('corpModule')
-.controller("cvCtrl", ['$scope', '$timeout', 'cvService', '$q', function($scope, $timeout, cvService, $q) {
+.controller("cvCtrl", ['$scope', '$timeout', 'cvService', '$q', '$rootScope', function($scope, $timeout, cvService, $q, $rootScope) {
     var STATIC_PARAM = {
         DELIVERED: 'delivered',
         INTERESTED: 'interested',
@@ -7,6 +7,32 @@ angular.module('corpModule')
         POOL: "pool"
     };
     var FIRST_PAGE = 1;
+    var handleHeadshot = function(url, gender) {
+        var femaleDefault = "img/corp/female_default.png";
+        var maleDefault = "img/corp/male_default.png";
+        var unknownDefault = "img/corp/unknown.png";
+        var cndify = function(source) {
+            return $rootScope.config.cdn.normal + source + '?' + $rootScope.config.cdn.version;
+        };
+        var condition = /upload.bridgeplus.cn/;
+        var ret;
+        if (url) {
+            if (condition.test(url)) {
+                ret = url + "-small";
+            } else {
+                ret = url;
+            }
+        } else {
+            if (gender === "M") {
+                ret = cndify(maleDefault);
+            } else if (gender === "F") {
+                ret = cndify(femaleDefault);
+            } else {
+                ret = cndify(unknownDefault);
+            }
+        }
+        return ret;
+    };
     var getData = function(currentPage, defautlSort){
         $scope.isSortDesc = defautlSort ? true : $scope.isSortDesc;
         $scope.isLoading = true;
@@ -55,7 +81,7 @@ angular.module('corpModule')
                         matchLevel: cvService.levelMapping(rawData.job_match),
                         position: rawData.job_position || "",
                         function: rawData.job_title || "",
-                        headshot: rawData.member.avatar || "",
+                        headshot: handleHeadshot(rawData.member.avatar, rawData.member.gender),
                         flag: "",
                         issueDate: (rawData.apply_date || rawData.action_date || rawData.add_date || "").split("T")[0],
                         gender: rawData.member.gender || "",

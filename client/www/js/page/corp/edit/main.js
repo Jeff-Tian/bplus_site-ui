@@ -127,7 +127,7 @@ angular
                         return service.post($rootScope.config.serviceUrls.corp.member.profile, {
                             company_id: DeviceHelper.getCookie('corp_id'),
                             abstraction: $scope.corpProfile.abstraction,
-                            slogan: $scope.corpProfile.slogan,
+                            description: $scope.corpProfile.description,
                             tags: $scope.corpProfile.tags
                         });
                     })

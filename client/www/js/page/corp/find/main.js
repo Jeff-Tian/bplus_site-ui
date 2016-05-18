@@ -1,5 +1,5 @@
 angular.module('corpModule')
-.controller("findCtrl", ['$scope', '$timeout', 'findService', 'resourceService','$q', function($scope, $timeout, findService, resourceService, $q) {
+.controller("findCtrl", ['$scope', '$timeout', 'findService', 'resourceService','$q', '$rootScope', function($scope, $timeout, findService, resourceService, $q, $rootScope) {
 
     var STATIC_PARAM = {
         SMART: "smart",
@@ -11,6 +11,32 @@ angular.module('corpModule')
     var PAGE_LIMIT = 3;
     var _data;
     var _isVIP;
+    var handleHeadshot = function(url, gender) {
+        var femaleDefault = "img/corp/female_default.png";
+        var maleDefault = "img/corp/male_default.png";
+        var unknownDefault = "img/corp/unknown.png";
+        var cndify = function(source) {
+            return $rootScope.config.cdn.normal + source + '?' + $rootScope.config.cdn.version;
+        };
+        var condition = /upload.bridgeplus.cn/;
+        var ret;
+        if (url) {
+            if (condition.test(url)) {
+                ret = url + "-small";
+            } else {
+                ret = url;
+            }
+        } else {
+            if (gender === "M") {
+                ret = cndify(maleDefault);
+            } else if (gender === "F") {
+                ret = cndify(femaleDefault);
+            } else {
+                ret = cndify(unknownDefault);
+            }
+        }
+        return ret;
+    };
     var getData = function(){
         $scope.isloading = true;
         var dataFunction;
@@ -28,6 +54,10 @@ angular.module('corpModule')
         return dataFunction.then(function(ret){
             $scope.isloading = false;
             _data = ret.list;
+            _data.forEach(function(value) {
+                value.member.avatar = handleHeadshot(value.member.avatar);
+                value.member.gender = value.member.gender || "";
+            });
             var totalPage = Math.floor(ret.total / ITEM_PER_PAGE);
             $scope.page = 1;
             $scope.maxPage = totalPage > PAGE_LIMIT ? PAGE_LIMIT : totalPage;
@@ -186,6 +216,7 @@ angular.module('corpModule')
     };
     $scope.errorConfirm = function(){
         $(".corp-cvdetailerror").modal("hide");
+        $(".corp-cvdetailerror-vip").modal("hide");
     };
     var fulfillData = function(dataInput) {
         for (var i = dataInput.length; i < 3; i++) {
