@@ -31,7 +31,7 @@ block content
                                             div.corp-find-route-label-line
                                             div.corp-find-route-label-text {{data.job_title}}
                                     div.corp-find-item-body
-                                        <img ng-src="{{data.member.avatar?data.member.avatar+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[data.member.gender]">
+                                        <img ng-src="{{data.member.avatar}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male','':'unknown','U':'unknown'}[data.member.gender]">
                                         div.corp-find-item-body-name {{data.member.real_name}}
                                         div.corp-find-item-body-info
                                             span {{data.education.university}}

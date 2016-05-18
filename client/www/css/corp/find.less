@@ -3,8 +3,6 @@
 @female: #EB6754;
 @image-size: 128px;
 .headshotimagefind(@gender){
-    width: @image-size;
-    height: @image-size;
     border: 6px solid @gender;
     background-color: @color-corp-background-light-grey;
 }
@@ -17,11 +15,16 @@
     //     margin-right: 10px;
     // }
     .headshot.image {
+        width: @image-size;
+        height: @image-size;
         &.male {
             .headshotimagefind(@male);
         }
         &.female {
             .headshotimagefind(@female);
+        }
+        &.unknown {
+            border: 6px dashed @color-corp-background-light-grey;
         }
     }
     .corp-find-route-label {
@@ -132,6 +135,8 @@
             margin-top: @image-size * -0.5;
             margin-left: @image-size * -0.5;
             left: 50%;
+            height: @image-size;
+            width: @image-size;
         }
         .corp-find-item-body-name {
             padding-top: 70px;

@@ -2,8 +2,6 @@
 @male: #206CB6;
 @female: #EB6754;
 .headshotimage(@gender){
-    width: 72px;
-    height: 72px;
     border: 3px solid @gender;
 }
 
@@ -66,11 +64,16 @@
         padding: 1rem;
     }
     .headshot.image {
+        width: 72px;
+        height: 72px;
         &.male {
             .headshotimage(@male);
         }
         &.female {
             .headshotimage(@female);
+        }
+        &.unknown {
+            border: 3px dashed @color-corp-background-light-grey;
         }
     }
     .personal-name-container {
@@ -106,11 +109,16 @@
     padding-top: 1em;
     padding-bottom: 1em;
     .headshot.image {
+        width: 72px;
+        height: 72px;
         &.male {
             .headshotimage(@male);
         }
         &.female {
             .headshotimage(@female);
+        }
+        &.unknown {
+            border: 3px dashed @color-corp-background-light-grey;
         }
     }
     .corp-cv-detail-segment {
