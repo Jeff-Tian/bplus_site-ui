@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('bplus', ['bplusModule'])
+angular.module('bplus', ['bplusModule', 'linkedInModule'])
     .factory('FormValidation', angular.bplus.FormValidation)
     .directive('captcha', angular.bplus.captcha)
     .directive('registerForm', angular.bplus.registerForm)

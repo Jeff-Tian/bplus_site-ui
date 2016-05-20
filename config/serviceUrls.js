@@ -114,5 +114,12 @@ module.exports = {
         sms: {
             send: '/service-proxy/sms/send'
         }
+    },
+
+    linkedIn: {
+        oauth: {
+            frontEnd: '/service-proxy/linked-in/oauth-logon',
+            serverSide: '/oauth/linkedin/logon'
+        }
     }
 };

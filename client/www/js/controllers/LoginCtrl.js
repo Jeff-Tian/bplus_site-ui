@@ -49,8 +49,7 @@
 
             return $loginForm.form('is valid');
         };
-
-
+        
         $scope.submitting = false;
         $scope.resetPassword = function ($event) {
             $event.preventDefault();
@@ -127,10 +126,6 @@
                     loginFromWechat();
                 }
             }
-        };
-
-        $scope.logOnViaLinkedIn = function () {
-            alert('hello');
         };
 
         if (DeviceHelper.isInWechatBrowser() && (!queryParser.get('wechat_token')) && (location.href.indexOf('token') < 0) && (location.href.indexOf('is_registed') < 0)) {

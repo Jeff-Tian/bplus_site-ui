@@ -6,6 +6,7 @@ var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('greenShared').logger;
 var config = require('./config');
+var configHelper = require('./config/configHelper');
 var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
 
@@ -74,12 +75,8 @@ function setDeviceHelper(req, res, next) {
     next();
 }
 
-function getMode() {
-    return process.env.NODE_ENV || 'dev';
-}
-
 function setMode(req, res, next) {
-    res.locals.dev_mode = (getMode() === 'dev');
+    res.locals.dev_mode = (configHelper.getMode() === 'dev');
 
     next();
 }
@@ -128,7 +125,7 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req
 
 server.use('/', membership.setSignedInUser);
 
-var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var staticFolder = __dirname + (configHelper.getMode() === 'dev' ? '/client/www' : '/client/dist');
 var viewFolder = __dirname + '/client/views';
 
 var staticSetting = {
@@ -168,7 +165,7 @@ setupStaticResources();
 
 server.use(localeHelper.localePath('/m', false), express.static(staticFolder));
 
-if (getMode() === 'dev') {
+if (configHelper.getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
 } else {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
@@ -176,7 +173,7 @@ if (getMode() === 'dev') {
 
 server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(configHelper.filterConfig(config)) + ';}');
 });
 
 var proxy = require('./serviceProxy/proxy.js');
@@ -262,23 +259,6 @@ function isFromMobile(req) {
     return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
 }
 
-function filterConfig(config) {
-    var filtered = {};
-
-    filtered.captcha = config.captcha;
-    filtered.payment = config.payment.public;
-    filtered.cdn = config.cdn;
-    filtered.featureSwitcher = config.featureSwitcher;
-    filtered.service_upload = config.service_upload;
-    filtered.trackingUrl = config.trackingUrl;
-    filtered.serviceUrls = config.serviceUrls;
-    filtered.competitions = config.competitions;
-    filtered.mode = getMode();
-    filtered.durableMessageSource = config.durableMessageSource;
-
-    return filtered;
-}
-
 server.use('/translation', localeHelper.serveTranslations);
 subApps.map(function (s) {
     server.use('/' + s + '/translation', localeHelper.serveTranslations);
@@ -304,7 +284,7 @@ function setupOnlineStoreStaticResources(staticFolder) {
             onlineOfflinePathSwitch(
                 '/node_modules/',
                 '/../') +
-            (getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
+            (configHelper.getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
             staticFolder,
             staticSetting
         )

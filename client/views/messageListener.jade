@@ -1,0 +1,14 @@
+html
+    head
+        title Message Listener
+    body
+        script.
+            window.addEventListener('message', function (event) {
+                console.log(event.data);
+
+                if (event.data.indexOf('http://') === 0 || event.data.indexOf('https://') === 0) {
+                    location.href = event.data;
+                }
+            }, false);
+
+            window.opener.postMessage('listenerLoaded', window.location.origin);

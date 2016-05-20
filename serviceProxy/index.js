@@ -23,6 +23,7 @@ module.exports = require('express').Router()
         next();
     })
     .use('/study-center', require('./study-center.js'))
+    .use('/linked-in', require('./linked-in'))
     .post(serviceUrls.general.sms.send, captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
@@ -72,15 +73,15 @@ module.exports = require('express').Router()
     .post(serviceUrls.createOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createUpSellOrderByRedemptionCode)
     .post(serviceUrls.createStoreOrderAndPayByRedemptionCode, membership.ensureAuthenticated, commerceService.createStoreOrderAndPayByRedemptionCode)
     .post(serviceUrls.checkNationalGame2015OrderPayment,
-    membership.ensureAuthenticated,
-    commerceService.checkUserAccessForNationalGame2015,
-    commerceService.checkUserAccessForNationalGame2015Middle,
-    commerceService.checkUserAccessForNationalGame2015Economy,
-    commerceService.checkUserAccessForRepechages2015,
-    commerceService.checkUserAccessForRepechages2015Middle,
-    commerceService.checkUserAccessForRepechages2015Economy, function (req, res, next) {
-        res.send(req.chunks);
-    })
+        membership.ensureAuthenticated,
+        commerceService.checkUserAccessForNationalGame2015,
+        commerceService.checkUserAccessForNationalGame2015Middle,
+        commerceService.checkUserAccessForNationalGame2015Economy,
+        commerceService.checkUserAccessForRepechages2015,
+        commerceService.checkUserAccessForRepechages2015Middle,
+        commerceService.checkUserAccessForRepechages2015Economy, function (req, res, next) {
+            res.send(req.chunks);
+        })
     .post(serviceUrls.wechatJsApiConfig, wechat.getJsApiConfig)
 
     .post(serviceUrls.getMyOrderList, membership.ensureAuthenticated, commerceService.getMyOrderList)
