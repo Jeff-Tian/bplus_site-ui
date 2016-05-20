@@ -23,4 +23,8 @@ router.get('/message-listener', function (req, res) {
     res.render('third-party-interactives/messageListener.jade');
 });
 
+router.get('/:lang?/personal-history', membership.ensureAuthenticated, function (req, res, next) {
+    res.render('personal-history.html');
+});
+
 module.exports = router;

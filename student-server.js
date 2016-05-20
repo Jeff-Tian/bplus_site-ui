@@ -9,6 +9,7 @@ var config = require('./config');
 var configHelper = require('./config/configHelper');
 var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
+var url = require('url');
 
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
@@ -177,7 +178,12 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
 });
 
 var proxy = require('./serviceProxy/proxy.js');
+
 server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
+    if (req.headers.referer && url.parse(req.headers.referer).pathname === '/personal-history') {
+        return next();
+    }
+
     if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
         return proxy.execute(req, res, next, {
             host: config.bplusService.host,
@@ -364,7 +370,6 @@ mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
-mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
