@@ -19,7 +19,7 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
         }
 
         function getJumpUrl(linkedInData) {
-            var jumpUrl = '/sign-in?linked_in_token=' + linkedInData.token + '&linked_in_profile=' + linkedInData.profile;
+            var jumpUrl = '/sign-in?linked_in_token=' + linkedInData.token + '&linked_in_profile=' + linkedInData.profile + '&linked_in_is_registered=' + linkedInData.is_registed;
 
             var returnUrl = getReturnUrl();
 
@@ -35,9 +35,11 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
         }
 
         function handleLinkedInCallback(result) {
-            if (!result.is_registered) {
-                registerWithLinkedInProfile(result);
+            if (!/^true$/i.test(result.is_registed)) {
+                return registerWithLinkedInProfile(result);
             }
+            
+            
         }
 
         $scope.logOnViaLinkedIn = function () {
@@ -79,6 +81,19 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
                         }
                     });
                 });
+            }
+        };
+    }])
+    .factory('linkedInLogOn', ['service', 'bplusConfig', 'queryParser', function (service, bplusConfig, queryParser) {
+        return {
+            bindMobile: function (loginData) {
+                return service.post(bplusConfig.serviceUrls.linkedIn.bindMobile.frontEnd, {
+                    value: loginData.mobile,
+                    password: loginData.password,
+                    remember: false,
+                    linkedInProfile: loginData.linkedInProfile,
+                    return_url: queryParser.get('return_url')
+                })
             }
         };
     }])

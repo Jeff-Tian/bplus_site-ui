@@ -120,6 +120,11 @@ module.exports = {
         oauth: {
             frontEnd: '/service-proxy/linked-in/oauth-logon',
             serverSide: '/oauth/linkedin/logon'
+        },
+        bindMobile: {
+            frontEnd: '/service-proxy/linked-in/bind-mobile',
+            serverSideStep1: '/logon/authentication',
+            serverSideStep2: '/profile/updateFrom3rdParty'
         }
     }
 };

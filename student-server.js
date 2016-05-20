@@ -195,6 +195,9 @@ server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?persona
     next();
 }, function (req, res, next) {
     if (res.locals.needFillEducation === true) {
+        req.dualLog('======= Need to fill education info ===========');
+        req.dualLog(' redirecting to /personal-history');
+        req.dualLog('===============================================');
         res.redirect('/personal-history');
     } else {
         next();

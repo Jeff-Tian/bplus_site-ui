@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser, msgBus, WechatLogon) {
+    exports.LoginCtrl = function ($scope, FormValidation, service, MessageStore, $filter, DeviceHelper, queryParser, msgBus, WechatLogon, linkedInLogOn) {
 
         $('.ui.checkbox.remember-me').checkbox({
             'onChecked': function () {
@@ -20,7 +20,7 @@
             rememberMe: false,
             wechatToken: queryParser.get('wechat_token'),
             linkedInToken: queryParser.get('linked_in_token'),
-            linkedInProfile: queryParser.get('linked_in_profile')
+            linkedInProfile: decodeURIComponent(queryParser.get('linked_in_profile')).replace(/[ \s\r\n]/g, '')
         };
 
         $scope.isInBindMobileMode = !!($scope.loginData.wechatToken || $scope.loginData.linkedInProfile);
@@ -71,6 +71,51 @@
             moduleTrack.send('registerBtn.click', {checkAutoLogin: $scope.loginData.rememberMe});
         };
 
+        function handleLoginSuccess(res) {
+            moduleTrack.send('login.afterClick', {
+                isLoginSuc: true,
+                checkAutoLogin: $scope.loginData.rememberMe
+            });
+
+            try {
+                MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
+            } catch (ex) {
+            } finally {
+                debugger;
+                setTimeout(function () {
+                    debugger;
+                    if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
+                        $scope.submitting = true;
+                        setTimeout(function () {
+                            window.location.href = '/zh/cmpt';
+                        }, 300);
+                    } else {
+                        $scope.submitting = true;
+
+                        setTimeout(function () {
+                            window.location.href = '/m/youth';
+                        }, 300);
+                    }
+
+                }, 1);
+            }
+        }
+
+        function handleFailure(reason) {
+            FormValidation.delegateHandleFormError($loginForm)(reason);
+
+            moduleTrack.send('login.afterClick', {
+                isLoginSuc: false,
+                checkAutoLogin: $scope.loginData.rememberMe
+            });
+        }
+
+        function handleLinkedInBindMobile() {
+            service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
+                return linkedInLogOn.bindMobile($scope.loginData).then(handleLoginSuccess).catch(handleFailure);
+            });
+        }
+
         $scope.tryLogin = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -80,6 +125,10 @@
                 return;
             }
 
+            if ($scope.loginData.linkedInProfile) {
+                return handleLinkedInBindMobile();
+            }
+
             service.executePromiseAvoidDuplicate($scope, 'submitting', function () {
                 return service.post(angular.bplus.config.serviceUrls.logOnAuthenticate, {
                     value: $scope.loginData.mobile,
@@ -87,33 +136,7 @@
                     remember: $scope.loginData.rememberMe,
                     wechat_token: $scope.loginData.wechatToken,
                     return_url: queryParser.get('return_url')
-                }).then(function (res) {
-                    moduleTrack.send('login.afterClick', {
-                        isLoginSuc: true,
-                        checkAutoLogin: $scope.loginData.rememberMe
-                    });
-
-                    try {
-                        MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
-                    } catch (ex) {
-                    } finally {
-                        setTimeout(function () {
-                            if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
-                                window.location.href = '/zh/cmpt';
-                            } else {
-                                window.location.href = '/m/youth';
-                            }
-
-                        }, 500);
-                    }
-                }).catch(function (reason) {
-                    FormValidation.delegateHandleFormError($loginForm)(reason);
-
-                    moduleTrack.send('login.afterClick', {
-                        isLoginSuc: false,
-                        checkAutoLogin: $scope.loginData.rememberMe
-                    });
-                });
+                }).then(handleLoginSuccess).catch(handleFailure);
             });
         };
 
@@ -151,5 +174,5 @@
         }
     };
 
-    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus', 'WechatLogon'];
+    exports.LoginCtrl.$inject = ['$scope', 'FormValidation', 'service', 'MessageStore', '$filter', 'DeviceHelper', 'queryParser', 'msgBus', 'WechatLogon', 'linkedInLogOn'];
 })(angular.bplus = angular.bplus || {});
