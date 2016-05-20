@@ -179,7 +179,7 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
 
 var proxy = require('./serviceProxy/proxy.js');
 
-server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
+server.use(/^\/(?!config|service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
     if (req.headers.referer && url.parse(req.headers.referer).pathname === '/personal-history') {
         return next();
     }
@@ -202,7 +202,7 @@ server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?persona
 }, function (req, res, next) {
     if (res.locals.needFillEducation === true) {
         req.dualLog('======= Need to fill education info ===========');
-        req.dualLog(' redirecting to /personal-history');
+        req.dualLog(' redirecting to /personal-history from ' + req.url);
         req.dualLog('===============================================');
         res.redirect('/personal-history');
     } else {
