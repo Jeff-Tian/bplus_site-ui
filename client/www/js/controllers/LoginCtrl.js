@@ -18,8 +18,14 @@
             mobile: '',
             password: '',
             rememberMe: false,
-            wechatToken: queryParser.get('wechat_token')
+            wechatToken: queryParser.get('wechat_token'),
+            linkedInToken: queryParser.get('linked_in_token'),
+            linkedInProfile: queryParser.get('linked_in_profile')
         };
+
+        $scope.isInBindMobileMode = !!($scope.loginData.wechatToken || $scope.loginData.linkedInProfile);
+
+        $scope.thirdPartyAccount = $scope.loginData.wechatToken ? '微信' : ($scope.loginData.linkedInProfile ? '领英' : '第三方');
 
         var moduleTrack = new window.ModuleTrack(
             DeviceHelper.isMobile() ? 'm.login' : 'login',
@@ -49,7 +55,7 @@
 
             return $loginForm.form('is valid');
         };
-        
+
         $scope.submitting = false;
         $scope.resetPassword = function ($event) {
             $event.preventDefault();

@@ -15,8 +15,12 @@ router.use(localeHelper.localePath('/study-center', false), membership.ensureAut
 
 router.use('/config', require('./student-config.js'));
 
+router.get('/linked-in/oauth/callback', function (req, res, next) {
+    res.render('third-party-interactives/linked-in-callback.jade');
+});
+
 router.get('/message-listener', function (req, res) {
-    res.render('messageListener.jade');
+    res.render('third-party-interactives/messageListener.jade');
 });
 
 module.exports = router;

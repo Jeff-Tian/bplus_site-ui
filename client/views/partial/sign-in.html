@@ -1,11 +1,11 @@
-<div class="ui fluid two item top pointing secondary menu brand">
+<div class="ui fluid two item top pointing secondary menu brand"
+     ng-hide="isInBindMobileMode" ng-controller="LoginCtrl" ng-cloak>
     <a class="active item" data-tab="login" onclick="window.sendTrack('register.loginTab.click');"><%= __('SignIn')
         %></a>
     <a class="item" data-tab="register" onclick="window.sendTrack('login.registerTab.click');"><%= __('SignUp') %></a>
 </div>
 <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
-    <h2 class="ui centered header" ng-show="!!loginData.wechatToken" ng-cloak><%= __('绑定手机') %></h2>
-
+    <%- include('bind-mobile-tip.html') -%>
     <form class="ui large fluid form login" ng-class="{'loading': submitting}" ng-submit="tryLogin($event)"
           name="loginForm">
         <div class="ui error message brand"></div>
@@ -26,7 +26,7 @@
             </div>
             <div class="fields">
                 <div class="eight wide field">
-                    <div class="ui checkbox remember-me" ng-hide="!!loginData.wechatToken" ng-cloak>
+                    <div class="ui checkbox remember-me" ng-hide="isInBindMobileMode" ng-cloak>
                         <input type="checkbox" ng-model="loginData.rememberMe" id="remember-me-check-box">
                         <label for="remember-me-check-box"><%= __('RememberMe') %></label>
                     </div>
@@ -39,11 +39,11 @@
             <div class="ui divider horizontal"></div>
             <button loading type="submit" class="ui fluid large red submit button hidden mobile-button"
                     ng-disabled="!isLoginFormValid()" ng-cloak>
-                {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
+                {{!isInBindMobileMode ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>
             <button loading type="submit" class="ui fluid large red submit button"
                     ng-disabled="!isLoginFormValid()" ng-cloak>
-                {{!loginData.wechatToken ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
+                {{!isInBindMobileMode ? "<%= __('SignIn') %>" : "<%= __('绑定') %>"}}
             </button>
         </div>
     </form>
@@ -56,8 +56,8 @@
         <div><%= __('NoAccount') %> <a href="#register" ng-click="register()"><%= __('SignUpNow') %></a></div>
     </div>
     <% if (!device.isFromMobile || device.isFromWechatBrowser) { %>
-    <div class="ui divider" ng-hide="!!loginData.wechatToken"></div>
-    <div class="ui" ng-hide="!!loginData.wechatToken">
+    <div class="ui divider" ng-hide="isInBindMobileMode"></div>
+    <div class="ui" ng-hide="isInBindMobileMode">
         <%= __('SignInWithOtherWays') %>
 
         <a class="wechat link" ng-click="logOnViaWechat()">
@@ -67,12 +67,13 @@
 
         <a class="linkedin link" ng-click="logOnViaLinkedIn()" ng-controller="linkedInLogInCtrl">
             <i class="big linkedin square icon" ng-class="{'loading': newWindowOpened()}"></i>
-            <span ng-show="newWindowOpened()" style="font-size: xx-small; color: white;">请在新窗口中操作...</span>
+            <span ng-show="newWindowOpened()" style="font-size: xx-small; color: white;" ng-cloak>请在新窗口中操作...</span>
         </a>
     </div>
     <% } %>
 </div>
 <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
+    <%- include('bind-mobile-tip-2.html') -%>
     <div class="ui center aligned container subcontainer mobile">
         <h2 class="grey color"><%= __('SignUp') %></h2>
     </div>
