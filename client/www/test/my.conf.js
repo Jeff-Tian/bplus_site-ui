@@ -26,6 +26,11 @@ module.exports = function (config) {
             '../js/utils/utils.js',
             '../js/utils/msgbus.js',
             '../js/utils/trackingSender.js',
+
+            '../bower/angularQueryParserModule/dist/scripts/app.js',
+            '../bower/angularQueryParserModule/dist/scripts/queryParser.js',
+            '../js/common/linkedInModule.js',
+
             '../js/factories/*.js',
             '../js/controllers/*.js',
             '../js/directives/loading.js',
