@@ -179,11 +179,7 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
 
 var proxy = require('./serviceProxy/proxy.js');
 
-server.use(/^\/(?!config|service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
-    if (req.headers.referer && url.parse(req.headers.referer).pathname === '/personal-history') {
-        return next();
-    }
-
+server.use(/^\/((zh|en)\/)?(?:study-center|cmpt|opportunity|store|profile)\/?.*$/i, function (req, res, next) {
     if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
         return proxy.execute(req, res, next, {
             host: config.bplusService.host,
@@ -209,7 +205,6 @@ server.use(/^\/(?!config|service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?
         next();
     }
 });
-
 
 server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
