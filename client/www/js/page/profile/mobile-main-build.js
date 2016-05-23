@@ -77,16 +77,8 @@ require([
              workContainerTemplate,
              awardContainerTemplate,
              languageContainerTemplate) {
-    var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils'])
-            .config(angular.bplus.translate)
-            .controller('AppCtrl', angular.bplus.AppCtrl)
-            .factory('translationLoader', angular.bplus.translationLoader)
+    var documentMudule = angular.module('docModule', ['pascalprecht.translate', 'ng.utils', 'bplusModule'])
             .factory('FormValidation', angular.bplus.FormValidation)
-            .factory('DeviceHelper', angular.bplus.DeviceHelper)
-            .factory('service', angular.bplus.service)
-            .factory('MessageStore', angular.bplus.MessageStore)
-            .factory('queryParser', angular.bplus.queryParser)
-            .factory('WechatLogon', angular.bplus.WechatLogon)
         ;
     (function (agModule) {
         banner(agModule);
@@ -97,8 +89,7 @@ require([
         autocomplete(agModule);
 
         new ProfileModel().start(agModule);
-        var instance = Container;
-        instance.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
+        Container.start(agModule, "bpluspersonalinfooverall", personalinfoContainerTemplate)
             .start(agModule, "bplusskillsoverall", skillsContainerTemplate)
             .start(agModule, "bpluseducationbackgroundall", eduContainerTemplate)
             .start(agModule, "bplusclubexperienceall", clubContainerTemplate)
