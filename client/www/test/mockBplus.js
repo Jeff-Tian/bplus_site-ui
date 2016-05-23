@@ -41,3 +41,7 @@ angular.module('trackingModule', [])
         };
     }])
 ;
+
+angular.module('bplusConfigModule', [])
+    .value('bplusConfig', {})
+;

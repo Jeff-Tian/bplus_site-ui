@@ -5,6 +5,7 @@ describe('ComingCoursesCtrl', function () {
     beforeEach(module('studyCenterModule'));
 
     beforeEach(inject(function ($rootScope, $controller) {
+        console.log('before each executing...');
         scope = $rootScope.$new();
         $controller('ComingCoursesCtrl', {$scope: scope});
 
