@@ -10,7 +10,6 @@ describe('App Controller', function () {
     }));
 
     // tests start here
-    // it('should get avatar url', function () {
-    //     expect(scope.getAvatarUrl('http://wx.qlogo.cn/mmopen/HoGxrZYTwPFI41jDzTXXVbTPegxibFlLvvkwTRfPn8XUbicHGtn1khJlWhxia8tuHF9l6E9QvyHia8hqqy6rSX9XRafyt6fdoRtp/0')).toEqual('http://wx.qlogo.cn/mmopen/HoGxrZYTwPFI41jDzTXXVbTPegxibFlLvvkwTRfPn8XUbicHGtn1khJlWhxia8tuHF9l6E9QvyHia8hqqy6rSX9XRafyt6fdoRtp/0');
-    // });
+    it('', function () {
+    });
 });

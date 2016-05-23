@@ -268,5 +268,6 @@ module.exports = {
         }
     }),
     jumpToReturnUrl: jumpToReturnUrl,
-    setAuthToken: setAuthToken
+    setAuthToken: setAuthToken,
+    proxySSO: proxySSO
 };

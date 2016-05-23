@@ -2,10 +2,10 @@
 
 // Declare app level module which depends on views, and components
 angular.module('bplusModule', [
-        'ng.utils',
-        'pascalprecht.translate',
-        'ngSanitize'
-    ])
+    'ng.utils',
+    'pascalprecht.translate',
+    'ngSanitize'
+])
     .config(angular.bplus.translate)
     .config(angular.bplus.xhr)
     .factory('translationLoader', angular.bplus.translationLoader)
@@ -94,7 +94,7 @@ angular.module('bplusModule', [
         });
 
         $rootScope.getAvatarUrl = function (url, size) {
-            if (url.indexOf('//upload.bridgeplus.cn') === 0) {
+            if (url.indexOf('//upload.bridgeplus.cn') === 0 || url.indexOf('//img.hcdlearning.com') === 0) {
                 return url + size;
             }
 

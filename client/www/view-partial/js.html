@@ -6,6 +6,8 @@
 <script src="<%= cdn.normal %>bower/angular/angular.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/angular-translate/angular-translate.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/angular-sanitize/angular-sanitize.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angular-service/dist/scripts/app.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angular-service/dist/scripts/service.js?<%= cdn.version %>"></script>
 
 <% if (dev_mode) { %>
 <script src="/js/factories/service.js"></script>
@@ -20,6 +22,7 @@
 <script src="<%= cdn.normal %>translation/localeHelper.js?<%= cdn.version %>"></script>
 <%/* Never cdnify config.js! */%>
 <script src="/config.js?<%= cdn.version %>"></script>
+<script src="/config/all.js?<%= cdn.version %>"></script>
 
 <% if (dev_mode) { %>
 <script src="/js/factories/FormValidation.js"></script>

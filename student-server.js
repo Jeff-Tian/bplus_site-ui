@@ -6,8 +6,10 @@ var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
 var Logger = require('greenShared').logger;
 var config = require('./config');
+var configHelper = require('./config/configHelper');
 var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
+var url = require('url');
 
 // To keep it from deleting by "npm prune --production"
 //require('log4js-cassandra');
@@ -74,12 +76,8 @@ function setDeviceHelper(req, res, next) {
     next();
 }
 
-function getMode() {
-    return process.env.NODE_ENV || 'dev';
-}
-
 function setMode(req, res, next) {
-    res.locals.dev_mode = (getMode() === 'dev');
+    res.locals.dev_mode = (configHelper.getMode() === 'dev');
 
     next();
 }
@@ -128,7 +126,7 @@ server.all('*', localeHelper.setLocale, localeHelper.setLocalVars, function (req
 
 server.use('/', membership.setSignedInUser);
 
-var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
+var staticFolder = __dirname + (configHelper.getMode() === 'dev' ? '/client/www' : '/client/dist');
 var viewFolder = __dirname + '/client/views';
 
 var staticSetting = {
@@ -168,7 +166,7 @@ setupStaticResources();
 
 server.use(localeHelper.localePath('/m', false), express.static(staticFolder));
 
-if (getMode() === 'dev') {
+if (configHelper.getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));
 } else {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/client/dist/translation/localeHelper.js', staticSetting));
@@ -176,34 +174,10 @@ if (getMode() === 'dev') {
 
 server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(filterConfig(config)) + '; }');
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(configHelper.filterConfig(config)) + ';}');
 });
 
-var proxy = require('./serviceProxy/proxy.js');
-server.use(/^\/(?!service-proxy|studycenter|cmpt|(?:(?:zh|en)\/)?(?:m\/)?personal-history).*$/i, function (req, res, next) {
-    if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
-        return proxy.execute(req, res, next, {
-            host: config.bplusService.host,
-            port: config.bplusService.port,
-            method: 'GET',
-            path: '/profile/load/' + res.locals.hcd_user.member_id,
-            responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {
-                res.locals.needFillEducation = !upstreamJson.result.education || upstreamJson.result.education.length <= 0;
-
-                next();
-            }
-        });
-    }
-
-    next();
-}, function (req, res, next) {
-    if (res.locals.needFillEducation === true) {
-        res.redirect('/personal-history');
-    } else {
-        next();
-    }
-});
-
+require('./pre-check/education-background')(server);
 
 server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
@@ -220,7 +194,7 @@ function renderTemplate(name) {
 }
 
 function renderOrRedirect(req, res, template) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render(template);
     } else {
         console.log('request from mobile');
@@ -257,28 +231,6 @@ function mapRoute2Template(url, template, pipes) {
     server.get.apply(server, args);
 }
 
-function isFromMobile(req) {
-    var ua = req.headers['user-agent'];
-    return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
-}
-
-function filterConfig(config) {
-    var filtered = {};
-
-    filtered.captcha = config.captcha;
-    filtered.payment = config.payment.public;
-    filtered.cdn = config.cdn;
-    filtered.featureSwitcher = config.featureSwitcher;
-    filtered.service_upload = config.service_upload;
-    filtered.trackingUrl = config.trackingUrl;
-    filtered.serviceUrls = config.serviceUrls;
-    filtered.competitions = config.competitions;
-    filtered.mode = getMode();
-    filtered.durableMessageSource = config.durableMessageSource;
-
-    return filtered;
-}
-
 server.use('/translation', localeHelper.serveTranslations);
 subApps.map(function (s) {
     server.use('/' + s + '/translation', localeHelper.serveTranslations);
@@ -304,7 +256,7 @@ function setupOnlineStoreStaticResources(staticFolder) {
             onlineOfflinePathSwitch(
                 '/node_modules/',
                 '/../') +
-            (getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
+            (configHelper.getMode() === 'dev' ? 'online-store/public/' : 'online-store/dist/') +
             staticFolder,
             staticSetting
         )
@@ -381,7 +333,6 @@ mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');
 mapRoute2Template('/sign-up-from', 'bind-mobile', [membership.ensureAuthenticated]);
 mapRoute2Template('/bind-mobile', [membership.ensureAuthenticated]);
-mapRoute2Template('/personal-history', [membership.ensureAuthenticated]);
 mapRoute2Template('/profile', [membership.ensureAuthenticated]);
 mapRoute2Template('/game-training', [membership.ensureAuthenticated]);
 mapRoute2Template('/upsell', [membership.ensureAuthenticated]);
@@ -389,7 +340,7 @@ mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('opportunity-detail');
     } else {
         res.render('mobile/opportunity-detail');
@@ -397,7 +348,7 @@ server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, n
 });
 
 server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         if (res.locals.hcd_user) {
             res.redirect('/zh/cmpt/ranking');
         } else {
@@ -409,14 +360,14 @@ server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
 });
 
 server.get(localeHelper.localePath('/study'), membership.ensureAuthenticated, function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('game-training');
     } else {
         res.redirect('/m/game-training');
     }
 });
 server.get(localeHelper.localePath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('select-payment-method');
     } else {
         res.redirect('/m#/select-payment-method');
@@ -439,7 +390,7 @@ server.use('/healthcheck', function (req, res, next) {
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
     res.status(500);
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('error', {error: err});
     } else {
         res.render('mobile/error', {error: err});
@@ -450,7 +401,7 @@ server.use('*', function (req, res) {
     req.dualLogError('404 Error met for "' + ((req.headers['origin'] + '') + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
 
     res.status(404);
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('404.html');
     } else {
         res.render('mobile/404.html');

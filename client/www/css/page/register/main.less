@@ -33,8 +33,9 @@
     }
 }
 
-.wechat.link, .wechat.link:link {
+.wechat.link, .wechat.link:link, .linkedin.link, .linkedin.link:link {
     color: black;
+    cursor: pointer;
 
     .icon {
         color: @color-grey;
@@ -43,10 +44,24 @@
 
 .wechat.link:hover, .wechat.link:active {
     text-decoration: none;
+    cursor: pointer;
 
     .icon {
         color: limegreen;
     }
+}
+
+.linkedin.link:hover, .linkedin.link:active {
+    text-decoration: none;
+    cursor: pointer;
+
+    .icon {
+        color: @color-linked-in-blue;
+    }
+}
+
+.linkedin.link .linked-in-tip {
+    font-size: xx-small;
 }
 
 .ui.secondary.pointing.menu.brand {

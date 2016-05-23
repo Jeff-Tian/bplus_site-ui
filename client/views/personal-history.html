@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= __('SEOTitle_PersonalHistory') %></title>
     <meta name="description" content="<%= __('SEODesc_PersonalHistory') %>">
-    <%- include('view-partial/head.html') -%>
+    <%- include('../www/view-partial/head.html') -%>
 </head>
 
 <body ng-app="personalHistory" ng-controller="AppCtrl" class="b-background">
-<%- include('view-partial/header.html') -%>
+<%- include('../www/view-partial/header.html') -%>
 <div class="ui b-signin-wrapper">
 
     <h4 class="ui centered header" style="display: none;">
@@ -354,7 +354,7 @@
 
     </div>
 </div>
-<%- include('view-partial/footer.html') -%>
+<%- include('../www/view-partial/footer.html') -%>
 <!--Page JS-->
 
 <script src="<%= cdn.normal %>js/directives/dropdown.js?<%= cdn.version %>"></script>
@@ -365,7 +365,7 @@
 <script>
     window.t_PageName = "personalHis";
 </script>
-<%- include('view-partial/external-js.html') -%>
+<%- include('../www/view-partial/external-js.html') -%>
 </body>
 
 </html>

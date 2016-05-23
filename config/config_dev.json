@@ -44,6 +44,12 @@
     "corp_app_id": "bridgeplus_corp",
     "pytui": "PYTUI"
   },
+  "thirdPartyLogon": {
+    "host": "uat.service.hcd.com",
+    "port": "10101",
+    "app_id": "bridgeplus_web",
+    "corp_app_id": "bridgeplus_corp"
+  },
   "commerce": {
     "inner": {
       "host": "uat.service.hcd.com",

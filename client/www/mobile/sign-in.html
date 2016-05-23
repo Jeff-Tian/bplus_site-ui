@@ -16,23 +16,32 @@
          style="margin-top: 2em;">
         <div class="b-signin-wide padded" tab=".b-signin-wide">
             <div class="ui bottom attached tab active" data-tab="login" ng-controller="LoginCtrl">
-                <h2 class="ui centered header" ng-show="!!loginData.wechatToken" ng-cloak><%= __('绑定手机') %></h2>
+                <div ng-show="isInBindMobileMode">
+                    <%- include('../../views/partial/bind-mobile-tip.html') -%>
+                    <br/>
+                </div>
 
+                <h2 class="ui center aligned header grey color" ng-hide="isInBindMobileMode" ng-controller="LoginCtrl">
+                    <%= __('SignIn') %></h2>
                 <%- include('sign-in-form.html') -%>
                 <a class="ui fluid large red basic button" href="#register" ng-click="register()">
                     <%= __('NoAccount') %> <%= __('SignUpNow') %>
                 </a>
 
-                <div class="ui divider" ng-hide="!!loginData.wechatToken" ng-cloak></div>
-                <div class="ui" ng-hide="!!loginData.wechatToken" ng-cloak>
-                    <a class="wechat link" ng-click="logOnViaWechat()">
-                        <%= __('SignInWithOtherWays') %>
-                        <i class="big wechat icon"></i>
-                    </a>
+                <div class="ui divider" ng-hide="isInBindMobileMode" ng-cloak></div>
+                <div class="ui" ng-hide="isInBindMobileMode" ng-cloak>
+                    <%- include('../../views/partial/third-party-sign-in.html') -%>
                 </div>
             </div>
             <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
-                <h2 class="ui center aligned header grey color"><%= __('SignUp') %></h2>
+
+                <div ng-show="isInBindMobileMode">
+                    <%- include('../../views/partial/bind-mobile-tip-2.html') -%>
+                    <br/>
+                </div>
+
+                <h2 class="ui center aligned header grey color" ng-hide="isInBindMobileMode" ng-controller="LoginCtrl">
+                    <%= __('SignUp') %></h2>
                 <register-form action="signUp" send-tracking="sendTracking" control="registerFormCtrl"></register-form>
 
                 <div class="ui horizontal divider"></div>
@@ -53,6 +62,8 @@
 </div>
 <%- include('footer.html') -%>
 
+<script src="<%= cdn.normal %>bower/angularQueryParserModule/dist/scripts/app.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angularQueryParserModule/dist/scripts/queryParser.js?<%= cdn.version %>"></script>
 <% if (dev_mode) { %>
 <script src="js/factories/FormValidation.js"></script>
 <script src="js/directives/captcha.js"></script>
@@ -60,6 +71,7 @@
 <script src="js/directives/registerForm.js"></script>
 <script src="js/directives/tab.js"></script>
 <script src="js/directives/dropdown.js"></script>
+<script src="js/common/linkedInModule.js"></script>
 <script src="js/controllers/LoginCtrl.js"></script>
 <script src="js/controllers/WechatLoginCtrl.js"></script>
 <script src="js/controllers/SignUpCtrl.js"></script>
