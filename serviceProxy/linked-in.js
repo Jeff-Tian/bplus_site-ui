@@ -88,4 +88,5 @@ module.exports = require('express').Router()
             }
         })(req, res, next);
     })
+    .post(linkedInServiceUrls.logonByToken.frontEnd, sso.delegateSetAuthToken)
 ;

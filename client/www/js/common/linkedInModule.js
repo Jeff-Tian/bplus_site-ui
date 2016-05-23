@@ -3,9 +3,17 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
         var popup = null;
         $scope.doing = false;
 
-        $scope.newWindowOpened = function () {
-            return popup && !popup.closed;
+        $scope.linkedInWorking = function () {
+            if (newWindowOpened()) {
+                return true;
+            }
+
+            return $scope.doing;
         };
+
+        function newWindowOpened() {
+            return popup && !popup.closed;
+        }
 
         function getReturnUrl() {
             var hash = window.location.hash;
@@ -34,12 +42,21 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
             window.location.href = getJumpUrl(linkedInData);
         }
 
+        function logonWithLinkedInToken(result) {
+            service.executePromiseAvoidDuplicate($scope, 'doing', function () {
+                return service.post(bplusConfig.serviceUrls.linkedIn.logonByToken.frontEnd, {
+                    token: result.token,
+                    return_url: location.href
+                });
+            });
+        }
+
         function handleLinkedInCallback(result) {
             if (!/^true$/i.test(result.is_registed)) {
                 return registerWithLinkedInProfile(result);
             }
-            
-            
+
+            return logonWithLinkedInToken(result);
         }
 
         $scope.logOnViaLinkedIn = function () {
@@ -47,6 +64,11 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
                 popup = window.open('/message-listener');
 
                 window.addEventListener('message', function (event) {
+                    if (!event.data) {
+                        // Ignore the redirecting messages.
+                        return;
+                    }
+
                     if (event.data === 'listenerLoaded') {
                         return gotoLinkedInOAuthWindow();
                     }
@@ -93,7 +115,7 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
                     remember: false,
                     linkedInProfile: loginData.linkedInProfile,
                     return_url: queryParser.get('return_url')
-                })
+                });
             }
         };
     }])

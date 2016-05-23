@@ -125,6 +125,9 @@ module.exports = {
             frontEnd: '/service-proxy/linked-in/bind-mobile',
             serverSideStep1: '/logon/authentication',
             serverSideStep2: '/profile/updateFrom3rdParty'
+        },
+        logonByToken: {
+            frontEnd: '/service-proxy/linked-in/logon-by-token'
         }
     }
 };

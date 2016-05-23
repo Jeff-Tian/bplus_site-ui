@@ -66,8 +66,8 @@
         </a>
 
         <a class="linkedin link" ng-click="logOnViaLinkedIn()" ng-controller="linkedInLogInCtrl">
-            <i class="big linkedin square icon" ng-class="{'loading': newWindowOpened()}"></i>
-            <span ng-show="newWindowOpened()" style="font-size: xx-small; color: white;" ng-cloak>请在新窗口中操作...</span>
+            <i class="big linkedin square icon" ng-class="{'loading': linkedInWorking()}"></i>
+            <span ng-show="linkedInWorking()" style="font-size: xx-small; color: white;" ng-cloak>请在新窗口中操作...</span>
         </a>
     </div>
     <% } %>

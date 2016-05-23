@@ -81,14 +81,9 @@
                 MessageStore.set($filter('translate')('SignedInWelcomeMessage'));
             } catch (ex) {
             } finally {
-                debugger;
                 setTimeout(function () {
-                    debugger;
                     if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
                         $scope.submitting = true;
-                        setTimeout(function () {
-                            window.location.href = '/zh/cmpt';
-                        }, 300);
                     } else {
                         $scope.submitting = true;
 
