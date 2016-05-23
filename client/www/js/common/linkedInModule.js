@@ -16,14 +16,7 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
         }
 
         function getReturnUrl() {
-            var hash = window.location.hash;
-            var index = hash.indexOf('?');
-
-            if (index >= 0) {
-                hash = hash.substr(0, index);
-            }
-
-            return window.location.pathname + hash;
+            return queryParser.get('return_url') || '/';
         }
 
         function getJumpUrl(linkedInData) {
@@ -32,7 +25,7 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
             var returnUrl = getReturnUrl();
 
             if (returnUrl.indexOf('bind-mobile') < 0) {
-                jumpUrl += '&return_url=' + encodeURIComponent(returnUrl);
+                jumpUrl += '&return_url=' + returnUrl;
             }
 
             return jumpUrl;
@@ -46,7 +39,7 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
             service.executePromiseAvoidDuplicate($scope, 'doing', function () {
                 return service.post(bplusConfig.serviceUrls.linkedIn.logonByToken.frontEnd, {
                     token: result.token,
-                    return_url: location.href
+                    return_url: location.origin
                 });
             });
         }
@@ -59,51 +52,58 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
             return logonWithLinkedInToken(result);
         }
 
+
+        function gotoLinkedInOAuthWindow() {
+            service.executePromiseAvoidDuplicate($scope, 'doing', function () {
+                return service.post(bplusConfig.serviceUrls.linkedIn.oauth.frontEnd, {
+                    returnUrl: window.location.origin + '/linked-in/oauth/callback'
+                }).then(function (result) {
+                    try {
+                        var testLink = popup.location.href;
+                    } catch (ex) {
+                        console.error(ex);
+                        popup.close();
+
+                        window.alert('之前打开的窗口已关闭, 请重新点击并在新打开的窗口中重试。');
+                    } finally {
+                        popup.postMessage(result, window.location.origin);
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('message', function (event) {
+            console.log(event);
+
+            if (event.origin !== window.location.origin) {
+                return;
+            }
+
+            if (!event.data) {
+                // Ignore the redirecting messages.
+                return;
+            }
+
+            if (event.data === 'listenerLoaded') {
+                return gotoLinkedInOAuthWindow();
+            }
+
+            if ((typeof event.data === 'string') && event.data.indexOf('?') === 0) {
+                var result = queryParser.parse(event.data);
+                console.log(result);
+
+                handleLinkedInCallback(result);
+
+                return (popup || event.source).close();
+            }
+        }, false);
+
         $scope.logOnViaLinkedIn = function () {
             if (!popup || popup.closed) {
                 popup = window.open('/message-listener');
-
-                window.addEventListener('message', function (event) {
-                    if (!event.data) {
-                        // Ignore the redirecting messages.
-                        return;
-                    }
-
-                    if (event.data === 'listenerLoaded') {
-                        return gotoLinkedInOAuthWindow();
-                    }
-
-                    if (event.data.indexOf('?') === 0) {
-                        var result = queryParser.parse(event.data);
-                        console.log(result);
-
-                        handleLinkedInCallback(result);
-
-                        return popup.close();
-                    }
-                }, false);
             }
 
             gotoLinkedInOAuthWindow();
-
-            function gotoLinkedInOAuthWindow() {
-                service.executePromiseAvoidDuplicate($scope, 'doing', function () {
-                    return service.post(bplusConfig.serviceUrls.linkedIn.oauth.frontEnd, {
-                        returnUrl: window.location.origin + '/linked-in/oauth/callback'
-                    }).then(function (result) {
-                        try {
-                            var testLink = popup.location.href;
-                        } catch (ex) {
-                            console.error(ex);
-                            popup.close();
-
-                            window.alert('之前打开的窗口已关闭, 请重新点击并在新打开的窗口中重试。');
-                        } finally {
-                            popup.postMessage(result, window.location.origin);
-                        }
-                    });
-                });
-            }
         };
     }])
     .factory('linkedInLogOn', ['service', 'bplusConfig', 'queryParser', function (service, bplusConfig, queryParser) {

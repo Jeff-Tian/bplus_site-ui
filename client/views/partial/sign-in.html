@@ -58,17 +58,7 @@
     <% if (!device.isFromMobile || device.isFromWechatBrowser) { %>
     <div class="ui divider" ng-hide="isInBindMobileMode"></div>
     <div class="ui" ng-hide="isInBindMobileMode">
-        <%= __('SignInWithOtherWays') %>
-
-        <a class="wechat link" ng-click="logOnViaWechat()">
-            <i class="big wechat icon"></i>
-
-        </a>
-
-        <a class="linkedin link" ng-click="logOnViaLinkedIn()" ng-controller="linkedInLogInCtrl">
-            <i class="big linkedin square icon" ng-class="{'loading': linkedInWorking()}"></i>
-            <span ng-show="linkedInWorking()" style="font-size: xx-small; color: white;" ng-cloak>请在新窗口中操作...</span>
-        </a>
+        <%- include('third-party-sign-in.html') -%>
     </div>
     <% } %>
 </div>

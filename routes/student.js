@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var localeHelper = require('../locales/localeHelper.js');
 var membership = require('../serviceProxy/membership.js');
+var mobileDetector = require('../mobile/mobileDetector');
 
 var router = express.Router();
 
@@ -24,7 +25,11 @@ router.get('/message-listener', function (req, res) {
 });
 
 router.get('/:lang?/personal-history', membership.ensureAuthenticated, function (req, res, next) {
-    res.render('personal-history.html');
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
+        return res.render('personal-history.html');
+    }
+
+    return res.redirect('m/personal-history');
 });
 
 module.exports = router;

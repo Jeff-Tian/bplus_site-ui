@@ -177,34 +177,7 @@ server.use(/\/(?:corp\/)?config\.js/, function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + JSON.stringify(configHelper.filterConfig(config)) + ';}');
 });
 
-var proxy = require('./serviceProxy/proxy.js');
-
-server.use(/^\/((zh|en)\/)?(?:study-center|cmpt|opportunity|store|profile)\/?.*$/i, function (req, res, next) {
-    if (res.locals.hcd_user && res.locals.hcd_user.member_id) {
-        return proxy.execute(req, res, next, {
-            host: config.bplusService.host,
-            port: config.bplusService.port,
-            method: 'GET',
-            path: '/profile/load/' + res.locals.hcd_user.member_id,
-            responseInterceptor: function (originalResponse, upstreamJson, originalRequest, next) {
-                res.locals.needFillEducation = !upstreamJson.result.education || upstreamJson.result.education.length <= 0;
-
-                next();
-            }
-        });
-    }
-
-    next();
-}, function (req, res, next) {
-    if (res.locals.needFillEducation === true) {
-        req.dualLog('======= Need to fill education info ===========');
-        req.dualLog(' redirecting to /personal-history from ' + req.url);
-        req.dualLog('===============================================');
-        res.redirect('/personal-history');
-    } else {
-        next();
-    }
-});
+require('./pre-check/education-background')(server);
 
 server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
@@ -221,7 +194,7 @@ function renderTemplate(name) {
 }
 
 function renderOrRedirect(req, res, template) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render(template);
     } else {
         console.log('request from mobile');
@@ -256,11 +229,6 @@ function mapRoute2Template(url, template, pipes) {
     var args = [localeHelper.localePath(url)].concat(pipes);
 
     server.get.apply(server, args);
-}
-
-function isFromMobile(req) {
-    var ua = req.headers['user-agent'];
-    return mobileDetector.isFromMobile(ua) || mobileDetector.isFromPad(ua);
 }
 
 server.use('/translation', localeHelper.serveTranslations);
@@ -372,7 +340,7 @@ mapRoute2Template('/offers');
 mapRoute2Template('/paymentresult', [membership.ensureAuthenticated]);
 mapRoute2Template('/map');
 server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('opportunity-detail');
     } else {
         res.render('mobile/opportunity-detail');
@@ -380,7 +348,7 @@ server.get(localeHelper.localePath('/opportunity-detail'), function (req, res, n
 });
 
 server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         if (res.locals.hcd_user) {
             res.redirect('/zh/cmpt/ranking');
         } else {
@@ -392,14 +360,14 @@ server.get(localeHelper.localePath('/ranking'), function (req, res, next) {
 });
 
 server.get(localeHelper.localePath('/study'), membership.ensureAuthenticated, function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('game-training');
     } else {
         res.redirect('/m/game-training');
     }
 });
 server.get(localeHelper.localePath('/select-payment-method'), membership.ensureAuthenticated, function (req, res, next) {
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('select-payment-method');
     } else {
         res.redirect('/m#/select-payment-method');
@@ -422,7 +390,7 @@ server.use('/healthcheck', function (req, res, next) {
 function errorHandler(err, req, res, next) {
     req.dualLogError(err);
     res.status(500);
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('error', {error: err});
     } else {
         res.render('mobile/error', {error: err});
@@ -433,7 +401,7 @@ server.use('*', function (req, res) {
     req.dualLogError('404 Error met for "' + ((req.headers['origin'] + '') + req.originalUrl) + '". The referer is "' + req.headers['referer'] + '".');
 
     res.status(404);
-    if (!isFromMobile(req)) {
+    if (!mobileDetector.isRequestFromMobileOrPad(req)) {
         res.render('404.html');
     } else {
         res.render('mobile/404.html');
