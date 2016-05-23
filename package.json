@@ -69,7 +69,8 @@
     "require-dot-file": "^0.4.0",
     "run-sequence": "^1.1.5",
     "semantic-ui": "^2.1.8",
-    "shelljs": "^0.5.3"
+    "shelljs": "^0.5.3",
+    "to-iso-string": "0.0.2"
   },
   "scripts": {
     "start": "node app.js"
