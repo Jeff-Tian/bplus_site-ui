@@ -44,9 +44,16 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
             });
         }
 
+        function userCancelled() {
+        }
+
         function handleLinkedInCallback(result) {
             if (!/^true$/i.test(result.is_registed)) {
-                return registerWithLinkedInProfile(result);
+                if (result.profile) {
+                    return registerWithLinkedInProfile(result);
+                }
+
+                return userCancelled();
             }
 
             return logonWithLinkedInToken(result);
