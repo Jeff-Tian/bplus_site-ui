@@ -10,7 +10,6 @@ define([
         val = parseInt(val);
         var progressLeft = document.getElementById('progressLeft'),
             progressRight = document.getElementById('progressRight'),
-            step = 1,
             space = parseInt(1000 / val),
             maxRight = val >= 50 ? 180 : (val <= 0 ? 0 : val * 3.6),
             maxLeft = (val > 50 && val < 100) ? (val - 50) * 3.6 : 180;

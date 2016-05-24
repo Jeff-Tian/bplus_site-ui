@@ -32,12 +32,23 @@
             cursor: pointer;
             color: @color-grey-light !important;
         }
-        .wechat.icon {
+        .wechat.icon, .linkedin.icon {
             color: white !important;
             cursor: pointer;
         }
         .wechat.icon:hover, .wechat.icon:active, .wechat.icon:focus {
             color: limegreen !important;
+            text-decoration: none;
+        }
+        .linkedin.icon:hover, .linkedin.icon:active, .linkedin.icon:focus {
+            color: @color-linked-in-blue !important;
+        }
+        .wechat.link:hover, .wechat.link:active, .wechat.link:focus, .linkedin.link:hover, .linkedin.link:active, .linkedin.link:focus {
+            text-decoration: none;
+        }
+        .linkedin.link .linked-in-tip {
+            color: white;
+            font-size: xx-small;
         }
         .item {
             color: white;

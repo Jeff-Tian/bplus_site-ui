@@ -44,6 +44,12 @@
     "corp_app_id": "bridgeplus_corp",
     "pytui": "PYTUI"
   },
+  "3rd-party-log-on": {
+    "host": "service.bridgeplus.cn",
+    "port": "10101",
+    "app_id": "bridgeplus_web",
+    "corp_app_id": "bridgeplus_corp"
+  },
   "commerce": {
     "inner": {
       "host": "service.bridgeplus.cn",
