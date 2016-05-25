@@ -84,6 +84,10 @@
                 setTimeout(function () {
                     if (!(DeviceHelper.isMobile() || DeviceHelper.isPad())) {
                         $scope.submitting = true;
+
+                        setTimeout(function () {
+                            window.location.href = '/zh/cmpt';
+                        }, 300);
                     } else {
                         $scope.submitting = true;
 
