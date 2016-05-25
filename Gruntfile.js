@@ -312,7 +312,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('ensurePhantomJsPath', function () {
-        process.env.PHANTOMJS_BIN = '/node_modules/phantomjs-prebuilt/bin/phantomjs';
+        process.env.PHANTOMJS_BIN = './node_modules/phantomjs-prebuilt/bin/phantomjs';
         console.log(process.env.PHANTOMJS_BIN);
     });
 
