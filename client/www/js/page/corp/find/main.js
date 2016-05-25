@@ -18,7 +18,7 @@ angular.module('corpModule')
         var cndify = function(source) {
             return $rootScope.config.cdn.normal + source + '?' + $rootScope.config.cdn.version;
         };
-        var condition = /upload.bridgeplus.cn/;
+        var condition = /upload.bridgeplus.cn|img.hcdlearning.com/;
         var ret;
         if (url) {
             if (condition.test(url)) {

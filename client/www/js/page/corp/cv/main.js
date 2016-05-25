@@ -14,7 +14,7 @@ angular.module('corpModule')
         var cndify = function(source) {
             return $rootScope.config.cdn.normal + source + '?' + $rootScope.config.cdn.version;
         };
-        var condition = /upload.bridgeplus.cn/;
+        var condition = /upload.bridgeplus.cn|img.hcdlearning.com/;
         var ret;
         if (url) {
             if (condition.test(url)) {
@@ -71,7 +71,7 @@ angular.module('corpModule')
             $scope.displayData.currentPage = ret.currentPage;
             $scope.displayData.totalPages = ret.total;
             for(var i = 0,j = 0; i < ret.total; i++) {
-                if (i === (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE + i && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
+                if (i >= (ret.currentPage - 1) * $scope.displayData.NUMBER_PER_PAGE && i < ret.currentPage * $scope.displayData.NUMBER_PER_PAGE) {
                     ret.list = ret.list || [];
                     var rawData = ret.list[j++];
                     if (!rawData.education) {
