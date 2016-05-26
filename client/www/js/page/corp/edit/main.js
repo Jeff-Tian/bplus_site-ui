@@ -126,6 +126,7 @@ angular
                     service.executePromiseAvoidDuplicate($scope, 'savingCorpDescription', function () {
                         return service.post($rootScope.config.serviceUrls.corp.member.profile, {
                             company_id: DeviceHelper.getCookie('corp_id'),
+                            display_name: $scope.corpProfile.display_name,
                             abstraction: $scope.corpProfile.abstraction,
                             description: $scope.corpProfile.description,
                             tags: $scope.corpProfile.tags

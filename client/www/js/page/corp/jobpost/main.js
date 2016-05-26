@@ -131,6 +131,7 @@ angular.module('corpModule')
                     slogantag: [],
                     requirementtag: [],
                     description: "",
+                    qualification: "",
                     expireyear: "",
                     expiremonth: "",
                     expireday: ""
@@ -151,6 +152,7 @@ angular.module('corpModule')
                 slogantag: [],
                 requirementtag: [],
                 description: "",
+                qualification: "",
                 expireyear: "",
                 expiremonth: "",
                 expireday: ""
@@ -163,6 +165,7 @@ angular.module('corpModule')
                 jobtitles: resourceService.getResource(resourceService.RESOURCE_KEY.JOB),
                 jobtypes: resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE),
                 salarytypes: resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE),
+                qualifications: resourceService.getResource(resourceService.RESOURCE_KEY.QUALIFICATIONS),
                 expireyears: [],
                 expiredays: [],
                 expiremonths: []
@@ -250,33 +253,7 @@ angular.module('corpModule')
                     targetArray.splice(index, 1);
                 }
             };
-            $scope.save = function() {
-                var param = {
-                    job_id: $scope.postData.id || "",
-                    position: $scope.postData.position,
-                    title: resourceService.getResource(resourceService.RESOURCE_KEY.JOB, $scope.postData.jobtitle),
-                    title_id: $scope.postData.jobtitle,
-                    job_type_text: resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE, $scope.postData.jobtype),
-                    job_type_id: $scope.postData.jobtype,
-                    department: $scope.postData.department,
-                    location: $scope.postData.location,
-                    requirement_tags: $scope.postData.requirementtag,
-                    description: $scope.postData.description,
-                    expire_at: new Date($scope.postData.expireyear, $scope.postData.expiremonth, $scope.postData.expireday),
-                    salary_type_id: $scope.postData.salarytype,
-                    salary_type_text: resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE, $scope.postData.salarytype),
-                    annual_salary_from: parseInt($scope.postData.salaryfrom),
-                    annual_salary_to: parseInt($scope.postData.salaryto),
-                    slogan: $scope.postData.slogan,
-                    slogan_tags: $scope.postData.slogantag
-                };
-                return jobpostService.saveDraft(param).then(function(){
-                    return getData();
-                }).then(function(){
-                    $scope.status = $scope.STATUS.VIEW;
-                });
-            };
-            $scope.submit = function () {
+            var checkForm = function(){
                 $scope.hasSubmitted = true;
                 $scope.hasError = false;
                 var requiredDataToHandle = requiredData;
@@ -302,7 +279,38 @@ angular.module('corpModule')
                         break;
                     }
                 }
-                if (!$scope.hasError) {
+                return $scope.hasError;
+            };
+            $scope.save = function() {
+                if (!checkForm()) {
+                    var param = {
+                        job_id: $scope.postData.id || "",
+                        position: $scope.postData.position,
+                        title: $scope.postData.jobtitle === "" ? "" : resourceService.getResource(resourceService.RESOURCE_KEY.JOB, $scope.postData.jobtitle),
+                        title_id: $scope.postData.jobtitle,
+                        job_type_text: $scope.postData.jobtype === "" ? "" : resourceService.getResource(resourceService.RESOURCE_KEY.WORKTYPE, $scope.postData.jobtype),
+                        job_type_id: $scope.postData.jobtype,
+                        department: $scope.postData.department,
+                        location: $scope.postData.location,
+                        requirement_tags: $scope.postData.requirementtag,
+                        description: $scope.postData.description,
+                        expire_at: new Date($scope.postData.expireyear, $scope.postData.expiremonth, $scope.postData.expireday),
+                        salary_type_id: $scope.postData.salarytype,
+                        salary_type_text: $scope.postData.salarytype === "" ? "" : resourceService.getResource(resourceService.RESOURCE_KEY.SALARYTYPE, $scope.postData.salarytype),
+                        annual_salary_from: parseInt($scope.postData.salaryfrom),
+                        annual_salary_to: parseInt($scope.postData.salaryto),
+                        slogan: $scope.postData.slogan,
+                        slogan_tags: $scope.postData.slogantag
+                    };
+                    return jobpostService.saveDraft(param).then(function(){
+                        return getData();
+                    }).then(function(){
+                        $scope.status = $scope.STATUS.VIEW;
+                    });
+                }
+            };
+            $scope.submit = function () {
+                if (!checkForm()) {
                     $(".postconfirm").modal("show");
                     return;
                 }
