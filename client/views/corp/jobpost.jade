@@ -89,10 +89,16 @@ block content
                                         | {{tag}}
                                         i.delete.icon(ng-click="lableDelete('requirementtag', tag)")
                                     input.labeled-input-input(type="text",ng-model="tmpTags.requirementtag",ng-change="labelChange('requirementtag')",ng-trim="false",placeholder="添加标签并按空格完成添加")
+                        div.field(ng-class="{'error': hasSubmitted && postData.qualification==='' }")
+                            div.corp-jobpost-content-title.required-title 学历要求
+                            div.corp-jobpost-content-input-container
+                                select.corp-jobpost-select(name="jobtitle" ng-model="postData.qualification")
+                                    option(value="") 请选择
+                                    option(value="{{item.id}}" ng-repeat='item in displayForm.qualifications') {{item.text}}
                         div.field(ng-class="{'error': hasSubmitted && postData.description ==='' }")
-                                div.corp-jobpost-content-title.required-title 职位描述
-                                div.corp-jobpost-content-input-container
-                                    textarea(ng-model="postData.description")
+                            div.corp-jobpost-content-title.required-title 职位描述
+                            div.corp-jobpost-content-input-container
+                                textarea(ng-model="postData.description")
                         div.corp-jobpost-content-title.required-title 招募截止日期
                         div.field.inline-block(ng-class="{'error': hasSubmitted && (postData.expireday ===''||postData.expiremonth ===''||postData.expireyear ==='')}")
                             div.corp-jobpost-content-input-container
