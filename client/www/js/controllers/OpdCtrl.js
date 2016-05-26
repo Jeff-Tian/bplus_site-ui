@@ -190,7 +190,7 @@
                         type: value.job_type_text || "不限",
                         salary: salaryDisplay(value.annual_salary_from, value.annual_salary_to),
                         function: value.job_funciton || "不限",
-                        certification: value.education || "学历不限"
+                        certification: value.required_education_text || "学历不限"
                     },
                     issueTime: value.publish_at ? dataDisplayMapping(value.publish_at) : "",
                     appiedTime: value.apply.apply_date ? dataDisplayMapping(value.apply.apply_date) + "投递" : "",
@@ -203,6 +203,7 @@
                         logo: value.company.logo || "",
                         name: value.company.name,
                         field: value.company.industry || "",
+                        displayname: value.company.display_name || "",
                         flag: ""
                     }
                 };
