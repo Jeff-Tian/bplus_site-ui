@@ -40,7 +40,6 @@ angular
                 $scope.companyData = companyData;
                 $scope.hasCollected = hasCollected;
                 $scope.hasSent = hasDelivered;
-                $scope.hasCollected = false;
                 $scope.onCollectClick = function(){
                     return $scope.saveFavoritePosition(jobID, true).then(function(ret){
                         $scope.hasCollected = ret;

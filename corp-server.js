@@ -92,6 +92,8 @@ server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
 server.use(require('./routes/corp.js'));
 
+server.use('/config', require('./routes/client-config.js'));
+
 var staticFolder = __dirname + (getMode() === 'dev' ? '/client/www' : '/client/dist');
 var viewFolder = __dirname + '/client/views';
 
@@ -125,7 +127,7 @@ server.use(/\/config\.js/, function (req, res, next) {
     var filteredConfig = JSON.stringify(filterConfig(config));
 
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule", []).run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; }]);');
+    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule").run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; }]);');
 });
 
 if (getMode() === 'dev') {

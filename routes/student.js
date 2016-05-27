@@ -14,7 +14,7 @@ router.use(localeHelper.localePath('/study-center', true), function (req, res, n
 
 router.use(localeHelper.localePath('/study-center', false), membership.ensureAuthenticated, require('./study-center.js'));
 
-router.use('/config', require('./student-config.js'));
+router.use('/config', require('./client-config.js'));
 
 router.get('/linked-in/oauth/callback', function (req, res, next) {
     res.render('third-party-interactives/linked-in-callback.jade');
