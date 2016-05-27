@@ -20,10 +20,9 @@ block content
                     div.ui.active.tab.list-tab
                         div(ng-if="isloading") 加载中，请稍后……
                         div.ui.equal.width.grid.position-relative(ng-if="!isloading")
-                            i.icon.angle.right.arrow-right.arrow-attr.clickable(ng-click="arrowClick(STATIC_PARAM.RIGHT)",ng-class="{'disabled':page>=maxPage}")
                             i.icon.angle.left.arrow-left.arrow-attr.clickable(ng-click="arrowClick(STATIC_PARAM.LEFT)",ng-class="{'disabled':page<=1}")
                             div.column(ng-repeat="data in displayData", ng-class="{'hidden': data.hide}")
-                                div.corp-find-item-contaner.clickable(ng-click="cvClick(data)")
+                                div.corp-find-item-container.clickable(ng-click="cvClick(data)")
                                     div.corp-find-item-overlay
                                         | 简历详情
                                     div.corp-find-item-head
@@ -46,6 +45,7 @@ block content
                                                 div.corp-find-item-foot-matchtext 职位匹配度
                                             //- div.eleven.wide.column
                                             //-     div.corp-find-item-foot-label(ng-repeat="label in data.label") {{label}}
+                            i.icon.angle.right.arrow-right.arrow-attr.clickable(ng-click="arrowClick(STATIC_PARAM.RIGHT)",ng-class="{'disabled':page>=maxPage}")
                         div.corp-pagination-dots.container
                             div.corp-pagination-dots.inline-block.inline-space.clickable(ng-class="{'active':page===1}",ng-click="onPageClick(1)",ng-show="maxPage>0")
                             div.corp-pagination-dots.inline-block.inline-space.clickable(ng-class="{'active':page===2}",ng-click="onPageClick(2)",ng-show="maxPage>1")
