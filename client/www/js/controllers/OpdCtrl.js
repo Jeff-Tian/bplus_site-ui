@@ -383,6 +383,7 @@
                     abstraction: ret.abstraction || "",
                     category: ret.category || [],
                     description: ret.description || "",
+                    displayname: ret.display_name || "",
                     evaluation: ret.evaluation || {},
                     industry: ret.industry || "",
                     location: ret.location || "",
