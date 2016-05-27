@@ -70,6 +70,7 @@ angular.module('corpModule')
         $scope.STATUS = {
             VIEW: "view",
             POST: "post",
+            EDIT: "edit"
         };
         $scope.option = {
             type: ""
@@ -103,7 +104,7 @@ angular.module('corpModule')
                     expiremonth: "",
                     expireday: ""
                 };
-                $scope.status = $scope.STATUS.POST;
+                $scope.status = $scope.STATUS.EDIT;
             };
             $scope.offline = function(target){
                 var param = { job_id: target.id };
