@@ -26,7 +26,7 @@
                 </div>
                 <div class="three wide column">
                     <div>
-                        <img ng-src="{{data.resumeDetail.member.avatar?resumeDetail.member.avatar+'-small':''}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male'}[resumeDetail.member.gender]">
+                        <img ng-src="{{resumeDetail.member.avatar}}" class="ui circular image headshot inline-block" ng-class="{'F': 'female', 'M': 'male', 'U':'unknown'}[resumeDetail.member.gender]">
                     </div>
                 </div>
             </div>

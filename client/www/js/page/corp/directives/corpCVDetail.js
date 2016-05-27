@@ -1,5 +1,5 @@
 angular.module('corpModule')
-.directive('corpCvDetail', ['resourceService', function (resourceService) {
+.directive('corpCvDetail', ['$rootScope', 'resourceService', function ($rootScope, resourceService) {
     return {
         templateUrl: 'js/page/corp/directives/corpCVDetail.html',
         scope: true,    //Need param: resumeDetail
@@ -16,7 +16,36 @@ angular.module('corpModule')
                 }
                 return ret;
             };
-
+            var handleHeadshot = function(url, gender) {
+                var femaleDefault = "img/corp/female_default.png";
+                var maleDefault = "img/corp/male_default.png";
+                var unknownDefault = "img/corp/unknown.png";
+                var cndify = function(source) {
+                    return $rootScope.config.cdn.normal + source + '?' + $rootScope.config.cdn.version;
+                };
+                var condition = /upload.bridgeplus.cn|img.hcdlearning.com/;
+                var ret;
+                if (url) {
+                    if (condition.test(url)) {
+                        ret = url + "-small";
+                    } else {
+                        ret = url;
+                    }
+                } else {
+                    if (gender === "M") {
+                        ret = cndify(maleDefault);
+                    } else if (gender === "F") {
+                        ret = cndify(femaleDefault);
+                    } else {
+                        ret = cndify(unknownDefault);
+                    }
+                }
+                return ret;
+            };
+            if ($scope.resumeDetail.member) {
+                $scope.resumeDetail.member.gender = $scope.resumeDetail.member.gender ? $scope.resumeDetail.member.gender : 'U';
+                $scope.resumeDetail.member.avatar = handleHeadshot($scope.resumeDetail.member.avatar, $scope.resumeDetail.member.gender);
+            }
             Object.keys($scope.resumeDetail).forEach(function(key){
                 var type = $scope.resumeDetail[key];
                 type = $.isArray(type) ? type : [type];
