@@ -26,7 +26,8 @@
     "angular-sanitize": "^1.5.0",
     "mock-tracking": "git@bitbucket.org:hcdlearning/mock-tracking.git",
     "angular-service": "https://github.com/Jeff-Tian/angular-service.git",
-    "angularQueryParserModule": "https://github.com/Jeff-Tian/angularQueryParserModule.git"
+    "angularQueryParserModule": "https://github.com/Jeff-Tian/angularQueryParserModule.git",
+    "bridgeplus_ui": "git@bitbucket.org:hcdlearning/bridgeplus_ui.git#develop"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6",
