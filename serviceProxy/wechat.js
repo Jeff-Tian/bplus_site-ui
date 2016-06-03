@@ -37,7 +37,7 @@ module.exports = {
             method: 'POST',
             dataMapper: function (d) {
                 req.dualLogError('partner = ' + d.partner);
-                d.app_id = wechat[d.partner] || wechat.corp_app_id;
+                d.app_id = wechat[d.partner] || wechat.corp_app_id; // 是否是从合作伙伴的公众号或者自己的公众号来登录的
 
                 req.dualLogError('wechat oauth logon data: ' + JSON.stringify(d));
 

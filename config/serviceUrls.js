@@ -75,7 +75,7 @@ module.exports = {
             offline: '/corp-service-proxy/job/offline',
             save: '/corp-service-proxy/job/save',
             drop: '/corp-service-proxy/job/drop',
-            search: '/corp-service-proxy/job/search',
+            search: '/corp-service-proxy/job/search'
         },
         recommend: {
             smart: '/corp-service-proxy/recommend/smart',
