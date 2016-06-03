@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper) {
+    exports.SignUpCtrl = function ($scope, service, queryParser, DeviceHelper, linkedInLogOn) {
         var moduleTrack = new window.ModuleTrack(
             DeviceHelper.isMobile() ? 'm.register' : 'register',
             function (sender, args) {
@@ -34,7 +34,7 @@
         $scope.registering = false;
         $scope.signUp = function () {
             function autoSignIn() {
-                service.post('/service-proxy/logon/authentication', {
+                return service.post('/service-proxy/logon/authentication', {
                     value: signUpData.mobile,
                     password: signUpData.password,
                     wechat_token: queryParser.get('wechat_token')
@@ -53,14 +53,26 @@
             return service.executePromiseAvoidDuplicate($scope, 'registering', function () {
                 return service.post('/service-proxy/member/register', signUpData)
                     .then(function () {
-                        autoSignIn();
-                    }, $scope.registerFormCtrl.handleFormError)
+                        var linkedInProfile = queryParser.get('linked_in_profile');
+
+                        if (!linkedInProfile) {
+                            return autoSignIn();
+                        } else {
+                            return linkedInLogOn.bindMobile({
+                                mobile: signUpData.mobile,
+                                password: signUpData.password,
+                                linkedInProfile: linkedInProfile
+                            });
+                        }
+                    })
                     .catch(function (reason) {
+                        $scope.registerFormCtrl.handleFormError(reason);
+
                         moduleTrack.send('register.afterClick', {isRegisterSuc: false});
                     });
             });
         };
     };
 
-    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper'];
+    exports.SignUpCtrl.$inject = ['$scope', 'service', 'queryParser', 'DeviceHelper', 'linkedInLogOn'];
 })(angular.bplus = angular.bplus || {});

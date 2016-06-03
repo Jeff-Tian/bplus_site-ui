@@ -35,7 +35,7 @@
             </div>
             <div class="ui bottom attached tab" data-tab="register" ng-controller="SignUpCtrl">
 
-                <div ng-show="isInBindMobileMode">
+                <div ng-show="isInBindMobileMode" ng-controller="LoginCtrl">
                     <%- include('../../views/partial/bind-mobile-tip-2.html') -%>
                     <br/>
                 </div>
