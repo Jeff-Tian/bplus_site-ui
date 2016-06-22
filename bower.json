@@ -41,6 +41,6 @@
     "when": "~3.7.3"
   },
   "resolutions": {
-    "angular": "1.4.10"
+    "angular": "1.4.x"
   }
 }
