@@ -3,7 +3,7 @@ var fs = require('fs');
 var urlParser = require('url');
 var localeHelper = require('../locales/localeHelper.js');
 var supportedLocales = localeHelper.supportedLocales;
-var Portal = require('../client/www/bower/bridgeplus_ui');
+var Portal = process.env.RUN_FROM === 'jeff' ? require('/Users/tianjie/bridgeplus_ui') : require('../client/www/bower/bridgeplus_ui');
 
 function renderIndex(req, res, next) {
     if (!mobileDetector.isRequestFromMobileOrPad(req)) {
@@ -42,17 +42,17 @@ function tryRenderMobileTemplate(template, req, res) {
     }
 }
 
-module.exports = function(server) {
+module.exports = function (server) {
     server.get('/', renderIndex);
-    server.get('/index', function(req, res, next) {
+    server.get('/index', function (req, res, next) {
         res.redirect(301, '/');
     });
-    server.get('/portal/:lang/:page', function(req, res, next) {
+    server.get('/portal/:lang/:page', function (req, res, next) {
         Portal.render(req.params.lang, req.params.page, req, res, next);
     });
-    supportedLocales.map(function(l) {
+    supportedLocales.map(function (l) {
         server.get('/' + l, renderIndex);
-        server.get('/' + l + '/index', function(req, res, next) {
+        server.get('/' + l + '/index', function (req, res, next) {
             res.redirect(301, '/');
         });
     });

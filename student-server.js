@@ -231,8 +231,6 @@ mapRoute2Template('/youth');
 mapRoute2Template('/preheating');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
-mapRoute2Template('/sign-in');
-mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');

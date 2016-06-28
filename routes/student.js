@@ -31,5 +31,18 @@ router.get('/:lang?/personal-history', membership.ensureAuthenticated, function 
 
     return res.redirect('m/personal-history');
 });
+router.get('/:lang?/sign-in', function (req, res, next) {
+    if (res.locals.signedIn) {
+        return res.redirect('/my');
+    }
+
+    next();
+}, function (req, res) {
+    return res.render('sign-in.html');
+});
+
+router.get('/:lang?/my', function (req, res, next) {
+    res.redirect('/zh/cmpt');
+});
 
 module.exports = router;

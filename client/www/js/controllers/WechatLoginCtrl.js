@@ -5,11 +5,18 @@
         $scope.wechatQRPage = $sce.trustAsResourceUrl('about:blank');
         $scope.opening = false;
         $scope.logOnViaWechat = function () {
+            var returnUrl = queryParser.get('return_url');
+            if (!returnUrl) {
+                returnUrl = location.pathname;
+            }
+
+            var data = {
+                returnUrl: window.location.origin + returnUrl
+            };
+
             service.executePromiseAvoidDuplicate($scope, 'opening', function () {
                 return service
-                    .post('/service-proxy/logon/by-wechat', {
-                        returnUrl: (window.location.protocol + '//' + window.location.host + decodeURIComponent(queryParser.get('return_url'))) || DeviceHelper.getCurrentUrlWithoutQueryStringNorHash()
-                    })
+                    .post('/service-proxy/logon/by-wechat', data)
                     .then(function (res) {
                         $scope.wechatQRPage = $sce.trustAsResourceUrl(res);
                     });
