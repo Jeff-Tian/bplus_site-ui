@@ -41,6 +41,7 @@
     "when": "~3.7.3"
   },
   "resolutions": {
-    "angular": "1.4.x"
+    "angular": "1.4.x",
+    "owl.carousel": "^2.1.6"
   }
 }
