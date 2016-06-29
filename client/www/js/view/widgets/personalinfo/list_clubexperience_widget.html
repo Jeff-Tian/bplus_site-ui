@@ -6,7 +6,7 @@
                 <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="required field {{!clicked || data.name ? '' : 'error'}}">
                     <label>{{'AssociationName' | translate}}</label>
-                    <input type="text" name="clubname" ng-model="data.name" required />
+                    <input type="text" name="clubname" ng-model="data.name" bplus-autocomplete datasource-bplus-autocomplete="social.json" required />
                 </div>
                 <div class="required field {{!clicked || data.position.id ? '' : 'error'}}">
                     <label>{{'Position' | translate}}</label>

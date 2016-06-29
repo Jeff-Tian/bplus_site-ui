@@ -6,7 +6,7 @@
                 <div class="ui error message">{{'FormRequired' | translate}}</div>
                 <div class="required field {{!clicked || data.name ? '' : 'error'}}">
                     <label>{{'Award' | translate}}</label>
-                    <input type="text" name="prizename" ng-model="data.name" required placeholder="" />
+                    <input type="text" name="prizename" ng-model="data.name" required placeholder="" bplus-autocomplete datasource-bplus-autocomplete="match.json"/>
                 </div>
                 <div class="field">
                     <label>{{'IssuedBy' | translate}}</label>
