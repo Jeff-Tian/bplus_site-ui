@@ -29,6 +29,12 @@ router.get('/my', function (req, res, next) {
     });
 });
 
+router.get('/my-account', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-layout.jade', {
+        cdn: config.cdn
+    });
+});
+
 router.get('/json/:json', function (req, res, next) {
     res.send(fs.readFileSync(__dirname + '/./' + req.params.json));
 });
