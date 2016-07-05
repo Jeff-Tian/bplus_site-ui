@@ -30,7 +30,19 @@ router.get('/my', function (req, res, next) {
 });
 
 router.get('/my-account', function (req, res, next) {
-    renderMixin(res, 'my-account.jade', 'my-account-layout.jade', {
+    renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', {
+        cdn: config.cdn
+    });
+});
+
+router.get('/my-account/transactions', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', {
+        cdn: config.cdn
+    });
+});
+
+router.get('/my-account/used', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', {
         cdn: config.cdn
     });
 });
