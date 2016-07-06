@@ -133,9 +133,11 @@
   "cdn": {
     "normal": "//cdn.bridgeplus.cn/"
   },
-  "featureSwitcher": {
-    "enableWechat": true,
-    "enableLogoutOnMobile": false
+  "userCenterService": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": 11777
+    }
   },
   "version": "3.0.1",
   "date": "20160420_1018",

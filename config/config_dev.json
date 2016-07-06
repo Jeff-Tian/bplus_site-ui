@@ -133,9 +133,11 @@
   "cdn": {
     "normal": "/"
   },
-  "featureSwitcher": {
-    "enableWechat": true,
-    "enableLogoutOnMobile": true
+  "userCenterService": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": 11777
+    }
   },
   "version": "3.0.1",
   "date": "20160420_1018",
