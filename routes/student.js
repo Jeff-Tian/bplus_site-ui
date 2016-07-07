@@ -6,6 +6,8 @@ var mobileDetector = require('../mobile/mobileDetector');
 
 var router = express.Router();
 
+router.get('/bplusConfigModule.js', require('../config/configHelper').serveBplusConfigModule);
+
 router.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('../store'));
 
 router.use(localeHelper.localePath('/study-center', true), function (req, res, next) {

@@ -129,5 +129,13 @@ module.exports = {
         logonByToken: {
             frontEnd: '/service-proxy/linked-in/logon-by-token'
         }
+    },
+
+    userCenter: {
+        bbCoin: {
+            frontEnd: '/service-proxy/user-center/bbcoin',
+            abbr: '/bbcoin',
+            upstream: '/service/bbcoin/load'
+        }
     }
 };
