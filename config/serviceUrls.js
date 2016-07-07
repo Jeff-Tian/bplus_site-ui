@@ -136,6 +136,16 @@ module.exports = {
             frontEnd: '/service-proxy/user-center/bbcoin',
             abbr: '/bbcoin',
             upstream: '/service/bbcoin/load'
+        },
+        myProducts: {
+            frontEnd: '/service-proxy/user-center/my-products',
+            abbr: '/my-products',
+            upstream: '/service/myproductStatus'
+        },
+        bbCoinHistory: {
+            frontEnd: '/service-proxy/user-center/bbcoin-history',
+            abbr: '/bbcoin-history',
+            upstream: '/service/bbcoinHistory/load'
         }
     }
 };
