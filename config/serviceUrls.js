@@ -147,5 +147,17 @@ module.exports = {
             abbr: '/bbcoin-history',
             upstream: '/service/bbcoinHistory/load'
         }
+    },
+    commerceCenter: {
+        orderHistory: {
+            frontEnd: '/service-proxy/commerce-center/order-history',
+            abbr: '/order-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'cash';
+                return d;
+            }
+        }
     }
 };
