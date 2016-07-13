@@ -158,6 +158,16 @@ module.exports = {
                 d.type = 'cash';
                 return d;
             }
+        },
+        redemptionHistory: {
+            frontEnd: '/service-proxy/commerce-center/redemption-history',
+            abbr: '/redemption-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'redemption';
+                return d;
+            }
         }
     }
 };
