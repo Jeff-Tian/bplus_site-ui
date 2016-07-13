@@ -53,7 +53,7 @@
   "commerce": {
     "inner": {
       "host": "service.bridgeplus.cn",
-      "port": "10222"
+      "port": "12888"
     }
   },
   "info": {
