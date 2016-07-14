@@ -1,4 +1,13 @@
-module.exports = {
+function recent(parent) {
+    parent.recent = {
+        frontEnd: parent.frontEnd + '/recent',
+        abbr: parent.abbr + '/recent',
+        upstream: parent.upstream + '/recent',
+        dataMapper: parent.dataMapper
+    };
+}
+
+var serviceUrls = {
     "logOnFromWechat": "/service-proxy/logon/from-wechat",
     "logOnByToken": "/service-proxy/logon/by-token",
     "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
@@ -171,3 +180,9 @@ module.exports = {
         }
     }
 };
+
+recent(serviceUrls.userCenter.bbCoinHistory);
+recent(serviceUrls.commerceCenter.orderHistory);
+recent(serviceUrls.commerceCenter.redemptionHistory);
+
+module.exports = serviceUrls;
