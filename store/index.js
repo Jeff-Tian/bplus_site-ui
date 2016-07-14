@@ -54,6 +54,12 @@ router.get('/my-account/deposit', function (req, res, next) {
     });
 });
 
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+router.use('/', require(onlineOfflinePathSwitch('online-store', '../../online-store')));
+
 router.get('/json/:json', function (req, res, next) {
     res.send(fs.readFileSync(__dirname + '/./' + req.params.json));
 });
