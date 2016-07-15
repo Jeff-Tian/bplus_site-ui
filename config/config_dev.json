@@ -71,11 +71,11 @@
   "payment": {
     "public": {
       "host": "uat.service.hcd.com",
-      "port": "10111"
+      "port": "12666"
     },
     "inner": {
       "host": "uat.service.hcd.com",
-      "port": "10111"
+      "port": "12666"
     }
   },
   "games": {

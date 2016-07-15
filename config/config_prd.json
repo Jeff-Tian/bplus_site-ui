@@ -75,7 +75,7 @@
     },
     "inner": {
       "host": "service.bridgeplus.cn",
-      "port": "10111"
+      "port": "12666"
     }
   },
   "games": {
