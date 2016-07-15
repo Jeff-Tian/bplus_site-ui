@@ -139,6 +139,12 @@
       "port": 12777
     }
   },
+  "cmsService": {
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": 12555
+    }
+  },
   "version": "3.0.2",
   "date": "20160707_0619",
   "trackingUrl": "http://tracking.bridgeplus.cn",

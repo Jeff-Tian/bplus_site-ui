@@ -178,6 +178,13 @@ var serviceUrls = {
                 return d;
             }
         }
+    },
+    cmsService: {
+        getContentByKey: {
+            frontEnd: '/service-proxy/cms/get/:key',
+            abbr: '/get/:key',
+            upstream: '/service/cmsContent/:key'
+        }
     }
 };
 

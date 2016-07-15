@@ -139,6 +139,12 @@
       "port": 12777
     }
   },
+  "cmsService": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": 12555
+    }
+  },
   "version": "3.0.2",
   "date": "20160707_0619",
   "trackingUrl": "http://uat.tracking.hcd.com",
