@@ -63,7 +63,7 @@ function onlineOfflinePathSwitch(onlinePath, offlinePath) {
 }
 
 function setOnlineStoreTemplate(req, res, next) {
-    res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
+    res.locals.onlineStoreTemplate = __dirname + '/..' + onlineOfflinePathSwitch(
             '/node_modules/',
             '/../') +
         'online-store/views/';
