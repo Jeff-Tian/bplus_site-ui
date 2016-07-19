@@ -6,6 +6,7 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
+    usercenterService = require('./usercenter'),
     productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
     infomationService = require('./informationService'),
@@ -90,5 +91,8 @@ module.exports = require('express').Router()
     .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
     .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
 
-    .post(serviceUrls.getOfferInfo, commerceService.getOfferInfo)
+    .post(serviceUrls.getOfferInfo, membership.ensureAuthenticated, commerceService.getOfferInfo)
+    .post(serviceUrls.searchOffer, membership.ensureAuthenticated, commerceService.searchOffer)
+    .post(serviceUrls.bbcoinBalance, membership.ensureAuthenticated, usercenterService.bbcoinBalance)
+    .post(serviceUrls.bbcoinExchange, membership.ensureAuthenticated, usercenterService.bbcoinExchange)
 ;
