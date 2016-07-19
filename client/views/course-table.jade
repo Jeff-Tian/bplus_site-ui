@@ -14,7 +14,8 @@ mixin unfinishedCourseBlocks(c)
             button(class="ui mini button", ng-class="{'red': #{c}.countdown.value <= timeThreshold, 'grey': !#{c}.countdown.value || #{c}.countdown.value > timeThreshold}", ng-disabled="#{c}.status === -1 || #{c}.countdown.value <= timeThreshold", ng-href="{{#{c}.classUrl}}", target="_blank") {{ #{c}.status === - 1 ? '还未开课': (#{c}.countdown.value <= timeThreshold ? '进入课程' : '未到时间')}}
 
 mixin finishedUnratedCourseBlocks(c)
-    td {{#{c}.rated ? '已评价' : '尚未评价'}}
+    td
+        span(style="white-space: nowrap;") {{#{c}.rated ? '已评价' : '尚未评价'}}
     td
         button(class="ui mini red button", ng-click="#{c}.showRating=true", ng-disabled="#{c}.showRating") 立刻评价
 
@@ -31,7 +32,7 @@ mixin finishedRatedCourseBlocks(c)
     td
         + rating(5, 'c.generalEvaluation')
     td
-        button(class="ui mini red button", ng-click="c.showRating=!c.showRating; showEvaluationDetail(c)") 评价详情
+        button(class="ui mini red button", ng-click="c.showRating=!c.showRating; showEvaluationDetail(c)", style="white-space: nowrap;") 评价详情
 
 mixin courseTable()
     table(class="ui basic table positions", style="border: none; background-color: white;")
