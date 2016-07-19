@@ -39,7 +39,7 @@
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-less": "*",
+    "grunt-contrib-less": "1.3.0",
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
