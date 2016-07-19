@@ -25,6 +25,9 @@ var serviceUrls = {
     getUnusedProducts: '/service-proxy/member/get-my-unused-products',
     getUsedProducts: '/service-proxy/member/get-my-used-products',
     getOfferInfo: '/service-proxy/commerce/get-offer-info',
+    searchOffer: '/service-proxy/commerce/search-offer',
+    bbcoinBalance: '/service-proxy/usercenter/bbcoin-balance',
+    bbcoinExchange: '/service-proxy/usercenter/bbcoin-exchange',
 
     studyCenter: {
         classBooking: {

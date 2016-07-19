@@ -1,6 +1,7 @@
 var http = require('http');
 var config = require('../config');
 var commerceConfig = config.commerce.inner;
+var newCommerceConfig = config.newCommerce.inner;
 var paymentConfig = config.payment.inner;
 var gameConfig = config.games;
 var proxy = require('./proxy');
@@ -11,8 +12,8 @@ var bplusService = config.bplusService;
 function injectRedemptionGeneration(res, json, req, next) {
     if (json.isSuccess) {
         proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
+            host: newCommerceConfig.host,
+            port: newCommerceConfig.port,
             path: '/service/redemption/generate',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -68,8 +69,8 @@ function injectRedemptionGeneration(res, json, req, next) {
 function checkUserAccessFor(req, res, next) {
     return function (option) {
         proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
+            host: newCommerceConfig.host,
+            port: newCommerceConfig.port,
             path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -91,7 +92,7 @@ function checkUserAccessFor(req, res, next) {
                 }
             }
         })(req, res, next);
-    }
+    };
 }
 
 function handleUserAccessCheckResult(res, json, req, next) {
@@ -125,11 +126,24 @@ function proxyCommerce(config) {
         }
     });
 }
+function proxyNewCommerce(config) {
+    return proxy({
+        host: newCommerceConfig.host,
+        port: newCommerceConfig.port,
+        path: config.path,
+        dataMapper: function (d) {
+            console.log("d", d);
+            d.userId = d.member_id;
+
+            return d;
+        }
+    });
+}
 
 module.exports = {
     createUpSellOrderByRedemptionCode: proxy({
-        host: commerceConfig.host,
-        port: commerceConfig.port,
+        host: newCommerceConfig.host,
+        port: newCommerceConfig.port,
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
@@ -143,8 +157,8 @@ module.exports = {
     }),
 
     createStoreOrderAndPayByRedemptionCode: proxy({
-        host: commerceConfig.host,
-        port: commerceConfig.port,
+        host: newCommerceConfig.host,
+        port: newCommerceConfig.port,
         path: '/service/redemption/redeem',
         dataMapper: function (d) {
             d.userId = d.member_id;
@@ -181,8 +195,8 @@ module.exports = {
 
     checkUserAccessForNationalGame2015AndGenerateRedemptionCodeIfHasRight: function (req, res, next) {
         proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
+            host: newCommerceConfig.host,
+            port: newCommerceConfig.port,
             path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -200,8 +214,8 @@ module.exports = {
         req.dualLogError('check user access with option is ' + option);
 
         proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
+            host: newCommerceConfig.host,
+            port: newCommerceConfig.port,
             path: '/service/useraccess/hasApply',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -214,8 +228,8 @@ module.exports = {
     },
 
     createOrder: proxy({
-        host: commerceConfig.host,
-        port: commerceConfig.port,
+        host: newCommerceConfig.host,
+        port: newCommerceConfig.port,
         path: '/service/order/create',
         dataMapper: function (d) {
             d.userId = d.member_id;
@@ -243,8 +257,8 @@ module.exports = {
         }
 
         proxy({
-            host: commerceConfig.host,
-            port: commerceConfig.port,
+            host: newCommerceConfig.host,
+            port: newCommerceConfig.port,
             path: '/service/order/create',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -302,7 +316,7 @@ module.exports = {
     },
 
     getMyOrderList: function (req, res, next) {
-        proxyCommerce({
+        proxyNewCommerce({
             path: '/service/orderList',
             dataMapper: function (d) {
                 d.userId = d.member_id;
@@ -313,14 +327,20 @@ module.exports = {
     },
 
     getOrderDetail: function (req, res, next) {
-        proxyCommerce({
+        proxyNewCommerce({
             path: '/service/orderDetail/' + res.locals.hcd_user.member_id + '/' + req.params.orderId
         })(req, res, next);
     },
 
     getOfferInfo: function (req, res, next) {
-        proxyCommerce({
-            path: '/service/offer/getOffer/'
+        proxyNewCommerce({
+            path: '/service/offer/getOffer'
+        })(req, res, next);
+    },
+
+    searchOffer: function (req, res, next) {
+        proxyNewCommerce({
+            path: '/service/offer/search'
         })(req, res, next);
     }
 };

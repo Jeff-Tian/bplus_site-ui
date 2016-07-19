@@ -50,6 +50,12 @@
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
   },
+  "newCommerce": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "12888"
+    }
+  },
   "commerce": {
     "inner": {
       "host": "uat.service.hcd.com",
@@ -76,6 +82,12 @@
     "inner": {
       "host": "uat.service.hcd.com",
       "port": "12666"
+    }
+  },
+  "usercenter": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "12777"
     }
   },
   "games": {
