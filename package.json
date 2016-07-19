@@ -9,7 +9,7 @@
   "homepage": "",
   "author": {},
   "dependencies": {
-    "body-parser": "^1.13.3",
+    "body-parser": "1.15.0",
     "competion-api": "git@bitbucket.org:hcdlearning/cmpt2015-api.git#develop",
     "connect-busboy": "0.0.2",
     "ejs": "^2.3.3",

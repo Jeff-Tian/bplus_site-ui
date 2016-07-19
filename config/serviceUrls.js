@@ -158,6 +158,16 @@ var serviceUrls = {
             frontEnd: '/service-proxy/user-center/bbcoin-history',
             abbr: '/bbcoin-history',
             upstream: '/service/bbcoinHistory/load'
+        },
+        productUsageHistory: {
+            frontEnd: '/service-proxy/user-center/product-usage-history',
+            abbr: '/product-usage-history',
+            upstream: '/service/myproductHistory/search',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+
+                return d;
+            }
         }
     },
     commerceCenter: {
