@@ -1,4 +1,13 @@
-module.exports = {
+function recent(parent) {
+    parent.recent = {
+        frontEnd: parent.frontEnd + '/recent',
+        abbr: parent.abbr + '/recent',
+        upstream: parent.upstream + '/recent',
+        dataMapper: parent.dataMapper
+    };
+}
+
+var serviceUrls = {
     "logOnFromWechat": "/service-proxy/logon/from-wechat",
     "logOnByToken": "/service-proxy/logon/by-token",
     "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
@@ -129,5 +138,58 @@ module.exports = {
         logonByToken: {
             frontEnd: '/service-proxy/linked-in/logon-by-token'
         }
+    },
+
+    userCenter: {
+        bbCoin: {
+            frontEnd: '/service-proxy/user-center/bbcoin',
+            abbr: '/bbcoin',
+            upstream: '/service/bbcoin/load'
+        },
+        myProducts: {
+            frontEnd: '/service-proxy/user-center/my-products',
+            abbr: '/my-products',
+            upstream: '/service/myproductStatus'
+        },
+        bbCoinHistory: {
+            frontEnd: '/service-proxy/user-center/bbcoin-history',
+            abbr: '/bbcoin-history',
+            upstream: '/service/bbcoinHistory/load'
+        }
+    },
+    commerceCenter: {
+        orderHistory: {
+            frontEnd: '/service-proxy/commerce-center/order-history',
+            abbr: '/order-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'cash';
+                return d;
+            }
+        },
+        redemptionHistory: {
+            frontEnd: '/service-proxy/commerce-center/redemption-history',
+            abbr: '/redemption-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'redemption';
+                return d;
+            }
+        }
+    },
+    cmsService: {
+        getContentByKey: {
+            frontEnd: '/service-proxy/cms/get/:key',
+            abbr: '/get/:key',
+            upstream: '/service/cmsContent/:key'
+        }
     }
 };
+
+recent(serviceUrls.userCenter.bbCoinHistory);
+recent(serviceUrls.commerceCenter.orderHistory);
+recent(serviceUrls.commerceCenter.redemptionHistory);
+
+module.exports = serviceUrls;

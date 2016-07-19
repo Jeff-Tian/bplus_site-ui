@@ -303,7 +303,12 @@ module.exports = {
 
     getMyOrderList: function (req, res, next) {
         proxyCommerce({
-            path: '/service/orderList/' + res.locals.hcd_user.member_id
+            path: '/service/orderList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                
+                return d;
+            }
         })(req, res, next);
     },
 

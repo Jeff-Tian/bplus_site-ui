@@ -17,6 +17,10 @@ function filterConfig(config) {
     return filtered;
 }
 
+const data = {
+    cdn: config.cdn
+};
+
 router.get('/config.js', function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
@@ -28,6 +32,33 @@ router.get('/my', function (req, res, next) {
         trackingJs: config.trackingJs + '?' + config.cdn.version
     });
 });
+
+router.get('/my-account', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', data);
+});
+
+router.get('/my-account/transactions', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', data);
+});
+
+router.get('/my-account/used', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', data);
+});
+
+router.get('/my-account/deposit', function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-deposit-sublayout.jade', {
+        cdn: config.cdn,
+        paymentMethods: {
+            pcAlipay: 'b_alipay'
+        }
+    });
+});
+
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+router.use('/', require(onlineOfflinePathSwitch('online-store', '../../online-store')));
 
 router.get('/json/:json', function (req, res, next) {
     res.send(fs.readFileSync(__dirname + '/./' + req.params.json));

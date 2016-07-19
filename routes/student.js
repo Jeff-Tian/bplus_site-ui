@@ -6,6 +6,8 @@ var mobileDetector = require('../mobile/mobileDetector');
 
 var router = express.Router();
 
+router.get('/bplusConfigModule.js', require('../config/configHelper').serveBplusConfigModule);
+
 router.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('../store'));
 
 router.use(localeHelper.localePath('/study-center', true), function (req, res, next) {
@@ -21,7 +23,9 @@ router.get('/linked-in/oauth/callback', function (req, res, next) {
 });
 
 router.get('/message-listener', function (req, res) {
-    res.render('third-party-interactives/messageListener.jade');
+    res.render('third-party-interactives/messageListener.jade', {
+        title: req.query.title
+    });
 });
 
 router.get('/:lang?/personal-history', membership.ensureAuthenticated, function (req, res, next) {
