@@ -236,9 +236,9 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     patterns: [{
-                        match: /https:\/\/fonts.googleapis.com\/css/g,
+                        match: /@import url\(http(s*):\/\/fonts\.(.*)\.com\/css\?family\=Lato\:400\,700\,400italic\,700italic\&subset\=latin\)\;/g,
                         replacement: function () {
-                            return 'http://fonts.useso.com/css'; // replaces "foo" to "bar"
+                            return ''; // replaces "foo" to "bar"
                         }
                     }]
                 },
