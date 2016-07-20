@@ -94,8 +94,8 @@ module.exports = require('express').Router()
     .post(serviceUrls.getUnusedProducts, membership.ensureAuthenticated, productService.getMyUnusedProducts)
     .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
 
-    .post(serviceUrls.getOfferInfo, membership.ensureAuthenticated, commerceService.getOfferInfo)
-    .post(serviceUrls.searchOffer, membership.ensureAuthenticated, commerceService.searchOffer)
+    .post(serviceUrls.getOfferInfo, commerceService.getOfferInfo)
+    .post(serviceUrls.searchOffer, commerceService.searchOffer)
     .post(serviceUrls.bbcoinBalance, membership.ensureAuthenticated, usercenterService.bbcoinBalance)
     .post(serviceUrls.bbcoinExchange, membership.ensureAuthenticated, usercenterService.bbcoinExchange)
 ;

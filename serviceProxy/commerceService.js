@@ -320,7 +320,7 @@ module.exports = {
             path: '/service/orderList',
             dataMapper: function (d) {
                 d.userId = d.member_id;
-                
+
                 return d;
             }
         })(req, res, next);
