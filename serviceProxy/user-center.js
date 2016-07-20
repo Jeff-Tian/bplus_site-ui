@@ -13,5 +13,6 @@ proxyTo.proxyGetToPost(router, config.serviceUrls.userCenter.bbCoin, config.user
 proxyTo.proxyGetToPost(router, config.serviceUrls.userCenter.myProducts, config.userCenterService.inner);
 proxyTo.proxyPostToPost(router, config.serviceUrls.userCenter.bbCoinHistory, config.userCenterService.inner);
 proxyTo.proxyPostToPost(router, config.serviceUrls.userCenter.bbCoinHistory.recent, config.userCenterService.inner);
+proxyTo.proxyPostToPost(router, config.serviceUrls.userCenter.productUsageHistory, config.userCenterService.inner);
 
 module.exports = router;
