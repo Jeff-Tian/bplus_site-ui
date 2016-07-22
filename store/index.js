@@ -30,20 +30,23 @@ router.get('/config.js', function (req, res, next) {
 router.get('/my', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade', {
         cdn: config.cdn,
-        trackingJs: config.trackingJs + '?' + config.cdn.version
+        trackingJs: config.trackingJs + '?' + config.cdn.version,
+        title: '我的订单'
     });
 });
 
 router.get('/my-account', membership.ensureAuthenticated, function (req, res, next) {
-    renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', data);
+    renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', Object.assign({}, data, {
+        title: '我的账户'
+    }));
 });
 
 router.get('/my-account/transactions', membership.ensureAuthenticated, function (req, res, next) {
-    renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', data);
+    renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', Object.assign({}, data, {title: '我的交易记录'}));
 });
 
 router.get('/my-account/used', membership.ensureAuthenticated, function (req, res, next) {
-    renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', data);
+    renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', Object.assign(data, {title: '我的产品使用记录'}));
 });
 
 router.get('/my-account/deposit', membership.ensureAuthenticated, function (req, res, next) {
@@ -51,7 +54,8 @@ router.get('/my-account/deposit', membership.ensureAuthenticated, function (req,
         cdn: config.cdn,
         paymentMethods: {
             pcAlipay: 'b_alipay'
-        }
+        },
+        title: '充值发条到我的账户'
     });
 });
 
