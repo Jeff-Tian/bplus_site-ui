@@ -462,6 +462,8 @@
         }
 
         $scope.isFromAndroid = /android/i.test(window.navigator.userAgent || window.navigator.vender);
+
+        $scope.locale = angular.bplus.localeHelper.getLocale(location.pathname);
     };
 
     exports.PersonalHistoryCtrl.$inject = ['$scope', 'FormValidation', '$timeout', 'service', '$filter', 'msgBus', '$q', 'DeviceHelper'];

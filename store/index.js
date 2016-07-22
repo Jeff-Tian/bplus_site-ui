@@ -4,6 +4,7 @@ var jade = require('jade');
 var path = require('path');
 var ejs = require('ejs');
 var config = require('../config');
+var membership = require('../serviceProxy/membership');
 
 function filterConfig(config) {
     var filtered = {};
@@ -33,7 +34,7 @@ router.get('/my', function (req, res, next) {
     });
 });
 
-router.get('/my-account', function (req, res, next) {
+router.get('/my-account', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', data);
 });
 
