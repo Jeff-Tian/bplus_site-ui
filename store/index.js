@@ -27,7 +27,7 @@ router.get('/config.js', function (req, res, next) {
     res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-router.get('/my', function (req, res, next) {
+router.get('/my', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade', {
         cdn: config.cdn,
         trackingJs: config.trackingJs + '?' + config.cdn.version
@@ -38,15 +38,15 @@ router.get('/my-account', membership.ensureAuthenticated, function (req, res, ne
     renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', data);
 });
 
-router.get('/my-account/transactions', function (req, res, next) {
+router.get('/my-account/transactions', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', data);
 });
 
-router.get('/my-account/used', function (req, res, next) {
+router.get('/my-account/used', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', data);
 });
 
-router.get('/my-account/deposit', function (req, res, next) {
+router.get('/my-account/deposit', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my-account.jade', 'my-account-deposit-sublayout.jade', {
         cdn: config.cdn,
         paymentMethods: {
