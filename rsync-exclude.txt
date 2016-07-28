@@ -6,4 +6,4 @@ client/grunt
 client/css
 client/js
 client/test
-semantic
+/semantic
