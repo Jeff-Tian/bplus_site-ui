@@ -58,7 +58,7 @@
                     <span class="ui right floated light grey color" ng-bind-template="{{data.issueTime}}" ng-show="data.appiedTime === ''" style="padding-top:2px"></span>
                     <span class="ui right floated light grey color status-text" ng-bind="data.appiedTime" style="padding-top:2px"></span>
                 </div>
-                <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)" ng-show="data.status==='apply'">
+                <div ng-if="displayData.deleteable" class="removeIcon" ng-click="displayData.onDelete(data, $event)">
                     <div class="ui red right corner label">
                         <i class="remove icon"></i>
                     </div>

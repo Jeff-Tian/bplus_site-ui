@@ -170,7 +170,7 @@
             var targetDate = new Date(dateString);
             var ret = targetDate.getFullYear() + "-" +
                     (targetDate.getMonth()+1) + "-" +
-                    targetDate.getDay();
+                    targetDate.getDate();
 
             return ret;
         };
