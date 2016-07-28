@@ -27,7 +27,8 @@
     "mock-tracking": "git@bitbucket.org:hcdlearning/mock-tracking.git",
     "angular-service": "https://github.com/Jeff-Tian/angular-service.git",
     "angularQueryParserModule": "angular-query-parser#^0.0.2",
-    "angular-auto-complete": "angular-j-auto-complete#^1.0.0"
+    "angular-auto-complete": "angular-j-auto-complete#^1.0.0",
+    "bridgeplus_ui": "git@bitbucket.org:hcdlearning/bridgeplus_ui.git#develop"
   },
   "devDependencies": {
     "angular-mocks": "1.4.12",
@@ -41,6 +42,7 @@
     "when": "3.7.7"
   },
   "resolutions": {
-    "angular": "1.4.12"
+    "angular": "1.4.12",
+    "owl.carousel": "^2.1.6"
   }
 }
