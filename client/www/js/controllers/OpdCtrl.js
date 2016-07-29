@@ -355,7 +355,10 @@
                     data.positionAdditional = {};
                     data.positionAdditional.description = ret.description || "";
                     data.positionAdditional.workLife = ret.work_life || "";
+                    data.positionAdditional.slogan = ret.slogan || "";
                     data.positionAdditional.tags = ret.tags || [];
+                    data.positionAdditional.requirement_tags = ret.requirement_tags || [];
+                    data.positionAdditional.slogan_tags = ret.slogan_tags || [];
                     data.positionAdditional.major = ret.major || "";
                     data.positionAdditional.language = ret.language || "";
                     data.positionAdditional.internshipWorkingInfo = ret.internship_days_per_week ? "每周工作" + ret.internship_days_per_week + "天" : "";
