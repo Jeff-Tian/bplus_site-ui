@@ -154,8 +154,6 @@ function checkWechatHostAndSetCookie(req, res, next) {
 server.use(localeHelper.localePath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.localePath('/m', false), require('./mobile'));
 
-server.use(localeHelper.localePath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
-
 function onlineOfflinePathSwitch(onlinePath, offlinePath) {
     return (process.env.RUN_FROM !== 'jeff') ? onlinePath : offlinePath;
 }
