@@ -58,13 +58,6 @@ require('./routes/student-homepage')(server);
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
 
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false),
-        express.static('/Users/tianjie/SHARED-UI'));
-}
-
 function setupStaticResources() {
     var staticServer = express.static(staticFolder, staticSetting);
 
@@ -173,11 +166,18 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+function serveSharedUI() {
+    if (process.env.RUN_FROM === 'jeff') {
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
 
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+    } else {
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI'));
+    }
 }
+
+serveSharedUI();
 
 //setupOnlineStoreStaticResources('semantic');
 server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
