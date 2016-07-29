@@ -168,12 +168,12 @@ function setupOnlineStoreStaticResources(staticFolder) {
 
 function serveSharedUI() {
     if (process.env.RUN_FROM === 'jeff') {
-        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI', staticSetting));
 
-        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI', staticSetting));
     } else {
-        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI'));
-        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI', staticSetting));
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI', staticSetting));
     }
 }
 
