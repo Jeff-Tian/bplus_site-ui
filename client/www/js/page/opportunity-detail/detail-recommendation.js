@@ -162,7 +162,7 @@ angular.module('opdModule').directive('bopdrecommendation', ['$q', '$timeout', f
                 }, {
                     key: 'monthlySalary',
                     label: '年\u2001\u2001薪：',
-                    rangeLabel: '人民币',
+                    rangeLabel: '元',
                     type: 'range',
                     list: [{
                         id: 0,

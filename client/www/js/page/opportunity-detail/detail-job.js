@@ -64,7 +64,7 @@ angular.module('opdModule')
                     $scope.filters = [{
                         key: 'workPlace',
                         label: '工作地点：',
-                        more: placesRaw.slice(DISPLAY_COUNT),
+                        more: null,
                         list: [{
                             id: 0,
                             value: '全国',
@@ -81,23 +81,23 @@ angular.module('opdModule')
                     }, {
                         key: 'industry',
                         label: '行业领域：',
-                        extraListValue: '',
-                        autoComplete: industriesRaw,
+                        // extraListValue: '',
+                        // autoComplete: industriesRaw,
                         list: [{
                             id: 0,
                             text: '不限'
                         }, {
                             id: 1,
                             text: '互联网'
-                        }, {
-                            id: 2,
-                            text: '计算机'
+                        // }, {
+                        //     id: 2,
+                        //     text: '计算机'
                         }, {
                             id: 3,
                             text: '地产'
-                        }, {
-                            id: 4,
-                            text: '能源'
+                        // }, {
+                        //     id: 4,
+                        //     text: '能源'
                         }, {
                             id: 5,
                             text: '快消'
@@ -107,9 +107,9 @@ angular.module('opdModule')
                         }, {
                             id: 7,
                             text: '金融'
-                        }, {
-                            id: 8,
-                            text: '游戏'
+                        // }, {
+                        //     id: 8,
+                        //     text: '游戏'
                         }, {
                             id: 9,
                             text: '教育'
@@ -133,7 +133,7 @@ angular.module('opdModule')
                     }, {
                         key: 'monthlySalary',
                         label: '年\u2001\u2001薪：',
-                        rangeLabel: '人民币',
+                        rangeLabel: '元',
                         type: 'range',
                         list: [{
                             id: 0,

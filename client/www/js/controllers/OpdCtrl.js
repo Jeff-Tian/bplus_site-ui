@@ -43,25 +43,25 @@
         {text: "上海"},
         {text: "广州"},
         {text: "深圳"},
-        {text: "南京"},
+        // {text: "南京"},
         {text: "杭州"},
-        {text: "成都"},
-        {text: "重庆"},
-        {text: "苏州"},
-        {text: "天津"},
+        // {text: "成都"},
+        // {text: "重庆"},
+        // {text: "苏州"},
+        // {text: "天津"},
         {text: "武汉"},
-        {text: "西安"},
+        // {text: "西安"},
         {text: "大连"},
-        {text: "郑州"},
-        {text: "青岛"},
-        {text: "福州"},
-        {text: "沈阳"},
-        {text: "合肥"},
-        {text: "长沙"},
-        {text: "昆明"},
-        {text: "济南"},
-        {text: "哈尔滨"},
-        {text: "长春"}
+        // {text: "郑州"},
+        // {text: "青岛"},
+        // {text: "福州"},
+        // {text: "沈阳"},
+        // {text: "合肥"},
+        // {text: "长沙"},
+        // {text: "昆明"},
+        // {text: "济南"},
+        // {text: "哈尔滨"},
+        // {text: "长春"}
     ];
 
     exports.OpdCtrl = function ($scope, $q, PipeCacheService, service)  {
@@ -170,7 +170,7 @@
             var targetDate = new Date(dateString);
             var ret = targetDate.getFullYear() + "-" +
                     (targetDate.getMonth()+1) + "-" +
-                    targetDate.getDay();
+                    targetDate.getDate();
 
             return ret;
         };
@@ -355,7 +355,10 @@
                     data.positionAdditional = {};
                     data.positionAdditional.description = ret.description || "";
                     data.positionAdditional.workLife = ret.work_life || "";
+                    data.positionAdditional.slogan = ret.slogan || "";
                     data.positionAdditional.tags = ret.tags || [];
+                    data.positionAdditional.requirement_tags = ret.requirement_tags || [];
+                    data.positionAdditional.slogan_tags = ret.slogan_tags || [];
                     data.positionAdditional.major = ret.major || "";
                     data.positionAdditional.language = ret.language || "";
                     data.positionAdditional.internshipWorkingInfo = ret.internship_days_per_week ? "每周工作" + ret.internship_days_per_week + "天" : "";
