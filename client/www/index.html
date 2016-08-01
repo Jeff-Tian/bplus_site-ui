@@ -379,6 +379,19 @@
         </div>
     </div>
 </div>
+<div style="display:none;position:fixed;z-index:9999;left:0;top:0;background-color:rgba(0,0,0,0.8);width:100vw;height:100vh;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;" class="urgentPopup">
+    <div style="position:absolute;color:white;top:35vh;left:20vw;width:30vw;">
+        <div style="font-size:48px;height:1em">公告</div>
+        <div style="font-size:20px;margin-top:1em;line-height:1.6em" class="content"></div>
+    </div>
+    <div style="position:absolute;top:30vh;left:50vw">
+        <img src="<%= cdn.normal %>img/newbanner.png?<%= cdn.version %>">
+        <div class="urgentCancel" style="position:absolute;color:white;top:-2em;right:-1em;width:1em;font-size:38px;cursor:pointer"> X </div>
+    </div>
+    <div style="position:absolute; bottom:25vh;left:45vw;">
+        <button class="ui red button urgentCancel" style="width:10vw;">朕知道了</button>
+    </div>
+</div>
 <%- include('view-partial/footer.html') -%>
 <!--JS-->
 <script src="<%= cdn.normal %>bower/angularQueryParserModule/dist/scripts/app.js?<%= cdn.version %>"></script>
@@ -408,8 +421,18 @@
         a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0035/5758.js?" + Math.floor(new Date().getTime() / 3600000);
         a.async = true;
         a.type = "text/javascript";
-        b.parentNode.insertBefore(a, b)
+        b.parentNode.insertBefore(a, b);
     }, 1);
+    $.get("http://blob.bridgeplus.cn/bplus_config.json"+"?"+(new Date().getTime()).toString()).then(function(ret) { 
+        if (ret && ret.displayUrgentPopup && !sessionStorage.getItem("urgentNotificationRead")) {
+            $(".urgentPopup .content").text(ret.urgentPopupContent);
+            $(".urgentPopup").show();
+            $(".urgentCancel").click(function() {
+                sessionStorage.setItem("urgentNotificationRead",true);
+                $(".urgentPopup").hide();
+            });
+        }
+    });
 </script>
 
 <%- include('view-partial/external-js.html') -%>
