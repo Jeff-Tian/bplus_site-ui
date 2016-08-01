@@ -2,7 +2,8 @@ angular.module('studyCenterModule')
     .value('CourseTypeTags', {
         one2one: '一对一',
         one2many: '小班课',
-        lecture: '导师辅导'
+        lecture: '公开课',
+        mentor: '导师课'
     })
     .value('RequestStatus', {
         request: '待确认',
