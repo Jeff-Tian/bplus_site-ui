@@ -52,7 +52,7 @@
   },
   "newCommerce": {
     "inner": {
-      "host": "uat.service.hcd.com",
+      "host": "service.bridgeplus.cn",
       "port": "12888"
     }
   },
