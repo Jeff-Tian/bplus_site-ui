@@ -19,6 +19,10 @@ module.exports = function () {
                         'mock/major.zh.json',
                         'mock/schoolname.en.json',
                         'mock/schoolname.zh.json',
+                        'mock/social.en.json',
+                        'mock/social.zh.json',
+                        'mock/match.en.json',
+                        'mock/match.zh.json',
                         '*'
                     ],
                     dest: "<%= config.dist %>"

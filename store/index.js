@@ -4,6 +4,7 @@ var jade = require('jade');
 var path = require('path');
 var ejs = require('ejs');
 var config = require('../config');
+var membership = require('../serviceProxy/membership');
 
 function filterConfig(config) {
     var filtered = {};
@@ -17,17 +18,52 @@ function filterConfig(config) {
     return filtered;
 }
 
+const data = {
+    cdn: config.cdn
+};
+
 router.get('/config.js', function (req, res, next) {
     res.setHeader("Content-Type", "text/javascript; charset=utf-8");
     res.send('if (typeof angular !== "undefined") {angular.onlineStore = angular.onlineStore || {}; angular.onlineStore.config = ' + JSON.stringify(filterConfig(config)) + '; }');
 });
 
-router.get('/my', function (req, res, next) {
+router.get('/my', membership.ensureAuthenticated, function (req, res, next) {
     renderMixin(res, 'my.jade', 'mylayout.jade', {
         cdn: config.cdn,
-        trackingJs: config.trackingJs + '?' + config.cdn.version
+        trackingJs: config.trackingJs + '?' + config.cdn.version,
+        title: '我的订单'
     });
 });
+
+router.get('/my-account', membership.ensureAuthenticated, function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-index-sublayout.jade', Object.assign({}, data, {
+        title: '我的账户'
+    }));
+});
+
+router.get('/my-account/transactions', membership.ensureAuthenticated, function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-transactions-sublayout.jade', Object.assign({}, data, {title: '我的交易记录'}));
+});
+
+router.get('/my-account/used', membership.ensureAuthenticated, function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-used-sublayout.jade', Object.assign(data, {title: '我的产品使用记录'}));
+});
+
+router.get('/my-account/deposit', membership.ensureAuthenticated, function (req, res, next) {
+    renderMixin(res, 'my-account.jade', 'my-account-deposit-sublayout.jade', {
+        cdn: config.cdn,
+        paymentMethods: {
+            pcAlipay: 'b_alipay'
+        },
+        title: '充值发条到我的账户'
+    });
+});
+
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
+}
+
+// router.use('/', require(onlineOfflinePathSwitch('online-store', '../../online-store')));
 
 router.get('/json/:json', function (req, res, next) {
     res.send(fs.readFileSync(__dirname + '/./' + req.params.json));

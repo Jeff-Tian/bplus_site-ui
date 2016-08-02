@@ -50,10 +50,16 @@
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
   },
+  "newCommerce": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "12888"
+    }
+  },
   "commerce": {
     "inner": {
       "host": "uat.service.hcd.com",
-      "port": "10222"
+      "port": "12888"
     }
   },
   "info": {
@@ -71,11 +77,17 @@
   "payment": {
     "public": {
       "host": "uat.service.hcd.com",
-      "port": "10111"
+      "port": "12666"
     },
     "inner": {
       "host": "uat.service.hcd.com",
-      "port": "10111"
+      "port": "12666"
+    }
+  },
+  "usercenter": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "12777"
     }
   },
   "games": {
@@ -133,12 +145,20 @@
   "cdn": {
     "normal": "/"
   },
-  "featureSwitcher": {
-    "enableWechat": true,
-    "enableLogoutOnMobile": true
+  "userCenterService": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": 12777
+    }
   },
-  "version": "3.0.1",
-  "date": "20160420_1018",
+  "cmsService": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": 12555
+    }
+  },
+  "version": "3.0.2",
+  "date": "20160707_0619",
   "trackingUrl": "http://uat.tracking.hcd.com",
   "trackingJs": "http://uat.tracking.hcd.com/js/t.js",
   "onlineStoreMenuSource": "/store/json/store-menu.json",

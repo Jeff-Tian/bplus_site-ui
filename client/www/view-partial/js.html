@@ -6,8 +6,8 @@
 <script src="<%= cdn.normal %>bower/angular/angular.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/angular-translate/angular-translate.min.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/angular-sanitize/angular-sanitize.min.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>bower/angular-service/dist/scripts/app.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>bower/angular-service/dist/scripts/service.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angular-service/dist/scripts/all.min.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angularQueryParserModule/dist/scripts/all.min.js?<%= cdn.version %>"></script>
 
 <% if (dev_mode) { %>
 <script src="/js/factories/service.js"></script>
@@ -27,7 +27,6 @@
 <% if (dev_mode) { %>
 <script src="/js/factories/FormValidation.js"></script>
 <script src="/js/factories/DeviceHelper.js"></script>
-<script src="/js/factories/queryParser.js"></script>
 <script src="/js/factories/WechatLogon.js"></script>
 <script src="/js/controllers/AppCtrl.js"></script>
 <script src="/js/page/bplusModule.js"></script>
@@ -40,6 +39,7 @@
 
 <script type="text/javascript">
     $('.footer-wechat-share').popup({
-        on: 'hover'
+        on: 'hover',
+        hoverable: true
     });
 </script>

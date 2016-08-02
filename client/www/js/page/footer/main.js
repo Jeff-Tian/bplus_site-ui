@@ -3,20 +3,20 @@
 // Declare app level module which depends on views, and components
 angular.module('bplus', ['bplusModule'])
     .factory('FormValidation', angular.bplus.FormValidation || function () {
-        return {};
-    })
+            return {};
+        })
 ;
 // TODO: integrated into JS framework
-(function() {
+(function () {
     //$(document)
     //  .ready(function() {
     // fix header when passed
     $('.footer-main').visibility({
         once: false,
-        onBottomPassed: function() {
+        onBottomPassed: function () {
             $('[data-action=fixedHeader]').transition('fade in');
         },
-        onBottomPassedReverse: function() {
+        onBottomPassedReverse: function () {
             $('[data-action=fixedHeader]').transition('fade out');
         }
     });
@@ -29,7 +29,7 @@ angular.module('bplus', ['bplusModule'])
     // TODO: initial tabs, to be integrated into JS framework
     $('.menu .item').tab();
 
-        $('.feedback-carousel').owlCarousel({
+    $('.feedback-carousel').owlCarousel({
         items: 1,
         lazyLoad: true,
         loop: true,

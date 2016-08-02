@@ -70,6 +70,8 @@
             msgBus.onWechatLogonCallbackHandled($scope, function () {
                 return service.get('/service-proxy/member/profile/')
                     .then(function (res) {
+                        res = res || {};
+
                         $scope.memberInfo = res;
                         $scope.memberLoaded = true;
 
@@ -103,7 +105,7 @@
         $scope.signOut = function () {
             service.post('/service-proxy/logon/logout')
                 .finally(function (res) {
-                    window.location.href = $scope.localeUrl('/');
+                    window.location.href = '/';
                 });
         };
 

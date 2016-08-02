@@ -50,10 +50,16 @@
     "app_id": "bridgeplus_web",
     "corp_app_id": "bridgeplus_corp"
   },
+  "newCommerce": {
+    "inner": {
+      "host": "uat.service.hcd.com",
+      "port": "12888"
+    }
+  },
   "commerce": {
     "inner": {
       "host": "service.bridgeplus.cn",
-      "port": "10222"
+      "port": "12888"
     }
   },
   "info": {
@@ -75,7 +81,13 @@
     },
     "inner": {
       "host": "service.bridgeplus.cn",
-      "port": "10111"
+      "port": "12666"
+    }
+  },
+  "usercenter": {
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": "12777"
     }
   },
   "games": {
@@ -133,12 +145,20 @@
   "cdn": {
     "normal": "//cdn.bridgeplus.cn/"
   },
-  "featureSwitcher": {
-    "enableWechat": true,
-    "enableLogoutOnMobile": false
+  "userCenterService": {
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": 12777
+    }
   },
-  "version": "3.0.1",
-  "date": "20160420_1018",
+  "cmsService": {
+    "inner": {
+      "host": "service.bridgeplus.cn",
+      "port": 12555
+    }
+  },
+  "version": "3.0.2",
+  "date": "20160707_0619",
   "trackingUrl": "http://tracking.bridgeplus.cn",
   "trackingJs": "http://tracking.bridgeplus.cn/js/t.js",
   "onlineStoreMenuSource": "//source.bridgeplus.cn/json/store-menu.json",

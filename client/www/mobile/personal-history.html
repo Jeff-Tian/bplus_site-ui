@@ -121,13 +121,13 @@
                                 <input type="text" name="schoolName"
                                        placeholder="<%= __('PleaseInputSchoolName') %>"
                                        ng-model="schoolInfo.name" auto-complete
-                                       datasource-bplus-autocomplete="schoolname.json">
+                                       datasource="/mock/schoolname.{{locale}}.json" min-chars="0">
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Major') %></label>
                                 <input type="text" name="schoolMajor" placeholder="<%= __('PleaseInputMajor') %>"
                                        ng-model="schoolInfo.major" auto-complete
-                                       datasource-bplus-autocomplete="major.json">
+                                       datasource="/mock/major.{{locale}}.json" min-chars="0">
                             </div>
                             <div class="field">
                                 <label><i class="ui large red icon">*</i><%= __('Qualification')
@@ -212,9 +212,9 @@
 <script src="<%= cdn.normal %>js/directives/dropdown.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/factories/FormValidation.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>bower/devbridge-autocomplete/dist/jquery.autocomplete.min.js?<%= cdn.version %>"></script>
-<script src="<%= cdn.normal %>js/directives/autocomplete.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/personal-history/PersonalHistoryCtrl.js?<%= cdn.version %>"></script>
 <script src="<%= cdn.normal %>js/page/personal-history/main.js?<%= cdn.version %>"></script>
+<script src="<%= cdn.normal %>bower/angular-auto-complete/dist/scripts/app.js?<%= cdn.version %>"></script>
 <script>
     window.t_PageName = "m.personalHis";
 </script>

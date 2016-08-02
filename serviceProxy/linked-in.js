@@ -57,17 +57,10 @@ module.exports = require('express').Router()
                             dataMapper: function (d) {
                                 d.member_id = upstreamJson.result.member_id;
                                 d.profile = req.body.linkedInProfile;
-                                console.log('======= binding linked in profile =======');
-                                console.log('d.profile = "' + d.profile + '"');
-                                console.log('===========================================');
 
                                 return d;
                             },
                             responseInterceptor: function (theOriginResponse, theUpstreamJson) {
-                                console.log('==== after bind mobile ====');
-                                console.log(theUpstreamJson);
-                                console.log('============================');
-
                                 if (theUpstreamJson.isSuccess) {
                                     setAuthToken();
 

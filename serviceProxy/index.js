@@ -6,6 +6,7 @@ var sms = require('./sms'),
     bplusService = require('./bplusService'),
     wechat = require('./wechat'),
     commerceService = require('./commerceService'),
+    usercenterService = require('./usercenter'),
     productService = require('./productService'),
     uploadCallbackService = require('./uploadCallbackService'),
     infomationService = require('./informationService'),
@@ -24,6 +25,9 @@ module.exports = require('express').Router()
     })
     .use('/study-center', require('./study-center.js'))
     .use('/linked-in', require('./linked-in'))
+    .use('/user-center', require('./user-center'))
+    .use('/cms', require('./cms'))
+    .use('/commerce-center', require('./commerce-center'))
     .post(serviceUrls.general.sms.send, captcha.validate, sms.getVerificationCode)
     .post('/member/register', sms.validate, sso.signUp)
     .post('/member/change-mobile', membership.ensureAuthenticated, sms.validate, sso.authenticateCurrentUser, sso.changeMobile)
@@ -91,4 +95,7 @@ module.exports = require('express').Router()
     .post(serviceUrls.getUsedProducts, membership.ensureAuthenticated, productService.getMyUsedProducts)
 
     .post(serviceUrls.getOfferInfo, commerceService.getOfferInfo)
+    .post(serviceUrls.searchOffer, commerceService.searchOffer)
+    .post(serviceUrls.bbcoinBalance, membership.ensureAuthenticated, usercenterService.bbcoinBalance)
+    .post(serviceUrls.bbcoinExchange, membership.ensureAuthenticated, usercenterService.bbcoinExchange)
 ;

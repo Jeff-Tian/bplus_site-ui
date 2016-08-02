@@ -6,7 +6,9 @@ var mobileDetector = require('../mobile/mobileDetector');
 
 var router = express.Router();
 
-router.use(localeHelper.localePath('/store', false), membership.ensureAuthenticated, require('../store'));
+router.get('/bplusConfigModule.js', require('../config/configHelper').serveBplusConfigModule);
+
+router.use(localeHelper.localePath('/store', false), require('../store'));
 
 router.use(localeHelper.localePath('/study-center', true), function (req, res, next) {
     res.redirect('/study-center/');
@@ -21,7 +23,9 @@ router.get('/linked-in/oauth/callback', function (req, res, next) {
 });
 
 router.get('/message-listener', function (req, res) {
-    res.render('third-party-interactives/messageListener.jade');
+    res.render('third-party-interactives/messageListener.jade', {
+        title: req.query.title
+    });
 });
 
 router.get('/:lang?/personal-history', membership.ensureAuthenticated, function (req, res, next) {
@@ -30,6 +34,19 @@ router.get('/:lang?/personal-history', membership.ensureAuthenticated, function 
     }
 
     return res.redirect('m/personal-history');
+});
+router.get('/:lang?/sign-in', function (req, res, next) {
+    if (res.locals.signedIn) {
+        return res.redirect('/my');
+    }
+
+    next();
+}, function (req, res) {
+    return res.render('sign-in.html');
+});
+
+router.get('/:lang?/my', function (req, res, next) {
+    res.redirect('/zh/cmpt');
 });
 
 module.exports = router;

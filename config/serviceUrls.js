@@ -1,4 +1,13 @@
-module.exports = {
+function recent(parent) {
+    parent.recent = {
+        frontEnd: parent.frontEnd + '/recent',
+        abbr: parent.abbr + '/recent',
+        upstream: parent.upstream + '/recent',
+        dataMapper: parent.dataMapper
+    };
+}
+
+var serviceUrls = {
     "logOnFromWechat": "/service-proxy/logon/from-wechat",
     "logOnByToken": "/service-proxy/logon/by-token",
     "checkNationalGame2015OrderPayment": "/service-proxy/payment/create-order/national-game-2015/check-has-right",
@@ -16,6 +25,9 @@ module.exports = {
     getUnusedProducts: '/service-proxy/member/get-my-unused-products',
     getUsedProducts: '/service-proxy/member/get-my-used-products',
     getOfferInfo: '/service-proxy/commerce/get-offer-info',
+    searchOffer: '/service-proxy/commerce/search-offer',
+    bbcoinBalance: '/service-proxy/usercenter/bbcoin-balance',
+    bbcoinExchange: '/service-proxy/usercenter/bbcoin-exchange',
 
     studyCenter: {
         classBooking: {
@@ -75,7 +87,7 @@ module.exports = {
             offline: '/corp-service-proxy/job/offline',
             save: '/corp-service-proxy/job/save',
             drop: '/corp-service-proxy/job/drop',
-            search: '/corp-service-proxy/job/search',
+            search: '/corp-service-proxy/job/search'
         },
         recommend: {
             smart: '/corp-service-proxy/recommend/smart',
@@ -129,5 +141,68 @@ module.exports = {
         logonByToken: {
             frontEnd: '/service-proxy/linked-in/logon-by-token'
         }
+    },
+
+    userCenter: {
+        bbCoin: {
+            frontEnd: '/service-proxy/user-center/bbcoin',
+            abbr: '/bbcoin',
+            upstream: '/service/bbcoin/load'
+        },
+        myProducts: {
+            frontEnd: '/service-proxy/user-center/my-products',
+            abbr: '/my-products',
+            upstream: '/service/myproductStatus'
+        },
+        bbCoinHistory: {
+            frontEnd: '/service-proxy/user-center/bbcoin-history',
+            abbr: '/bbcoin-history',
+            upstream: '/service/bbcoinHistory/load'
+        },
+        productUsageHistory: {
+            frontEnd: '/service-proxy/user-center/product-usage-history',
+            abbr: '/product-usage-history',
+            upstream: '/service/myproductHistory/search',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+
+                return d;
+            }
+        }
+    },
+    commerceCenter: {
+        orderHistory: {
+            frontEnd: '/service-proxy/commerce-center/order-history',
+            abbr: '/order-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'cash';
+                return d;
+            }
+        },
+        redemptionHistory: {
+            frontEnd: '/service-proxy/commerce-center/redemption-history',
+            abbr: '/redemption-history',
+            upstream: '/service/orderList/paidList',
+            dataMapper: function (d) {
+                d.userId = d.member_id;
+                d.type = 'redemption';
+                return d;
+            }
+        }
+    },
+    cmsService: {
+        getContentByKey: {
+            frontEnd: '/service-proxy/cms/get/:key',
+            abbr: '/get/:key',
+            upstream: '/service/cmsContent/:key'
+        }
     }
 };
+
+recent(serviceUrls.userCenter.bbCoinHistory);
+recent(serviceUrls.commerceCenter.orderHistory);
+recent(serviceUrls.commerceCenter.redemptionHistory);
+
+module.exports = serviceUrls;

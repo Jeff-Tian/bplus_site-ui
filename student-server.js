@@ -1,26 +1,18 @@
 // Use Expressjs as Node.js web framework
 var express = require('express');
 var server = express();
-var bodyParser = require('body-parser');
 var i18n = require('i18n');
 var localeHelper = require('./locales/localeHelper.js');
-var Logger = require('greenShared').logger;
 var config = require('./config');
 var configHelper = require('./config/configHelper');
-var pack = require('./package.json');
 var membership = require('./serviceProxy/membership.js');
 var url = require('url');
-
-// To keep it from deleting by "npm prune --production"
-//require('log4js-cassandra');
-var logger = (Logger.init(config.logger), Logger(pack.name + pack.version));
 
 var mobileDetector = require('./mobile/mobileDetector');
 var urlParser = require('url');
 var fs = require('fs');
 
 var supportedLocales = localeHelper.supportedLocales;
-var subApps = ['corp'];
 i18n.configure({
     locales: supportedLocales,
     directory: __dirname + '/locales',
@@ -30,84 +22,7 @@ i18n.configure({
 // Node.js template engine
 var ejs = require('ejs');
 
-function setLogger(req, res, next) {
-    function dualLogError(o) {
-        logger.error(o);
-        console.error(o);
-    }
-
-    function dualLog(o) {
-        logger.info(o);
-        console.log(o);
-    }
-
-    req.logger = logger;
-    req.dualLogError = dualLogError;
-    req.dualLog = dualLog;
-
-    next();
-}
-
-function setCDN(req, res, next) {
-    res.locals.cdn = config.cdn;
-
-    next();
-}
-
-function setFeatureSwitcher(req, res, next) {
-    res.locals.featureSwitcher = config.featureSwitcher;
-    next();
-}
-
-function setConfig(req, res, next) {
-    res.locals.config = config;
-    next();
-}
-
-function setDeviceHelper(req, res, next) {
-    var ua = req.headers['user-agent'];
-
-    res.locals.device = {
-        isFromMobile: mobileDetector.isFromMobile(ua),
-        isFromWechatBrowser: mobileDetector.isFromWechatBrowser(ua),
-        isFromAndroid: mobileDetector.isFromAndroid(ua)
-    };
-
-    next();
-}
-
-function setMode(req, res, next) {
-    res.locals.dev_mode = (configHelper.getMode() === 'dev');
-
-    next();
-}
-
-function onlineOfflinePathSwitch(onlinePath, offlinePath) {
-    return !(process.env.RUN_FROM === 'jeff') ? onlinePath : offlinePath;
-}
-
-function setOnlineStoreTemplate(req, res, next) {
-    res.locals.onlineStoreTemplate = __dirname + onlineOfflinePathSwitch(
-            '/node_modules/',
-            '/../') +
-        'online-store/views/';
-
-    next();
-}
-
-server
-    .use(Logger.express("auto"))
-    .use(setLogger)
-    .use(setCDN)
-    .use(setFeatureSwitcher)
-    .use(setConfig)
-    .use(setDeviceHelper)
-    .use(setMode)
-    .use(setOnlineStoreTemplate)
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({
-        extended: true
-    }));
+require('./server-prepare/student')(server);
 
 // Set the view engine to ejs, but specify file type with ".html"
 server.engine('html', ejs.renderFile);
@@ -138,26 +53,16 @@ var staticSetting = {
     }
 };
 
-server.get('/', renderIndex);
-supportedLocales.map(function (l) {
-    server.get('/' + l, renderIndex);
-});
+require('./routes/student-homepage')(server);
 
 // Customize client file path
 server.set('views', [staticFolder, viewFolder]);
-
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
-
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false),
-        express.static('/Users/tianjie/SHARED-UI'));
-}
 
 function setupStaticResources() {
     var staticServer = express.static(staticFolder, staticSetting);
 
     server.use(staticServer);
-    supportedLocales.concat(subApps).map(function (l) {
+    supportedLocales.map(function (l) {
         server.use('/' + l, staticServer);
     });
 }
@@ -181,11 +86,10 @@ require('./pre-check/education-background')(server);
 
 server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
-server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
-
 function renderIndex(req, res, next) {
     renderOrRedirect(req, res, 'index');
 }
+server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
 function renderTemplate(name) {
     return function (req, res, next) {
@@ -232,9 +136,6 @@ function mapRoute2Template(url, template, pipes) {
 }
 
 server.use('/translation', localeHelper.serveTranslations);
-subApps.map(function (s) {
-    server.use('/' + s + '/translation', localeHelper.serveTranslations);
-});
 
 function checkWechatHostAndSetCookie(req, res, next) {
     var query = urlParser.parse(req.url).query;
@@ -246,7 +147,9 @@ function checkWechatHostAndSetCookie(req, res, next) {
 server.use(localeHelper.localePath('/m', false), checkWechatHostAndSetCookie);
 server.use(localeHelper.localePath('/m', false), require('./mobile'));
 
-server.use(localeHelper.localePath('/online-store', false), require(onlineOfflinePathSwitch('online-store', '../online-store')));
+function onlineOfflinePathSwitch(onlinePath, offlinePath) {
+    return (process.env.RUN_FROM !== 'jeff') ? onlinePath : offlinePath;
+}
 
 function setupOnlineStoreStaticResources(staticFolder) {
     server.use(
@@ -263,11 +166,18 @@ function setupOnlineStoreStaticResources(staticFolder) {
     );
 }
 
-if (process.env.RUN_FROM === 'jeff') {
-    server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+function serveSharedUI() {
+    if (process.env.RUN_FROM === 'jeff') {
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI', staticSetting));
 
-    server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI'));
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static('/Users/tianjie/SHARED-UI', staticSetting));
+    } else {
+        server.use(localeHelper.localePath('/bower_components/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI', staticSetting));
+        server.use(localeHelper.localePath('/bower/SHARED-UI', false), express.static(__dirname + '/node_modules/online-store/public/bower_components/SHARED-UI', staticSetting));
+    }
 }
+
+serveSharedUI();
 
 //setupOnlineStoreStaticResources('semantic');
 server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic', staticSetting));
@@ -282,9 +192,6 @@ server.use(require('./routes/student'));
 server.use(localeHelper.localePath('/corp', false), require('./routes/corp.js'));
 
 server.use('/service-proxy', require('./serviceProxy'));
-subApps.map(function (s) {
-    server.use('/' + s + '/service-proxy', require('./serviceProxy'));
-});
 
 //Competion Integration
 
@@ -313,10 +220,9 @@ server
             lang: lang
         });
     })
-    .use('/cmpt', !(process.env.RUN_FROM === 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
+    .use('/cmpt', (process.env.RUN_FROM !== 'jeff') ? require('competion-api')(express) : require('../cmpt2015-api')(express))
     .use('/studycenter', require('study-center-proxy')(express));
 
-mapRoute2Template('/index');
 mapRoute2Template('/game');
 mapRoute2Template('/contractus');
 mapRoute2Template('/aboutus');
@@ -326,8 +232,6 @@ mapRoute2Template('/youth');
 mapRoute2Template('/preheating');
 mapRoute2Template('/opportunity');
 server.get('/data', require('./client/www/api/data.js').getData);
-mapRoute2Template('/sign-in');
-mapRoute2Template('/signin', 'sign-in');
 mapRoute2Template('/reset-password-by-email');
 mapRoute2Template('/reset-password');
 mapRoute2Template('/set-password');

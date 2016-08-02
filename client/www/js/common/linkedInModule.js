@@ -122,6 +122,12 @@ angular.module('linkedInModule', ['servicesModule', 'bplusConfigModule', 'angula
                     remember: false,
                     linkedInProfile: loginData.linkedInProfile,
                     return_url: queryParser.get('return_url')
+                }).catch(function (reason) {
+                    if (reason.code == '70009' && /linkedin,.+is already used by others/i.test(reason.message)) {
+                        reason.code = 'ConflictCode';
+                        reason.message = 'The LinkedIn account has already been bound to another account.';
+                    }
+                    throw reason;
                 });
             }
         };

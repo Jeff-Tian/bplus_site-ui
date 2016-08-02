@@ -106,29 +106,7 @@ var staticSetting = {
     }
 };
 
-function filterConfig(config) {
-    var filtered = {};
-
-    filtered.captcha = config.captcha;
-    filtered.payment = config.payment.public;
-    filtered.cdn = config.cdn;
-    filtered.featureSwitcher = config.featureSwitcher;
-    filtered.service_upload = config.service_upload;
-    filtered.trackingUrl = config.trackingUrl;
-    filtered.serviceUrls = config.serviceUrls;
-    filtered.competitions = config.competitions;
-    filtered.mode = getMode();
-    filtered.durableMessageSource = config.durableMessageSource;
-    filtered.upload = config.upload.public;
-
-    return filtered;
-}
-server.use(/\/config\.js/, function (req, res, next) {
-    var filteredConfig = JSON.stringify(filterConfig(config));
-
-    res.setHeader("Content-Type", "text/javascript; charset=utf-8");
-    res.send('if (typeof angular !== "undefined") {angular.bplus = angular.bplus || {}; angular.bplus.config = ' + filteredConfig + '; } angular.module("bplusConfigModule").run(["$rootScope", function($rootScope){$rootScope.config = ' + filteredConfig + '; }]);');
-});
+server.use(/\/config\.js/, require('./config/configHelper').serveClientConfig);
 
 if (getMode() === 'dev') {
     server.use('/translation/localeHelper.js', express.static(__dirname + '/locales/localeHelper.js', staticSetting));

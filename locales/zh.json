@@ -797,5 +797,6 @@
   "Wed": "周三",
   "Thu": "周四",
   "Fri": "周五",
-  "Password can't be empty": "密码不能为空"
+  "Password can't be empty": "密码不能为空",
+  "The LinkedIn account has already been bound to another account.": "该领英账号已经被绑定了其他的手机号码。"
 }

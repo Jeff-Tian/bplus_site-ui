@@ -18,7 +18,7 @@
 <%- include('view-partial/footer.html') -%>
 <script type="text/javascript">
     angular
-            .module('emailVerify', ['pascalprecht.translate', 'ng.utils'])
+            .module('emailVerify', ['pascalprecht.translate', 'ng.utils', 'bplusModule'])
             .controller('AppCtrl', angular.bplus.AppCtrl)
             .factory('translationLoader', angular.bplus.translationLoader)
             .factory('FormValidation', angular.bplus.FormValidation)

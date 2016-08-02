@@ -30,6 +30,7 @@ function setAuthToken(res, token, rememberMe, member_id) {
 
     if (member_id) {
         cookieOption.httpOnly = false;
+        // This cookie serves only for tracking
         res.cookie('mid', member_id, cookieOption);
     }
 }

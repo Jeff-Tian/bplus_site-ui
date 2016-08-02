@@ -34,14 +34,6 @@ gulp release
 
 Now browse to the website at `http://localhost:12000`
 
-### Code format
-
-CSS
-- use even number for `z-index`
-
-JS
-- Do not define global object
-
 ### Run server side code test
 ```
 mocha
@@ -93,3 +85,6 @@ To build a new module, for example, `corp` for BridgePlus Company users, add a *
 ```javascript
 server.use(localeHelper.regexPath('/corp', false), require('./routes/corp.js'));
 ```
+
+### View files
+put your view files to `~/client/views/` instead of `~/vlient/www/`!
