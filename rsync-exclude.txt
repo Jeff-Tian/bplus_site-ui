@@ -6,4 +6,5 @@ client/grunt
 client/css
 client/js
 client/test
+client/www/bower
 /semantic
