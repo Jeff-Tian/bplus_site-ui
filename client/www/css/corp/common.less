@@ -130,13 +130,32 @@
 
 .red.bulleted.list {
     list-style: none;
-    padding: 0;
-    margin: 0;
 
     li {
         &:before {
             content: '• ';
-            color: red;
+            color: @color-corp-red;
+        }
+    }
+}
+
+.sharp.steps {
+    border: none !important;
+
+    .step {
+        border-radius: 0 !important;
+
+        &.active {
+            background-color: @color-corp-red !important;
+
+            &:after {
+                background-color: @color-corp-red !important;
+            }
+        }
+
+        &:after {
+            width: 2em !important;
+            height: 2em !important;
         }
     }
 }
