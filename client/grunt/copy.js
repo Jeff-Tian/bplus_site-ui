@@ -23,6 +23,7 @@ module.exports = function () {
                         'mock/social.zh.json',
                         'mock/match.en.json',
                         'mock/match.zh.json',
+                        'semantic-online-store/**',
                         '*'
                     ],
                     dest: "<%= config.dist %>"

@@ -180,7 +180,7 @@ function serveSharedUI() {
 serveSharedUI();
 
 //setupOnlineStoreStaticResources('semantic');
-server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/bower/semantic-ui', staticSetting));
+server.use(localeHelper.localePath('/semantic', false), express.static(__dirname + '/client/dist/semantic-online-store', staticSetting));
 //setupOnlineStoreStaticResources('bower_components');
 server.use(localeHelper.localePath('/bower_components', false), express.static(__dirname + '/client/dist/bower', staticSetting));
 setupOnlineStoreStaticResources('images');
