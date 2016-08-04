@@ -19,7 +19,7 @@
     "jquery-address": "https://github.com/asual/jquery-address.git",
     "owl.carousel": "2.0.0-beta.3",
     "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git",
-    "competion-ui": "git@bitbucket.org:hcdlearning/cmpt2015-ui.git#develop-ui",
+    "competion-ui": "git@github.com:Jeff-Tian/cmpt2015-ui.git#develop-ui",
     "devbridge-autocomplete": "1.2.25",
     "angular-chart.js": "0.8.9",
     "angular-sanitize": "1.5.7",
