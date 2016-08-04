@@ -17,7 +17,7 @@
     "angular-translate": "2.7.2",
     "echarts": "2.2.7",
     "jquery-address": "https://github.com/asual/jquery-address.git",
-    "owl.carousel": "2.1.6",
+    "owl.carousel": "2.0.0-beta.3",
     "preheating-ui": "git@bitbucket.org:hcdlearning/preheating-ui.git",
     "competion-ui": "git@bitbucket.org:hcdlearning/cmpt2015-ui.git#develop-ui",
     "devbridge-autocomplete": "1.2.25",
@@ -41,7 +41,6 @@
     "when": "3.7.7"
   },
   "resolutions": {
-    "angular": "1.5.8",
-    "owl.carousel": "^2.1.6"
+    "angular": "1.5.7"
   }
 }
