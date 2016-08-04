@@ -96,11 +96,11 @@ gulp.task('run replace-bplus', function (done) {
 gulp.task('release', function (done) {
     // Here use sh.exec() to run 2 tasks to ensure
     // the sequence not interrupted by the asynchronous events.
-    runSequence(
-        'make online-store semantic json',
-        'run online-store-build',
-        'run replace-bplus',
-        'make own semantic json',
-        done
-    );
+    // runSequence(
+    //     'make online-store semantic json',
+    //     'run online-store-build',
+    //     'run replace-bplus',
+    //     'make own semantic json',
+    //     done
+    // );
 });
