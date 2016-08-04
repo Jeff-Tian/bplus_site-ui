@@ -157,8 +157,8 @@
       "port": 12555
     }
   },
-  "version": "3.0.3",
-  "date": "20160803_0830",
+  "version": "3.0.5",
+  "date": "20160804_0151",
   "trackingUrl": "http://uat.tracking.hcd.com",
   "trackingJs": "http://uat.tracking.hcd.com/js/t.js",
   "onlineStoreMenuSource": "/store/json/store-menu.json",
