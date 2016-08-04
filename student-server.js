@@ -86,9 +86,6 @@ require('./pre-check/education-background')(server);
 
 server.all('*', localeHelper.setLocale, localeHelper.setLocalVars);
 
-function renderIndex(req, res, next) {
-    renderOrRedirect(req, res, 'index');
-}
 server.use('/', require('./serviceProxy/membership.js').setSignedInUser);
 
 function renderTemplate(name) {
